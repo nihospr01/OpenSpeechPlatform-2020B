@@ -1,0 +1,752 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/self_adjust_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            tools:context="edu.ucsd.hearingaid.osp_r01.SettingsActivity">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal">
+            <Button
+                android:layout_gravity="center"
+                android:id="@+id/settings_save_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                style="?android:textAppearanceLarge"
+                android:text="@string/save_params" />
+            <Button
+                android:layout_gravity="center"
+                android:id="@+id/settings_reset_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                style="?android:textAppearanceLarge"
+                android:text="@string/reset_params" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="12">
+
+                <TextView
+                    style="@style/label_text_style"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="@string/step_sizes"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_weight="10"
+                    android:background="@drawable/gray_border"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/label_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="start"
+                        android:text="@string/fullness_step"
+                        />
+
+                    <Button
+                        android:id="@+id/settings_l_step_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        style="@style/table_cell"
+                        android:text="40" />
+
+                    <TextView
+                        style="@style/label_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="start"
+                        android:text="@string/volume_step"
+                        />
+
+                    <Button
+                        android:id="@+id/settings_v_step_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        style="@style/table_cell"
+                        android:text="40" />
+
+                    <TextView
+                        style="@style/label_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:text="@string/crispness_step"
+                         />
+
+                    <Button
+                        android:id="@+id/settings_h_step_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        style="@style/table_cell"
+                        android:text="40" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="12">
+
+                <TextView
+                    style="@style/label_text_style"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="@string/levels"
+                    />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_weight="10"
+                    android:background="@drawable/gray_border"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/label_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="start"
+                        android:text="@string/fullness_level"
+                        />
+
+                    <Button
+                        android:id="@+id/settings_l_level_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        style="@style/table_cell"
+                        android:text="40" />
+
+                    <TextView
+                        style="@style/label_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="start"
+                        android:text="@string/volume_level"
+                        />
+
+                    <Button
+                        android:id="@+id/settings_v_level_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        style="@style/table_cell"
+                        android:text="40" />
+
+                    <TextView
+                        style="@style/label_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:text="@string/crispness_level"
+                        />
+
+                    <Button
+                        android:id="@+id/settings_h_level_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        style="@style/table_cell"
+                        android:text="40" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="12">
+
+                <TextView
+                    style="@style/label_text_style"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="@string/lvh_values"
+                    />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_weight="10"
+                    android:background="@drawable/gray_border"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/label_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="start"
+                        android:text="@string/fullness"
+                        />
+
+                    <Button
+                        android:id="@+id/settings_l_val_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        style="@style/table_cell"
+                        android:text="40" />
+
+                    <TextView
+                        style="@style/label_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="start"
+                        android:text="@string/volume"
+                         />
+
+                    <Button
+                        android:id="@+id/settings_v_val_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        style="@style/table_cell"
+                        android:text="40" />
+
+                    <TextView
+                        style="@style/label_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:text="@string/crispness"
+                        />
+
+                    <Button
+                        android:id="@+id/settings_h_val_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        style="@style/table_cell"
+                        android:text="40" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="12">
+
+                <TextView
+                    style="@style/label_text_style"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="@string/crispness_multipliers"
+                    />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_weight="10"
+                    android:background="@drawable/gray_border"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/label_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/m1k"
+                        />
+
+                    <Button
+                        android:id="@+id/settings_m1k_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        style="@style/table_cell"
+                        android:text="40" />
+
+                    <TextView
+                        style="@style/label_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/m2k"
+                        />
+
+                    <Button
+                        android:id="@+id/settings_m2k_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        style="@style/table_cell"
+                        android:text="40" />
+
+                    <TextView
+                        style="@style/label_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/m4k"
+                        />
+
+                    <Button
+                        android:id="@+id/settings_m4k_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        style="@style/table_cell"
+                        android:text="40" />
+
+                    <TextView
+                        style="@style/label_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/m8k"
+                        />
+
+                    <Button
+                        android:id="@+id/settings_m8k_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        style="@style/table_cell"
+                        android:text="40" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/label_text_style"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:gravity="center"
+                    android:text="@string/choose_filters" />
+
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/settings_filters_radio_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/settings_radio_kates"
+                        android:layout_width="wrap_content"
+                        style="@style/label_text_style"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kates_filters_str" />
+
+                    <RadioButton
+                        android:id="@+id/settings_radio_boothroyd"
+                        android:layout_width="wrap_content"
+                        style="@style/label_text_style"
+                        android:layout_height="wrap_content"
+                        android:text="@string/boothroyd_filters_str" />
+                </RadioGroup>
+            </LinearLayout>
+
+         <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+             android:layout_marginBottom="@dimen/activity_horizontal_margin"
+             android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/label_text_style"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:gravity="center"
+                    android:text="@string/control_via" />
+
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/settings_control_radio_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/settings_radio_comp"
+                        android:layout_width="wrap_content"
+                        style="@style/label_text_style"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        android:text="@string/comp_ratio_g65" />
+
+                    <RadioButton
+                        android:id="@+id/settings_radio_g50"
+                        android:layout_width="wrap_content"
+                        style="@style/label_text_style"
+                        android:layout_height="wrap_content"
+                        android:text="@string/g50_g80" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/settings_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/cfreq" />
+
+                    <TextView
+                        android:id="@+id/settings_f1"
+                        style="@style/table_heading_gray"
+                        android:text="@string/_250" />
+
+                    <TextView
+                        android:id="@+id/settings_f2"
+                        style="@style/table_heading_gray"
+                        android:text="@string/_500" />
+
+                    <TextView
+                        android:id="@+id/settings_f3"
+                        style="@style/table_heading_gray"
+                        android:text="@string/_1000" />
+
+                    <TextView
+                        android:id="@+id/settings_f4"
+                        style="@style/table_heading_gray"
+                        android:text="@string/_2000" />
+
+                    <TextView
+                        android:id="@+id/settings_f5"
+                        style="@style/table_heading_gray"
+                        android:text="@string/_4000" />
+
+                    <TextView
+                        android:id="@+id/settings_f6"
+                        style="@style/table_heading_gray"
+                        android:text="@string/_6000" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop = "@dimen/activity_small_margin">
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/comp_ratio" />
+
+                    <Button
+                        android:id="@+id/settings_cr_1"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_cr_2"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_cr_3"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_cr_4"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_cr_5"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_cr_6"
+                        style="@style/table_cell" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/gain_50" />
+
+                    <Button
+                        android:id="@+id/settings_g50_1"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_g50_2"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_g50_3"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_g50_4"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_g50_5"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_g50_6"
+                        style="@style/table_cell" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/gain_65" />
+
+                    <Button
+                        android:id="@+id/settings_g65_1"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_g65_2"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_g65_3"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_g65_4"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_g65_5"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_g65_6"
+                        style="@style/table_cell" />
+
+                </TableRow>
+
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/gain_80" />
+
+                    <Button
+                        android:id="@+id/settings_g80_1"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_g80_2"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_g80_3"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_g80_4"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_g80_5"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_g80_6"
+                        style="@style/table_cell" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/knee_low" />
+
+                    <Button
+                        android:id="@+id/settings_knee_low_1"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_knee_low_2"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_knee_low_3"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_knee_low_4"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_knee_low_5"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_knee_low_6"
+                        style="@style/table_cell" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/knee_high" />
+
+                    <Button
+                        android:id="@+id/settings_mpo_1"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_mpo_2"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_mpo_3"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_mpo_4"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_mpo_5"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_mpo_6"
+                        style="@style/table_cell" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/attack_time" />
+
+                    <Button
+                        android:id="@+id/settings_attack_1"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_attack_2"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_attack_3"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_attack_4"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_attack_5"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_attack_6"
+                        style="@style/table_cell" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/release_time" />
+
+                    <Button
+                        android:id="@+id/settings_release_1"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_release_2"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_release_3"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_release_4"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_release_5"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/settings_release_6"
+                        style="@style/table_cell" />
+
+                </TableRow>
+
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+</ScrollView>

@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/self_adjust_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            tools:context="edu.ucsd.hearingaid.osp_r01.MainActivity">
+
+            <Button
+                android:layout_gravity="right"
+                android:id="@+id/target_transmit_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                style="?android:textAppearanceLarge"
+                android:text="@string/transmit" />
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+                android:id="@+id/table1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:shrinkColumns="*"
+                android:layout_gravity="center">
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:maxLines="1"
+                        android:ems="5"
+                        android:text="@string/cfreq" />
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/_250" />
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/_500" />
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/_707" />
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/_1000" />
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/_1414" />
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/_2000" />
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/_2828" />
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/_4000" />
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/_5657" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop = "@dimen/activity_small_margin">
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:maxLines="1"
+                        android:text="@string/input_verifit" />
+
+                    <Button
+                        android:id="@+id/target_input_half_octave_1"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_input_half_octave_2"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_input_half_octave_3"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_input_half_octave_4"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_input_half_octave_5"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_input_half_octave_6"
+                        style="@style/table_cell" />
+                    <Button
+                        android:id="@+id/target_input_half_octave_7"
+                        style="@style/table_cell" />
+                    <Button
+                        android:id="@+id/target_input_half_octave_8"
+                        style="@style/table_cell" />
+                    <Button
+                        android:id="@+id/target_input_half_octave_9"
+                        style="@style/table_cell" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:maxLines="1"
+                        android:text="@string/output_verifit" />
+
+                    <Button
+                        android:id="@+id/target_output_half_octave_1"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_output_half_octave_2"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_output_half_octave_3"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_output_half_octave_4"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_output_half_octave_5"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_output_half_octave_6"
+                        style="@style/table_cell" />
+                    <Button
+                        android:id="@+id/target_output_half_octave_7"
+                        style="@style/table_cell" />
+                    <Button
+                        android:id="@+id/target_output_half_octave_8"
+                        style="@style/table_cell" />
+                    <Button
+                        android:id="@+id/target_output_half_octave_9"
+                        style="@style/table_cell" />
+
+                </TableRow>
+
+            </TableLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/label_text_style"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:gravity="center"
+                    android:text="@string/control_via" />
+
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/target_radio_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/target_radio_comp"
+                        android:layout_width="wrap_content"
+                        style="@style/label_text_style"
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:layout_height="wrap_content"
+                        android:text="@string/comp_ratio_g65" />
+
+                    <RadioButton
+                        android:id="@+id/target_radio_g50"
+                        android:layout_width="wrap_content"
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        style="@style/label_text_style"
+                        android:layout_height="wrap_content"
+                        android:text="@string/g50_g80" />
+                </RadioGroup>
+                <Button
+                    android:gravity="center"
+                    android:id="@+id/target_populate_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    style="?android:textAppearanceLarge"
+                    android:text="@string/populate" />
+
+            </LinearLayout>
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_marginTop = "@dimen/activity_small_margin"
+                android:id="@+id/table2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/cfreq" />
+
+                    <TextView
+                        android:id="@+id/target_f1"
+                        style="@style/table_heading_gray"
+                        android:text="@string/_177" />
+
+                    <TextView
+                        android:id="@+id/target_f2"
+                        style="@style/table_heading_gray"
+                        android:text="@string/_354" />
+
+                    <TextView
+                        android:id="@+id/target_f3"
+                        style="@style/table_heading_gray"
+                        android:text="@string/_707" />
+
+                    <TextView
+                        android:id="@+id/target_f4"
+                        style="@style/table_heading_gray"
+                        android:text="@string/_1414" />
+
+                    <TextView
+                        android:id="@+id/target_f5"
+                        style="@style/table_heading_gray"
+                        android:text="@string/_2828" />
+
+                    <TextView
+                        android:id="@+id/target_f6"
+                        style="@style/table_heading_gray"
+                        android:text="@string/_5657" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop = "@dimen/activity_small_margin">
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/input_verifit" />
+
+                    <Button
+                        android:id="@+id/target_input_octave_1"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_input_octave_2"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_input_octave_3"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_input_octave_4"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_input_octave_5"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_input_octave_7"
+                        style="@style/table_cell" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/output_verifit" />
+
+                    <Button
+                        android:id="@+id/target_output_octave_1"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_output_octave_2"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_output_octave_3"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_output_octave_4"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_output_octave_5"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_output_octave_6"
+                        style="@style/table_cell" />
+
+                </TableRow>
+
+                <TableRow
+                    >
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/comp_ratio" />
+
+                    <Button
+                        android:id="@+id/target_cr_1"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_cr_2"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_cr_3"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_cr_4"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_cr_5"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_cr_6"
+                        style="@style/table_cell" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/gain_50" />
+
+                    <Button
+                        android:id="@+id/target_g50_1"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_g50_2"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_g50_3"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_g50_4"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_g50_5"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_g50_6"
+                        style="@style/table_cell" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/gain_65" />
+
+                    <Button
+                        android:id="@+id/target_g65_1"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_g65_2"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_g65_3"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_g65_4"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_g65_5"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_g65_6"
+                        style="@style/table_cell" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/table_heading_gray"
+                        android:text="@string/gain_80" />
+
+                    <Button
+                        android:id="@+id/target_g80_1"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_g80_2"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_g80_3"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_g80_4"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_g80_5"
+                        style="@style/table_cell" />
+
+                    <Button
+                        android:id="@+id/target_g80_6"
+                        style="@style/table_cell" />
+
+                </TableRow>
+
+            </TableLayout>
+
+
+            <ScrollView
+                android:layout_marginTop = "@dimen/activity_small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/target_controls_text"
+                    style="?android:textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:background="@drawable/gray_border"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:text="@string/controls"
+                    android:textStyle="bold" />
+            </ScrollView>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+</ScrollView>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#01579B</color>
+    <color name="colorPrimaryDark">#01579B</color>
+    <color name="colorAccent">#01579B</color>
+    <color name="fullness_color">#009688</color>
+    <color name="volume_color">#EC407A</color>
+    <color name="crispness_color">#2196F3</color>
+    <color name="final_adjust_color">#4E342E</color>
+    <color name="table_heading_color">#E65100</color>
+    <color name="connect_color">#4cae50</color>
+    <color name="disconnect_color">#d50000</color>
+    <color name="material_gray">#9E9E9E</color>
+</resources>

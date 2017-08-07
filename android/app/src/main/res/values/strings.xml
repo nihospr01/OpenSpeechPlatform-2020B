@@ -1,0 +1,246 @@
+<resources>
+    <string name="app_name">OSP-R01</string>
+
+    <!-- Strings related to login page-->
+    <string name="user_initials">Enter User ID</string>
+    <string name="login">Login</string>
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="enter_ip">Enter IP Address</string>
+    <string name="invalid_ip">Invalid IP address</string>
+    <string name="wrong_ip">Wrong IP address</string>
+    <string name="sub_title">Software for self-fitting hearing aid</string>
+
+    <!-- Strings related to main page-->
+    <string name="researcher_pages">Researcher Pages</string>
+    <string name="user_page"> Listener Self-Adjustment</string>
+    <string name="param_settings">Parameter Settings</string>
+    <string name="user_initials_txt">User ID: </string>
+
+    <!-- Strings related to user page-->
+    <string name="less_crisp">Less Crisp</string>
+    <string name="more_crisp">More Crisp</string>
+    <string name="less_volume">Softer</string>
+    <string name="more_volume">Louder</string>
+    <string name="more_full">More Full</string>
+    <string name="less_full">Less Full</string>
+    <string name="ok">OK</string>
+    <string name="self_adjust_hints">Self-Adjustment Instructions</string>
+    <string name="make_final_adjustment">Make final adjustments\nclick here when you are satisfied</string>
+    <string name="fullness">Fullness</string>
+    <string name="crispness">Crispness</string>
+    <string name="volume">Volume</string>
+    <string name="self_adjust_instructions">Instructions:\n\nYou will hear a man talking. Adjust the Fullness, Volume, Crispness according to the instructions shown in same color. Press Okay to start!!</string>
+
+    <!-- Strings related to settings page-->
+    <string name="step_sizes">Step Sizes</string>
+    <string name="fullness_step">L Step</string>
+    <string name="crispness_step">H Step</string>
+    <string name="volume_step">V Step</string>
+    <string name="crispness_multipliers">Crispness\nMultipliers</string>
+    <string name="m1k">m1</string>
+    <string name="m2k">m2</string>
+    <string name="m4k">m3</string>
+    <string name="m8k">m4</string>
+    <string name="_177">177</string>
+    <string name="_354">354</string>
+    <string name="_707">707</string>
+    <string name="_1414">1414</string>
+    <string name="_2828">2828</string>
+    <string name="_5657">5657</string>
+
+    <string name="_250">250</string>
+    <string name="_500">500</string>
+    <string name="_750">750</string>
+    <string name="_1000">1000</string>
+    <string name="_1500">1500</string>
+    <string name="_2000">2000</string>
+    <string name="_3000">3000</string>
+    <string name="_4000">4000</string>
+    <string name="_6000">6000</string>
+    <string name="cfreq">Freq</string>
+    <string name="comp_ratio">Comp. Ratio</string>
+    <string name="gain_50">G50</string>
+    <string name="gain_65">G65</string>
+    <string name="gain_80">G80</string>
+    <string name="knee_low">Knee Low</string>
+    <string name="knee_high">MPO Limit</string>
+    <string name="release_time">Release</string>
+    <string name="attack_time">Attack</string>
+    <string name="input_verifit">Input</string>
+    <string name="output_verifit">Output</string>
+    <string name="reset_params">Reset Params</string>
+    <string name="levels">Levels</string>
+    <string name="fullness_level">L level</string>
+    <string name="volume_level">V level</string>
+    <string name="crispness_level">H level</string>
+    <string name="lvh_values">LVH values</string>
+    <string name="sure_about_resetting">Are you sure about resetting parameters?</string>
+
+    <!-- Strings related to researcher pages -->
+    <string name="lf_cut">LF Cut</string>
+    <string name="hf_boost">HF Boost</string>
+    <string name="controls">Controls</string>
+    <string name="comp_ratio_g65">Comp. Ratio, G65</string>
+    <string name="g50_g80">G50, G80</string>
+    <string name="control_via">Control via:</string>
+    <string name="choose_filters">Choose Filters:</string>
+    <string name="cancel">Cancel</string>
+    <string name="transmit">Transmit</string>
+    <string name="number_picker_title">Select a number...</string>
+    <string name="populate">Populate</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="save_params">Save Params</string>
+    <string name="kates_filters_str">Kates Filters</string>
+    <string name="boothroyd_filters_str">Boothroyd Filters</string>
+    <string name="select_a_connection">Select a Connection: </string>
+    <string name="researcher_initials">Enter Researcher Initials</string>
+    <string name="researcher_initials_txt">Researcher Initials: </string>
+    <string name="ip_address">IP Address:</string>
+    <string name="show_dashboard">Show Values</string>
+
+    <string-array name="hf_boost_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+    <string-array name="lf_cut_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+    </string-array>
+
+    <string-array name="vol_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+    </string-array>
+
+
+    <string-array name="comp_ratio_vals">
+        <item>1.0</item>
+        <item>1.2</item>
+        <item>1.4</item>
+        <item>1.6</item>
+        <item>1.8</item>
+        <item>2.0</item>
+        <item>2.2</item>
+        <item>2.4</item>
+        <item>2.6</item>
+        <item>2.8</item>
+        <item>3.0</item>
+    </string-array>
+    <string-array name="v_step_vals">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="l_step_vals">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    <string-array name="h_step_vals">
+        <item>1</item>
+    </string-array>
+
+    <integer-array name="boothroyd_cfreq">
+        <item>177</item>
+        <item>354</item>
+        <item>707</item>
+        <item>1414</item>
+        <item>2828</item>
+        <item>5657</item>
+    </integer-array>
+
+    <integer-array name="kates_cfreq">
+        <item>250</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>4000</item>
+        <item>6000</item>
+    </integer-array>
+
+    <string-array name="target_freq">
+        <item>250</item>
+        <item>500</item>
+        <item>350</item>
+        <item>1000</item>
+        <item>1500</item>
+        <item>2000</item>
+        <item>3000</item>
+        <item>4000</item>
+        <item>6000</item>
+    </string-array>
+
+
+</resources>
