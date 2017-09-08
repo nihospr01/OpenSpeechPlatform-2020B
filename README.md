@@ -146,8 +146,8 @@ The user device software is implemented above TCP/IP layer in a software stack c
 4. Install doxygen
 	1. Run the following command: "brew install doxygen"
 	2. Next install graphviz using this command: “brew install graphviz”
-5. Extract the tar file 
-6. Open xcode and open the r01-osp-xcode project file
+5. Extract the zip file 
+6. Open xcode and open the xcode project file
 7. Build project
 8. Run the code
 9. If the prompt appears “Enable developer mode for this mac”, click on enable.
