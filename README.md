@@ -172,7 +172,7 @@ The user device software is implemented above TCP/IP layer in a software stack c
 ## Running the system
 
 1. Open Xcode
-2. Open project file: R01-OSP-xcode
+2. Open project file: osp.xcodeproj
 3. Go to Product>scheme>Edit scheme
 4. Go to RUN > Arguments
 5. The system supports the various functionalities that have been enabled using the following arguments
