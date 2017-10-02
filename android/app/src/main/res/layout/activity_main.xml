@@ -26,12 +26,6 @@
         android:textStyle="bold" />
 
     <TextView
-        style="?android:textAppearanceLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="@string/sub_title" />
-    <TextView
         android:id="@+id/resercher_initials_txt"
         style="?android:textAppearanceLarge"
         android:layout_width="wrap_content"
