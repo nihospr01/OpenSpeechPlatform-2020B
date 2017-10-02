@@ -27,14 +27,6 @@
             android:text="@string/app_name"
             android:textStyle="bold" />
 
-        <TextView
-            style="?android:textAppearanceLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:fontFamily="sans-serif-smallcaps"
-            android:text="@string/sub_title" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
