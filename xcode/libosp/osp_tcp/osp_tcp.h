@@ -21,6 +21,7 @@
 
 #include <stddef.h>
 #include "constants.h"
+#include <sys/types.h>
 
 typedef struct osp_tcp_t *Osp_tcp;
 
