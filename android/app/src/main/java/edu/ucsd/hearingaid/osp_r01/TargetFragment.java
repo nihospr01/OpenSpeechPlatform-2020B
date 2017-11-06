@@ -255,16 +255,14 @@ public class TargetFragment extends Fragment implements View.OnClickListener {
 
 
     public void setControlsText() {
-        String s1 = String.format("Fullness = %d, Volume = %d, Crispness = %d\n\n",
-                OspInterface.getInstance().getFullness(), OspInterface.getInstance().getVolume(),
-                OspInterface.getInstance().getCrispness());
+
         String s2 = String.format("Gain 50 = %s\nGain 65 = %s\nGain 80 = %s\nCompression Ratio = %s\n" +
                         "Knee Low = %s\nMPO Limit = %s\nAttack Time = %s\nRelease Time = %s",
                 Arrays.toString(OspInterface.getInstance().getG50()), Arrays.toString(OspInterface.getInstance().getG65()),
                 Arrays.toString(OspInterface.getInstance().getG80()), Arrays.toString(OspInterface.getInstance().getCompRatio()),
                 Arrays.toString(OspInterface.getInstance().getKneeLow()), Arrays.toString(OspInterface.getInstance().getMPOLimit()),
                 Arrays.toString(OspInterface.getInstance().getAttackTime()), Arrays.toString(OspInterface.getInstance().getReleaseTime()));
-        controlsText.setText(s1 + s2);
+        controlsText.setText(s2);
     }
 
     public String[] range(int start, int stop) {
@@ -695,14 +693,10 @@ public class TargetFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void run() {
                     try {
-                        String str = String.format("%s|%s|%s|%s|%d|%d|%d|%s|%s|%s|%s|%s|%s|%s|%s",
+                        String str = String.format("%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s",
                                 DateFormat.getDateTimeInstance().format(new Date()),
                                 OspInterface.getInstance().getPageName(),
                                 OspInterface.getInstance().getButtonName(),
-                                Arrays.toString(OspInterface.getInstance().getCrispnessMultipliers()),
-                                OspInterface.getInstance().getFullness(),
-                                OspInterface.getInstance().getVolume(),
-                                OspInterface.getInstance().getCrispness(),
                                 Arrays.toString(OspInterface.getInstance().getCompRatio()),
                                 Arrays.toString(OspInterface.getInstance().getG50()),
                                 Arrays.toString(OspInterface.getInstance().getG65()),
