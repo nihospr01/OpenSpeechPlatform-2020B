@@ -25,13 +25,10 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
 
     private String[] gainValRange, compRatioValRange, kneeLowRange, mpoRange, attackRange, releaseRange;
-    private String[] LStepRange, VStepRange, HStepRange, LLevelRange, VLevelRange, HLevelRange;
-    private String[] multipliersRange;
 
-    private Button LStepButton, VStepButton, HStepButton, LLevelButton, VLevelButton, HLevelButton, LValButton, VValButton, HValButton;
 
     private int[] compRatioIdx = new int[NUM_BANDS];
-    private int fullness, volume, crispness;
+
     private static final int[] crButtonIDS = {R.id.settings_cr_1, R.id.settings_cr_2, R.id.settings_cr_3,
             R.id.settings_cr_4, R.id.settings_cr_5, R.id.settings_cr_6};
     private Button[] crButtons = new Button[crButtonIDS.length];
@@ -57,20 +54,14 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     private static final int[] releaseButtonIDS = {R.id.settings_release_1, R.id.settings_release_2, R.id.settings_release_3,
             R.id.settings_release_4, R.id.settings_release_5, R.id.settings_release_6};
     private Button[] releaseButtons = new Button[releaseButtonIDS.length];
-    private static final int[] multiplierButtonIds = {R.id.settings_m1k_btn, R.id.settings_m2k_btn,
-            R.id.settings_m4k_btn, R.id.settings_m8k_btn};
-    private Button[] multiplierButtons = new Button[multiplierButtonIds.length];
+
     private static final int[] freqButtonIds = {R.id.settings_f1, R.id.settings_f2,
             R.id.settings_f3, R.id.settings_f4, R.id.settings_f5, R.id.settings_f6};
     private TextView[] freqButtons = new TextView[freqButtonIds.length];
 
     private RadioGroup mControlRadioGrp, mFilterRadioGrp;
-    private int LStep, VStep, HStep, LStepIdx, VStepIdx, HStepIdx;
-    private int LLevel, VLevel, HLevel;
-    private int maxVolume, maxFullness, maxCrispness;
 
     private int[] filterCFreq;
-    private int[] crispnessMultipliers;
     private float[] compRatio;
     private int[] g50;
     private int[] g65;
@@ -92,41 +83,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         attackRange = range(0, 200);
         releaseRange = range(0, 200);
         compRatioValRange = getResources().getStringArray(R.array.comp_ratio_vals);
-        LStepRange = getResources().getStringArray(R.array.l_step_vals);
-        VStepRange = getResources().getStringArray(R.array.v_step_vals);
-        HStepRange = getResources().getStringArray(R.array.h_step_vals);
 
-        multipliersRange = range(0, 5);
 
-        LStepButton = (Button) findViewById(R.id.settings_l_step_btn);
-        LStepButton.setOnClickListener(this);
-        VStepButton = (Button) findViewById(R.id.settings_v_step_btn);
-        VStepButton.setOnClickListener(this);
-        HStepButton = (Button) findViewById(R.id.settings_h_step_btn);
-        HStepButton.setOnClickListener(this);
-
-        LLevelButton = (Button) findViewById(R.id.settings_l_level_btn);
-        LLevelButton.setOnClickListener(this);
-        VLevelButton = (Button) findViewById(R.id.settings_v_level_btn);
-        VLevelButton.setOnClickListener(this);
-        HLevelButton = (Button) findViewById(R.id.settings_h_level_btn);
-        HLevelButton.setOnClickListener(this);
-
-        LValButton = (Button) findViewById(R.id.settings_l_val_btn);
-        LValButton.setOnClickListener(this);
-        LValButton.setEnabled(false);
-        VValButton = (Button) findViewById(R.id.settings_v_val_btn);
-        VValButton.setOnClickListener(this);
-        VValButton.setEnabled(false);
-        HValButton = (Button) findViewById(R.id.settings_h_val_btn);
-        HValButton.setOnClickListener(this);
-        HValButton.setEnabled(false);
-
-        for (int i = 0; i < multiplierButtonIds.length; i++) {
-            final int b = i;
-            multiplierButtons[b] = (Button) findViewById(multiplierButtonIds[b]);
-            multiplierButtons[b].setOnClickListener(this);
-        }
         for (int i = 0; i < NUM_BANDS; i++) {
             final int b = i;
             crButtons[b] = (Button) findViewById(crButtonIDS[b]);
@@ -217,15 +175,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void setParams() {
-        LStep = OspInterface.getInstance().getFullnessStep();
-        VStep = OspInterface.getInstance().getVolumeStep();
-        HStep = OspInterface.getInstance().getCrispnessStep();
-        LLevel = OspInterface.getInstance().getFullnessLevel();
-        VLevel = OspInterface.getInstance().getVolumeLevel();
-        HLevel = OspInterface.getInstance().getCrispnessLevel();
-        fullness = OspInterface.getInstance().getFullness();
-        volume = OspInterface.getInstance().getVolume();
-        crispness = OspInterface.getInstance().getCrispness();
+
         compRatio = OspInterface.getInstance().getCompRatio();
         g50 = OspInterface.getInstance().getG50();
         g65 = OspInterface.getInstance().getG65();
@@ -234,39 +184,14 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         mpoLimits = OspInterface.getInstance().getMPOLimit();
         attackTime = OspInterface.getInstance().getAttackTime();
         releaseTime = OspInterface.getInstance().getReleaseTime();
-        maxFullness = OspInterface.getInstance().getMaxFullness();
-        maxVolume = OspInterface.getInstance().getMaxVolume();
-        maxCrispness = OspInterface.getInstance().getMaxCrispness();
-        crispnessMultipliers = OspInterface.getInstance().getCrispnessMultipliers();
 
-        LStepIdx = Arrays.asList(LStepRange).indexOf(String.valueOf(LStep));
-        VStepIdx = Arrays.asList(VStepRange).indexOf(String.valueOf(VStep));
-        HStepIdx = Arrays.asList(HStepRange).indexOf(String.valueOf(HStep));
-
-        LLevelRange = range(0, maxFullness / LStep + 1);
-        VLevelRange = range(0, maxVolume / VStep + 1);
-        HLevelRange = range(0, maxCrispness / HStep + 1);
-
-        LStepButton.setText(String.valueOf(LStep));
-        VStepButton.setText(String.valueOf(VStep));
-        HStepButton.setText(String.valueOf(HStep));
-
-        LLevelButton.setText(String.valueOf(LLevel));
-        VLevelButton.setText(String.valueOf(VLevel));
-        HLevelButton.setText(String.valueOf(HLevel));
-
-        LValButton.setText(String.valueOf(fullness));
-        VValButton.setText(String.valueOf(volume));
-        HValButton.setText(String.valueOf(crispness));
 
         mControlRadioGrp.check(R.id.settings_radio_g50);
         mFilterRadioGrp.check(R.id.settings_radio_boothroyd);
         filterCFreq = getResources().getIntArray(R.array.boothroyd_cfreq);
         OspInterface.getInstance().setCFreq(filterCFreq);
 
-        for (int i = 0; i < multiplierButtonIds.length; i++) {
-            multiplierButtons[i].setText(String.valueOf(crispnessMultipliers[i]));
-        }
+
         for (int i = 0; i < NUM_BANDS; i++) {
             crButtons[i].setText(String.valueOf(compRatio[i]));
             g50Buttons[i].setText(String.valueOf(g50[i]));
@@ -341,36 +266,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.settings_l_step_btn:
-                showLVHStepDialog(LStepRange, v, "Select LF Cut Step Size");
-                break;
-            case R.id.settings_v_step_btn:
-                showLVHStepDialog(VStepRange, v, "Select Volume Step Size");
-                break;
-            case R.id.settings_h_step_btn:
-                showLVHStepDialog(HStepRange, v, "Select HF Boost Step Size");
-                break;
-            case R.id.settings_l_level_btn:
-                showLVHLevelDialog(LLevelRange, v, "Select LF Cut Level");
-                break;
-            case R.id.settings_v_level_btn:
-                showLVHLevelDialog(VLevelRange, v, "Select Volume Level");
-                break;
-            case R.id.settings_h_level_btn:
-                showLVHLevelDialog(HLevelRange, v, "Select HF Boost Level");
-                break;
-            case R.id.settings_m1k_btn:
-                showMultipliersDialog(v, 0);
-                break;
-            case R.id.settings_m2k_btn:
-                showMultipliersDialog(v, 1);
-                break;
-            case R.id.settings_m4k_btn:
-                showMultipliersDialog(v, 2);
-                break;
-            case R.id.settings_m8k_btn:
-                showMultipliersDialog(v, 3);
-                break;
+
 
             case R.id.settings_cr_1:
                 showCompRatioDialog(v, 0);
@@ -525,194 +421,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private void showLVHStepDialog(final String[] values, final View callingView, String pickerTitle) {
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.number_picker_dialog);
-        final TextView numberPickerTitleView = (TextView) dialog.findViewById(R.id.number_picker_title);
-        numberPickerTitleView.setText(pickerTitle);
-        final NumberPicker numberPicker = (NumberPicker) dialog.findViewById(R.id.number_picker);
-        numberPicker.setMinValue(0);
-        numberPicker.setDisplayedValues(values);
-        numberPicker.setMaxValue(values.length - 1);
-        switch (callingView.getId()) {
-            case R.id.settings_l_step_btn:
-                numberPicker.setValue(LStepIdx);
-                break;
-            case R.id.settings_v_step_btn:
-                numberPicker.setValue(VStepIdx);
-                break;
-            case R.id.settings_h_step_btn:
-                numberPicker.setValue(HStepIdx);
-                break;
-        }
-        numberPicker.setWrapSelectorWheel(true);
-
-        Button okButton = (Button) dialog.findViewById(R.id.dialog_ok_btn);
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String valStr = values[numberPicker.getValue()];
-                ((Button) callingView).setText(valStr);
-                //TODO: Do math for gain calculations and set gains
-                switch (callingView.getId()) {
-                    case R.id.settings_l_step_btn:
-                        LStep = Integer.parseInt(valStr);
-                        LStepIdx = numberPicker.getValue();
-                        OspInterface.getInstance().setFullnessStep(LStep);
-                        LLevelRange = range(0, maxFullness / LStep + 1);
-                        if (LLevel > (maxFullness/LStep) ) {
-                            LLevel = maxFullness / LStep;
-                            LLevelButton.setText(String.valueOf(LLevel));
-                            OspInterface.getInstance().setFullnessLevel(LLevel);
-                        }
-                        fullness = LStep * LLevel;
-                        OspInterface.getInstance().setFullness(fullness);
-                        LValButton.setText(String.valueOf(fullness));
-                        fullnessChanged();
-                        break;
-                    case R.id.settings_v_step_btn:
-                        VStep = Integer.parseInt(valStr);
-                        VStepIdx = numberPicker.getValue();
-                        OspInterface.getInstance().setVolumeStep(VStep);
-                        VLevelRange = range(0, maxVolume / VStep + 1);
-                        if (VLevel > (maxVolume/VStep) ) {
-                            VLevel = maxVolume / VStep;
-                            VLevelButton.setText(String.valueOf(VLevel));
-                            OspInterface.getInstance().setVolumeLevel(VLevel);
-                        }
-                        volume = VStep * VLevel;
-                        OspInterface.getInstance().setVolume(volume);
-                        VValButton.setText(String.valueOf(volume));
-                        volumeChanged();
-                        break;
-                    case R.id.settings_h_step_btn:
-                        HStep = Integer.parseInt(valStr);
-                        HStepIdx = numberPicker.getValue();
-                        OspInterface.getInstance().setCrispnessStep(HStep);
-                        HLevelRange = range(0, maxCrispness / HStep + 1);
-                        if (HLevel > (maxCrispness / HStep ) ) {
-                            HLevel = maxCrispness / HStep;
-                            OspInterface.getInstance().setCrispnessLevel(HLevel);
-                            HLevelButton.setText(String.valueOf(HLevel));
-                        }
-                        crispness = HStep * HLevel;
-                        OspInterface.getInstance().setCrispness(crispness);
-                        HValButton.setText(String.valueOf(crispness));
-                        crispnessChanged();
-                        break;
-                }
-                dialog.dismiss();
-            }
-        });
-
-        Button cancelButton = (Button) dialog.findViewById(R.id.dialog_cancel_btn);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-    }
-
-    private void showLVHLevelDialog(final String[] values, final View callingView, String pickerTitle) {
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.number_picker_dialog);
-        final TextView numberPickerTitleView = (TextView) dialog.findViewById(R.id.number_picker_title);
-        numberPickerTitleView.setText(pickerTitle);
-        final NumberPicker numberPicker = (NumberPicker) dialog.findViewById(R.id.number_picker);
-        numberPicker.setMinValue(0);
-        numberPicker.setMaxValue(values.length - 1);
-        numberPicker.setDisplayedValues(values);
-        int prevVal = Integer.parseInt(((Button) callingView).getText().toString());
-        numberPicker.setValue(prevVal);
-        numberPicker.setWrapSelectorWheel(true);
-
-        Button okButton = (Button) dialog.findViewById(R.id.dialog_ok_btn);
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String valStr = values[numberPicker.getValue()];
-                ((Button) callingView).setText(valStr);
-                //TODO: Do math for gain calculations and set gains
-                switch (callingView.getId()) {
-                    case R.id.settings_l_level_btn:
-                        LLevel = Integer.parseInt(valStr);
-                        OspInterface.getInstance().setFullnessLevel(LLevel);
-                        fullness = LStep * LLevel;
-                        OspInterface.getInstance().setFullness(fullness);
-                        LValButton.setText(String.valueOf(fullness));
-                        fullnessChanged();
-                        break;
-                    case R.id.settings_v_level_btn:
-                        VLevel = Integer.parseInt(valStr);
-                        OspInterface.getInstance().setVolumeLevel(VLevel);
-                        volume = VStep * VLevel;
-                        OspInterface.getInstance().setVolume(volume);
-                        VValButton.setText(String.valueOf(volume));
-                        volumeChanged();
-                        break;
-                    case R.id.settings_h_level_btn:
-                        HLevel = Integer.parseInt(valStr);
-                        OspInterface.getInstance().setCrispnessLevel(HLevel);
-                        crispness = HStep * HLevel;
-                        OspInterface.getInstance().setCrispness(crispness);
-                        HValButton.setText(String.valueOf(crispness));
-                        crispnessChanged();
-                        break;
-                }
-                dialog.dismiss();
-            }
-        });
-
-        Button cancelButton = (Button) dialog.findViewById(R.id.dialog_cancel_btn);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-    }
-
-    private void showMultipliersDialog(final View callingView, final int idx) {
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.number_picker_dialog);
-        final TextView numberPickerTitleView = (TextView) dialog.findViewById(R.id.number_picker_title);
-        numberPickerTitleView.setText("Select Crispness Multiplier for Band-" + String.valueOf(idx + 3));
-        final NumberPicker numberPicker = (NumberPicker) dialog.findViewById(R.id.number_picker);
-        numberPicker.setMinValue(0);
-        numberPicker.setMaxValue(multipliersRange.length - 1);
-        numberPicker.setDisplayedValues(multipliersRange);
-        int prevVal = Integer.parseInt(((Button) callingView).getText().toString());
-        numberPicker.setValue(prevVal);
-        numberPicker.setWrapSelectorWheel(true);
-
-        Button okButton = (Button) dialog.findViewById(R.id.dialog_ok_btn);
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String valStr = multipliersRange[numberPicker.getValue()];
-                ((Button) callingView).setText(valStr);
-                crispnessMultipliers[idx] = Integer.parseInt(valStr);
-                OspInterface.getInstance().setG50(crispnessMultipliers[idx], idx);
-                crispnessChanged();
-                dialog.dismiss();
-            }
-        });
-
-        Button cancelButton = (Button) dialog.findViewById(R.id.dialog_cancel_btn);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-    }
 
     private void showCompRatioDialog(final View callingView, final int bandIdx) {
         final Dialog dialog = new Dialog(this);
@@ -1035,26 +743,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         g80Buttons[bandIdx].setText(String.valueOf(g80[bandIdx]));
     }
 
-    private void crispnessChanged() {
-        for(int i=2; i<NUM_BANDS; i++) {
-            g65[i] = volume + crispness * crispnessMultipliers[i-2];
-        }
-        updateGains();
-    }
 
-    private void fullnessChanged() {
-        g65[0] = volume - fullness;
-        updateGains();
-    }
-
-    private void volumeChanged() {
-        g65[0] = volume - fullness;
-        g65[1] = volume;
-        for(int i=2; i<NUM_BANDS; i++) {
-            g65[i] = volume + crispness * crispnessMultipliers[i-2];
-        }
-        updateGains();
-    }
 
     private void updateGains() {
         for(int i=0; i<NUM_BANDS; i++) {
