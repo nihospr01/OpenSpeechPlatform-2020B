@@ -33,18 +33,12 @@ public class OspInterface {
     private String pageName;
     private String buttonName;
 
-    private int volume;
-    private int fullness;
-    private int crispness;
-    private int fullnessStep;
-    private int volumeStep;
-    private int crispnessStep;
+
     private int[] crispnessMultipliers = new int[NUM_BANDS-2];
     private float[] compRatio = new float[NUM_BANDS];
     private int[] g65 = new int[NUM_BANDS];
     private int[] cFreq = new int[NUM_BANDS];
-    private int maxFullness, maxVolume, maxCrispness;
-    private int fullnessLevel, volumeLevel, crispnessLevel;
+
 
     private boolean isConnected = false;
 
@@ -221,115 +215,6 @@ public class OspInterface {
         return kneeLow;
     }
 
-    public void setFullness(int fullness) {
-        this.fullness = fullness;
-    }
-
-    public int getFullness() {
-        return fullness;
-    }
-
-    public void setCrispness(int crispness) {
-        this.crispness = crispness;
-    }
-
-    public int getCrispness() {
-        return crispness;
-    }
-
-    public void setVolume(int volume) {
-        this.volume = volume;
-    }
-
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setVolumeStep(int volumeStep) {
-        this.volumeStep = volumeStep;
-    }
-
-    public int getVolumeStep() {
-        return volumeStep;
-    }
-
-    public void setFullnessStep(int fullnessStep) {
-        this.fullnessStep = fullnessStep;
-    }
-
-    public int getFullnessStep() {
-        return fullnessStep;
-    }
-
-    public void setCrispnessStep(int crispnessStep) {
-        this.crispnessStep = crispnessStep;
-    }
-
-    public int getCrispnessStep() {
-        return crispnessStep;
-    }
-
-    public void setCrispnessMultipliers(int[] crispnessMultipliers) {
-        for (int i = 0; i < 4; i++) {
-            this.crispnessMultipliers[i] = crispnessMultipliers[i];
-        }
-    }
-
-    public void setCrispnessMultipliers(int multiplier, int idx) {
-        this.crispnessMultipliers[idx] = multiplier;
-    }
-
-    public int[] getCrispnessMultipliers() {
-        return crispnessMultipliers;
-    }
-
-    public int getFullnessLevel() {
-        return fullnessLevel;
-    }
-
-    public void setFullnessLevel(int fullnessLevel) {
-        this.fullnessLevel = fullnessLevel;
-    }
-
-    public int getVolumeLevel() {
-        return volumeLevel;
-    }
-
-    public void setVolumeLevel(int volumeLevel) {
-        this.volumeLevel = volumeLevel;
-    }
-
-    public int getCrispnessLevel() {
-        return crispnessLevel;
-    }
-
-    public void setCrispnessLevel(int crispnessLevel) {
-        this.crispnessLevel = crispnessLevel;
-    }
-
-    public int getMaxFullness() {
-        return maxFullness;
-    }
-
-    public void setMaxFullness(int maxFullness) {
-        this.maxFullness = maxFullness;
-    }
-
-    public int getMaxVolume() {
-        return maxVolume;
-    }
-
-    public void setMaxVolume(int maxVolume) {
-        this.maxVolume = maxVolume;
-    }
-
-    public int getMaxCrispness() {
-        return maxCrispness;
-    }
-
-    public void setMaxCrispness(int maxCrispness) {
-        this.maxCrispness = maxCrispness;
-    }
 
 
     public void connect(String ipAddress, String user) throws OspInterfaceException {
@@ -494,29 +379,17 @@ public class OspInterface {
 
 
     public void setToDefaultParams() {
-        maxFullness = 21;
-        maxVolume = 40;
-        maxCrispness = 7;
-        fullnessStep = 2;
-        volumeStep = 2;
-        crispnessStep = 1;
-        fullnessLevel = 5;
-        volumeLevel = 10;
-        crispnessLevel = 3;
-        fullness = fullnessStep * fullnessLevel;
-        volume = volumeStep * volumeLevel;
-        crispness = crispnessStep * crispnessLevel;
+
         int[] boothroydCFreq = new int[]{177, 354, 707, 1414, 2828, 5657};
-        int[] defaultMultipliers = new int[]{1, 2, 3, 3};
-        for (int i = 0; i < 4; i++) {
-            crispnessMultipliers[i] = defaultMultipliers[i];
-        }
+
+        int[] default_g65 = new int[]{10,20,23,26,29,29};
+
 
         Arrays.fill(compRatio, 1.0f);
-        g65[0] = volume - fullness;
-        g65[1] = volume;
-        for(int i=2; i<NUM_BANDS; i++) {
-            g65[i] = volume + crispness * crispnessMultipliers[i-2];
+
+
+        for(int i=0; i<NUM_BANDS; i++) {
+            g65[i] = default_g65[i];
         }
         for(int i=0; i<NUM_BANDS; i++) {
             float slope = (1-compRatio[i]) / compRatio[i];
