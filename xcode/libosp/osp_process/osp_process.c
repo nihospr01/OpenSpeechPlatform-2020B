@@ -14,8 +14,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "constants.h"
 #include "logger.h"
+
+#include "speech_enhancement.h"
 
 #include "osp_process.h"
 #include "utilities.h"
@@ -70,7 +72,7 @@ static void osp_process_ha(osp_user_data *osp, Filter *filter, Peak_detect pd, f
 	int i;
 	float signal[len]; // Array to contain WDRC output
 	float filtered[len]; // Array to contain Sub-Band filtered signal. i.e. a single band signal
-
+	float signal_speech_enhanced[len];
 	float peak[len]; // Array to contain Peak Detector output
 	float pdb[len];	// Array to contain Peak Detector output in dB SPL
 	float wdrcdb[len]; // Array to contain WDRC output in dB
@@ -102,7 +104,11 @@ static void osp_process_ha(osp_user_data *osp, Filter *filter, Peak_detect pd, f
 		}
 		// #endif /* MPO */
 		// Accumulating the output of HA for each Sub-Band
-		array_add_array(s_n, signal, len);
+		
+		
+		speech_enhancement(signal, osp->noise_estimation_type, osp->spectral_subtraction, osp->spectral_subtraction_param, len, D_PD_SAMP_RATE, signal_speech_enhanced);
+		
+		array_add_array(s_n, signal_speech_enhanced, len);
 	}
 }
 

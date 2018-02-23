@@ -1,0 +1,202 @@
+\hypertarget{osp__tcp_8c}{}\section{libosp/osp\+\_\+tcp/osp\+\_\+tcp.c File Reference}
+\label{osp__tcp_8c}\index{libosp/osp\+\_\+tcp/osp\+\_\+tcp.\+c@{libosp/osp\+\_\+tcp/osp\+\_\+tcp.\+c}}
+{\ttfamily \#include \char`\"{}osp\+\_\+tcp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tcplib.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+Include dependency graph for osp\+\_\+tcp.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{osp__tcp_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Data structure containing O\+SP T\+CP layer internal variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} \mbox{\hyperlink{osp__tcp_8c_ae6c126a45386214aac909bc2b819a6d3}{osp\+\_\+tcp\+\_\+init}} (int port)
+\begin{DoxyCompactList}\small\item\em Initialization function for the O\+SP T\+CP layer. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{osp__tcp_8c_ab649aa1c24117770ecca7de43f94a3e8}{osp\+\_\+tcp\+\_\+connect}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp)
+\begin{DoxyCompactList}\small\item\em Blocking call that sets up server socket and waits for client connection In order to start a socket for a client (Android tablet, for instance), this must be called. It will block until a client establishes a connection, at which point it will return 0. \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{osp__tcp_8c_a5f810fc80c3683cdc05b5c4a3a785aa4}{osp\+\_\+tcp\+\_\+read\+\_\+req}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp)
+\begin{DoxyCompactList}\small\item\em Blocking call that returns the request sent by the connected client. The client can make a number of requests including updating the values running in the O\+SP real-\/time code (knee points, attack, release, gains, etc). The client can also request the number of underruns that have been counted from the audio driver, the number of bands that have been initially set up, etc. \end{DoxyCompactList}\item 
+ssize\+\_\+t \mbox{\hyperlink{osp__tcp_8c_aa4b8a5a6a4fa9249a163f47c206f7e8d}{osp\+\_\+tcp\+\_\+read\+\_\+values}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp, \mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$data, unsigned int size)
+\begin{DoxyCompactList}\small\item\em Reads data from the T\+CP stream into the osp\+\_\+user\+\_\+data structure. \end{DoxyCompactList}\item 
+ssize\+\_\+t \mbox{\hyperlink{osp__tcp_8c_aa2fe974658327f3586a54e6c2d57740b}{osp\+\_\+tcp\+\_\+read\+\_\+user\+\_\+packet}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp, char $\ast$message, unsigned int size)
+\item 
+int \mbox{\hyperlink{osp__tcp_8c_af443391eb190ffb7bb8b13c19d5bbe67}{osp\+\_\+tcp\+\_\+send\+\_\+underruns}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp, unsigned int underruns)
+\begin{DoxyCompactList}\small\item\em Sends the number of underruns to client. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{osp__tcp_8c_aab96e1d96e5f30b40bfed4b88cda820c}{osp\+\_\+tcp\+\_\+send\+\_\+num\+\_\+bands}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp, unsigned char bands)
+\begin{DoxyCompactList}\small\item\em Sends the number of bands to client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{osp__tcp_8c_ab998766bad97b04e79d93b25c2d54c14}{osp\+\_\+tcp\+\_\+close}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp)
+\begin{DoxyCompactList}\small\item\em Closes the T\+CP stream and frees the Osp\+\_\+tcp instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{osp__tcp_8c_ab998766bad97b04e79d93b25c2d54c14}\label{osp__tcp_8c_ab998766bad97b04e79d93b25c2d54c14}} 
+\index{osp\+\_\+tcp.\+c@{osp\+\_\+tcp.\+c}!osp\+\_\+tcp\+\_\+close@{osp\+\_\+tcp\+\_\+close}}
+\index{osp\+\_\+tcp\+\_\+close@{osp\+\_\+tcp\+\_\+close}!osp\+\_\+tcp.\+c@{osp\+\_\+tcp.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+close()}{osp\_tcp\_close()}}
+{\footnotesize\ttfamily void osp\+\_\+tcp\+\_\+close (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp }\end{DoxyParamCaption})}
+
+
+
+Closes the T\+CP stream and frees the Osp\+\_\+tcp instance. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em osp\+\_\+tcp} & The instance of the Osp\+\_\+tcp variable that was returned from osp\+\_\+tcp\+\_\+init \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{osp__tcp_8c_ab649aa1c24117770ecca7de43f94a3e8}\label{osp__tcp_8c_ab649aa1c24117770ecca7de43f94a3e8}} 
+\index{osp\+\_\+tcp.\+c@{osp\+\_\+tcp.\+c}!osp\+\_\+tcp\+\_\+connect@{osp\+\_\+tcp\+\_\+connect}}
+\index{osp\+\_\+tcp\+\_\+connect@{osp\+\_\+tcp\+\_\+connect}!osp\+\_\+tcp.\+c@{osp\+\_\+tcp.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+connect()}{osp\_tcp\_connect()}}
+{\footnotesize\ttfamily int osp\+\_\+tcp\+\_\+connect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp }\end{DoxyParamCaption})}
+
+
+
+Blocking call that sets up server socket and waits for client connection In order to start a socket for a client (Android tablet, for instance), this must be called. It will block until a client establishes a connection, at which point it will return 0. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em osp\+\_\+tcp} & The instance of the Osp\+\_\+tcp variable that was returned from osp\+\_\+tcp\+\_\+init \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 on success, or -\/1 if there\textquotesingle{}s an error setting up the socket 
+\end{DoxyReturn}
+\mbox{\Hypertarget{osp__tcp_8c_ae6c126a45386214aac909bc2b819a6d3}\label{osp__tcp_8c_ae6c126a45386214aac909bc2b819a6d3}} 
+\index{osp\+\_\+tcp.\+c@{osp\+\_\+tcp.\+c}!osp\+\_\+tcp\+\_\+init@{osp\+\_\+tcp\+\_\+init}}
+\index{osp\+\_\+tcp\+\_\+init@{osp\+\_\+tcp\+\_\+init}!osp\+\_\+tcp.\+c@{osp\+\_\+tcp.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+init()}{osp\_tcp\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp\+\_\+init (\begin{DoxyParamCaption}\item[{int}]{port }\end{DoxyParamCaption})}
+
+
+
+Initialization function for the O\+SP T\+CP layer. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em port} & The port in which to listen on for a client connection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the allocated instance of the O\+SP T\+CP layer data structure (\char`\"{}object\char`\"{}) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{osp__tcp_8c_a5f810fc80c3683cdc05b5c4a3a785aa4}\label{osp__tcp_8c_a5f810fc80c3683cdc05b5c4a3a785aa4}} 
+\index{osp\+\_\+tcp.\+c@{osp\+\_\+tcp.\+c}!osp\+\_\+tcp\+\_\+read\+\_\+req@{osp\+\_\+tcp\+\_\+read\+\_\+req}}
+\index{osp\+\_\+tcp\+\_\+read\+\_\+req@{osp\+\_\+tcp\+\_\+read\+\_\+req}!osp\+\_\+tcp.\+c@{osp\+\_\+tcp.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+read\+\_\+req()}{osp\_tcp\_read\_req()}}
+{\footnotesize\ttfamily char osp\+\_\+tcp\+\_\+read\+\_\+req (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp }\end{DoxyParamCaption})}
+
+
+
+Blocking call that returns the request sent by the connected client. The client can make a number of requests including updating the values running in the O\+SP real-\/time code (knee points, attack, release, gains, etc). The client can also request the number of underruns that have been counted from the audio driver, the number of bands that have been initially set up, etc. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}} 
+
+e\+\_\+osp\+\_\+tcp\+\_\+req\+\_\+t 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em osp\+\_\+tcp} & The instance of the Osp\+\_\+tcp variable that was returned from osp\+\_\+tcp\+\_\+init \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the request sent by the client 
+\end{DoxyReturn}
+\mbox{\Hypertarget{osp__tcp_8c_aa2fe974658327f3586a54e6c2d57740b}\label{osp__tcp_8c_aa2fe974658327f3586a54e6c2d57740b}} 
+\index{osp\+\_\+tcp.\+c@{osp\+\_\+tcp.\+c}!osp\+\_\+tcp\+\_\+read\+\_\+user\+\_\+packet@{osp\+\_\+tcp\+\_\+read\+\_\+user\+\_\+packet}}
+\index{osp\+\_\+tcp\+\_\+read\+\_\+user\+\_\+packet@{osp\+\_\+tcp\+\_\+read\+\_\+user\+\_\+packet}!osp\+\_\+tcp.\+c@{osp\+\_\+tcp.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+read\+\_\+user\+\_\+packet()}{osp\_tcp\_read\_user\_packet()}}
+{\footnotesize\ttfamily ssize\+\_\+t osp\+\_\+tcp\+\_\+read\+\_\+user\+\_\+packet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp,  }\item[{char $\ast$}]{message,  }\item[{unsigned int}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{osp__tcp_8c_aa4b8a5a6a4fa9249a163f47c206f7e8d}\label{osp__tcp_8c_aa4b8a5a6a4fa9249a163f47c206f7e8d}} 
+\index{osp\+\_\+tcp.\+c@{osp\+\_\+tcp.\+c}!osp\+\_\+tcp\+\_\+read\+\_\+values@{osp\+\_\+tcp\+\_\+read\+\_\+values}}
+\index{osp\+\_\+tcp\+\_\+read\+\_\+values@{osp\+\_\+tcp\+\_\+read\+\_\+values}!osp\+\_\+tcp.\+c@{osp\+\_\+tcp.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+read\+\_\+values()}{osp\_tcp\_read\_values()}}
+{\footnotesize\ttfamily ssize\+\_\+t osp\+\_\+tcp\+\_\+read\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp,  }\item[{\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$}]{data,  }\item[{unsigned int}]{size }\end{DoxyParamCaption})}
+
+
+
+Reads data from the T\+CP stream into the osp\+\_\+user\+\_\+data structure. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} 
+
+\mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em osp\+\_\+tcp} & The instance of the Osp\+\_\+tcp variable that was returned from osp\+\_\+tcp\+\_\+init \\
+\hline
+{\em data} & The osp\+\_\+user\+\_\+data structure that will be filled with data from the stream \\
+\hline
+{\em size} & The size of the data, in bytes, that are to be read from the stream since we\textquotesingle{}re reading into a struct of known size, passing a size variable might be redundant \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if the stream is no longer present (disconnect from client side, not error), -\/1 if there is an error reading from the server stream. Otherwise, the number of bytes read from the stream is returned 
+\end{DoxyReturn}
+\mbox{\Hypertarget{osp__tcp_8c_aab96e1d96e5f30b40bfed4b88cda820c}\label{osp__tcp_8c_aab96e1d96e5f30b40bfed4b88cda820c}} 
+\index{osp\+\_\+tcp.\+c@{osp\+\_\+tcp.\+c}!osp\+\_\+tcp\+\_\+send\+\_\+num\+\_\+bands@{osp\+\_\+tcp\+\_\+send\+\_\+num\+\_\+bands}}
+\index{osp\+\_\+tcp\+\_\+send\+\_\+num\+\_\+bands@{osp\+\_\+tcp\+\_\+send\+\_\+num\+\_\+bands}!osp\+\_\+tcp.\+c@{osp\+\_\+tcp.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+send\+\_\+num\+\_\+bands()}{osp\_tcp\_send\_num\_bands()}}
+{\footnotesize\ttfamily int osp\+\_\+tcp\+\_\+send\+\_\+num\+\_\+bands (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp,  }\item[{unsigned char}]{bands }\end{DoxyParamCaption})}
+
+
+
+Sends the number of bands to client. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em osp\+\_\+tcp} & The instance of the Osp\+\_\+tcp variable that was returned from osp\+\_\+tcp\+\_\+init \\
+\hline
+{\em bands} & Number of bands to report \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if success, -\/1 if there was an error writing to the stream 
+\end{DoxyReturn}
+\mbox{\Hypertarget{osp__tcp_8c_af443391eb190ffb7bb8b13c19d5bbe67}\label{osp__tcp_8c_af443391eb190ffb7bb8b13c19d5bbe67}} 
+\index{osp\+\_\+tcp.\+c@{osp\+\_\+tcp.\+c}!osp\+\_\+tcp\+\_\+send\+\_\+underruns@{osp\+\_\+tcp\+\_\+send\+\_\+underruns}}
+\index{osp\+\_\+tcp\+\_\+send\+\_\+underruns@{osp\+\_\+tcp\+\_\+send\+\_\+underruns}!osp\+\_\+tcp.\+c@{osp\+\_\+tcp.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+send\+\_\+underruns()}{osp\_tcp\_send\_underruns()}}
+{\footnotesize\ttfamily int osp\+\_\+tcp\+\_\+send\+\_\+underruns (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp,  }\item[{unsigned int}]{underruns }\end{DoxyParamCaption})}
+
+
+
+Sends the number of underruns to client. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em osp\+\_\+tcp} & The instance of the Osp\+\_\+tcp variable that was returned from osp\+\_\+tcp\+\_\+init \\
+\hline
+{\em underruns} & Number of underruns to report \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if success, -\/1 if there was an error writing to the stream 
+\end{DoxyReturn}

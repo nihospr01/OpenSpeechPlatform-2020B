@@ -1,0 +1,64 @@
+.TH "filter_t" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+filter_t \- Structure containing filter information\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "float * \fBtaps\fP"
+.br
+.RI "Taps of the filter (loaded in at init) "
+.ti -1c
+.RI "float * \fBbuf\fP"
+.br
+.RI "Internal buffer\&. Keeps track of old samples between frames\&. "
+.ti -1c
+.RI "int \fBlength\fP"
+.br
+.RI "Length of the filter\&. "
+.ti -1c
+.RI "int \fBindex\fP"
+.br
+.RI "Internal index\&. Keeps track of where we are on internal buffer\&. "
+.ti -1c
+.RI "unsigned int \fBbuf_len\fP"
+.br
+.ti -1c
+.RI "unsigned char \fBexp\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Structure containing filter information\&. 
+.SH "Field Documentation"
+.PP 
+.SS "float* filter_t::buf"
+
+.PP
+Internal buffer\&. Keeps track of old samples between frames\&. 
+.SS "unsigned int filter_t::buf_len"
+
+.SS "unsigned char filter_t::exp"
+
+.SS "int filter_t::index"
+
+.PP
+Internal index\&. Keeps track of where we are on internal buffer\&. 
+.SS "int filter_t::length"
+
+.PP
+Length of the filter\&. 
+.SS "float* filter_t::taps"
+
+.PP
+Taps of the filter (loaded in at init) 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

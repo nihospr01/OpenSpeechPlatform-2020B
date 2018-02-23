@@ -1,0 +1,241 @@
+\hypertarget{main_8c}{}\section{osp/main.c File Reference}
+\label{main_8c}\index{osp/main.\+c@{osp/main.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$limits.\+h$>$}\newline
+{\ttfamily \#include $<$execinfo.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$ifaddrs.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+{\ttfamily \#include $<$netinet/in.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}osp\+\_\+tcp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}osp\+\_\+process.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}resample.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utilities.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}port\+\_\+wrapper.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}logger.\+h\char`\"{}}\newline
+Include dependency graph for main.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main_8c_a123836f658bbae1fe968e88c71d9f59f}{U\+I\+\_\+\+P\+O\+RT}}~8001
+\item 
+\#define \mbox{\hyperlink{main_8c_a4b76a0c2859cfd819a343a780070ee2b}{S\+A\+M\+P\+L\+E\+\_\+\+R\+A\+TE}}~96000
+\item 
+\#define \mbox{\hyperlink{main_8c_af4f62216aa14e0407faa6631e9ec4c62}{F\+R\+A\+M\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+F\+F\+ER}}~96
+\item 
+\#define \mbox{\hyperlink{main_8c_ac82612e6326e939ae27e62ce1be9c8eb}{D\+\_\+\+A\+T\+T\+E\+N\+U\+A\+T\+I\+O\+N\+\_\+\+F\+A\+C\+T\+OR}}~(0.\+025)
+\item 
+\#define \mbox{\hyperlink{main_8c_a6242a25f9d996f0cc4f4cdb911218b75}{A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}}(x)~(sizeof((x)) / sizeof((x)\mbox{[}0\mbox{]}))
+\item 
+\#define \mbox{\hyperlink{main_8c_a91fea349332c05eb78ce3c17202e1dc9}{O\+P\+T\+\_\+\+S\+T\+R\+I\+NG}}~\char`\"{}Enter \textbackslash{}\char`\"{}a\textbackslash{}\char`\"{} to enable hearing aid algorithm, \textbackslash{}\char`\"{}d\textbackslash{}\char`\"{} to disable \textbackslash{}\char`\"{}q\textbackslash{}\char`\"{} to quit\textbackslash{}n\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static float \mbox{\hyperlink{main_8c_ab352b1ff7a758e40b3072874726eba4c}{log2lin}} (float db)
+\item 
+static void \mbox{\hyperlink{main_8c_a31293479a2742f1ac5a586f181c09d3d}{usage}} (const char $\ast$s)
+\item 
+static void $\ast$ \mbox{\hyperlink{main_8c_a5eb5b7c33ec3a1b84b4dc75b6bc20dfd}{announce\+\_\+presence}} (void $\ast$tid)
+\item 
+static void \mbox{\hyperlink{main_8c_abbb0d46c0f00de5ea4ce0c647ceac666}{run\+\_\+loopback}} (\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$osp\+\_\+data, float $\ast$inL, float $\ast$inR, float $\ast$outL, float $\ast$outR, size\+\_\+t len)
+\item 
+static int \mbox{\hyperlink{main_8c_a4bed96c09ac6c23015dab100e83a3996}{file\+\_\+loopback\+\_\+init}} (\mbox{\hyperlink{port__wrapper_8h_a44712da21c339df7c0735d4bab71a303}{file\+\_\+loopback\+\_\+context}} $\ast$ctx, const char $\ast$in\+\_\+file, const char $\ast$out\+\_\+file)
+\item 
+static void \mbox{\hyperlink{main_8c_a797c8fa6667f63d3cac9f1d378bb6851}{file\+\_\+loopback\+\_\+close}} (\mbox{\hyperlink{port__wrapper_8h_a44712da21c339df7c0735d4bab71a303}{file\+\_\+loopback\+\_\+context}} $\ast$ctx)
+\item 
+static int \mbox{\hyperlink{main_8c_a2ca50a57ce898682d8042211eee429e2}{file\+\_\+context\+\_\+write}} (\mbox{\hyperlink{port__wrapper_8h_a44712da21c339df7c0735d4bab71a303}{file\+\_\+loopback\+\_\+context}} $\ast$file\+\_\+ctx)
+\item 
+static int \mbox{\hyperlink{main_8c_aba4b29cdd5da8c4196dcc895431f6436}{file\+\_\+loopback\+\_\+run}} (const char $\ast$in\+\_\+file, const char $\ast$out\+\_\+file, unsigned int frames\+\_\+per\+\_\+buffer)
+\item 
+static int \mbox{\hyperlink{main_8c_a2be8b12fd0c4b32ba4449e1f56e66807}{run\+\_\+pa\+\_\+loopback}} (unsigned int sample\+\_\+rate, unsigned int frames\+\_\+per\+\_\+buffer, const char $\ast$in\+\_\+file, const char $\ast$out\+\_\+file)
+\item 
+static void \mbox{\hyperlink{main_8c_a4db999af4611cf4620ccec2ebf6e6a0d}{run\+\_\+loopback\+\_\+null}} (unsigned long count, unsigned int frames\+\_\+per\+\_\+buffer)
+\item 
+static int \mbox{\hyperlink{main_8c_a86ff0d7ff30269dba677b358fcabc387}{init\+\_\+pa}} (\mbox{\hyperlink{constants_8h_aba6e2261d5c6ef36dedb5b45ba0fc4ae}{pa\+\_\+user\+\_\+data}} $\ast$pa\+\_\+data, unsigned int samp\+\_\+rate, unsigned int frames\+\_\+per\+\_\+buffer)
+\item 
+static int \mbox{\hyperlink{main_8c_aa34be8cf0278cb357c2c5960f4c557c6}{close\+\_\+pa}} ()
+\item 
+static int \mbox{\hyperlink{main_8c_a1eb914c7767ba47fd3463871577c3662}{run\+\_\+pa\+\_\+key}} (\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$osp\+\_\+data, unsigned int samp\+\_\+rate, unsigned int frames\+\_\+per\+\_\+buffer, float attenuation\+\_\+factor)
+\item 
+static int \mbox{\hyperlink{main_8c_a5c1a351ba62dfc0d60b39c5382c38636}{run\+\_\+pa\+\_\+tcp}} (\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$osp\+\_\+data, unsigned int samp\+\_\+rate, unsigned int frames\+\_\+per\+\_\+buffer, float attenuation\+\_\+factor)
+\item 
+int \mbox{\hyperlink{main_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}} \mbox{\hyperlink{main_8c_ab71b1ae937e7216d3836e92522723863}{resampleL}}
+\begin{DoxyCompactList}\small\item\em Resample structure for left channel. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}} \mbox{\hyperlink{main_8c_a9b50a346e168b51231ee3e4d6ad9fd2d}{resampleR}}
+\begin{DoxyCompactList}\small\item\em Resample structure for right channel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{main_8c_a6242a25f9d996f0cc4f4cdb911218b75}\label{main_8c_a6242a25f9d996f0cc4f4cdb911218b75}} 
+\index{main.\+c@{main.\+c}!A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE@{A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}}
+\index{A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE@{A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}{ARRAY\_SIZE}}
+{\footnotesize\ttfamily \#define A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(sizeof((x)) / sizeof((x)\mbox{[}0\mbox{]}))}
+
+\mbox{\Hypertarget{main_8c_ac82612e6326e939ae27e62ce1be9c8eb}\label{main_8c_ac82612e6326e939ae27e62ce1be9c8eb}} 
+\index{main.\+c@{main.\+c}!D\+\_\+\+A\+T\+T\+E\+N\+U\+A\+T\+I\+O\+N\+\_\+\+F\+A\+C\+T\+OR@{D\+\_\+\+A\+T\+T\+E\+N\+U\+A\+T\+I\+O\+N\+\_\+\+F\+A\+C\+T\+OR}}
+\index{D\+\_\+\+A\+T\+T\+E\+N\+U\+A\+T\+I\+O\+N\+\_\+\+F\+A\+C\+T\+OR@{D\+\_\+\+A\+T\+T\+E\+N\+U\+A\+T\+I\+O\+N\+\_\+\+F\+A\+C\+T\+OR}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{D\+\_\+\+A\+T\+T\+E\+N\+U\+A\+T\+I\+O\+N\+\_\+\+F\+A\+C\+T\+OR}{D\_ATTENUATION\_FACTOR}}
+{\footnotesize\ttfamily \#define D\+\_\+\+A\+T\+T\+E\+N\+U\+A\+T\+I\+O\+N\+\_\+\+F\+A\+C\+T\+OR~(0.\+025)}
+
+\mbox{\Hypertarget{main_8c_af4f62216aa14e0407faa6631e9ec4c62}\label{main_8c_af4f62216aa14e0407faa6631e9ec4c62}} 
+\index{main.\+c@{main.\+c}!F\+R\+A\+M\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+F\+F\+ER@{F\+R\+A\+M\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+F\+F\+ER}}
+\index{F\+R\+A\+M\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+F\+F\+ER@{F\+R\+A\+M\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+F\+F\+ER}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{F\+R\+A\+M\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+F\+F\+ER}{FRAMES\_PER\_BUFFER}}
+{\footnotesize\ttfamily \#define F\+R\+A\+M\+E\+S\+\_\+\+P\+E\+R\+\_\+\+B\+U\+F\+F\+ER~96}
+
+\mbox{\Hypertarget{main_8c_a91fea349332c05eb78ce3c17202e1dc9}\label{main_8c_a91fea349332c05eb78ce3c17202e1dc9}} 
+\index{main.\+c@{main.\+c}!O\+P\+T\+\_\+\+S\+T\+R\+I\+NG@{O\+P\+T\+\_\+\+S\+T\+R\+I\+NG}}
+\index{O\+P\+T\+\_\+\+S\+T\+R\+I\+NG@{O\+P\+T\+\_\+\+S\+T\+R\+I\+NG}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{O\+P\+T\+\_\+\+S\+T\+R\+I\+NG}{OPT\_STRING}}
+{\footnotesize\ttfamily \#define O\+P\+T\+\_\+\+S\+T\+R\+I\+NG~\char`\"{}Enter \textbackslash{}\char`\"{}a\textbackslash{}\char`\"{} to enable hearing aid algorithm, \textbackslash{}\char`\"{}d\textbackslash{}\char`\"{} to disable \textbackslash{}\char`\"{}q\textbackslash{}\char`\"{} to quit\textbackslash{}n\char`\"{}}
+
+\mbox{\Hypertarget{main_8c_a4b76a0c2859cfd819a343a780070ee2b}\label{main_8c_a4b76a0c2859cfd819a343a780070ee2b}} 
+\index{main.\+c@{main.\+c}!S\+A\+M\+P\+L\+E\+\_\+\+R\+A\+TE@{S\+A\+M\+P\+L\+E\+\_\+\+R\+A\+TE}}
+\index{S\+A\+M\+P\+L\+E\+\_\+\+R\+A\+TE@{S\+A\+M\+P\+L\+E\+\_\+\+R\+A\+TE}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{S\+A\+M\+P\+L\+E\+\_\+\+R\+A\+TE}{SAMPLE\_RATE}}
+{\footnotesize\ttfamily \#define S\+A\+M\+P\+L\+E\+\_\+\+R\+A\+TE~96000}
+
+\mbox{\Hypertarget{main_8c_a123836f658bbae1fe968e88c71d9f59f}\label{main_8c_a123836f658bbae1fe968e88c71d9f59f}} 
+\index{main.\+c@{main.\+c}!U\+I\+\_\+\+P\+O\+RT@{U\+I\+\_\+\+P\+O\+RT}}
+\index{U\+I\+\_\+\+P\+O\+RT@{U\+I\+\_\+\+P\+O\+RT}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{U\+I\+\_\+\+P\+O\+RT}{UI\_PORT}}
+{\footnotesize\ttfamily \#define U\+I\+\_\+\+P\+O\+RT~8001}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{main_8c_a5eb5b7c33ec3a1b84b4dc75b6bc20dfd}\label{main_8c_a5eb5b7c33ec3a1b84b4dc75b6bc20dfd}} 
+\index{main.\+c@{main.\+c}!announce\+\_\+presence@{announce\+\_\+presence}}
+\index{announce\+\_\+presence@{announce\+\_\+presence}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{announce\+\_\+presence()}{announce\_presence()}}
+{\footnotesize\ttfamily static void$\ast$ announce\+\_\+presence (\begin{DoxyParamCaption}\item[{void $\ast$}]{tid }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_aa34be8cf0278cb357c2c5960f4c557c6}\label{main_8c_aa34be8cf0278cb357c2c5960f4c557c6}} 
+\index{main.\+c@{main.\+c}!close\+\_\+pa@{close\+\_\+pa}}
+\index{close\+\_\+pa@{close\+\_\+pa}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{close\+\_\+pa()}{close\_pa()}}
+{\footnotesize\ttfamily static int close\+\_\+pa (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_a2ca50a57ce898682d8042211eee429e2}\label{main_8c_a2ca50a57ce898682d8042211eee429e2}} 
+\index{main.\+c@{main.\+c}!file\+\_\+context\+\_\+write@{file\+\_\+context\+\_\+write}}
+\index{file\+\_\+context\+\_\+write@{file\+\_\+context\+\_\+write}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{file\+\_\+context\+\_\+write()}{file\_context\_write()}}
+{\footnotesize\ttfamily static int file\+\_\+context\+\_\+write (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{port__wrapper_8h_a44712da21c339df7c0735d4bab71a303}{file\+\_\+loopback\+\_\+context}} $\ast$}]{file\+\_\+ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_a797c8fa6667f63d3cac9f1d378bb6851}\label{main_8c_a797c8fa6667f63d3cac9f1d378bb6851}} 
+\index{main.\+c@{main.\+c}!file\+\_\+loopback\+\_\+close@{file\+\_\+loopback\+\_\+close}}
+\index{file\+\_\+loopback\+\_\+close@{file\+\_\+loopback\+\_\+close}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{file\+\_\+loopback\+\_\+close()}{file\_loopback\_close()}}
+{\footnotesize\ttfamily static void file\+\_\+loopback\+\_\+close (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{port__wrapper_8h_a44712da21c339df7c0735d4bab71a303}{file\+\_\+loopback\+\_\+context}} $\ast$}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_a4bed96c09ac6c23015dab100e83a3996}\label{main_8c_a4bed96c09ac6c23015dab100e83a3996}} 
+\index{main.\+c@{main.\+c}!file\+\_\+loopback\+\_\+init@{file\+\_\+loopback\+\_\+init}}
+\index{file\+\_\+loopback\+\_\+init@{file\+\_\+loopback\+\_\+init}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{file\+\_\+loopback\+\_\+init()}{file\_loopback\_init()}}
+{\footnotesize\ttfamily static int file\+\_\+loopback\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{port__wrapper_8h_a44712da21c339df7c0735d4bab71a303}{file\+\_\+loopback\+\_\+context}} $\ast$}]{ctx,  }\item[{const char $\ast$}]{in\+\_\+file,  }\item[{const char $\ast$}]{out\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_aba4b29cdd5da8c4196dcc895431f6436}\label{main_8c_aba4b29cdd5da8c4196dcc895431f6436}} 
+\index{main.\+c@{main.\+c}!file\+\_\+loopback\+\_\+run@{file\+\_\+loopback\+\_\+run}}
+\index{file\+\_\+loopback\+\_\+run@{file\+\_\+loopback\+\_\+run}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{file\+\_\+loopback\+\_\+run()}{file\_loopback\_run()}}
+{\footnotesize\ttfamily static int file\+\_\+loopback\+\_\+run (\begin{DoxyParamCaption}\item[{const char $\ast$}]{in\+\_\+file,  }\item[{const char $\ast$}]{out\+\_\+file,  }\item[{unsigned int}]{frames\+\_\+per\+\_\+buffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_a86ff0d7ff30269dba677b358fcabc387}\label{main_8c_a86ff0d7ff30269dba677b358fcabc387}} 
+\index{main.\+c@{main.\+c}!init\+\_\+pa@{init\+\_\+pa}}
+\index{init\+\_\+pa@{init\+\_\+pa}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{init\+\_\+pa()}{init\_pa()}}
+{\footnotesize\ttfamily static int init\+\_\+pa (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{constants_8h_aba6e2261d5c6ef36dedb5b45ba0fc4ae}{pa\+\_\+user\+\_\+data}} $\ast$}]{pa\+\_\+data,  }\item[{unsigned int}]{samp\+\_\+rate,  }\item[{unsigned int}]{frames\+\_\+per\+\_\+buffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_ab352b1ff7a758e40b3072874726eba4c}\label{main_8c_ab352b1ff7a758e40b3072874726eba4c}} 
+\index{main.\+c@{main.\+c}!log2lin@{log2lin}}
+\index{log2lin@{log2lin}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{log2lin()}{log2lin()}}
+{\footnotesize\ttfamily static float log2lin (\begin{DoxyParamCaption}\item[{float}]{db }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{main_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{main.\+c@{main.\+c}!main@{main}}
+\index{main@{main}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8c_abbb0d46c0f00de5ea4ce0c647ceac666}\label{main_8c_abbb0d46c0f00de5ea4ce0c647ceac666}} 
+\index{main.\+c@{main.\+c}!run\+\_\+loopback@{run\+\_\+loopback}}
+\index{run\+\_\+loopback@{run\+\_\+loopback}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{run\+\_\+loopback()}{run\_loopback()}}
+{\footnotesize\ttfamily static void run\+\_\+loopback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$}]{osp\+\_\+data,  }\item[{float $\ast$}]{inL,  }\item[{float $\ast$}]{inR,  }\item[{float $\ast$}]{outL,  }\item[{float $\ast$}]{outR,  }\item[{size\+\_\+t}]{len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_a4db999af4611cf4620ccec2ebf6e6a0d}\label{main_8c_a4db999af4611cf4620ccec2ebf6e6a0d}} 
+\index{main.\+c@{main.\+c}!run\+\_\+loopback\+\_\+null@{run\+\_\+loopback\+\_\+null}}
+\index{run\+\_\+loopback\+\_\+null@{run\+\_\+loopback\+\_\+null}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{run\+\_\+loopback\+\_\+null()}{run\_loopback\_null()}}
+{\footnotesize\ttfamily static void run\+\_\+loopback\+\_\+null (\begin{DoxyParamCaption}\item[{unsigned long}]{count,  }\item[{unsigned int}]{frames\+\_\+per\+\_\+buffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_a1eb914c7767ba47fd3463871577c3662}\label{main_8c_a1eb914c7767ba47fd3463871577c3662}} 
+\index{main.\+c@{main.\+c}!run\+\_\+pa\+\_\+key@{run\+\_\+pa\+\_\+key}}
+\index{run\+\_\+pa\+\_\+key@{run\+\_\+pa\+\_\+key}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{run\+\_\+pa\+\_\+key()}{run\_pa\_key()}}
+{\footnotesize\ttfamily static int run\+\_\+pa\+\_\+key (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$}]{osp\+\_\+data,  }\item[{unsigned int}]{samp\+\_\+rate,  }\item[{unsigned int}]{frames\+\_\+per\+\_\+buffer,  }\item[{float}]{attenuation\+\_\+factor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_a2be8b12fd0c4b32ba4449e1f56e66807}\label{main_8c_a2be8b12fd0c4b32ba4449e1f56e66807}} 
+\index{main.\+c@{main.\+c}!run\+\_\+pa\+\_\+loopback@{run\+\_\+pa\+\_\+loopback}}
+\index{run\+\_\+pa\+\_\+loopback@{run\+\_\+pa\+\_\+loopback}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{run\+\_\+pa\+\_\+loopback()}{run\_pa\_loopback()}}
+{\footnotesize\ttfamily static int run\+\_\+pa\+\_\+loopback (\begin{DoxyParamCaption}\item[{unsigned int}]{sample\+\_\+rate,  }\item[{unsigned int}]{frames\+\_\+per\+\_\+buffer,  }\item[{const char $\ast$}]{in\+\_\+file,  }\item[{const char $\ast$}]{out\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_a5c1a351ba62dfc0d60b39c5382c38636}\label{main_8c_a5c1a351ba62dfc0d60b39c5382c38636}} 
+\index{main.\+c@{main.\+c}!run\+\_\+pa\+\_\+tcp@{run\+\_\+pa\+\_\+tcp}}
+\index{run\+\_\+pa\+\_\+tcp@{run\+\_\+pa\+\_\+tcp}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{run\+\_\+pa\+\_\+tcp()}{run\_pa\_tcp()}}
+{\footnotesize\ttfamily static int run\+\_\+pa\+\_\+tcp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$}]{osp\+\_\+data,  }\item[{unsigned int}]{samp\+\_\+rate,  }\item[{unsigned int}]{frames\+\_\+per\+\_\+buffer,  }\item[{float}]{attenuation\+\_\+factor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{main_8c_a31293479a2742f1ac5a586f181c09d3d}\label{main_8c_a31293479a2742f1ac5a586f181c09d3d}} 
+\index{main.\+c@{main.\+c}!usage@{usage}}
+\index{usage@{usage}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{usage()}{usage()}}
+{\footnotesize\ttfamily static void usage (\begin{DoxyParamCaption}\item[{const char $\ast$}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{main_8c_ab71b1ae937e7216d3836e92522723863}\label{main_8c_ab71b1ae937e7216d3836e92522723863}} 
+\index{main.\+c@{main.\+c}!resampleL@{resampleL}}
+\index{resampleL@{resampleL}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{resampleL}{resampleL}}
+{\footnotesize\ttfamily \mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}} resampleL\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Resample structure for left channel. 
+
+\mbox{\Hypertarget{main_8c_a9b50a346e168b51231ee3e4d6ad9fd2d}\label{main_8c_a9b50a346e168b51231ee3e4d6ad9fd2d}} 
+\index{main.\+c@{main.\+c}!resampleR@{resampleR}}
+\index{resampleR@{resampleR}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{resampleR}{resampleR}}
+{\footnotesize\ttfamily \mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}} resampleR\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Resample structure for right channel. 
+

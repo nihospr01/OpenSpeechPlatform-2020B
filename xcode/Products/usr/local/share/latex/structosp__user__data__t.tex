@@ -1,0 +1,201 @@
+\hypertarget{structosp__user__data__t}{}\section{osp\+\_\+user\+\_\+data\+\_\+t Struct Reference}
+\label{structosp__user__data__t}\index{osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}}
+
+
+general data structure shared between client and C application  
+
+
+
+
+{\ttfamily \#include $<$constants.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{structosp__user__data__t_ab6aa759f78ee1e7411c6591c88977c14}{no\+\_\+op}}
+\begin{DoxyCompactList}\small\item\em No operation. The audio is passed from input to output in the audio callback. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structosp__user__data__t_a5eca0400f27a8aaf1b9ce3e961720af8}{afc}}
+\begin{DoxyCompactList}\small\item\em A\+FC on/off. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structosp__user__data__t_a03a42dd2eac876e9bcea79061343d3df}{feedback}}
+\begin{DoxyCompactList}\small\item\em Feedback on/off. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structosp__user__data__t_a509aa26b645cbc3436c862f0865f66a6}{rear\+\_\+mics}}
+\begin{DoxyCompactList}\small\item\em Read mics on/off. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structosp__user__data__t_ae2f043926e510f9f990480346e2ba6fe}{g50}} \mbox{[}\mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}\mbox{]}
+\begin{DoxyCompactList}\small\item\em The gain values at 50 dB S\+PL input level. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structosp__user__data__t_a02d70968d64180808d46e4f76e066382}{g80}} \mbox{[}\mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}\mbox{]}
+\begin{DoxyCompactList}\small\item\em The gain values at 80 dB S\+PL input level. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structosp__user__data__t_a8709446147e7d44c5b9cfabe9e51799e}{knee\+\_\+low}} \mbox{[}\mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Lower kneepoints for all bands. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structosp__user__data__t_a2564a1c5458026ce4a1532458886f5ab}{knee\+\_\+high}} \mbox{[}\mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Upper kneepoints for all bands. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structosp__user__data__t_abb30fbb6fa960d660b72e18ecd82ee88}{attack}} \mbox{[}\mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Attack time for W\+D\+RC for all bands. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structosp__user__data__t_ab1e8e99c42b77ee9f8920b678d94a1a5}{release}} \mbox{[}\mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Release time for W\+D\+RC for all bands. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structosp__user__data__t_af265bd9d66e58eec5ac0b43a2f8e02cc}{mpo\+\_\+on}}
+\begin{DoxyCompactList}\small\item\em toggle for M\+PO on/off \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structosp__user__data__t_a7aac3aa1476589a9014fef82cbcc4c4c}{choose\+\_\+sampling\+\_\+frequency}}
+\item 
+int \mbox{\hyperlink{structosp__user__data__t_ab6c6864ef4a835caedfac8f7757d3646}{noise\+\_\+estimation\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Choose type of Noise estimation technique. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structosp__user__data__t_a4d4b5738a5abe27d67dbbc278959defa}{spectral\+\_\+subtraction}}
+\begin{DoxyCompactList}\small\item\em Spectral subtraction O\+N/\+O\+FF. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{structosp__user__data__t_a21ab3e8e57f137d0308868f84d09631f}{spectral\+\_\+subtraction\+\_\+param}}
+\begin{DoxyCompactList}\small\item\em Spectral subtraction parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+general data structure shared between client and C application 
+
+\subsection{Field Documentation}
+\mbox{\Hypertarget{structosp__user__data__t_a5eca0400f27a8aaf1b9ce3e961720af8}\label{structosp__user__data__t_a5eca0400f27a8aaf1b9ce3e961720af8}} 
+\index{osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}!afc@{afc}}
+\index{afc@{afc}!osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}}
+\subsubsection{\texorpdfstring{afc}{afc}}
+{\footnotesize\ttfamily int osp\+\_\+user\+\_\+data\+\_\+t\+::afc}
+
+
+
+A\+FC on/off. 
+
+\mbox{\Hypertarget{structosp__user__data__t_abb30fbb6fa960d660b72e18ecd82ee88}\label{structosp__user__data__t_abb30fbb6fa960d660b72e18ecd82ee88}} 
+\index{osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}!attack@{attack}}
+\index{attack@{attack}!osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}}
+\subsubsection{\texorpdfstring{attack}{attack}}
+{\footnotesize\ttfamily int osp\+\_\+user\+\_\+data\+\_\+t\+::attack\mbox{[}\mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}\mbox{]}}
+
+
+
+Attack time for W\+D\+RC for all bands. 
+
+\mbox{\Hypertarget{structosp__user__data__t_a7aac3aa1476589a9014fef82cbcc4c4c}\label{structosp__user__data__t_a7aac3aa1476589a9014fef82cbcc4c4c}} 
+\index{osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}!choose\+\_\+sampling\+\_\+frequency@{choose\+\_\+sampling\+\_\+frequency}}
+\index{choose\+\_\+sampling\+\_\+frequency@{choose\+\_\+sampling\+\_\+frequency}!osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}}
+\subsubsection{\texorpdfstring{choose\+\_\+sampling\+\_\+frequency}{choose\_sampling\_frequency}}
+{\footnotesize\ttfamily int osp\+\_\+user\+\_\+data\+\_\+t\+::choose\+\_\+sampling\+\_\+frequency}
+
+\mbox{\Hypertarget{structosp__user__data__t_a03a42dd2eac876e9bcea79061343d3df}\label{structosp__user__data__t_a03a42dd2eac876e9bcea79061343d3df}} 
+\index{osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}!feedback@{feedback}}
+\index{feedback@{feedback}!osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}}
+\subsubsection{\texorpdfstring{feedback}{feedback}}
+{\footnotesize\ttfamily int osp\+\_\+user\+\_\+data\+\_\+t\+::feedback}
+
+
+
+Feedback on/off. 
+
+\mbox{\Hypertarget{structosp__user__data__t_ae2f043926e510f9f990480346e2ba6fe}\label{structosp__user__data__t_ae2f043926e510f9f990480346e2ba6fe}} 
+\index{osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}!g50@{g50}}
+\index{g50@{g50}!osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}}
+\subsubsection{\texorpdfstring{g50}{g50}}
+{\footnotesize\ttfamily int osp\+\_\+user\+\_\+data\+\_\+t\+::g50\mbox{[}\mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}\mbox{]}}
+
+
+
+The gain values at 50 dB S\+PL input level. 
+
+\mbox{\Hypertarget{structosp__user__data__t_a02d70968d64180808d46e4f76e066382}\label{structosp__user__data__t_a02d70968d64180808d46e4f76e066382}} 
+\index{osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}!g80@{g80}}
+\index{g80@{g80}!osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}}
+\subsubsection{\texorpdfstring{g80}{g80}}
+{\footnotesize\ttfamily int osp\+\_\+user\+\_\+data\+\_\+t\+::g80\mbox{[}\mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}\mbox{]}}
+
+
+
+The gain values at 80 dB S\+PL input level. 
+
+\mbox{\Hypertarget{structosp__user__data__t_a2564a1c5458026ce4a1532458886f5ab}\label{structosp__user__data__t_a2564a1c5458026ce4a1532458886f5ab}} 
+\index{osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}!knee\+\_\+high@{knee\+\_\+high}}
+\index{knee\+\_\+high@{knee\+\_\+high}!osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}}
+\subsubsection{\texorpdfstring{knee\+\_\+high}{knee\_high}}
+{\footnotesize\ttfamily int osp\+\_\+user\+\_\+data\+\_\+t\+::knee\+\_\+high\mbox{[}\mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}\mbox{]}}
+
+
+
+Upper kneepoints for all bands. 
+
+\mbox{\Hypertarget{structosp__user__data__t_a8709446147e7d44c5b9cfabe9e51799e}\label{structosp__user__data__t_a8709446147e7d44c5b9cfabe9e51799e}} 
+\index{osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}!knee\+\_\+low@{knee\+\_\+low}}
+\index{knee\+\_\+low@{knee\+\_\+low}!osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}}
+\subsubsection{\texorpdfstring{knee\+\_\+low}{knee\_low}}
+{\footnotesize\ttfamily int osp\+\_\+user\+\_\+data\+\_\+t\+::knee\+\_\+low\mbox{[}\mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}\mbox{]}}
+
+
+
+Lower kneepoints for all bands. 
+
+\mbox{\Hypertarget{structosp__user__data__t_af265bd9d66e58eec5ac0b43a2f8e02cc}\label{structosp__user__data__t_af265bd9d66e58eec5ac0b43a2f8e02cc}} 
+\index{osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}!mpo\+\_\+on@{mpo\+\_\+on}}
+\index{mpo\+\_\+on@{mpo\+\_\+on}!osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}}
+\subsubsection{\texorpdfstring{mpo\+\_\+on}{mpo\_on}}
+{\footnotesize\ttfamily int osp\+\_\+user\+\_\+data\+\_\+t\+::mpo\+\_\+on}
+
+
+
+toggle for M\+PO on/off 
+
+\mbox{\Hypertarget{structosp__user__data__t_ab6aa759f78ee1e7411c6591c88977c14}\label{structosp__user__data__t_ab6aa759f78ee1e7411c6591c88977c14}} 
+\index{osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}!no\+\_\+op@{no\+\_\+op}}
+\index{no\+\_\+op@{no\+\_\+op}!osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}}
+\subsubsection{\texorpdfstring{no\+\_\+op}{no\_op}}
+{\footnotesize\ttfamily int osp\+\_\+user\+\_\+data\+\_\+t\+::no\+\_\+op}
+
+
+
+No operation. The audio is passed from input to output in the audio callback. 
+
+\mbox{\Hypertarget{structosp__user__data__t_ab6c6864ef4a835caedfac8f7757d3646}\label{structosp__user__data__t_ab6c6864ef4a835caedfac8f7757d3646}} 
+\index{osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}!noise\+\_\+estimation\+\_\+type@{noise\+\_\+estimation\+\_\+type}}
+\index{noise\+\_\+estimation\+\_\+type@{noise\+\_\+estimation\+\_\+type}!osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}}
+\subsubsection{\texorpdfstring{noise\+\_\+estimation\+\_\+type}{noise\_estimation\_type}}
+{\footnotesize\ttfamily int osp\+\_\+user\+\_\+data\+\_\+t\+::noise\+\_\+estimation\+\_\+type}
+
+
+
+Choose type of Noise estimation technique. 
+
+\mbox{\Hypertarget{structosp__user__data__t_a509aa26b645cbc3436c862f0865f66a6}\label{structosp__user__data__t_a509aa26b645cbc3436c862f0865f66a6}} 
+\index{osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}!rear\+\_\+mics@{rear\+\_\+mics}}
+\index{rear\+\_\+mics@{rear\+\_\+mics}!osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}}
+\subsubsection{\texorpdfstring{rear\+\_\+mics}{rear\_mics}}
+{\footnotesize\ttfamily int osp\+\_\+user\+\_\+data\+\_\+t\+::rear\+\_\+mics}
+
+
+
+Read mics on/off. 
+
+\mbox{\Hypertarget{structosp__user__data__t_ab1e8e99c42b77ee9f8920b678d94a1a5}\label{structosp__user__data__t_ab1e8e99c42b77ee9f8920b678d94a1a5}} 
+\index{osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}!release@{release}}
+\index{release@{release}!osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}}
+\subsubsection{\texorpdfstring{release}{release}}
+{\footnotesize\ttfamily int osp\+\_\+user\+\_\+data\+\_\+t\+::release\mbox{[}\mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}\mbox{]}}
+
+
+
+Release time for W\+D\+RC for all bands. 
+
+\mbox{\Hypertarget{structosp__user__data__t_a4d4b5738a5abe27d67dbbc278959defa}\label{structosp__user__data__t_a4d4b5738a5abe27d67dbbc278959defa}} 
+\index{osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}!spectral\+\_\+subtraction@{spectral\+\_\+subtraction}}
+\index{spectral\+\_\+subtraction@{spectral\+\_\+subtraction}!osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}}
+\subsubsection{\texorpdfstring{spectral\+\_\+subtraction}{spectral\_subtraction}}
+{\footnotesize\ttfamily int osp\+\_\+user\+\_\+data\+\_\+t\+::spectral\+\_\+subtraction}
+
+
+
+Spectral subtraction O\+N/\+O\+FF. 
+
+\mbox{\Hypertarget{structosp__user__data__t_a21ab3e8e57f137d0308868f84d09631f}\label{structosp__user__data__t_a21ab3e8e57f137d0308868f84d09631f}} 
+\index{osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}!spectral\+\_\+subtraction\+\_\+param@{spectral\+\_\+subtraction\+\_\+param}}
+\index{spectral\+\_\+subtraction\+\_\+param@{spectral\+\_\+subtraction\+\_\+param}!osp\+\_\+user\+\_\+data\+\_\+t@{osp\+\_\+user\+\_\+data\+\_\+t}}
+\subsubsection{\texorpdfstring{spectral\+\_\+subtraction\+\_\+param}{spectral\_subtraction\_param}}
+{\footnotesize\ttfamily float osp\+\_\+user\+\_\+data\+\_\+t\+::spectral\+\_\+subtraction\+\_\+param}
+
+
+
+Spectral subtraction parameter. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libosp/common/\mbox{\hyperlink{constants_8h}{constants.\+h}}\end{DoxyCompactItemize}

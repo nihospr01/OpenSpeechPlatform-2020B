@@ -1,0 +1,127 @@
+\hypertarget{peak__detect_8c}{}\section{libosp/peak\+\_\+detect/peak\+\_\+detect.c File Reference}
+\label{peak__detect_8c}\index{libosp/peak\+\_\+detect/peak\+\_\+detect.\+c@{libosp/peak\+\_\+detect/peak\+\_\+detect.\+c}}
+{\ttfamily \#include \char`\"{}peak\+\_\+detect.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$limits.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+Include dependency graph for peak\+\_\+detect.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{peak__detect_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structpeak__detect__t}{peak\+\_\+detect\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Peak Detect data structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{peak__detect_8h_a152d14cd03f6e1ac947c95921da5507c}{Peak\+\_\+detect}} \mbox{\hyperlink{peak__detect_8c_a1bb9895ff8c4b0457213e526fd4fab74}{peak\+\_\+detect\+\_\+init}} (float fsamp, unsigned int num\+\_\+bands)
+\begin{DoxyCompactList}\small\item\em Function to initialize the peak\+\_\+detect data struct. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{peak__detect_8c_a28a24577ab91983936daee15fd88af54}{peak\+\_\+to\+\_\+spl}} (float $\ast$peak, float $\ast$pdb, size\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em Function to convert the output from the peak detector into dB S\+PL (Sound Pressure Level). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{peak__detect_8c_a3d0ec744b3cd1bf9acd7598def47748c}{peak\+\_\+detect}} (\mbox{\hyperlink{peak__detect_8h_a152d14cd03f6e1ac947c95921da5507c}{Peak\+\_\+detect}} pd, float $\ast$input, size\+\_\+t len, float $\ast$peak, float attack\+\_\+time, float release\+\_\+time, int band\+\_\+num)
+\begin{DoxyCompactList}\small\item\em Function to peak detect the signal. The attack and release times are specified as A\+N\+SI values which are then converted to filter time constants. The peak detector is given by Kates, Eq (8.\+1). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{peak__detect_8c_a0012f353d07e27778b050692205a717e}{peak\+\_\+detect\+\_\+destroy}} (\mbox{\hyperlink{peak__detect_8h_a152d14cd03f6e1ac947c95921da5507c}{Peak\+\_\+detect}} pd)
+\begin{DoxyCompactList}\small\item\em Function to close and free the Peak\+\_\+detect instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{peak__detect_8c_a3d0ec744b3cd1bf9acd7598def47748c}\label{peak__detect_8c_a3d0ec744b3cd1bf9acd7598def47748c}} 
+\index{peak\+\_\+detect.\+c@{peak\+\_\+detect.\+c}!peak\+\_\+detect@{peak\+\_\+detect}}
+\index{peak\+\_\+detect@{peak\+\_\+detect}!peak\+\_\+detect.\+c@{peak\+\_\+detect.\+c}}
+\subsubsection{\texorpdfstring{peak\+\_\+detect()}{peak\_detect()}}
+{\footnotesize\ttfamily void peak\+\_\+detect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{peak__detect_8h_a152d14cd03f6e1ac947c95921da5507c}{Peak\+\_\+detect}}}]{pd,  }\item[{float $\ast$}]{input,  }\item[{size\+\_\+t}]{len,  }\item[{float $\ast$}]{peak,  }\item[{float}]{attack\+\_\+time,  }\item[{float}]{release\+\_\+time,  }\item[{int}]{band\+\_\+num }\end{DoxyParamCaption})}
+
+
+
+Function to peak detect the signal. The attack and release times are specified as A\+N\+SI values which are then converted to filter time constants. The peak detector is given by Kates, Eq (8.\+1). 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structpeak__detect__t}{peak\+\_\+detect\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em pd} & The instance of the Peak\+\_\+detect structure that was returned from peak\+\_\+detect\+\_\+init \\
+\hline
+{\em input} & Pointer to the signal array at the frequency sub-\/band (output from sub-\/band filtering) \\
+\hline
+{\em len} & Length of the input signal \\
+\hline
+{\em peak} & Pointer to the array that will have peak detection output. i.\+e. output from peak\+\_\+detect \\
+\hline
+{\em attack\+\_\+time} & Attack time in milliseconds \\
+\hline
+{\em release\+\_\+time} & Release time in milliseconds \\
+\hline
+{\em band\+\_\+num} & The sub-\/band number that is being operated on. Required to get the prev\+\_\+peak value for that band \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{peak__detect_8c_a0012f353d07e27778b050692205a717e}\label{peak__detect_8c_a0012f353d07e27778b050692205a717e}} 
+\index{peak\+\_\+detect.\+c@{peak\+\_\+detect.\+c}!peak\+\_\+detect\+\_\+destroy@{peak\+\_\+detect\+\_\+destroy}}
+\index{peak\+\_\+detect\+\_\+destroy@{peak\+\_\+detect\+\_\+destroy}!peak\+\_\+detect.\+c@{peak\+\_\+detect.\+c}}
+\subsubsection{\texorpdfstring{peak\+\_\+detect\+\_\+destroy()}{peak\_detect\_destroy()}}
+{\footnotesize\ttfamily int peak\+\_\+detect\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{peak__detect_8h_a152d14cd03f6e1ac947c95921da5507c}{Peak\+\_\+detect}}}]{pd }\end{DoxyParamCaption})}
+
+
+
+Function to close and free the Peak\+\_\+detect instance. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structpeak__detect__t}{peak\+\_\+detect\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em pd} & The instance of the Peak\+\_\+detect structure that was returned from peak\+\_\+detect\+\_\+init \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful. -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{peak__detect_8c_a1bb9895ff8c4b0457213e526fd4fab74}\label{peak__detect_8c_a1bb9895ff8c4b0457213e526fd4fab74}} 
+\index{peak\+\_\+detect.\+c@{peak\+\_\+detect.\+c}!peak\+\_\+detect\+\_\+init@{peak\+\_\+detect\+\_\+init}}
+\index{peak\+\_\+detect\+\_\+init@{peak\+\_\+detect\+\_\+init}!peak\+\_\+detect.\+c@{peak\+\_\+detect.\+c}}
+\subsubsection{\texorpdfstring{peak\+\_\+detect\+\_\+init()}{peak\_detect\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{peak__detect_8h_a152d14cd03f6e1ac947c95921da5507c}{Peak\+\_\+detect}} peak\+\_\+detect\+\_\+init (\begin{DoxyParamCaption}\item[{float}]{fsamp,  }\item[{unsigned int}]{num\+\_\+bands }\end{DoxyParamCaption})}
+
+
+
+Function to initialize the peak\+\_\+detect data struct. 
+
+Allocates memory to the Peak\+\_\+detect instance and initialize its parameters. prev\+\_\+peak is set to zero for all bands for the first time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsamp} & Sampling rate in Hz \\
+\hline
+{\em num\+\_\+bands} & Number of sub-\/bands. Required to store prev\+\_\+peak values for each band \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Peak\+\_\+detect Returns the Peak\+\_\+detect instance/object if memory is succesfully allocated or returns N\+U\+LL. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{peak__detect_8c_a28a24577ab91983936daee15fd88af54}\label{peak__detect_8c_a28a24577ab91983936daee15fd88af54}} 
+\index{peak\+\_\+detect.\+c@{peak\+\_\+detect.\+c}!peak\+\_\+to\+\_\+spl@{peak\+\_\+to\+\_\+spl}}
+\index{peak\+\_\+to\+\_\+spl@{peak\+\_\+to\+\_\+spl}!peak\+\_\+detect.\+c@{peak\+\_\+detect.\+c}}
+\subsubsection{\texorpdfstring{peak\+\_\+to\+\_\+spl()}{peak\_to\_spl()}}
+{\footnotesize\ttfamily void peak\+\_\+to\+\_\+spl (\begin{DoxyParamCaption}\item[{float $\ast$}]{peak,  }\item[{float $\ast$}]{pdb,  }\item[{size\+\_\+t}]{len }\end{DoxyParamCaption})}
+
+
+
+Function to convert the output from the peak detector into dB S\+PL (Sound Pressure Level). 
+
+The S\+PL output will be used by the wide dynamic-\/range compression (wdrc) function. The function assumes that an R\+MS signal value of 1 corresponds to \mbox{\hyperlink{peak__detect_8h_a4f9fe2f1309c3dbfcf132e9fffb11fb2}{D\+E\+F\+A\+U\+L\+T\+\_\+\+L\+E\+V\+E\+L(100)}} dB S\+PL and converts the signal accordingly. The input W\+AV file therefore needs to be set to R\+MS = 1 at the start of processing.
+
+
+\begin{DoxyParams}{Parameters}
+{\em peak} & Pointer to the signal to be conveted to dB S\+PL. i.\+e. the output from the peak\+\_\+detect \\
+\hline
+{\em pdb} & Pointer to the signal converted to dB S\+PL. i.\+e. the output of peak\+\_\+to\+\_\+spl \\
+\hline
+{\em len} & Length of the input signal to be converted to dB S\+PL \\
+\hline
+\end{DoxyParams}

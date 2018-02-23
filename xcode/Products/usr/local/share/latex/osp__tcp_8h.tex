@@ -1,0 +1,302 @@
+\hypertarget{osp__tcp_8h}{}\section{libosp/osp\+\_\+tcp/osp\+\_\+tcp.h File Reference}
+\label{osp__tcp_8h}\index{libosp/osp\+\_\+tcp/osp\+\_\+tcp.\+h@{libosp/osp\+\_\+tcp/osp\+\_\+tcp.\+h}}
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+Include dependency graph for osp\+\_\+tcp.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=301pt]{osp__tcp_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{osp__tcp_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{osp__tcp_8h_ad70c5cf43d6187190e18013388120a13}{O\+S\+P\+\_\+\+W\+R\+O\+N\+G\+\_\+\+V\+E\+R\+S\+I\+ON}}~0x00
+\item 
+\#define \mbox{\hyperlink{osp__tcp_8h_a88fd5366fe38af2b4219821affa068af}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+P\+D\+A\+T\+E\+\_\+\+V\+A\+L\+U\+ES}}~0x01
+\begin{DoxyCompactList}\small\item\em Request to set the values in the real-\/time O\+SP C application. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{osp__tcp_8h_ac11866b2a978a05955e5e89a0b1107d1}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+U\+N\+D\+E\+R\+R\+U\+NS}}~0x02
+\begin{DoxyCompactList}\small\item\em Request to get number of underruns from real-\/time O\+SP application. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{osp__tcp_8h_a491961372a3e01bdc57287e4c2b94d47}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+ID}}~0x03
+\item 
+\#define \mbox{\hyperlink{osp__tcp_8h_ae9f1e494220fc2ed6c557185f2630e09}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+A\+C\+T\+I\+ON}}~0x04
+\item 
+\#define \mbox{\hyperlink{osp__tcp_8h_a2ff6a0a7b702e21aaa12904ebe0b983a}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+N\+U\+M\+\_\+\+B\+A\+N\+DS}}~0x05
+\item 
+\#define \mbox{\hyperlink{osp__tcp_8h_aea93a99440c7bb1ee573213b6df715c0}{O\+S\+P\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT}}~0x06
+\item 
+\#define \mbox{\hyperlink{osp__tcp_8h_afe108e38ff4f06dfe9ea602ab9f23ab0}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+L\+A\+ST}}~0x07
+\begin{DoxyCompactList}\small\item\em This exists so we can test if an inc packet is one we recognize. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}} $\ast$ \mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} \mbox{\hyperlink{osp__tcp_8h_ae6c126a45386214aac909bc2b819a6d3}{osp\+\_\+tcp\+\_\+init}} (int port)
+\begin{DoxyCompactList}\small\item\em Initialization function for the O\+SP T\+CP layer. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{osp__tcp_8h_ab649aa1c24117770ecca7de43f94a3e8}{osp\+\_\+tcp\+\_\+connect}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp)
+\begin{DoxyCompactList}\small\item\em Blocking call that sets up server socket and waits for client connection In order to start a socket for a client (Android tablet, for instance), this must be called. It will block until a client establishes a connection, at which point it will return 0. \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{osp__tcp_8h_a5f810fc80c3683cdc05b5c4a3a785aa4}{osp\+\_\+tcp\+\_\+read\+\_\+req}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp)
+\begin{DoxyCompactList}\small\item\em Blocking call that returns the request sent by the connected client. The client can make a number of requests including updating the values running in the O\+SP real-\/time code (knee points, attack, release, gains, etc). The client can also request the number of underruns that have been counted from the audio driver, the number of bands that have been initially set up, etc. \end{DoxyCompactList}\item 
+ssize\+\_\+t \mbox{\hyperlink{osp__tcp_8h_aa4b8a5a6a4fa9249a163f47c206f7e8d}{osp\+\_\+tcp\+\_\+read\+\_\+values}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp, \mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$data, unsigned int size)
+\begin{DoxyCompactList}\small\item\em Reads data from the T\+CP stream into the osp\+\_\+user\+\_\+data structure. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{osp__tcp_8h_af443391eb190ffb7bb8b13c19d5bbe67}{osp\+\_\+tcp\+\_\+send\+\_\+underruns}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp, unsigned int underruns)
+\begin{DoxyCompactList}\small\item\em Sends the number of underruns to client. \end{DoxyCompactList}\item 
+ssize\+\_\+t \mbox{\hyperlink{osp__tcp_8h_aa2fe974658327f3586a54e6c2d57740b}{osp\+\_\+tcp\+\_\+read\+\_\+user\+\_\+packet}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp, char $\ast$message, unsigned int size)
+\item 
+int \mbox{\hyperlink{osp__tcp_8h_aab96e1d96e5f30b40bfed4b88cda820c}{osp\+\_\+tcp\+\_\+send\+\_\+num\+\_\+bands}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp, unsigned char bands)
+\begin{DoxyCompactList}\small\item\em Sends the number of bands to client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{osp__tcp_8h_ab998766bad97b04e79d93b25c2d54c14}{osp\+\_\+tcp\+\_\+close}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp)
+\begin{DoxyCompactList}\small\item\em Closes the T\+CP stream and frees the Osp\+\_\+tcp instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This layer is the interface to the client side of the O\+SP application. 
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{osp__tcp_8h_aea93a99440c7bb1ee573213b6df715c0}\label{osp__tcp_8h_aea93a99440c7bb1ee573213b6df715c0}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!O\+S\+P\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT@{O\+S\+P\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT}}
+\index{O\+S\+P\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT@{O\+S\+P\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{O\+S\+P\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT}{OSP\_DISCONNECT}}
+{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT~0x06}
+
+\mbox{\Hypertarget{osp__tcp_8h_a2ff6a0a7b702e21aaa12904ebe0b983a}\label{osp__tcp_8h_a2ff6a0a7b702e21aaa12904ebe0b983a}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+N\+U\+M\+\_\+\+B\+A\+N\+DS@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+N\+U\+M\+\_\+\+B\+A\+N\+DS}}
+\index{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+N\+U\+M\+\_\+\+B\+A\+N\+DS@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+N\+U\+M\+\_\+\+B\+A\+N\+DS}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+N\+U\+M\+\_\+\+B\+A\+N\+DS}{OSP\_REQ\_GET\_NUM\_BANDS}}
+{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+N\+U\+M\+\_\+\+B\+A\+N\+DS~0x05}
+
+\mbox{\Hypertarget{osp__tcp_8h_ac11866b2a978a05955e5e89a0b1107d1}\label{osp__tcp_8h_ac11866b2a978a05955e5e89a0b1107d1}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+U\+N\+D\+E\+R\+R\+U\+NS@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+U\+N\+D\+E\+R\+R\+U\+NS}}
+\index{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+U\+N\+D\+E\+R\+R\+U\+NS@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+U\+N\+D\+E\+R\+R\+U\+NS}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+U\+N\+D\+E\+R\+R\+U\+NS}{OSP\_REQ\_GET\_UNDERRUNS}}
+{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+U\+N\+D\+E\+R\+R\+U\+NS~0x02}
+
+
+
+Request to get number of underruns from real-\/time O\+SP application. 
+
+\mbox{\Hypertarget{osp__tcp_8h_afe108e38ff4f06dfe9ea602ab9f23ab0}\label{osp__tcp_8h_afe108e38ff4f06dfe9ea602ab9f23ab0}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+L\+A\+ST@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+L\+A\+ST}}
+\index{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+L\+A\+ST@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+L\+A\+ST}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+L\+A\+ST}{OSP\_REQ\_LAST}}
+{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+L\+A\+ST~0x07}
+
+
+
+This exists so we can test if an inc packet is one we recognize. 
+
+\mbox{\Hypertarget{osp__tcp_8h_a88fd5366fe38af2b4219821affa068af}\label{osp__tcp_8h_a88fd5366fe38af2b4219821affa068af}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+P\+D\+A\+T\+E\+\_\+\+V\+A\+L\+U\+ES@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+P\+D\+A\+T\+E\+\_\+\+V\+A\+L\+U\+ES}}
+\index{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+P\+D\+A\+T\+E\+\_\+\+V\+A\+L\+U\+ES@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+P\+D\+A\+T\+E\+\_\+\+V\+A\+L\+U\+ES}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+P\+D\+A\+T\+E\+\_\+\+V\+A\+L\+U\+ES}{OSP\_REQ\_UPDATE\_VALUES}}
+{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+P\+D\+A\+T\+E\+\_\+\+V\+A\+L\+U\+ES~0x01}
+
+
+
+Request to set the values in the real-\/time O\+SP C application. 
+
+\mbox{\Hypertarget{osp__tcp_8h_ae9f1e494220fc2ed6c557185f2630e09}\label{osp__tcp_8h_ae9f1e494220fc2ed6c557185f2630e09}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+A\+C\+T\+I\+ON@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+A\+C\+T\+I\+ON}}
+\index{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+A\+C\+T\+I\+ON@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+A\+C\+T\+I\+ON}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+A\+C\+T\+I\+ON}{OSP\_REQ\_USER\_ACTION}}
+{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+A\+C\+T\+I\+ON~0x04}
+
+\mbox{\Hypertarget{osp__tcp_8h_a491961372a3e01bdc57287e4c2b94d47}\label{osp__tcp_8h_a491961372a3e01bdc57287e4c2b94d47}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+ID@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+ID}}
+\index{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+ID@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+ID}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+ID}{OSP\_REQ\_USER\_ID}}
+{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+ID~0x03}
+
+\mbox{\Hypertarget{osp__tcp_8h_ad70c5cf43d6187190e18013388120a13}\label{osp__tcp_8h_ad70c5cf43d6187190e18013388120a13}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!O\+S\+P\+\_\+\+W\+R\+O\+N\+G\+\_\+\+V\+E\+R\+S\+I\+ON@{O\+S\+P\+\_\+\+W\+R\+O\+N\+G\+\_\+\+V\+E\+R\+S\+I\+ON}}
+\index{O\+S\+P\+\_\+\+W\+R\+O\+N\+G\+\_\+\+V\+E\+R\+S\+I\+ON@{O\+S\+P\+\_\+\+W\+R\+O\+N\+G\+\_\+\+V\+E\+R\+S\+I\+ON}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{O\+S\+P\+\_\+\+W\+R\+O\+N\+G\+\_\+\+V\+E\+R\+S\+I\+ON}{OSP\_WRONG\_VERSION}}
+{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+W\+R\+O\+N\+G\+\_\+\+V\+E\+R\+S\+I\+ON~0x00}
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}\label{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!Osp\+\_\+tcp@{Osp\+\_\+tcp}}
+\index{Osp\+\_\+tcp@{Osp\+\_\+tcp}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{Osp\+\_\+tcp}{Osp\_tcp}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}}$\ast$ \mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{osp__tcp_8h_ab998766bad97b04e79d93b25c2d54c14}\label{osp__tcp_8h_ab998766bad97b04e79d93b25c2d54c14}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!osp\+\_\+tcp\+\_\+close@{osp\+\_\+tcp\+\_\+close}}
+\index{osp\+\_\+tcp\+\_\+close@{osp\+\_\+tcp\+\_\+close}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+close()}{osp\_tcp\_close()}}
+{\footnotesize\ttfamily void osp\+\_\+tcp\+\_\+close (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp }\end{DoxyParamCaption})}
+
+
+
+Closes the T\+CP stream and frees the Osp\+\_\+tcp instance. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em osp\+\_\+tcp} & The instance of the Osp\+\_\+tcp variable that was returned from osp\+\_\+tcp\+\_\+init \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{osp__tcp_8h_ab649aa1c24117770ecca7de43f94a3e8}\label{osp__tcp_8h_ab649aa1c24117770ecca7de43f94a3e8}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!osp\+\_\+tcp\+\_\+connect@{osp\+\_\+tcp\+\_\+connect}}
+\index{osp\+\_\+tcp\+\_\+connect@{osp\+\_\+tcp\+\_\+connect}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+connect()}{osp\_tcp\_connect()}}
+{\footnotesize\ttfamily int osp\+\_\+tcp\+\_\+connect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp }\end{DoxyParamCaption})}
+
+
+
+Blocking call that sets up server socket and waits for client connection In order to start a socket for a client (Android tablet, for instance), this must be called. It will block until a client establishes a connection, at which point it will return 0. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em osp\+\_\+tcp} & The instance of the Osp\+\_\+tcp variable that was returned from osp\+\_\+tcp\+\_\+init \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 on success, or -\/1 if there\textquotesingle{}s an error setting up the socket 
+\end{DoxyReturn}
+\mbox{\Hypertarget{osp__tcp_8h_ae6c126a45386214aac909bc2b819a6d3}\label{osp__tcp_8h_ae6c126a45386214aac909bc2b819a6d3}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!osp\+\_\+tcp\+\_\+init@{osp\+\_\+tcp\+\_\+init}}
+\index{osp\+\_\+tcp\+\_\+init@{osp\+\_\+tcp\+\_\+init}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+init()}{osp\_tcp\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp\+\_\+init (\begin{DoxyParamCaption}\item[{int}]{port }\end{DoxyParamCaption})}
+
+
+
+Initialization function for the O\+SP T\+CP layer. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em port} & The port in which to listen on for a client connection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the allocated instance of the O\+SP T\+CP layer data structure (\char`\"{}object\char`\"{}) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{osp__tcp_8h_a5f810fc80c3683cdc05b5c4a3a785aa4}\label{osp__tcp_8h_a5f810fc80c3683cdc05b5c4a3a785aa4}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!osp\+\_\+tcp\+\_\+read\+\_\+req@{osp\+\_\+tcp\+\_\+read\+\_\+req}}
+\index{osp\+\_\+tcp\+\_\+read\+\_\+req@{osp\+\_\+tcp\+\_\+read\+\_\+req}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+read\+\_\+req()}{osp\_tcp\_read\_req()}}
+{\footnotesize\ttfamily char osp\+\_\+tcp\+\_\+read\+\_\+req (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp }\end{DoxyParamCaption})}
+
+
+
+Blocking call that returns the request sent by the connected client. The client can make a number of requests including updating the values running in the O\+SP real-\/time code (knee points, attack, release, gains, etc). The client can also request the number of underruns that have been counted from the audio driver, the number of bands that have been initially set up, etc. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}} 
+
+e\+\_\+osp\+\_\+tcp\+\_\+req\+\_\+t 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em osp\+\_\+tcp} & The instance of the Osp\+\_\+tcp variable that was returned from osp\+\_\+tcp\+\_\+init \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the request sent by the client 
+\end{DoxyReturn}
+\mbox{\Hypertarget{osp__tcp_8h_aa2fe974658327f3586a54e6c2d57740b}\label{osp__tcp_8h_aa2fe974658327f3586a54e6c2d57740b}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!osp\+\_\+tcp\+\_\+read\+\_\+user\+\_\+packet@{osp\+\_\+tcp\+\_\+read\+\_\+user\+\_\+packet}}
+\index{osp\+\_\+tcp\+\_\+read\+\_\+user\+\_\+packet@{osp\+\_\+tcp\+\_\+read\+\_\+user\+\_\+packet}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+read\+\_\+user\+\_\+packet()}{osp\_tcp\_read\_user\_packet()}}
+{\footnotesize\ttfamily ssize\+\_\+t osp\+\_\+tcp\+\_\+read\+\_\+user\+\_\+packet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp,  }\item[{char $\ast$}]{message,  }\item[{unsigned int}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{osp__tcp_8h_aa4b8a5a6a4fa9249a163f47c206f7e8d}\label{osp__tcp_8h_aa4b8a5a6a4fa9249a163f47c206f7e8d}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!osp\+\_\+tcp\+\_\+read\+\_\+values@{osp\+\_\+tcp\+\_\+read\+\_\+values}}
+\index{osp\+\_\+tcp\+\_\+read\+\_\+values@{osp\+\_\+tcp\+\_\+read\+\_\+values}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+read\+\_\+values()}{osp\_tcp\_read\_values()}}
+{\footnotesize\ttfamily ssize\+\_\+t osp\+\_\+tcp\+\_\+read\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp,  }\item[{\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$}]{data,  }\item[{unsigned int}]{size }\end{DoxyParamCaption})}
+
+
+
+Reads data from the T\+CP stream into the osp\+\_\+user\+\_\+data structure. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} 
+
+\mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em osp\+\_\+tcp} & The instance of the Osp\+\_\+tcp variable that was returned from osp\+\_\+tcp\+\_\+init \\
+\hline
+{\em data} & The osp\+\_\+user\+\_\+data structure that will be filled with data from the stream \\
+\hline
+{\em size} & The size of the data, in bytes, that are to be read from the stream since we\textquotesingle{}re reading into a struct of known size, passing a size variable might be redundant \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if the stream is no longer present (disconnect from client side, not error), -\/1 if there is an error reading from the server stream. Otherwise, the number of bytes read from the stream is returned 
+\end{DoxyReturn}
+\mbox{\Hypertarget{osp__tcp_8h_aab96e1d96e5f30b40bfed4b88cda820c}\label{osp__tcp_8h_aab96e1d96e5f30b40bfed4b88cda820c}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!osp\+\_\+tcp\+\_\+send\+\_\+num\+\_\+bands@{osp\+\_\+tcp\+\_\+send\+\_\+num\+\_\+bands}}
+\index{osp\+\_\+tcp\+\_\+send\+\_\+num\+\_\+bands@{osp\+\_\+tcp\+\_\+send\+\_\+num\+\_\+bands}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+send\+\_\+num\+\_\+bands()}{osp\_tcp\_send\_num\_bands()}}
+{\footnotesize\ttfamily int osp\+\_\+tcp\+\_\+send\+\_\+num\+\_\+bands (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp,  }\item[{unsigned char}]{bands }\end{DoxyParamCaption})}
+
+
+
+Sends the number of bands to client. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em osp\+\_\+tcp} & The instance of the Osp\+\_\+tcp variable that was returned from osp\+\_\+tcp\+\_\+init \\
+\hline
+{\em bands} & Number of bands to report \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if success, -\/1 if there was an error writing to the stream 
+\end{DoxyReturn}
+\mbox{\Hypertarget{osp__tcp_8h_af443391eb190ffb7bb8b13c19d5bbe67}\label{osp__tcp_8h_af443391eb190ffb7bb8b13c19d5bbe67}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!osp\+\_\+tcp\+\_\+send\+\_\+underruns@{osp\+\_\+tcp\+\_\+send\+\_\+underruns}}
+\index{osp\+\_\+tcp\+\_\+send\+\_\+underruns@{osp\+\_\+tcp\+\_\+send\+\_\+underruns}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+send\+\_\+underruns()}{osp\_tcp\_send\_underruns()}}
+{\footnotesize\ttfamily int osp\+\_\+tcp\+\_\+send\+\_\+underruns (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp,  }\item[{unsigned int}]{underruns }\end{DoxyParamCaption})}
+
+
+
+Sends the number of underruns to client. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em osp\+\_\+tcp} & The instance of the Osp\+\_\+tcp variable that was returned from osp\+\_\+tcp\+\_\+init \\
+\hline
+{\em underruns} & Number of underruns to report \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if success, -\/1 if there was an error writing to the stream 
+\end{DoxyReturn}

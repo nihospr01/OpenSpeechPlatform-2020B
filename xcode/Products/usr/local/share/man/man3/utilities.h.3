@@ -1,0 +1,76 @@
+.TH "libosp/osp_process/utilities.h" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libosp/osp_process/utilities.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBARRAY_SIZE\fP(x)   (sizeof((x)) / sizeof((x)[0]))"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBload_filter_taps\fP (const char *file, float *taps, int len)"
+.br
+.RI "Load filter taps from file\&. "
+.ti -1c
+.RI "int \fBsave_filter_taps\fP (const char *file, float *taps, int len)"
+.br
+.RI "Save filter taps to a file\&. "
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define ARRAY_SIZE(x)   (sizeof((x)) / sizeof((x)[0]))"
+
+.SH "Function Documentation"
+.PP 
+.SS "int load_filter_taps (const char * file, float * taps, int len)"
+
+.PP
+Load filter taps from file\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfile\fP The file in which to load 32bit float taps from 
+.br
+\fItaps\fP The array in which the taps will be loaded into 
+.br
+\fIlen\fP The number of taps to load into the 'taps' array
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the number of taps loaded\&. This should be the same as the 'len' parameter\&. This way the developer can test if this is the case, and return an error if it is not 
+.RE
+.PP
+
+.SS "int save_filter_taps (const char * file, float * taps, int len)"
+
+.PP
+Save filter taps to a file\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfile\fP File to save filter taps to 
+.br
+\fItaps\fP Array of filter taps to save to file 
+.br
+\fIlen\fP Length of the 'taps' array: the number of taps to save
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns 0 on success, -1 otherwise 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

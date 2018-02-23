@@ -1,0 +1,141 @@
+.TH "osp_user_data_t" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+osp_user_data_t \- general data structure shared between client and C application  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <constants\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "int \fBno_op\fP"
+.br
+.RI "No operation\&. The audio is passed from input to output in the audio callback\&. "
+.ti -1c
+.RI "int \fBafc\fP"
+.br
+.RI "AFC on/off\&. "
+.ti -1c
+.RI "int \fBfeedback\fP"
+.br
+.RI "Feedback on/off\&. "
+.ti -1c
+.RI "int \fBrear_mics\fP"
+.br
+.RI "Read mics on/off\&. "
+.ti -1c
+.RI "int \fBg50\fP [\fBNUM_BANDS\fP]"
+.br
+.RI "The gain values at 50 dB SPL input level\&. "
+.ti -1c
+.RI "int \fBg80\fP [\fBNUM_BANDS\fP]"
+.br
+.RI "The gain values at 80 dB SPL input level\&. "
+.ti -1c
+.RI "int \fBknee_low\fP [\fBNUM_BANDS\fP]"
+.br
+.RI "Lower kneepoints for all bands\&. "
+.ti -1c
+.RI "int \fBknee_high\fP [\fBNUM_BANDS\fP]"
+.br
+.RI "Upper kneepoints for all bands\&. "
+.ti -1c
+.RI "int \fBattack\fP [\fBNUM_BANDS\fP]"
+.br
+.RI "Attack time for WDRC for all bands\&. "
+.ti -1c
+.RI "int \fBrelease\fP [\fBNUM_BANDS\fP]"
+.br
+.RI "Release time for WDRC for all bands\&. "
+.ti -1c
+.RI "int \fBmpo_on\fP"
+.br
+.RI "toggle for MPO on/off "
+.ti -1c
+.RI "int \fBchoose_sampling_frequency\fP"
+.br
+.ti -1c
+.RI "int \fBnoise_estimation_type\fP"
+.br
+.RI "Choose type of Noise estimation technique\&. "
+.ti -1c
+.RI "int \fBspectral_subtraction\fP"
+.br
+.RI "Spectral subtraction ON/OFF\&. "
+.ti -1c
+.RI "float \fBspectral_subtraction_param\fP"
+.br
+.RI "Spectral subtraction parameter\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+general data structure shared between client and C application 
+.SH "Field Documentation"
+.PP 
+.SS "int osp_user_data_t::afc"
+
+.PP
+AFC on/off\&. 
+.SS "int osp_user_data_t::attack[\fBNUM_BANDS\fP]"
+
+.PP
+Attack time for WDRC for all bands\&. 
+.SS "int osp_user_data_t::choose_sampling_frequency"
+
+.SS "int osp_user_data_t::feedback"
+
+.PP
+Feedback on/off\&. 
+.SS "int osp_user_data_t::g50[\fBNUM_BANDS\fP]"
+
+.PP
+The gain values at 50 dB SPL input level\&. 
+.SS "int osp_user_data_t::g80[\fBNUM_BANDS\fP]"
+
+.PP
+The gain values at 80 dB SPL input level\&. 
+.SS "int osp_user_data_t::knee_high[\fBNUM_BANDS\fP]"
+
+.PP
+Upper kneepoints for all bands\&. 
+.SS "int osp_user_data_t::knee_low[\fBNUM_BANDS\fP]"
+
+.PP
+Lower kneepoints for all bands\&. 
+.SS "int osp_user_data_t::mpo_on"
+
+.PP
+toggle for MPO on/off 
+.SS "int osp_user_data_t::no_op"
+
+.PP
+No operation\&. The audio is passed from input to output in the audio callback\&. 
+.SS "int osp_user_data_t::noise_estimation_type"
+
+.PP
+Choose type of Noise estimation technique\&. 
+.SS "int osp_user_data_t::rear_mics"
+
+.PP
+Read mics on/off\&. 
+.SS "int osp_user_data_t::release[\fBNUM_BANDS\fP]"
+
+.PP
+Release time for WDRC for all bands\&. 
+.SS "int osp_user_data_t::spectral_subtraction"
+
+.PP
+Spectral subtraction ON/OFF\&. 
+.SS "float osp_user_data_t::spectral_subtraction_param"
+
+.PP
+Spectral subtraction parameter\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

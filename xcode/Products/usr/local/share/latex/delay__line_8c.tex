@@ -1,0 +1,111 @@
+\hypertarget{delay__line_8c}{}\section{libosp/beam\+\_\+forming/delay\+\_\+line.c File Reference}
+\label{delay__line_8c}\index{libosp/beam\+\_\+forming/delay\+\_\+line.\+c@{libosp/beam\+\_\+forming/delay\+\_\+line.\+c}}
+{\ttfamily \#include \char`\"{}delay\+\_\+line.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+Include dependency graph for delay\+\_\+line.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=347pt]{delay__line_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structdelay__line__t}{delay\+\_\+line\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Data structure that contains delay\+\_\+line information. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{delay__line_8h_aa62b49f8bfee0c3a174896c9b446d68d}{Delay\+\_\+\+Line}} \mbox{\hyperlink{delay__line_8c_a7e4b8dbf2a223a4014061763f039ed07}{delay\+\_\+line\+\_\+init}} (unsigned int delay)
+\begin{DoxyCompactList}\small\item\em Initializes Delay Line structure. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{delay__line_8c_a0e9e86a07f0e0b2dfa0826bde02983e8}{delay\+\_\+line\+\_\+tick}} (\mbox{\hyperlink{delay__line_8h_aa62b49f8bfee0c3a174896c9b446d68d}{Delay\+\_\+\+Line}} del\+\_\+line, float input\+\_\+sample)
+\begin{DoxyCompactList}\small\item\em Returns an output sample that has been delayed by a set number When you call delay\+\_\+line\+\_\+tick with a sample, you are putting a sample into its internal circular buffer, and you are getting a sample that has previously been put onto its circular buffer N samples/ticks ago (where N is the delay parameter in delay\+\_\+line\+\_\+init). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{delay__line_8c_a4010a68b463ce7bc8fe47ffd59b917b4}{delay\+\_\+line\+\_\+free}} (\mbox{\hyperlink{delay__line_8h_aa62b49f8bfee0c3a174896c9b446d68d}{Delay\+\_\+\+Line}} del\+\_\+line)
+\begin{DoxyCompactList}\small\item\em Frees the Delay\+\_\+\+Line data structure. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{delay__line_8c_a0c4320f88c683a623950f95a844a1466}{delay\+\_\+line\+\_\+flush}} (\mbox{\hyperlink{delay__line_8h_aa62b49f8bfee0c3a174896c9b446d68d}{Delay\+\_\+\+Line}} del\+\_\+line)
+\begin{DoxyCompactList}\small\item\em Flushes internal circular buffer that contains previous samples put on by calls to delay\+\_\+line\+\_\+tick. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{delay__line_8c_a0c4320f88c683a623950f95a844a1466}\label{delay__line_8c_a0c4320f88c683a623950f95a844a1466}} 
+\index{delay\+\_\+line.\+c@{delay\+\_\+line.\+c}!delay\+\_\+line\+\_\+flush@{delay\+\_\+line\+\_\+flush}}
+\index{delay\+\_\+line\+\_\+flush@{delay\+\_\+line\+\_\+flush}!delay\+\_\+line.\+c@{delay\+\_\+line.\+c}}
+\subsubsection{\texorpdfstring{delay\+\_\+line\+\_\+flush()}{delay\_line\_flush()}}
+{\footnotesize\ttfamily int delay\+\_\+line\+\_\+flush (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{delay__line_8h_aa62b49f8bfee0c3a174896c9b446d68d}{Delay\+\_\+\+Line}}}]{del\+\_\+line }\end{DoxyParamCaption})}
+
+
+
+Flushes internal circular buffer that contains previous samples put on by calls to delay\+\_\+line\+\_\+tick. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em del\+\_\+line} & The data structure containing delay\+\_\+line details \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 otherwise. Need to fix this 
+\end{DoxyReturn}
+\mbox{\Hypertarget{delay__line_8c_a4010a68b463ce7bc8fe47ffd59b917b4}\label{delay__line_8c_a4010a68b463ce7bc8fe47ffd59b917b4}} 
+\index{delay\+\_\+line.\+c@{delay\+\_\+line.\+c}!delay\+\_\+line\+\_\+free@{delay\+\_\+line\+\_\+free}}
+\index{delay\+\_\+line\+\_\+free@{delay\+\_\+line\+\_\+free}!delay\+\_\+line.\+c@{delay\+\_\+line.\+c}}
+\subsubsection{\texorpdfstring{delay\+\_\+line\+\_\+free()}{delay\_line\_free()}}
+{\footnotesize\ttfamily int delay\+\_\+line\+\_\+free (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{delay__line_8h_aa62b49f8bfee0c3a174896c9b446d68d}{Delay\+\_\+\+Line}}}]{del\+\_\+line }\end{DoxyParamCaption})}
+
+
+
+Frees the Delay\+\_\+\+Line data structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em del\+\_\+line} & Delay\+\_\+\+Line data structure to be freed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{delay__line_8c_a7e4b8dbf2a223a4014061763f039ed07}\label{delay__line_8c_a7e4b8dbf2a223a4014061763f039ed07}} 
+\index{delay\+\_\+line.\+c@{delay\+\_\+line.\+c}!delay\+\_\+line\+\_\+init@{delay\+\_\+line\+\_\+init}}
+\index{delay\+\_\+line\+\_\+init@{delay\+\_\+line\+\_\+init}!delay\+\_\+line.\+c@{delay\+\_\+line.\+c}}
+\subsubsection{\texorpdfstring{delay\+\_\+line\+\_\+init()}{delay\_line\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{delay__line_8h_aa62b49f8bfee0c3a174896c9b446d68d}{Delay\+\_\+\+Line}} delay\+\_\+line\+\_\+init (\begin{DoxyParamCaption}\item[{unsigned int}]{delay }\end{DoxyParamCaption})}
+
+
+
+Initializes Delay Line structure. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{delay__line_8h_a0e9e86a07f0e0b2dfa0826bde02983e8}{delay\+\_\+line\+\_\+tick}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em delay} & The number of samples to delay when calling delay\+\_\+line\+\_\+tick \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the Delay\+\_\+\+Line data structure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{delay__line_8c_a0e9e86a07f0e0b2dfa0826bde02983e8}\label{delay__line_8c_a0e9e86a07f0e0b2dfa0826bde02983e8}} 
+\index{delay\+\_\+line.\+c@{delay\+\_\+line.\+c}!delay\+\_\+line\+\_\+tick@{delay\+\_\+line\+\_\+tick}}
+\index{delay\+\_\+line\+\_\+tick@{delay\+\_\+line\+\_\+tick}!delay\+\_\+line.\+c@{delay\+\_\+line.\+c}}
+\subsubsection{\texorpdfstring{delay\+\_\+line\+\_\+tick()}{delay\_line\_tick()}}
+{\footnotesize\ttfamily float delay\+\_\+line\+\_\+tick (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{delay__line_8h_aa62b49f8bfee0c3a174896c9b446d68d}{Delay\+\_\+\+Line}}}]{del\+\_\+line,  }\item[{float}]{input\+\_\+sample }\end{DoxyParamCaption})}
+
+
+
+Returns an output sample that has been delayed by a set number When you call delay\+\_\+line\+\_\+tick with a sample, you are putting a sample into its internal circular buffer, and you are getting a sample that has previously been put onto its circular buffer N samples/ticks ago (where N is the delay parameter in delay\+\_\+line\+\_\+init). 
+
+For example, if you set the delay\+\_\+line\+\_\+init with a delay of 4 samples, the input and output of delay\+\_\+line\+\_\+tick are shown below, where each row represents calling the delay\+\_\+line\+\_\+tick function In Out 1 0 1 0 1 0 1 0 0 1 0 1 0 1 0 1 0 0 0 0 ...
+
+
+\begin{DoxyParams}{Parameters}
+{\em del\+\_\+line} & The Delay\+\_\+\+Line struct returned from delay\+\_\+line\+\_\+init \\
+\hline
+{\em input\+\_\+sample} & The input sample that will be returned N ticks in the future\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A sample that was previously passed into delay\+\_\+line\+\_\+tick N ticks in the past 
+\end{DoxyReturn}

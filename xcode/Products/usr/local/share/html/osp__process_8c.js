@@ -1,0 +1,27 @@
+var osp__process_8c =
+[
+    [ "FEEDBACK_EST_DELAY", "osp__process_8c.html#a35028ea7fc0cef3cdc0ce4fbd2ff25a4", null ],
+    [ "STEREO", "osp__process_8c.html#a5f1590d4ac46cd4c58167f767d284ef7", null ],
+    [ "osp_close", "osp__process_8c.html#af0a98853e0b3bce6a93cb88c1839723f", null ],
+    [ "osp_data_init", "osp__process_8c.html#a12fc7be1c06d51523df05f460e91d097", null ],
+    [ "osp_data_set_gain", "osp__process_8c.html#a1b9e53a67adfda315e3fe93862361d22", null ],
+    [ "osp_data_set_n2", "osp__process_8c.html#aa23c1072681c057f945a6d22d7659934", null ],
+    [ "osp_data_set_n4", "osp__process_8c.html#ae7da3f44c97ca3e1ec342f2410015845", null ],
+    [ "osp_data_set_nh", "osp__process_8c.html#a6f9f5ada6b7f84af9827bbb1cbe68d3d", null ],
+    [ "osp_data_set_s2", "osp__process_8c.html#aeb2474bd6b995d8ad289bfb1ce9b91c9", null ],
+    [ "osp_dump_afc_filter", "osp__process_8c.html#a37765f5c4d9ab3f3569947503b97a6c6", null ],
+    [ "osp_get_num_bands", "osp__process_8c.html#afa87b8384a65fb6f6a12ac92297c9961", null ],
+    [ "osp_init", "osp__process_8c.html#a6d714155eff0850c8fd9458444365c57", null ],
+    [ "osp_process_audio", "osp__process_8c.html#a6c8f16a08d0ce2a2b4989861253a51f5", null ],
+    [ "osp_process_ha", "osp__process_8c.html#a5e03afe3816964e6052931a58b754d99", null ],
+    [ "afc_left", "osp__process_8c.html#a1b0e0576d2848078cb3c36c87014bff5", null ],
+    [ "afc_right", "osp__process_8c.html#a79945a59c824205d3853b2488639dcda", null ],
+    [ "delay_line_left", "osp__process_8c.html#adfcf80bfcebee0007f158d88b724f531", null ],
+    [ "delay_line_right", "osp__process_8c.html#af011450742dbabbc02c0fb1a3903a884", null ],
+    [ "filterL", "osp__process_8c.html#a7c99ae65957762007fcd93018842ed12", null ],
+    [ "filterR", "osp__process_8c.html#a1768daa4a1e3e9e2e2d5327315ba69f9", null ],
+    [ "pdL", "osp__process_8c.html#a3c18e558d4aff166f6be1cd1fa271ff1", null ],
+    [ "pdR", "osp__process_8c.html#aa630bd455bf668501cc2c91822cb4d2b", null ],
+    [ "synthetic_feedback_filter_left", "osp__process_8c.html#a0d1d77ea7cad8796f93e5185af5d04b6", null ],
+    [ "synthetic_feedback_filter_right", "osp__process_8c.html#a245b5b6521a6c8aa806c31919532ee0b", null ]
+];

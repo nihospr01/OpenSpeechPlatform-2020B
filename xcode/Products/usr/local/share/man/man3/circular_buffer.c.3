@@ -1,0 +1,72 @@
+.TH "libosp/afc/circular_buffer.c" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libosp/afc/circular_buffer.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <assert\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+\fC#include 'circular_buffer\&.h'\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBcircular_buffer_t\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCircular_buffer\fP \fBcircular_buffer_init\fP (size_t buf_len)"
+.br
+.ti -1c
+.RI "int \fBcircular_buffer_update_buffer\fP (\fBCircular_buffer\fP obj, float *new_frame, size_t new_frame_len)"
+.br
+.ti -1c
+.RI "size_t \fBcircular_buffer_get_internal_buffer\fP (\fBCircular_buffer\fP obj, float *buf)"
+.br
+.ti -1c
+.RI "size_t \fBcircular_buffer_get_buffer_size\fP (\fBCircular_buffer\fP obj)"
+.br
+.ti -1c
+.RI "unsigned char \fBcircular_buffer_get_exp\fP (\fBCircular_buffer\fP obj)"
+.br
+.ti -1c
+.RI "void \fBcircular_buffer_flush\fP (\fBCircular_buffer\fP obj, float *out)"
+.br
+.ti -1c
+.RI "int \fBcircular_buffer_destroy\fP (\fBCircular_buffer\fP obj)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int circular_buffer_destroy (\fBCircular_buffer\fP obj)"
+
+.SS "void circular_buffer_flush (\fBCircular_buffer\fP obj, float * out)"
+
+.SS "size_t circular_buffer_get_buffer_size (\fBCircular_buffer\fP obj)"
+
+.SS "unsigned char circular_buffer_get_exp (\fBCircular_buffer\fP obj)"
+
+.SS "size_t circular_buffer_get_internal_buffer (\fBCircular_buffer\fP obj, float * buf)"
+
+.SS "\fBCircular_buffer\fP circular_buffer_init (size_t buf_len)"
+
+.SS "int circular_buffer_update_buffer (\fBCircular_buffer\fP obj, float * new_frame, size_t new_frame_len)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

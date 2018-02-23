@@ -73,6 +73,7 @@ static inline void usage(const char *s)
 	printf("\t-T\tinitialize with selected AFC. 0=FXLMS and 1=PNLMS\n");
 	printf("\t-M\tEnable/Disable MPO. 0= Disable MPO and 1 = Enable MPO\n");
 	printf("\t-l\t<Loopback File>\tRun in loopback mode where <Loopback File> is input\n");
+	printf("\t-F\tChoose sampling Frequency. 0 = 48 kHz or 1 = 96 kHz\n");
 }
 
 static void * announce_presence(void * tid)
@@ -171,10 +172,19 @@ static void run_loopback(osp_user_data *osp_data, float *inL, float *inR, float 
 		fprintf(stderr, "Incompatible frame size: %lu\n", len);
 	}
 
-	ret =
-	resample_96_32(resampleL, inL, inL32, len);
-	resample_96_32(resampleR, inR, inR32, len);
+	if(osp_data->choose_sampling_frequency)
+	{
+		ret =
+		resample_96_32(resampleL, inL, inL32, len);
+		resample_96_32(resampleR, inR, inR32, len);
+	}
+	else
+	{
+		ret =
+		resample_48_32(resampleL, inL, inL32, len);
+		resample_48_32(resampleR, inR, inR32, len);
 
+	}
 	if (osp_data->no_op) {
 		for (i = 0; i < ret; i++) {
 			outL32[i] = inL32[i];
@@ -187,11 +197,17 @@ static void run_loopback(osp_user_data *osp_data, float *inL, float *inR, float 
 											inL32, inR32,
 											outL32, outR32, ret);
 	}
-
-	resample_32_96(resampleL, outL32, outL, len / 3);
-	resample_32_96(resampleR, outR32, outR, len / 3);
+	if(osp_data->choose_sampling_frequency)
+	{
+		resample_32_96(resampleL, outL32, outL, len / 3);
+		resample_32_96(resampleR, outR32, outR, len / 3);
+	}
+	else
+	{
+		resample_32_48(resampleL, outL32, outL, len / 3);
+		resample_32_48(resampleR, outR32, outR, len / 3);
+	}
 }
-
 //static void run_loopback_32(osp_user_data *osp_data, float *inL, float *inR, float *outL, float *outR, unsigned long len)
 //{
 //	unsigned long i;
@@ -553,7 +569,34 @@ static int run_pa_key(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 		} else if (input == '0') {
 			printf("Setting NH\n");
 			osp_data_set_nh(osp_data);
-		} else if (input == 'q') {
+		} else if( input == 'p'){
+			char ch;
+			int i = 0;
+			float param;
+			char param_s[10] = {};
+			
+			while ((ch = getchar()) != '\n') {
+				
+				if (ch != '.'){
+					if ((ch > '9' || ch < '0')) {
+						continue;
+					}
+				}
+				param_s[i] = ch;
+				i++;
+			}
+			
+			param = strtof(param_s, NULL);
+			if (param<0 || param > 1){
+				printf("The range for Spectral subtraction parameter should be with in 0 and 1\n");
+				continue;
+			}
+			osp_data->spectral_subtraction_param = param;
+			printf("Spectral subtraction parameter = %f\n", osp_data->spectral_subtraction_param);
+		}
+		
+		
+		else if (input == 'q') {
 			break;
 		}
 
@@ -758,10 +801,17 @@ int main(int argc, char **argv)
 	unsigned int tcp_mode;
 	unsigned int adaptation_type;
 	unsigned int ansi_test_onoff;
+	unsigned int noise_estimation_type;
+	unsigned int spectral_subtraction;
+	unsigned int choose_sampling_frequency;
+	
 	float resample_32_96_taps[RESAMP_32_96_TAPS];
 	float resample_96_32_taps[RESAMP_96_32_TAPS];
+	float resample_32_48_taps[RESAMP_32_48_TAPS];
+	float resample_48_32_taps[RESAMP_48_32_TAPS];
 	float attenuation_factor = D_ATTENUATION_FACTOR;
 
+	unsigned int sampling_frequency= 96000;
 	pthread_t announce_thread;
 
 	osp_user_data osp_data;
@@ -773,8 +823,79 @@ int main(int argc, char **argv)
 
 	adaptation_type = 2;
 	tcp_mode = 0;
-	while ((c = getopt(argc, argv, "ad:M:l:p:rtT:")) != -1) {
+	while ((c = getopt(argc, argv, "ad:M:l:p:rtT:F:N:S:s:")) != -1) {
 		switch (c) {
+			case 'F':
+				if (optarg == NULL) {
+					osp_data.choose_sampling_frequency = 1;
+					printf("Choosing 96kHz sampling frequency as default\n");
+					sampling_frequency = 96000;
+					break;
+					
+				}
+				choose_sampling_frequency = (unsigned char)strtol(optarg, (char **)NULL, 10);
+				osp_data.choose_sampling_frequency = choose_sampling_frequency;
+				if (choose_sampling_frequency)
+				{
+					printf("Choosing 96kHz sampling frequency\n");
+					sampling_frequency = 96000;
+				}
+				
+				else
+				{
+					printf("Choosing 48kHz sampling frequency\n");
+					sampling_frequency = 48000;
+				}
+				break;
+			
+			case 'N':
+				if (optarg == NULL) {
+					osp_data.noise_estimation_type = 3;
+					printf("Cohen & Berdugo MCRA Noise Estimation method chosen as default\n");
+					sampling_frequency = 96000;
+					break;
+					
+				}
+				noise_estimation_type = (unsigned char)strtol(optarg, (char **)NULL, 10);
+				osp_data.noise_estimation_type = noise_estimation_type;
+				if(noise_estimation_type == 0) {
+					printf("Noise estimation disabled\n");
+				}
+				else if (noise_estimation_type == 1){
+					printf("Arslan Noise Estimation method chosen\n");
+				}
+				else if (noise_estimation_type == 2){
+					printf("Hirsch & Ehrlicher Noise Estimation method chosen\n");
+				}
+				else if (noise_estimation_type == 3){
+					printf("Cohen & Berdugo MCRA Noise Estimation method chosen\n");
+				}
+				else{
+					osp_data.noise_estimation_type = 3;
+					printf("Invalid entry for noise estimation, Cohen & Berdugo MCRA Noise Estimation method chosen by default\n");
+				}
+				break;
+			case 'S':
+				if (optarg == NULL) {
+					osp_data.spectral_subtraction = 0;
+					printf("Spectral subtraction for speech enhancement disabled\n");
+					sampling_frequency = 96000;
+					break;
+					
+				}
+				spectral_subtraction = (unsigned char)strtol(optarg, (char **)NULL, 10);
+				osp_data.spectral_subtraction = spectral_subtraction;
+				if(spectral_subtraction == 0) {
+					printf("Spectral subtraction for speech enhancement disabled\n");
+				}
+				else if (spectral_subtraction == 1){
+					printf("Spectral subtraction enabled\n");
+				}
+				else{
+					osp_data.spectral_subtraction = 0;
+					printf("Invalid entry for Spectral subtraction, Spectral subtraction disabled by default\n");
+				}
+				break;
 			case 'M':
 				ansi_test_onoff = (unsigned char)strtol(optarg, (char **)NULL, 10);
 				if(ansi_test_onoff == 0) {
@@ -849,6 +970,13 @@ int main(int argc, char **argv)
 						printf("Setting adaptation type to FXLMS\n");
 						break;
 					case 1:
+						printf("Setting adaptation type to PNLMS\n");
+						break;
+					case 2:
+						printf("\n\n******************************************************************************************************************\n");
+						printf("For SLMS please refer to \"Lee, Ching-Hua, Bhaskar D. Rao, and Harinath Garudadri. Sparsity promoting LMS for adaptive feedback cancellation. In Signal Processing Conference (EUSIPCO), 2017 25th European, pp. 226-230. IEEE, 2017.\" Setting Adaptation type to PNLMS\n");
+						printf("******************************************************************************************************************\n\n\n");
+						break;
 					default:
 						printf("Setting adaptation type to PNLMS\n");
 				}
@@ -870,26 +998,54 @@ int main(int argc, char **argv)
 	}
 
 	// Load the resampler taps
-	if (load_filter_taps("resample_32_96.flt", resample_32_96_taps, RESAMP_32_96_TAPS) < 0) {
-		return -1;
+	// choosing filter taps for 96kHz input
+	if (osp_data.choose_sampling_frequency)
+	{
+		if (load_filter_taps("resample_32_96.flt", resample_32_96_taps, RESAMP_32_96_TAPS) < 0) {
+			return -1;
+		}
+		
+		if (load_filter_taps("resample_96_32.flt", resample_96_32_taps, RESAMP_96_32_TAPS) < 0) {
+			return -1;
+		}
+		
+		// Initialize resampler Left
+		if ((resampleL = resample_init(resample_32_96_taps, ARRAY_SIZE(resample_32_96_taps),
+																	 resample_96_32_taps, ARRAY_SIZE(resample_96_32_taps))) == NULL) {
+			return -1;
+		}
+		
+		// Initialize resampler Right
+		if ((resampleR = resample_init(resample_32_96_taps, ARRAY_SIZE(resample_32_96_taps),
+																	 resample_96_32_taps, ARRAY_SIZE(resample_96_32_taps))) == NULL) {
+			return -1;
+		}
 	}
-
-	if (load_filter_taps("resample_96_32.flt", resample_96_32_taps, RESAMP_96_32_TAPS) < 0) {
-		return -1;
+	else
+	{
+		
+		
+		if (load_filter_taps("resample_32_96.flt", resample_32_48_taps, RESAMP_32_48_TAPS) < 0) {
+			return -1;
+		}
+		
+		if (load_filter_taps("resample_96_32.flt", resample_48_32_taps, RESAMP_48_32_TAPS) < 0) {
+			return -1;
+		}
+		
+		// Initialize resampler Left
+		if ((resampleL = resample_init(resample_32_48_taps, ARRAY_SIZE(resample_32_48_taps),
+																	 resample_48_32_taps, ARRAY_SIZE(resample_48_32_taps))) == NULL) {
+			return -1;
+		}
+		
+		// Initialize resampler Right
+		if ((resampleR = resample_init(resample_32_48_taps, ARRAY_SIZE(resample_32_48_taps),
+																	 resample_48_32_taps, ARRAY_SIZE(resample_48_32_taps))) == NULL) {
+			return -1;
+		}
 	}
-
-	// Initialize resampler Left
-	if ((resampleL = resample_init(resample_32_96_taps, ARRAY_SIZE(resample_32_96_taps),
-																 resample_96_32_taps, ARRAY_SIZE(resample_96_32_taps))) == NULL) {
-		return -1;
-	}
-
-	// Initialize resampler Right
-	if ((resampleR = resample_init(resample_32_96_taps, ARRAY_SIZE(resample_32_96_taps),
-																 resample_96_32_taps, ARRAY_SIZE(resample_96_32_taps))) == NULL) {
-		return -1;
-	}
-
+	
 	// start announcement thread
 	if(pthread_create(&announce_thread, NULL, announce_presence, NULL))
 	{

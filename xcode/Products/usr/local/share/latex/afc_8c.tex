@@ -1,0 +1,262 @@
+\hypertarget{afc_8c}{}\section{libosp/afc/afc.c File Reference}
+\label{afc_8c}\index{libosp/afc/afc.\+c@{libosp/afc/afc.\+c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}afc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}filter.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}array\+\_\+utilities.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}circular\+\_\+buffer.\+h\char`\"{}}\newline
+Include dependency graph for afc.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{afc_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structafc__t}{afc\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em A\+FC data structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{afc_8c_aa954fa18c8519c3b191b6e7e0be8ff02}{compute\+\_\+gradient}} (float $\ast$e\+\_\+prefiltered, float $\ast$u\+\_\+prefiltered\+\_\+accumulated, float $\ast$gradient, size\+\_\+t u\+\_\+prefiltered\+\_\+acc\+\_\+len, size\+\_\+t frame\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Compute the gradient for F\+X\+L\+MS update. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{afc_8c_a66ccd7a4405272de4401221d1028b7d2}{D\+S\+P\+F\+\_\+sp\+\_\+fircirc\+\_\+2}} (float x\mbox{[}$\,$\mbox{]}, float h\mbox{[}$\,$\mbox{]}, float r\mbox{[}$\,$\mbox{]}, size\+\_\+t index, size\+\_\+t csize, size\+\_\+t nh, size\+\_\+t nr)
+\item 
+static void \mbox{\hyperlink{afc_8c_a1eeff5119c14cd963fa967bd209d91d5}{compute\+\_\+gradient\+\_\+upa}} (float $\ast$e\+\_\+prefiltered, \mbox{\hyperlink{circular__buffer_8h_aa88184dd60879f696cb2e679d0e50b45}{Circular\+\_\+buffer}} upa, float $\ast$gradient, size\+\_\+t frame\+\_\+size)
+\item 
+static void \mbox{\hyperlink{afc_8c_a93d83559cbb9c271e3a8c55a67ffbd09}{update\+\_\+u\+\_\+prefiltered\+\_\+accumulated}} (float $\ast$u\+\_\+prefiltered\+\_\+accumulated, float $\ast$new\+\_\+frame, int u\+\_\+prefiltered\+\_\+acc\+\_\+len, int new\+\_\+frame\+\_\+len)
+\begin{DoxyCompactList}\small\item\em Updating u\+\_\+prefiltered\+\_\+accumulated buffer which is circular. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{afc_8c_a4cfbda46d723acc3423af2483fa0f05a}{get\+\_\+step\+\_\+size\+\_\+weights}} (float $\ast$taps, float $\ast$step\+\_\+size\+\_\+weights, float alpha, float beta, float delta, int len)
+\begin{DoxyCompactList}\small\item\em Update the proportionate matrix (P(n)) diagonal matrix for P\+N\+L\+MS adaptation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} \mbox{\hyperlink{afc_8c_ae2ae05e92c452d604e5b283c6db3e307}{afc\+\_\+init}} (const float $\ast$afc\+\_\+filter\+\_\+taps, int afc\+\_\+filter\+\_\+tap\+\_\+len, const float $\ast$prefilter\+\_\+taps, int prefilter\+\_\+tap\+\_\+len, const float $\ast$band\+\_\+limited\+\_\+filter\+\_\+taps, int band\+\_\+limited\+\_\+filter\+\_\+tap\+\_\+len, int frame\+\_\+size, unsigned int adaptation\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Function to initialize the afc data struct. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{afc_8c_ac453a669837cff671fbe64d59da8fd03}{afc\+\_\+update\+\_\+taps}} (\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} afc, float $\ast$s, float $\ast$e, size\+\_\+t frame\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Function to update the A\+FC filter taps. i.\+e. perform A\+FC. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{afc_8c_ae23fd5ba219af0e472c3ea5a6b883b8e}{afc\+\_\+get\+\_\+y\+\_\+estimated}} (\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} afc, float $\ast$y\+\_\+est, size\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em Function to get the estimate of the feedback signal, y\+\_\+hat(n) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{afc_8c_a3b8e35089fac94e704cd9b0a964b7202}{afc\+\_\+get\+\_\+taps}} (\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} afc, float $\ast$taps)
+\begin{DoxyCompactList}\small\item\em Function to get the A\+FC filter taps. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{afc_8c_a27cf074c18fa2ff7253bfab542b348cb}{afc\+\_\+destroy}} (\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} afc)
+\begin{DoxyCompactList}\small\item\em Function to close and free the Afc instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{afc_8c_a27cf074c18fa2ff7253bfab542b348cb}\label{afc_8c_a27cf074c18fa2ff7253bfab542b348cb}} 
+\index{afc.\+c@{afc.\+c}!afc\+\_\+destroy@{afc\+\_\+destroy}}
+\index{afc\+\_\+destroy@{afc\+\_\+destroy}!afc.\+c@{afc.\+c}}
+\subsubsection{\texorpdfstring{afc\+\_\+destroy()}{afc\_destroy()}}
+{\footnotesize\ttfamily int afc\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}}}]{afc }\end{DoxyParamCaption})}
+
+
+
+Function to close and free the Afc instance. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structafc__t}{afc\+\_\+t}} ~\newline
+
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em afc} & The instance of the Afc structure that was returned from afc\+\_\+init \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 0 if successful. -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{afc_8c_a3b8e35089fac94e704cd9b0a964b7202}\label{afc_8c_a3b8e35089fac94e704cd9b0a964b7202}} 
+\index{afc.\+c@{afc.\+c}!afc\+\_\+get\+\_\+taps@{afc\+\_\+get\+\_\+taps}}
+\index{afc\+\_\+get\+\_\+taps@{afc\+\_\+get\+\_\+taps}!afc.\+c@{afc.\+c}}
+\subsubsection{\texorpdfstring{afc\+\_\+get\+\_\+taps()}{afc\_get\_taps()}}
+{\footnotesize\ttfamily int afc\+\_\+get\+\_\+taps (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}}}]{afc,  }\item[{float $\ast$}]{taps }\end{DoxyParamCaption})}
+
+
+
+Function to get the A\+FC filter taps. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structafc__t}{afc\+\_\+t}} ~\newline
+
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em afc} & The instance of the Afc structure that was returned from afc\+\_\+init \\
+\hline
+{\em taps} & Pointer to the array that afc filter taps will be written into \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int A\+FC filter tap length 
+\end{DoxyReturn}
+\mbox{\Hypertarget{afc_8c_ae23fd5ba219af0e472c3ea5a6b883b8e}\label{afc_8c_ae23fd5ba219af0e472c3ea5a6b883b8e}} 
+\index{afc.\+c@{afc.\+c}!afc\+\_\+get\+\_\+y\+\_\+estimated@{afc\+\_\+get\+\_\+y\+\_\+estimated}}
+\index{afc\+\_\+get\+\_\+y\+\_\+estimated@{afc\+\_\+get\+\_\+y\+\_\+estimated}!afc.\+c@{afc.\+c}}
+\subsubsection{\texorpdfstring{afc\+\_\+get\+\_\+y\+\_\+estimated()}{afc\_get\_y\_estimated()}}
+{\footnotesize\ttfamily void afc\+\_\+get\+\_\+y\+\_\+estimated (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}}}]{afc,  }\item[{float $\ast$}]{y\+\_\+est,  }\item[{size\+\_\+t}]{len }\end{DoxyParamCaption})}
+
+
+
+Function to get the estimate of the feedback signal, y\+\_\+hat(n) 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structafc__t}{afc\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em afc} & The instance of the Afc structure that was returned from afc\+\_\+init \\
+\hline
+{\em y\+\_\+est} & Pointer to the array that estimated feedback signal will be written into \\
+\hline
+{\em len} & Number of samples of the estimated feedback signal requested \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{afc_8c_ae2ae05e92c452d604e5b283c6db3e307}\label{afc_8c_ae2ae05e92c452d604e5b283c6db3e307}} 
+\index{afc.\+c@{afc.\+c}!afc\+\_\+init@{afc\+\_\+init}}
+\index{afc\+\_\+init@{afc\+\_\+init}!afc.\+c@{afc.\+c}}
+\subsubsection{\texorpdfstring{afc\+\_\+init()}{afc\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} afc\+\_\+init (\begin{DoxyParamCaption}\item[{const float $\ast$}]{afc\+\_\+filter\+\_\+taps,  }\item[{int}]{afc\+\_\+filter\+\_\+tap\+\_\+len,  }\item[{const float $\ast$}]{prefilter\+\_\+taps,  }\item[{int}]{prefilter\+\_\+tap\+\_\+len,  }\item[{const float $\ast$}]{band\+\_\+limited\+\_\+filter\+\_\+taps,  }\item[{int}]{band\+\_\+limited\+\_\+filter\+\_\+tap\+\_\+len,  }\item[{int}]{frame\+\_\+size,  }\item[{unsigned int}]{adaptation\+\_\+type }\end{DoxyParamCaption})}
+
+
+
+Function to initialize the afc data struct. 
+
+Allocates memory to the Afc instance and initialize its parameters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em afc\+\_\+filter\+\_\+taps} & A\+FC filter initalization taps, W(z) initialization \\
+\hline
+{\em afc\+\_\+filter\+\_\+tap\+\_\+len} & A\+FC filter tap length \\
+\hline
+{\em prefilter\+\_\+taps} & Pre-\/whitening filter taps, A(z) \\
+\hline
+{\em prefilter\+\_\+tap\+\_\+len} & Pre-\/whitening filter tap length \\
+\hline
+{\em band\+\_\+limited\+\_\+filter\+\_\+taps} & Band-\/limited filter taps, H(z) \\
+\hline
+{\em band\+\_\+limited\+\_\+filter\+\_\+tap\+\_\+len} & Band-\/limited filter tap length \\
+\hline
+{\em frame\+\_\+size} & Frame size to process \\
+\hline
+{\em adaptation\+\_\+type} & A\+FC adaptation type. 1 = (F\+X\+L\+MS + P\+N\+L\+MS), 0 = F\+X\+L\+MS \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Afc Returns the Afc instance/object if memory is succesfully allocated or returns N\+U\+LL. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{afc_8c_ac453a669837cff671fbe64d59da8fd03}\label{afc_8c_ac453a669837cff671fbe64d59da8fd03}} 
+\index{afc.\+c@{afc.\+c}!afc\+\_\+update\+\_\+taps@{afc\+\_\+update\+\_\+taps}}
+\index{afc\+\_\+update\+\_\+taps@{afc\+\_\+update\+\_\+taps}!afc.\+c@{afc.\+c}}
+\subsubsection{\texorpdfstring{afc\+\_\+update\+\_\+taps()}{afc\_update\_taps()}}
+{\footnotesize\ttfamily int afc\+\_\+update\+\_\+taps (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}}}]{afc,  }\item[{float $\ast$}]{s,  }\item[{float $\ast$}]{e,  }\item[{size\+\_\+t}]{frame\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Function to update the A\+FC filter taps. i.\+e. perform A\+FC. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structafc__t}{afc\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em afc} & The instance of the Afc structure that was returned from afc\+\_\+init ~\newline
+\\
+\hline
+{\em s} & Pointer to the output signal array of W\+D\+RC \\
+\hline
+{\em e} & Pointer to the error signal array \\
+\hline
+{\em frame\+\_\+size} & Number of samples in the frame to process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int -\/1 for wrong frame size. 0 if successful 
+\end{DoxyReturn}
+\mbox{\Hypertarget{afc_8c_aa954fa18c8519c3b191b6e7e0be8ff02}\label{afc_8c_aa954fa18c8519c3b191b6e7e0be8ff02}} 
+\index{afc.\+c@{afc.\+c}!compute\+\_\+gradient@{compute\+\_\+gradient}}
+\index{compute\+\_\+gradient@{compute\+\_\+gradient}!afc.\+c@{afc.\+c}}
+\subsubsection{\texorpdfstring{compute\+\_\+gradient()}{compute\_gradient()}}
+{\footnotesize\ttfamily static void compute\+\_\+gradient (\begin{DoxyParamCaption}\item[{float $\ast$}]{e\+\_\+prefiltered,  }\item[{float $\ast$}]{u\+\_\+prefiltered\+\_\+accumulated,  }\item[{float $\ast$}]{gradient,  }\item[{size\+\_\+t}]{u\+\_\+prefiltered\+\_\+acc\+\_\+len,  }\item[{size\+\_\+t}]{frame\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Compute the gradient for F\+X\+L\+MS update. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e\+\_\+prefiltered} & Pointer to the array containing pre-\/filtered input e\+\_\+f(n) \\
+\hline
+{\em u\+\_\+prefiltered\+\_\+accumulated} & Pointer to the buffer of accumulated values of pre-\/filtered output of u(n) i.\+e., u\+\_\+f(n) \\
+\hline
+{\em gradient} & Pointer to the array where the gradient will be written into \\
+\hline
+{\em u\+\_\+prefiltered\+\_\+acc\+\_\+len} & Length of the u\+\_\+prefiltered\+\_\+accumulated buffer \\
+\hline
+{\em frame\+\_\+size} & Length of the frame size which is also the length of e\+\_\+prefiltered \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{afc_8c_a1eeff5119c14cd963fa967bd209d91d5}\label{afc_8c_a1eeff5119c14cd963fa967bd209d91d5}} 
+\index{afc.\+c@{afc.\+c}!compute\+\_\+gradient\+\_\+upa@{compute\+\_\+gradient\+\_\+upa}}
+\index{compute\+\_\+gradient\+\_\+upa@{compute\+\_\+gradient\+\_\+upa}!afc.\+c@{afc.\+c}}
+\subsubsection{\texorpdfstring{compute\+\_\+gradient\+\_\+upa()}{compute\_gradient\_upa()}}
+{\footnotesize\ttfamily static void compute\+\_\+gradient\+\_\+upa (\begin{DoxyParamCaption}\item[{float $\ast$}]{e\+\_\+prefiltered,  }\item[{\mbox{\hyperlink{circular__buffer_8h_aa88184dd60879f696cb2e679d0e50b45}{Circular\+\_\+buffer}}}]{upa,  }\item[{float $\ast$}]{gradient,  }\item[{size\+\_\+t}]{frame\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{afc_8c_a66ccd7a4405272de4401221d1028b7d2}\label{afc_8c_a66ccd7a4405272de4401221d1028b7d2}} 
+\index{afc.\+c@{afc.\+c}!D\+S\+P\+F\+\_\+sp\+\_\+fircirc\+\_\+2@{D\+S\+P\+F\+\_\+sp\+\_\+fircirc\+\_\+2}}
+\index{D\+S\+P\+F\+\_\+sp\+\_\+fircirc\+\_\+2@{D\+S\+P\+F\+\_\+sp\+\_\+fircirc\+\_\+2}!afc.\+c@{afc.\+c}}
+\subsubsection{\texorpdfstring{D\+S\+P\+F\+\_\+sp\+\_\+fircirc\+\_\+2()}{DSPF\_sp\_fircirc\_2()}}
+{\footnotesize\ttfamily void D\+S\+P\+F\+\_\+sp\+\_\+fircirc\+\_\+2 (\begin{DoxyParamCaption}\item[{float}]{x\mbox{[}$\,$\mbox{]},  }\item[{float}]{h\mbox{[}$\,$\mbox{]},  }\item[{float}]{r\mbox{[}$\,$\mbox{]},  }\item[{size\+\_\+t}]{index,  }\item[{size\+\_\+t}]{csize,  }\item[{size\+\_\+t}]{nh,  }\item[{size\+\_\+t}]{nr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{afc_8c_a4cfbda46d723acc3423af2483fa0f05a}\label{afc_8c_a4cfbda46d723acc3423af2483fa0f05a}} 
+\index{afc.\+c@{afc.\+c}!get\+\_\+step\+\_\+size\+\_\+weights@{get\+\_\+step\+\_\+size\+\_\+weights}}
+\index{get\+\_\+step\+\_\+size\+\_\+weights@{get\+\_\+step\+\_\+size\+\_\+weights}!afc.\+c@{afc.\+c}}
+\subsubsection{\texorpdfstring{get\+\_\+step\+\_\+size\+\_\+weights()}{get\_step\_size\_weights()}}
+{\footnotesize\ttfamily static void get\+\_\+step\+\_\+size\+\_\+weights (\begin{DoxyParamCaption}\item[{float $\ast$}]{taps,  }\item[{float $\ast$}]{step\+\_\+size\+\_\+weights,  }\item[{float}]{alpha,  }\item[{float}]{beta,  }\item[{float}]{delta,  }\item[{int}]{len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Update the proportionate matrix (P(n)) diagonal matrix for P\+N\+L\+MS adaptation. 
+
+Get weights for all step sizes. Step sizes are different for each filter tap
+
+
+\begin{DoxyParams}{Parameters}
+{\em taps} & Pointer to the array that contain A\+FC filter taps \\
+\hline
+{\em step\+\_\+size\+\_\+weights} & Pointer to the array that step size weights will be written into \\
+\hline
+{\em alpha} & Parameter for P\+N\+L\+MS \\
+\hline
+{\em beta} & Parameter for P\+N\+L\+MS \\
+\hline
+{\em delta} & Regularization parameter \\
+\hline
+{\em len} & Length of the A\+FC filter \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{afc_8c_a93d83559cbb9c271e3a8c55a67ffbd09}\label{afc_8c_a93d83559cbb9c271e3a8c55a67ffbd09}} 
+\index{afc.\+c@{afc.\+c}!update\+\_\+u\+\_\+prefiltered\+\_\+accumulated@{update\+\_\+u\+\_\+prefiltered\+\_\+accumulated}}
+\index{update\+\_\+u\+\_\+prefiltered\+\_\+accumulated@{update\+\_\+u\+\_\+prefiltered\+\_\+accumulated}!afc.\+c@{afc.\+c}}
+\subsubsection{\texorpdfstring{update\+\_\+u\+\_\+prefiltered\+\_\+accumulated()}{update\_u\_prefiltered\_accumulated()}}
+{\footnotesize\ttfamily static void update\+\_\+u\+\_\+prefiltered\+\_\+accumulated (\begin{DoxyParamCaption}\item[{float $\ast$}]{u\+\_\+prefiltered\+\_\+accumulated,  }\item[{float $\ast$}]{new\+\_\+frame,  }\item[{int}]{u\+\_\+prefiltered\+\_\+acc\+\_\+len,  }\item[{int}]{new\+\_\+frame\+\_\+len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Updating u\+\_\+prefiltered\+\_\+accumulated buffer which is circular. 
+
+Replace the frame\+\_\+size number of old values with new values in the circular buffer using the last element of the buffer as the start index.
+
+
+\begin{DoxyParams}{Parameters}
+{\em u\+\_\+prefiltered\+\_\+accumulated} & Pointer to the buffer of accumulated values of pre-\/filtered output of u(n) i.\+e., u\+\_\+f(n) \\
+\hline
+{\em new\+\_\+frame} & Pointer to the pre-\/filtered output of u(n) for the new frame \\
+\hline
+{\em u\+\_\+prefiltered\+\_\+acc\+\_\+len} & Length of the u\+\_\+prefiltered\+\_\+accumulated buffer \\
+\hline
+{\em new\+\_\+frame\+\_\+len} & Length of new\+\_\+frame which is equal to the frame\+\_\+size \\
+\hline
+\end{DoxyParams}

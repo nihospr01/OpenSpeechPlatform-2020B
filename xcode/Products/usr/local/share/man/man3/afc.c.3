@@ -1,0 +1,263 @@
+.TH "libosp/afc/afc.c" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libosp/afc/afc.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+\fC#include 'afc\&.h'\fP
+.br
+\fC#include 'filter\&.h'\fP
+.br
+\fC#include 'array_utilities\&.h'\fP
+.br
+\fC#include 'circular_buffer\&.h'\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBafc_t\fP"
+.br
+.RI "AFC data structure\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static void \fBcompute_gradient\fP (float *e_prefiltered, float *u_prefiltered_accumulated, float *gradient, size_t u_prefiltered_acc_len, size_t frame_size)"
+.br
+.RI "Compute the gradient for FXLMS update\&. "
+.ti -1c
+.RI "void \fBDSPF_sp_fircirc_2\fP (float x[], float h[], float r[], size_t index, size_t csize, size_t nh, size_t nr)"
+.br
+.ti -1c
+.RI "static void \fBcompute_gradient_upa\fP (float *e_prefiltered, \fBCircular_buffer\fP upa, float *gradient, size_t frame_size)"
+.br
+.ti -1c
+.RI "static void \fBupdate_u_prefiltered_accumulated\fP (float *u_prefiltered_accumulated, float *new_frame, int u_prefiltered_acc_len, int new_frame_len)"
+.br
+.RI "Updating u_prefiltered_accumulated buffer which is circular\&. "
+.ti -1c
+.RI "static void \fBget_step_size_weights\fP (float *taps, float *step_size_weights, float alpha, float beta, float delta, int len)"
+.br
+.RI "Update the proportionate matrix (P(n)) diagonal matrix for PNLMS adaptation\&. "
+.ti -1c
+.RI "\fBAfc\fP \fBafc_init\fP (const float *afc_filter_taps, int afc_filter_tap_len, const float *prefilter_taps, int prefilter_tap_len, const float *band_limited_filter_taps, int band_limited_filter_tap_len, int frame_size, unsigned int adaptation_type)"
+.br
+.RI "Function to initialize the afc data struct\&. "
+.ti -1c
+.RI "int \fBafc_update_taps\fP (\fBAfc\fP afc, float *s, float *e, size_t frame_size)"
+.br
+.RI "Function to update the AFC filter taps\&. i\&.e\&. perform AFC\&. "
+.ti -1c
+.RI "void \fBafc_get_y_estimated\fP (\fBAfc\fP afc, float *y_est, size_t len)"
+.br
+.RI "Function to get the estimate of the feedback signal, y_hat(n) "
+.ti -1c
+.RI "int \fBafc_get_taps\fP (\fBAfc\fP afc, float *taps)"
+.br
+.RI "Function to get the AFC filter taps\&. "
+.ti -1c
+.RI "int \fBafc_destroy\fP (\fBAfc\fP afc)"
+.br
+.RI "Function to close and free the Afc instance\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int afc_destroy (\fBAfc\fP afc)"
+
+.PP
+Function to close and free the Afc instance\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBafc_t\fP 
+.br
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIafc\fP The instance of the Afc structure that was returned from afc_init 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+int 0 if successful\&. -1 otherwise 
+.RE
+.PP
+
+.SS "int afc_get_taps (\fBAfc\fP afc, float * taps)"
+
+.PP
+Function to get the AFC filter taps\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBafc_t\fP 
+.br
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIafc\fP The instance of the Afc structure that was returned from afc_init 
+.br
+\fItaps\fP Pointer to the array that afc filter taps will be written into 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+int AFC filter tap length 
+.RE
+.PP
+
+.SS "void afc_get_y_estimated (\fBAfc\fP afc, float * y_est, size_t len)"
+
+.PP
+Function to get the estimate of the feedback signal, y_hat(n) 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBafc_t\fP 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIafc\fP The instance of the Afc structure that was returned from afc_init 
+.br
+\fIy_est\fP Pointer to the array that estimated feedback signal will be written into 
+.br
+\fIlen\fP Number of samples of the estimated feedback signal requested 
+.RE
+.PP
+
+.SS "\fBAfc\fP afc_init (const float * afc_filter_taps, int afc_filter_tap_len, const float * prefilter_taps, int prefilter_tap_len, const float * band_limited_filter_taps, int band_limited_filter_tap_len, int frame_size, unsigned int adaptation_type)"
+
+.PP
+Function to initialize the afc data struct\&. Allocates memory to the Afc instance and initialize its parameters\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIafc_filter_taps\fP AFC filter initalization taps, W(z) initialization 
+.br
+\fIafc_filter_tap_len\fP AFC filter tap length 
+.br
+\fIprefilter_taps\fP Pre-whitening filter taps, A(z) 
+.br
+\fIprefilter_tap_len\fP Pre-whitening filter tap length 
+.br
+\fIband_limited_filter_taps\fP Band-limited filter taps, H(z) 
+.br
+\fIband_limited_filter_tap_len\fP Band-limited filter tap length 
+.br
+\fIframe_size\fP Frame size to process 
+.br
+\fIadaptation_type\fP AFC adaptation type\&. 1 = (FXLMS + PNLMS), 0 = FXLMS 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Afc Returns the Afc instance/object if memory is succesfully allocated or returns NULL\&. 
+.RE
+.PP
+
+.SS "int afc_update_taps (\fBAfc\fP afc, float * s, float * e, size_t frame_size)"
+
+.PP
+Function to update the AFC filter taps\&. i\&.e\&. perform AFC\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBafc_t\fP 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIafc\fP The instance of the Afc structure that was returned from afc_init 
+.br
+.br
+\fIs\fP Pointer to the output signal array of WDRC 
+.br
+\fIe\fP Pointer to the error signal array 
+.br
+\fIframe_size\fP Number of samples in the frame to process 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+int -1 for wrong frame size\&. 0 if successful 
+.RE
+.PP
+
+.SS "static void compute_gradient (float * e_prefiltered, float * u_prefiltered_accumulated, float * gradient, size_t u_prefiltered_acc_len, size_t frame_size)\fC [static]\fP"
+
+.PP
+Compute the gradient for FXLMS update\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIe_prefiltered\fP Pointer to the array containing pre-filtered input e_f(n) 
+.br
+\fIu_prefiltered_accumulated\fP Pointer to the buffer of accumulated values of pre-filtered output of u(n) i\&.e\&., u_f(n) 
+.br
+\fIgradient\fP Pointer to the array where the gradient will be written into 
+.br
+\fIu_prefiltered_acc_len\fP Length of the u_prefiltered_accumulated buffer 
+.br
+\fIframe_size\fP Length of the frame size which is also the length of e_prefiltered 
+.RE
+.PP
+
+.SS "static void compute_gradient_upa (float * e_prefiltered, \fBCircular_buffer\fP upa, float * gradient, size_t frame_size)\fC [static]\fP"
+
+.SS "void DSPF_sp_fircirc_2 (float x[], float h[], float r[], size_t index, size_t csize, size_t nh, size_t nr)"
+
+.SS "static void get_step_size_weights (float * taps, float * step_size_weights, float alpha, float beta, float delta, int len)\fC [static]\fP"
+
+.PP
+Update the proportionate matrix (P(n)) diagonal matrix for PNLMS adaptation\&. Get weights for all step sizes\&. Step sizes are different for each filter tap
+.PP
+\fBParameters:\fP
+.RS 4
+\fItaps\fP Pointer to the array that contain AFC filter taps 
+.br
+\fIstep_size_weights\fP Pointer to the array that step size weights will be written into 
+.br
+\fIalpha\fP Parameter for PNLMS 
+.br
+\fIbeta\fP Parameter for PNLMS 
+.br
+\fIdelta\fP Regularization parameter 
+.br
+\fIlen\fP Length of the AFC filter 
+.RE
+.PP
+
+.SS "static void update_u_prefiltered_accumulated (float * u_prefiltered_accumulated, float * new_frame, int u_prefiltered_acc_len, int new_frame_len)\fC [static]\fP"
+
+.PP
+Updating u_prefiltered_accumulated buffer which is circular\&. Replace the frame_size number of old values with new values in the circular buffer using the last element of the buffer as the start index\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIu_prefiltered_accumulated\fP Pointer to the buffer of accumulated values of pre-filtered output of u(n) i\&.e\&., u_f(n) 
+.br
+\fInew_frame\fP Pointer to the pre-filtered output of u(n) for the new frame 
+.br
+\fIu_prefiltered_acc_len\fP Length of the u_prefiltered_accumulated buffer 
+.br
+\fInew_frame_len\fP Length of new_frame which is equal to the frame_size 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

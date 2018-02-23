@@ -1,0 +1,411 @@
+\hypertarget{osp__process_8c}{}\section{libosp/osp\+\_\+process/osp\+\_\+process.c File Reference}
+\label{osp__process_8c}\index{libosp/osp\+\_\+process/osp\+\_\+process.\+c@{libosp/osp\+\_\+process/osp\+\_\+process.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}logger.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}speech\+\_\+enhancement.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}osp\+\_\+process.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utilities.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}filter.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}coeffs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}afc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}delay\+\_\+line.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}array\+\_\+utilities.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}peak\+\_\+detect.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}wdrc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}wdrc\+\_\+mpo\+\_\+support.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mpo.\+h\char`\"{}}\newline
+Include dependency graph for osp\+\_\+process.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{osp__process_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{osp__process_8c_a35028ea7fc0cef3cdc0ce4fbd2ff25a4}{F\+E\+E\+D\+B\+A\+C\+K\+\_\+\+E\+S\+T\+\_\+\+D\+E\+L\+AY}}~100
+\begin{DoxyCompactList}\small\item\em Feedback delay in samples. For file loopback its 0. For real-\/time processing one needs to account for I/O delay. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{osp__process_8c_a5f1590d4ac46cd4c58167f767d284ef7}{S\+T\+E\+R\+EO}}
+\begin{DoxyCompactList}\small\item\em Toggle for stereo and mono. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{osp__process_8c_a5e03afe3816964e6052931a58b754d99}{osp\+\_\+process\+\_\+ha}} (\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$osp, \mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} $\ast$filter, \mbox{\hyperlink{peak__detect_8h_a152d14cd03f6e1ac947c95921da5507c}{Peak\+\_\+detect}} pd, float $\ast$e\+\_\+n, float $\ast$s\+\_\+n, size\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em Function that performs basic Hearing Aid (HA) processing on a single channel. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{osp__process_8c_a6d714155eff0850c8fd9458444365c57}{osp\+\_\+init}} (unsigned int frame\+\_\+size, int sample\+\_\+rate, unsigned char afc\+\_\+adaptation\+\_\+type)
+\begin{DoxyCompactList}\small\item\em This file groups all of the different O\+SP library calls in one place. This is more of an example way of using the different parts of the O\+SP libraries to implement a hearing aid algorith with M\+HA and A\+FC all in one place. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{osp__process_8c_a6c8f16a08d0ce2a2b4989861253a51f5}{osp\+\_\+process\+\_\+audio}} (\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$osp, float $\ast$x\+\_\+nL, float $\ast$x\+\_\+nR, float $\ast$outL, float $\ast$outR, size\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em Function to perform Master Hearing Aid (M\+HA) processing on the input signal for both channels. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{osp__process_8c_afa87b8384a65fb6f6a12ac92297c9961}{osp\+\_\+get\+\_\+num\+\_\+bands}} ()
+\begin{DoxyCompactList}\small\item\em Function to get the number of Sub-\/\+Bands. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{osp__process_8c_af0a98853e0b3bce6a93cb88c1839723f}{osp\+\_\+close}} ()
+\begin{DoxyCompactList}\small\item\em Wrapper function to free all the modules of Master Hearing Aid (M\+HA) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{osp__process_8c_a37765f5c4d9ab3f3569947503b97a6c6}{osp\+\_\+dump\+\_\+afc\+\_\+filter}} ()
+\begin{DoxyCompactList}\small\item\em Function to dump A\+FC filter taps for both left and right channels. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{osp__process_8c_a12fc7be1c06d51523df05f460e91d097}{osp\+\_\+data\+\_\+init}} (\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Helper function for initializing Master Hearing Aid (M\+HA) parameters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{osp__process_8c_a1b9e53a67adfda315e3fe93862361d22}{osp\+\_\+data\+\_\+set\+\_\+gain}} (\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$user\+\_\+data, int gain)
+\begin{DoxyCompactList}\small\item\em Helper function for initializing gain parameters for W\+D\+RC with a constant gain. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{osp__process_8c_a6f9f5ada6b7f84af9827bbb1cbe68d3d}{osp\+\_\+data\+\_\+set\+\_\+nh}} (\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Helper function for initializing gain parameters for W\+D\+RC with NH audiogram. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{osp__process_8c_aa23c1072681c057f945a6d22d7659934}{osp\+\_\+data\+\_\+set\+\_\+n2}} (\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Helper function for initializing gain parameters for W\+D\+RC with N2 audiogram. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{osp__process_8c_ae7da3f44c97ca3e1ec342f2410015845}{osp\+\_\+data\+\_\+set\+\_\+n4}} (\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Helper function for initializing gain parameters for W\+D\+RC with N4 audiogram. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{osp__process_8c_aeb2474bd6b995d8ad289bfb1ce9b91c9}{osp\+\_\+data\+\_\+set\+\_\+s2}} (\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$user\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Helper function for initializing gain parameters for W\+D\+RC with S2 audiogram. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} \mbox{\hyperlink{osp__process_8c_a7c99ae65957762007fcd93018842ed12}{filterL}} \mbox{[}\mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}\mbox{]}
+\item 
+static \mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} \mbox{\hyperlink{osp__process_8c_a1768daa4a1e3e9e2e2d5327315ba69f9}{filterR}} \mbox{[}\mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}\mbox{]}
+\item 
+static \mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} \mbox{\hyperlink{osp__process_8c_a0d1d77ea7cad8796f93e5185af5d04b6}{synthetic\+\_\+feedback\+\_\+filter\+\_\+left}}
+\item 
+static \mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} \mbox{\hyperlink{osp__process_8c_a245b5b6521a6c8aa806c31919532ee0b}{synthetic\+\_\+feedback\+\_\+filter\+\_\+right}}
+\item 
+static \mbox{\hyperlink{peak__detect_8h_a152d14cd03f6e1ac947c95921da5507c}{Peak\+\_\+detect}} \mbox{\hyperlink{osp__process_8c_a3c18e558d4aff166f6be1cd1fa271ff1}{pdL}}
+\item 
+static \mbox{\hyperlink{peak__detect_8h_a152d14cd03f6e1ac947c95921da5507c}{Peak\+\_\+detect}} \mbox{\hyperlink{osp__process_8c_aa630bd455bf668501cc2c91822cb4d2b}{pdR}}
+\item 
+static \mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} \mbox{\hyperlink{osp__process_8c_a1b0e0576d2848078cb3c36c87014bff5}{afc\+\_\+left}}
+\item 
+static \mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} \mbox{\hyperlink{osp__process_8c_a79945a59c824205d3853b2488639dcda}{afc\+\_\+right}}
+\item 
+static \mbox{\hyperlink{delay__line_8h_aa62b49f8bfee0c3a174896c9b446d68d}{Delay\+\_\+\+Line}} \mbox{\hyperlink{osp__process_8c_adfcf80bfcebee0007f158d88b724f531}{delay\+\_\+line\+\_\+left}}
+\item 
+static \mbox{\hyperlink{delay__line_8h_aa62b49f8bfee0c3a174896c9b446d68d}{Delay\+\_\+\+Line}} \mbox{\hyperlink{osp__process_8c_af011450742dbabbc02c0fb1a3903a884}{delay\+\_\+line\+\_\+right}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{osp__process_8c_a35028ea7fc0cef3cdc0ce4fbd2ff25a4}\label{osp__process_8c_a35028ea7fc0cef3cdc0ce4fbd2ff25a4}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!F\+E\+E\+D\+B\+A\+C\+K\+\_\+\+E\+S\+T\+\_\+\+D\+E\+L\+AY@{F\+E\+E\+D\+B\+A\+C\+K\+\_\+\+E\+S\+T\+\_\+\+D\+E\+L\+AY}}
+\index{F\+E\+E\+D\+B\+A\+C\+K\+\_\+\+E\+S\+T\+\_\+\+D\+E\+L\+AY@{F\+E\+E\+D\+B\+A\+C\+K\+\_\+\+E\+S\+T\+\_\+\+D\+E\+L\+AY}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{F\+E\+E\+D\+B\+A\+C\+K\+\_\+\+E\+S\+T\+\_\+\+D\+E\+L\+AY}{FEEDBACK\_EST\_DELAY}}
+{\footnotesize\ttfamily \#define F\+E\+E\+D\+B\+A\+C\+K\+\_\+\+E\+S\+T\+\_\+\+D\+E\+L\+AY~100}
+
+
+
+Feedback delay in samples. For file loopback its 0. For real-\/time processing one needs to account for I/O delay. 
+
+\mbox{\Hypertarget{osp__process_8c_a5f1590d4ac46cd4c58167f767d284ef7}\label{osp__process_8c_a5f1590d4ac46cd4c58167f767d284ef7}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!S\+T\+E\+R\+EO@{S\+T\+E\+R\+EO}}
+\index{S\+T\+E\+R\+EO@{S\+T\+E\+R\+EO}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{S\+T\+E\+R\+EO}{STEREO}}
+{\footnotesize\ttfamily \#define S\+T\+E\+R\+EO}
+
+
+
+Toggle for stereo and mono. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{osp__process_8c_af0a98853e0b3bce6a93cb88c1839723f}\label{osp__process_8c_af0a98853e0b3bce6a93cb88c1839723f}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!osp\+\_\+close@{osp\+\_\+close}}
+\index{osp\+\_\+close@{osp\+\_\+close}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+close()}{osp\_close()}}
+{\footnotesize\ttfamily void osp\+\_\+close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Wrapper function to free all the modules of Master Hearing Aid (M\+HA) 
+
+\mbox{\Hypertarget{osp__process_8c_a12fc7be1c06d51523df05f460e91d097}\label{osp__process_8c_a12fc7be1c06d51523df05f460e91d097}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!osp\+\_\+data\+\_\+init@{osp\+\_\+data\+\_\+init}}
+\index{osp\+\_\+data\+\_\+init@{osp\+\_\+data\+\_\+init}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+data\+\_\+init()}{osp\_data\_init()}}
+{\footnotesize\ttfamily void osp\+\_\+data\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Helper function for initializing Master Hearing Aid (M\+HA) parameters. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} 
+
+\mbox{\hyperlink{osp__process_8h_a1b9e53a67adfda315e3fe93862361d22}{osp\+\_\+data\+\_\+set\+\_\+gain}}, \mbox{\hyperlink{osp__process_8h_a6f9f5ada6b7f84af9827bbb1cbe68d3d}{osp\+\_\+data\+\_\+set\+\_\+nh}}, \mbox{\hyperlink{osp__process_8h_aa23c1072681c057f945a6d22d7659934}{osp\+\_\+data\+\_\+set\+\_\+n2}} ,\mbox{\hyperlink{osp__process_8h_ae7da3f44c97ca3e1ec342f2410015845}{osp\+\_\+data\+\_\+set\+\_\+n4}} ,\mbox{\hyperlink{osp__process_8h_aeb2474bd6b995d8ad289bfb1ce9b91c9}{osp\+\_\+data\+\_\+set\+\_\+s2}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em user\+\_\+data} & Pointer to an osp\+\_\+user\+\_\+data instance which will be allocated in the function \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{osp__process_8c_a1b9e53a67adfda315e3fe93862361d22}\label{osp__process_8c_a1b9e53a67adfda315e3fe93862361d22}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!osp\+\_\+data\+\_\+set\+\_\+gain@{osp\+\_\+data\+\_\+set\+\_\+gain}}
+\index{osp\+\_\+data\+\_\+set\+\_\+gain@{osp\+\_\+data\+\_\+set\+\_\+gain}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+data\+\_\+set\+\_\+gain()}{osp\_data\_set\_gain()}}
+{\footnotesize\ttfamily void osp\+\_\+data\+\_\+set\+\_\+gain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$}]{user\+\_\+data,  }\item[{int}]{gain }\end{DoxyParamCaption})}
+
+
+
+Helper function for initializing gain parameters for W\+D\+RC with a constant gain. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} 
+
+\mbox{\hyperlink{osp__process_8h_a1b9e53a67adfda315e3fe93862361d22}{osp\+\_\+data\+\_\+set\+\_\+gain}}, \mbox{\hyperlink{osp__process_8h_a6f9f5ada6b7f84af9827bbb1cbe68d3d}{osp\+\_\+data\+\_\+set\+\_\+nh}}, \mbox{\hyperlink{osp__process_8h_aa23c1072681c057f945a6d22d7659934}{osp\+\_\+data\+\_\+set\+\_\+n2}} ,\mbox{\hyperlink{osp__process_8h_ae7da3f44c97ca3e1ec342f2410015845}{osp\+\_\+data\+\_\+set\+\_\+n4}} ,\mbox{\hyperlink{osp__process_8h_aeb2474bd6b995d8ad289bfb1ce9b91c9}{osp\+\_\+data\+\_\+set\+\_\+s2}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em user\+\_\+data} & Pointer to the instance of osp\+\_\+user\+\_\+data initialized by osp\+\_\+data\+\_\+init \\
+\hline
+{\em gain} & The constant gain value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{osp__process_8c_aa23c1072681c057f945a6d22d7659934}\label{osp__process_8c_aa23c1072681c057f945a6d22d7659934}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!osp\+\_\+data\+\_\+set\+\_\+n2@{osp\+\_\+data\+\_\+set\+\_\+n2}}
+\index{osp\+\_\+data\+\_\+set\+\_\+n2@{osp\+\_\+data\+\_\+set\+\_\+n2}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+data\+\_\+set\+\_\+n2()}{osp\_data\_set\_n2()}}
+{\footnotesize\ttfamily void osp\+\_\+data\+\_\+set\+\_\+n2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Helper function for initializing gain parameters for W\+D\+RC with N2 audiogram. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} 
+
+\mbox{\hyperlink{osp__process_8h_a1b9e53a67adfda315e3fe93862361d22}{osp\+\_\+data\+\_\+set\+\_\+gain}}, \mbox{\hyperlink{osp__process_8h_a6f9f5ada6b7f84af9827bbb1cbe68d3d}{osp\+\_\+data\+\_\+set\+\_\+nh}}, \mbox{\hyperlink{osp__process_8h_aa23c1072681c057f945a6d22d7659934}{osp\+\_\+data\+\_\+set\+\_\+n2}} ,\mbox{\hyperlink{osp__process_8h_ae7da3f44c97ca3e1ec342f2410015845}{osp\+\_\+data\+\_\+set\+\_\+n4}} ,\mbox{\hyperlink{osp__process_8h_aeb2474bd6b995d8ad289bfb1ce9b91c9}{osp\+\_\+data\+\_\+set\+\_\+s2}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em user\+\_\+data} & Pointer to the instance of osp\+\_\+user\+\_\+data initialized by osp\+\_\+data\+\_\+init \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{osp__process_8c_ae7da3f44c97ca3e1ec342f2410015845}\label{osp__process_8c_ae7da3f44c97ca3e1ec342f2410015845}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!osp\+\_\+data\+\_\+set\+\_\+n4@{osp\+\_\+data\+\_\+set\+\_\+n4}}
+\index{osp\+\_\+data\+\_\+set\+\_\+n4@{osp\+\_\+data\+\_\+set\+\_\+n4}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+data\+\_\+set\+\_\+n4()}{osp\_data\_set\_n4()}}
+{\footnotesize\ttfamily void osp\+\_\+data\+\_\+set\+\_\+n4 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Helper function for initializing gain parameters for W\+D\+RC with N4 audiogram. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} 
+
+\mbox{\hyperlink{osp__process_8h_a1b9e53a67adfda315e3fe93862361d22}{osp\+\_\+data\+\_\+set\+\_\+gain}}, \mbox{\hyperlink{osp__process_8h_a6f9f5ada6b7f84af9827bbb1cbe68d3d}{osp\+\_\+data\+\_\+set\+\_\+nh}}, \mbox{\hyperlink{osp__process_8h_aa23c1072681c057f945a6d22d7659934}{osp\+\_\+data\+\_\+set\+\_\+n2}} ,\mbox{\hyperlink{osp__process_8h_ae7da3f44c97ca3e1ec342f2410015845}{osp\+\_\+data\+\_\+set\+\_\+n4}} ,\mbox{\hyperlink{osp__process_8h_aeb2474bd6b995d8ad289bfb1ce9b91c9}{osp\+\_\+data\+\_\+set\+\_\+s2}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em user\+\_\+data} & Pointer to the instance of osp\+\_\+user\+\_\+data initialized by osp\+\_\+data\+\_\+init \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{osp__process_8c_a6f9f5ada6b7f84af9827bbb1cbe68d3d}\label{osp__process_8c_a6f9f5ada6b7f84af9827bbb1cbe68d3d}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!osp\+\_\+data\+\_\+set\+\_\+nh@{osp\+\_\+data\+\_\+set\+\_\+nh}}
+\index{osp\+\_\+data\+\_\+set\+\_\+nh@{osp\+\_\+data\+\_\+set\+\_\+nh}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+data\+\_\+set\+\_\+nh()}{osp\_data\_set\_nh()}}
+{\footnotesize\ttfamily void osp\+\_\+data\+\_\+set\+\_\+nh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Helper function for initializing gain parameters for W\+D\+RC with NH audiogram. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} 
+
+\mbox{\hyperlink{osp__process_8h_a1b9e53a67adfda315e3fe93862361d22}{osp\+\_\+data\+\_\+set\+\_\+gain}}, \mbox{\hyperlink{osp__process_8h_a6f9f5ada6b7f84af9827bbb1cbe68d3d}{osp\+\_\+data\+\_\+set\+\_\+nh}}, \mbox{\hyperlink{osp__process_8h_aa23c1072681c057f945a6d22d7659934}{osp\+\_\+data\+\_\+set\+\_\+n2}} ,\mbox{\hyperlink{osp__process_8h_ae7da3f44c97ca3e1ec342f2410015845}{osp\+\_\+data\+\_\+set\+\_\+n4}} ,\mbox{\hyperlink{osp__process_8h_aeb2474bd6b995d8ad289bfb1ce9b91c9}{osp\+\_\+data\+\_\+set\+\_\+s2}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em user\+\_\+data} & Pointer to the instance of osp\+\_\+user\+\_\+data initialized by osp\+\_\+data\+\_\+init \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{osp__process_8c_aeb2474bd6b995d8ad289bfb1ce9b91c9}\label{osp__process_8c_aeb2474bd6b995d8ad289bfb1ce9b91c9}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!osp\+\_\+data\+\_\+set\+\_\+s2@{osp\+\_\+data\+\_\+set\+\_\+s2}}
+\index{osp\+\_\+data\+\_\+set\+\_\+s2@{osp\+\_\+data\+\_\+set\+\_\+s2}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+data\+\_\+set\+\_\+s2()}{osp\_data\_set\_s2()}}
+{\footnotesize\ttfamily void osp\+\_\+data\+\_\+set\+\_\+s2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$}]{user\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Helper function for initializing gain parameters for W\+D\+RC with S2 audiogram. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} 
+
+\mbox{\hyperlink{osp__process_8h_a1b9e53a67adfda315e3fe93862361d22}{osp\+\_\+data\+\_\+set\+\_\+gain}}, \mbox{\hyperlink{osp__process_8h_a6f9f5ada6b7f84af9827bbb1cbe68d3d}{osp\+\_\+data\+\_\+set\+\_\+nh}}, \mbox{\hyperlink{osp__process_8h_aa23c1072681c057f945a6d22d7659934}{osp\+\_\+data\+\_\+set\+\_\+n2}} ,\mbox{\hyperlink{osp__process_8h_ae7da3f44c97ca3e1ec342f2410015845}{osp\+\_\+data\+\_\+set\+\_\+n4}} ,\mbox{\hyperlink{osp__process_8h_aeb2474bd6b995d8ad289bfb1ce9b91c9}{osp\+\_\+data\+\_\+set\+\_\+s2}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em user\+\_\+data} & Pointer to the instance of osp\+\_\+user\+\_\+data initialized by osp\+\_\+data\+\_\+init \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{osp__process_8c_a37765f5c4d9ab3f3569947503b97a6c6}\label{osp__process_8c_a37765f5c4d9ab3f3569947503b97a6c6}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!osp\+\_\+dump\+\_\+afc\+\_\+filter@{osp\+\_\+dump\+\_\+afc\+\_\+filter}}
+\index{osp\+\_\+dump\+\_\+afc\+\_\+filter@{osp\+\_\+dump\+\_\+afc\+\_\+filter}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+dump\+\_\+afc\+\_\+filter()}{osp\_dump\_afc\_filter()}}
+{\footnotesize\ttfamily void osp\+\_\+dump\+\_\+afc\+\_\+filter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function to dump A\+FC filter taps for both left and right channels. 
+
+File names can be changed by changing A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+F\+I\+L\+E\+\_\+L, A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+F\+I\+L\+E\+\_\+R in \mbox{\hyperlink{constants_8h}{constants.\+h}} \mbox{\Hypertarget{osp__process_8c_afa87b8384a65fb6f6a12ac92297c9961}\label{osp__process_8c_afa87b8384a65fb6f6a12ac92297c9961}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!osp\+\_\+get\+\_\+num\+\_\+bands@{osp\+\_\+get\+\_\+num\+\_\+bands}}
+\index{osp\+\_\+get\+\_\+num\+\_\+bands@{osp\+\_\+get\+\_\+num\+\_\+bands}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+get\+\_\+num\+\_\+bands()}{osp\_get\_num\_bands()}}
+{\footnotesize\ttfamily unsigned int osp\+\_\+get\+\_\+num\+\_\+bands (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function to get the number of Sub-\/\+Bands. 
+
+\begin{DoxyReturn}{Returns}
+int Number of Sub-\/\+Bands give by N\+U\+M\+\_\+\+B\+A\+N\+DS 
+\end{DoxyReturn}
+\mbox{\Hypertarget{osp__process_8c_a6d714155eff0850c8fd9458444365c57}\label{osp__process_8c_a6d714155eff0850c8fd9458444365c57}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!osp\+\_\+init@{osp\+\_\+init}}
+\index{osp\+\_\+init@{osp\+\_\+init}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+init()}{osp\_init()}}
+{\footnotesize\ttfamily int osp\+\_\+init (\begin{DoxyParamCaption}\item[{unsigned int}]{frame\+\_\+size,  }\item[{int}]{sample\+\_\+rate,  }\item[{unsigned char}]{afc\+\_\+adaptation\+\_\+type }\end{DoxyParamCaption})}
+
+
+
+This file groups all of the different O\+SP library calls in one place. This is more of an example way of using the different parts of the O\+SP libraries to implement a hearing aid algorith with M\+HA and A\+FC all in one place. 
+
+Wrapper function to initalize all the modules of Master Hearing Aid (M\+HA)
+
+
+\begin{DoxyParams}{Parameters}
+{\em frame\+\_\+size} & The number of samples in a frame. i.\+e. the number of samples to process \\
+\hline
+{\em sample\+\_\+rate} & The sample rate at which all M\+HA processing will be done \\
+\hline
+{\em afc\+\_\+adaptation\+\_\+type} & The type of A\+FC adaptation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful initialization. -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{osp__process_8c_a6c8f16a08d0ce2a2b4989861253a51f5}\label{osp__process_8c_a6c8f16a08d0ce2a2b4989861253a51f5}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!osp\+\_\+process\+\_\+audio@{osp\+\_\+process\+\_\+audio}}
+\index{osp\+\_\+process\+\_\+audio@{osp\+\_\+process\+\_\+audio}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+process\+\_\+audio()}{osp\_process\_audio()}}
+{\footnotesize\ttfamily void osp\+\_\+process\+\_\+audio (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$}]{osp,  }\item[{float $\ast$}]{x\+\_\+nL,  }\item[{float $\ast$}]{x\+\_\+nR,  }\item[{float $\ast$}]{outL,  }\item[{float $\ast$}]{outR,  }\item[{size\+\_\+t}]{len }\end{DoxyParamCaption})}
+
+
+
+Function to perform Master Hearing Aid (M\+HA) processing on the input signal for both channels. 
+
+If S\+T\+E\+R\+EO is false, only the right channel is processed
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em osp} & The instance of the osp\+\_\+user\+\_\+data structure that was initialized in osp\+\_\+data\+\_\+init. This contains all the M\+HA parameters. \\
+\hline
+{\em x\+\_\+nL} & Pointer to the array containing left channel input \\
+\hline
+{\em x\+\_\+nR} & Pointer to the array containing right channel input \\
+\hline
+{\em outL} & Pointer to the array to store the output of M\+HA processing on left channel input \\
+\hline
+{\em outR} & Pointer to the array to store the output of M\+HA processing on right channel input \\
+\hline
+{\em len} & The length of the input signal e\+\_\+n that is given for processing. i.\+e. frame length. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{osp__process_8c_a5e03afe3816964e6052931a58b754d99}\label{osp__process_8c_a5e03afe3816964e6052931a58b754d99}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!osp\+\_\+process\+\_\+ha@{osp\+\_\+process\+\_\+ha}}
+\index{osp\+\_\+process\+\_\+ha@{osp\+\_\+process\+\_\+ha}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{osp\+\_\+process\+\_\+ha()}{osp\_process\_ha()}}
+{\footnotesize\ttfamily static void osp\+\_\+process\+\_\+ha (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$}]{osp,  }\item[{\mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} $\ast$}]{filter,  }\item[{\mbox{\hyperlink{peak__detect_8h_a152d14cd03f6e1ac947c95921da5507c}{Peak\+\_\+detect}}}]{pd,  }\item[{float $\ast$}]{e\+\_\+n,  }\item[{float $\ast$}]{s\+\_\+n,  }\item[{size\+\_\+t}]{len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Function that performs basic Hearing Aid (HA) processing on a single channel. 
+
+The signal is split into Sub-\/\+Bands. Peak Detect and W\+D\+RC are applied on each Sub-\/\+Band. The W\+D\+RC outputs are then added across the Sub-\/\+Bands. This will be the output of the HA.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em osp} & The instance of the osp\+\_\+user\+\_\+data structure that was initialized in osp\+\_\+data\+\_\+init. This contains all the M\+HA parameters. \\
+\hline
+{\em filter} & The filter data structure instance for that channel \\
+\hline
+{\em pd} & The peak detect data structure instance for that channel \\
+\hline
+{\em e\+\_\+n} & Pointer to the input signal of the HA. This will be the sum of desired input signal plus the feedback signal. \\
+\hline
+{\em s\+\_\+n} & Pointer to the output signal of the HA. i.\+e. the output of the HA. This output will be used by A\+FC to remove feedback. \\
+\hline
+{\em len} & The length of the input signal e\+\_\+n that is given for processing. i.\+e. frame length. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{osp__process_8c_a1b0e0576d2848078cb3c36c87014bff5}\label{osp__process_8c_a1b0e0576d2848078cb3c36c87014bff5}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!afc\+\_\+left@{afc\+\_\+left}}
+\index{afc\+\_\+left@{afc\+\_\+left}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{afc\+\_\+left}{afc\_left}}
+{\footnotesize\ttfamily \mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} afc\+\_\+left\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{osp__process_8c_a79945a59c824205d3853b2488639dcda}\label{osp__process_8c_a79945a59c824205d3853b2488639dcda}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!afc\+\_\+right@{afc\+\_\+right}}
+\index{afc\+\_\+right@{afc\+\_\+right}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{afc\+\_\+right}{afc\_right}}
+{\footnotesize\ttfamily \mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} afc\+\_\+right\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{osp__process_8c_adfcf80bfcebee0007f158d88b724f531}\label{osp__process_8c_adfcf80bfcebee0007f158d88b724f531}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!delay\+\_\+line\+\_\+left@{delay\+\_\+line\+\_\+left}}
+\index{delay\+\_\+line\+\_\+left@{delay\+\_\+line\+\_\+left}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{delay\+\_\+line\+\_\+left}{delay\_line\_left}}
+{\footnotesize\ttfamily \mbox{\hyperlink{delay__line_8h_aa62b49f8bfee0c3a174896c9b446d68d}{Delay\+\_\+\+Line}} delay\+\_\+line\+\_\+left\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{osp__process_8c_af011450742dbabbc02c0fb1a3903a884}\label{osp__process_8c_af011450742dbabbc02c0fb1a3903a884}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!delay\+\_\+line\+\_\+right@{delay\+\_\+line\+\_\+right}}
+\index{delay\+\_\+line\+\_\+right@{delay\+\_\+line\+\_\+right}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{delay\+\_\+line\+\_\+right}{delay\_line\_right}}
+{\footnotesize\ttfamily \mbox{\hyperlink{delay__line_8h_aa62b49f8bfee0c3a174896c9b446d68d}{Delay\+\_\+\+Line}} delay\+\_\+line\+\_\+right\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{osp__process_8c_a7c99ae65957762007fcd93018842ed12}\label{osp__process_8c_a7c99ae65957762007fcd93018842ed12}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!filterL@{filterL}}
+\index{filterL@{filterL}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{filterL}{filterL}}
+{\footnotesize\ttfamily \mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} filterL\mbox{[}\mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{osp__process_8c_a1768daa4a1e3e9e2e2d5327315ba69f9}\label{osp__process_8c_a1768daa4a1e3e9e2e2d5327315ba69f9}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!filterR@{filterR}}
+\index{filterR@{filterR}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{filterR}{filterR}}
+{\footnotesize\ttfamily \mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} filterR\mbox{[}\mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{osp__process_8c_a3c18e558d4aff166f6be1cd1fa271ff1}\label{osp__process_8c_a3c18e558d4aff166f6be1cd1fa271ff1}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!pdL@{pdL}}
+\index{pdL@{pdL}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{pdL}{pdL}}
+{\footnotesize\ttfamily \mbox{\hyperlink{peak__detect_8h_a152d14cd03f6e1ac947c95921da5507c}{Peak\+\_\+detect}} pdL\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{osp__process_8c_aa630bd455bf668501cc2c91822cb4d2b}\label{osp__process_8c_aa630bd455bf668501cc2c91822cb4d2b}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!pdR@{pdR}}
+\index{pdR@{pdR}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{pdR}{pdR}}
+{\footnotesize\ttfamily \mbox{\hyperlink{peak__detect_8h_a152d14cd03f6e1ac947c95921da5507c}{Peak\+\_\+detect}} pdR\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{osp__process_8c_a0d1d77ea7cad8796f93e5185af5d04b6}\label{osp__process_8c_a0d1d77ea7cad8796f93e5185af5d04b6}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!synthetic\+\_\+feedback\+\_\+filter\+\_\+left@{synthetic\+\_\+feedback\+\_\+filter\+\_\+left}}
+\index{synthetic\+\_\+feedback\+\_\+filter\+\_\+left@{synthetic\+\_\+feedback\+\_\+filter\+\_\+left}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{synthetic\+\_\+feedback\+\_\+filter\+\_\+left}{synthetic\_feedback\_filter\_left}}
+{\footnotesize\ttfamily \mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} synthetic\+\_\+feedback\+\_\+filter\+\_\+left\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{osp__process_8c_a245b5b6521a6c8aa806c31919532ee0b}\label{osp__process_8c_a245b5b6521a6c8aa806c31919532ee0b}} 
+\index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!synthetic\+\_\+feedback\+\_\+filter\+\_\+right@{synthetic\+\_\+feedback\+\_\+filter\+\_\+right}}
+\index{synthetic\+\_\+feedback\+\_\+filter\+\_\+right@{synthetic\+\_\+feedback\+\_\+filter\+\_\+right}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
+\subsubsection{\texorpdfstring{synthetic\+\_\+feedback\+\_\+filter\+\_\+right}{synthetic\_feedback\_filter\_right}}
+{\footnotesize\ttfamily \mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} synthetic\+\_\+feedback\+\_\+filter\+\_\+right\hspace{0.3cm}{\ttfamily [static]}}
+

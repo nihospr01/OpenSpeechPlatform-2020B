@@ -1,0 +1,199 @@
+.TH "libosp/common/constants.h" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libosp/common/constants.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBpa_aux_data_t\fP"
+.br
+.RI "Struct that contains misc data passed to PortAudio\&. "
+.ti -1c
+.RI "struct \fBosp_user_data_t\fP"
+.br
+.RI "general data structure shared between client and C application "
+.ti -1c
+.RI "struct \fBpa_user_data_t\fP"
+.br
+.RI "The data structure passed to PortAudio\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBFRAME_SIZE\fP   32"
+.br
+.RI "Contains general, commonly used data structures and constants\&. "
+.ti -1c
+.RI "#define \fBVERSION\fP   2"
+.br
+.RI "This is the C version for keeping the networking of packets between the\&. "
+.ti -1c
+.RI "#define \fBNUM_BANDS\fP   6"
+.br
+.RI "Number of Sub-Bands\&. "
+.ti -1c
+.RI "#define \fBBAND_FILT_LEN\fP   193"
+.br
+.RI "Sub-Band filter tap length\&. "
+.ti -1c
+.RI "#define \fBRESAMP_96_32_TAPS\fP   25"
+.br
+.RI "Number of taps for decimation filter in resampler\&.c\&. "
+.ti -1c
+.RI "#define \fBRESAMP_32_96_TAPS\fP   25"
+.br
+.RI "Number of taps for interpolation filter in resampler\&.c\&. "
+.ti -1c
+.RI "#define \fBRESAMP_48_32_TAPS\fP   25"
+.br
+.RI "Number of taps for decimation filter in resampler\&.c for 48 to 32 kHz\&. "
+.ti -1c
+.RI "#define \fBRESAMP_32_48_TAPS\fP   25"
+.br
+.RI "Number of taps for interpolation filter in resampler\&.c for 32 to 48 kHz\&. "
+.ti -1c
+.RI "#define \fBSYNTHETIC_TAP_LEN\fP   525"
+.br
+.RI "Synthetic feedback filter tap length\&. "
+.ti -1c
+.RI "#define \fBD_ATTACK_TIME\fP   5"
+.br
+.RI "Attack time in msec\&. "
+.ti -1c
+.RI "#define \fBD_RELEASE_TIME\fP   20"
+.br
+.RI "Release time in msec\&. "
+.ti -1c
+.RI "#define \fBD_PD_SAMP_RATE\fP   32000"
+.br
+.RI "Sample rate that MHA is operating at\&. "
+.ti -1c
+.RI "#define \fBD_KNEE_LOW\fP   45"
+.br
+.RI "Lower kneepoint in dB SPL\&. Using the same value for all the bands\&. "
+.ti -1c
+.RI "#define \fBD_KNEE_HIGH\fP   100"
+.br
+.RI "Upper kneepoint in dB SPL\&. Using the same value for all the bands\&. "
+.ti -1c
+.RI "#define \fBAFC_FILTER_TAP_FILE_L\fP   '\&./afc_filter_taps_l\&.bin'"
+.br
+.RI "AFC filter initialization taps for left channel\&. "
+.ti -1c
+.RI "#define \fBAFC_FILTER_TAP_FILE_R\fP   '\&./afc_filter_taps_r\&.bin'"
+.br
+.RI "AFC filter initialization taps for right channel\&. "
+.ti -1c
+.RI "#define \fBCURRENT_VERSION\fP   1"
+.br
+.RI "Version number of the application\&. Required to match the version with Android app\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBpa_aux_data_t\fP \fBpa_aux_data\fP"
+.br
+.RI "Struct that contains misc data passed to PortAudio\&. "
+.ti -1c
+.RI "typedef struct \fBosp_user_data_t\fP \fBosp_user_data\fP"
+.br
+.RI "general data structure shared between client and C application "
+.ti -1c
+.RI "typedef struct \fBpa_user_data_t\fP \fBpa_user_data\fP"
+.br
+.RI "The data structure passed to PortAudio\&. "
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define AFC_FILTER_TAP_FILE_L   '\&./afc_filter_taps_l\&.bin'"
+
+.PP
+AFC filter initialization taps for left channel\&. 
+.SS "#define AFC_FILTER_TAP_FILE_R   '\&./afc_filter_taps_r\&.bin'"
+
+.PP
+AFC filter initialization taps for right channel\&. 
+.SS "#define BAND_FILT_LEN   193"
+
+.PP
+Sub-Band filter tap length\&. 
+.SS "#define CURRENT_VERSION   1"
+
+.PP
+Version number of the application\&. Required to match the version with Android app\&. 
+.SS "#define D_ATTACK_TIME   5"
+
+.PP
+Attack time in msec\&. 
+.SS "#define D_KNEE_HIGH   100"
+
+.PP
+Upper kneepoint in dB SPL\&. Using the same value for all the bands\&. 
+.SS "#define D_KNEE_LOW   45"
+
+.PP
+Lower kneepoint in dB SPL\&. Using the same value for all the bands\&. 
+.SS "#define D_PD_SAMP_RATE   32000"
+
+.PP
+Sample rate that MHA is operating at\&. 
+.SS "#define D_RELEASE_TIME   20"
+
+.PP
+Release time in msec\&. 
+.SS "#define FRAME_SIZE   32"
+
+.PP
+Contains general, commonly used data structures and constants\&. 
+.SS "#define NUM_BANDS   6"
+
+.PP
+Number of Sub-Bands\&. 
+.SS "#define RESAMP_32_48_TAPS   25"
+
+.PP
+Number of taps for interpolation filter in resampler\&.c for 32 to 48 kHz\&. 
+.SS "#define RESAMP_32_96_TAPS   25"
+
+.PP
+Number of taps for interpolation filter in resampler\&.c\&. 
+.SS "#define RESAMP_48_32_TAPS   25"
+
+.PP
+Number of taps for decimation filter in resampler\&.c for 48 to 32 kHz\&. 
+.SS "#define RESAMP_96_32_TAPS   25"
+
+.PP
+Number of taps for decimation filter in resampler\&.c\&. 
+.SS "#define SYNTHETIC_TAP_LEN   525"
+
+.PP
+Synthetic feedback filter tap length\&. 
+.SS "#define VERSION   2"
+
+.PP
+This is the C version for keeping the networking of packets between the\&. 
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fBosp_user_data_t\fP  \fBosp_user_data\fP"
+
+.PP
+general data structure shared between client and C application 
+.SS "typedef struct \fBpa_aux_data_t\fP  \fBpa_aux_data\fP"
+
+.PP
+Struct that contains misc data passed to PortAudio\&. 
+.SS "typedef struct \fBpa_user_data_t\fP  \fBpa_user_data\fP"
+
+.PP
+The data structure passed to PortAudio\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

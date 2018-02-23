@@ -1,0 +1,216 @@
+\hypertarget{structafc__t}{}\section{afc\+\_\+t Struct Reference}
+\label{structafc__t}\index{afc\+\_\+t@{afc\+\_\+t}}
+
+
+A\+FC data structure.  
+
+
+
+
+Collaboration diagram for afc\+\_\+t\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{structafc__t__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} \mbox{\hyperlink{structafc__t_a33db3fc1bf008116481e632f6080972c}{afc\+\_\+filter}}
+\begin{DoxyCompactList}\small\item\em A\+FC filter W(z) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} \mbox{\hyperlink{structafc__t_a67b0483fc918fc9af5cb64c6b79e41cf}{prefilter\+\_\+e}}
+\begin{DoxyCompactList}\small\item\em Pre-\/whitening filter A(z) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} \mbox{\hyperlink{structafc__t_a43d15e690ac1c74461c8b8a5522d8e52}{prefilter\+\_\+u}}
+\begin{DoxyCompactList}\small\item\em Pre-\/whitening filter A(z) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} \mbox{\hyperlink{structafc__t_ad649e5413644e0dd06b2dfe789dd0630}{band\+\_\+limited\+\_\+filter}}
+\begin{DoxyCompactList}\small\item\em Band-\/limited filter H(z) \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{structafc__t_ad09604e56d2183c494456350cbb709ea}{adaptation\+\_\+type}}
+\item 
+float $\ast$ \mbox{\hyperlink{structafc__t_aa69482203264d41b13f96cda153faec3}{u}}
+\begin{DoxyCompactList}\small\item\em Band-\/limited signal u(n) of the HA output s(n) \end{DoxyCompactList}\item 
+float $\ast$ \mbox{\hyperlink{structafc__t_a7c5db3530c08c1bec07d6f4bf921537d}{y\+\_\+hat}}
+\begin{DoxyCompactList}\small\item\em Estimate of feedback signal y\+\_\+hat(n) \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{structafc__t_ab94a0e3f15733272ecd739279e132818}{power\+\_\+estimate}}
+\begin{DoxyCompactList}\small\item\em Power estimate, sigma$^\wedge$2\+\_\+hat(n), of the input to coefficient adaptation bloclk. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structafc__t_acb59e5af368aca0b2840fa76e5e5a000}{frame\+\_\+size}}
+\begin{DoxyCompactList}\small\item\em Number of samples in the current frame. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{structafc__t_a7b343e47789c5a03ba4a37671c281861}{mu}}
+\begin{DoxyCompactList}\small\item\em Step size parameter. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{structafc__t_a472432ba992e61143df0a1ab83981c10}{delta}}
+\begin{DoxyCompactList}\small\item\em Regularization term. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{structafc__t_a8edae5604a2d189f1e83b71678566cad}{rho}}
+\begin{DoxyCompactList}\small\item\em Forgetting factor. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{structafc__t_a161775274c257b1d804c61b77cfbbbd7}{alpha}}
+\begin{DoxyCompactList}\small\item\em Parameter for P\+N\+L\+MS. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{structafc__t_a829042affbb45e80df502fc95134b673}{beta}}
+\begin{DoxyCompactList}\small\item\em Parameter for P\+N\+L\+MS. \end{DoxyCompactList}\item 
+float $\ast$ \mbox{\hyperlink{structafc__t_af7b50d899dcdfc8c68f6866764861f5f}{u\+\_\+prefiltered\+\_\+accumulated}}
+\begin{DoxyCompactList}\small\item\em A\+F\+C\+\_\+\+N\+U\+M\+\_\+\+F\+R\+A\+M\+ES frames accumulated values of pre-\/filtered output of u(n). i.\+e. u\+\_\+f(n) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{circular__buffer_8h_aa88184dd60879f696cb2e679d0e50b45}{Circular\+\_\+buffer}} \mbox{\hyperlink{structafc__t_a11328ef1f3d92c69c404c5df7761116a}{upa}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A\+FC data structure. 
+
+Refer to the supported document on A\+FC for the notations 
+
+\subsection{Field Documentation}
+\mbox{\Hypertarget{structafc__t_ad09604e56d2183c494456350cbb709ea}\label{structafc__t_ad09604e56d2183c494456350cbb709ea}} 
+\index{afc\+\_\+t@{afc\+\_\+t}!adaptation\+\_\+type@{adaptation\+\_\+type}}
+\index{adaptation\+\_\+type@{adaptation\+\_\+type}!afc\+\_\+t@{afc\+\_\+t}}
+\subsubsection{\texorpdfstring{adaptation\+\_\+type}{adaptation\_type}}
+{\footnotesize\ttfamily unsigned int afc\+\_\+t\+::adaptation\+\_\+type}
+
+\mbox{\Hypertarget{structafc__t_a33db3fc1bf008116481e632f6080972c}\label{structafc__t_a33db3fc1bf008116481e632f6080972c}} 
+\index{afc\+\_\+t@{afc\+\_\+t}!afc\+\_\+filter@{afc\+\_\+filter}}
+\index{afc\+\_\+filter@{afc\+\_\+filter}!afc\+\_\+t@{afc\+\_\+t}}
+\subsubsection{\texorpdfstring{afc\+\_\+filter}{afc\_filter}}
+{\footnotesize\ttfamily \mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} afc\+\_\+t\+::afc\+\_\+filter}
+
+
+
+A\+FC filter W(z) 
+
+\mbox{\Hypertarget{structafc__t_a161775274c257b1d804c61b77cfbbbd7}\label{structafc__t_a161775274c257b1d804c61b77cfbbbd7}} 
+\index{afc\+\_\+t@{afc\+\_\+t}!alpha@{alpha}}
+\index{alpha@{alpha}!afc\+\_\+t@{afc\+\_\+t}}
+\subsubsection{\texorpdfstring{alpha}{alpha}}
+{\footnotesize\ttfamily float afc\+\_\+t\+::alpha}
+
+
+
+Parameter for P\+N\+L\+MS. 
+
+\mbox{\Hypertarget{structafc__t_ad649e5413644e0dd06b2dfe789dd0630}\label{structafc__t_ad649e5413644e0dd06b2dfe789dd0630}} 
+\index{afc\+\_\+t@{afc\+\_\+t}!band\+\_\+limited\+\_\+filter@{band\+\_\+limited\+\_\+filter}}
+\index{band\+\_\+limited\+\_\+filter@{band\+\_\+limited\+\_\+filter}!afc\+\_\+t@{afc\+\_\+t}}
+\subsubsection{\texorpdfstring{band\+\_\+limited\+\_\+filter}{band\_limited\_filter}}
+{\footnotesize\ttfamily \mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} afc\+\_\+t\+::band\+\_\+limited\+\_\+filter}
+
+
+
+Band-\/limited filter H(z) 
+
+\mbox{\Hypertarget{structafc__t_a829042affbb45e80df502fc95134b673}\label{structafc__t_a829042affbb45e80df502fc95134b673}} 
+\index{afc\+\_\+t@{afc\+\_\+t}!beta@{beta}}
+\index{beta@{beta}!afc\+\_\+t@{afc\+\_\+t}}
+\subsubsection{\texorpdfstring{beta}{beta}}
+{\footnotesize\ttfamily float afc\+\_\+t\+::beta}
+
+
+
+Parameter for P\+N\+L\+MS. 
+
+\mbox{\Hypertarget{structafc__t_a472432ba992e61143df0a1ab83981c10}\label{structafc__t_a472432ba992e61143df0a1ab83981c10}} 
+\index{afc\+\_\+t@{afc\+\_\+t}!delta@{delta}}
+\index{delta@{delta}!afc\+\_\+t@{afc\+\_\+t}}
+\subsubsection{\texorpdfstring{delta}{delta}}
+{\footnotesize\ttfamily float afc\+\_\+t\+::delta}
+
+
+
+Regularization term. 
+
+\mbox{\Hypertarget{structafc__t_acb59e5af368aca0b2840fa76e5e5a000}\label{structafc__t_acb59e5af368aca0b2840fa76e5e5a000}} 
+\index{afc\+\_\+t@{afc\+\_\+t}!frame\+\_\+size@{frame\+\_\+size}}
+\index{frame\+\_\+size@{frame\+\_\+size}!afc\+\_\+t@{afc\+\_\+t}}
+\subsubsection{\texorpdfstring{frame\+\_\+size}{frame\_size}}
+{\footnotesize\ttfamily int afc\+\_\+t\+::frame\+\_\+size}
+
+
+
+Number of samples in the current frame. 
+
+\mbox{\Hypertarget{structafc__t_a7b343e47789c5a03ba4a37671c281861}\label{structafc__t_a7b343e47789c5a03ba4a37671c281861}} 
+\index{afc\+\_\+t@{afc\+\_\+t}!mu@{mu}}
+\index{mu@{mu}!afc\+\_\+t@{afc\+\_\+t}}
+\subsubsection{\texorpdfstring{mu}{mu}}
+{\footnotesize\ttfamily float afc\+\_\+t\+::mu}
+
+
+
+Step size parameter. 
+
+\mbox{\Hypertarget{structafc__t_ab94a0e3f15733272ecd739279e132818}\label{structafc__t_ab94a0e3f15733272ecd739279e132818}} 
+\index{afc\+\_\+t@{afc\+\_\+t}!power\+\_\+estimate@{power\+\_\+estimate}}
+\index{power\+\_\+estimate@{power\+\_\+estimate}!afc\+\_\+t@{afc\+\_\+t}}
+\subsubsection{\texorpdfstring{power\+\_\+estimate}{power\_estimate}}
+{\footnotesize\ttfamily float afc\+\_\+t\+::power\+\_\+estimate}
+
+
+
+Power estimate, sigma$^\wedge$2\+\_\+hat(n), of the input to coefficient adaptation bloclk. 
+
+\mbox{\Hypertarget{structafc__t_a67b0483fc918fc9af5cb64c6b79e41cf}\label{structafc__t_a67b0483fc918fc9af5cb64c6b79e41cf}} 
+\index{afc\+\_\+t@{afc\+\_\+t}!prefilter\+\_\+e@{prefilter\+\_\+e}}
+\index{prefilter\+\_\+e@{prefilter\+\_\+e}!afc\+\_\+t@{afc\+\_\+t}}
+\subsubsection{\texorpdfstring{prefilter\+\_\+e}{prefilter\_e}}
+{\footnotesize\ttfamily \mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} afc\+\_\+t\+::prefilter\+\_\+e}
+
+
+
+Pre-\/whitening filter A(z) 
+
+\mbox{\Hypertarget{structafc__t_a43d15e690ac1c74461c8b8a5522d8e52}\label{structafc__t_a43d15e690ac1c74461c8b8a5522d8e52}} 
+\index{afc\+\_\+t@{afc\+\_\+t}!prefilter\+\_\+u@{prefilter\+\_\+u}}
+\index{prefilter\+\_\+u@{prefilter\+\_\+u}!afc\+\_\+t@{afc\+\_\+t}}
+\subsubsection{\texorpdfstring{prefilter\+\_\+u}{prefilter\_u}}
+{\footnotesize\ttfamily \mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} afc\+\_\+t\+::prefilter\+\_\+u}
+
+
+
+Pre-\/whitening filter A(z) 
+
+\mbox{\Hypertarget{structafc__t_a8edae5604a2d189f1e83b71678566cad}\label{structafc__t_a8edae5604a2d189f1e83b71678566cad}} 
+\index{afc\+\_\+t@{afc\+\_\+t}!rho@{rho}}
+\index{rho@{rho}!afc\+\_\+t@{afc\+\_\+t}}
+\subsubsection{\texorpdfstring{rho}{rho}}
+{\footnotesize\ttfamily float afc\+\_\+t\+::rho}
+
+
+
+Forgetting factor. 
+
+\mbox{\Hypertarget{structafc__t_aa69482203264d41b13f96cda153faec3}\label{structafc__t_aa69482203264d41b13f96cda153faec3}} 
+\index{afc\+\_\+t@{afc\+\_\+t}!u@{u}}
+\index{u@{u}!afc\+\_\+t@{afc\+\_\+t}}
+\subsubsection{\texorpdfstring{u}{u}}
+{\footnotesize\ttfamily float$\ast$ afc\+\_\+t\+::u}
+
+
+
+Band-\/limited signal u(n) of the HA output s(n) 
+
+\mbox{\Hypertarget{structafc__t_af7b50d899dcdfc8c68f6866764861f5f}\label{structafc__t_af7b50d899dcdfc8c68f6866764861f5f}} 
+\index{afc\+\_\+t@{afc\+\_\+t}!u\+\_\+prefiltered\+\_\+accumulated@{u\+\_\+prefiltered\+\_\+accumulated}}
+\index{u\+\_\+prefiltered\+\_\+accumulated@{u\+\_\+prefiltered\+\_\+accumulated}!afc\+\_\+t@{afc\+\_\+t}}
+\subsubsection{\texorpdfstring{u\+\_\+prefiltered\+\_\+accumulated}{u\_prefiltered\_accumulated}}
+{\footnotesize\ttfamily float$\ast$ afc\+\_\+t\+::u\+\_\+prefiltered\+\_\+accumulated}
+
+
+
+A\+F\+C\+\_\+\+N\+U\+M\+\_\+\+F\+R\+A\+M\+ES frames accumulated values of pre-\/filtered output of u(n). i.\+e. u\+\_\+f(n) 
+
+\mbox{\Hypertarget{structafc__t_a11328ef1f3d92c69c404c5df7761116a}\label{structafc__t_a11328ef1f3d92c69c404c5df7761116a}} 
+\index{afc\+\_\+t@{afc\+\_\+t}!upa@{upa}}
+\index{upa@{upa}!afc\+\_\+t@{afc\+\_\+t}}
+\subsubsection{\texorpdfstring{upa}{upa}}
+{\footnotesize\ttfamily \mbox{\hyperlink{circular__buffer_8h_aa88184dd60879f696cb2e679d0e50b45}{Circular\+\_\+buffer}} afc\+\_\+t\+::upa}
+
+\mbox{\Hypertarget{structafc__t_a7c5db3530c08c1bec07d6f4bf921537d}\label{structafc__t_a7c5db3530c08c1bec07d6f4bf921537d}} 
+\index{afc\+\_\+t@{afc\+\_\+t}!y\+\_\+hat@{y\+\_\+hat}}
+\index{y\+\_\+hat@{y\+\_\+hat}!afc\+\_\+t@{afc\+\_\+t}}
+\subsubsection{\texorpdfstring{y\+\_\+hat}{y\_hat}}
+{\footnotesize\ttfamily float$\ast$ afc\+\_\+t\+::y\+\_\+hat}
+
+
+
+Estimate of feedback signal y\+\_\+hat(n) 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libosp/afc/\mbox{\hyperlink{afc_8c}{afc.\+c}}\end{DoxyCompactItemize}

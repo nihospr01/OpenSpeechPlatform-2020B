@@ -1,0 +1,129 @@
+\hypertarget{beam__forming_8c}{}\section{libosp/beam\+\_\+forming/beam\+\_\+forming.c File Reference}
+\label{beam__forming_8c}\index{libosp/beam\+\_\+forming/beam\+\_\+forming.\+c@{libosp/beam\+\_\+forming/beam\+\_\+forming.\+c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}beam\+\_\+forming.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}delay\+\_\+line.\+h\char`\"{}}\newline
+Include dependency graph for beam\+\_\+forming.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{beam__forming_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structbeam__form__t}{beam\+\_\+form\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em data structure containing relevant beam-\/forming fields \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{beam__forming_8c_a9d41d147039787c25d6631b276ab4330}{D\+I\+S\+T\+A\+N\+CE}}~0.\+1
+\begin{DoxyCompactList}\small\item\em Distance between front and rear microphones in meters. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{beam__forming_8c_ac9f9f9d25bbf964365102f1ef77d359e}{S\+P\+E\+E\+D\+\_\+\+O\+F\+\_\+\+S\+O\+U\+ND}}~340.\+29
+\begin{DoxyCompactList}\small\item\em Speed of sound in meters/second. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{beam__forming_8h_a9199414346374516a0281f253490d683}{Beam\+\_\+\+Form}} \mbox{\hyperlink{beam__forming_8c_af1500dbad6977e67b77ddcb693399b4c}{beam\+\_\+form\+\_\+init}} (float beta, float gain, float sample\+\_\+rate)
+\begin{DoxyCompactList}\small\item\em Initialization function for the beam forming data struct. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{beam__forming_8c_ae641e306d725c5ee093d5179e49ec252}{beam\+\_\+form\+\_\+proc}} (\mbox{\hyperlink{beam__forming_8h_a9199414346374516a0281f253490d683}{Beam\+\_\+\+Form}} beam\+\_\+form, float $\ast$in\+\_\+front, float $\ast$in\+\_\+rear, float $\ast$output, int len)
+\begin{DoxyCompactList}\small\item\em Takes in two channel inputs, and attempts to use beamforming to provide directed output The in\+\_\+front, in\+\_\+rear, and output arrays must be allocated so that they are len samples long. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{beam__forming_8c_aa555d80ffa96de7c2221a70a24f04fe4}{beam\+\_\+form\+\_\+destroy}} (\mbox{\hyperlink{beam__forming_8h_a9199414346374516a0281f253490d683}{Beam\+\_\+\+Form}} beam\+\_\+form)
+\begin{DoxyCompactList}\small\item\em Closes and frees the beam\+\_\+form instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{beam__forming_8c_a9d41d147039787c25d6631b276ab4330}\label{beam__forming_8c_a9d41d147039787c25d6631b276ab4330}} 
+\index{beam\+\_\+forming.\+c@{beam\+\_\+forming.\+c}!D\+I\+S\+T\+A\+N\+CE@{D\+I\+S\+T\+A\+N\+CE}}
+\index{D\+I\+S\+T\+A\+N\+CE@{D\+I\+S\+T\+A\+N\+CE}!beam\+\_\+forming.\+c@{beam\+\_\+forming.\+c}}
+\subsubsection{\texorpdfstring{D\+I\+S\+T\+A\+N\+CE}{DISTANCE}}
+{\footnotesize\ttfamily \#define D\+I\+S\+T\+A\+N\+CE~0.\+1}
+
+
+
+Distance between front and rear microphones in meters. 
+
+\mbox{\Hypertarget{beam__forming_8c_ac9f9f9d25bbf964365102f1ef77d359e}\label{beam__forming_8c_ac9f9f9d25bbf964365102f1ef77d359e}} 
+\index{beam\+\_\+forming.\+c@{beam\+\_\+forming.\+c}!S\+P\+E\+E\+D\+\_\+\+O\+F\+\_\+\+S\+O\+U\+ND@{S\+P\+E\+E\+D\+\_\+\+O\+F\+\_\+\+S\+O\+U\+ND}}
+\index{S\+P\+E\+E\+D\+\_\+\+O\+F\+\_\+\+S\+O\+U\+ND@{S\+P\+E\+E\+D\+\_\+\+O\+F\+\_\+\+S\+O\+U\+ND}!beam\+\_\+forming.\+c@{beam\+\_\+forming.\+c}}
+\subsubsection{\texorpdfstring{S\+P\+E\+E\+D\+\_\+\+O\+F\+\_\+\+S\+O\+U\+ND}{SPEED\_OF\_SOUND}}
+{\footnotesize\ttfamily \#define S\+P\+E\+E\+D\+\_\+\+O\+F\+\_\+\+S\+O\+U\+ND~340.\+29}
+
+
+
+Speed of sound in meters/second. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{beam__forming_8c_aa555d80ffa96de7c2221a70a24f04fe4}\label{beam__forming_8c_aa555d80ffa96de7c2221a70a24f04fe4}} 
+\index{beam\+\_\+forming.\+c@{beam\+\_\+forming.\+c}!beam\+\_\+form\+\_\+destroy@{beam\+\_\+form\+\_\+destroy}}
+\index{beam\+\_\+form\+\_\+destroy@{beam\+\_\+form\+\_\+destroy}!beam\+\_\+forming.\+c@{beam\+\_\+forming.\+c}}
+\subsubsection{\texorpdfstring{beam\+\_\+form\+\_\+destroy()}{beam\_form\_destroy()}}
+{\footnotesize\ttfamily void beam\+\_\+form\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{beam__forming_8h_a9199414346374516a0281f253490d683}{Beam\+\_\+\+Form}}}]{beam\+\_\+form }\end{DoxyParamCaption})}
+
+
+
+Closes and frees the beam\+\_\+form instance. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structbeam__form__t}{beam\+\_\+form\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em beam\+\_\+form} & The instance of the Beam\+\_\+\+Form variable that was returned from beam\+\_\+form\+\_\+init \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{beam__forming_8c_af1500dbad6977e67b77ddcb693399b4c}\label{beam__forming_8c_af1500dbad6977e67b77ddcb693399b4c}} 
+\index{beam\+\_\+forming.\+c@{beam\+\_\+forming.\+c}!beam\+\_\+form\+\_\+init@{beam\+\_\+form\+\_\+init}}
+\index{beam\+\_\+form\+\_\+init@{beam\+\_\+form\+\_\+init}!beam\+\_\+forming.\+c@{beam\+\_\+forming.\+c}}
+\subsubsection{\texorpdfstring{beam\+\_\+form\+\_\+init()}{beam\_form\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{beam__forming_8h_a9199414346374516a0281f253490d683}{Beam\+\_\+\+Form}} beam\+\_\+form\+\_\+init (\begin{DoxyParamCaption}\item[{float}]{beta,  }\item[{float}]{gain,  }\item[{float}]{sample\+\_\+rate }\end{DoxyParamCaption})}
+
+
+
+Initialization function for the beam forming data struct. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structbeam__form__t}{beam\+\_\+form\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em beta} & beta value \\
+\hline
+{\em gain} & gain value \\
+\hline
+{\em sample\+\_\+rate} & Sample rate set by audio drivers. Used in calculation of angle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the allocated instance of the beamforming data structure (\char`\"{}object\char`\"{}) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{beam__forming_8c_ae641e306d725c5ee093d5179e49ec252}\label{beam__forming_8c_ae641e306d725c5ee093d5179e49ec252}} 
+\index{beam\+\_\+forming.\+c@{beam\+\_\+forming.\+c}!beam\+\_\+form\+\_\+proc@{beam\+\_\+form\+\_\+proc}}
+\index{beam\+\_\+form\+\_\+proc@{beam\+\_\+form\+\_\+proc}!beam\+\_\+forming.\+c@{beam\+\_\+forming.\+c}}
+\subsubsection{\texorpdfstring{beam\+\_\+form\+\_\+proc()}{beam\_form\_proc()}}
+{\footnotesize\ttfamily void beam\+\_\+form\+\_\+proc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{beam__forming_8h_a9199414346374516a0281f253490d683}{Beam\+\_\+\+Form}}}]{beam\+\_\+form,  }\item[{float $\ast$}]{in\+\_\+front,  }\item[{float $\ast$}]{in\+\_\+rear,  }\item[{float $\ast$}]{output,  }\item[{int}]{len }\end{DoxyParamCaption})}
+
+
+
+Takes in two channel inputs, and attempts to use beamforming to provide directed output The in\+\_\+front, in\+\_\+rear, and output arrays must be allocated so that they are len samples long. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structbeam__form__t}{beam\+\_\+form\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em beam\+\_\+form} & The instance of the Beam\+\_\+\+Form variable that was returned from beam\+\_\+form\+\_\+init \\
+\hline
+{\em in\+\_\+front} & Float array of the input samples from the \char`\"{}front\char`\"{} mic that are len floats long \\
+\hline
+{\em in\+\_\+rear} & Float array of the samples from the \char`\"{}rear\char`\"{} mic that are len floats long \\
+\hline
+{\em output} & Float array containing the processed samples that are len floats long \\
+\hline
+{\em len} & The length of the input \\
+\hline
+\end{DoxyParams}

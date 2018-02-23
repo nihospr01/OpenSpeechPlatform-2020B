@@ -1,0 +1,66 @@
+\hypertarget{utilities_8c}{}\section{libosp/osp\+\_\+process/utilities.c File Reference}
+\label{utilities_8c}\index{libosp/osp\+\_\+process/utilities.\+c@{libosp/osp\+\_\+process/utilities.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$limits.\+h$>$}\newline
+Include dependency graph for utilities.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{utilities_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{utilities_8c_aa884370487e6a35d482982274134a94c}{load\+\_\+filter\+\_\+taps}} (const char $\ast$file, float $\ast$taps, int len)
+\begin{DoxyCompactList}\small\item\em Load filter taps from file. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{utilities_8c_a11a85d9e5da9385c325c40be7f393284}{save\+\_\+filter\+\_\+taps}} (const char $\ast$file, float $\ast$taps, int len)
+\begin{DoxyCompactList}\small\item\em Save filter taps to a file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{utilities_8c_aa884370487e6a35d482982274134a94c}\label{utilities_8c_aa884370487e6a35d482982274134a94c}} 
+\index{utilities.\+c@{utilities.\+c}!load\+\_\+filter\+\_\+taps@{load\+\_\+filter\+\_\+taps}}
+\index{load\+\_\+filter\+\_\+taps@{load\+\_\+filter\+\_\+taps}!utilities.\+c@{utilities.\+c}}
+\subsubsection{\texorpdfstring{load\+\_\+filter\+\_\+taps()}{load\_filter\_taps()}}
+{\footnotesize\ttfamily int load\+\_\+filter\+\_\+taps (\begin{DoxyParamCaption}\item[{const char $\ast$}]{file,  }\item[{float $\ast$}]{taps,  }\item[{int}]{len }\end{DoxyParamCaption})}
+
+
+
+Load filter taps from file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & The file in which to load 32bit float taps from \\
+\hline
+{\em taps} & The array in which the taps will be loaded into \\
+\hline
+{\em len} & The number of taps to load into the \char`\"{}taps\char`\"{} array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the number of taps loaded. This should be the same as the \char`\"{}len\char`\"{} parameter. This way the developer can test if this is the case, and return an error if it is not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utilities_8c_a11a85d9e5da9385c325c40be7f393284}\label{utilities_8c_a11a85d9e5da9385c325c40be7f393284}} 
+\index{utilities.\+c@{utilities.\+c}!save\+\_\+filter\+\_\+taps@{save\+\_\+filter\+\_\+taps}}
+\index{save\+\_\+filter\+\_\+taps@{save\+\_\+filter\+\_\+taps}!utilities.\+c@{utilities.\+c}}
+\subsubsection{\texorpdfstring{save\+\_\+filter\+\_\+taps()}{save\_filter\_taps()}}
+{\footnotesize\ttfamily int save\+\_\+filter\+\_\+taps (\begin{DoxyParamCaption}\item[{const char $\ast$}]{file,  }\item[{float $\ast$}]{taps,  }\item[{int}]{len }\end{DoxyParamCaption})}
+
+
+
+Save filter taps to a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & File to save filter taps to \\
+\hline
+{\em taps} & Array of filter taps to save to file \\
+\hline
+{\em len} & Length of the \char`\"{}taps\char`\"{} array\+: the number of taps to save\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 on success, -\/1 otherwise 
+\end{DoxyReturn}

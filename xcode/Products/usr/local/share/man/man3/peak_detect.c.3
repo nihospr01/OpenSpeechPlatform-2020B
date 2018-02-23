@@ -1,0 +1,134 @@
+.TH "libosp/peak_detect/peak_detect.c" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libosp/peak_detect/peak_detect.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'peak_detect\&.h'\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+\fC#include <limits\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBpeak_detect_t\fP"
+.br
+.RI "Peak Detect data structure\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBPeak_detect\fP \fBpeak_detect_init\fP (float fsamp, unsigned int num_bands)"
+.br
+.RI "Function to initialize the peak_detect data struct\&. "
+.ti -1c
+.RI "void \fBpeak_to_spl\fP (float *peak, float *pdb, size_t len)"
+.br
+.RI "Function to convert the output from the peak detector into dB SPL (Sound Pressure Level)\&. "
+.ti -1c
+.RI "void \fBpeak_detect\fP (\fBPeak_detect\fP pd, float *input, size_t len, float *peak, float attack_time, float release_time, int band_num)"
+.br
+.RI "Function to peak detect the signal\&. The attack and release times are specified as ANSI values which are then converted to filter time constants\&. The peak detector is given by Kates, Eq (8\&.1)\&. "
+.ti -1c
+.RI "int \fBpeak_detect_destroy\fP (\fBPeak_detect\fP pd)"
+.br
+.RI "Function to close and free the Peak_detect instance\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void peak_detect (\fBPeak_detect\fP pd, float * input, size_t len, float * peak, float attack_time, float release_time, int band_num)"
+
+.PP
+Function to peak detect the signal\&. The attack and release times are specified as ANSI values which are then converted to filter time constants\&. The peak detector is given by Kates, Eq (8\&.1)\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBpeak_detect_t\fP 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpd\fP The instance of the Peak_detect structure that was returned from peak_detect_init 
+.br
+\fIinput\fP Pointer to the signal array at the frequency sub-band (output from sub-band filtering) 
+.br
+\fIlen\fP Length of the input signal 
+.br
+\fIpeak\fP Pointer to the array that will have peak detection output\&. i\&.e\&. output from peak_detect 
+.br
+\fIattack_time\fP Attack time in milliseconds 
+.br
+\fIrelease_time\fP Release time in milliseconds 
+.br
+\fIband_num\fP The sub-band number that is being operated on\&. Required to get the prev_peak value for that band 
+.RE
+.PP
+
+.SS "int peak_detect_destroy (\fBPeak_detect\fP pd)"
+
+.PP
+Function to close and free the Peak_detect instance\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBpeak_detect_t\fP 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpd\fP The instance of the Peak_detect structure that was returned from peak_detect_init 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+0 if successful\&. -1 otherwise 
+.RE
+.PP
+
+.SS "\fBPeak_detect\fP peak_detect_init (float fsamp, unsigned int num_bands)"
+
+.PP
+Function to initialize the peak_detect data struct\&. Allocates memory to the Peak_detect instance and initialize its parameters\&. prev_peak is set to zero for all bands for the first time\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfsamp\fP Sampling rate in Hz 
+.br
+\fInum_bands\fP Number of sub-bands\&. Required to store prev_peak values for each band 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Peak_detect Returns the Peak_detect instance/object if memory is succesfully allocated or returns NULL\&. 
+.RE
+.PP
+
+.SS "void peak_to_spl (float * peak, float * pdb, size_t len)"
+
+.PP
+Function to convert the output from the peak detector into dB SPL (Sound Pressure Level)\&. The SPL output will be used by the wide dynamic-range compression (wdrc) function\&. The function assumes that an RMS signal value of 1 corresponds to \fBDEFAULT_LEVEL(100)\fP dB SPL and converts the signal accordingly\&. The input WAV file therefore needs to be set to RMS = 1 at the start of processing\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpeak\fP Pointer to the signal to be conveted to dB SPL\&. i\&.e\&. the output from the peak_detect 
+.br
+\fIpdb\fP Pointer to the signal converted to dB SPL\&. i\&.e\&. the output of peak_to_spl 
+.br
+\fIlen\fP Length of the input signal to be converted to dB SPL 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.
