@@ -1,0 +1,170 @@
+\hypertarget{resample_8h}{}\section{libosp/resample/resample.h File Reference}
+\label{resample_8h}\index{libosp/resample/resample.\+h@{libosp/resample/resample.\+h}}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{resample_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structresample__t}{resample\+\_\+t}} $\ast$ \mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}} \mbox{\hyperlink{resample_8h_ae9df3f5bb638689d2d193913bee84d08}{resample\+\_\+init}} (const float $\ast$upsample\+\_\+taps, int up\+\_\+len, const float $\ast$downsample\+\_\+taps, int down\+\_\+len)
+\begin{DoxyCompactList}\small\item\em Initialization function for the resample structure. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{resample_8h_a1ca7f92bb107bf50a9c3aa3b8bfd375e}{resample\+\_\+32\+\_\+48}} (\mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}} obj, float $\ast$in\+\_\+32, float $\ast$out\+\_\+48, size\+\_\+t size\+\_\+input)
+\begin{DoxyCompactList}\small\item\em Resamples an input of 32 samples at 32k\+Hz sampling rate, and resamples it to 48k\+Hz. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{resample_8h_a268ac02447f54bfd52367bf857acf146}{resample\+\_\+48\+\_\+32}} (\mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}} obj, float $\ast$in\+\_\+48, float $\ast$out\+\_\+32, int size\+\_\+input)
+\begin{DoxyCompactList}\small\item\em Resamples an input of 48 samples at 48k\+Hz sampling rate, and resamples it to 32k\+Hz. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{resample_8h_a4cb21f88698fb352b2740675b0135e58}{resample\+\_\+96\+\_\+32}} (\mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}} obj, float $\ast$in\+\_\+96, float $\ast$out\+\_\+32, size\+\_\+t size\+\_\+input)
+\begin{DoxyCompactList}\small\item\em Resamples an input of 96 samples at 96k\+Hz sampling rate, and resamples it to 32k\+Hz. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{resample_8h_aa33bf7f29f45c3435b6d28af6a1f683e}{resample\+\_\+32\+\_\+96}} (\mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}} obj, float $\ast$in\+\_\+32, float $\ast$out\+\_\+96, size\+\_\+t size\+\_\+input)
+\begin{DoxyCompactList}\small\item\em Resamples an input of 32 samples at 32k\+Hz sampling rate, and resamples it to 96k\+Hz. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{resample_8h_ab73f93ef213ac8a2e2b930a3ed616120}{resample\+\_\+destroy}} (\mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}} obj)
+\begin{DoxyCompactList}\small\item\em Frees the Resample struct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}\label{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}} 
+\index{resample.\+h@{resample.\+h}!Resample@{Resample}}
+\index{Resample@{Resample}!resample.\+h@{resample.\+h}}
+\subsubsection{\texorpdfstring{Resample}{Resample}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structresample__t}{resample\+\_\+t}}$\ast$ \mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}}}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{resample_8h_a1ca7f92bb107bf50a9c3aa3b8bfd375e}\label{resample_8h_a1ca7f92bb107bf50a9c3aa3b8bfd375e}} 
+\index{resample.\+h@{resample.\+h}!resample\+\_\+32\+\_\+48@{resample\+\_\+32\+\_\+48}}
+\index{resample\+\_\+32\+\_\+48@{resample\+\_\+32\+\_\+48}!resample.\+h@{resample.\+h}}
+\subsubsection{\texorpdfstring{resample\+\_\+32\+\_\+48()}{resample\_32\_48()}}
+{\footnotesize\ttfamily size\+\_\+t resample\+\_\+32\+\_\+48 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}}}]{obj,  }\item[{float $\ast$}]{in\+\_\+32,  }\item[{float $\ast$}]{out\+\_\+48,  }\item[{size\+\_\+t}]{size\+\_\+input }\end{DoxyParamCaption})}
+
+
+
+Resamples an input of 32 samples at 32k\+Hz sampling rate, and resamples it to 48k\+Hz. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & Resample struct \\
+\hline
+{\em in\+\_\+32} & Input array of float samples. Must be 32 elements long \\
+\hline
+{\em out\+\_\+48} & Outout array of float samples. Must be allocated to be 48 elements long. \\
+\hline
+{\em size\+\_\+input} & The size of the in\+\_\+32 array. This is tested internally and must be 32, or else -\/1 is returned. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{resample_8h_aa33bf7f29f45c3435b6d28af6a1f683e}\label{resample_8h_aa33bf7f29f45c3435b6d28af6a1f683e}} 
+\index{resample.\+h@{resample.\+h}!resample\+\_\+32\+\_\+96@{resample\+\_\+32\+\_\+96}}
+\index{resample\+\_\+32\+\_\+96@{resample\+\_\+32\+\_\+96}!resample.\+h@{resample.\+h}}
+\subsubsection{\texorpdfstring{resample\+\_\+32\+\_\+96()}{resample\_32\_96()}}
+{\footnotesize\ttfamily size\+\_\+t resample\+\_\+32\+\_\+96 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}}}]{obj,  }\item[{float $\ast$}]{in\+\_\+32,  }\item[{float $\ast$}]{out\+\_\+96,  }\item[{size\+\_\+t}]{size\+\_\+input }\end{DoxyParamCaption})}
+
+
+
+Resamples an input of 32 samples at 32k\+Hz sampling rate, and resamples it to 96k\+Hz. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & Resample struct \\
+\hline
+{\em in\+\_\+32} & Input array of float samples. Must be 32 elements long \\
+\hline
+{\em out\+\_\+96} & Outout array of float samples. Must be allocated to be 96 elements long. \\
+\hline
+{\em size\+\_\+input} & The size of the in\+\_\+32 array. This is tested internally and must be 32, or else -\/1 is returned. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{resample_8h_a268ac02447f54bfd52367bf857acf146}\label{resample_8h_a268ac02447f54bfd52367bf857acf146}} 
+\index{resample.\+h@{resample.\+h}!resample\+\_\+48\+\_\+32@{resample\+\_\+48\+\_\+32}}
+\index{resample\+\_\+48\+\_\+32@{resample\+\_\+48\+\_\+32}!resample.\+h@{resample.\+h}}
+\subsubsection{\texorpdfstring{resample\+\_\+48\+\_\+32()}{resample\_48\_32()}}
+{\footnotesize\ttfamily size\+\_\+t resample\+\_\+48\+\_\+32 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}}}]{obj,  }\item[{float $\ast$}]{in\+\_\+48,  }\item[{float $\ast$}]{out\+\_\+32,  }\item[{int}]{size\+\_\+input }\end{DoxyParamCaption})}
+
+
+
+Resamples an input of 48 samples at 48k\+Hz sampling rate, and resamples it to 32k\+Hz. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & Resample struct \\
+\hline
+{\em in\+\_\+48} & Input array of float samples. Must be 48 elements long \\
+\hline
+{\em out\+\_\+32} & Outout array of float samples. Must be allocated to be 32 elements long. \\
+\hline
+{\em size\+\_\+input} & The size of the in\+\_\+48 array. This is tested internally and must be 48, or else -\/1 is returned. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{resample_8h_a4cb21f88698fb352b2740675b0135e58}\label{resample_8h_a4cb21f88698fb352b2740675b0135e58}} 
+\index{resample.\+h@{resample.\+h}!resample\+\_\+96\+\_\+32@{resample\+\_\+96\+\_\+32}}
+\index{resample\+\_\+96\+\_\+32@{resample\+\_\+96\+\_\+32}!resample.\+h@{resample.\+h}}
+\subsubsection{\texorpdfstring{resample\+\_\+96\+\_\+32()}{resample\_96\_32()}}
+{\footnotesize\ttfamily size\+\_\+t resample\+\_\+96\+\_\+32 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}}}]{obj,  }\item[{float $\ast$}]{in\+\_\+96,  }\item[{float $\ast$}]{out\+\_\+32,  }\item[{size\+\_\+t}]{size\+\_\+input }\end{DoxyParamCaption})}
+
+
+
+Resamples an input of 96 samples at 96k\+Hz sampling rate, and resamples it to 32k\+Hz. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & Resample struct \\
+\hline
+{\em in\+\_\+96} & Input array of float samples. Must be 96 elements long \\
+\hline
+{\em out\+\_\+32} & Outout array of float samples. Must be allocated to be 32 elements long. \\
+\hline
+{\em size\+\_\+input} & The size of the in\+\_\+96 array. This is tested internally and must be 96, or else -\/1 is returned. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{resample_8h_ab73f93ef213ac8a2e2b930a3ed616120}\label{resample_8h_ab73f93ef213ac8a2e2b930a3ed616120}} 
+\index{resample.\+h@{resample.\+h}!resample\+\_\+destroy@{resample\+\_\+destroy}}
+\index{resample\+\_\+destroy@{resample\+\_\+destroy}!resample.\+h@{resample.\+h}}
+\subsubsection{\texorpdfstring{resample\+\_\+destroy()}{resample\_destroy()}}
+{\footnotesize\ttfamily int resample\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}}}]{obj }\end{DoxyParamCaption})}
+
+
+
+Frees the Resample struct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & Resample struct \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 on success, -\/1 on error 
+\end{DoxyReturn}
+\mbox{\Hypertarget{resample_8h_ae9df3f5bb638689d2d193913bee84d08}\label{resample_8h_ae9df3f5bb638689d2d193913bee84d08}} 
+\index{resample.\+h@{resample.\+h}!resample\+\_\+init@{resample\+\_\+init}}
+\index{resample\+\_\+init@{resample\+\_\+init}!resample.\+h@{resample.\+h}}
+\subsubsection{\texorpdfstring{resample\+\_\+init()}{resample\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{resample_8h_aa18dcb3a00dcbfe35cecd42a27ff3097}{Resample}} resample\+\_\+init (\begin{DoxyParamCaption}\item[{const float $\ast$}]{upsample\+\_\+taps,  }\item[{int}]{up\+\_\+len,  }\item[{const float $\ast$}]{downsample\+\_\+taps,  }\item[{int}]{down\+\_\+len }\end{DoxyParamCaption})}
+
+
+
+Initialization function for the resample structure. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structresample__t}{resample\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em upsample\+\_\+taps} & The taps of the filter to be filtered with the input after being interpolated \\
+\hline
+{\em up\+\_\+len} & Length of upsample filter \\
+\hline
+{\em downsample\+\_\+taps} & The taps of the filter to be filtered with the signal before being decimated \\
+\hline
+{\em down\+\_\+len} & Length of the downsample filter\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the allocated instance of the O\+SP T\+CP layer data structure (\char`\"{}object\char`\"{} 
+\end{DoxyReturn}

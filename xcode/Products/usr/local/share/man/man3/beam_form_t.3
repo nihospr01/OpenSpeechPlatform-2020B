@@ -1,0 +1,54 @@
+.TH "beam_form_t" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+beam_form_t \- data structure containing relevant beam-forming fields  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "\fBDelay_Line\fP \fBdelay_line\fP"
+.br
+.RI "instance of delay_line structure "
+.ti -1c
+.RI "float \fBbeta\fP"
+.br
+.RI "Rear microphone delay = beta * DISTANCE / SPEED_OF_SOUND\&. "
+.ti -1c
+.RI "float \fBgain\fP"
+.br
+.RI "Rear microphone gain\&. "
+.ti -1c
+.RI "unsigned char \fBno_delay\fP"
+.br
+.RI "Bypasses delay line code if there's no delay Might remove\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+data structure containing relevant beam-forming fields 
+.SH "Field Documentation"
+.PP 
+.SS "float beam_form_t::beta"
+
+.PP
+Rear microphone delay = beta * DISTANCE / SPEED_OF_SOUND\&. 
+.SS "\fBDelay_Line\fP beam_form_t::delay_line"
+
+.PP
+instance of delay_line structure 
+.SS "float beam_form_t::gain"
+
+.PP
+Rear microphone gain\&. 
+.SS "unsigned char beam_form_t::no_delay"
+
+.PP
+Bypasses delay line code if there's no delay Might remove\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

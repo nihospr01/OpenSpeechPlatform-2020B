@@ -1,0 +1,119 @@
+\hypertarget{tcplib_8h}{}\section{libosp/osp\+\_\+tcp/tcplib.h File Reference}
+\label{tcplib_8h}\index{libosp/osp\+\_\+tcp/tcplib.\+h@{libosp/osp\+\_\+tcp/tcplib.\+h}}
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+Include dependency graph for tcplib.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{tcplib_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{tcplib_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{tcplib_8h_a82868dec779695fc3eb3e81f32d4df73}{start\+\_\+tcp\+\_\+server}} (int)
+\begin{DoxyCompactList}\small\item\em Initiates T\+CP protocol server. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{tcplib_8h_a36c6d89c6b81a745d5cdaaab9262ad9e}{get\+\_\+tcp\+\_\+server\+\_\+connection}} (int)
+\begin{DoxyCompactList}\small\item\em Gets T\+CP protocol server. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{tcplib_8h_a5f9d1cbd10cb6fa7dbb71a668d95cacc}{close\+\_\+tcp\+\_\+server\+\_\+connection}} (int)
+\begin{DoxyCompactList}\small\item\em Closes T\+CP protocol server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{tcplib_8h_a363a39459571b78f7c9cb0a825e133c6}{stop\+\_\+tcp\+\_\+server}} (int)
+\begin{DoxyCompactList}\small\item\em Stops the T\+CP protocol server. \end{DoxyCompactList}\item 
+ssize\+\_\+t \mbox{\hyperlink{tcplib_8h_ab4ed21d70bd1ec9e8302a12ba4ff72c0}{read\+\_\+tcp\+\_\+server\+\_\+stream}} (int, char $\ast$, int)
+\begin{DoxyCompactList}\small\item\em Reads data on server side. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{tcplib_8h_af8559d32e146f74f591cbf18122354b5}{start\+\_\+tcp\+\_\+client}} (char $\ast$, int)
+\begin{DoxyCompactList}\small\item\em Initiates T\+CP protocol client. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{tcplib_8h_adbad3e70a6ec4e8d0449baac779cef40}{stop\+\_\+tcp\+\_\+client}} (int)
+\begin{DoxyCompactList}\small\item\em Stops T\+CP protocol client. \end{DoxyCompactList}\item 
+ssize\+\_\+t \mbox{\hyperlink{tcplib_8h_a054e71a22607597f9315b5b8406d2402}{send\+\_\+tcp\+\_\+client\+\_\+data}} (int, char $\ast$, int)
+\begin{DoxyCompactList}\small\item\em Sends data on client side. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{tcplib_8h_a5f9d1cbd10cb6fa7dbb71a668d95cacc}\label{tcplib_8h_a5f9d1cbd10cb6fa7dbb71a668d95cacc}} 
+\index{tcplib.\+h@{tcplib.\+h}!close\+\_\+tcp\+\_\+server\+\_\+connection@{close\+\_\+tcp\+\_\+server\+\_\+connection}}
+\index{close\+\_\+tcp\+\_\+server\+\_\+connection@{close\+\_\+tcp\+\_\+server\+\_\+connection}!tcplib.\+h@{tcplib.\+h}}
+\subsubsection{\texorpdfstring{close\+\_\+tcp\+\_\+server\+\_\+connection()}{close\_tcp\_server\_connection()}}
+{\footnotesize\ttfamily int close\+\_\+tcp\+\_\+server\+\_\+connection (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})}
+
+
+
+Closes T\+CP protocol server. 
+
+\mbox{\Hypertarget{tcplib_8h_a36c6d89c6b81a745d5cdaaab9262ad9e}\label{tcplib_8h_a36c6d89c6b81a745d5cdaaab9262ad9e}} 
+\index{tcplib.\+h@{tcplib.\+h}!get\+\_\+tcp\+\_\+server\+\_\+connection@{get\+\_\+tcp\+\_\+server\+\_\+connection}}
+\index{get\+\_\+tcp\+\_\+server\+\_\+connection@{get\+\_\+tcp\+\_\+server\+\_\+connection}!tcplib.\+h@{tcplib.\+h}}
+\subsubsection{\texorpdfstring{get\+\_\+tcp\+\_\+server\+\_\+connection()}{get\_tcp\_server\_connection()}}
+{\footnotesize\ttfamily int get\+\_\+tcp\+\_\+server\+\_\+connection (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})}
+
+
+
+Gets T\+CP protocol server. 
+
+\mbox{\Hypertarget{tcplib_8h_ab4ed21d70bd1ec9e8302a12ba4ff72c0}\label{tcplib_8h_ab4ed21d70bd1ec9e8302a12ba4ff72c0}} 
+\index{tcplib.\+h@{tcplib.\+h}!read\+\_\+tcp\+\_\+server\+\_\+stream@{read\+\_\+tcp\+\_\+server\+\_\+stream}}
+\index{read\+\_\+tcp\+\_\+server\+\_\+stream@{read\+\_\+tcp\+\_\+server\+\_\+stream}!tcplib.\+h@{tcplib.\+h}}
+\subsubsection{\texorpdfstring{read\+\_\+tcp\+\_\+server\+\_\+stream()}{read\_tcp\_server\_stream()}}
+{\footnotesize\ttfamily ssize\+\_\+t read\+\_\+tcp\+\_\+server\+\_\+stream (\begin{DoxyParamCaption}\item[{int}]{,  }\item[{char $\ast$}]{,  }\item[{int}]{ }\end{DoxyParamCaption})}
+
+
+
+Reads data on server side. 
+
+\mbox{\Hypertarget{tcplib_8h_a054e71a22607597f9315b5b8406d2402}\label{tcplib_8h_a054e71a22607597f9315b5b8406d2402}} 
+\index{tcplib.\+h@{tcplib.\+h}!send\+\_\+tcp\+\_\+client\+\_\+data@{send\+\_\+tcp\+\_\+client\+\_\+data}}
+\index{send\+\_\+tcp\+\_\+client\+\_\+data@{send\+\_\+tcp\+\_\+client\+\_\+data}!tcplib.\+h@{tcplib.\+h}}
+\subsubsection{\texorpdfstring{send\+\_\+tcp\+\_\+client\+\_\+data()}{send\_tcp\_client\_data()}}
+{\footnotesize\ttfamily ssize\+\_\+t send\+\_\+tcp\+\_\+client\+\_\+data (\begin{DoxyParamCaption}\item[{int}]{,  }\item[{char $\ast$}]{,  }\item[{int}]{ }\end{DoxyParamCaption})}
+
+
+
+Sends data on client side. 
+
+\mbox{\Hypertarget{tcplib_8h_af8559d32e146f74f591cbf18122354b5}\label{tcplib_8h_af8559d32e146f74f591cbf18122354b5}} 
+\index{tcplib.\+h@{tcplib.\+h}!start\+\_\+tcp\+\_\+client@{start\+\_\+tcp\+\_\+client}}
+\index{start\+\_\+tcp\+\_\+client@{start\+\_\+tcp\+\_\+client}!tcplib.\+h@{tcplib.\+h}}
+\subsubsection{\texorpdfstring{start\+\_\+tcp\+\_\+client()}{start\_tcp\_client()}}
+{\footnotesize\ttfamily int start\+\_\+tcp\+\_\+client (\begin{DoxyParamCaption}\item[{char $\ast$}]{ip,  }\item[{int}]{port }\end{DoxyParamCaption})}
+
+
+
+Initiates T\+CP protocol client. 
+
+Starts the client side socket connection based on I\+N\+ET Internet stream-\/oriented sockets. \mbox{\Hypertarget{tcplib_8h_a82868dec779695fc3eb3e81f32d4df73}\label{tcplib_8h_a82868dec779695fc3eb3e81f32d4df73}} 
+\index{tcplib.\+h@{tcplib.\+h}!start\+\_\+tcp\+\_\+server@{start\+\_\+tcp\+\_\+server}}
+\index{start\+\_\+tcp\+\_\+server@{start\+\_\+tcp\+\_\+server}!tcplib.\+h@{tcplib.\+h}}
+\subsubsection{\texorpdfstring{start\+\_\+tcp\+\_\+server()}{start\_tcp\_server()}}
+{\footnotesize\ttfamily int start\+\_\+tcp\+\_\+server (\begin{DoxyParamCaption}\item[{int}]{port }\end{DoxyParamCaption})}
+
+
+
+Initiates T\+CP protocol server. 
+
+Initiates T\+CP protocol server. \mbox{\Hypertarget{tcplib_8h_adbad3e70a6ec4e8d0449baac779cef40}\label{tcplib_8h_adbad3e70a6ec4e8d0449baac779cef40}} 
+\index{tcplib.\+h@{tcplib.\+h}!stop\+\_\+tcp\+\_\+client@{stop\+\_\+tcp\+\_\+client}}
+\index{stop\+\_\+tcp\+\_\+client@{stop\+\_\+tcp\+\_\+client}!tcplib.\+h@{tcplib.\+h}}
+\subsubsection{\texorpdfstring{stop\+\_\+tcp\+\_\+client()}{stop\_tcp\_client()}}
+{\footnotesize\ttfamily int stop\+\_\+tcp\+\_\+client (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})}
+
+
+
+Stops T\+CP protocol client. 
+
+\mbox{\Hypertarget{tcplib_8h_a363a39459571b78f7c9cb0a825e133c6}\label{tcplib_8h_a363a39459571b78f7c9cb0a825e133c6}} 
+\index{tcplib.\+h@{tcplib.\+h}!stop\+\_\+tcp\+\_\+server@{stop\+\_\+tcp\+\_\+server}}
+\index{stop\+\_\+tcp\+\_\+server@{stop\+\_\+tcp\+\_\+server}!tcplib.\+h@{tcplib.\+h}}
+\subsubsection{\texorpdfstring{stop\+\_\+tcp\+\_\+server()}{stop\_tcp\_server()}}
+{\footnotesize\ttfamily void stop\+\_\+tcp\+\_\+server (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})}
+
+
+
+Stops the T\+CP protocol server. 
+

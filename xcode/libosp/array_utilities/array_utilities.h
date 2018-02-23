@@ -95,6 +95,17 @@ void array_subtract_array(float *in1, float *in2, size_t len);
 void array_element_multiply_array(float *in1, float *in2, size_t len);
 
 /**
+ * @brief Function to do element wise division of two arrays
+ * @param in1 Pointer to the first array
+ * @param in2 Pointer to the second array
+ * @param len Length of the arrays
+ * @warning Assumes both the arrays are of same length and takes only one length parameter
+ */
+
+
+void array_element_divide_array(float *in1, float *in2, size_t len);
+
+/**
  * @brief Function to return the minimum of the elements of an array
  * @param arr Pointer to the array
  * @param len Length of the array

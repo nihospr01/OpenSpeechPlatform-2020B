@@ -22,6 +22,7 @@
 
 #include "coeffs.h"
 #include "constants.h"
+#include "speech_enhancement.h"
 
 /**
  * @brief Wrapper function to initalize all the modules of Master Hearing Aid (MHA)

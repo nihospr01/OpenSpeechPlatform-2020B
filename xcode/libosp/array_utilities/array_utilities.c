@@ -106,6 +106,15 @@ void array_element_multiply_array(float *in1, float *in2, size_t len)
 	}
 }
 
+void array_element_divide_array(float *in1, float *in2, size_t len)
+{
+	size_t i;
+	
+	for(i = 0; i < len; i++) {
+		in1[i] = in1[i] / in2[i];
+	}
+}
+
 float array_min(float *arr, size_t len)
 {
 	float min;

@@ -1,0 +1,51 @@
+.TH "delay_line_t" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+delay_line_t \- Data structure that contains delay_line information\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "float * \fBdelay_buffer\fP"
+.br
+.RI "The circ\&. buffer containing old delay_line samples\&. "
+.ti -1c
+.RI "long \fBdelay_size\fP"
+.br
+.RI "Size of the delay\&. Set up on init\&. "
+.ti -1c
+.RI "long \fBdelay_mask\fP"
+.br
+.ti -1c
+.RI "long \fBwrite_pointer\fP"
+.br
+.RI "Write pointer of circular buffer\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Data structure that contains delay_line information\&. 
+.SH "Field Documentation"
+.PP 
+.SS "float* delay_line_t::delay_buffer"
+
+.PP
+The circ\&. buffer containing old delay_line samples\&. 
+.SS "long delay_line_t::delay_mask"
+
+.SS "long delay_line_t::delay_size"
+
+.PP
+Size of the delay\&. Set up on init\&. 
+.SS "long delay_line_t::write_pointer"
+
+.PP
+Write pointer of circular buffer\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

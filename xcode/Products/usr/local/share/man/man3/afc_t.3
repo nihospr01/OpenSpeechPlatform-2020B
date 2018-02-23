@@ -1,0 +1,146 @@
+.TH "afc_t" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+afc_t \- AFC data structure\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "\fBFilter\fP \fBafc_filter\fP"
+.br
+.RI "AFC filter W(z) "
+.ti -1c
+.RI "\fBFilter\fP \fBprefilter_e\fP"
+.br
+.RI "Pre-whitening filter A(z) "
+.ti -1c
+.RI "\fBFilter\fP \fBprefilter_u\fP"
+.br
+.RI "Pre-whitening filter A(z) "
+.ti -1c
+.RI "\fBFilter\fP \fBband_limited_filter\fP"
+.br
+.RI "Band-limited filter H(z) "
+.ti -1c
+.RI "unsigned int \fBadaptation_type\fP"
+.br
+.ti -1c
+.RI "float * \fBu\fP"
+.br
+.RI "Band-limited signal u(n) of the HA output s(n) "
+.ti -1c
+.RI "float * \fBy_hat\fP"
+.br
+.RI "Estimate of feedback signal y_hat(n) "
+.ti -1c
+.RI "float \fBpower_estimate\fP"
+.br
+.RI "Power estimate, sigma^2_hat(n), of the input to coefficient adaptation bloclk\&. "
+.ti -1c
+.RI "int \fBframe_size\fP"
+.br
+.RI "Number of samples in the current frame\&. "
+.ti -1c
+.RI "float \fBmu\fP"
+.br
+.RI "Step size parameter\&. "
+.ti -1c
+.RI "float \fBdelta\fP"
+.br
+.RI "Regularization term\&. "
+.ti -1c
+.RI "float \fBrho\fP"
+.br
+.RI "Forgetting factor\&. "
+.ti -1c
+.RI "float \fBalpha\fP"
+.br
+.RI "Parameter for PNLMS\&. "
+.ti -1c
+.RI "float \fBbeta\fP"
+.br
+.RI "Parameter for PNLMS\&. "
+.ti -1c
+.RI "float * \fBu_prefiltered_accumulated\fP"
+.br
+.RI "AFC_NUM_FRAMES frames accumulated values of pre-filtered output of u(n)\&. i\&.e\&. u_f(n) "
+.ti -1c
+.RI "\fBCircular_buffer\fP \fBupa\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+AFC data structure\&. 
+
+Refer to the supported document on AFC for the notations 
+.SH "Field Documentation"
+.PP 
+.SS "unsigned int afc_t::adaptation_type"
+
+.SS "\fBFilter\fP afc_t::afc_filter"
+
+.PP
+AFC filter W(z) 
+.SS "float afc_t::alpha"
+
+.PP
+Parameter for PNLMS\&. 
+.SS "\fBFilter\fP afc_t::band_limited_filter"
+
+.PP
+Band-limited filter H(z) 
+.SS "float afc_t::beta"
+
+.PP
+Parameter for PNLMS\&. 
+.SS "float afc_t::delta"
+
+.PP
+Regularization term\&. 
+.SS "int afc_t::frame_size"
+
+.PP
+Number of samples in the current frame\&. 
+.SS "float afc_t::mu"
+
+.PP
+Step size parameter\&. 
+.SS "float afc_t::power_estimate"
+
+.PP
+Power estimate, sigma^2_hat(n), of the input to coefficient adaptation bloclk\&. 
+.SS "\fBFilter\fP afc_t::prefilter_e"
+
+.PP
+Pre-whitening filter A(z) 
+.SS "\fBFilter\fP afc_t::prefilter_u"
+
+.PP
+Pre-whitening filter A(z) 
+.SS "float afc_t::rho"
+
+.PP
+Forgetting factor\&. 
+.SS "float* afc_t::u"
+
+.PP
+Band-limited signal u(n) of the HA output s(n) 
+.SS "float* afc_t::u_prefiltered_accumulated"
+
+.PP
+AFC_NUM_FRAMES frames accumulated values of pre-filtered output of u(n)\&. i\&.e\&. u_f(n) 
+.SS "\fBCircular_buffer\fP afc_t::upa"
+
+.SS "float* afc_t::y_hat"
+
+.PP
+Estimate of feedback signal y_hat(n) 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

@@ -1,0 +1,45 @@
+.TH "libosp/wdrc/wdrc_mpo_support.c" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libosp/wdrc/wdrc_mpo_support.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'wdrc_mpo_support\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBwdrc_mpo_support\fP (float *pdB, float gain50, float gain80, float knee_low, size_t len, float *wdrcdB)"
+.br
+.RI "Function to apply dynamic-range compression to a single sub-band of the output of the analysis filter bank\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void wdrc_mpo_support (float * pdB, float gain50, float gain80, float knee_low, size_t len, float * wdrcdB)"
+
+.PP
+Function to apply dynamic-range compression to a single sub-band of the output of the analysis filter bank\&. The peak detector output in dB SPL is needed as one of the inputs\&. The gain at 50 and 80 dB SPL is specified for the frequency sub-band, along with the lower and upper kneepoints in dB SPL\&. The compressor is linear below the lower kneepoint and applies compression limiting above the upper kneepoint
+.PP
+\fBParameters:\fP
+.RS 4
+\fIpdB\fP Pointer to the peak detector output array of the sub-band in dB SPL (output from peak_to_spl) 
+.br
+\fIgain50\fP Gain in dB at the sub-band frequency for an input at 50 dB SPL 
+.br
+\fIgain80\fP Gain in dB at the sub-band frequency for an input at 80 dB SPL 
+.br
+\fIknee_low\fP Lower kneepoint in dB SPL for the sub-band 
+.br
+\fIlen\fP Length of the input array 
+.br
+\fIwdrcdB\fP Pointer to an array where the compressed output of the sub-band will be written\&. i\&.e\&. the output of WDRC 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

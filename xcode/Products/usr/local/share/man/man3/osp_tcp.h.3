@@ -1,0 +1,280 @@
+.TH "libosp/osp_tcp/osp_tcp.h" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libosp/osp_tcp/osp_tcp.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stddef\&.h>\fP
+.br
+\fC#include 'constants\&.h'\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBOSP_WRONG_VERSION\fP   0x00"
+.br
+.ti -1c
+.RI "#define \fBOSP_REQ_UPDATE_VALUES\fP   0x01"
+.br
+.RI "Request to set the values in the real-time OSP C application\&. "
+.ti -1c
+.RI "#define \fBOSP_REQ_GET_UNDERRUNS\fP   0x02"
+.br
+.RI "Request to get number of underruns from real-time OSP application\&. "
+.ti -1c
+.RI "#define \fBOSP_REQ_USER_ID\fP   0x03"
+.br
+.ti -1c
+.RI "#define \fBOSP_REQ_USER_ACTION\fP   0x04"
+.br
+.ti -1c
+.RI "#define \fBOSP_REQ_GET_NUM_BANDS\fP   0x05"
+.br
+.ti -1c
+.RI "#define \fBOSP_DISCONNECT\fP   0x06"
+.br
+.ti -1c
+.RI "#define \fBOSP_REQ_LAST\fP   0x07"
+.br
+.RI "This exists so we can test if an inc packet is one we recognize\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBosp_tcp_t\fP * \fBOsp_tcp\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBOsp_tcp\fP \fBosp_tcp_init\fP (int port)"
+.br
+.RI "Initialization function for the OSP TCP layer\&. "
+.ti -1c
+.RI "int \fBosp_tcp_connect\fP (\fBOsp_tcp\fP osp_tcp)"
+.br
+.RI "Blocking call that sets up server socket and waits for client connection In order to start a socket for a client (Android tablet, for instance), this must be called\&. It will block until a client establishes a connection, at which point it will return 0\&. "
+.ti -1c
+.RI "char \fBosp_tcp_read_req\fP (\fBOsp_tcp\fP osp_tcp)"
+.br
+.RI "Blocking call that returns the request sent by the connected client\&. The client can make a number of requests including updating the values running in the OSP real-time code (knee points, attack, release, gains, etc)\&. The client can also request the number of underruns that have been counted from the audio driver, the number of bands that have been initially set up, etc\&. "
+.ti -1c
+.RI "ssize_t \fBosp_tcp_read_values\fP (\fBOsp_tcp\fP osp_tcp, \fBosp_user_data\fP *data, unsigned int size)"
+.br
+.RI "Reads data from the TCP stream into the osp_user_data structure\&. "
+.ti -1c
+.RI "int \fBosp_tcp_send_underruns\fP (\fBOsp_tcp\fP osp_tcp, unsigned int underruns)"
+.br
+.RI "Sends the number of underruns to client\&. "
+.ti -1c
+.RI "ssize_t \fBosp_tcp_read_user_packet\fP (\fBOsp_tcp\fP osp_tcp, char *message, unsigned int size)"
+.br
+.ti -1c
+.RI "int \fBosp_tcp_send_num_bands\fP (\fBOsp_tcp\fP osp_tcp, unsigned char bands)"
+.br
+.RI "Sends the number of bands to client\&. "
+.ti -1c
+.RI "void \fBosp_tcp_close\fP (\fBOsp_tcp\fP osp_tcp)"
+.br
+.RI "Closes the TCP stream and frees the Osp_tcp instance\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+This layer is the interface to the client side of the OSP application\&. 
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define OSP_DISCONNECT   0x06"
+
+.SS "#define OSP_REQ_GET_NUM_BANDS   0x05"
+
+.SS "#define OSP_REQ_GET_UNDERRUNS   0x02"
+
+.PP
+Request to get number of underruns from real-time OSP application\&. 
+.SS "#define OSP_REQ_LAST   0x07"
+
+.PP
+This exists so we can test if an inc packet is one we recognize\&. 
+.SS "#define OSP_REQ_UPDATE_VALUES   0x01"
+
+.PP
+Request to set the values in the real-time OSP C application\&. 
+.SS "#define OSP_REQ_USER_ACTION   0x04"
+
+.SS "#define OSP_REQ_USER_ID   0x03"
+
+.SS "#define OSP_WRONG_VERSION   0x00"
+
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fBosp_tcp_t\fP* \fBOsp_tcp\fP"
+
+.SH "Function Documentation"
+.PP 
+.SS "void osp_tcp_close (\fBOsp_tcp\fP osp_tcp)"
+
+.PP
+Closes the TCP stream and frees the Osp_tcp instance\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBosp_tcp_t\fP 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIosp_tcp\fP The instance of the Osp_tcp variable that was returned from osp_tcp_init 
+.RE
+.PP
+
+.SS "int osp_tcp_connect (\fBOsp_tcp\fP osp_tcp)"
+
+.PP
+Blocking call that sets up server socket and waits for client connection In order to start a socket for a client (Android tablet, for instance), this must be called\&. It will block until a client establishes a connection, at which point it will return 0\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBosp_tcp_t\fP 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIosp_tcp\fP The instance of the Osp_tcp variable that was returned from osp_tcp_init 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns 0 on success, or -1 if there's an error setting up the socket 
+.RE
+.PP
+
+.SS "\fBOsp_tcp\fP osp_tcp_init (int port)"
+
+.PP
+Initialization function for the OSP TCP layer\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBosp_tcp_t\fP 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIport\fP The port in which to listen on for a client connection 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the allocated instance of the OSP TCP layer data structure ('object') 
+.RE
+.PP
+
+.SS "char osp_tcp_read_req (\fBOsp_tcp\fP osp_tcp)"
+
+.PP
+Blocking call that returns the request sent by the connected client\&. The client can make a number of requests including updating the values running in the OSP real-time code (knee points, attack, release, gains, etc)\&. The client can also request the number of underruns that have been counted from the audio driver, the number of bands that have been initially set up, etc\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBosp_tcp_t\fP 
+.PP
+e_osp_tcp_req_t 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIosp_tcp\fP The instance of the Osp_tcp variable that was returned from osp_tcp_init 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the request sent by the client 
+.RE
+.PP
+
+.SS "ssize_t osp_tcp_read_user_packet (\fBOsp_tcp\fP osp_tcp, char * message, unsigned int size)"
+
+.SS "ssize_t osp_tcp_read_values (\fBOsp_tcp\fP osp_tcp, \fBosp_user_data\fP * data, unsigned int size)"
+
+.PP
+Reads data from the TCP stream into the osp_user_data structure\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBosp_user_data\fP 
+.PP
+\fBosp_tcp_t\fP 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIosp_tcp\fP The instance of the Osp_tcp variable that was returned from osp_tcp_init 
+.br
+\fIdata\fP The osp_user_data structure that will be filled with data from the stream 
+.br
+\fIsize\fP The size of the data, in bytes, that are to be read from the stream since we're reading into a struct of known size, passing a size variable might be redundant 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns 0 if the stream is no longer present (disconnect from client side, not error), -1 if there is an error reading from the server stream\&. Otherwise, the number of bytes read from the stream is returned 
+.RE
+.PP
+
+.SS "int osp_tcp_send_num_bands (\fBOsp_tcp\fP osp_tcp, unsigned char bands)"
+
+.PP
+Sends the number of bands to client\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBosp_tcp_t\fP 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIosp_tcp\fP The instance of the Osp_tcp variable that was returned from osp_tcp_init 
+.br
+\fIbands\fP Number of bands to report 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns 0 if success, -1 if there was an error writing to the stream 
+.RE
+.PP
+
+.SS "int osp_tcp_send_underruns (\fBOsp_tcp\fP osp_tcp, unsigned int underruns)"
+
+.PP
+Sends the number of underruns to client\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBosp_tcp_t\fP 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIosp_tcp\fP The instance of the Osp_tcp variable that was returned from osp_tcp_init 
+.br
+\fIunderruns\fP Number of underruns to report 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns 0 if success, -1 if there was an error writing to the stream 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

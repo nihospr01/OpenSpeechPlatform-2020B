@@ -1,0 +1,52 @@
+.TH "osp/logger.c" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+osp/logger.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include 'constants\&.h'\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "FILE * \fBfile_logger_init\fP (char *filename)"
+.br
+.ti -1c
+.RI "int \fBfile_logger_log_osp_data\fP (FILE *fd, \fBosp_user_data\fP *data)"
+.br
+.ti -1c
+.RI "void \fBfile_logger_log_message\fP (FILE *fd, char *message)"
+.br
+.ti -1c
+.RI "void \fBfile_logger_close\fP (FILE *fd)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void file_logger_close (FILE * fd)"
+
+.SS "FILE* file_logger_init (char * filename)"
+
+.SS "void file_logger_log_message (FILE * fd, char * message)"
+
+.SS "int file_logger_log_osp_data (FILE * fd, \fBosp_user_data\fP * data)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

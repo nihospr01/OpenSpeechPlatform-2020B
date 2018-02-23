@@ -1,0 +1,270 @@
+\hypertarget{constants_8h}{}\section{libosp/common/constants.h File Reference}
+\label{constants_8h}\index{libosp/common/constants.\+h@{libosp/common/constants.\+h}}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{constants_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structpa__aux__data__t}{pa\+\_\+aux\+\_\+data\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Struct that contains misc data passed to Port\+Audio. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structosp__user__data__t}{osp\+\_\+user\+\_\+data\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em general data structure shared between client and C application \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structpa__user__data__t}{pa\+\_\+user\+\_\+data\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em The data structure passed to Port\+Audio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{constants_8h_af9b1b2ba12857a4bf11289dac8c5462d}{F\+R\+A\+M\+E\+\_\+\+S\+I\+ZE}}~32
+\begin{DoxyCompactList}\small\item\em Contains general, commonly used data structures and constants. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_a1c6d5de492ac61ad29aec7aa9a436bbf}{V\+E\+R\+S\+I\+ON}}~2
+\begin{DoxyCompactList}\small\item\em This is the C version for keeping the networking of packets between the. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_a19441d7b9be72492ed93a440085e53be}{N\+U\+M\+\_\+\+B\+A\+N\+DS}}~6
+\begin{DoxyCompactList}\small\item\em Number of Sub-\/\+Bands. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_a452c7c8774a73a5b8cbd4563653a21af}{B\+A\+N\+D\+\_\+\+F\+I\+L\+T\+\_\+\+L\+EN}}~193
+\begin{DoxyCompactList}\small\item\em Sub-\/\+Band filter tap length. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_a22ad4850ff1e8ce8e185cf535c32c26e}{R\+E\+S\+A\+M\+P\+\_\+96\+\_\+32\+\_\+\+T\+A\+PS}}~25
+\begin{DoxyCompactList}\small\item\em Number of taps for decimation filter in resampler.\+c. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_af1c688c1719e08f8a604305465450147}{R\+E\+S\+A\+M\+P\+\_\+32\+\_\+96\+\_\+\+T\+A\+PS}}~25
+\begin{DoxyCompactList}\small\item\em Number of taps for interpolation filter in resampler.\+c. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_a9b84aa2154cd9ca7cb142e726240a5d7}{R\+E\+S\+A\+M\+P\+\_\+48\+\_\+32\+\_\+\+T\+A\+PS}}~25
+\begin{DoxyCompactList}\small\item\em Number of taps for decimation filter in resampler.\+c for 48 to 32 k\+Hz. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_acb1026ec40e93e9b7791eeea149b8e7c}{R\+E\+S\+A\+M\+P\+\_\+32\+\_\+48\+\_\+\+T\+A\+PS}}~25
+\begin{DoxyCompactList}\small\item\em Number of taps for interpolation filter in resampler.\+c for 32 to 48 k\+Hz. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_aac913071759241f612b525eb18b88c21}{S\+Y\+N\+T\+H\+E\+T\+I\+C\+\_\+\+T\+A\+P\+\_\+\+L\+EN}}~525
+\begin{DoxyCompactList}\small\item\em Synthetic feedback filter tap length. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_aa6fad7476783d6554d6960266fc9710e}{D\+\_\+\+A\+T\+T\+A\+C\+K\+\_\+\+T\+I\+ME}}~5
+\begin{DoxyCompactList}\small\item\em Attack time in msec. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_a23e7303689b2693b49c214078260ff07}{D\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+T\+I\+ME}}~20
+\begin{DoxyCompactList}\small\item\em Release time in msec. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_a2b99a14a394089869b4ddfd90770b744}{D\+\_\+\+P\+D\+\_\+\+S\+A\+M\+P\+\_\+\+R\+A\+TE}}~32000
+\begin{DoxyCompactList}\small\item\em Sample rate that M\+HA is operating at. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_ac0c3f81bc6d1bff60a7151fd357c9553}{D\+\_\+\+K\+N\+E\+E\+\_\+\+L\+OW}}~45
+\begin{DoxyCompactList}\small\item\em Lower kneepoint in dB S\+PL. Using the same value for all the bands. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_a1d3c631a46d2c01ca8c30f8b1950baec}{D\+\_\+\+K\+N\+E\+E\+\_\+\+H\+I\+GH}}~100
+\begin{DoxyCompactList}\small\item\em Upper kneepoint in dB S\+PL. Using the same value for all the bands. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_ab7d9d3d6b6e2a1e24cf9a4045e7a2112}{A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+F\+I\+L\+E\+\_\+L}}~\char`\"{}./afc\+\_\+filter\+\_\+taps\+\_\+l.\+bin\char`\"{}
+\begin{DoxyCompactList}\small\item\em A\+FC filter initialization taps for left channel. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_a8de8458e1ba37e0233dce701a8b4fd89}{A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+F\+I\+L\+E\+\_\+R}}~\char`\"{}./afc\+\_\+filter\+\_\+taps\+\_\+r.\+bin\char`\"{}
+\begin{DoxyCompactList}\small\item\em A\+FC filter initialization taps for right channel. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_ac4ec0a338c1546cbff3dfd95a3eac2de}{C\+U\+R\+R\+E\+N\+T\+\_\+\+V\+E\+R\+S\+I\+ON}}~1
+\begin{DoxyCompactList}\small\item\em Version number of the application. Required to match the version with Android app. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structpa__aux__data__t}{pa\+\_\+aux\+\_\+data\+\_\+t}} \mbox{\hyperlink{constants_8h_add46628e302aedde68d37aea654eda24}{pa\+\_\+aux\+\_\+data}}
+\begin{DoxyCompactList}\small\item\em Struct that contains misc data passed to Port\+Audio. \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structosp__user__data__t}{osp\+\_\+user\+\_\+data\+\_\+t}} \mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}}
+\begin{DoxyCompactList}\small\item\em general data structure shared between client and C application \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structpa__user__data__t}{pa\+\_\+user\+\_\+data\+\_\+t}} \mbox{\hyperlink{constants_8h_aba6e2261d5c6ef36dedb5b45ba0fc4ae}{pa\+\_\+user\+\_\+data}}
+\begin{DoxyCompactList}\small\item\em The data structure passed to Port\+Audio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{constants_8h_ab7d9d3d6b6e2a1e24cf9a4045e7a2112}\label{constants_8h_ab7d9d3d6b6e2a1e24cf9a4045e7a2112}} 
+\index{constants.\+h@{constants.\+h}!A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+F\+I\+L\+E\+\_\+L@{A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+F\+I\+L\+E\+\_\+L}}
+\index{A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+F\+I\+L\+E\+\_\+L@{A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+F\+I\+L\+E\+\_\+L}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+F\+I\+L\+E\+\_\+L}{AFC\_FILTER\_TAP\_FILE\_L}}
+{\footnotesize\ttfamily \#define A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+F\+I\+L\+E\+\_\+L~\char`\"{}./afc\+\_\+filter\+\_\+taps\+\_\+l.\+bin\char`\"{}}
+
+
+
+A\+FC filter initialization taps for left channel. 
+
+\mbox{\Hypertarget{constants_8h_a8de8458e1ba37e0233dce701a8b4fd89}\label{constants_8h_a8de8458e1ba37e0233dce701a8b4fd89}} 
+\index{constants.\+h@{constants.\+h}!A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+F\+I\+L\+E\+\_\+R@{A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+F\+I\+L\+E\+\_\+R}}
+\index{A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+F\+I\+L\+E\+\_\+R@{A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+F\+I\+L\+E\+\_\+R}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+F\+I\+L\+E\+\_\+R}{AFC\_FILTER\_TAP\_FILE\_R}}
+{\footnotesize\ttfamily \#define A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+F\+I\+L\+E\+\_\+R~\char`\"{}./afc\+\_\+filter\+\_\+taps\+\_\+r.\+bin\char`\"{}}
+
+
+
+A\+FC filter initialization taps for right channel. 
+
+\mbox{\Hypertarget{constants_8h_a452c7c8774a73a5b8cbd4563653a21af}\label{constants_8h_a452c7c8774a73a5b8cbd4563653a21af}} 
+\index{constants.\+h@{constants.\+h}!B\+A\+N\+D\+\_\+\+F\+I\+L\+T\+\_\+\+L\+EN@{B\+A\+N\+D\+\_\+\+F\+I\+L\+T\+\_\+\+L\+EN}}
+\index{B\+A\+N\+D\+\_\+\+F\+I\+L\+T\+\_\+\+L\+EN@{B\+A\+N\+D\+\_\+\+F\+I\+L\+T\+\_\+\+L\+EN}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{B\+A\+N\+D\+\_\+\+F\+I\+L\+T\+\_\+\+L\+EN}{BAND\_FILT\_LEN}}
+{\footnotesize\ttfamily \#define B\+A\+N\+D\+\_\+\+F\+I\+L\+T\+\_\+\+L\+EN~193}
+
+
+
+Sub-\/\+Band filter tap length. 
+
+\mbox{\Hypertarget{constants_8h_ac4ec0a338c1546cbff3dfd95a3eac2de}\label{constants_8h_ac4ec0a338c1546cbff3dfd95a3eac2de}} 
+\index{constants.\+h@{constants.\+h}!C\+U\+R\+R\+E\+N\+T\+\_\+\+V\+E\+R\+S\+I\+ON@{C\+U\+R\+R\+E\+N\+T\+\_\+\+V\+E\+R\+S\+I\+ON}}
+\index{C\+U\+R\+R\+E\+N\+T\+\_\+\+V\+E\+R\+S\+I\+ON@{C\+U\+R\+R\+E\+N\+T\+\_\+\+V\+E\+R\+S\+I\+ON}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{C\+U\+R\+R\+E\+N\+T\+\_\+\+V\+E\+R\+S\+I\+ON}{CURRENT\_VERSION}}
+{\footnotesize\ttfamily \#define C\+U\+R\+R\+E\+N\+T\+\_\+\+V\+E\+R\+S\+I\+ON~1}
+
+
+
+Version number of the application. Required to match the version with Android app. 
+
+\mbox{\Hypertarget{constants_8h_aa6fad7476783d6554d6960266fc9710e}\label{constants_8h_aa6fad7476783d6554d6960266fc9710e}} 
+\index{constants.\+h@{constants.\+h}!D\+\_\+\+A\+T\+T\+A\+C\+K\+\_\+\+T\+I\+ME@{D\+\_\+\+A\+T\+T\+A\+C\+K\+\_\+\+T\+I\+ME}}
+\index{D\+\_\+\+A\+T\+T\+A\+C\+K\+\_\+\+T\+I\+ME@{D\+\_\+\+A\+T\+T\+A\+C\+K\+\_\+\+T\+I\+ME}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{D\+\_\+\+A\+T\+T\+A\+C\+K\+\_\+\+T\+I\+ME}{D\_ATTACK\_TIME}}
+{\footnotesize\ttfamily \#define D\+\_\+\+A\+T\+T\+A\+C\+K\+\_\+\+T\+I\+ME~5}
+
+
+
+Attack time in msec. 
+
+\mbox{\Hypertarget{constants_8h_a1d3c631a46d2c01ca8c30f8b1950baec}\label{constants_8h_a1d3c631a46d2c01ca8c30f8b1950baec}} 
+\index{constants.\+h@{constants.\+h}!D\+\_\+\+K\+N\+E\+E\+\_\+\+H\+I\+GH@{D\+\_\+\+K\+N\+E\+E\+\_\+\+H\+I\+GH}}
+\index{D\+\_\+\+K\+N\+E\+E\+\_\+\+H\+I\+GH@{D\+\_\+\+K\+N\+E\+E\+\_\+\+H\+I\+GH}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{D\+\_\+\+K\+N\+E\+E\+\_\+\+H\+I\+GH}{D\_KNEE\_HIGH}}
+{\footnotesize\ttfamily \#define D\+\_\+\+K\+N\+E\+E\+\_\+\+H\+I\+GH~100}
+
+
+
+Upper kneepoint in dB S\+PL. Using the same value for all the bands. 
+
+\mbox{\Hypertarget{constants_8h_ac0c3f81bc6d1bff60a7151fd357c9553}\label{constants_8h_ac0c3f81bc6d1bff60a7151fd357c9553}} 
+\index{constants.\+h@{constants.\+h}!D\+\_\+\+K\+N\+E\+E\+\_\+\+L\+OW@{D\+\_\+\+K\+N\+E\+E\+\_\+\+L\+OW}}
+\index{D\+\_\+\+K\+N\+E\+E\+\_\+\+L\+OW@{D\+\_\+\+K\+N\+E\+E\+\_\+\+L\+OW}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{D\+\_\+\+K\+N\+E\+E\+\_\+\+L\+OW}{D\_KNEE\_LOW}}
+{\footnotesize\ttfamily \#define D\+\_\+\+K\+N\+E\+E\+\_\+\+L\+OW~45}
+
+
+
+Lower kneepoint in dB S\+PL. Using the same value for all the bands. 
+
+\mbox{\Hypertarget{constants_8h_a2b99a14a394089869b4ddfd90770b744}\label{constants_8h_a2b99a14a394089869b4ddfd90770b744}} 
+\index{constants.\+h@{constants.\+h}!D\+\_\+\+P\+D\+\_\+\+S\+A\+M\+P\+\_\+\+R\+A\+TE@{D\+\_\+\+P\+D\+\_\+\+S\+A\+M\+P\+\_\+\+R\+A\+TE}}
+\index{D\+\_\+\+P\+D\+\_\+\+S\+A\+M\+P\+\_\+\+R\+A\+TE@{D\+\_\+\+P\+D\+\_\+\+S\+A\+M\+P\+\_\+\+R\+A\+TE}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{D\+\_\+\+P\+D\+\_\+\+S\+A\+M\+P\+\_\+\+R\+A\+TE}{D\_PD\_SAMP\_RATE}}
+{\footnotesize\ttfamily \#define D\+\_\+\+P\+D\+\_\+\+S\+A\+M\+P\+\_\+\+R\+A\+TE~32000}
+
+
+
+Sample rate that M\+HA is operating at. 
+
+\mbox{\Hypertarget{constants_8h_a23e7303689b2693b49c214078260ff07}\label{constants_8h_a23e7303689b2693b49c214078260ff07}} 
+\index{constants.\+h@{constants.\+h}!D\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+T\+I\+ME@{D\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+T\+I\+ME}}
+\index{D\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+T\+I\+ME@{D\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+T\+I\+ME}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{D\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+T\+I\+ME}{D\_RELEASE\_TIME}}
+{\footnotesize\ttfamily \#define D\+\_\+\+R\+E\+L\+E\+A\+S\+E\+\_\+\+T\+I\+ME~20}
+
+
+
+Release time in msec. 
+
+\mbox{\Hypertarget{constants_8h_af9b1b2ba12857a4bf11289dac8c5462d}\label{constants_8h_af9b1b2ba12857a4bf11289dac8c5462d}} 
+\index{constants.\+h@{constants.\+h}!F\+R\+A\+M\+E\+\_\+\+S\+I\+ZE@{F\+R\+A\+M\+E\+\_\+\+S\+I\+ZE}}
+\index{F\+R\+A\+M\+E\+\_\+\+S\+I\+ZE@{F\+R\+A\+M\+E\+\_\+\+S\+I\+ZE}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{F\+R\+A\+M\+E\+\_\+\+S\+I\+ZE}{FRAME\_SIZE}}
+{\footnotesize\ttfamily \#define F\+R\+A\+M\+E\+\_\+\+S\+I\+ZE~32}
+
+
+
+Contains general, commonly used data structures and constants. 
+
+\mbox{\Hypertarget{constants_8h_a19441d7b9be72492ed93a440085e53be}\label{constants_8h_a19441d7b9be72492ed93a440085e53be}} 
+\index{constants.\+h@{constants.\+h}!N\+U\+M\+\_\+\+B\+A\+N\+DS@{N\+U\+M\+\_\+\+B\+A\+N\+DS}}
+\index{N\+U\+M\+\_\+\+B\+A\+N\+DS@{N\+U\+M\+\_\+\+B\+A\+N\+DS}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{N\+U\+M\+\_\+\+B\+A\+N\+DS}{NUM\_BANDS}}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+B\+A\+N\+DS~6}
+
+
+
+Number of Sub-\/\+Bands. 
+
+\mbox{\Hypertarget{constants_8h_acb1026ec40e93e9b7791eeea149b8e7c}\label{constants_8h_acb1026ec40e93e9b7791eeea149b8e7c}} 
+\index{constants.\+h@{constants.\+h}!R\+E\+S\+A\+M\+P\+\_\+32\+\_\+48\+\_\+\+T\+A\+PS@{R\+E\+S\+A\+M\+P\+\_\+32\+\_\+48\+\_\+\+T\+A\+PS}}
+\index{R\+E\+S\+A\+M\+P\+\_\+32\+\_\+48\+\_\+\+T\+A\+PS@{R\+E\+S\+A\+M\+P\+\_\+32\+\_\+48\+\_\+\+T\+A\+PS}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{R\+E\+S\+A\+M\+P\+\_\+32\+\_\+48\+\_\+\+T\+A\+PS}{RESAMP\_32\_48\_TAPS}}
+{\footnotesize\ttfamily \#define R\+E\+S\+A\+M\+P\+\_\+32\+\_\+48\+\_\+\+T\+A\+PS~25}
+
+
+
+Number of taps for interpolation filter in resampler.\+c for 32 to 48 k\+Hz. 
+
+\mbox{\Hypertarget{constants_8h_af1c688c1719e08f8a604305465450147}\label{constants_8h_af1c688c1719e08f8a604305465450147}} 
+\index{constants.\+h@{constants.\+h}!R\+E\+S\+A\+M\+P\+\_\+32\+\_\+96\+\_\+\+T\+A\+PS@{R\+E\+S\+A\+M\+P\+\_\+32\+\_\+96\+\_\+\+T\+A\+PS}}
+\index{R\+E\+S\+A\+M\+P\+\_\+32\+\_\+96\+\_\+\+T\+A\+PS@{R\+E\+S\+A\+M\+P\+\_\+32\+\_\+96\+\_\+\+T\+A\+PS}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{R\+E\+S\+A\+M\+P\+\_\+32\+\_\+96\+\_\+\+T\+A\+PS}{RESAMP\_32\_96\_TAPS}}
+{\footnotesize\ttfamily \#define R\+E\+S\+A\+M\+P\+\_\+32\+\_\+96\+\_\+\+T\+A\+PS~25}
+
+
+
+Number of taps for interpolation filter in resampler.\+c. 
+
+\mbox{\Hypertarget{constants_8h_a9b84aa2154cd9ca7cb142e726240a5d7}\label{constants_8h_a9b84aa2154cd9ca7cb142e726240a5d7}} 
+\index{constants.\+h@{constants.\+h}!R\+E\+S\+A\+M\+P\+\_\+48\+\_\+32\+\_\+\+T\+A\+PS@{R\+E\+S\+A\+M\+P\+\_\+48\+\_\+32\+\_\+\+T\+A\+PS}}
+\index{R\+E\+S\+A\+M\+P\+\_\+48\+\_\+32\+\_\+\+T\+A\+PS@{R\+E\+S\+A\+M\+P\+\_\+48\+\_\+32\+\_\+\+T\+A\+PS}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{R\+E\+S\+A\+M\+P\+\_\+48\+\_\+32\+\_\+\+T\+A\+PS}{RESAMP\_48\_32\_TAPS}}
+{\footnotesize\ttfamily \#define R\+E\+S\+A\+M\+P\+\_\+48\+\_\+32\+\_\+\+T\+A\+PS~25}
+
+
+
+Number of taps for decimation filter in resampler.\+c for 48 to 32 k\+Hz. 
+
+\mbox{\Hypertarget{constants_8h_a22ad4850ff1e8ce8e185cf535c32c26e}\label{constants_8h_a22ad4850ff1e8ce8e185cf535c32c26e}} 
+\index{constants.\+h@{constants.\+h}!R\+E\+S\+A\+M\+P\+\_\+96\+\_\+32\+\_\+\+T\+A\+PS@{R\+E\+S\+A\+M\+P\+\_\+96\+\_\+32\+\_\+\+T\+A\+PS}}
+\index{R\+E\+S\+A\+M\+P\+\_\+96\+\_\+32\+\_\+\+T\+A\+PS@{R\+E\+S\+A\+M\+P\+\_\+96\+\_\+32\+\_\+\+T\+A\+PS}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{R\+E\+S\+A\+M\+P\+\_\+96\+\_\+32\+\_\+\+T\+A\+PS}{RESAMP\_96\_32\_TAPS}}
+{\footnotesize\ttfamily \#define R\+E\+S\+A\+M\+P\+\_\+96\+\_\+32\+\_\+\+T\+A\+PS~25}
+
+
+
+Number of taps for decimation filter in resampler.\+c. 
+
+\mbox{\Hypertarget{constants_8h_aac913071759241f612b525eb18b88c21}\label{constants_8h_aac913071759241f612b525eb18b88c21}} 
+\index{constants.\+h@{constants.\+h}!S\+Y\+N\+T\+H\+E\+T\+I\+C\+\_\+\+T\+A\+P\+\_\+\+L\+EN@{S\+Y\+N\+T\+H\+E\+T\+I\+C\+\_\+\+T\+A\+P\+\_\+\+L\+EN}}
+\index{S\+Y\+N\+T\+H\+E\+T\+I\+C\+\_\+\+T\+A\+P\+\_\+\+L\+EN@{S\+Y\+N\+T\+H\+E\+T\+I\+C\+\_\+\+T\+A\+P\+\_\+\+L\+EN}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{S\+Y\+N\+T\+H\+E\+T\+I\+C\+\_\+\+T\+A\+P\+\_\+\+L\+EN}{SYNTHETIC\_TAP\_LEN}}
+{\footnotesize\ttfamily \#define S\+Y\+N\+T\+H\+E\+T\+I\+C\+\_\+\+T\+A\+P\+\_\+\+L\+EN~525}
+
+
+
+Synthetic feedback filter tap length. 
+
+\mbox{\Hypertarget{constants_8h_a1c6d5de492ac61ad29aec7aa9a436bbf}\label{constants_8h_a1c6d5de492ac61ad29aec7aa9a436bbf}} 
+\index{constants.\+h@{constants.\+h}!V\+E\+R\+S\+I\+ON@{V\+E\+R\+S\+I\+ON}}
+\index{V\+E\+R\+S\+I\+ON@{V\+E\+R\+S\+I\+ON}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{V\+E\+R\+S\+I\+ON}{VERSION}}
+{\footnotesize\ttfamily \#define V\+E\+R\+S\+I\+ON~2}
+
+
+
+This is the C version for keeping the networking of packets between the. 
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{constants_8h_a2d1d78531fe12807c3852488556d5a4b}\label{constants_8h_a2d1d78531fe12807c3852488556d5a4b}} 
+\index{constants.\+h@{constants.\+h}!osp\+\_\+user\+\_\+data@{osp\+\_\+user\+\_\+data}}
+\index{osp\+\_\+user\+\_\+data@{osp\+\_\+user\+\_\+data}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{osp\+\_\+user\+\_\+data}{osp\_user\_data}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structosp__user__data__t}{osp\+\_\+user\+\_\+data\+\_\+t}}  \mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}}}
+
+
+
+general data structure shared between client and C application 
+
+\mbox{\Hypertarget{constants_8h_add46628e302aedde68d37aea654eda24}\label{constants_8h_add46628e302aedde68d37aea654eda24}} 
+\index{constants.\+h@{constants.\+h}!pa\+\_\+aux\+\_\+data@{pa\+\_\+aux\+\_\+data}}
+\index{pa\+\_\+aux\+\_\+data@{pa\+\_\+aux\+\_\+data}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{pa\+\_\+aux\+\_\+data}{pa\_aux\_data}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structpa__aux__data__t}{pa\+\_\+aux\+\_\+data\+\_\+t}}  \mbox{\hyperlink{constants_8h_add46628e302aedde68d37aea654eda24}{pa\+\_\+aux\+\_\+data}}}
+
+
+
+Struct that contains misc data passed to Port\+Audio. 
+
+\mbox{\Hypertarget{constants_8h_aba6e2261d5c6ef36dedb5b45ba0fc4ae}\label{constants_8h_aba6e2261d5c6ef36dedb5b45ba0fc4ae}} 
+\index{constants.\+h@{constants.\+h}!pa\+\_\+user\+\_\+data@{pa\+\_\+user\+\_\+data}}
+\index{pa\+\_\+user\+\_\+data@{pa\+\_\+user\+\_\+data}!constants.\+h@{constants.\+h}}
+\subsubsection{\texorpdfstring{pa\+\_\+user\+\_\+data}{pa\_user\_data}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structpa__user__data__t}{pa\+\_\+user\+\_\+data\+\_\+t}}  \mbox{\hyperlink{constants_8h_aba6e2261d5c6ef36dedb5b45ba0fc4ae}{pa\+\_\+user\+\_\+data}}}
+
+
+
+The data structure passed to Port\+Audio. 
+

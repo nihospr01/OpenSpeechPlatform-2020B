@@ -1,0 +1,207 @@
+\hypertarget{afc_8h}{}\section{libosp/afc/afc.h File Reference}
+\label{afc_8h}\index{libosp/afc/afc.\+h@{libosp/afc/afc.\+h}}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=282pt]{afc_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{afc_8h_a56a54cded994eb84c93ab352ead9d95f}{A\+F\+C\+\_\+\+N\+U\+M\+\_\+\+F\+R\+A\+M\+ES}}~7
+\begin{DoxyCompactList}\small\item\em Amount of frames required for A\+FC processing. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{afc_8h_a03268366c1b4b6ba55f87a5786ecf00a}{A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+L\+EN}}~192
+\begin{DoxyCompactList}\small\item\em A\+FC fitler tap length. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{afc_8h_a6242a25f9d996f0cc4f4cdb911218b75}{A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}}(x)~(sizeof((x)) / sizeof((x)\mbox{[}0\mbox{]}))
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structafc__t}{afc\+\_\+t}} $\ast$ \mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} \mbox{\hyperlink{afc_8h_ae2ae05e92c452d604e5b283c6db3e307}{afc\+\_\+init}} (const float $\ast$afc\+\_\+filter\+\_\+taps, int afc\+\_\+filter\+\_\+tap\+\_\+len, const float $\ast$prefilter\+\_\+taps, int prefilter\+\_\+tap\+\_\+len, const float $\ast$band\+\_\+limited\+\_\+filter\+\_\+taps, int band\+\_\+limited\+\_\+filter\+\_\+tap\+\_\+len, int frame\+\_\+size, unsigned int adaptation\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Function to initialize the afc data struct. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{afc_8h_ac453a669837cff671fbe64d59da8fd03}{afc\+\_\+update\+\_\+taps}} (\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} afc, float $\ast$s, float $\ast$e, size\+\_\+t frame\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Function to update the A\+FC filter taps. i.\+e. perform A\+FC. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{afc_8h_ae23fd5ba219af0e472c3ea5a6b883b8e}{afc\+\_\+get\+\_\+y\+\_\+estimated}} (\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} afc, float $\ast$y\+\_\+est, size\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em Function to get the estimate of the feedback signal, y\+\_\+hat(n) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{afc_8h_a3b8e35089fac94e704cd9b0a964b7202}{afc\+\_\+get\+\_\+taps}} (\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} afc, float $\ast$taps)
+\begin{DoxyCompactList}\small\item\em Function to get the A\+FC filter taps. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{afc_8h_a27cf074c18fa2ff7253bfab542b348cb}{afc\+\_\+destroy}} (\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} afc)
+\begin{DoxyCompactList}\small\item\em Function to close and free the Afc instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{afc_8h_a03268366c1b4b6ba55f87a5786ecf00a}\label{afc_8h_a03268366c1b4b6ba55f87a5786ecf00a}} 
+\index{afc.\+h@{afc.\+h}!A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+L\+EN@{A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+L\+EN}}
+\index{A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+L\+EN@{A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+L\+EN}!afc.\+h@{afc.\+h}}
+\subsubsection{\texorpdfstring{A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+L\+EN}{AFC\_FILTER\_TAP\_LEN}}
+{\footnotesize\ttfamily \#define A\+F\+C\+\_\+\+F\+I\+L\+T\+E\+R\+\_\+\+T\+A\+P\+\_\+\+L\+EN~192}
+
+
+
+A\+FC fitler tap length. 
+
+\mbox{\Hypertarget{afc_8h_a56a54cded994eb84c93ab352ead9d95f}\label{afc_8h_a56a54cded994eb84c93ab352ead9d95f}} 
+\index{afc.\+h@{afc.\+h}!A\+F\+C\+\_\+\+N\+U\+M\+\_\+\+F\+R\+A\+M\+ES@{A\+F\+C\+\_\+\+N\+U\+M\+\_\+\+F\+R\+A\+M\+ES}}
+\index{A\+F\+C\+\_\+\+N\+U\+M\+\_\+\+F\+R\+A\+M\+ES@{A\+F\+C\+\_\+\+N\+U\+M\+\_\+\+F\+R\+A\+M\+ES}!afc.\+h@{afc.\+h}}
+\subsubsection{\texorpdfstring{A\+F\+C\+\_\+\+N\+U\+M\+\_\+\+F\+R\+A\+M\+ES}{AFC\_NUM\_FRAMES}}
+{\footnotesize\ttfamily \#define A\+F\+C\+\_\+\+N\+U\+M\+\_\+\+F\+R\+A\+M\+ES~7}
+
+
+
+Amount of frames required for A\+FC processing. 
+
+\mbox{\Hypertarget{afc_8h_a6242a25f9d996f0cc4f4cdb911218b75}\label{afc_8h_a6242a25f9d996f0cc4f4cdb911218b75}} 
+\index{afc.\+h@{afc.\+h}!A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE@{A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}}
+\index{A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE@{A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}!afc.\+h@{afc.\+h}}
+\subsubsection{\texorpdfstring{A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}{ARRAY\_SIZE}}
+{\footnotesize\ttfamily \#define A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(sizeof((x)) / sizeof((x)\mbox{[}0\mbox{]}))}
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}\label{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}} 
+\index{afc.\+h@{afc.\+h}!Afc@{Afc}}
+\index{Afc@{Afc}!afc.\+h@{afc.\+h}}
+\subsubsection{\texorpdfstring{Afc}{Afc}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structafc__t}{afc\+\_\+t}}$\ast$ \mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}}}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{afc_8h_a27cf074c18fa2ff7253bfab542b348cb}\label{afc_8h_a27cf074c18fa2ff7253bfab542b348cb}} 
+\index{afc.\+h@{afc.\+h}!afc\+\_\+destroy@{afc\+\_\+destroy}}
+\index{afc\+\_\+destroy@{afc\+\_\+destroy}!afc.\+h@{afc.\+h}}
+\subsubsection{\texorpdfstring{afc\+\_\+destroy()}{afc\_destroy()}}
+{\footnotesize\ttfamily int afc\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}}}]{afc }\end{DoxyParamCaption})}
+
+
+
+Function to close and free the Afc instance. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structafc__t}{afc\+\_\+t}} ~\newline
+
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em afc} & The instance of the Afc structure that was returned from afc\+\_\+init \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 0 if successful. -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{afc_8h_a3b8e35089fac94e704cd9b0a964b7202}\label{afc_8h_a3b8e35089fac94e704cd9b0a964b7202}} 
+\index{afc.\+h@{afc.\+h}!afc\+\_\+get\+\_\+taps@{afc\+\_\+get\+\_\+taps}}
+\index{afc\+\_\+get\+\_\+taps@{afc\+\_\+get\+\_\+taps}!afc.\+h@{afc.\+h}}
+\subsubsection{\texorpdfstring{afc\+\_\+get\+\_\+taps()}{afc\_get\_taps()}}
+{\footnotesize\ttfamily int afc\+\_\+get\+\_\+taps (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}}}]{afc,  }\item[{float $\ast$}]{taps }\end{DoxyParamCaption})}
+
+
+
+Function to get the A\+FC filter taps. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structafc__t}{afc\+\_\+t}} ~\newline
+
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em afc} & The instance of the Afc structure that was returned from afc\+\_\+init \\
+\hline
+{\em taps} & Pointer to the array that afc filter taps will be written into \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int A\+FC filter tap length 
+\end{DoxyReturn}
+\mbox{\Hypertarget{afc_8h_ae23fd5ba219af0e472c3ea5a6b883b8e}\label{afc_8h_ae23fd5ba219af0e472c3ea5a6b883b8e}} 
+\index{afc.\+h@{afc.\+h}!afc\+\_\+get\+\_\+y\+\_\+estimated@{afc\+\_\+get\+\_\+y\+\_\+estimated}}
+\index{afc\+\_\+get\+\_\+y\+\_\+estimated@{afc\+\_\+get\+\_\+y\+\_\+estimated}!afc.\+h@{afc.\+h}}
+\subsubsection{\texorpdfstring{afc\+\_\+get\+\_\+y\+\_\+estimated()}{afc\_get\_y\_estimated()}}
+{\footnotesize\ttfamily void afc\+\_\+get\+\_\+y\+\_\+estimated (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}}}]{afc,  }\item[{float $\ast$}]{y\+\_\+est,  }\item[{size\+\_\+t}]{len }\end{DoxyParamCaption})}
+
+
+
+Function to get the estimate of the feedback signal, y\+\_\+hat(n) 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structafc__t}{afc\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em afc} & The instance of the Afc structure that was returned from afc\+\_\+init \\
+\hline
+{\em y\+\_\+est} & Pointer to the array that estimated feedback signal will be written into \\
+\hline
+{\em len} & Number of samples of the estimated feedback signal requested \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{afc_8h_ae2ae05e92c452d604e5b283c6db3e307}\label{afc_8h_ae2ae05e92c452d604e5b283c6db3e307}} 
+\index{afc.\+h@{afc.\+h}!afc\+\_\+init@{afc\+\_\+init}}
+\index{afc\+\_\+init@{afc\+\_\+init}!afc.\+h@{afc.\+h}}
+\subsubsection{\texorpdfstring{afc\+\_\+init()}{afc\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} afc\+\_\+init (\begin{DoxyParamCaption}\item[{const float $\ast$}]{afc\+\_\+filter\+\_\+taps,  }\item[{int}]{afc\+\_\+filter\+\_\+tap\+\_\+len,  }\item[{const float $\ast$}]{prefilter\+\_\+taps,  }\item[{int}]{prefilter\+\_\+tap\+\_\+len,  }\item[{const float $\ast$}]{band\+\_\+limited\+\_\+filter\+\_\+taps,  }\item[{int}]{band\+\_\+limited\+\_\+filter\+\_\+tap\+\_\+len,  }\item[{int}]{frame\+\_\+size,  }\item[{unsigned int}]{adaptation\+\_\+type }\end{DoxyParamCaption})}
+
+
+
+Function to initialize the afc data struct. 
+
+Allocates memory to the Afc instance and initialize its parameters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em afc\+\_\+filter\+\_\+taps} & A\+FC filter initalization taps, W(z) initialization \\
+\hline
+{\em afc\+\_\+filter\+\_\+tap\+\_\+len} & A\+FC filter tap length \\
+\hline
+{\em prefilter\+\_\+taps} & Pre-\/whitening filter taps, A(z) \\
+\hline
+{\em prefilter\+\_\+tap\+\_\+len} & Pre-\/whitening filter tap length \\
+\hline
+{\em band\+\_\+limited\+\_\+filter\+\_\+taps} & Band-\/limited filter taps, H(z) \\
+\hline
+{\em band\+\_\+limited\+\_\+filter\+\_\+tap\+\_\+len} & Band-\/limited filter tap length \\
+\hline
+{\em frame\+\_\+size} & Frame size to process \\
+\hline
+{\em adaptation\+\_\+type} & A\+FC adaptation type. 1 = (F\+X\+L\+MS + P\+N\+L\+MS), 0 = F\+X\+L\+MS \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Afc Returns the Afc instance/object if memory is succesfully allocated or returns N\+U\+LL. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{afc_8h_ac453a669837cff671fbe64d59da8fd03}\label{afc_8h_ac453a669837cff671fbe64d59da8fd03}} 
+\index{afc.\+h@{afc.\+h}!afc\+\_\+update\+\_\+taps@{afc\+\_\+update\+\_\+taps}}
+\index{afc\+\_\+update\+\_\+taps@{afc\+\_\+update\+\_\+taps}!afc.\+h@{afc.\+h}}
+\subsubsection{\texorpdfstring{afc\+\_\+update\+\_\+taps()}{afc\_update\_taps()}}
+{\footnotesize\ttfamily int afc\+\_\+update\+\_\+taps (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}}}]{afc,  }\item[{float $\ast$}]{s,  }\item[{float $\ast$}]{e,  }\item[{size\+\_\+t}]{frame\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Function to update the A\+FC filter taps. i.\+e. perform A\+FC. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structafc__t}{afc\+\_\+t}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em afc} & The instance of the Afc structure that was returned from afc\+\_\+init ~\newline
+\\
+\hline
+{\em s} & Pointer to the output signal array of W\+D\+RC \\
+\hline
+{\em e} & Pointer to the error signal array \\
+\hline
+{\em frame\+\_\+size} & Number of samples in the frame to process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int -\/1 for wrong frame size. 0 if successful 
+\end{DoxyReturn}

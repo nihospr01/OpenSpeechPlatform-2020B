@@ -1,0 +1,84 @@
+.TH "libosp/osp_tcp/tcplib.h" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libosp/osp_tcp/tcplib.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stddef\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBstart_tcp_server\fP (int)"
+.br
+.RI "Initiates TCP protocol server\&. "
+.ti -1c
+.RI "int \fBget_tcp_server_connection\fP (int)"
+.br
+.RI "Gets TCP protocol server\&. "
+.ti -1c
+.RI "int \fBclose_tcp_server_connection\fP (int)"
+.br
+.RI "Closes TCP protocol server\&. "
+.ti -1c
+.RI "void \fBstop_tcp_server\fP (int)"
+.br
+.RI "Stops the TCP protocol server\&. "
+.ti -1c
+.RI "ssize_t \fBread_tcp_server_stream\fP (int, char *, int)"
+.br
+.RI "Reads data on server side\&. "
+.ti -1c
+.RI "int \fBstart_tcp_client\fP (char *, int)"
+.br
+.RI "Initiates TCP protocol client\&. "
+.ti -1c
+.RI "int \fBstop_tcp_client\fP (int)"
+.br
+.RI "Stops TCP protocol client\&. "
+.ti -1c
+.RI "ssize_t \fBsend_tcp_client_data\fP (int, char *, int)"
+.br
+.RI "Sends data on client side\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int close_tcp_server_connection (int)"
+
+.PP
+Closes TCP protocol server\&. 
+.SS "int get_tcp_server_connection (int)"
+
+.PP
+Gets TCP protocol server\&. 
+.SS "ssize_t read_tcp_server_stream (int, char *, int)"
+
+.PP
+Reads data on server side\&. 
+.SS "ssize_t send_tcp_client_data (int, char *, int)"
+
+.PP
+Sends data on client side\&. 
+.SS "int start_tcp_client (char * ip, int port)"
+
+.PP
+Initiates TCP protocol client\&. Starts the client side socket connection based on INET Internet stream-oriented sockets\&. 
+.SS "int start_tcp_server (int port)"
+
+.PP
+Initiates TCP protocol server\&. Initiates TCP protocol server\&. 
+.SS "int stop_tcp_client (int)"
+
+.PP
+Stops TCP protocol client\&. 
+.SS "void stop_tcp_server (int)"
+
+.PP
+Stops the TCP protocol server\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

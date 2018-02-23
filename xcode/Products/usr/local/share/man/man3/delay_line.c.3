@@ -1,0 +1,121 @@
+.TH "libosp/beam_forming/delay_line.c" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libosp/beam_forming/delay_line.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'delay_line\&.h'\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBdelay_line_t\fP"
+.br
+.RI "Data structure that contains delay_line information\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDelay_Line\fP \fBdelay_line_init\fP (unsigned int delay)"
+.br
+.RI "Initializes Delay Line structure\&. "
+.ti -1c
+.RI "float \fBdelay_line_tick\fP (\fBDelay_Line\fP del_line, float input_sample)"
+.br
+.RI "Returns an output sample that has been delayed by a set number When you call delay_line_tick with a sample, you are putting a sample into its internal circular buffer, and you are getting a sample that has previously been put onto its circular buffer N samples/ticks ago (where N is the delay parameter in delay_line_init)\&. "
+.ti -1c
+.RI "int \fBdelay_line_free\fP (\fBDelay_Line\fP del_line)"
+.br
+.RI "Frees the Delay_Line data structure\&. "
+.ti -1c
+.RI "int \fBdelay_line_flush\fP (\fBDelay_Line\fP del_line)"
+.br
+.RI "Flushes internal circular buffer that contains previous samples put on by calls to delay_line_tick\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int delay_line_flush (\fBDelay_Line\fP del_line)"
+
+.PP
+Flushes internal circular buffer that contains previous samples put on by calls to delay_line_tick\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdel_line\fP The data structure containing delay_line details 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+0 on success, -1 otherwise\&. Need to fix this 
+.RE
+.PP
+
+.SS "int delay_line_free (\fBDelay_Line\fP del_line)"
+
+.PP
+Frees the Delay_Line data structure\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdel_line\fP Delay_Line data structure to be freed 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+0 on success, -1 otherwise 
+.RE
+.PP
+
+.SS "\fBDelay_Line\fP delay_line_init (unsigned int delay)"
+
+.PP
+Initializes Delay Line structure\&. 
+.PP
+\fBSee also:\fP
+.RS 4
+\fBdelay_line_tick\fP 
+.RE
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdelay\fP The number of samples to delay when calling delay_line_tick 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Returns the Delay_Line data structure 
+.RE
+.PP
+
+.SS "float delay_line_tick (\fBDelay_Line\fP del_line, float input_sample)"
+
+.PP
+Returns an output sample that has been delayed by a set number When you call delay_line_tick with a sample, you are putting a sample into its internal circular buffer, and you are getting a sample that has previously been put onto its circular buffer N samples/ticks ago (where N is the delay parameter in delay_line_init)\&. For example, if you set the delay_line_init with a delay of 4 samples, the input and output of delay_line_tick are shown below, where each row represents calling the delay_line_tick function In Out 1 0 1 0 1 0 1 0 0 1 0 1 0 1 0 1 0 0 0 0 \&.\&.\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdel_line\fP The Delay_Line struct returned from delay_line_init 
+.br
+\fIinput_sample\fP The input sample that will be returned N ticks in the future
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+A sample that was previously passed into delay_line_tick N ticks in the past 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

@@ -1,0 +1,45 @@
+\hypertarget{wdrc__mpo__support_8c}{}\section{libosp/wdrc/wdrc\+\_\+mpo\+\_\+support.c File Reference}
+\label{wdrc__mpo__support_8c}\index{libosp/wdrc/wdrc\+\_\+mpo\+\_\+support.\+c@{libosp/wdrc/wdrc\+\_\+mpo\+\_\+support.\+c}}
+{\ttfamily \#include \char`\"{}wdrc\+\_\+mpo\+\_\+support.\+h\char`\"{}}\newline
+Include dependency graph for wdrc\+\_\+mpo\+\_\+support.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=195pt]{wdrc__mpo__support_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{wdrc__mpo__support_8c_aa9f96c6f6e22bbc863c8467195ff8dd9}{wdrc\+\_\+mpo\+\_\+support}} (float $\ast$pdB, float gain50, float gain80, float knee\+\_\+low, size\+\_\+t len, float $\ast$wdrcdB)
+\begin{DoxyCompactList}\small\item\em Function to apply dynamic-\/range compression to a single sub-\/band of the output of the analysis filter bank. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{wdrc__mpo__support_8c_aa9f96c6f6e22bbc863c8467195ff8dd9}\label{wdrc__mpo__support_8c_aa9f96c6f6e22bbc863c8467195ff8dd9}} 
+\index{wdrc\+\_\+mpo\+\_\+support.\+c@{wdrc\+\_\+mpo\+\_\+support.\+c}!wdrc\+\_\+mpo\+\_\+support@{wdrc\+\_\+mpo\+\_\+support}}
+\index{wdrc\+\_\+mpo\+\_\+support@{wdrc\+\_\+mpo\+\_\+support}!wdrc\+\_\+mpo\+\_\+support.\+c@{wdrc\+\_\+mpo\+\_\+support.\+c}}
+\subsubsection{\texorpdfstring{wdrc\+\_\+mpo\+\_\+support()}{wdrc\_mpo\_support()}}
+{\footnotesize\ttfamily void wdrc\+\_\+mpo\+\_\+support (\begin{DoxyParamCaption}\item[{float $\ast$}]{pdB,  }\item[{float}]{gain50,  }\item[{float}]{gain80,  }\item[{float}]{knee\+\_\+low,  }\item[{size\+\_\+t}]{len,  }\item[{float $\ast$}]{wdrcdB }\end{DoxyParamCaption})}
+
+
+
+Function to apply dynamic-\/range compression to a single sub-\/band of the output of the analysis filter bank. 
+
+The peak detector output in dB S\+PL is needed as one of the inputs. The gain at 50 and 80 dB S\+PL is specified for the frequency sub-\/band, along with the lower and upper kneepoints in dB S\+PL. The compressor is linear below the lower kneepoint and applies compression limiting above the upper kneepoint
+
+
+\begin{DoxyParams}{Parameters}
+{\em pdB} & Pointer to the peak detector output array of the sub-\/band in dB S\+PL (output from peak\+\_\+to\+\_\+spl) \\
+\hline
+{\em gain50} & Gain in dB at the sub-\/band frequency for an input at 50 dB S\+PL \\
+\hline
+{\em gain80} & Gain in dB at the sub-\/band frequency for an input at 80 dB S\+PL \\
+\hline
+{\em knee\+\_\+low} & Lower kneepoint in dB S\+PL for the sub-\/band \\
+\hline
+{\em len} & Length of the input array \\
+\hline
+{\em wdrcdB} & Pointer to an array where the compressed output of the sub-\/band will be written. i.\+e. the output of W\+D\+RC \\
+\hline
+\end{DoxyParams}

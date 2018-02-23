@@ -1,0 +1,76 @@
+.TH "libosp/osp_process/logger.h" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libosp/osp_process/logger.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMAX_WRITE_LEN\fP   200"
+.br
+.ti -1c
+.RI "#define \fB_TI_DSP\fP"
+.br
+.ti -1c
+.RI "#define \fB_PRINT\fP(fmt,  args\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#define \fBDBG\fP(fmg,  args\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#define \fBDBGDATA\fP(data,  len)"
+.br
+.ti -1c
+.RI "#define \fBASSERT\fP(cond,  fmt,  args\&.\&.\&.)"
+.br
+.ti -1c
+.RI "#define \fBINFO\fP(fmt,  args\&.\&.\&.)   \fB_PRINT\fP('[info] %s() ' fmt, __FUNCTION__, ##args);"
+.br
+.ti -1c
+.RI "#define \fBERROR\fP(fmt,  args\&.\&.\&.)   \fB_PRINT\fP('[error] %s() ' fmt, __FUNCTION__, ##args);"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define _PRINT(fmt, args\&.\&.\&.)"
+\fBValue:\fP
+.PP
+.nf
+do { \
+    } while (0)
+.fi
+.SS "#define _TI_DSP"
+
+.SS "#define ASSERT(cond, fmt, args\&.\&.\&.)"
+\fBValue:\fP
+.PP
+.nf
+do {                  \
+    if (!(cond)) {                          \
+        _PRINT("[assert] %s() " fmt, __FUNCTION__, ##args); \
+        exit(1);                        \
+    }                               \
+} while(0)
+.fi
+.SS "#define DBG(fmg, args\&.\&.\&.)"
+
+.SS "#define DBGDATA(data, len)"
+
+.SS "#define ERROR(fmt, args\&.\&.\&.)   \fB_PRINT\fP('[error] %s() ' fmt, __FUNCTION__, ##args);"
+
+.SS "#define INFO(fmt, args\&.\&.\&.)   \fB_PRINT\fP('[info] %s() ' fmt, __FUNCTION__, ##args);"
+
+.SS "#define MAX_WRITE_LEN   200"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

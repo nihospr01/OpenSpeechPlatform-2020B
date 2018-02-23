@@ -1,0 +1,143 @@
+\hypertarget{port__wrapper_8h}{}\section{osp/port\+\_\+wrapper.h File Reference}
+\label{port__wrapper_8h}\index{osp/port\+\_\+wrapper.\+h@{osp/port\+\_\+wrapper.\+h}}
+{\ttfamily \#include $<$portaudio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}osp\+\_\+process.\+h\char`\"{}}\newline
+Include dependency graph for port\+\_\+wrapper.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{port__wrapper_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{port__wrapper_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structfile__loopback__context__t}{file\+\_\+loopback\+\_\+context\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Struct containing details for file loopback mode. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structpa__loopback__data__t}{pa\+\_\+loopback\+\_\+data\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Wraps around the osp\+\_\+data, but also contains a file loopback context struct Have to wrap the two structs in one data structure so that we can pass it to the Port Audio callback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structfile__loopback__context__t}{file\+\_\+loopback\+\_\+context\+\_\+t}} \mbox{\hyperlink{port__wrapper_8h_a44712da21c339df7c0735d4bab71a303}{file\+\_\+loopback\+\_\+context}}
+\begin{DoxyCompactList}\small\item\em Struct containing details for file loopback mode. \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structpa__loopback__data__t}{pa\+\_\+loopback\+\_\+data\+\_\+t}} \mbox{\hyperlink{port__wrapper_8h_ac9254c02b6ce62f35cba8e0f7fe0ac13}{pa\+\_\+loopback\+\_\+data}}
+\begin{DoxyCompactList}\small\item\em Wraps around the osp\+\_\+data, but also contains a file loopback context struct Have to wrap the two structs in one data structure so that we can pass it to the Port Audio callback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{port__wrapper_8h_aad87de761cac2f38bdb8c0cdf9fe878b}{pa\+\_\+init}} (\mbox{\hyperlink{constants_8h_aba6e2261d5c6ef36dedb5b45ba0fc4ae}{pa\+\_\+user\+\_\+data}} $\ast$pa\+\_\+data, unsigned int samp\+\_\+rate, unsigned int frames\+\_\+per\+\_\+buffer)
+\item 
+int \mbox{\hyperlink{port__wrapper_8h_a1dff412d26845dcb47b3de00ab4f069f}{pa\+\_\+loopback\+\_\+run}} (\mbox{\hyperlink{port__wrapper_8h_ac9254c02b6ce62f35cba8e0f7fe0ac13}{pa\+\_\+loopback\+\_\+data}} $\ast$loopback\+\_\+data, unsigned int samp\+\_\+rate, unsigned int frames\+\_\+per\+\_\+buffer)
+\begin{DoxyCompactList}\small\item\em Initialization for file loopback mode. Executes same functionality as pa\+\_\+init. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{port__wrapper_8h_afcf3e9fac2c625de44f0455824837de4}{pa\+\_\+start\+\_\+stream}} ()
+\begin{DoxyCompactList}\small\item\em Starts Port Audio stream. Until this is called, the audio callback will not be fired. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{port__wrapper_8h_a0e7ba37533bce680c4f21afe880d66a5}{pa\+\_\+stop\+\_\+stream}} ()
+\begin{DoxyCompactList}\small\item\em Stops Port Audio stream. The audio callback will cease to be fired, stopping stream. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{port__wrapper_8h_aea4b670fd6e019f53d12d48176593231}{pa\+\_\+close}} ()
+\begin{DoxyCompactList}\small\item\em Closes Port Audio stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{port__wrapper_8h_a44712da21c339df7c0735d4bab71a303}\label{port__wrapper_8h_a44712da21c339df7c0735d4bab71a303}} 
+\index{port\+\_\+wrapper.\+h@{port\+\_\+wrapper.\+h}!file\+\_\+loopback\+\_\+context@{file\+\_\+loopback\+\_\+context}}
+\index{file\+\_\+loopback\+\_\+context@{file\+\_\+loopback\+\_\+context}!port\+\_\+wrapper.\+h@{port\+\_\+wrapper.\+h}}
+\subsubsection{\texorpdfstring{file\+\_\+loopback\+\_\+context}{file\_loopback\_context}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structfile__loopback__context__t}{file\+\_\+loopback\+\_\+context\+\_\+t}}  \mbox{\hyperlink{port__wrapper_8h_a44712da21c339df7c0735d4bab71a303}{file\+\_\+loopback\+\_\+context}}}
+
+
+
+Struct containing details for file loopback mode. 
+
+\mbox{\Hypertarget{port__wrapper_8h_ac9254c02b6ce62f35cba8e0f7fe0ac13}\label{port__wrapper_8h_ac9254c02b6ce62f35cba8e0f7fe0ac13}} 
+\index{port\+\_\+wrapper.\+h@{port\+\_\+wrapper.\+h}!pa\+\_\+loopback\+\_\+data@{pa\+\_\+loopback\+\_\+data}}
+\index{pa\+\_\+loopback\+\_\+data@{pa\+\_\+loopback\+\_\+data}!port\+\_\+wrapper.\+h@{port\+\_\+wrapper.\+h}}
+\subsubsection{\texorpdfstring{pa\+\_\+loopback\+\_\+data}{pa\_loopback\_data}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structpa__loopback__data__t}{pa\+\_\+loopback\+\_\+data\+\_\+t}}  \mbox{\hyperlink{port__wrapper_8h_ac9254c02b6ce62f35cba8e0f7fe0ac13}{pa\+\_\+loopback\+\_\+data}}}
+
+
+
+Wraps around the osp\+\_\+data, but also contains a file loopback context struct Have to wrap the two structs in one data structure so that we can pass it to the Port Audio callback. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{port__wrapper_8h_a44712da21c339df7c0735d4bab71a303}{file\+\_\+loopback\+\_\+context}} 
+
+\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} 
+\end{DoxySeeAlso}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{port__wrapper_8h_aea4b670fd6e019f53d12d48176593231}\label{port__wrapper_8h_aea4b670fd6e019f53d12d48176593231}} 
+\index{port\+\_\+wrapper.\+h@{port\+\_\+wrapper.\+h}!pa\+\_\+close@{pa\+\_\+close}}
+\index{pa\+\_\+close@{pa\+\_\+close}!port\+\_\+wrapper.\+h@{port\+\_\+wrapper.\+h}}
+\subsubsection{\texorpdfstring{pa\+\_\+close()}{pa\_close()}}
+{\footnotesize\ttfamily void pa\+\_\+close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Closes Port Audio stream. 
+
+\mbox{\Hypertarget{port__wrapper_8h_aad87de761cac2f38bdb8c0cdf9fe878b}\label{port__wrapper_8h_aad87de761cac2f38bdb8c0cdf9fe878b}} 
+\index{port\+\_\+wrapper.\+h@{port\+\_\+wrapper.\+h}!pa\+\_\+init@{pa\+\_\+init}}
+\index{pa\+\_\+init@{pa\+\_\+init}!port\+\_\+wrapper.\+h@{port\+\_\+wrapper.\+h}}
+\subsubsection{\texorpdfstring{pa\+\_\+init()}{pa\_init()}}
+{\footnotesize\ttfamily int pa\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{constants_8h_aba6e2261d5c6ef36dedb5b45ba0fc4ae}{pa\+\_\+user\+\_\+data}} $\ast$}]{pa\+\_\+data,  }\item[{unsigned int}]{samp\+\_\+rate,  }\item[{unsigned int}]{frames\+\_\+per\+\_\+buffer }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{port__wrapper_8h_a1dff412d26845dcb47b3de00ab4f069f}\label{port__wrapper_8h_a1dff412d26845dcb47b3de00ab4f069f}} 
+\index{port\+\_\+wrapper.\+h@{port\+\_\+wrapper.\+h}!pa\+\_\+loopback\+\_\+run@{pa\+\_\+loopback\+\_\+run}}
+\index{pa\+\_\+loopback\+\_\+run@{pa\+\_\+loopback\+\_\+run}!port\+\_\+wrapper.\+h@{port\+\_\+wrapper.\+h}}
+\subsubsection{\texorpdfstring{pa\+\_\+loopback\+\_\+run()}{pa\_loopback\_run()}}
+{\footnotesize\ttfamily int pa\+\_\+loopback\+\_\+run (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{port__wrapper_8h_ac9254c02b6ce62f35cba8e0f7fe0ac13}{pa\+\_\+loopback\+\_\+data}} $\ast$}]{loopback\+\_\+data,  }\item[{unsigned int}]{samp\+\_\+rate,  }\item[{unsigned int}]{frames\+\_\+per\+\_\+buffer }\end{DoxyParamCaption})}
+
+
+
+Initialization for file loopback mode. Executes same functionality as pa\+\_\+init. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{port__wrapper_8h_ac9254c02b6ce62f35cba8e0f7fe0ac13}{pa\+\_\+loopback\+\_\+data}}
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em loopback\+\_\+data} & Structure that contains details about files (input and output), and samples \\
+\hline
+{\em samp\+\_\+rate} & The sample rate of incoming/outgoing audio \\
+\hline
+{\em frames\+\_\+per\+\_\+buffer} & The number of samples per buffer returned by PA.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 on success, -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{port__wrapper_8h_afcf3e9fac2c625de44f0455824837de4}\label{port__wrapper_8h_afcf3e9fac2c625de44f0455824837de4}} 
+\index{port\+\_\+wrapper.\+h@{port\+\_\+wrapper.\+h}!pa\+\_\+start\+\_\+stream@{pa\+\_\+start\+\_\+stream}}
+\index{pa\+\_\+start\+\_\+stream@{pa\+\_\+start\+\_\+stream}!port\+\_\+wrapper.\+h@{port\+\_\+wrapper.\+h}}
+\subsubsection{\texorpdfstring{pa\+\_\+start\+\_\+stream()}{pa\_start\_stream()}}
+{\footnotesize\ttfamily int pa\+\_\+start\+\_\+stream (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Starts Port Audio stream. Until this is called, the audio callback will not be fired. 
+
+\begin{DoxyReturn}{Returns}
+Returns 0 on success, -\/1 on error 
+\end{DoxyReturn}
+\mbox{\Hypertarget{port__wrapper_8h_a0e7ba37533bce680c4f21afe880d66a5}\label{port__wrapper_8h_a0e7ba37533bce680c4f21afe880d66a5}} 
+\index{port\+\_\+wrapper.\+h@{port\+\_\+wrapper.\+h}!pa\+\_\+stop\+\_\+stream@{pa\+\_\+stop\+\_\+stream}}
+\index{pa\+\_\+stop\+\_\+stream@{pa\+\_\+stop\+\_\+stream}!port\+\_\+wrapper.\+h@{port\+\_\+wrapper.\+h}}
+\subsubsection{\texorpdfstring{pa\+\_\+stop\+\_\+stream()}{pa\_stop\_stream()}}
+{\footnotesize\ttfamily int pa\+\_\+stop\+\_\+stream (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Stops Port Audio stream. The audio callback will cease to be fired, stopping stream. 
+
+\begin{DoxyReturn}{Returns}
+Returns 0 on success, -\/1 on error 
+\end{DoxyReturn}

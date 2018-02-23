@@ -1,0 +1,369 @@
+.TH "libosp/array_utilities/array_utilities.h" 3 "Fri Feb 23 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libosp/array_utilities/array_utilities.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBarray_flip\fP (float *arr, size_t len)"
+.br
+.RI "Function to reverse an array\&. "
+.ti -1c
+.RI "float \fBarray_sum\fP (float *arr, size_t len)"
+.br
+.RI "Function to calculate the sum of an array\&. "
+.ti -1c
+.RI "float \fBarray_dot_product\fP (float *in1, float *in2, size_t len)"
+.br
+.RI "Function to calculate the dot-product of two 1-D vectors/arrays\&. "
+.ti -1c
+.RI "void \fBarray_right_shift\fP (float *arr, size_t len)"
+.br
+.RI "Function to right shift an array by one place\&. Left most value will be replaced by zero\&. "
+.ti -1c
+.RI "void \fBarray_multiply_const\fP (float *arr, float constant, size_t len)"
+.br
+.RI "Function to multiply each element of an array by a scalar constant\&. "
+.ti -1c
+.RI "void \fBarray_add_const\fP (float *arr, float constant, size_t len)"
+.br
+.RI "Function to add a scalar constant to each element of an array\&. "
+.ti -1c
+.RI "void \fBarray_add_array\fP (float *in1, float *in2, size_t len)"
+.br
+.RI "Function to do element wise addition of two arrays\&. "
+.ti -1c
+.RI "void \fBarray_subtract_array\fP (float *in1, float *in2, size_t len)"
+.br
+.RI "Function to do element wise subtraction of two arrays\&. "
+.ti -1c
+.RI "void \fBarray_element_multiply_array\fP (float *in1, float *in2, size_t len)"
+.br
+.RI "Function to do element wise multiplication of two arrays\&. "
+.ti -1c
+.RI "void \fBarray_element_divide_array\fP (float *in1, float *in2, size_t len)"
+.br
+.RI "Function to do element wise division of two arrays\&. "
+.ti -1c
+.RI "float \fBarray_min\fP (float *arr, size_t len)"
+.br
+.RI "Function to return the minimum of the elements of an array\&. "
+.ti -1c
+.RI "float \fBarray_mean\fP (float *arr, size_t len)"
+.br
+.RI "Function to calculate the mean of the elements of an array\&. "
+.ti -1c
+.RI "void \fBarray_square\fP (float *in, float *out, size_t len)"
+.br
+.RI "Function to populate the output array with square of the elements of an input array\&. "
+.ti -1c
+.RI "float \fBarray_mean_square\fP (float *arr, size_t len)"
+.br
+.RI "Function to calculate the mean square of the elements of an array\&. "
+.ti -1c
+.RI "void \fBmemcpy_f\fP (float *dst, float *src, size_t len)"
+.br
+.RI "Function to copy an array from source to destination\&. "
+.ti -1c
+.RI "void \fBarray_print\fP (const char *str, float *arr, size_t len)"
+.br
+.RI "Function to print an array for debugging\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void array_add_array (float * in1, float * in2, size_t len)"
+
+.PP
+Function to do element wise addition of two arrays\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIin1\fP Pointer to the first array 
+.br
+\fIin2\fP Pointer to the second array 
+.br
+\fIlen\fP Length of the arrays 
+.RE
+.PP
+\fBWarning:\fP
+.RS 4
+Assumes both the arrays are of same length and takes only one length parameter 
+.RE
+.PP
+
+.SS "void array_add_const (float * arr, float constant, size_t len)"
+
+.PP
+Function to add a scalar constant to each element of an array\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIarr\fP Pointer to the array 
+.br
+\fIconstant\fP The constant scalar adder 
+.br
+\fIlen\fP Length of the array 
+.RE
+.PP
+
+.SS "float array_dot_product (float * in1, float * in2, size_t len)"
+
+.PP
+Function to calculate the dot-product of two 1-D vectors/arrays\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIin1\fP Pointer to the first vector 
+.br
+\fIin2\fP Pointer to the second vector 
+.br
+\fIlen\fP Length of the vectors 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Dot product (inner product) of the two vectors 
+.RE
+.PP
+\fBWarning:\fP
+.RS 4
+Assumes both the vectors are of same length and takes only one length parameter 
+.RE
+.PP
+
+.SS "void array_element_divide_array (float * in1, float * in2, size_t len)"
+
+.PP
+Function to do element wise division of two arrays\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIin1\fP Pointer to the first array 
+.br
+\fIin2\fP Pointer to the second array 
+.br
+\fIlen\fP Length of the arrays 
+.RE
+.PP
+\fBWarning:\fP
+.RS 4
+Assumes both the arrays are of same length and takes only one length parameter 
+.RE
+.PP
+
+.SS "void array_element_multiply_array (float * in1, float * in2, size_t len)"
+
+.PP
+Function to do element wise multiplication of two arrays\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIin1\fP Pointer to the first array 
+.br
+\fIin2\fP Pointer to the second array 
+.br
+\fIlen\fP Length of the arrays 
+.RE
+.PP
+\fBWarning:\fP
+.RS 4
+Assumes both the arrays are of same length and takes only one length parameter 
+.RE
+.PP
+
+.SS "void array_flip (float * arr, size_t len)"
+
+.PP
+Function to reverse an array\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIarr\fP Pointer to the array 
+.br
+\fIlen\fP Length of the array 
+.RE
+.PP
+
+.SS "float array_mean (float * arr, size_t len)"
+
+.PP
+Function to calculate the mean of the elements of an array\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIarr\fP Pointer to the array 
+.br
+\fIlen\fP Length of the array 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Mean of the array elements 
+.RE
+.PP
+
+.SS "float array_mean_square (float * arr, size_t len)"
+
+.PP
+Function to calculate the mean square of the elements of an array\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIarr\fP Pointer to the array 
+.br
+\fIlen\fP Length of the array 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Mean square of the array elements 
+.RE
+.PP
+
+.SS "float array_min (float * arr, size_t len)"
+
+.PP
+Function to return the minimum of the elements of an array\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIarr\fP Pointer to the array 
+.br
+\fIlen\fP Length of the array 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Minimum of the array elements 
+.RE
+.PP
+
+.SS "void array_multiply_const (float * arr, float constant, size_t len)"
+
+.PP
+Function to multiply each element of an array by a scalar constant\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIarr\fP Pointer to the array 
+.br
+\fIconstant\fP The constant scalar multiplier 
+.br
+\fIlen\fP Length of the array 
+.RE
+.PP
+
+.SS "void array_print (const char * str, float * arr, size_t len)"
+
+.PP
+Function to print an array for debugging\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIstr\fP String to use for debugging 
+.br
+\fIarr\fP Pointer to the array 
+.br
+\fIlen\fP Length of the array 
+.RE
+.PP
+
+.SS "void array_right_shift (float * arr, size_t len)"
+
+.PP
+Function to right shift an array by one place\&. Left most value will be replaced by zero\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIarr\fP Pointer to the array 
+.br
+\fIlen\fP Length of the array 
+.RE
+.PP
+
+.SS "void array_square (float * in, float * out, size_t len)"
+
+.PP
+Function to populate the output array with square of the elements of an input array\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIin\fP Pointer to the input array 
+.br
+\fIout\fP Pointer to the output array 
+.br
+\fIlen\fP Length of the arrays 
+.RE
+.PP
+\fBWarning:\fP
+.RS 4
+Assumes that output array already has memory allocated to it 
+.RE
+.PP
+
+.SS "void array_subtract_array (float * in1, float * in2, size_t len)"
+
+.PP
+Function to do element wise subtraction of two arrays\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIin1\fP Pointer to the first array 
+.br
+\fIin2\fP Pointer to the second array 
+.br
+\fIlen\fP Length of the arrays 
+.RE
+.PP
+\fBWarning:\fP
+.RS 4
+Assumes both the arrays are of same length and takes only one length parameter 
+.RE
+.PP
+
+.SS "float array_sum (float * arr, size_t len)"
+
+.PP
+Function to calculate the sum of an array\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIarr\fP Pointer to the array 
+.br
+\fIlen\fP Length of the array 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+Sum of the array 
+.RE
+.PP
+
+.SS "void memcpy_f (float * dst, float * src, size_t len)"
+
+.PP
+Function to copy an array from source to destination\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdst\fP Pointer to the destination array 
+.br
+\fIsrc\fP Pointer to the source array 
+.br
+\fIlen\fP Length of the arrays 
+.RE
+.PP
+\fBWarning:\fP
+.RS 4
+Assumes that destination array already has memory allocated to it 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

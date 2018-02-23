@@ -39,6 +39,7 @@
 		704BBD201F2938C70047A8B0 /* fbpath.flt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7014BC1D1F291D1B0011E7AB /* fbpath.flt */; };
 		704BBD211F2938C70047A8B0 /* resample_32_96.flt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7014BC241F291D1B0011E7AB /* resample_32_96.flt */; };
 		704BBD221F2938C70047A8B0 /* resample_96_32.flt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7014BC251F291D1B0011E7AB /* resample_96_32.flt */; };
+		84C32A491FE2911D002495BB /* speech_enhancement.c in Sources */ = {isa = PBXBuildFile; fileRef = 84C32A471FE2911D002495BB /* speech_enhancement.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -70,6 +71,10 @@
 		141C20021F289B6F00DF6424 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14702B681F28D23B00E17FFB /* libportaudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libportaudio.a; path = ../../../../usr/local/Cellar/portaudio/19.6.0/lib/libportaudio.a; sourceTree = "<group>"; };
 		14B883D21F2866A1000E8F06 /* Doxyfile */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = Doxyfile; sourceTree = SOURCE_ROOT; };
+		4A54EDE0204087E700D70A25 /* speech_enhancement.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speech_enhancement.png; sourceTree = "<group>"; };
+		4A54EDE1204087E700D70A25 /* peak_valley_detection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = peak_valley_detection.png; sourceTree = "<group>"; };
+		4A54EDE3204087E800D70A25 /* Software_assets_2018a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Software_assets_2018a.png; sourceTree = "<group>"; };
+		4A54EDE4204087E800D70A25 /* table_comp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table_comp.png; sourceTree = "<group>"; };
 		7014BC0E1F291D1B0011E7AB /* afc_init.flt */ = {isa = PBXFileReference; lastKnownFileType = text; path = afc_init.flt; sourceTree = "<group>"; };
 		7014BC0F1F291D1B0011E7AB /* afc_init_taps.flt */ = {isa = PBXFileReference; lastKnownFileType = text; path = afc_init_taps.flt; sourceTree = "<group>"; };
 		7014BC101F291D1B0011E7AB /* afc_init_taps_l.flt */ = {isa = PBXFileReference; lastKnownFileType = text; path = afc_init_taps_l.flt; sourceTree = "<group>"; };
@@ -133,15 +138,18 @@
 		704B300E1F0F07FC001615F8 /* wdrc_mpo_support.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wdrc_mpo_support.h; sourceTree = "<group>"; };
 		704BBD231F294D840047A8B0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		708F392E1F0EE87D00708F4D /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		70C506422028E78D006CE92A /* resample_32_48.flt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = resample_32_48.flt; sourceTree = "<group>"; };
+		70C506432028E78E006CE92A /* resample_48_32.flt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = resample_48_32.flt; sourceTree = "<group>"; };
 		70EC76911F2FEF2A007B866C /* AFC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AFC.png; sourceTree = "<group>"; };
 		70EC76921F2FEF2A007B866C /* AT_RT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AT_RT.png; sourceTree = "<group>"; };
 		70EC76931F2FEF2A007B866C /* CompRule.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CompRule.png; sourceTree = "<group>"; };
 		70EC76941F2FEF2A007B866C /* Filterbank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Filterbank.png; sourceTree = "<group>"; };
-		70EC76961F2FEF2A007B866C /* Software_assets_2017a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Software_assets_2017a.png; sourceTree = "<group>"; };
 		70EC76971F2FEF2A007B866C /* UI.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UI.png; sourceTree = "<group>"; };
 		70EC76981F2FEF2A007B866C /* WDRC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WDRC.png; sourceTree = "<group>"; };
 		70EC769A1F2FF2E7007B866C /* RT-MHA_basic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RT-MHA_basic.png"; sourceTree = "<group>"; };
 		70EC769B1F2FFB3E007B866C /* Table1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Table1.png; sourceTree = "<group>"; };
+		84C32A471FE2911D002495BB /* speech_enhancement.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = speech_enhancement.c; sourceTree = "<group>"; };
+		84C32A481FE2911D002495BB /* speech_enhancement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speech_enhancement.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +190,8 @@
 				7014BC231F291D1B0011E7AB /* filterbank_coeffs6.flt */,
 				7014BC241F291D1B0011E7AB /* resample_32_96.flt */,
 				7014BC251F291D1B0011E7AB /* resample_96_32.flt */,
+				70C506422028E78D006CE92A /* resample_32_48.flt */,
+				70C506432028E78E006CE92A /* resample_48_32.flt */,
 			);
 			path = filter_coefficients;
 			sourceTree = "<group>";
@@ -214,6 +224,7 @@
 		704B2FD71F0F07FC001615F8 /* libosp */ = {
 			isa = PBXGroup;
 			children = (
+				70C5063C20205C19006CE92A /* speech_enhancement */,
 				704B2FD91F0F07FC001615F8 /* afc */,
 				704B2FDF1F0F07FC001615F8 /* array_utilities */,
 				704B2FE31F0F07FC001615F8 /* beam_forming */,
@@ -368,16 +379,28 @@
 			path = osp;
 			sourceTree = SOURCE_ROOT;
 		};
+		70C5063C20205C19006CE92A /* speech_enhancement */ = {
+			isa = PBXGroup;
+			children = (
+				84C32A471FE2911D002495BB /* speech_enhancement.c */,
+				84C32A481FE2911D002495BB /* speech_enhancement.h */,
+			);
+			path = speech_enhancement;
+			sourceTree = "<group>";
+		};
 		70EC76901F2FEF2A007B866C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				4A54EDE1204087E700D70A25 /* peak_valley_detection.png */,
+				4A54EDE3204087E800D70A25 /* Software_assets_2018a.png */,
+				4A54EDE0204087E700D70A25 /* speech_enhancement.png */,
+				4A54EDE4204087E800D70A25 /* table_comp.png */,
 				70EC769B1F2FFB3E007B866C /* Table1.png */,
 				70EC76911F2FEF2A007B866C /* AFC.png */,
 				70EC769A1F2FF2E7007B866C /* RT-MHA_basic.png */,
 				70EC76921F2FEF2A007B866C /* AT_RT.png */,
 				70EC76931F2FEF2A007B866C /* CompRule.png */,
 				70EC76941F2FEF2A007B866C /* Filterbank.png */,
-				70EC76961F2FEF2A007B866C /* Software_assets_2017a.png */,
 				70EC76971F2FEF2A007B866C /* UI.png */,
 				70EC76981F2FEF2A007B866C /* WDRC.png */,
 			);
@@ -412,7 +435,7 @@
 		708F39231F0EE87D00708F4D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "University of California, San Diego";
 				TargetAttributes = {
 					704B2FC31F0EFA22001615F8 = {
@@ -441,7 +464,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		1443AB5F1F28B19F0081864E /* Build Package Installer */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -455,10 +478,9 @@
 			outputPaths = (
 				"$(SRCROOT)/osp-installer.pkg",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "productbuild --root $SRCROOT/Products $SRCROOT/osp-installer.pkg";
-			showEnvVarsInLog = 0;
 		};
 		14702B701F28F22000E17FFB /* Generate Documentation */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -542,6 +564,7 @@
 				1443AB581F28B02F0081864E /* osp_tcp.c in Sources */,
 				704B2FCC1F0EFA31001615F8 /* port_wrapper.c in Sources */,
 				1443AB5B1F28B0450081864E /* resample.c in Sources */,
+				84C32A491FE2911D002495BB /* speech_enhancement.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,6 +578,7 @@
 				DEPLOYMENT_LOCATION = YES;
 				INFOPLIST_FILE = osp/Info.plist;
 				MACH_O_TYPE = mh_execute;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.ucsd.osp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -567,6 +591,7 @@
 				DEPLOYMENT_LOCATION = YES;
 				INFOPLIST_FILE = osp/Info.plist;
 				MACH_O_TYPE = mh_execute;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.ucsd.osp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -579,19 +604,28 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DSTROOT = Products;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -601,6 +635,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -616,13 +652,20 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -630,10 +673,13 @@
 				DSTROOT = Products;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MTL_ENABLE_DEBUG_INFO = NO;
