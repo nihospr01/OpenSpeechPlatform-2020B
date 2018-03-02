@@ -35,6 +35,7 @@ This work is supported by Nation Institute of Health, NIH/NIDCD grant R01DC01543
     - [Setting Up Mac's Wi-fi](#setting-up-macs-wifi)
     - [Setting Up Android](#setting-up-android)
     - [Working with the Android app](#working-with-the-android-app)
+    - [OSP - Jelly beans and BoB](#jelly-bean-and-bob)
   - [OSP – MATLAB Documentation](#osp--matlab-documentation)
 - [API](#api)
 - [References](#references)
@@ -323,6 +324,95 @@ With the OSP project open in Xcode, you can run the program with different optio
 
 	Raw data from android app has the following format: 
 	[date, pageName, ButtonName, CrispnessMultipliers, FullnessStepSize, VolumeStepSize, CrispnessStepSize, FullnessLevel, VolumeLevel, CrispnessLevel, FullnessValue, VolumeValue, CrispnessValue, CompressionRatio, g50, g65, g80, KneeLow, MPOLimit, AttackTime, ReleaseTime]
+
+
+### OSP - Jelly beans and BoB
+
+This section describes the use of Jelly beans JBv5 and Breakout Board (BoB v5)
+
+#### Jelly Beans
+
+![Jelly Beans JBv5](images/jbv5.png)
+
+1. The jellybean shell has been sealed with hot glue. Do not attempted to open it. 102 is the serial number of this JB.
+2. Standard CS44 connector. Feel free to use different receivers. All jellybeans work with left and right receivers.
+3. 2x CS44 cable to the BOB. The cables are labelled 1 and 2, and should be Connected to ports 1 and 2 labelled on the JB shell. Cable 1 is always closer to the receiver.
+4. Correctly connecting the cables and applying power will result in a green light visible in this port.
+
+#### CS44 Cables
+
+![CS44 Cable](images/cs44.png)
+
+1. The red dot on the cable should line up with the white stripe on the connector in the JBv5.
+2. This CS44 adapter is necessary to connect to the BoB. The 1 and 2 on the adapter should match the 1 and 2 on the BoB.
+3. Cables are reversible, but it is strongly recommended that BoB-end be left secured. The cables are 1 meter long.
+
+#### Breakout Board
+
+![BoBv5](images/bobv5.png)
+
+1. **USB B-Micro** : Takes a standard USB supply of 5V as an alternative to battery power. If using battery power, DISCONNECT THE USB CABLE. 
+2. **Power source selector** : Switch to the left for battery power, to the right for USB power. Use a USB source from the Verifit or a computer, NOT from a 2-prong wall-outlet-adapter. EIN from a floating-ground USB source can be substantial (45dB+).
+3. **Power switch** : Left for ON, right for OFF.
+4. **Low Battery LED**: This LED will turn on (RED) if the battery voltage drops below 3V. The bottom side of the box must be removed to replace the batteries (3xAAA). 
+5. **Power on LED** : This LED will turn on (GREEN) if power is supplied to the board. If using battery power, the LED will turn OFF in the case of low battery, and the RED led will turn on.
+6. **Boost enable/bypass**: Left for ENABLE, Right for BYPASS. Bypass should only be used if an extremely sensitive digital measurement is occurring in battery mode. The switching effect of the boost regulator is not audible in normal operation.
+7. **Right volume adjust** : Logarithmic potentiometer, clockwise to increase volume. This knob does NOT affect the gain of the microphone
+signal coming from the JB.
+8. **Right loopback selector** : Left for INTERNAL loopback (fully analog, front mic only). Right for EXTERNAL loopback (via ZT8 + DSP software).
+9. **CS44 adapter to Right JB** : #1 towards the front of the device. #2 towards the back. Match with marks on the adapter PCB.
+10. **Right output limiting LEDs**: Will turn on as output voltage becomes dangerously high. Can be disabled.
+11. **3x TRS jack to ZT8** : See next page.
+12. **Left output limiting LEDs**: Will turn on as output voltage becomes dangerously high. Can be disabled.
+13. **CS44 adapter to Left JB** : #1 towards the front of the device. #2 towards the back. Match with marks on the adapter PCB.
+14. **Left loopback selector** : Left for INTERNAL loopback (fully analog, front mic only). Right for EXTERNAL loopback (via ZT8 + DSP software). 
+15. **Left volume adjust** : Logarithmic potentiometer, clockwise to increase volume. This knob does NOT affect the gain of the microphone signal coming from the JB.
+16. **Battery pack** : Takes 3 standard AA alkaline cells.
+17. **Stereo volume adjust**: Logarithmic potentiometer, clockwise to increase volume. This knob adjusts the output level of both JB equally.
+
+![BoBv5](images/bob_connect.png)
+
+1. Left Front Mic differential output
+2. Left and Right Receiver single-ended inputs 
+3. Right Front Mic differential output
+
+All outputs are 0V DC biased.
+
+This is the only audio cable provided with the OSP hardware. It converts the dual-channel differential output from the ZT8 to stereo single-ended for the BoB.
+
+####Startup Procedure
+Switches 2, 6, 8, and 14 will require a pen or other aid to switch with the box assembled. This is by design to prevent accidental switching of operating modes during experiments.
+
+For each ear:
+
+1. Connect Jellybean to BoB with the CS44 cables and connectors 9 (right) or 13 (left) on the BoB.
+2. Use Switch 8 (right) or 14 (left) on the BoB to enable Internal loopback mode.
+3. Use Switch 2 to select the power source for the BoB. If using USB, only use a PC or other grounded device as the source. A 2-prong wall adapter is NOT sufficient. If using batteries, enable Boost with switch 6 (see page 5).
+4. Turn on the power to the BoB (switch 3). A green light should be visible in the Jellybean.
+5. Turn knobs 7 (right) and 15 (left) on the BoB clockwise to increase individual channel output. Knob 17 adjusts both channels equally. With a receiver in place and maximum volume the Jellybean should feedback audibly (low-power receivers may not feedback until a hand is cupped nearby). The absence of audible feedback suggests an error in system assembly.
+6. Place Jellybean and receiver in Verifit or other calibration device.
+7. Using a pink noise or ANSI 3.22 as a guide, adjust the output volume with knobs , 15, or 17 on the BoB until the desired gain is achieved. 40-42dB gain is typical before acoustic feedback occurs in internal mode.
+8. Use Switch 8 or 14 to engage External mode. Connect the BoB to ZoomTac or other audio interface using 3.5mm TRS cables (See page 6 for connector functions).
+9. Adjust input gain on ZoomTac (or equivalent) to maximize dynamic input range to the ADC.
+10. Run the OSP software and attenuate as desired within the program.
+
+####Troubleshooting
+
+If no sound is coming out of the receiver, check the following:
+
+1. Is the BoB’s “Power on” (green) LED on? If not, check switches 3 (power) and 2 (source select).
+
+2. Is the JB’s “Power on” (green) LED on? If not, check the CS44 cable connections. Verify that cables 1 and 2 are in the correct sockets on both JB and BoB. Verify that the adapter board is not in backwards.
+
+3. Check switch 8 or 14. Is the BoB in the correct mode for this test (Internal or External)? If External mode is desired, verify the proper cable connection to ZT8 (or equivalent).
+
+4. Check knobs 7 or 15. In the fully-counterclockwise position they will cut off output completely.
+
+5. Is the receiver properly seated in the Jellybean?
+
+#### Single Ear Signal Path
+
+![Single Ear Signal Path](images/Single_Ear_Signal_Path.png)
 
 
 ### MATLAB Documentation
