@@ -37,7 +37,7 @@ This work is supported by Nation Institute of Health, NIH/NIDCD grant R01DC01543
     - [Setup Procedure](#setup-procedure)
     - [Troubleshooting](#troubleshooting)
     - [Single Ear Signal Path](#single-ear-signal-path)
-  - [OSP – MATLAB Documentation](#osp--matlab-documentation)
+  - [MATLAB Documentation](#matlab-documentation)
 - [API](#api)
 - [References](#references)
 
