@@ -17,10 +17,10 @@ This work is supported by Nation Institute of Health, NIH/NIDCD grant R01DC01543
     - [For Audiologists and Speech Scientists](#for-audiologists-and-speech-scientists) 
   - [Real-Time Master Hearing Aid (RT-MHA) Software](#real-time-master-hearing-aid-rt-mha-software)
     - [Subband decomposition](#subband-decomposition)
-    - [WDRC](#wdrc)
-    - [AFC](#afc)
-    - [Speech Enhancement](#speech-enEnhancement)
-    - [RT-MHA Performance](#rt-mha-performance) 
+    - [Wide Dynamic Range Compression](#wide-dynamic-range-compression)
+    - [Automatic Feedback Control](#automatic-feedback-control)
+    - [Speech Enhancement](#speech-enhancement)
+    - [RTMHA Performance](#rt-mha-performance) 
   - [User Device Software](#user-device-software)
 - [**OSP Installation**](#osp-installation)
   - [**Basic Installation**](#basic-installation)
@@ -72,13 +72,16 @@ We will discuss the open source libraries developed for OSP. Figure 2 shows the 
 
 **Figure 2:** RT-MHA software block diagram with signal flow.
 
-**Subband Decomposition:** In the RT-MHA, subband decomposition is provided to divide the full frequency spectrum into multiple frequency regions called “subbands”. This decomposition enables independent gain control of the HA system in each frequency region using different WDRC parameters. The decomposition is implemented as a bank of 6 finite impulse response (FIR) filters (Subband-1 to 6 in Figure 2) whose frequency responses are shown in Figure 3. Each of the 6 FIR filters has 193 taps, equivalent to a latency of ((193-1)/2)/32 kHz) = 3 ms. The filters are designed in MATLAB and the resulting filters are saved in `.flt` files for inclusion with the RT-MHA software. Bandwidths and upper and lower cut-off frequencies of these filters are determined according to a set of critical frequency values. It is possible for users to modify the MATLAB scripts to use FIR filters of different length and different number of subbands. This change requires recompiling the library.
+#### Subband Decomposition
+In the RT-MHA, subband decomposition is provided to divide the full frequency spectrum into multiple frequency regions called “subbands”. This decomposition enables independent gain control of the HA system in each frequency region using different WDRC parameters. The decomposition is implemented as a bank of 6 finite impulse response (FIR) filters (Subband-1 to 6 in Figure 2) whose frequency responses are shown in Figure 3. Each of the 6 FIR filters has 193 taps, equivalent to a latency of ((193-1)/2)/32 kHz) = 3 ms. The filters are designed in MATLAB and the resulting filters are saved in `.flt` files for inclusion with the RT-MHA software. Bandwidths and upper and lower cut-off frequencies of these filters are determined according to a set of critical frequency values. It is possible for users to modify the MATLAB scripts to use FIR filters of different length and different number of subbands. This change requires recompiling the library.
 
 ![Figure 3](images/Filterbank.png)
 
 **Figure 3:** Frequency response of the 6-channel filter bank.
 
-**Wide Dynamic Range Compression (WDRC):** The WDRC technique is one of the essential building blocks of a HA [2]. The purpose of a WDRC system is to modify the volume of the audio signal arriving at the user's ear in such a way as to make the output sound as audible, comfortable, and intelligible as possible for the user. At a high level, the WDRC amplifies quiet sounds (40-50 dB SPL), attenuates loud sounds (85-100 dB SPL), and applies a variable gain for everything in between [3]. In the RT-MHA, the WDRC algorithm is a based on a version of Prof. James Kates [4] and developed in MATLAB. We ported this module to ANSI C and provided as a library in source code. The implemented WDRC is a multi-channel system, in which the gain control is realized independently in each subband. The amount of gain in each subband is a frequency dependent, non-linear function of the input signal power. Basically, the overall WDRC algorithm is based on envelope detection (Peak Detector) and non-linear amplification (Compression Rule) as illustrated in Figure 4, with primary control parameters: compression ratio (CR), attack time (AT), release time (RT), and upper and lower kneepoints (K_{up} and K_{low}) [5]. In each subband, a peak detector tracks the envelope variations of the input subband signal and estimates the signal power accordingly. Then the amount of gain to apply will be determined based on a compression rule of the estimated input power level given by the peak detector. The AT and RT are illustrated in Figure 5, which are affected by the tracking ability of the peak detector. The CR, K_{up} and K_{low} are the control parameters for determining the compression rule, as shown in Figure 6. These WDRC parameters for each subband can be specified at compile time and changed at run time using the user device.
+#### Wide Dynamic Range Compression
+
+The WDRC technique is one of the essential building blocks of a HA [2]. The purpose of a WDRC system is to modify the volume of the audio signal arriving at the user's ear in such a way as to make the output sound as audible, comfortable, and intelligible as possible for the user. At a high level, the WDRC amplifies quiet sounds (40-50 dB SPL), attenuates loud sounds (85-100 dB SPL), and applies a variable gain for everything in between [3]. In the RT-MHA, the WDRC algorithm is a based on a version of Prof. James Kates [4] and developed in MATLAB. We ported this module to ANSI C and provided as a library in source code. The implemented WDRC is a multi-channel system, in which the gain control is realized independently in each subband. The amount of gain in each subband is a frequency dependent, non-linear function of the input signal power. Basically, the overall WDRC algorithm is based on envelope detection (Peak Detector) and non-linear amplification (Compression Rule) as illustrated in Figure 4, with primary control parameters: compression ratio (CR), attack time (AT), release time (RT), and upper and lower kneepoints (K_{up} and K_{low}) [5]. In each subband, a peak detector tracks the envelope variations of the input subband signal and estimates the signal power accordingly. Then the amount of gain to apply will be determined based on a compression rule of the estimated input power level given by the peak detector. The AT and RT are illustrated in Figure 5, which are affected by the tracking ability of the peak detector. The CR, K_{up} and K_{low} are the control parameters for determining the compression rule, as shown in Figure 6. These WDRC parameters for each subband can be specified at compile time and changed at run time using the user device.
 
 ![Figure 4](images/WDRC.png)
 
@@ -92,13 +95,17 @@ We will discuss the open source libraries developed for OSP. Figure 2 shows the 
 
 **Figure 6:** Input-output curve of the compression rule.
 
-**Automatic Feedback Control (AFC):** Physical placement of the microphone and receiver in a HA device poses a major problem known as acoustic feedback [5]. This results from the acoustic coupling between the receiver and the microphone, in which the amplified signal through the receiver is collected by the microphone and re-amplified, causing severe distortion in the desired signal [5]. Consequently, it limits the available amount of amplification in a HA and disturbs the user due to the produced howling or whistling sounds. To overcome this problem, AFC has become the most common technique in modern HAs because of its ability to track the variations in the acoustic feedback path and cancels the feedback signal accordingly. Figure 7 depicts the AFC framework implemented in our RT-MHA system, which is mainly based on the Filtered-X Least Mean Square (FXLMS) method [6,7]. In this framework, the AFC filter *W*(*z*) is a finite impulse response (FIR) filter placed in parallel with the HA processing *G*(*z*) that continuously adjusts its coefficients to emulate the impulse response of the feedback path *F*(*z*). *x*(*n*) is the desired input signal and *d*(*n*) is the actual input to the microphone, which contains *x*(*n*) and the feedback signal *y*(*n*) generated by the HA output *s*(*n*) passing through *F*(*z*). *\hat{y}*(*n*) is the estimate of *y*(*n*) given by the output of *W*(*z*). *e*(*n*) = *d*(*n*) − *\hat{y}*(*n*) is the feedback-compensated signal. *H*(*z*) and *A*(*z*) are respectively the band-limited filter and the pre-whitening filter (both FIR and fixed), with *u*(*n*), *e_f*(*n*), and *u_f*(*n*) being the output signals of the filters. Besides the basic FXLMS, the proportionate normalized LMS (PNLMS) [8-10] is also provided that improves the feedback tracking ability over the FXLMS. The AFC module is provided as a library in source code.
+#### Automatic Feedback Control
+
+Physical placement of the microphone and receiver in a HA device poses a major problem known as acoustic feedback [5]. This results from the acoustic coupling between the receiver and the microphone, in which the amplified signal through the receiver is collected by the microphone and re-amplified, causing severe distortion in the desired signal [5]. Consequently, it limits the available amount of amplification in a HA and disturbs the user due to the produced howling or whistling sounds. To overcome this problem, AFC has become the most common technique in modern HAs because of its ability to track the variations in the acoustic feedback path and cancels the feedback signal accordingly. Figure 7 depicts the AFC framework implemented in our RT-MHA system, which is mainly based on the Filtered-X Least Mean Square (FXLMS) method [6,7]. In this framework, the AFC filter *W*(*z*) is a finite impulse response (FIR) filter placed in parallel with the HA processing *G*(*z*) that continuously adjusts its coefficients to emulate the impulse response of the feedback path *F*(*z*). *x*(*n*) is the desired input signal and *d*(*n*) is the actual input to the microphone, which contains *x*(*n*) and the feedback signal *y*(*n*) generated by the HA output *s*(*n*) passing through *F*(*z*). *\hat{y}*(*n*) is the estimate of *y*(*n*) given by the output of *W*(*z*). *e*(*n*) = *d*(*n*) − *\hat{y}*(*n*) is the feedback-compensated signal. *H*(*z*) and *A*(*z*) are respectively the band-limited filter and the pre-whitening filter (both FIR and fixed), with *u*(*n*), *e_f*(*n*), and *u_f*(*n*) being the output signals of the filters. Besides the basic FXLMS, the proportionate normalized LMS (PNLMS) [8-10] is also provided that improves the feedback tracking ability over the FXLMS. The AFC module is provided as a library in source code.
 
 ![Figure 7](images/AFC.png)
 
 **Figure 7:** The AFC framework.
 
-**Speech Enhancement:** The presence of background noise significantly diminishes the Hearing ability of the users with Hearing aids. The speech enhancement module in the Open speech platform to enhance the speech components in the degraded speech with noise. In the RT-MHA, the Speech Enhancement algorithms are a based on a version of Prof. James Kates and developed in MATLAB. This module has been ported to ANSI C and provided as a library in source code `speech_enhancement.c` and `speech_enhancement.h`. Figure 8 depicts the speech enhancement block diagram, this module utilizes the output of the WDRC block for each of the six subbands and performs (1) Peak and Valley detection, (2) Noise Estimation and (3) Spectral subtraction. The peak and valley detection has been shown in Figure 9. In the RT-MHA, three Noise estimation algorithms have been implemented: (1) Arslan Power Averaging Procedure [11], (2) Hirsch & Ehrlicher weight averaging procedure [12] and (3) Cohen & Berdugo MCRA Procedure [13]. After the estimating the noise in the corrupted speech signal, spectral subtraction is performed to remove the noise contents of the signal. Power spectral subtraction has been implemented to remove the noise from the corrupted speech signal by using a fixed over-subtraction factor (spectral subtraction param) and wiener filter gain equation. The value for the spectral subtraction param can have a value between 0 (no spectral subtraction) and 1 (maximum subtraction).
+#### Speech Enhancement
+
+The presence of background noise significantly diminishes the Hearing ability of the users with Hearing aids. The speech enhancement module in the Open speech platform to enhance the speech components in the degraded speech with noise. In the RT-MHA, the Speech Enhancement algorithms are a based on a version of Prof. James Kates and developed in MATLAB. This module has been ported to ANSI C and provided as a library in source code `speech_enhancement.c` and `speech_enhancement.h`. Figure 8 depicts the speech enhancement block diagram, this module utilizes the output of the WDRC block for each of the six subbands and performs (1) Peak and Valley detection, (2) Noise Estimation and (3) Spectral subtraction. The peak and valley detection has been shown in Figure 9. In the RT-MHA, three Noise estimation algorithms have been implemented: (1) Arslan Power Averaging Procedure [11], (2) Hirsch & Ehrlicher weight averaging procedure [12] and (3) Cohen & Berdugo MCRA Procedure [13]. After the estimating the noise in the corrupted speech signal, spectral subtraction is performed to remove the noise contents of the signal. Power spectral subtraction has been implemented to remove the noise from the corrupted speech signal by using a fixed over-subtraction factor (spectral subtraction param) and wiener filter gain equation. The value for the spectral subtraction param can have a value between 0 (no spectral subtraction) and 1 (maximum subtraction).
 
 ![Figure 8](images/speech_enhancement.png)
 
@@ -384,7 +391,8 @@ All outputs are 0V DC biased.
 
 This is the only audio cable provided with the OSP hardware. It converts the dual-channel differential output from the ZT8 to stereo single-ended for the BoB.
 
-####Startup Procedure
+#### Startup Procedure
+
 Switches 2, 6, 8, and 14 will require a pen or other aid to switch with the box assembled. This is by design to prevent accidental switching of operating modes during experiments.
 
 For each ear:
@@ -400,7 +408,7 @@ For each ear:
 9. Adjust input gain on ZoomTac (or equivalent) to maximize dynamic input range to the ADC.
 10. Run the OSP software and attenuate as desired within the program.
 
-####Troubleshooting
+#### Troubleshooting
 
 If no sound is coming out of the receiver, check the following:
 
