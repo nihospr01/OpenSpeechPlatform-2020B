@@ -13,16 +13,14 @@ This work is supported by Nation Institute of Health, NIH/NIDCD grant R01DC01543
 - [License](#license)
 - [Overview](#overview)
   - [Recommended Usage](#recommended-usage)
-<!---
     - [For Electrical Engineering and Computer Science Practitioners](#for-electrical-engineering-and-computer-science-practitioners)
-    - [For Audiologists and Speech Scientists](#for-audiologists-and-speech-scientists) --->
+    - [For Audiologists and Speech Scientists](#for-audiologists-and-speech-scientists) 
   - [Real-Time Master Hearing Aid (RT-MHA) Software](#real-time-master-hearing-aid-rt-mha-software)
-<!---
     - [Subband decomposition](#subband-decomposition)
     - [WDRC](#wdrc)
     - [AFC](#afc)
     - [Speech Enhancement](#speech-enEnhancement)
-    - [RT-MHA Performance](#rt-mha-performance) --->
+    - [RT-MHA Performance](#rt-mha-performance) 
   - [User Device Software](#user-device-software)
 - [**OSP Installation**](#osp-installation)
   - [**Basic Installation**](#basic-installation)
@@ -36,7 +34,7 @@ This work is supported by Nation Institute of Health, NIH/NIDCD grant R01DC01543
     - [Setting Up Android](#setting-up-android)
     - [Working with the Android app](#working-with-the-android-app)
   - [OSP - Jelly beans and BoB](#OSP--jelly-bean-and-bob)
-  - [Jelly Beans](#jelly-beans)
+    - [Jelly Beans](#jelly-beans)
     - [CS44 Cables](#cs44-cables)
     - [Breakout Board](#breakout-board)
     - [Setup Procedure](#setup-procedure)
