@@ -50,93 +50,105 @@ static Beam_Form beam_formR;
 
 static int _internal_pa_init(PaStreamParameters *inputParameters, PaStreamParameters *outputParameters, unsigned int sample_rate)
 {
-    int numDevices;
-    int i;
-
-	float resample_32_96_taps[RESAMP_32_96_TAPS];
-	float resample_96_32_taps[RESAMP_96_32_TAPS];
-
+	int numDevices;
+	int i;
+	
+	float resample_32_96_with_mic_calibration_left_ear[RESAMP_32_96_TAPS_MIC_CALIB];
+	float resample_32_96_with_mic_calibration_right_ear[RESAMP_32_96_TAPS_MIC_CALIB];
+	float resample_96_32_with_mic_calibration_left_ear[RESAMP_96_32_TAPS_MIC_CALIB];
+	float resample_96_32_with_mic_calibration_right_ear[RESAMP_96_32_TAPS_MIC_CALIB];
+	
 	//
 	// Load the resampler taps
-	if (load_filter_taps("resample_32_96.flt", resample_32_96_taps, RESAMP_32_96_TAPS) < 0) {
+	
+	if (load_filter_taps("resample_32_96_with_mic_calibration_left_ear.flt", resample_32_96_with_mic_calibration_left_ear, RESAMP_32_96_TAPS_MIC_CALIB) < 0) {
 		return -1;
 	}
-
-	if (load_filter_taps("resample_96_32.flt", resample_96_32_taps, RESAMP_96_32_TAPS) < 0) {
+	
+	if (load_filter_taps("resample_32_96_with_mic_calibration_right_ear.flt", resample_32_96_with_mic_calibration_right_ear, RESAMP_32_96_TAPS_MIC_CALIB) < 0) {
 		return -1;
 	}
-
+	
+	if (load_filter_taps("resample_96_32_with_mic_calibration_left_ear.flt", resample_96_32_with_mic_calibration_left_ear, RESAMP_96_32_TAPS_MIC_CALIB) < 0) {
+		return -1;
+	}
+	
+	if (load_filter_taps("resample_96_32_with_mic_calibration_right_ear.flt", resample_96_32_with_mic_calibration_right_ear, RESAMP_96_32_TAPS_MIC_CALIB) < 0) {
+		return -1;
+	}
+	
 	// Initialize resampler Left
-	if ((resampleL = resample_init(resample_32_96_taps, ARRAY_SIZE(resample_32_96_taps),
-									resample_96_32_taps, ARRAY_SIZE(resample_96_32_taps))) == NULL) {
+	if ((resampleL = resample_init(resample_32_96_with_mic_calibration_left_ear, ARRAY_SIZE(resample_32_96_with_mic_calibration_left_ear),
+																 resample_96_32_with_mic_calibration_left_ear, ARRAY_SIZE(resample_96_32_with_mic_calibration_left_ear))) == NULL) {
 		return -1;
 	}
-
+	
 	// Initialize resampler Right
-	if ((resampleR = resample_init(resample_32_96_taps, ARRAY_SIZE(resample_32_96_taps),
-									resample_96_32_taps, ARRAY_SIZE(resample_96_32_taps))) == NULL) {
+	if ((resampleR = resample_init(resample_32_96_with_mic_calibration_right_ear, ARRAY_SIZE(resample_32_96_with_mic_calibration_right_ear),
+																 resample_96_32_with_mic_calibration_right_ear, ARRAY_SIZE(resample_96_32_with_mic_calibration_right_ear))) == NULL) {
 		return -1;
 	}
-
+	
+	
 	// Init beam forming stuff
 	if ((beam_formL = beam_form_init(0, 1, sample_rate)) == NULL) {
 		return -1;
 	}
-
+	
 	if ((beam_formR = beam_form_init(0, 1, sample_rate)) == NULL) {
 		return -1;
 	}
-
-    printf("patest_read_write_wire.c\n");
-    fflush(stdout);
-
-    err_message= Pa_Initialize();
-    if (err_message != paNoError) {
-        return -1;
-    }
-
-    // get number of devices
-    numDevices = Pa_GetDeviceCount();
-    if( numDevices < 0 )
-    {
-        printf( "ERROR: Pa_CountDevices returned 0x%x\n", numDevices );
-        return -1;
-    }
-    else{
-        printf("\n # of audio devices = %d\n", numDevices);
-    }
-
-    // get info about devices
-    const   PaDeviceInfo *deviceInfo;
-    for( i=0; i<numDevices; i++ )
-    {
-        deviceInfo = Pa_GetDeviceInfo( i );
-        printf("device %d  = %s\n", i, deviceInfo->name);
-    }
-
-    inputParameters->device = Pa_GetDefaultInputDevice(); /* default input device */
-    printf("Input device # %d.\n", inputParameters->device);
-    printf("Input LL: %g s\n", Pa_GetDeviceInfo(inputParameters->device)->defaultLowInputLatency);
-    printf("Input HL: %g s\n", Pa_GetDeviceInfo(inputParameters->device)->defaultHighInputLatency);
-    inputParameters->channelCount = NUM_INPUT_CHANNELS;
-    inputParameters->sampleFormat = PA_SAMPLE_TYPE;
-//    inputParameters.suggestedLatency = Pa_GetDeviceInfo(inputParameters.device)->defaultHighInputLatency ; // might need 0
-    inputParameters->suggestedLatency = DESIRED_LATENCY ;
-
-    inputParameters->hostApiSpecificStreamInfo = NULL;
-
-    outputParameters->device = Pa_GetDefaultOutputDevice(); /* default output device */
-    printf("Output device # %d.\n", outputParameters->device);
-    printf("Output LL: %g s\n", Pa_GetDeviceInfo( outputParameters->device)->defaultLowOutputLatency);
-    printf("Output HL: %g s\n", Pa_GetDeviceInfo( outputParameters->device)->defaultHighOutputLatency);
-    outputParameters->channelCount = NUM_OUTPUT_CHANNELS;
-    outputParameters->sampleFormat = PA_SAMPLE_TYPE;
-//    outputParameters.suggestedLatency = Pa_GetDeviceInfo(outputParameters.device)->defaultHighOutputLatency; // might need 0
-    outputParameters->suggestedLatency = DESIRED_LATENCY;
-
-
-    outputParameters->hostApiSpecificStreamInfo = NULL;
-
+	
+	printf("patest_read_write_wire.c\n");
+	fflush(stdout);
+	
+	err_message= Pa_Initialize();
+	if (err_message != paNoError) {
+		return -1;
+	}
+	
+	// get number of devices
+	numDevices = Pa_GetDeviceCount();
+	if( numDevices < 0 )
+	{
+		printf( "ERROR: Pa_CountDevices returned 0x%x\n", numDevices );
+		return -1;
+	}
+	else{
+		printf("\n # of audio devices = %d\n", numDevices);
+	}
+	
+	// get info about devices
+	const   PaDeviceInfo *deviceInfo;
+	for( i=0; i<numDevices; i++ )
+	{
+		deviceInfo = Pa_GetDeviceInfo( i );
+		printf("device %d  = %s\n", i, deviceInfo->name);
+	}
+	
+	inputParameters->device = Pa_GetDefaultInputDevice(); /* default input device */
+	printf("Input device # %d.\n", inputParameters->device);
+	printf("Input LL: %g s\n", Pa_GetDeviceInfo(inputParameters->device)->defaultLowInputLatency);
+	printf("Input HL: %g s\n", Pa_GetDeviceInfo(inputParameters->device)->defaultHighInputLatency);
+	inputParameters->channelCount = NUM_INPUT_CHANNELS;
+	inputParameters->sampleFormat = PA_SAMPLE_TYPE;
+	//    inputParameters.suggestedLatency = Pa_GetDeviceInfo(inputParameters.device)->defaultHighInputLatency ; // might need 0
+	inputParameters->suggestedLatency = DESIRED_LATENCY ;
+	
+	inputParameters->hostApiSpecificStreamInfo = NULL;
+	
+	outputParameters->device = Pa_GetDefaultOutputDevice(); /* default output device */
+	printf("Output device # %d.\n", outputParameters->device);
+	printf("Output LL: %g s\n", Pa_GetDeviceInfo( outputParameters->device)->defaultLowOutputLatency);
+	printf("Output HL: %g s\n", Pa_GetDeviceInfo( outputParameters->device)->defaultHighOutputLatency);
+	outputParameters->channelCount = NUM_OUTPUT_CHANNELS;
+	outputParameters->sampleFormat = PA_SAMPLE_TYPE;
+	//    outputParameters.suggestedLatency = Pa_GetDeviceInfo(outputParameters.device)->defaultHighOutputLatency; // might need 0
+	outputParameters->suggestedLatency = DESIRED_LATENCY;
+	
+	
+	outputParameters->hostApiSpecificStreamInfo = NULL;
+	
 	return 0;
 }
 

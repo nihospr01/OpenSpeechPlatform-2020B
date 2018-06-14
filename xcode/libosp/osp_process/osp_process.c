@@ -87,32 +87,34 @@ static void osp_process_ha(osp_user_data *osp, Filter *filter, Peak_detect pd, f
 		peak_detect(pd, filtered, len, peak, osp->attack[i], osp->release[i], i);
 		// Converting the Peak Detector output to dB SPL values
 		peak_to_spl(peak, pdb, len);
+		
+		// speech enhancement before wdrc.
+		speech_enhancement(filtered, osp->noise_estimation_type, osp->spectral_subtraction, osp->spectral_subtraction_param, len, D_PD_SAMP_RATE, signal_speech_enhanced);
 		// MPO limiting
-
 		// #ifdef MPO  // If MPO is activated
 		if (osp->mpo_on){
-		
+			
 			wdrc_mpo_support(pdb, osp->g50[i], osp->g80[i], osp->knee_low[i], len, wdrcdb);
-            
-			mpo(filtered, pdb, wdrcdb, osp->knee_high[i], len, signal);
+			
+			mpo(signal_speech_enhanced, pdb, wdrcdb, osp->knee_high[i], len, signal);
 		}
-
+		
 		// #else /* MPO */
-			// Applying WDRC on filtered signal using the Peak Detector dB SPL values to compare with gains at 50 dB SPL and 80 dB SPL
+		// Applying WDRC on filtered signal using the Peak Detector dB SPL values to compare with gains at 50 dB SPL and 80 dB SPL
 		else {
-			wdrc(filtered, pdb, osp->g50[i], osp->g80[i], osp->knee_low[i], osp->knee_high[i], len, signal);
+			wdrc(signal_speech_enhanced, pdb, osp->g50[i], osp->g80[i], osp->knee_low[i], osp->knee_high[i], len, signal);
 		}
 		// #endif /* MPO */
 		// Accumulating the output of HA for each Sub-Band
 		
+		// For speech enhancement block after wdrc.
+		//		speech_enhancement(signal, osp->noise_estimation_type, osp->spectral_subtraction, osp->spectral_subtraction_param, len, D_PD_SAMP_RATE, signal_speech_enhanced);
 		
-		speech_enhancement(signal, osp->noise_estimation_type, osp->spectral_subtraction, osp->spectral_subtraction_param, len, D_PD_SAMP_RATE, signal_speech_enhanced);
-		
-		array_add_array(s_n, signal_speech_enhanced, len);
+		array_add_array(s_n, signal, len);
 	}
 }
 
-int osp_init(unsigned int frame_size, int sample_rate, unsigned char afc_adaptation_type)
+int osp_init(unsigned int frame_size, int sample_rate, osp_user_data *osp_data)
 {
 	int i;
 	float band_filter_coeffs[NUM_BANDS][BAND_FILT_LEN]; // Array to contain all Sub-Band filter taps
@@ -162,7 +164,7 @@ int osp_init(unsigned int frame_size, int sample_rate, unsigned char afc_adaptat
 	if ((afc_left = afc_init(afc_init_taps, ARRAY_SIZE(afc_init_taps),
 						hpf_taps, ARRAY_SIZE(hpf_taps),
 						blf_taps, ARRAY_SIZE(blf_taps),
-						frame_size, afc_adaptation_type)) == NULL) {
+						frame_size, osp_data->feedback_algorithm_type, osp_data->mu, osp_data->rho)) == NULL) {
 		fprintf(stderr, "Error initializing afc left\n");
 		return -1;
 	}
@@ -184,7 +186,7 @@ int osp_init(unsigned int frame_size, int sample_rate, unsigned char afc_adaptat
 	if ((afc_right = afc_init(afc_init_taps, ARRAY_SIZE(afc_init_taps),
 						hpf_taps, ARRAY_SIZE(hpf_taps),
 						blf_taps, ARRAY_SIZE(blf_taps),
-						frame_size, afc_adaptation_type)) == NULL) {
+						frame_size, osp_data->feedback_algorithm_type, osp_data->mu, osp_data->rho)) == NULL) {
 		fprintf(stderr, "Error initializing afc right\n");
 		return -1;
 	}
@@ -392,6 +394,17 @@ void osp_data_init(osp_user_data *user_data)
 	user_data->no_op = 0;
 	user_data->feedback = 0;
 	user_data->rear_mics = 1;
+	
+	user_data->choose_sampling_frequency = 1;
+//	user_data->mpo_on = 1;
+	user_data->noise_estimation_type = 0;
+	user_data->spectral_subtraction = 0;
+	user_data->spectral_subtraction_param = 0;
+	
+	user_data->feedback_algorithm_type = 1;
+	user_data->mu = 0.005;
+	user_data->rho =  0.985;
+	
 }
 
 void osp_data_set_gain(osp_user_data *user_data, int gain)

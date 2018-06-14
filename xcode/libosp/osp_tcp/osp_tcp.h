@@ -22,17 +22,25 @@
 #include <stddef.h>
 #include "constants.h"
 #include <sys/types.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "jsmn.h"
 
 typedef struct osp_tcp_t *Osp_tcp;
 
-#define OSP_WRONG_VERSION		0x00
-#define OSP_REQ_UPDATE_VALUES	0x01	///< Request to set the values in the real-time OSP C application
-#define	OSP_REQ_GET_UNDERRUNS	0x02	///< Request to get number of underruns from real-time OSP application
-#define OSP_REQ_USER_ID			0x03
-#define OSP_REQ_USER_ACTION		0x04
-#define OSP_REQ_GET_NUM_BANDS	0x05
-#define OSP_DISCONNECT			0x06
-#define OSP_REQ_LAST			0x07	///< This exists so we can test if an inc packet is one we recognize
+#define OSP_WRONG_VERSION		0
+#define OSP_REQ_UPDATE_VALUES	1	///< Request to set the values in the real-time OSP C application
+#define	OSP_REQ_GET_UNDERRUNS	2	///< Request to get number of underruns from real-time OSP application
+#define OSP_REQ_USER_ID			3
+#define OSP_REQ_USER_ACTION		4
+#define OSP_REQ_GET_NUM_BANDS	5
+#define OSP_DISCONNECT			6
+#define OSP_REQ_LAST			7	///< This exists so we can test if an inc packet is one we recognize
+#define READ_REQUEST_LEN_JSON 36
+#define USER_LEN_JSON 8
+#define USER_JSON 10
+#define HA_STATE_JSON 257
 
 /**
  * @brief Initialization function for the OSP TCP layer
@@ -69,7 +77,8 @@ int osp_tcp_connect(Osp_tcp osp_tcp);
  * @param osp_tcp The instance of the Osp_tcp variable that was returned from osp_tcp_init
  * @return Returns the request sent by the client
  */
-char osp_tcp_read_req(Osp_tcp osp_tcp);
+int osp_tcp_read_req(Osp_tcp osp_tcp);
+ssize_t osp_4afc_read_values(Osp_tcp osp_tcp, char *file_path, unsigned int size);
 
 /**
  * @brief Reads data from the TCP stream into the osp_user_data structure

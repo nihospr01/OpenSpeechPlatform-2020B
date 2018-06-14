@@ -1,0 +1,22 @@
+[
+  {
+    "words": ["states", "sates", "state", "sate"],
+    "correct_answer": "states",
+    "audio": { "Word_set": "/../../../resources/sounds/01/", "Actual_answer": "/../../../resources/sounds/01/01.wav" }
+  },
+  {
+    "words": ["peak", "teak", "peat", "teat"],
+    "correct_answer": "teak",
+    "audio": { "Word_set": "/../../../resources/sounds/02/", "Actual_answer": "/../../../resources/sounds/02/02.wav" }
+  },
+  {
+    "words": ["base", "pace", "bait", "pate"],
+    "correct_answer": "bait",
+    "audio": { "Word_set": "/../../../resources/sounds/03/", "Actual_answer": "/../../../resources/sounds/03/03.wav" }
+  },
+  {
+    "words": ["mat", "bat", "mad", "bad"],
+    "correct_answer": "bad",
+    "audio": { "Word_set": "/../../../resources/sounds/04/", "Actual_answer": "/../../../resources/sounds/04/04.wav" }
+  }
+]

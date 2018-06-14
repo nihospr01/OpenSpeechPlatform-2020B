@@ -32,7 +32,7 @@
  * @param afc_adaptation_type The type of AFC adaptation
  * @return 0 if successful initialization. -1 otherwise
  */
-int osp_init(unsigned int frame_size, int sample_rate, unsigned char afc_adaptation_type);
+int osp_init(unsigned int frame_size, int sample_rate, osp_user_data *osp_data);
 
 /**
  * @brief Function to perform Master Hearing Aid (MHA) processing on the input signal for both channels

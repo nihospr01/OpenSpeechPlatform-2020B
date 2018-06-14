@@ -1,0 +1,195 @@
+header{
+  margin-top: 3%;
+}
+
+title{
+
+    font-size: 30px;
+    font-family:georgia;
+    margin-top:3%;
+    font-weight: lighter;
+    color: #3EBDCF;
+    text-align: center;
+  }
+
+body{
+  text-align: center;
+}
+h1{
+
+  font-size: 20px;
+  font-family:georgia;
+  margin-top:3%;
+  font-weight: lighter;
+  color: #3EBDCF;
+  text-align: center;
+}
+
+h2{
+  font-size: 17px;
+  font-family:georgia;
+  margin-top:3%;
+  font-weight: lighter;
+  color: #3EBDCF;
+  text-align: center;
+}
+
+.glyphicon {
+    font-size: 100;
+    margin-left: 45%;
+    color: black;
+}
+
+
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+
+#start{
+  height: 70px;
+  width: 110px;
+  background-color: rgba(62,189,207,.5);
+  text-align: center;
+  border-radius: 15px;
+}
+
+.startTaskButton:hover {
+  background-color: rgba(62,189,207,1);
+}
+
+.container{
+
+  font-size: 20px;
+  align-self: center;
+}
+
+.bigForm{
+  text-align: center;
+  align-content: center;
+  align-self: center;
+}
+
+.pp-settings-wrapper{
+ text-align: center;
+
+}
+
+
+.pp-settings-wrapper .pp-settings-seemp-wrapper {
+text-align: center;
+
+  }
+
+.permnum{
+  font-style: bold;
+  font-family: sans-serif;
+  font-size: 48px;
+
+}
+
+.pp-seemp-table{
+  align-self: center;
+  margin-left: 180px;
+
+}
+
+.pp-seemp-table-row{
+  align-items: center;
+  font-size: 25px;
+  text-align: center;
+  font-size: 45px;
+  font-family: sans-serif;
+}
+
+    .pp-settings-wrapper .pp-settings-seemp-wrapper button {
+      border: none;
+      text-align: center;
+       }
+
+
+  .pp-settings-wrapper table.pp-settings-table {
+    border: 1px solid #3EBDCF;
+    width: 100%;
+  text-align: center;}
+  .pp-settings-wrapper table.pp-settings-table tbody tr.pp-settings-table-row:nth-of-type(even) {
+    background-color: #3EBDCF; }
+  .pp-settings-wrapper .pp-settings-seemp-wrapper {
+    position: relative; }
+
+  .pp-settings-wrapper table.pp-seemp-table {
+    position: relative;
+    align-content: center;
+    text-align: center;
+     }
+    .pp-settings-wrapper table.pp-seemp-table th {
+      padding: 5px 5px 5px 5px;
+      background-color: transparent;
+      font-weight: bold;
+      font-size: 45px;
+    text-align: center;}
+    .pp-settings-wrapper table.pp-seemp-table.seemp-generator tr.pp-seemp-table-row td input {
+      width: 100%;
+    text-align: center;}
+    .pp-settings-wrapper table.pp-seemp-table tbody tr.pp-seemp-table-row:nth-of-type(even) {
+      background-color: rgba(207,212,212,.5) }
+      .pp-settings-wrapper table.pp-seemp-table tbody tr.pp-seemp-table-row:nth-of-type(even) td input {
+        border-bottom-color: #fff;
+        /*transition: all 0.5s;*/
+        /*&:focus {
+                                border-bottom-color:                     }*/ }
+
+    .specialLabel{
+      color: black;
+    }
+    .pp-settings-wrapper table.pp-seemp-table tbody tr.pp-seemp-table-row td {
+      padding: 5px;
+      text-align: center;
+      border: 2px solid #fff;
+      line-height: 16px;
+      font-family: sans-serif;
+    font-size: 45px;
+    text-align: center;
+    background-color: transparent;
+}
+      .pp-settings-wrapper table.pp-seemp-table tbody tr.pp-seemp-table-row td input {
+        border: none;
+        border-bottom: 1px solid #f1f1f1;
+        background-color: transparent;
+        font-size: 30px;
+        text-align: center;
+        transition: all 0.5s;
+        width: 40px;
+        line-height: 50px;
+        height: 45px; }
+        .pp-settings-wrapper table.pp-seemp-table tbody tr.pp-seemp-table-row td input:focus {
+          border-bottom-color: #fcc047; }
+      .pp-settings-wrapper table.pp-seemp-table tbody tr.pp-seemp-table-row td:first-child {
+
+        text-align: center; }
+        .pp-settings-wrapper table.pp-seemp-table tbody tr.pp-seemp-table-row td:first-child input {
+          width: 180px; }
+
+  #Transmit{
+  height: 60px;
+  width: 300px;
+  background-color: white;
+  border: 2px solid black;
+  text-align: center;
+  font-size: 45px;
+  border-radius: 25px;
+  position: fixed;
+  
+  margin-right: 60%;
+  margin-top: 47%;
+
+
+}
+
+#transmit:hover {
+  background-color: rgba(62,189,207,.5);
+}
