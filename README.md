@@ -26,7 +26,8 @@ This work is supported by Nation Institute of Health, NIH/NIDCD grant R01DC01543
     - [Initial Test - 1](#initial-test---1)
     - [(Optional) Initial Test – 2 with Zoom tac-8](#optional-initial-test--2-with-zoom-tac-8)
   - [Changing Filter Coefficients](#changing-the-filter-coefficients)
-  - [Setting up Embedded webserver](#Setting-up-Embedded-webserver)
+  - [Setting up Embedded webserver](#setting-up-embedded-webserver)
+  - [Controlling Hearing aid parameters](#controlling-hearing-aid-parameters)
   - [Using the Tablet Mode:](#using-the-tablet-mode)
     - [Setting Up Mac's Wi-fi](#setting-up-macs-wifi)
     - [Setting Up Android](#setting-up-android)
@@ -403,7 +404,32 @@ POST request on .../api/disconnect
 
 * there is no required body
 
+### Controlling Hearing aid parameters
 
+The following are the list of hearing aid parameters that can be controlled via the webapps:
+
+**Amplification Parameters**
+
+G50  :	Gain at 50 dB SPL of input level
+G80  :	Gain at 80 dB SPL of input level
+G65  :	Gain at 65 dB SPL of input level
+CR   :	Compression Ratio
+AT   :	Attack Time
+RT   :	Release Time
+Klow :	Lower Kneepoint
+Kup  :	Upper Kneepoint
+
+**Noise Management parameters**
+
+noise_estimation_type		 : 0 - None, 1 - Arslan, 2 - Hirsch & Ehrlicher, 3 - MCRA.
+Spectral subtraction on/off 	 : 0 - off, 1 - on.
+s				 : Spectral subtraction parameter: a positive constant from 0 to 1. 0 implies no speech enhancement. 
+
+**Feedback Management parameters**
+
+feedback_algorithm_type		: 0 - FxLMS, 1 - PNLMS, 2 - SLMS.
+μ				: Step size parameter: a positive constant. A higher value results in faster tracking at the cost of higher steady state error. Recommended value = 0.005
+ρ				: Forgetting factor for power estimation: a constant between 0 and 1. ρ > 0.9 is suggested. Recommended value = 0.985
 
 ### Setting Up Mac's Wi-Fi
 1. Wi-Fi dongle – EDUP – DB 1607
