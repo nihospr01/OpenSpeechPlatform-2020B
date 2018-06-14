@@ -36,6 +36,14 @@
 #include "constants.h"
 #include "logger.h"
 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "jsmn.h"
+
+char filepath_4afc[512];
+
 /*** Main constants ***/
 #define UI_PORT				8001
 #define SAMPLE_RATE 		96000
@@ -74,6 +82,12 @@ static inline void usage(const char *s)
 	printf("\t-M\tEnable/Disable MPO. 0= Disable MPO and 1 = Enable MPO\n");
 	printf("\t-l\t<Loopback File>\tRun in loopback mode where <Loopback File> is input\n");
 	printf("\t-F\tChoose sampling Frequency. 0 = 48 kHz or 1 = 96 kHz\n");
+	printf("\t-N\tChoose noise estimation technique (0,1,2,3). 0- Disabled, 1- Arslan, 2- Hirsch, 3- MCRA\n");
+	printf("\t-S\tSpectral subtraction 1- on/ 0 -off\n");
+	printf("\t-s\tSpectral subtraction parameter, float value from 0 to 1\n");
+	
+	
+	
 }
 
 static void * announce_presence(void * tid)
@@ -248,6 +262,9 @@ static int file_loopback_init(file_loopback_context *ctx, const char *in_file, c
 	memcpy(ctx->wav_header, ctx->input_file, sizeof(ctx->wav_header));
 	fseek(ctx->input_file, 0L, SEEK_END);
 	// Length of file in bytes, divided by size of a short, divided by channels
+	
+	// check the sampling frequency of the sound files
+	
 	ctx->length = ftell(ctx->input_file) - 44;
 	fseek(ctx->input_file, 44, SEEK_SET); // Past wav header
 	ctx->length = ctx->length / sizeof(short) / 2; // Offset by the header
@@ -370,35 +387,32 @@ static int file_loopback_run(const char *in_file, const char *out_file, unsigned
 
 static int run_pa_loopback(unsigned int sample_rate, unsigned int frames_per_buffer, const char *in_file, const char *out_file)
 {
+	int i;
 	pa_loopback_data loopback_data;
-	osp_user_data osp_data;
 	file_loopback_context file_ctx;
-
-	osp_data_init(&osp_data);
-
 	loopback_data.file_ctx = &file_ctx;
-	loopback_data.osp_data = &osp_data;
-
+	loopback_data.osp_data = osp_data;
+	
 	// Initialize file context struct
 	printf("Initializing file context for pa_loopback\n");
 	if (file_loopback_init(loopback_data.file_ctx, in_file, out_file) < 0) {
 		printf("Error initializing file context for pa_loopback mode\n");
 		return -1;
 	}
-
-	loopback_data.osp_data->no_op = 0;
+	
 	if (pa_loopback_run(&loopback_data, sample_rate, frames_per_buffer) < 0) {
 		printf("Error running portaudio loopback mode\n");
 	}
-
-	if (file_context_write(loopback_data.file_ctx) < 0) {
-		printf("Error writing file\n");
-	}
-
+	
+	//	if (file_context_write(loopback_data.file_ctx) < 0) {
+	//		printf("Error writing file\n");
+	//	}
+	
 	file_loopback_close(loopback_data.file_ctx);
-
+	
 	return 0;
 }
+
 
 // Called when loopback is selected without file (null test)
 static void run_loopback_null(unsigned long count, unsigned int frames_per_buffer)
@@ -652,7 +666,7 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 
 	printf("Entering infinite for loop\n");
 	for (;;) {
-		fprintf(stderr, "Waiting for a connection from the client...");
+		fprintf(stderr, "\nWaiting for a connection from the client...\n");
 		if (osp_tcp_connect(osp_tcp) < 0) {
 			printf("Error on getting server connection\n");
 			if (num_fails < 5) {
@@ -664,7 +678,7 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 			break;
 		}
 
-		printf("done. Client connected\n");
+		printf("\nDone!!!\nClient connected\n\n");
 		pa_data.aux_data.underruns = 0;
 		tcp_running = 1;
 
@@ -681,23 +695,25 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 #endif
 
 			if ((req = osp_tcp_read_req(osp_tcp)) < 0) {
-				printf("Failed to read connection, resetting\n");
+				printf("\nFailed to read connection, resetting\n");
 				tcp_running = 0;
 				break;
 			} else if (req == OSP_WRONG_VERSION) {
-				printf("Wrong version OSP packet from client\n");
+				printf("\nWrong version OSP packet from client\n");
 			}
 
-			fprintf(stderr, "Got req %d\n", req);
+//			fprintf(stderr, "Got req %d\n", req);
 
 			switch (req) {
 				case OSP_REQ_UPDATE_VALUES:
-					printf("Request to update OSP values\n");
+					printf("\nRequest to update OSP values\n");
 #if 0
 					ret = read_tcp_server_stream(ui_connfd, (char *)osp_tmp_data, sizeof(osp_user_data));
 #endif
-					if ((ret = osp_tcp_read_values(osp_tcp, osp_tmp_data, sizeof(osp_user_data))) < 0) {
-						printf("Failed to read \"values\" packet from client\n");
+					if ((ret = osp_tcp_read_values(osp_tcp, osp_tmp_data, HA_STATE_JSON)) < 0) {
+						
+						//size of osp_user_data is 168, we need only first 160 bytes to be updated.
+						printf("Failed to read values packet from client\n");
 						tcp_running = 0;
 						break;
 					} else if (ret == 0) {
@@ -712,7 +728,7 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 					}
 #endif
 
-					printf("Read %zd, sizeof osp_user_data %lu\n", ret, sizeof(osp_user_data));
+//					printf("Read %zd, sizeof osp_user_data %lu\n", ret, sizeof(osp_user_data));
 					printf("Got no op: %d\n", osp_tmp_data->no_op);
 					printf("AFC: %d\n", osp_tmp_data->afc);
 					printf("Rear Mics: %d\n", osp_tmp_data->rear_mics);
@@ -735,11 +751,14 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 						osp_data->release[i] = osp_tmp_data->release[i];
 						printf("Attack: %d, Release: %d\n", osp_data->attack[i], osp_data->release[i]);
 					}
-
+					
+					//const char done[] = "DONE";
+					//send(osp_tcp->conn_fd, done, 5, 0);
+					
 					printf("\n");
 					break;
 				case OSP_REQ_GET_UNDERRUNS:
-					printf("Received underrun request packet\n");
+					printf("\nReceived underrun request packet\n");
 					//fprintf(stderr, "Sending underruns %d\n", pa_data.aux_data.underruns);
 					if (osp_tcp_send_underruns(osp_tcp, pa_data.aux_data.underruns) < 0) {
 						printf("Error sending underrun packet to client\n");
@@ -747,7 +766,7 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 					}
 					break;
 				case OSP_REQ_GET_NUM_BANDS:
-					printf("Request to report number of bands\n");
+					printf("\nRequest to report number of bands\n");
 					if (osp_tcp_send_num_bands(osp_tcp, osp_get_num_bands()) < 0) {
 						printf("Failed to notify client to num of bands\n");
 						tcp_running = 0;
@@ -762,20 +781,20 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 						tcp_running = 0;
 					}
 
-					printf("Got userID packet from host: %s\n", message);
+					printf("\nGot userID packet from host: %s\n", message);
 					break;
 				case OSP_REQ_USER_ACTION:
 					// Log the string straight to the log
 					osp_tcp_read_user_packet(osp_tcp, message, sizeof(message));
 					file_logger_log_message(log_file, message);
-					printf("Got userAction packet from host\n");
+					printf("\nGot userAction packet from host\n");
 					break;
 				case OSP_DISCONNECT:
 					file_logger_close(log_file);
 					tcp_running = 0;
 					break;
 				default:
-					printf("Did not recognize packet received\n");
+					printf("\nDid not recognize packet received\n");
 					break;
 			}
 		}
@@ -793,11 +812,205 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 	return 0;
 }
 
-
+static int run_pa_tcp_4afc(osp_user_data *osp_data, unsigned int samp_rate, unsigned int frames_per_buffer, float attenuation_factor)
+{
+	ssize_t ret;
+	int i;
+	FILE *log_file = NULL;
+	int tcp_running = 1;
+	char message[512];
+	
+	unsigned int num_fails = 0;
+	
+	Osp_tcp osp_tcp;
+	char req;
+	
+	pa_user_data pa_data;
+	pa_data.user_data = osp_data;
+	pa_data.aux_data.attenuation_factor = attenuation_factor;
+	pa_data.aux_data.gain_factor = 1;
+	
+	osp_user_data *osp_tmp_data;
+	
+	osp_tmp_data = malloc(sizeof(osp_user_data));
+	memcpy(osp_tmp_data, osp_data, sizeof(osp_user_data));
+	printf("REAR MICS = %d\n", osp_tmp_data->rear_mics);
+	
+	// init TCP connection
+	printf("Initializing TCP connection.\n");
+	if ((osp_tcp = osp_tcp_init(UI_PORT)) == NULL) {
+		printf("There was an error initializing OSP TCP layer\n");
+		return -1;
+	}
+	
+	printf("Entering infinite for loop\n");
+	for (;;) {
+		fprintf(stderr, "\nWaiting for a connection from the client...\n");
+		
+		// uncomment
+		if (osp_tcp_connect(osp_tcp) < 0) {
+			printf("Error on getting server connection\n");
+			if (num_fails < 5) {
+				num_fails++;
+				continue;
+			}
+			
+			fprintf(stderr, "Failed to set up TCP server 5 times, aborting\n");
+			break;
+		}
+		
+		printf("\nDone!!!\nClient connected\n\n");
+		pa_data.aux_data.underruns = 0;
+		tcp_running = 1;
+		
+		
+		while (tcp_running == 1) {
+#if 0
+			ret = read_tcp_server_stream(ui_connfd, &req, sizeof(req));
+			if (ret < 0) {
+				perror("Failed to read connection, resetting\n");
+				break;
+			} else if (ret == 0){
+				printf("Client side closed, resetting connection\n");
+				break;
+			}
+#endif
+			
+			if ((req = osp_tcp_read_req(osp_tcp)) < 0) {
+				printf("\nFailed to read connection, resetting\n");
+				tcp_running = 0;
+				break;
+			} else if (req == OSP_WRONG_VERSION) {
+				printf("\nWrong version OSP packet from client\n");
+			}
+			
+			//			fprintf(stderr, "Got req %d\n", req);
+			
+			switch (req) {
+				case OSP_REQ_UPDATE_VALUES:
+					printf("\nRequest to update OSP values\n");
+#if 0
+					ret = read_tcp_server_stream(ui_connfd, (char *)osp_tmp_data, sizeof(osp_user_data));
+#endif
+					if ((ret = osp_tcp_read_values(osp_tcp, osp_tmp_data, HA_STATE_JSON)) < 0) { //size of osp_user_data is 168, we need only first 160 bytes to be updated.
+						printf("Failed to read values packet from client\n");
+						tcp_running = 0;
+						break;
+					} else if (ret == 0) {
+						tcp_running = 0;
+						printf("There was a disconnect trying to read \"values\" packet from client\n");
+						break;
+					}
+					
+#if 0
+					if (file_logger_log_osp_data(log_file, osp_tmp_data) < 0) {
+						fprintf(stderr, "Failed to log values to log file\n");
+					}
+#endif
+					
+					//					printf("Read %zd, sizeof osp_user_data %lu\n", ret, sizeof(osp_user_data));
+					printf("Got no op: %d\n", osp_tmp_data->no_op);
+					printf("AFC: %d\n", osp_tmp_data->afc);
+					printf("Rear Mics: %d\n", osp_tmp_data->rear_mics);
+					printf("Feedback: %d\n", osp_tmp_data->feedback);
+					
+					for (i = 0; i < NUM_BANDS; i++) {
+						osp_data->g50[i] = osp_tmp_data->g50[i];
+						osp_data->g80[i] = osp_tmp_data->g80[i];
+						printf("Gains: G50: %d, G80: %d\n", osp_data->g50[i], osp_data->g80[i]);
+					}
+					
+					for (i = 0; i < NUM_BANDS; i++) {
+						osp_data->knee_low[i] = osp_tmp_data->knee_low[i];
+						osp_data->knee_high[i] = osp_tmp_data->knee_high[i];
+						printf("knee low: %d, knee high: %d\n", osp_data->knee_low[i], osp_data->knee_high[i]);
+					}
+					
+					for (i = 0; i < NUM_BANDS; i++) {
+						osp_data->attack[i] = osp_tmp_data->attack[i];
+						osp_data->release[i] = osp_tmp_data->release[i];
+						printf("Attack: %d, Release: %d\n", osp_data->attack[i], osp_data->release[i]);
+					}
+					
+					printf("\n");
+					break;
+					
+				case 8:
+					//set file path
+					
+					if ((ret = osp_4afc_read_values(osp_tcp, filepath_4afc, 1024)) < 0) {
+						printf("Failed to read values packet from client\n");
+						tcp_running = 0;
+						break;
+					} else if (ret == 0) {
+						tcp_running = 0;
+						printf("There was a disconnect trying to read \"values\" packet from client\n");
+						break;
+					}
+					run_pa_loopback(SAMPLE_RATE, FRAMES_PER_BUFFER,	filepath_4afc, "output_file_pa.wav", osp_data);
+					printf("%s\n",filepath_4afc );
+					break;
+				case OSP_REQ_GET_UNDERRUNS:
+					printf("\nReceived underrun request packet\n");
+					//fprintf(stderr, "Sending underruns %d\n", pa_data.aux_data.underruns);
+					if (osp_tcp_send_underruns(osp_tcp, pa_data.aux_data.underruns) < 0) {
+						printf("Error sending underrun packet to client\n");
+						tcp_running = 0;
+					}
+					break;
+				case OSP_REQ_GET_NUM_BANDS:
+					printf("\nRequest to report number of bands\n");
+					if (osp_tcp_send_num_bands(osp_tcp, osp_get_num_bands()) < 0) {
+						printf("Failed to notify client to num of bands\n");
+						tcp_running = 0;
+					}
+					break;
+				case OSP_REQ_USER_ID:
+					// Open log with given username
+					osp_tcp_read_user_packet(osp_tcp, message, sizeof(message));
+					
+					if ((log_file = file_logger_init(message)) == NULL) {
+						fprintf(stderr, "Failed to open Log File\n");
+						tcp_running = 0;
+					}
+					
+					printf("\nGot userID packet from host: %s\n", message);
+					break;
+				case OSP_REQ_USER_ACTION:
+					// Log the string straight to the log
+					osp_tcp_read_user_packet(osp_tcp, message, sizeof(message));
+					file_logger_log_message(log_file, message);
+					printf("\nGot userAction packet from host\n");
+					break;
+				case OSP_DISCONNECT:
+					file_logger_close(log_file);
+					tcp_running = 0;
+					break;
+				default:
+					printf("\nDid not recognize packet received\n");
+					break;
+			}
+			
+		}
+		
+	}
+	
+	// close TCP stuff
+	osp_tcp_close(osp_tcp);
+	
+	// Close PA stuff
+	if (close_pa() < 0) {
+		printf("Error closing down port audio stuff\n");
+		return -1;
+	}
+	
+	return 0;
+}
 
 int main(int argc, char **argv)
 {
 	int c;
+	int i;
 	unsigned int tcp_mode;
 	unsigned int adaptation_type;
 	unsigned int ansi_test_onoff;
@@ -805,22 +1018,29 @@ int main(int argc, char **argv)
 	unsigned int spectral_subtraction;
 	unsigned int choose_sampling_frequency;
 	
+	float resample_32_96_with_mic_calibration_left_ear[RESAMP_32_96_TAPS_MIC_CALIB];
+	float resample_32_96_with_mic_calibration_right_ear[RESAMP_32_96_TAPS_MIC_CALIB];
+	float resample_96_32_with_mic_calibration_left_ear[RESAMP_96_32_TAPS_MIC_CALIB];
+	float resample_96_32_with_mic_calibration_right_ear[RESAMP_96_32_TAPS_MIC_CALIB];
+	
+	
 	float resample_32_96_taps[RESAMP_32_96_TAPS];
 	float resample_96_32_taps[RESAMP_96_32_TAPS];
 	float resample_32_48_taps[RESAMP_32_48_TAPS];
 	float resample_48_32_taps[RESAMP_48_32_TAPS];
 	float attenuation_factor = D_ATTENUATION_FACTOR;
 
-	unsigned int sampling_frequency= 96000;
+	unsigned int sampling_frequency= SAMPLE_RATE;
+	char file_path[512];
 	pthread_t announce_thread;
-
+	
 	osp_user_data osp_data;
 	osp_data_init(&osp_data);
-
+	
 	if (argc < 2) {
 		usage(argv[0]);
 	}
-
+	
 	adaptation_type = 2;
 	tcp_mode = 0;
 	while ((c = getopt(argc, argv, "ad:M:l:p:rtT:F:N:S:s:")) != -1) {
@@ -829,7 +1049,7 @@ int main(int argc, char **argv)
 				if (optarg == NULL) {
 					osp_data.choose_sampling_frequency = 1;
 					printf("Choosing 96kHz sampling frequency as default\n");
-					sampling_frequency = 96000;
+					sampling_frequency = SAMPLE_RATE;
 					break;
 					
 				}
@@ -838,21 +1058,21 @@ int main(int argc, char **argv)
 				if (choose_sampling_frequency)
 				{
 					printf("Choosing 96kHz sampling frequency\n");
-					sampling_frequency = 96000;
+					sampling_frequency = SAMPLE_RATE;
 				}
 				
 				else
 				{
 					printf("Choosing 48kHz sampling frequency\n");
-					sampling_frequency = 48000;
+					sampling_frequency = SAMPLE_RATE/2;
 				}
 				break;
-			
+				
 			case 'N':
 				if (optarg == NULL) {
 					osp_data.noise_estimation_type = 3;
 					printf("Cohen & Berdugo MCRA Noise Estimation method chosen as default\n");
-					sampling_frequency = 96000;
+					sampling_frequency = SAMPLE_RATE;
 					break;
 					
 				}
@@ -879,7 +1099,7 @@ int main(int argc, char **argv)
 				if (optarg == NULL) {
 					osp_data.spectral_subtraction = 0;
 					printf("Spectral subtraction for speech enhancement disabled\n");
-					sampling_frequency = 96000;
+					sampling_frequency = SAMPLE_RATE;
 					break;
 					
 				}
@@ -899,29 +1119,29 @@ int main(int argc, char **argv)
 			case 'M':
 				ansi_test_onoff = (unsigned char)strtol(optarg, (char **)NULL, 10);
 				if(ansi_test_onoff == 0) {
-
-						osp_data.mpo_on = 0;
-						attenuation_factor = 0;
-						printf("MPO disabled for ANSI test\n");
-						printf("Attenuation factor is set as %f dB\n", attenuation_factor);
-						attenuation_factor = log2lin(attenuation_factor);
-						printf("Attenuation factor in linear scale is %f\n", attenuation_factor);
-
-					}
-					else{
-						osp_data.mpo_on = 1;
-						printf("MPO enabled\n");
+					
+					osp_data.mpo_on = 0;
+					attenuation_factor = 0;
+					printf("MPO disabled for ANSI test\n");
+					printf("Attenuation factor is set as %f dB\n", attenuation_factor);
+					attenuation_factor = log2lin(attenuation_factor);
+					printf("Attenuation factor in linear scale is %f\n", attenuation_factor);
+					
+				}
+				else{
+					osp_data.mpo_on = 1;
+					printf("MPO enabled\n");
 				}
 				break;
 			case 'd':
 				if (optarg == NULL) {
 					printf("No argument for attenuation_factor.  Setting default %f\n", attenuation_factor);
 					break;
-
+					
 				}
-
+				
 				attenuation_factor = strtof(optarg, (char **)NULL);
-
+				
 				printf("Attenuation factor is %f dB\n", attenuation_factor);
 				attenuation_factor = log2lin(attenuation_factor);
 				printf("Attenuation factor is %f\n", attenuation_factor);
@@ -932,7 +1152,12 @@ int main(int argc, char **argv)
 					run_loopback_null(10000, FRAMES_PER_BUFFER);
 				} else {
 					printf("Loopback mode specified, setting up file %s\n", optarg);
-					file_loopback_run(optarg, "output_file_test", 96);
+					tcp_mode = 2;
+					strcpy (file_path, optarg);
+					printf("Is string copied: %s tcp: %d\n",file_path,tcp_mode);
+					//					file_loopback_run(optarg, "output_file_test", 96, &osp_data);
+					//					file_loopback_4afc(optarg);
+					
 				}
 				break;
 			case 'p':
@@ -940,7 +1165,7 @@ int main(int argc, char **argv)
 					printf("Portaudio loopback mode specified, using no file, just empty buffers\n");
 				} else {
 					if (run_pa_loopback(SAMPLE_RATE, FRAMES_PER_BUFFER,
-															optarg, "output_file_pa") < 0) {
+															optarg, "output_file_pa", &osp_data) < 0) {
 						printf("There was an error running the PA mode with files\n");
 					}
 					printf("Portaudio loopback mode specified, setting up file %s\n", optarg);
@@ -961,11 +1186,11 @@ int main(int argc, char **argv)
 			case 'T':
 				if (optarg == NULL) {
 					printf("No argument for AFC adaptation type, setting to PNLMS\n");
-					adaptation_type = 1;
+					osp_data.feedback_algorithm_type = 1;
 				}
-
-				adaptation_type = (unsigned char)strtol(optarg, (char **)NULL, 10);
-				switch (adaptation_type) {
+				
+				osp_data.feedback_algorithm_type = (unsigned char)strtol(optarg, (char **)NULL, 10);
+				switch (osp_data.feedback_algorithm_type) {
 					case 0:
 						printf("Setting adaptation type to FXLMS\n");
 						break;
@@ -990,41 +1215,47 @@ int main(int argc, char **argv)
 				return 0;
 		}
 	}
-
+	
 	// Initialize osp stuff
-	if (osp_init(FRAME_SIZE, SAMPLE_RATE, adaptation_type) < 0) {
+	if (osp_init(FRAME_SIZE, SAMPLE_RATE, &osp_data) < 0) {
 		printf("Error initializing osp\n");
 		return -1;
 	}
-
-	// Load the resampler taps
-	// choosing filter taps for 96kHz input
+	
 	if (osp_data.choose_sampling_frequency)
 	{
-		if (load_filter_taps("resample_32_96.flt", resample_32_96_taps, RESAMP_32_96_TAPS) < 0) {
+		if (load_filter_taps("resample_32_96_with_mic_calibration_left_ear.flt", resample_32_96_with_mic_calibration_left_ear, RESAMP_32_96_TAPS_MIC_CALIB) < 0) {
 			return -1;
 		}
 		
-		if (load_filter_taps("resample_96_32.flt", resample_96_32_taps, RESAMP_96_32_TAPS) < 0) {
+		if (load_filter_taps("resample_32_96_with_mic_calibration_right_ear.flt", resample_32_96_with_mic_calibration_right_ear, RESAMP_32_96_TAPS_MIC_CALIB) < 0) {
+			return -1;
+		}
+		
+		if (load_filter_taps("resample_96_32_with_mic_calibration_left_ear.flt", resample_96_32_with_mic_calibration_left_ear, RESAMP_96_32_TAPS_MIC_CALIB) < 0) {
+			return -1;
+		}
+		
+		if (load_filter_taps("resample_96_32_with_mic_calibration_right_ear.flt", resample_96_32_with_mic_calibration_right_ear, RESAMP_96_32_TAPS_MIC_CALIB) < 0) {
 			return -1;
 		}
 		
 		// Initialize resampler Left
-		if ((resampleL = resample_init(resample_32_96_taps, ARRAY_SIZE(resample_32_96_taps),
-																	 resample_96_32_taps, ARRAY_SIZE(resample_96_32_taps))) == NULL) {
+		if ((resampleL = resample_init(resample_32_96_with_mic_calibration_left_ear, ARRAY_SIZE(resample_32_96_with_mic_calibration_left_ear),
+																	 resample_96_32_with_mic_calibration_left_ear, ARRAY_SIZE(resample_96_32_with_mic_calibration_left_ear))) == NULL) {
 			return -1;
 		}
 		
 		// Initialize resampler Right
-		if ((resampleR = resample_init(resample_32_96_taps, ARRAY_SIZE(resample_32_96_taps),
-																	 resample_96_32_taps, ARRAY_SIZE(resample_96_32_taps))) == NULL) {
+		if ((resampleR = resample_init(resample_32_96_with_mic_calibration_right_ear, ARRAY_SIZE(resample_32_96_with_mic_calibration_right_ear),
+																	 resample_96_32_with_mic_calibration_right_ear, ARRAY_SIZE(resample_96_32_with_mic_calibration_right_ear))) == NULL) {
 			return -1;
 		}
 	}
+	
+	
 	else
 	{
-		
-		
 		if (load_filter_taps("resample_32_96.flt", resample_32_48_taps, RESAMP_32_48_TAPS) < 0) {
 			return -1;
 		}
@@ -1045,36 +1276,45 @@ int main(int argc, char **argv)
 			return -1;
 		}
 	}
-	
 	// start announcement thread
 	if(pthread_create(&announce_thread, NULL, announce_presence, NULL))
 	{
 		fprintf(stderr, "Error pthread_create() failed to create announcement thread\n");
 	}
-
-
+	
+	
 	//////////// Where the magic happens ///////////////
-	if (tcp_mode) {
+	if (tcp_mode == 1) {
+		
 		if (run_pa_tcp(&osp_data, SAMPLE_RATE, FRAMES_PER_BUFFER, attenuation_factor) < 0) {
 			printf("Error starting tcp version of live app.\n");
 		}
-	} else {
+	}
+	
+	if (tcp_mode == 2) {
+		if (run_pa_tcp_4afc(&osp_data, SAMPLE_RATE, FRAMES_PER_BUFFER, attenuation_factor) < 0) {
+			printf("Error starting 4AFC version of live app.\n");
+		}
+		
+	}
+	else {
 		if (run_pa_key(&osp_data, SAMPLE_RATE, FRAMES_PER_BUFFER, attenuation_factor) < 0) {
 			printf("Error starting key version of live app.\n");
 		}
 	}
-
+	
 	// Close resampler
 	if (resample_destroy(resampleL) < 0) {
 		fprintf(stderr, "Error destroying resampler\n");
 	}
-
+	
 	// Close resampler
 	if (resample_destroy(resampleR) < 0) {
 		fprintf(stderr, "Error destroying resampler\n");
 	}
-
+	
 	osp_close();
-
+	
 	return 0;
 }
+

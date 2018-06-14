@@ -41,7 +41,7 @@ typedef struct afc_t *Afc;
 Afc afc_init(const float *afc_filter_taps, int afc_filter_tap_len,
 				const float *prefilter_taps, int prefilter_tap_len,
 				const float *band_limited_filter_taps, int band_limited_filter_tap_len,
-				int frame_size, unsigned int adaptation_type);
+				int frame_size, unsigned int adaptation_type, float afc_mu, float afc_rho);
 
 /**
  * @brief Function to update the AFC filter taps. i.e. perform AFC
