@@ -3,14 +3,20 @@
 {\ttfamily \#include $<$stddef.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}constants.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$sys/types.\+h$>$}\newline
-Include dependency graph for osp\+\_\+tcp.\+h\+:\nopagebreak
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}jsmn.\+h\char`\"{}}\newline
+Include dependency graph for osp\+\_\+tcp.\+h\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=301pt]{osp__tcp_8h__incl}
+\includegraphics[width=350pt]{osp__tcp_8h__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,22 +26,30 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{osp__tcp_8h_ad70c5cf43d6187190e18013388120a13}{O\+S\+P\+\_\+\+W\+R\+O\+N\+G\+\_\+\+V\+E\+R\+S\+I\+ON}}~0x00
+\#define \mbox{\hyperlink{osp__tcp_8h_ad70c5cf43d6187190e18013388120a13}{O\+S\+P\+\_\+\+W\+R\+O\+N\+G\+\_\+\+V\+E\+R\+S\+I\+ON}}~0
 \item 
-\#define \mbox{\hyperlink{osp__tcp_8h_a88fd5366fe38af2b4219821affa068af}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+P\+D\+A\+T\+E\+\_\+\+V\+A\+L\+U\+ES}}~0x01
+\#define \mbox{\hyperlink{osp__tcp_8h_a88fd5366fe38af2b4219821affa068af}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+P\+D\+A\+T\+E\+\_\+\+V\+A\+L\+U\+ES}}~1
 \begin{DoxyCompactList}\small\item\em Request to set the values in the real-\/time O\+SP C application. \end{DoxyCompactList}\item 
-\#define \mbox{\hyperlink{osp__tcp_8h_ac11866b2a978a05955e5e89a0b1107d1}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+U\+N\+D\+E\+R\+R\+U\+NS}}~0x02
+\#define \mbox{\hyperlink{osp__tcp_8h_ac11866b2a978a05955e5e89a0b1107d1}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+U\+N\+D\+E\+R\+R\+U\+NS}}~2
 \begin{DoxyCompactList}\small\item\em Request to get number of underruns from real-\/time O\+SP application. \end{DoxyCompactList}\item 
-\#define \mbox{\hyperlink{osp__tcp_8h_a491961372a3e01bdc57287e4c2b94d47}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+ID}}~0x03
+\#define \mbox{\hyperlink{osp__tcp_8h_a491961372a3e01bdc57287e4c2b94d47}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+ID}}~3
 \item 
-\#define \mbox{\hyperlink{osp__tcp_8h_ae9f1e494220fc2ed6c557185f2630e09}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+A\+C\+T\+I\+ON}}~0x04
+\#define \mbox{\hyperlink{osp__tcp_8h_ae9f1e494220fc2ed6c557185f2630e09}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+A\+C\+T\+I\+ON}}~4
 \item 
-\#define \mbox{\hyperlink{osp__tcp_8h_a2ff6a0a7b702e21aaa12904ebe0b983a}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+N\+U\+M\+\_\+\+B\+A\+N\+DS}}~0x05
+\#define \mbox{\hyperlink{osp__tcp_8h_a2ff6a0a7b702e21aaa12904ebe0b983a}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+N\+U\+M\+\_\+\+B\+A\+N\+DS}}~5
 \item 
-\#define \mbox{\hyperlink{osp__tcp_8h_aea93a99440c7bb1ee573213b6df715c0}{O\+S\+P\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT}}~0x06
+\#define \mbox{\hyperlink{osp__tcp_8h_aea93a99440c7bb1ee573213b6df715c0}{O\+S\+P\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT}}~6
 \item 
-\#define \mbox{\hyperlink{osp__tcp_8h_afe108e38ff4f06dfe9ea602ab9f23ab0}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+L\+A\+ST}}~0x07
-\begin{DoxyCompactList}\small\item\em This exists so we can test if an inc packet is one we recognize. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\#define \mbox{\hyperlink{osp__tcp_8h_afe108e38ff4f06dfe9ea602ab9f23ab0}{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+L\+A\+ST}}~7
+\begin{DoxyCompactList}\small\item\em This exists so we can test if an inc packet is one we recognize. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{osp__tcp_8h_aeca6c1645aad424bb1e7b14ae09829b3}{R\+E\+A\+D\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+\+L\+E\+N\+\_\+\+J\+S\+ON}}~36
+\item 
+\#define \mbox{\hyperlink{osp__tcp_8h_a094486f28d8cd6fca095dbbdaf670b7e}{U\+S\+E\+R\+\_\+\+L\+E\+N\+\_\+\+J\+S\+ON}}~8
+\item 
+\#define \mbox{\hyperlink{osp__tcp_8h_acbb575a53449acaade075615da61307d}{U\+S\+E\+R\+\_\+\+J\+S\+ON}}~10
+\item 
+\#define \mbox{\hyperlink{osp__tcp_8h_ade9a9413664417f0fa4d89a11f9cbaed}{H\+A\+\_\+\+S\+T\+A\+T\+E\+\_\+\+J\+S\+ON}}~257
+\end{DoxyCompactItemize}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -48,8 +62,10 @@ typedef struct \mbox{\hyperlink{structosp__tcp__t}{osp\+\_\+tcp\+\_\+t}} $\ast$ 
 \begin{DoxyCompactList}\small\item\em Initialization function for the O\+SP T\+CP layer. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{osp__tcp_8h_ab649aa1c24117770ecca7de43f94a3e8}{osp\+\_\+tcp\+\_\+connect}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp)
 \begin{DoxyCompactList}\small\item\em Blocking call that sets up server socket and waits for client connection In order to start a socket for a client (Android tablet, for instance), this must be called. It will block until a client establishes a connection, at which point it will return 0. \end{DoxyCompactList}\item 
-char \mbox{\hyperlink{osp__tcp_8h_a5f810fc80c3683cdc05b5c4a3a785aa4}{osp\+\_\+tcp\+\_\+read\+\_\+req}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp)
+int \mbox{\hyperlink{osp__tcp_8h_a55d011dc599c183aa80780931d5fafe0}{osp\+\_\+tcp\+\_\+read\+\_\+req}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp)
 \begin{DoxyCompactList}\small\item\em Blocking call that returns the request sent by the connected client. The client can make a number of requests including updating the values running in the O\+SP real-\/time code (knee points, attack, release, gains, etc). The client can also request the number of underruns that have been counted from the audio driver, the number of bands that have been initially set up, etc. \end{DoxyCompactList}\item 
+ssize\+\_\+t \mbox{\hyperlink{osp__tcp_8h_a31da083ff61e714c57e6ac37100e8e15}{osp\+\_\+4afc\+\_\+read\+\_\+values}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp, char $\ast$file\+\_\+path, unsigned int size)
+\item 
 ssize\+\_\+t \mbox{\hyperlink{osp__tcp_8h_aa4b8a5a6a4fa9249a163f47c206f7e8d}{osp\+\_\+tcp\+\_\+read\+\_\+values}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp, \mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$data, unsigned int size)
 \begin{DoxyCompactList}\small\item\em Reads data from the T\+CP stream into the osp\+\_\+user\+\_\+data structure. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{osp__tcp_8h_af443391eb190ffb7bb8b13c19d5bbe67}{osp\+\_\+tcp\+\_\+send\+\_\+underruns}} (\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}} osp\+\_\+tcp, unsigned int underruns)
@@ -66,23 +82,29 @@ void \mbox{\hyperlink{osp__tcp_8h_ab998766bad97b04e79d93b25c2d54c14}{osp\+\_\+tc
 This layer is the interface to the client side of the O\+SP application. 
 
 \subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{osp__tcp_8h_ade9a9413664417f0fa4d89a11f9cbaed}\label{osp__tcp_8h_ade9a9413664417f0fa4d89a11f9cbaed}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!H\+A\+\_\+\+S\+T\+A\+T\+E\+\_\+\+J\+S\+ON@{H\+A\+\_\+\+S\+T\+A\+T\+E\+\_\+\+J\+S\+ON}}
+\index{H\+A\+\_\+\+S\+T\+A\+T\+E\+\_\+\+J\+S\+ON@{H\+A\+\_\+\+S\+T\+A\+T\+E\+\_\+\+J\+S\+ON}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{H\+A\+\_\+\+S\+T\+A\+T\+E\+\_\+\+J\+S\+ON}{HA\_STATE\_JSON}}
+{\footnotesize\ttfamily \#define H\+A\+\_\+\+S\+T\+A\+T\+E\+\_\+\+J\+S\+ON~257}
+
 \mbox{\Hypertarget{osp__tcp_8h_aea93a99440c7bb1ee573213b6df715c0}\label{osp__tcp_8h_aea93a99440c7bb1ee573213b6df715c0}} 
 \index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!O\+S\+P\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT@{O\+S\+P\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT}}
 \index{O\+S\+P\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT@{O\+S\+P\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
 \subsubsection{\texorpdfstring{O\+S\+P\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT}{OSP\_DISCONNECT}}
-{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT~0x06}
+{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT~6}
 
 \mbox{\Hypertarget{osp__tcp_8h_a2ff6a0a7b702e21aaa12904ebe0b983a}\label{osp__tcp_8h_a2ff6a0a7b702e21aaa12904ebe0b983a}} 
 \index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+N\+U\+M\+\_\+\+B\+A\+N\+DS@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+N\+U\+M\+\_\+\+B\+A\+N\+DS}}
 \index{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+N\+U\+M\+\_\+\+B\+A\+N\+DS@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+N\+U\+M\+\_\+\+B\+A\+N\+DS}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
 \subsubsection{\texorpdfstring{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+N\+U\+M\+\_\+\+B\+A\+N\+DS}{OSP\_REQ\_GET\_NUM\_BANDS}}
-{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+N\+U\+M\+\_\+\+B\+A\+N\+DS~0x05}
+{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+N\+U\+M\+\_\+\+B\+A\+N\+DS~5}
 
 \mbox{\Hypertarget{osp__tcp_8h_ac11866b2a978a05955e5e89a0b1107d1}\label{osp__tcp_8h_ac11866b2a978a05955e5e89a0b1107d1}} 
 \index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+U\+N\+D\+E\+R\+R\+U\+NS@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+U\+N\+D\+E\+R\+R\+U\+NS}}
 \index{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+U\+N\+D\+E\+R\+R\+U\+NS@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+U\+N\+D\+E\+R\+R\+U\+NS}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
 \subsubsection{\texorpdfstring{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+U\+N\+D\+E\+R\+R\+U\+NS}{OSP\_REQ\_GET\_UNDERRUNS}}
-{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+U\+N\+D\+E\+R\+R\+U\+NS~0x02}
+{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+G\+E\+T\+\_\+\+U\+N\+D\+E\+R\+R\+U\+NS~2}
 
 
 
@@ -92,7 +114,7 @@ Request to get number of underruns from real-\/time O\+SP application.
 \index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+L\+A\+ST@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+L\+A\+ST}}
 \index{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+L\+A\+ST@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+L\+A\+ST}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
 \subsubsection{\texorpdfstring{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+L\+A\+ST}{OSP\_REQ\_LAST}}
-{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+L\+A\+ST~0x07}
+{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+L\+A\+ST~7}
 
 
 
@@ -102,7 +124,7 @@ This exists so we can test if an inc packet is one we recognize.
 \index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+P\+D\+A\+T\+E\+\_\+\+V\+A\+L\+U\+ES@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+P\+D\+A\+T\+E\+\_\+\+V\+A\+L\+U\+ES}}
 \index{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+P\+D\+A\+T\+E\+\_\+\+V\+A\+L\+U\+ES@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+P\+D\+A\+T\+E\+\_\+\+V\+A\+L\+U\+ES}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
 \subsubsection{\texorpdfstring{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+P\+D\+A\+T\+E\+\_\+\+V\+A\+L\+U\+ES}{OSP\_REQ\_UPDATE\_VALUES}}
-{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+P\+D\+A\+T\+E\+\_\+\+V\+A\+L\+U\+ES~0x01}
+{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+P\+D\+A\+T\+E\+\_\+\+V\+A\+L\+U\+ES~1}
 
 
 
@@ -112,19 +134,37 @@ Request to set the values in the real-\/time O\+SP C application.
 \index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+A\+C\+T\+I\+ON@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+A\+C\+T\+I\+ON}}
 \index{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+A\+C\+T\+I\+ON@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+A\+C\+T\+I\+ON}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
 \subsubsection{\texorpdfstring{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+A\+C\+T\+I\+ON}{OSP\_REQ\_USER\_ACTION}}
-{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+A\+C\+T\+I\+ON~0x04}
+{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+A\+C\+T\+I\+ON~4}
 
 \mbox{\Hypertarget{osp__tcp_8h_a491961372a3e01bdc57287e4c2b94d47}\label{osp__tcp_8h_a491961372a3e01bdc57287e4c2b94d47}} 
 \index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+ID@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+ID}}
 \index{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+ID@{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+ID}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
 \subsubsection{\texorpdfstring{O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+ID}{OSP\_REQ\_USER\_ID}}
-{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+ID~0x03}
+{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+R\+E\+Q\+\_\+\+U\+S\+E\+R\+\_\+\+ID~3}
 
 \mbox{\Hypertarget{osp__tcp_8h_ad70c5cf43d6187190e18013388120a13}\label{osp__tcp_8h_ad70c5cf43d6187190e18013388120a13}} 
 \index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!O\+S\+P\+\_\+\+W\+R\+O\+N\+G\+\_\+\+V\+E\+R\+S\+I\+ON@{O\+S\+P\+\_\+\+W\+R\+O\+N\+G\+\_\+\+V\+E\+R\+S\+I\+ON}}
 \index{O\+S\+P\+\_\+\+W\+R\+O\+N\+G\+\_\+\+V\+E\+R\+S\+I\+ON@{O\+S\+P\+\_\+\+W\+R\+O\+N\+G\+\_\+\+V\+E\+R\+S\+I\+ON}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
 \subsubsection{\texorpdfstring{O\+S\+P\+\_\+\+W\+R\+O\+N\+G\+\_\+\+V\+E\+R\+S\+I\+ON}{OSP\_WRONG\_VERSION}}
-{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+W\+R\+O\+N\+G\+\_\+\+V\+E\+R\+S\+I\+ON~0x00}
+{\footnotesize\ttfamily \#define O\+S\+P\+\_\+\+W\+R\+O\+N\+G\+\_\+\+V\+E\+R\+S\+I\+ON~0}
+
+\mbox{\Hypertarget{osp__tcp_8h_aeca6c1645aad424bb1e7b14ae09829b3}\label{osp__tcp_8h_aeca6c1645aad424bb1e7b14ae09829b3}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!R\+E\+A\+D\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+\+L\+E\+N\+\_\+\+J\+S\+ON@{R\+E\+A\+D\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+\+L\+E\+N\+\_\+\+J\+S\+ON}}
+\index{R\+E\+A\+D\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+\+L\+E\+N\+\_\+\+J\+S\+ON@{R\+E\+A\+D\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+\+L\+E\+N\+\_\+\+J\+S\+ON}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{R\+E\+A\+D\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+\+L\+E\+N\+\_\+\+J\+S\+ON}{READ\_REQUEST\_LEN\_JSON}}
+{\footnotesize\ttfamily \#define R\+E\+A\+D\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+\+L\+E\+N\+\_\+\+J\+S\+ON~36}
+
+\mbox{\Hypertarget{osp__tcp_8h_acbb575a53449acaade075615da61307d}\label{osp__tcp_8h_acbb575a53449acaade075615da61307d}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!U\+S\+E\+R\+\_\+\+J\+S\+ON@{U\+S\+E\+R\+\_\+\+J\+S\+ON}}
+\index{U\+S\+E\+R\+\_\+\+J\+S\+ON@{U\+S\+E\+R\+\_\+\+J\+S\+ON}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{U\+S\+E\+R\+\_\+\+J\+S\+ON}{USER\_JSON}}
+{\footnotesize\ttfamily \#define U\+S\+E\+R\+\_\+\+J\+S\+ON~10}
+
+\mbox{\Hypertarget{osp__tcp_8h_a094486f28d8cd6fca095dbbdaf670b7e}\label{osp__tcp_8h_a094486f28d8cd6fca095dbbdaf670b7e}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!U\+S\+E\+R\+\_\+\+L\+E\+N\+\_\+\+J\+S\+ON@{U\+S\+E\+R\+\_\+\+L\+E\+N\+\_\+\+J\+S\+ON}}
+\index{U\+S\+E\+R\+\_\+\+L\+E\+N\+\_\+\+J\+S\+ON@{U\+S\+E\+R\+\_\+\+L\+E\+N\+\_\+\+J\+S\+ON}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{U\+S\+E\+R\+\_\+\+L\+E\+N\+\_\+\+J\+S\+ON}{USER\_LEN\_JSON}}
+{\footnotesize\ttfamily \#define U\+S\+E\+R\+\_\+\+L\+E\+N\+\_\+\+J\+S\+ON~8}
 
 
 
@@ -138,6 +178,12 @@ Request to set the values in the real-\/time O\+SP C application.
 
 
 \subsection{Function Documentation}
+\mbox{\Hypertarget{osp__tcp_8h_a31da083ff61e714c57e6ac37100e8e15}\label{osp__tcp_8h_a31da083ff61e714c57e6ac37100e8e15}} 
+\index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!osp\+\_\+4afc\+\_\+read\+\_\+values@{osp\+\_\+4afc\+\_\+read\+\_\+values}}
+\index{osp\+\_\+4afc\+\_\+read\+\_\+values@{osp\+\_\+4afc\+\_\+read\+\_\+values}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
+\subsubsection{\texorpdfstring{osp\+\_\+4afc\+\_\+read\+\_\+values()}{osp\_4afc\_read\_values()}}
+{\footnotesize\ttfamily ssize\+\_\+t osp\+\_\+4afc\+\_\+read\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp,  }\item[{char $\ast$}]{file\+\_\+path,  }\item[{unsigned int}]{size }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{osp__tcp_8h_ab998766bad97b04e79d93b25c2d54c14}\label{osp__tcp_8h_ab998766bad97b04e79d93b25c2d54c14}} 
 \index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!osp\+\_\+tcp\+\_\+close@{osp\+\_\+tcp\+\_\+close}}
 \index{osp\+\_\+tcp\+\_\+close@{osp\+\_\+tcp\+\_\+close}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
@@ -198,11 +244,11 @@ Initialization function for the O\+SP T\+CP layer.
 \begin{DoxyReturn}{Returns}
 Returns the allocated instance of the O\+SP T\+CP layer data structure (\char`\"{}object\char`\"{}) 
 \end{DoxyReturn}
-\mbox{\Hypertarget{osp__tcp_8h_a5f810fc80c3683cdc05b5c4a3a785aa4}\label{osp__tcp_8h_a5f810fc80c3683cdc05b5c4a3a785aa4}} 
+\mbox{\Hypertarget{osp__tcp_8h_a55d011dc599c183aa80780931d5fafe0}\label{osp__tcp_8h_a55d011dc599c183aa80780931d5fafe0}} 
 \index{osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}!osp\+\_\+tcp\+\_\+read\+\_\+req@{osp\+\_\+tcp\+\_\+read\+\_\+req}}
 \index{osp\+\_\+tcp\+\_\+read\+\_\+req@{osp\+\_\+tcp\+\_\+read\+\_\+req}!osp\+\_\+tcp.\+h@{osp\+\_\+tcp.\+h}}
 \subsubsection{\texorpdfstring{osp\+\_\+tcp\+\_\+read\+\_\+req()}{osp\_tcp\_read\_req()}}
-{\footnotesize\ttfamily char osp\+\_\+tcp\+\_\+read\+\_\+req (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int osp\+\_\+tcp\+\_\+read\+\_\+req (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{osp__tcp_8h_ac73f074c55d4549265c975cc8cffd349}{Osp\+\_\+tcp}}}]{osp\+\_\+tcp }\end{DoxyParamCaption})}
 
 
 

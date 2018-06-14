@@ -9,6 +9,6 @@ var osp__process_8h =
     [ "osp_data_set_s2", "osp__process_8h.html#aeb2474bd6b995d8ad289bfb1ce9b91c9", null ],
     [ "osp_dump_afc_filter", "osp__process_8h.html#a37765f5c4d9ab3f3569947503b97a6c6", null ],
     [ "osp_get_num_bands", "osp__process_8h.html#afa87b8384a65fb6f6a12ac92297c9961", null ],
-    [ "osp_init", "osp__process_8h.html#a6d714155eff0850c8fd9458444365c57", null ],
+    [ "osp_init", "osp__process_8h.html#aabb5c0280f6d5cd0cce725a00533978f", null ],
     [ "osp_process_audio", "osp__process_8h.html#a6c8f16a08d0ce2a2b4989861253a51f5", null ]
 ];

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['speech_5fenhancement_2ec',['speech_enhancement.c',['../speech__enhancement_8c.html',1,'']]],
-  ['speech_5fenhancement_2eh',['speech_enhancement.h',['../speech__enhancement_8h.html',1,'']]]
+  ['read_5ftaps_2ec',['read_taps.c',['../read__taps_8c.html',1,'']]],
+  ['resample_2ec',['resample.c',['../resample_8c.html',1,'']]],
+  ['resample_2eh',['resample.h',['../resample_8h.html',1,'']]]
 ];

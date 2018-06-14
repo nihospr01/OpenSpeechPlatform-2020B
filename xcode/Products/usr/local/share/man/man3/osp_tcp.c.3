@@ -1,4 +1,4 @@
-.TH "libosp/osp_tcp/osp_tcp.c" 3 "Wed Jun 13 2018" "Open Speech Platform" \" -*- nroff -*-
+.TH "libosp/osp_tcp/osp_tcp.c" 3 "Thu Jun 14 2018" "Open Speech Platform" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -14,6 +14,10 @@ libosp/osp_tcp/osp_tcp.c
 .br
 \fC#include <stdio\&.h>\fP
 .br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'jsmn\&.h'\fP
+.br
 
 .SS "Data Structures"
 
@@ -27,6 +31,15 @@ libosp/osp_tcp/osp_tcp.c
 
 .in +1c
 .ti -1c
+.RI "static int \fBjsoneq\fP (const char *json, \fBjsmntok_t\fP *tok, const char *s)"
+.br
+.ti -1c
+.RI "int \fBget_int_from_SubString\fP (const char *input, int offset, int len)"
+.br
+.ti -1c
+.RI "int \fBget_float_from_SubString\fP (const char *input, int offset, int len)"
+.br
+.ti -1c
 .RI "\fBOsp_tcp\fP \fBosp_tcp_init\fP (int port)"
 .br
 .RI "Initialization function for the OSP TCP layer\&. "
@@ -35,7 +48,7 @@ libosp/osp_tcp/osp_tcp.c
 .br
 .RI "Blocking call that sets up server socket and waits for client connection In order to start a socket for a client (Android tablet, for instance), this must be called\&. It will block until a client establishes a connection, at which point it will return 0\&. "
 .ti -1c
-.RI "char \fBosp_tcp_read_req\fP (\fBOsp_tcp\fP osp_tcp)"
+.RI "int \fBosp_tcp_read_req\fP (\fBOsp_tcp\fP osp_tcp)"
 .br
 .RI "Blocking call that returns the request sent by the connected client\&. The client can make a number of requests including updating the values running in the OSP real-time code (knee points, attack, release, gains, etc)\&. The client can also request the number of underruns that have been counted from the audio driver, the number of bands that have been initially set up, etc\&. "
 .ti -1c
@@ -44,6 +57,9 @@ libosp/osp_tcp/osp_tcp.c
 .RI "Reads data from the TCP stream into the osp_user_data structure\&. "
 .ti -1c
 .RI "ssize_t \fBosp_tcp_read_user_packet\fP (\fBOsp_tcp\fP osp_tcp, char *message, unsigned int size)"
+.br
+.ti -1c
+.RI "ssize_t \fBosp_4afc_read_values\fP (\fBOsp_tcp\fP osp_tcp, char *file_path, unsigned int size)"
 .br
 .ti -1c
 .RI "int \fBosp_tcp_send_underruns\fP (\fBOsp_tcp\fP osp_tcp, unsigned int underruns)"
@@ -60,6 +76,14 @@ libosp/osp_tcp/osp_tcp.c
 .in -1c
 .SH "Function Documentation"
 .PP 
+.SS "int get_float_from_SubString (const char * input, int offset, int len)"
+
+.SS "int get_int_from_SubString (const char * input, int offset, int len)"
+
+.SS "static int jsoneq (const char * json, \fBjsmntok_t\fP * tok, const char * s)\fC [static]\fP"
+
+.SS "ssize_t osp_4afc_read_values (\fBOsp_tcp\fP osp_tcp, char * file_path, unsigned int size)"
+
 .SS "void osp_tcp_close (\fBOsp_tcp\fP osp_tcp)"
 
 .PP
@@ -118,7 +142,7 @@ Returns the allocated instance of the OSP TCP layer data structure ('object')
 .RE
 .PP
 
-.SS "char osp_tcp_read_req (\fBOsp_tcp\fP osp_tcp)"
+.SS "int osp_tcp_read_req (\fBOsp_tcp\fP osp_tcp)"
 
 .PP
 Blocking call that returns the request sent by the connected client\&. The client can make a number of requests including updating the values running in the OSP real-time code (knee points, attack, release, gains, etc)\&. The client can also request the number of underruns that have been counted from the audio driver, the number of bands that have been initially set up, etc\&. 

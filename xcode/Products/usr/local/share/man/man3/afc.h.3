@@ -1,4 +1,4 @@
-.TH "libosp/afc/afc.h" 3 "Wed Jun 13 2018" "Open Speech Platform" \" -*- nroff -*-
+.TH "libosp/afc/afc.h" 3 "Thu Jun 14 2018" "Open Speech Platform" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -32,7 +32,7 @@ libosp/afc/afc.h
 
 .in +1c
 .ti -1c
-.RI "\fBAfc\fP \fBafc_init\fP (const float *afc_filter_taps, int afc_filter_tap_len, const float *prefilter_taps, int prefilter_tap_len, const float *band_limited_filter_taps, int band_limited_filter_tap_len, int frame_size, unsigned int adaptation_type)"
+.RI "\fBAfc\fP \fBafc_init\fP (const float *afc_filter_taps, int afc_filter_tap_len, const float *prefilter_taps, int prefilter_tap_len, const float *band_limited_filter_taps, int band_limited_filter_tap_len, int frame_size, unsigned int adaptation_type, float afc_mu, float afc_rho)"
 .br
 .RI "Function to initialize the afc data struct\&. "
 .ti -1c
@@ -136,7 +136,7 @@ Function to get the estimate of the feedback signal, y_hat(n)
 .RE
 .PP
 
-.SS "\fBAfc\fP afc_init (const float * afc_filter_taps, int afc_filter_tap_len, const float * prefilter_taps, int prefilter_tap_len, const float * band_limited_filter_taps, int band_limited_filter_tap_len, int frame_size, unsigned int adaptation_type)"
+.SS "\fBAfc\fP afc_init (const float * afc_filter_taps, int afc_filter_tap_len, const float * prefilter_taps, int prefilter_tap_len, const float * band_limited_filter_taps, int band_limited_filter_tap_len, int frame_size, unsigned int adaptation_type, float afc_mu, float afc_rho)"
 
 .PP
 Function to initialize the afc data struct\&. Allocates memory to the Afc instance and initialize its parameters\&.

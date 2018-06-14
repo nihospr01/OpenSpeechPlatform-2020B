@@ -1,0 +1,82 @@
+.TH "libosp/osp_tcp/json_parser/jsmn.h" 3 "Thu Jun 14 2018" "Open Speech Platform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+libosp/osp_tcp/json_parser/jsmn.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stddef\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBjsmntok_t\fP"
+.br
+.ti -1c
+.RI "struct \fBjsmn_parser\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBjsmntype_t\fP { \fBJSMN_UNDEFINED\fP = 0, \fBJSMN_OBJECT\fP = 1, \fBJSMN_ARRAY\fP = 2, \fBJSMN_STRING\fP = 3, \fBJSMN_PRIMITIVE\fP = 4 }"
+.br
+.ti -1c
+.RI "enum \fBjsmnerr\fP { \fBJSMN_ERROR_NOMEM\fP = -1, \fBJSMN_ERROR_INVAL\fP = -2, \fBJSMN_ERROR_PART\fP = -3 }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBjsmn_init\fP (\fBjsmn_parser\fP *parser)"
+.br
+.ti -1c
+.RI "int \fBjsmn_parse\fP (\fBjsmn_parser\fP *parser, const char *js, size_t len, \fBjsmntok_t\fP *tokens, unsigned int num_tokens)"
+.br
+.in -1c
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBjsmnerr\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIJSMN_ERROR_NOMEM \fP\fP
+.TP
+\fB\fIJSMN_ERROR_INVAL \fP\fP
+.TP
+\fB\fIJSMN_ERROR_PART \fP\fP
+.SS "enum \fBjsmntype_t\fP"
+JSON type identifier\&. Basic types are: o Object o Array o String o Other primitive: number, boolean (true/false) or null 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIJSMN_UNDEFINED \fP\fP
+.TP
+\fB\fIJSMN_OBJECT \fP\fP
+.TP
+\fB\fIJSMN_ARRAY \fP\fP
+.TP
+\fB\fIJSMN_STRING \fP\fP
+.TP
+\fB\fIJSMN_PRIMITIVE \fP\fP
+.SH "Function Documentation"
+.PP 
+.SS "void jsmn_init (\fBjsmn_parser\fP * parser)"
+Create JSON parser over an array of tokens
+.PP
+Creates a new parser based over a given buffer with an array of tokens available\&. 
+.SS "int jsmn_parse (\fBjsmn_parser\fP * parser, const char * js, size_t len, \fBjsmntok_t\fP * tokens, unsigned int num_tokens)"
+Run JSON parser\&. It parses a JSON data string into and array of tokens, each describing a single JSON object\&.
+.PP
+Parse JSON string and fill tokens\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Open Speech Platform from the source code\&.

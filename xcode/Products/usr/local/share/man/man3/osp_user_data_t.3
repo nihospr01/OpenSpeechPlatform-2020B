@@ -1,4 +1,4 @@
-.TH "osp_user_data_t" 3 "Wed Jun 13 2018" "Open Speech Platform" \" -*- nroff -*-
+.TH "osp_user_data_t" 3 "Thu Jun 14 2018" "Open Speech Platform" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -71,6 +71,18 @@ osp_user_data_t \- general data structure shared between client and C applicatio
 .RI "float \fBspectral_subtraction_param\fP"
 .br
 .RI "Spectral subtraction parameter\&. "
+.ti -1c
+.RI "int \fBfeedback_algorithm_type\fP"
+.br
+.RI "Choose the type of feedback algorithm type\&. "
+.ti -1c
+.RI "float \fBmu\fP"
+.br
+.RI "Step size parameter\&. "
+.ti -1c
+.RI "float \fBrho\fP"
+.br
+.RI "Forgetting factor\&. "
 .in -1c
 .SH "Detailed Description"
 .PP 
@@ -91,6 +103,10 @@ Attack time for WDRC for all bands\&.
 
 .PP
 Feedback on/off\&. 
+.SS "int osp_user_data_t::feedback_algorithm_type"
+
+.PP
+Choose the type of feedback algorithm type\&. 
 .SS "int osp_user_data_t::g50[\fBNUM_BANDS\fP]"
 
 .PP
@@ -111,6 +127,10 @@ Lower kneepoints for all bands\&.
 
 .PP
 toggle for MPO on/off 
+.SS "float osp_user_data_t::mu"
+
+.PP
+Step size parameter\&. 
 .SS "int osp_user_data_t::no_op"
 
 .PP
@@ -127,6 +147,10 @@ Read mics on/off\&.
 
 .PP
 Release time for WDRC for all bands\&. 
+.SS "float osp_user_data_t::rho"
+
+.PP
+Forgetting factor\&. 
 .SS "int osp_user_data_t::spectral_subtraction"
 
 .PP

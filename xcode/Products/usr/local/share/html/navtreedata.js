@@ -39,6 +39,8 @@ var NAVTREE =
         [ "Functions", "globals_func.html", "globals_func" ],
         [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
+        [ "Enumerations", "globals_enum.html", null ],
+        [ "Enumerator", "globals_eval.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -48,8 +50,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "afc_8c.html",
-"main_8c.html#ac82612e6326e939ae27e62ce1be9c8eb",
-"tcplib_8h.html#a36c6d89c6b81a745d5cdaaab9262ad9e"
+"libosp_2osp__process_2logger_8h_source.html",
+"structosp__tcp__t.html#a944dbf95de27ec773bf9b4e169a30661"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -143,6 +143,15 @@ Data Fields</h2></td></tr>
 <tr class="memitem:a21ab3e8e57f137d0308868f84d09631f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structosp__user__data__t.html#a21ab3e8e57f137d0308868f84d09631f">spectral_subtraction_param</a></td></tr>
 <tr class="memdesc:a21ab3e8e57f137d0308868f84d09631f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spectral subtraction parameter.  <a href="#a21ab3e8e57f137d0308868f84d09631f">More...</a><br /></td></tr>
 <tr class="separator:a21ab3e8e57f137d0308868f84d09631f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeae512f404bfdf2bc27256e92064f9ca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structosp__user__data__t.html#aeae512f404bfdf2bc27256e92064f9ca">feedback_algorithm_type</a></td></tr>
+<tr class="memdesc:aeae512f404bfdf2bc27256e92064f9ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Choose the type of feedback algorithm type.  <a href="#aeae512f404bfdf2bc27256e92064f9ca">More...</a><br /></td></tr>
+<tr class="separator:aeae512f404bfdf2bc27256e92064f9ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a189ecf1c6b08ec178e823f4802c1996c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structosp__user__data__t.html#a189ecf1c6b08ec178e823f4802c1996c">mu</a></td></tr>
+<tr class="memdesc:a189ecf1c6b08ec178e823f4802c1996c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Step size parameter.  <a href="#a189ecf1c6b08ec178e823f4802c1996c">More...</a><br /></td></tr>
+<tr class="separator:a189ecf1c6b08ec178e823f4802c1996c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab930615d0d22f7b4becc3321b82787a5"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structosp__user__data__t.html#ab930615d0d22f7b4becc3321b82787a5">rho</a></td></tr>
+<tr class="memdesc:ab930615d0d22f7b4becc3321b82787a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forgetting factor.  <a href="#ab930615d0d22f7b4becc3321b82787a5">More...</a><br /></td></tr>
+<tr class="separator:ab930615d0d22f7b4becc3321b82787a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>general data structure shared between client and C application </p>
@@ -206,6 +215,22 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Feedback on/off. </p>
+
+</div>
+</div>
+<a id="aeae512f404bfdf2bc27256e92064f9ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeae512f404bfdf2bc27256e92064f9ca">&#9670;&nbsp;</a></span>feedback_algorithm_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int osp_user_data_t::feedback_algorithm_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Choose the type of feedback algorithm type. </p>
 
 </div>
 </div>
@@ -289,6 +314,22 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a id="a189ecf1c6b08ec178e823f4802c1996c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a189ecf1c6b08ec178e823f4802c1996c">&#9670;&nbsp;</a></span>mu</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float osp_user_data_t::mu</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Step size parameter. </p>
+
+</div>
+</div>
 <a id="ab6aa759f78ee1e7411c6591c88977c14"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab6aa759f78ee1e7411c6591c88977c14">&#9670;&nbsp;</a></span>no_op</h2>
 
@@ -350,6 +391,22 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Release time for WDRC for all bands. </p>
+
+</div>
+</div>
+<a id="ab930615d0d22f7b4becc3321b82787a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab930615d0d22f7b4becc3321b82787a5">&#9670;&nbsp;</a></span>rho</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float osp_user_data_t::rho</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Forgetting factor. </p>
 
 </div>
 </div>

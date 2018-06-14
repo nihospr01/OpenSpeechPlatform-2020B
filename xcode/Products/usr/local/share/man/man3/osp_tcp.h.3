@@ -1,4 +1,4 @@
-.TH "libosp/osp_tcp/osp_tcp.h" 3 "Wed Jun 13 2018" "Open Speech Platform" \" -*- nroff -*-
+.TH "libosp/osp_tcp/osp_tcp.h" 3 "Thu Jun 14 2018" "Open Speech Platform" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,37 +12,57 @@ libosp/osp_tcp/osp_tcp.h
 .br
 \fC#include <sys/types\&.h>\fP
 .br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'jsmn\&.h'\fP
+.br
 
 .SS "Macros"
 
 .in +1c
 .ti -1c
-.RI "#define \fBOSP_WRONG_VERSION\fP   0x00"
+.RI "#define \fBOSP_WRONG_VERSION\fP   0"
 .br
 .ti -1c
-.RI "#define \fBOSP_REQ_UPDATE_VALUES\fP   0x01"
+.RI "#define \fBOSP_REQ_UPDATE_VALUES\fP   1"
 .br
 .RI "Request to set the values in the real-time OSP C application\&. "
 .ti -1c
-.RI "#define \fBOSP_REQ_GET_UNDERRUNS\fP   0x02"
+.RI "#define \fBOSP_REQ_GET_UNDERRUNS\fP   2"
 .br
 .RI "Request to get number of underruns from real-time OSP application\&. "
 .ti -1c
-.RI "#define \fBOSP_REQ_USER_ID\fP   0x03"
+.RI "#define \fBOSP_REQ_USER_ID\fP   3"
 .br
 .ti -1c
-.RI "#define \fBOSP_REQ_USER_ACTION\fP   0x04"
+.RI "#define \fBOSP_REQ_USER_ACTION\fP   4"
 .br
 .ti -1c
-.RI "#define \fBOSP_REQ_GET_NUM_BANDS\fP   0x05"
+.RI "#define \fBOSP_REQ_GET_NUM_BANDS\fP   5"
 .br
 .ti -1c
-.RI "#define \fBOSP_DISCONNECT\fP   0x06"
+.RI "#define \fBOSP_DISCONNECT\fP   6"
 .br
 .ti -1c
-.RI "#define \fBOSP_REQ_LAST\fP   0x07"
+.RI "#define \fBOSP_REQ_LAST\fP   7"
 .br
 .RI "This exists so we can test if an inc packet is one we recognize\&. "
+.ti -1c
+.RI "#define \fBREAD_REQUEST_LEN_JSON\fP   36"
+.br
+.ti -1c
+.RI "#define \fBUSER_LEN_JSON\fP   8"
+.br
+.ti -1c
+.RI "#define \fBUSER_JSON\fP   10"
+.br
+.ti -1c
+.RI "#define \fBHA_STATE_JSON\fP   257"
+.br
 .in -1c
 .SS "Typedefs"
 
@@ -63,9 +83,12 @@ libosp/osp_tcp/osp_tcp.h
 .br
 .RI "Blocking call that sets up server socket and waits for client connection In order to start a socket for a client (Android tablet, for instance), this must be called\&. It will block until a client establishes a connection, at which point it will return 0\&. "
 .ti -1c
-.RI "char \fBosp_tcp_read_req\fP (\fBOsp_tcp\fP osp_tcp)"
+.RI "int \fBosp_tcp_read_req\fP (\fBOsp_tcp\fP osp_tcp)"
 .br
 .RI "Blocking call that returns the request sent by the connected client\&. The client can make a number of requests including updating the values running in the OSP real-time code (knee points, attack, release, gains, etc)\&. The client can also request the number of underruns that have been counted from the audio driver, the number of bands that have been initially set up, etc\&. "
+.ti -1c
+.RI "ssize_t \fBosp_4afc_read_values\fP (\fBOsp_tcp\fP osp_tcp, char *file_path, unsigned int size)"
+.br
 .ti -1c
 .RI "ssize_t \fBosp_tcp_read_values\fP (\fBOsp_tcp\fP osp_tcp, \fBosp_user_data\fP *data, unsigned int size)"
 .br
@@ -91,27 +114,35 @@ libosp/osp_tcp/osp_tcp.h
 This layer is the interface to the client side of the OSP application\&. 
 .SH "Macro Definition Documentation"
 .PP 
-.SS "#define OSP_DISCONNECT   0x06"
+.SS "#define HA_STATE_JSON   257"
 
-.SS "#define OSP_REQ_GET_NUM_BANDS   0x05"
+.SS "#define OSP_DISCONNECT   6"
 
-.SS "#define OSP_REQ_GET_UNDERRUNS   0x02"
+.SS "#define OSP_REQ_GET_NUM_BANDS   5"
+
+.SS "#define OSP_REQ_GET_UNDERRUNS   2"
 
 .PP
 Request to get number of underruns from real-time OSP application\&. 
-.SS "#define OSP_REQ_LAST   0x07"
+.SS "#define OSP_REQ_LAST   7"
 
 .PP
 This exists so we can test if an inc packet is one we recognize\&. 
-.SS "#define OSP_REQ_UPDATE_VALUES   0x01"
+.SS "#define OSP_REQ_UPDATE_VALUES   1"
 
 .PP
 Request to set the values in the real-time OSP C application\&. 
-.SS "#define OSP_REQ_USER_ACTION   0x04"
+.SS "#define OSP_REQ_USER_ACTION   4"
 
-.SS "#define OSP_REQ_USER_ID   0x03"
+.SS "#define OSP_REQ_USER_ID   3"
 
-.SS "#define OSP_WRONG_VERSION   0x00"
+.SS "#define OSP_WRONG_VERSION   0"
+
+.SS "#define READ_REQUEST_LEN_JSON   36"
+
+.SS "#define USER_JSON   10"
+
+.SS "#define USER_LEN_JSON   8"
 
 .SH "Typedef Documentation"
 .PP 
@@ -119,6 +150,8 @@ Request to set the values in the real-time OSP C application\&.
 
 .SH "Function Documentation"
 .PP 
+.SS "ssize_t osp_4afc_read_values (\fBOsp_tcp\fP osp_tcp, char * file_path, unsigned int size)"
+
 .SS "void osp_tcp_close (\fBOsp_tcp\fP osp_tcp)"
 
 .PP
@@ -177,7 +210,7 @@ Returns the allocated instance of the OSP TCP layer data structure ('object')
 .RE
 .PP
 
-.SS "char osp_tcp_read_req (\fBOsp_tcp\fP osp_tcp)"
+.SS "int osp_tcp_read_req (\fBOsp_tcp\fP osp_tcp)"
 
 .PP
 Blocking call that returns the request sent by the connected client\&. The client can make a number of requests including updating the values running in the OSP real-time code (knee points, attack, release, gains, etc)\&. The client can also request the number of underruns that have been counted from the audio driver, the number of bands that have been initially set up, etc\&. 

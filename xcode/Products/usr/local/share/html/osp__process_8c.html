@@ -131,9 +131,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a5e03afe3816964e6052931a58b754d99"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="osp__process_8c.html#a5e03afe3816964e6052931a58b754d99">osp_process_ha</a> (<a class="el" href="constants_8h.html#a2d1d78531fe12807c3852488556d5a4b">osp_user_data</a> *osp, <a class="el" href="filter_8h.html#a69e34b8aa259d2ca0b81b5c95f395bdf">Filter</a> *filter, <a class="el" href="peak__detect_8h.html#a152d14cd03f6e1ac947c95921da5507c">Peak_detect</a> pd, float *e_n, float *s_n, size_t len)</td></tr>
 <tr class="memdesc:a5e03afe3816964e6052931a58b754d99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that performs basic Hearing Aid (HA) processing on a single channel.  <a href="#a5e03afe3816964e6052931a58b754d99">More...</a><br /></td></tr>
 <tr class="separator:a5e03afe3816964e6052931a58b754d99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d714155eff0850c8fd9458444365c57"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="osp__process_8c.html#a6d714155eff0850c8fd9458444365c57">osp_init</a> (unsigned int frame_size, int sample_rate, unsigned char afc_adaptation_type)</td></tr>
-<tr class="memdesc:a6d714155eff0850c8fd9458444365c57"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file groups all of the different OSP library calls in one place. This is more of an example way of using the different parts of the OSP libraries to implement a hearing aid algorith with MHA and AFC all in one place.  <a href="#a6d714155eff0850c8fd9458444365c57">More...</a><br /></td></tr>
-<tr class="separator:a6d714155eff0850c8fd9458444365c57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabb5c0280f6d5cd0cce725a00533978f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="osp__process_8c.html#aabb5c0280f6d5cd0cce725a00533978f">osp_init</a> (unsigned int frame_size, int sample_rate, <a class="el" href="constants_8h.html#a2d1d78531fe12807c3852488556d5a4b">osp_user_data</a> *osp_data)</td></tr>
+<tr class="memdesc:aabb5c0280f6d5cd0cce725a00533978f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file groups all of the different OSP library calls in one place. This is more of an example way of using the different parts of the OSP libraries to implement a hearing aid algorith with MHA and AFC all in one place.  <a href="#aabb5c0280f6d5cd0cce725a00533978f">More...</a><br /></td></tr>
+<tr class="separator:aabb5c0280f6d5cd0cce725a00533978f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c8f16a08d0ce2a2b4989861253a51f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="osp__process_8c.html#a6c8f16a08d0ce2a2b4989861253a51f5">osp_process_audio</a> (<a class="el" href="constants_8h.html#a2d1d78531fe12807c3852488556d5a4b">osp_user_data</a> *osp, float *x_nL, float *x_nR, float *outL, float *outR, size_t len)</td></tr>
 <tr class="memdesc:a6c8f16a08d0ce2a2b4989861253a51f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to perform Master Hearing Aid (MHA) processing on the input signal for both channels.  <a href="#a6c8f16a08d0ce2a2b4989861253a51f5">More...</a><br /></td></tr>
 <tr class="separator:a6c8f16a08d0ce2a2b4989861253a51f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -466,8 +466,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a6d714155eff0850c8fd9458444365c57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d714155eff0850c8fd9458444365c57">&#9670;&nbsp;</a></span>osp_init()</h2>
+<a id="aabb5c0280f6d5cd0cce725a00533978f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabb5c0280f6d5cd0cce725a00533978f">&#9670;&nbsp;</a></span>osp_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -487,8 +487,8 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned char&#160;</td>
-          <td class="paramname"><em>afc_adaptation_type</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="constants_8h.html#a2d1d78531fe12807c3852488556d5a4b">osp_user_data</a> *&#160;</td>
+          <td class="paramname"><em>osp_data</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

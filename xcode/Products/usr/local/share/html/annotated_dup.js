@@ -6,6 +6,8 @@ var annotated_dup =
     [ "delay_line_t", "structdelay__line__t.html", "structdelay__line__t" ],
     [ "file_loopback_context_t", "structfile__loopback__context__t.html", "structfile__loopback__context__t" ],
     [ "filter_t", "structfilter__t.html", "structfilter__t" ],
+    [ "jsmn_parser", "structjsmn__parser.html", "structjsmn__parser" ],
+    [ "jsmntok_t", "structjsmntok__t.html", "structjsmntok__t" ],
     [ "osp_tcp_t", "structosp__tcp__t.html", "structosp__tcp__t" ],
     [ "osp_user_data_t", "structosp__user__data__t.html", "structosp__user__data__t" ],
     [ "pa_aux_data_t", "structpa__aux__data__t.html", "structpa__aux__data__t" ],

@@ -1,4 +1,4 @@
-.TH "libosp/common/constants.h" 3 "Wed Jun 13 2018" "Open Speech Platform" \" -*- nroff -*-
+.TH "libosp/common/constants.h" 3 "Thu Jun 14 2018" "Open Speech Platform" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -61,6 +61,14 @@ libosp/common/constants.h
 .RI "#define \fBSYNTHETIC_TAP_LEN\fP   525"
 .br
 .RI "Synthetic feedback filter tap length\&. "
+.ti -1c
+.RI "#define \fBRESAMP_32_96_TAPS_MIC_CALIB\fP   211"
+.br
+.RI "Number of taps for interpolation filter in resampler\&.c with calibration\&. "
+.ti -1c
+.RI "#define \fBRESAMP_96_32_TAPS_MIC_CALIB\fP   212"
+.br
+.RI "Number of taps for decimation filter in resampler\&.c with calibration\&. "
 .ti -1c
 .RI "#define \fBD_ATTACK_TIME\fP   5"
 .br
@@ -164,6 +172,10 @@ Number of taps for interpolation filter in resampler\&.c for 32 to 48 kHz\&.
 
 .PP
 Number of taps for interpolation filter in resampler\&.c\&. 
+.SS "#define RESAMP_32_96_TAPS_MIC_CALIB   211"
+
+.PP
+Number of taps for interpolation filter in resampler\&.c with calibration\&. 
 .SS "#define RESAMP_48_32_TAPS   25"
 
 .PP
@@ -172,6 +184,10 @@ Number of taps for decimation filter in resampler\&.c for 48 to 32 kHz\&.
 
 .PP
 Number of taps for decimation filter in resampler\&.c\&. 
+.SS "#define RESAMP_96_32_TAPS_MIC_CALIB   212"
+
+.PP
+Number of taps for decimation filter in resampler\&.c with calibration\&. 
 .SS "#define SYNTHETIC_TAP_LEN   525"
 
 .PP

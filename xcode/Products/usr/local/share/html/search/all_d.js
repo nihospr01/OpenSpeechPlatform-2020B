@@ -1,9 +1,12 @@
 var searchData=
 [
-  ['no_5fdelay',['no_delay',['../structbeam__form__t.html#a6358c3b8f9b4940a50c7fe48bade9e6b',1,'beam_form_t']]],
-  ['no_5fop',['no_op',['../structosp__user__data__t.html#ab6aa759f78ee1e7411c6591c88977c14',1,'osp_user_data_t']]],
-  ['noise_5festimation_5ftype',['noise_estimation_type',['../structosp__user__data__t.html#ab6c6864ef4a835caedfac8f7757d3646',1,'osp_user_data_t']]],
-  ['num_5fbands',['num_bands',['../structpeak__detect__t.html#a18c7ff3dea1f1dafdab996fe12814366',1,'peak_detect_t::num_bands()'],['../constants_8h.html#a19441d7b9be72492ed93a440085e53be',1,'NUM_BANDS():&#160;constants.h']]],
-  ['num_5finput_5fchannels',['NUM_INPUT_CHANNELS',['../port__wrapper_8c.html#a021f92f7f43441350f69d5293ec6b5f6',1,'port_wrapper.c']]],
-  ['num_5foutput_5fchannels',['NUM_OUTPUT_CHANNELS',['../port__wrapper_8c.html#a189952d0bda61786ddb342cc388ce762',1,'port_wrapper.c']]]
+  ['main',['main',['../main_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;main.c'],['../extract__bin_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;extract_bin.c'],['../read__taps_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;read_taps.c']]],
+  ['main_2ec',['main.c',['../main_8c.html',1,'']]],
+  ['max_5fwrite_5flen',['MAX_WRITE_LEN',['../libosp_2osp__process_2logger_8h.html#a04ed3ac2f178cdcd0333c005a2923958',1,'logger.h']]],
+  ['memcpy_5ff',['memcpy_f',['../array__utilities_8c.html#acad9b9e456a0f3a81dab2671224f150c',1,'memcpy_f(float *dst, float *src, size_t len):&#160;array_utilities.c'],['../array__utilities_8h.html#acad9b9e456a0f3a81dab2671224f150c',1,'memcpy_f(float *dst, float *src, size_t len):&#160;array_utilities.c']]],
+  ['mpo',['mpo',['../mpo_8c.html#ae1fe3ef6535fbf9476ee597f411114c9',1,'mpo(float *input, float *pdB, float *wdrcdB, float mpo_limit, size_t len, float *out):&#160;mpo.c'],['../mpo_8h.html#ae1fe3ef6535fbf9476ee597f411114c9',1,'mpo(float *input, float *pdB, float *wdrcdB, float mpo_limit, size_t len, float *out):&#160;mpo.c']]],
+  ['mpo_2ec',['mpo.c',['../mpo_8c.html',1,'']]],
+  ['mpo_2eh',['mpo.h',['../mpo_8h.html',1,'']]],
+  ['mpo_5fon',['mpo_on',['../structosp__user__data__t.html#af265bd9d66e58eec5ac0b43a2f8e02cc',1,'osp_user_data_t']]],
+  ['mu',['mu',['../structafc__t.html#a7b343e47789c5a03ba4a37671c281861',1,'afc_t::mu()'],['../structosp__user__data__t.html#a189ecf1c6b08ec178e823f4802c1996c',1,'osp_user_data_t::mu()']]]
 ];

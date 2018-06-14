@@ -1,4 +1,4 @@
-.TH "libosp/osp_process/osp_process.c" 3 "Wed Jun 13 2018" "Open Speech Platform" \" -*- nroff -*-
+.TH "libosp/osp_process/osp_process.c" 3 "Thu Jun 14 2018" "Open Speech Platform" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -61,7 +61,7 @@ libosp/osp_process/osp_process.c
 .br
 .RI "Function that performs basic Hearing Aid (HA) processing on a single channel\&. "
 .ti -1c
-.RI "int \fBosp_init\fP (unsigned int frame_size, int sample_rate, unsigned char afc_adaptation_type)"
+.RI "int \fBosp_init\fP (unsigned int frame_size, int sample_rate, \fBosp_user_data\fP *osp_data)"
 .br
 .RI "This file groups all of the different OSP library calls in one place\&. This is more of an example way of using the different parts of the OSP libraries to implement a hearing aid algorith with MHA and AFC all in one place\&. "
 .ti -1c
@@ -280,7 +280,7 @@ int Number of Sub-Bands give by NUM_BANDS
 .RE
 .PP
 
-.SS "int osp_init (unsigned int frame_size, int sample_rate, unsigned char afc_adaptation_type)"
+.SS "int osp_init (unsigned int frame_size, int sample_rate, \fBosp_user_data\fP * osp_data)"
 
 .PP
 This file groups all of the different OSP library calls in one place\&. This is more of an example way of using the different parts of the OSP libraries to implement a hearing aid algorith with MHA and AFC all in one place\&. Wrapper function to initalize all the modules of Master Hearing Aid (MHA)
