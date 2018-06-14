@@ -410,26 +410,26 @@ The following are the list of hearing aid parameters that can be controlled via 
 
 **Amplification Parameters**
 
-G50  :	Gain at 50 dB SPL of input level
-G80  :	Gain at 80 dB SPL of input level
-G65  :	Gain at 65 dB SPL of input level
-CR   :	Compression Ratio
-AT   :	Attack Time
-RT   :	Release Time
-Klow :	Lower Kneepoint
-Kup  :	Upper Kneepoint
+- G50  :	Gain at 50 dB SPL of input level
+- G80  :	Gain at 80 dB SPL of input level
+- G65  :	Gain at 65 dB SPL of input level
+- CR   :	Compression Ratio
+- AT   :	Attack Time
+- RT   :	Release Time
+- Klow :	Lower Kneepoint
+- Kup  :	Upper Kneepoint
 
 **Noise Management parameters**
 
-noise_estimation_type		 : 0 - None, 1 - Arslan, 2 - Hirsch & Ehrlicher, 3 - MCRA.
-Spectral subtraction on/off 	 : 0 - off, 1 - on.
-s				 : Spectral subtraction parameter: a positive constant from 0 to 1. 0 implies no speech enhancement. 
+- noise_estimation_type		 : 0 - None, 1 - Arslan, 2 - Hirsch & Ehrlicher, 3 - MCRA.
+- Spectral subtraction on/off 	 : 0 - off, 1 - on.
+- s				 : Spectral subtraction parameter: a positive constant from 0 to 1. 0 implies no speech enhancement. 
 
 **Feedback Management parameters**
 
-feedback_algorithm_type		: 0 - FxLMS, 1 - PNLMS, 2 - SLMS.
-μ				: Step size parameter: a positive constant. A higher value results in faster tracking at the cost of higher steady state error. Recommended value = 0.005
-ρ				: Forgetting factor for power estimation: a constant between 0 and 1. ρ > 0.9 is suggested. Recommended value = 0.985
+- feedback_algorithm_type		: 0 - FxLMS, 1 - PNLMS, 2 - SLMS.
+- μ				: Step size parameter: a positive constant. A higher value results in faster tracking at the cost of higher steady state error. Recommended value = 0.005
+- ρ				: Forgetting factor for power estimation: a constant between 0 and 1. ρ > 0.9 is suggested. Recommended value = 0.985
 
 ### Setting Up Mac's Wi-Fi
 1. Wi-Fi dongle – EDUP – DB 1607
