@@ -36,7 +36,7 @@ Include dependency graph for osp\+\_\+process.\+c\+:\nopagebreak
 \item 
 static void \mbox{\hyperlink{osp__process_8c_a5e03afe3816964e6052931a58b754d99}{osp\+\_\+process\+\_\+ha}} (\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$osp, \mbox{\hyperlink{filter_8h_a69e34b8aa259d2ca0b81b5c95f395bdf}{Filter}} $\ast$filter, \mbox{\hyperlink{peak__detect_8h_a152d14cd03f6e1ac947c95921da5507c}{Peak\+\_\+detect}} pd, float $\ast$e\+\_\+n, float $\ast$s\+\_\+n, size\+\_\+t len)
 \begin{DoxyCompactList}\small\item\em Function that performs basic Hearing Aid (HA) processing on a single channel. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{osp__process_8c_a6d714155eff0850c8fd9458444365c57}{osp\+\_\+init}} (unsigned int frame\+\_\+size, int sample\+\_\+rate, unsigned char afc\+\_\+adaptation\+\_\+type)
+int \mbox{\hyperlink{osp__process_8c_aabb5c0280f6d5cd0cce725a00533978f}{osp\+\_\+init}} (unsigned int frame\+\_\+size, int sample\+\_\+rate, \mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$osp\+\_\+data)
 \begin{DoxyCompactList}\small\item\em This file groups all of the different O\+SP library calls in one place. This is more of an example way of using the different parts of the O\+SP libraries to implement a hearing aid algorith with M\+HA and A\+FC all in one place. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{osp__process_8c_a6c8f16a08d0ce2a2b4989861253a51f5}{osp\+\_\+process\+\_\+audio}} (\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$osp, float $\ast$x\+\_\+nL, float $\ast$x\+\_\+nR, float $\ast$outL, float $\ast$outR, size\+\_\+t len)
 \begin{DoxyCompactList}\small\item\em Function to perform Master Hearing Aid (M\+HA) processing on the input signal for both channels. \end{DoxyCompactList}\item 
@@ -262,11 +262,11 @@ Function to get the number of Sub-\/\+Bands.
 \begin{DoxyReturn}{Returns}
 int Number of Sub-\/\+Bands give by N\+U\+M\+\_\+\+B\+A\+N\+DS 
 \end{DoxyReturn}
-\mbox{\Hypertarget{osp__process_8c_a6d714155eff0850c8fd9458444365c57}\label{osp__process_8c_a6d714155eff0850c8fd9458444365c57}} 
+\mbox{\Hypertarget{osp__process_8c_aabb5c0280f6d5cd0cce725a00533978f}\label{osp__process_8c_aabb5c0280f6d5cd0cce725a00533978f}} 
 \index{osp\+\_\+process.\+c@{osp\+\_\+process.\+c}!osp\+\_\+init@{osp\+\_\+init}}
 \index{osp\+\_\+init@{osp\+\_\+init}!osp\+\_\+process.\+c@{osp\+\_\+process.\+c}}
 \subsubsection{\texorpdfstring{osp\+\_\+init()}{osp\_init()}}
-{\footnotesize\ttfamily int osp\+\_\+init (\begin{DoxyParamCaption}\item[{unsigned int}]{frame\+\_\+size,  }\item[{int}]{sample\+\_\+rate,  }\item[{unsigned char}]{afc\+\_\+adaptation\+\_\+type }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int osp\+\_\+init (\begin{DoxyParamCaption}\item[{unsigned int}]{frame\+\_\+size,  }\item[{int}]{sample\+\_\+rate,  }\item[{\mbox{\hyperlink{constants_8h_a2d1d78531fe12807c3852488556d5a4b}{osp\+\_\+user\+\_\+data}} $\ast$}]{osp\+\_\+data }\end{DoxyParamCaption})}
 
 
 

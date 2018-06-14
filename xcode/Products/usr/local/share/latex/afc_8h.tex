@@ -24,7 +24,7 @@ typedef struct \mbox{\hyperlink{structafc__t}{afc\+\_\+t}} $\ast$ \mbox{\hyperli
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} \mbox{\hyperlink{afc_8h_ae2ae05e92c452d604e5b283c6db3e307}{afc\+\_\+init}} (const float $\ast$afc\+\_\+filter\+\_\+taps, int afc\+\_\+filter\+\_\+tap\+\_\+len, const float $\ast$prefilter\+\_\+taps, int prefilter\+\_\+tap\+\_\+len, const float $\ast$band\+\_\+limited\+\_\+filter\+\_\+taps, int band\+\_\+limited\+\_\+filter\+\_\+tap\+\_\+len, int frame\+\_\+size, unsigned int adaptation\+\_\+type)
+\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} \mbox{\hyperlink{afc_8h_abe05d4f7f9d83b91231162a853c8bfef}{afc\+\_\+init}} (const float $\ast$afc\+\_\+filter\+\_\+taps, int afc\+\_\+filter\+\_\+tap\+\_\+len, const float $\ast$prefilter\+\_\+taps, int prefilter\+\_\+tap\+\_\+len, const float $\ast$band\+\_\+limited\+\_\+filter\+\_\+taps, int band\+\_\+limited\+\_\+filter\+\_\+tap\+\_\+len, int frame\+\_\+size, unsigned int adaptation\+\_\+type, float afc\+\_\+mu, float afc\+\_\+rho)
 \begin{DoxyCompactList}\small\item\em Function to initialize the afc data struct. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{afc_8h_ac453a669837cff671fbe64d59da8fd03}{afc\+\_\+update\+\_\+taps}} (\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} afc, float $\ast$s, float $\ast$e, size\+\_\+t frame\+\_\+size)
 \begin{DoxyCompactList}\small\item\em Function to update the A\+FC filter taps. i.\+e. perform A\+FC. \end{DoxyCompactList}\item 
@@ -143,11 +143,11 @@ Function to get the estimate of the feedback signal, y\+\_\+hat(n)
 {\em len} & Number of samples of the estimated feedback signal requested \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{afc_8h_ae2ae05e92c452d604e5b283c6db3e307}\label{afc_8h_ae2ae05e92c452d604e5b283c6db3e307}} 
+\mbox{\Hypertarget{afc_8h_abe05d4f7f9d83b91231162a853c8bfef}\label{afc_8h_abe05d4f7f9d83b91231162a853c8bfef}} 
 \index{afc.\+h@{afc.\+h}!afc\+\_\+init@{afc\+\_\+init}}
 \index{afc\+\_\+init@{afc\+\_\+init}!afc.\+h@{afc.\+h}}
 \subsubsection{\texorpdfstring{afc\+\_\+init()}{afc\_init()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} afc\+\_\+init (\begin{DoxyParamCaption}\item[{const float $\ast$}]{afc\+\_\+filter\+\_\+taps,  }\item[{int}]{afc\+\_\+filter\+\_\+tap\+\_\+len,  }\item[{const float $\ast$}]{prefilter\+\_\+taps,  }\item[{int}]{prefilter\+\_\+tap\+\_\+len,  }\item[{const float $\ast$}]{band\+\_\+limited\+\_\+filter\+\_\+taps,  }\item[{int}]{band\+\_\+limited\+\_\+filter\+\_\+tap\+\_\+len,  }\item[{int}]{frame\+\_\+size,  }\item[{unsigned int}]{adaptation\+\_\+type }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} afc\+\_\+init (\begin{DoxyParamCaption}\item[{const float $\ast$}]{afc\+\_\+filter\+\_\+taps,  }\item[{int}]{afc\+\_\+filter\+\_\+tap\+\_\+len,  }\item[{const float $\ast$}]{prefilter\+\_\+taps,  }\item[{int}]{prefilter\+\_\+tap\+\_\+len,  }\item[{const float $\ast$}]{band\+\_\+limited\+\_\+filter\+\_\+taps,  }\item[{int}]{band\+\_\+limited\+\_\+filter\+\_\+tap\+\_\+len,  }\item[{int}]{frame\+\_\+size,  }\item[{unsigned int}]{adaptation\+\_\+type,  }\item[{float}]{afc\+\_\+mu,  }\item[{float}]{afc\+\_\+rho }\end{DoxyParamCaption})}
 
 
 

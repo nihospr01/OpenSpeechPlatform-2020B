@@ -1,0 +1,121 @@
+\hypertarget{jsmn_8h}{}\section{libosp/osp\+\_\+tcp/json\+\_\+parser/jsmn.h File Reference}
+\label{jsmn_8h}\index{libosp/osp\+\_\+tcp/json\+\_\+parser/jsmn.\+h@{libosp/osp\+\_\+tcp/json\+\_\+parser/jsmn.\+h}}
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+Include dependency graph for jsmn.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{jsmn_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{jsmn_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structjsmntok__t}{jsmntok\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structjsmn__parser}{jsmn\+\_\+parser}}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{jsmn_8h_a065320719769f9dc1fbe30094e52802f}{jsmntype\+\_\+t}} \{ \newline
+\mbox{\hyperlink{jsmn_8h_a065320719769f9dc1fbe30094e52802fa7bc5faeddd33197250cf352af984f185}{J\+S\+M\+N\+\_\+\+U\+N\+D\+E\+F\+I\+N\+ED}} = 0, 
+\mbox{\hyperlink{jsmn_8h_a065320719769f9dc1fbe30094e52802fa416d6e733082bedc1166f0d66f571867}{J\+S\+M\+N\+\_\+\+O\+B\+J\+E\+CT}} = 1, 
+\mbox{\hyperlink{jsmn_8h_a065320719769f9dc1fbe30094e52802fabc4c47216dacf36bd4f64ac3d649d471}{J\+S\+M\+N\+\_\+\+A\+R\+R\+AY}} = 2, 
+\mbox{\hyperlink{jsmn_8h_a065320719769f9dc1fbe30094e52802fad4ea6277c135d9d3377bf8b719779539}{J\+S\+M\+N\+\_\+\+S\+T\+R\+I\+NG}} = 3, 
+\newline
+\mbox{\hyperlink{jsmn_8h_a065320719769f9dc1fbe30094e52802fa2550c93fe929f81f30ea9b629ed98742}{J\+S\+M\+N\+\_\+\+P\+R\+I\+M\+I\+T\+I\+VE}} = 4
+ \}
+\item 
+enum \mbox{\hyperlink{jsmn_8h_afbbe22e63007677ec9e7837b5c1b80ea}{jsmnerr}} \{ \mbox{\hyperlink{jsmn_8h_afbbe22e63007677ec9e7837b5c1b80eaafa350a2c19cc5fddbfb7c90309d3fe41}{J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+M\+EM}} = -\/1, 
+\mbox{\hyperlink{jsmn_8h_afbbe22e63007677ec9e7837b5c1b80eaa3297b1c54d926ce497b7a20530689171}{J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+AL}} = -\/2, 
+\mbox{\hyperlink{jsmn_8h_afbbe22e63007677ec9e7837b5c1b80eaa851a0e75343c14a13c6893b3727ead16}{J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+P\+A\+RT}} = -\/3
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{jsmn_8h_a8d4a8b3ce5c3d600feea38615b5f9aa6}{jsmn\+\_\+init}} (\mbox{\hyperlink{structjsmn__parser}{jsmn\+\_\+parser}} $\ast$parser)
+\item 
+int \mbox{\hyperlink{jsmn_8h_a774f985a9750a10c7e88304e30191e03}{jsmn\+\_\+parse}} (\mbox{\hyperlink{structjsmn__parser}{jsmn\+\_\+parser}} $\ast$parser, const char $\ast$js, size\+\_\+t len, \mbox{\hyperlink{structjsmntok__t}{jsmntok\+\_\+t}} $\ast$tokens, unsigned int num\+\_\+tokens)
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{jsmn_8h_afbbe22e63007677ec9e7837b5c1b80ea}\label{jsmn_8h_afbbe22e63007677ec9e7837b5c1b80ea}} 
+\index{jsmn.\+h@{jsmn.\+h}!jsmnerr@{jsmnerr}}
+\index{jsmnerr@{jsmnerr}!jsmn.\+h@{jsmn.\+h}}
+\subsubsection{\texorpdfstring{jsmnerr}{jsmnerr}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{jsmn_8h_afbbe22e63007677ec9e7837b5c1b80ea}{jsmnerr}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+M\+EM@{J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+M\+EM}!jsmn.\+h@{jsmn.\+h}}\index{jsmn.\+h@{jsmn.\+h}!J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+M\+EM@{J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+M\+EM}}}\mbox{\Hypertarget{jsmn_8h_afbbe22e63007677ec9e7837b5c1b80eaafa350a2c19cc5fddbfb7c90309d3fe41}\label{jsmn_8h_afbbe22e63007677ec9e7837b5c1b80eaafa350a2c19cc5fddbfb7c90309d3fe41}} 
+J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+N\+O\+M\+EM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+AL@{J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+AL}!jsmn.\+h@{jsmn.\+h}}\index{jsmn.\+h@{jsmn.\+h}!J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+AL@{J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+AL}}}\mbox{\Hypertarget{jsmn_8h_afbbe22e63007677ec9e7837b5c1b80eaa3297b1c54d926ce497b7a20530689171}\label{jsmn_8h_afbbe22e63007677ec9e7837b5c1b80eaa3297b1c54d926ce497b7a20530689171}} 
+J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+I\+N\+V\+AL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+P\+A\+RT@{J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+P\+A\+RT}!jsmn.\+h@{jsmn.\+h}}\index{jsmn.\+h@{jsmn.\+h}!J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+P\+A\+RT@{J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+P\+A\+RT}}}\mbox{\Hypertarget{jsmn_8h_afbbe22e63007677ec9e7837b5c1b80eaa851a0e75343c14a13c6893b3727ead16}\label{jsmn_8h_afbbe22e63007677ec9e7837b5c1b80eaa851a0e75343c14a13c6893b3727ead16}} 
+J\+S\+M\+N\+\_\+\+E\+R\+R\+O\+R\+\_\+\+P\+A\+RT&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{jsmn_8h_a065320719769f9dc1fbe30094e52802f}\label{jsmn_8h_a065320719769f9dc1fbe30094e52802f}} 
+\index{jsmn.\+h@{jsmn.\+h}!jsmntype\+\_\+t@{jsmntype\+\_\+t}}
+\index{jsmntype\+\_\+t@{jsmntype\+\_\+t}!jsmn.\+h@{jsmn.\+h}}
+\subsubsection{\texorpdfstring{jsmntype\+\_\+t}{jsmntype\_t}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{jsmn_8h_a065320719769f9dc1fbe30094e52802f}{jsmntype\+\_\+t}}}
+
+J\+S\+ON type identifier. Basic types are\+: o Object o Array o String o Other primitive\+: number, boolean (true/false) or null \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+S\+M\+N\+\_\+\+U\+N\+D\+E\+F\+I\+N\+ED@{J\+S\+M\+N\+\_\+\+U\+N\+D\+E\+F\+I\+N\+ED}!jsmn.\+h@{jsmn.\+h}}\index{jsmn.\+h@{jsmn.\+h}!J\+S\+M\+N\+\_\+\+U\+N\+D\+E\+F\+I\+N\+ED@{J\+S\+M\+N\+\_\+\+U\+N\+D\+E\+F\+I\+N\+ED}}}\mbox{\Hypertarget{jsmn_8h_a065320719769f9dc1fbe30094e52802fa7bc5faeddd33197250cf352af984f185}\label{jsmn_8h_a065320719769f9dc1fbe30094e52802fa7bc5faeddd33197250cf352af984f185}} 
+J\+S\+M\+N\+\_\+\+U\+N\+D\+E\+F\+I\+N\+ED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+S\+M\+N\+\_\+\+O\+B\+J\+E\+CT@{J\+S\+M\+N\+\_\+\+O\+B\+J\+E\+CT}!jsmn.\+h@{jsmn.\+h}}\index{jsmn.\+h@{jsmn.\+h}!J\+S\+M\+N\+\_\+\+O\+B\+J\+E\+CT@{J\+S\+M\+N\+\_\+\+O\+B\+J\+E\+CT}}}\mbox{\Hypertarget{jsmn_8h_a065320719769f9dc1fbe30094e52802fa416d6e733082bedc1166f0d66f571867}\label{jsmn_8h_a065320719769f9dc1fbe30094e52802fa416d6e733082bedc1166f0d66f571867}} 
+J\+S\+M\+N\+\_\+\+O\+B\+J\+E\+CT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+S\+M\+N\+\_\+\+A\+R\+R\+AY@{J\+S\+M\+N\+\_\+\+A\+R\+R\+AY}!jsmn.\+h@{jsmn.\+h}}\index{jsmn.\+h@{jsmn.\+h}!J\+S\+M\+N\+\_\+\+A\+R\+R\+AY@{J\+S\+M\+N\+\_\+\+A\+R\+R\+AY}}}\mbox{\Hypertarget{jsmn_8h_a065320719769f9dc1fbe30094e52802fabc4c47216dacf36bd4f64ac3d649d471}\label{jsmn_8h_a065320719769f9dc1fbe30094e52802fabc4c47216dacf36bd4f64ac3d649d471}} 
+J\+S\+M\+N\+\_\+\+A\+R\+R\+AY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+S\+M\+N\+\_\+\+S\+T\+R\+I\+NG@{J\+S\+M\+N\+\_\+\+S\+T\+R\+I\+NG}!jsmn.\+h@{jsmn.\+h}}\index{jsmn.\+h@{jsmn.\+h}!J\+S\+M\+N\+\_\+\+S\+T\+R\+I\+NG@{J\+S\+M\+N\+\_\+\+S\+T\+R\+I\+NG}}}\mbox{\Hypertarget{jsmn_8h_a065320719769f9dc1fbe30094e52802fad4ea6277c135d9d3377bf8b719779539}\label{jsmn_8h_a065320719769f9dc1fbe30094e52802fad4ea6277c135d9d3377bf8b719779539}} 
+J\+S\+M\+N\+\_\+\+S\+T\+R\+I\+NG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+S\+M\+N\+\_\+\+P\+R\+I\+M\+I\+T\+I\+VE@{J\+S\+M\+N\+\_\+\+P\+R\+I\+M\+I\+T\+I\+VE}!jsmn.\+h@{jsmn.\+h}}\index{jsmn.\+h@{jsmn.\+h}!J\+S\+M\+N\+\_\+\+P\+R\+I\+M\+I\+T\+I\+VE@{J\+S\+M\+N\+\_\+\+P\+R\+I\+M\+I\+T\+I\+VE}}}\mbox{\Hypertarget{jsmn_8h_a065320719769f9dc1fbe30094e52802fa2550c93fe929f81f30ea9b629ed98742}\label{jsmn_8h_a065320719769f9dc1fbe30094e52802fa2550c93fe929f81f30ea9b629ed98742}} 
+J\+S\+M\+N\+\_\+\+P\+R\+I\+M\+I\+T\+I\+VE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{jsmn_8h_a8d4a8b3ce5c3d600feea38615b5f9aa6}\label{jsmn_8h_a8d4a8b3ce5c3d600feea38615b5f9aa6}} 
+\index{jsmn.\+h@{jsmn.\+h}!jsmn\+\_\+init@{jsmn\+\_\+init}}
+\index{jsmn\+\_\+init@{jsmn\+\_\+init}!jsmn.\+h@{jsmn.\+h}}
+\subsubsection{\texorpdfstring{jsmn\+\_\+init()}{jsmn\_init()}}
+{\footnotesize\ttfamily void jsmn\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structjsmn__parser}{jsmn\+\_\+parser}} $\ast$}]{parser }\end{DoxyParamCaption})}
+
+Create J\+S\+ON parser over an array of tokens
+
+Creates a new parser based over a given buffer with an array of tokens available. \mbox{\Hypertarget{jsmn_8h_a774f985a9750a10c7e88304e30191e03}\label{jsmn_8h_a774f985a9750a10c7e88304e30191e03}} 
+\index{jsmn.\+h@{jsmn.\+h}!jsmn\+\_\+parse@{jsmn\+\_\+parse}}
+\index{jsmn\+\_\+parse@{jsmn\+\_\+parse}!jsmn.\+h@{jsmn.\+h}}
+\subsubsection{\texorpdfstring{jsmn\+\_\+parse()}{jsmn\_parse()}}
+{\footnotesize\ttfamily int jsmn\+\_\+parse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structjsmn__parser}{jsmn\+\_\+parser}} $\ast$}]{parser,  }\item[{const char $\ast$}]{js,  }\item[{size\+\_\+t}]{len,  }\item[{\mbox{\hyperlink{structjsmntok__t}{jsmntok\+\_\+t}} $\ast$}]{tokens,  }\item[{unsigned int}]{num\+\_\+tokens }\end{DoxyParamCaption})}
+
+Run J\+S\+ON parser. It parses a J\+S\+ON data string into and array of tokens, each describing a single J\+S\+ON object.
+
+Parse J\+S\+ON string and fill tokens. 

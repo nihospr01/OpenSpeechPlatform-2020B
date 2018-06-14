@@ -1,12 +1,8 @@
 var searchData=
 [
-  ['main',['main',['../main_8c.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;main.c'],['../extract__bin_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;extract_bin.c'],['../read__taps_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;read_taps.c']]],
-  ['main_2ec',['main.c',['../main_8c.html',1,'']]],
-  ['max_5fwrite_5flen',['MAX_WRITE_LEN',['../libosp_2osp__process_2logger_8h.html#a04ed3ac2f178cdcd0333c005a2923958',1,'logger.h']]],
-  ['memcpy_5ff',['memcpy_f',['../array__utilities_8c.html#acad9b9e456a0f3a81dab2671224f150c',1,'memcpy_f(float *dst, float *src, size_t len):&#160;array_utilities.c'],['../array__utilities_8h.html#acad9b9e456a0f3a81dab2671224f150c',1,'memcpy_f(float *dst, float *src, size_t len):&#160;array_utilities.c']]],
-  ['mpo',['mpo',['../mpo_8c.html#ae1fe3ef6535fbf9476ee597f411114c9',1,'mpo(float *input, float *pdB, float *wdrcdB, float mpo_limit, size_t len, float *out):&#160;mpo.c'],['../mpo_8h.html#ae1fe3ef6535fbf9476ee597f411114c9',1,'mpo(float *input, float *pdB, float *wdrcdB, float mpo_limit, size_t len, float *out):&#160;mpo.c']]],
-  ['mpo_2ec',['mpo.c',['../mpo_8c.html',1,'']]],
-  ['mpo_2eh',['mpo.h',['../mpo_8h.html',1,'']]],
-  ['mpo_5fon',['mpo_on',['../structosp__user__data__t.html#af265bd9d66e58eec5ac0b43a2f8e02cc',1,'osp_user_data_t']]],
-  ['mu',['mu',['../structafc__t.html#a7b343e47789c5a03ba4a37671c281861',1,'afc_t']]]
+  ['length',['length',['../structfile__loopback__context__t.html#a444c3817f1985ad7acd3a94c32fccd90',1,'file_loopback_context_t::length()'],['../structcircular__buffer__t.html#ab00ef7eea313237690dfe2814951b9af',1,'circular_buffer_t::length()'],['../structfilter__t.html#a8b47a8b9661b7ebcad76afd55452b992',1,'filter_t::length()']]],
+  ['load_5ffilter_5ftaps',['load_filter_taps',['../utilities_8c.html#aa884370487e6a35d482982274134a94c',1,'load_filter_taps(const char *file, float *taps, int len):&#160;utilities.c'],['../utilities_8h.html#aa884370487e6a35d482982274134a94c',1,'load_filter_taps(const char *file, float *taps, int len):&#160;utilities.c']]],
+  ['log2lin',['log2lin',['../main_8c.html#ab352b1ff7a758e40b3072874726eba4c',1,'main.c']]],
+  ['logger_2ec',['logger.c',['../logger_8c.html',1,'']]],
+  ['logger_2eh',['logger.h',['../osp_2logger_8h.html',1,'(Global Namespace)'],['../libosp_2osp__process_2logger_8h.html',1,'(Global Namespace)']]]
 ];

@@ -96,10 +96,12 @@ $(document).ready(function(){initNavTree('osp__tcp_8c.html','');});
 <code>#include &quot;<a class="el" href="tcplib_8h_source.html">tcplib.h</a>&quot;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="jsmn_8h_source.html">jsmn.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for osp_tcp.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="osp__tcp_8c__incl.svg" width="359" height="196"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="osp__tcp_8c__incl.svg" width="627" height="270"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><table class="memberdecls">
@@ -111,20 +113,28 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a66a4118cf6fedab06aa795581935fd03"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="osp__tcp_8c.html#a66a4118cf6fedab06aa795581935fd03">jsoneq</a> (const char *json, <a class="el" href="structjsmntok__t.html">jsmntok_t</a> *tok, const char *s)</td></tr>
+<tr class="separator:a66a4118cf6fedab06aa795581935fd03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a192f28ce7cdcc8d994e79140b3ea4fcd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="osp__tcp_8c.html#a192f28ce7cdcc8d994e79140b3ea4fcd">get_int_from_SubString</a> (const char *input, int offset, int len)</td></tr>
+<tr class="separator:a192f28ce7cdcc8d994e79140b3ea4fcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a5fada0136f276b505ab711c7e1c7bf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="osp__tcp_8c.html#a4a5fada0136f276b505ab711c7e1c7bf">get_float_from_SubString</a> (const char *input, int offset, int len)</td></tr>
+<tr class="separator:a4a5fada0136f276b505ab711c7e1c7bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6c126a45386214aac909bc2b819a6d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="osp__tcp_8h.html#ac73f074c55d4549265c975cc8cffd349">Osp_tcp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="osp__tcp_8c.html#ae6c126a45386214aac909bc2b819a6d3">osp_tcp_init</a> (int port)</td></tr>
 <tr class="memdesc:ae6c126a45386214aac909bc2b819a6d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization function for the OSP TCP layer.  <a href="#ae6c126a45386214aac909bc2b819a6d3">More...</a><br /></td></tr>
 <tr class="separator:ae6c126a45386214aac909bc2b819a6d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab649aa1c24117770ecca7de43f94a3e8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="osp__tcp_8c.html#ab649aa1c24117770ecca7de43f94a3e8">osp_tcp_connect</a> (<a class="el" href="osp__tcp_8h.html#ac73f074c55d4549265c975cc8cffd349">Osp_tcp</a> osp_tcp)</td></tr>
 <tr class="memdesc:ab649aa1c24117770ecca7de43f94a3e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocking call that sets up server socket and waits for client connection In order to start a socket for a client (Android tablet, for instance), this must be called. It will block until a client establishes a connection, at which point it will return 0.  <a href="#ab649aa1c24117770ecca7de43f94a3e8">More...</a><br /></td></tr>
 <tr class="separator:ab649aa1c24117770ecca7de43f94a3e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f810fc80c3683cdc05b5c4a3a785aa4"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="osp__tcp_8c.html#a5f810fc80c3683cdc05b5c4a3a785aa4">osp_tcp_read_req</a> (<a class="el" href="osp__tcp_8h.html#ac73f074c55d4549265c975cc8cffd349">Osp_tcp</a> osp_tcp)</td></tr>
-<tr class="memdesc:a5f810fc80c3683cdc05b5c4a3a785aa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocking call that returns the request sent by the connected client. The client can make a number of requests including updating the values running in the OSP real-time code (knee points, attack, release, gains, etc). The client can also request the number of underruns that have been counted from the audio driver, the number of bands that have been initially set up, etc.  <a href="#a5f810fc80c3683cdc05b5c4a3a785aa4">More...</a><br /></td></tr>
-<tr class="separator:a5f810fc80c3683cdc05b5c4a3a785aa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55d011dc599c183aa80780931d5fafe0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="osp__tcp_8c.html#a55d011dc599c183aa80780931d5fafe0">osp_tcp_read_req</a> (<a class="el" href="osp__tcp_8h.html#ac73f074c55d4549265c975cc8cffd349">Osp_tcp</a> osp_tcp)</td></tr>
+<tr class="memdesc:a55d011dc599c183aa80780931d5fafe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocking call that returns the request sent by the connected client. The client can make a number of requests including updating the values running in the OSP real-time code (knee points, attack, release, gains, etc). The client can also request the number of underruns that have been counted from the audio driver, the number of bands that have been initially set up, etc.  <a href="#a55d011dc599c183aa80780931d5fafe0">More...</a><br /></td></tr>
+<tr class="separator:a55d011dc599c183aa80780931d5fafe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4b8a5a6a4fa9249a163f47c206f7e8d"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="osp__tcp_8c.html#aa4b8a5a6a4fa9249a163f47c206f7e8d">osp_tcp_read_values</a> (<a class="el" href="osp__tcp_8h.html#ac73f074c55d4549265c975cc8cffd349">Osp_tcp</a> osp_tcp, <a class="el" href="constants_8h.html#a2d1d78531fe12807c3852488556d5a4b">osp_user_data</a> *data, unsigned int size)</td></tr>
 <tr class="memdesc:aa4b8a5a6a4fa9249a163f47c206f7e8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads data from the TCP stream into the osp_user_data structure.  <a href="#aa4b8a5a6a4fa9249a163f47c206f7e8d">More...</a><br /></td></tr>
 <tr class="separator:aa4b8a5a6a4fa9249a163f47c206f7e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2fe974658327f3586a54e6c2d57740b"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="osp__tcp_8c.html#aa2fe974658327f3586a54e6c2d57740b">osp_tcp_read_user_packet</a> (<a class="el" href="osp__tcp_8h.html#ac73f074c55d4549265c975cc8cffd349">Osp_tcp</a> osp_tcp, char *message, unsigned int size)</td></tr>
 <tr class="separator:aa2fe974658327f3586a54e6c2d57740b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31da083ff61e714c57e6ac37100e8e15"><td class="memItemLeft" align="right" valign="top">ssize_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="osp__tcp_8c.html#a31da083ff61e714c57e6ac37100e8e15">osp_4afc_read_values</a> (<a class="el" href="osp__tcp_8h.html#ac73f074c55d4549265c975cc8cffd349">Osp_tcp</a> osp_tcp, char *file_path, unsigned int size)</td></tr>
+<tr class="separator:a31da083ff61e714c57e6ac37100e8e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af443391eb190ffb7bb8b13c19d5bbe67"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="osp__tcp_8c.html#af443391eb190ffb7bb8b13c19d5bbe67">osp_tcp_send_underruns</a> (<a class="el" href="osp__tcp_8h.html#ac73f074c55d4549265c975cc8cffd349">Osp_tcp</a> osp_tcp, unsigned int underruns)</td></tr>
 <tr class="memdesc:af443391eb190ffb7bb8b13c19d5bbe67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends the number of underruns to client.  <a href="#af443391eb190ffb7bb8b13c19d5bbe67">More...</a><br /></td></tr>
 <tr class="separator:af443391eb190ffb7bb8b13c19d5bbe67"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,6 +146,150 @@ Functions</h2></td></tr>
 <tr class="separator:ab998766bad97b04e79d93b25c2d54c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a4a5fada0136f276b505ab711c7e1c7bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a5fada0136f276b505ab711c7e1c7bf">&#9670;&nbsp;</a></span>get_float_from_SubString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_float_from_SubString </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a192f28ce7cdcc8d994e79140b3ea4fcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a192f28ce7cdcc8d994e79140b3ea4fcd">&#9670;&nbsp;</a></span>get_int_from_SubString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_int_from_SubString </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a66a4118cf6fedab06aa795581935fd03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66a4118cf6fedab06aa795581935fd03">&#9670;&nbsp;</a></span>jsoneq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int jsoneq </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>json</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structjsmntok__t.html">jsmntok_t</a> *&#160;</td>
+          <td class="paramname"><em>tok</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a31da083ff61e714c57e6ac37100e8e15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31da083ff61e714c57e6ac37100e8e15">&#9670;&nbsp;</a></span>osp_4afc_read_values()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t osp_4afc_read_values </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="osp__tcp_8h.html#ac73f074c55d4549265c975cc8cffd349">Osp_tcp</a>&#160;</td>
+          <td class="paramname"><em>osp_tcp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>file_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ab998766bad97b04e79d93b25c2d54c14"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab998766bad97b04e79d93b25c2d54c14">&#9670;&nbsp;</a></span>osp_tcp_close()</h2>
 
@@ -219,14 +373,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5f810fc80c3683cdc05b5c4a3a785aa4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f810fc80c3683cdc05b5c4a3a785aa4">&#9670;&nbsp;</a></span>osp_tcp_read_req()</h2>
+<a id="a55d011dc599c183aa80780931d5fafe0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55d011dc599c183aa80780931d5fafe0">&#9670;&nbsp;</a></span>osp_tcp_read_req()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char osp_tcp_read_req </td>
+          <td class="memname">int osp_tcp_read_req </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="osp__tcp_8h.html#ac73f074c55d4549265c975cc8cffd349">Osp_tcp</a>&#160;</td>
           <td class="paramname"><em>osp_tcp</em></td><td>)</td>

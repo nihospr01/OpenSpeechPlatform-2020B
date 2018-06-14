@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['tcplib_2ec',['tcplib.c',['../tcplib_8c.html',1,'']]],
-  ['tcplib_2eh',['tcplib.h',['../tcplib_8h.html',1,'']]]
+  ['speech_5fenhancement_2ec',['speech_enhancement.c',['../speech__enhancement_8c.html',1,'']]],
+  ['speech_5fenhancement_2eh',['speech_enhancement.h',['../speech__enhancement_8h.html',1,'']]]
 ];

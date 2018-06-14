@@ -115,6 +115,7 @@ $(document).ready(function(){initNavTree('main_8c.html','');});
 <code>#include &quot;<a class="el" href="port__wrapper_8h_source.html">port_wrapper.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="constants_8h_source.html">constants.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="osp_2logger_8h_source.html">logger.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="jsmn_8h_source.html">jsmn.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for main.c:</div>
 <div class="dyncontent">
@@ -155,8 +156,8 @@ Functions</h2></td></tr>
 <tr class="separator:a2ca50a57ce898682d8042211eee429e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba4b29cdd5da8c4196dcc895431f6436"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aba4b29cdd5da8c4196dcc895431f6436">file_loopback_run</a> (const char *in_file, const char *out_file, unsigned int frames_per_buffer)</td></tr>
 <tr class="separator:aba4b29cdd5da8c4196dcc895431f6436"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2be8b12fd0c4b32ba4449e1f56e66807"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a2be8b12fd0c4b32ba4449e1f56e66807">run_pa_loopback</a> (unsigned int sample_rate, unsigned int frames_per_buffer, const char *in_file, const char *out_file)</td></tr>
-<tr class="separator:a2be8b12fd0c4b32ba4449e1f56e66807"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8a38f850fea34a115fda3140af8b774"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#ab8a38f850fea34a115fda3140af8b774">run_pa_loopback</a> (unsigned int sample_rate, unsigned int frames_per_buffer, const char *in_file, const char *out_file, <a class="el" href="constants_8h.html#a2d1d78531fe12807c3852488556d5a4b">osp_user_data</a> *osp_data)</td></tr>
+<tr class="separator:ab8a38f850fea34a115fda3140af8b774"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4db999af4611cf4620ccec2ebf6e6a0d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a4db999af4611cf4620ccec2ebf6e6a0d">run_loopback_null</a> (unsigned long count, unsigned int frames_per_buffer)</td></tr>
 <tr class="separator:a4db999af4611cf4620ccec2ebf6e6a0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86ff0d7ff30269dba677b358fcabc387"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a86ff0d7ff30269dba677b358fcabc387">init_pa</a> (<a class="el" href="constants_8h.html#aba6e2261d5c6ef36dedb5b45ba0fc4ae">pa_user_data</a> *pa_data, unsigned int samp_rate, unsigned int frames_per_buffer)</td></tr>
@@ -167,11 +168,15 @@ Functions</h2></td></tr>
 <tr class="separator:a1eb914c7767ba47fd3463871577c3662"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c1a351ba62dfc0d60b39c5382c38636"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a5c1a351ba62dfc0d60b39c5382c38636">run_pa_tcp</a> (<a class="el" href="constants_8h.html#a2d1d78531fe12807c3852488556d5a4b">osp_user_data</a> *osp_data, unsigned int samp_rate, unsigned int frames_per_buffer, float attenuation_factor)</td></tr>
 <tr class="separator:a5c1a351ba62dfc0d60b39c5382c38636"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a270935c92a12999bc75deb0ec045a4cd"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a270935c92a12999bc75deb0ec045a4cd">run_pa_tcp_4afc</a> (<a class="el" href="constants_8h.html#a2d1d78531fe12807c3852488556d5a4b">osp_user_data</a> *osp_data, unsigned int samp_rate, unsigned int frames_per_buffer, float attenuation_factor)</td></tr>
+<tr class="separator:a270935c92a12999bc75deb0ec045a4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
 <tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:acd94b84d1b851e50e9e761af568d00cd"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#acd94b84d1b851e50e9e761af568d00cd">filepath_4afc</a> [512]</td></tr>
+<tr class="separator:acd94b84d1b851e50e9e761af568d00cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab71b1ae937e7216d3836e92522723863"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="resample_8h.html#aa18dcb3a00dcbfe35cecd42a27ff3097">Resample</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#ab71b1ae937e7216d3836e92522723863">resampleL</a></td></tr>
 <tr class="memdesc:ab71b1ae937e7216d3836e92522723863"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resample structure for left channel.  <a href="#ab71b1ae937e7216d3836e92522723863">More...</a><br /></td></tr>
 <tr class="separator:ab71b1ae937e7216d3836e92522723863"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -696,8 +701,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a2be8b12fd0c4b32ba4449e1f56e66807"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2be8b12fd0c4b32ba4449e1f56e66807">&#9670;&nbsp;</a></span>run_pa_loopback()</h2>
+<a id="ab8a38f850fea34a115fda3140af8b774"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8a38f850fea34a115fda3140af8b774">&#9670;&nbsp;</a></span>run_pa_loopback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -727,7 +732,13 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>out_file</em>&#160;</td>
+          <td class="paramname"><em>out_file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="constants_8h.html#a2d1d78531fe12807c3852488556d5a4b">osp_user_data</a> *&#160;</td>
+          <td class="paramname"><em>osp_data</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -792,6 +803,54 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a270935c92a12999bc75deb0ec045a4cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a270935c92a12999bc75deb0ec045a4cd">&#9670;&nbsp;</a></span>run_pa_tcp_4afc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int run_pa_tcp_4afc </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="constants_8h.html#a2d1d78531fe12807c3852488556d5a4b">osp_user_data</a> *&#160;</td>
+          <td class="paramname"><em>osp_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>samp_rate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>frames_per_buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>attenuation_factor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a31293479a2742f1ac5a586f181c09d3d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a31293479a2742f1ac5a586f181c09d3d">&#9670;&nbsp;</a></span>usage()</h2>
 
@@ -819,6 +878,20 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="acd94b84d1b851e50e9e761af568d00cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd94b84d1b851e50e9e761af568d00cd">&#9670;&nbsp;</a></span>filepath_4afc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char filepath_4afc[512]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ab71b1ae937e7216d3836e92522723863"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab71b1ae937e7216d3836e92522723863">&#9670;&nbsp;</a></span>resampleL</h2>
 

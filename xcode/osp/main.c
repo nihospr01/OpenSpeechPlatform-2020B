@@ -65,7 +65,7 @@ static inline float log2lin(float db)
 	if (db == 0) {
 		return 1;
 	}
-
+	
 	return powf(10, (db/20.0));
 }
 
@@ -103,70 +103,70 @@ static void * announce_presence(void * tid)
 	char addressBuffer[INET_ADDRSTRLEN];
 	//char addressBuffer[INET6_ADDRSTRLEN];
 	char hostname[256];
-
+	
 	// Get hostname
 	gethostname(hostname, 256);
-
+	
 	// Create UDP socket
 	clientSocket = socket(PF_INET, SOCK_DGRAM, 0);
-
+	
 	// Configure settings in address struct
 	localAddr.sin_family = AF_INET;
 	localAddr.sin_port = htons(8001);
 	inet_aton("192.168.2.1", &localAddr.sin_addr);
 	memset(localAddr.sin_zero, '\0', sizeof localAddr.sin_zero);
-
+	
 	/* Now bind the host address using bind() call.*/
 	if (bind(clientSocket, (struct sockaddr *) &localAddr, sizeof(localAddr)) < 0) {
 		perror("bind()");
 	}
-
+	
 	// Configure settings in address struct
 	serverAddr.sin_family = AF_INET;
 	serverAddr.sin_port = htons(8001);
 	//serverAddr.sin_addr.s_addr = htonl(INADDR_BROADCAST);
 	inet_aton("192.168.2.255", &serverAddr.sin_addr);
 	memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);
-
+	
 	// Initialize size variable to be used later on
 	addr_size = sizeof serverAddr;
-
+	
 	if(setsockopt(clientSocket, SOL_SOCKET, SO_BROADCAST, &broadcastEnable, sizeof(broadcastEnable)) == -1) {
 		perror("setsockopt()");
 	}
-
+	
 	if(getifaddrs(&ifAddrStruct) == -1) {
 		perror("getifaddrs()");
 	}
-
+	
 	for (ifa = ifAddrStruct; ifa != NULL; ifa = ifa->ifa_next) {
 		if (!ifa->ifa_addr) {
 			continue;
 		}
-
+		
 		if (ifa->ifa_addr->sa_family == AF_INET) { // check it is IP4
-																							 // is a valid IP4 Address
+			// is a valid IP4 Address
 			tmpAddrPtr = &((struct sockaddr_in *)ifa->ifa_addr)->sin_addr;
 			inet_ntop(AF_INET, tmpAddrPtr, addressBuffer, INET_ADDRSTRLEN);
 		}
-//		else if (ifa->ifa_addr->sa_family == AF_INET6) { // check it is IP6
-//																											 // is a valid IP6 Address
-//			tmpAddrPtr=&((struct sockaddr_in6 *)ifa->ifa_addr)->sin6_addr;
-//			inet_ntop(AF_INET6, tmpAddrPtr, addressBuffer, INET6_ADDRSTRLEN);
-//			printf("%s IP Address %s\n", ifa->ifa_name, addressBuffer);
-//		}
+		//		else if (ifa->ifa_addr->sa_family == AF_INET6) { // check it is IP6
+		//																											 // is a valid IP6 Address
+		//			tmpAddrPtr=&((struct sockaddr_in6 *)ifa->ifa_addr)->sin6_addr;
+		//			inet_ntop(AF_INET6, tmpAddrPtr, addressBuffer, INET6_ADDRSTRLEN);
+		//			printf("%s IP Address %s\n", ifa->ifa_name, addressBuffer);
+		//		}
 	}
-
+	
 	if (ifAddrStruct != NULL)
 		freeifaddrs(ifAddrStruct);
-
+	
 	while(1)
 	{
 		// Send message to server
 		errno = 0;
 		if(sendto(clientSocket,hostname,strlen(hostname),0,(struct sockaddr *)&serverAddr,addr_size) == -1)
 			perror("sendto()");
-
+		
 		sleep(1);
 	}
 }
@@ -175,30 +175,21 @@ static void run_loopback(osp_user_data *osp_data, float *inL, float *inR, float 
 {
 	float inL32[len / 3];
 	float inR32[len / 3];
-
+	
 	float outL32[len / 3];
 	float outR32[len / 3];
-
+	
 	size_t ret;
 	int i;
-
+	
 	if (len % 3 != 0) {
 		fprintf(stderr, "Incompatible frame size: %lu\n", len);
 	}
-
-	if(osp_data->choose_sampling_frequency)
-	{
-		ret =
-		resample_96_32(resampleL, inL, inL32, len);
-		resample_96_32(resampleR, inR, inR32, len);
-	}
-	else
-	{
-		ret =
-		resample_48_32(resampleL, inL, inL32, len);
-		resample_48_32(resampleR, inR, inR32, len);
-
-	}
+	
+	ret =
+	resample_96_32(resampleL, inL, inL32, len);
+	resample_96_32(resampleR, inR, inR32, len);
+	
 	if (osp_data->no_op) {
 		for (i = 0; i < ret; i++) {
 			outL32[i] = inL32[i];
@@ -211,17 +202,11 @@ static void run_loopback(osp_user_data *osp_data, float *inL, float *inR, float 
 											inL32, inR32,
 											outL32, outR32, ret);
 	}
-	if(osp_data->choose_sampling_frequency)
-	{
-		resample_32_96(resampleL, outL32, outL, len / 3);
-		resample_32_96(resampleR, outR32, outR, len / 3);
-	}
-	else
-	{
-		resample_32_48(resampleL, outL32, outL, len / 3);
-		resample_32_48(resampleR, outR32, outR, len / 3);
-	}
+	
+	resample_32_96(resampleL, outL32, outL, len / 3);
+	resample_32_96(resampleR, outR32, outR, len / 3);
 }
+
 //static void run_loopback_32(osp_user_data *osp_data, float *inL, float *inR, float *outL, float *outR, unsigned long len)
 //{
 //	unsigned long i;
@@ -247,17 +232,17 @@ static void run_loopback(osp_user_data *osp_data, float *inL, float *inR, float 
 static int file_loopback_init(file_loopback_context *ctx, const char *in_file, const char *out_file)
 {
 	short in_s;
-
+	
 	if ((ctx->input_file = fopen(in_file, "rb")) == NULL) {
 		return -1;
 	}
-
+	
 	if ((ctx->output_file = fopen(out_file, "wb")) == NULL) {
 		return -1;
 	}
-
+	
 	ctx->index = 0;
-
+	
 	// Get size of the file in bytes.
 	memcpy(ctx->wav_header, ctx->input_file, sizeof(ctx->wav_header));
 	fseek(ctx->input_file, 0L, SEEK_END);
@@ -268,15 +253,15 @@ static int file_loopback_init(file_loopback_context *ctx, const char *in_file, c
 	ctx->length = ftell(ctx->input_file) - 44;
 	fseek(ctx->input_file, 44, SEEK_SET); // Past wav header
 	ctx->length = ctx->length / sizeof(short) / 2; // Offset by the header
-
+	
 	// Allocate memory for the input channels
 	ctx->inL = malloc(sizeof(float) * ctx->length);
 	ctx->inR = malloc(sizeof(float) * ctx->length);
-
+	
 	// Allocate memory for the output channels
 	ctx->outL = malloc(sizeof(float) * ctx->length);
 	ctx->outR = malloc(sizeof(float) * ctx->length);
-
+	
 	// Read contents into Right and Left buffers
 	printf("Reading file into memory, and handling clipping...\n");
 	for (ctx->index = 0; ctx->index < ctx->length; ctx->index++) {
@@ -284,21 +269,21 @@ static int file_loopback_init(file_loopback_context *ctx, const char *in_file, c
 			fprintf(stderr, "Error reading input file (1) at index %ld\n", ctx->index);
 			return -1;
 		}
-
+		
 		ctx->inL[ctx->index] = (float)in_s / (float)((SHRT_MAX));
-
+		
 		if (fread(&in_s, sizeof(in_s), 1, ctx->input_file) < 1) {
 			fprintf(stderr, "Error reading input file (2) at index %ld\n", ctx->index);
 			return -1;
 		}
-
+		
 		ctx->inR[ctx->index] = (float)in_s / (float)((SHRT_MAX));
-
+		
 	}
-
+	
 	ctx->index = 0; // Have to set it 0 somewhere. idk where, though
 	printf("\n"); // Clear clipping output
-
+	
 	return 0;
 }
 
@@ -306,7 +291,7 @@ static void file_loopback_close(file_loopback_context *ctx)
 {
 	free(ctx->inL);
 	free(ctx->inR);
-
+	
 	fclose(ctx->input_file);
 	fclose(ctx->output_file);
 }
@@ -323,13 +308,13 @@ static int file_context_write(file_loopback_context *file_ctx)
 			printf("C");
 			//file_ctx->outL[file_ctx->index] = -1;
 		}
-
+		
 		// Write sample to file in full float format
 		if (fwrite(&file_ctx->outL[file_ctx->index], sizeof(float), 1, file_ctx->output_file) < 1) {
 			perror("Error in file_context_write writing left sample\n");
 			return -1;
 		}
-
+		
 		// if (file_ctx->outR[file_ctx->index] > 1) {
 		// 	printf("C");
 		// 	//file_ctx->outR[file_ctx->index] = 1;
@@ -343,11 +328,11 @@ static int file_context_write(file_loopback_context *file_ctx)
 		// 	perror("Error in file_context_write writing left sample\n");
 		// 	return -1;
 		// }
-
+		
 	}
-
+	
 	printf("\n"); // Clear clipping printouts
-
+	
 	return 0;
 }
 
@@ -356,36 +341,36 @@ static int file_context_write(file_loopback_context *file_ctx)
 static int file_loopback_run(const char *in_file, const char *out_file, unsigned int frames_per_buffer)
 {
 	unsigned long i;
-
+	
 	file_loopback_context file_ctx;
 	osp_user_data osp_data;
-
+	
 	osp_data_init(&osp_data);
 	osp_data.feedback = 1;
-
+	
 	printf("Initializing file context for file_loopback\n");
 	if (file_loopback_init(&file_ctx, in_file, out_file) < 0) {
 		return -1;
 	}
-
+	
 	// Loop through the file and do the processing
 	printf("Running through loopback processing...\n");
 	for (i = 0; i < file_ctx.length; i += frames_per_buffer) {
 		//run_loopback_32(&osp_data, file_ctx.inL + i, file_ctx.inR + i, file_ctx.outL + i, file_ctx.outR + i, frames_per_buffer);
 		run_loopback(&osp_data, file_ctx.inL + i, file_ctx.inR + i, file_ctx.outL + i, file_ctx.outR + i, frames_per_buffer);
 	}
-
+	
 	if (file_context_write(&file_ctx) < 0) {
 		printf("Error writing file\n");
 		return -1;
 	}
-
+	
 	file_loopback_close(&file_ctx);
-
+	
 	return 0;
 }
 
-static int run_pa_loopback(unsigned int sample_rate, unsigned int frames_per_buffer, const char *in_file, const char *out_file)
+static int run_pa_loopback(unsigned int sample_rate, unsigned int frames_per_buffer, const char *in_file, const char *out_file, osp_user_data *osp_data)
 {
 	int i;
 	pa_loopback_data loopback_data;
@@ -421,15 +406,15 @@ static void run_loopback_null(unsigned long count, unsigned int frames_per_buffe
 	float inR[frames_per_buffer];
 	float outL[frames_per_buffer];
 	float outR[frames_per_buffer];
-
+	
 	unsigned long i = 0;
-
+	
 	printf("Running null loopback mode for %ld iterations\n", count);
-
+	
 	osp_user_data osp_data;
-
+	
 	osp_data_init(&osp_data);
-
+	
 	while (i < count) {
 		run_loopback(&osp_data, inL, inR, outL, outR, frames_per_buffer);
 		i++;
@@ -443,13 +428,13 @@ static int init_pa(pa_user_data *pa_data, unsigned int samp_rate, unsigned int f
 		fprintf(stderr, "Error initializing port audio\n");
 		return -1;
 	}
-
+	
 	// start PA stream
 	if (pa_start_stream() < 0) {
 		fprintf(stderr, "Error starting audio stream\n");
 		return -1;
 	}
-
+	
 	return 0;
 }
 
@@ -460,10 +445,10 @@ static int close_pa()
 		fprintf(stderr, "Error stopping audio stream\n");
 		return -1;
 	}
-
+	
 	// close PA stream
 	pa_close();
-
+	
 	return 0;
 }
 
@@ -474,14 +459,14 @@ static int run_pa_key(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 	pa_data.user_data = osp_data;
 	pa_data.aux_data.attenuation_factor = attenuation_factor;
 	pa_data.aux_data.gain_factor = 1;
-
+	
 	printf("Feedback is %d\n", osp_data->feedback);
-
+	
 	if (init_pa(&pa_data, samp_rate, frames_per_buffer) < 0) {
 		printf("Error initializing port audio stuff\n");
 		return -1;
 	}
-
+	
 	for (;;) {
 		input = getchar();
 		if (input == 'a') {
@@ -496,27 +481,27 @@ static int run_pa_key(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 			char gain_s[5] = {0};
 			float gain_factordB = 0;
 			float gain_factor = 1;
-
+			
 			while ((ch = getchar()) != '\n') {
 				if (i > (int)sizeof(gain_s)) {
 					fprintf(stdout, "That value is too high\n");
 					break;
 				}
-
+				
 				if ((ch > '9' || ch < '0') && ch != '.') {
 					continue;
 				}
-
+				
 				gain_s[i] = ch;
 				i++;
 			}
-
+			
 			gain_factordB = strtof(gain_s, (char **)NULL);
 			if (gain_factordB < 0.0 || gain_factordB > 1000.0) {
 				fprintf(stdout, "[[[ DANGER ]]] Application will not set gain that high\n");
 				continue;
 			}
-
+			
 			gain_factor = log2lin(gain_factordB);
 			fprintf(stdout, "Setting gain_factordB to %f (%f)\n", gain_factordB, gain_factor);
 			pa_data.aux_data.gain_factor = gain_factor;
@@ -532,34 +517,34 @@ static int run_pa_key(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 			int i = 0;
 			char gain_s[5] = {0};
 			int gain;
-
+			
 			while ((ch = getchar()) != '\n') {
 				if (i > (int)sizeof(gain_s)) {
 					fprintf(stdout, "That value is too high\n");
 					break;
 				}
-
+				
 				if ((ch > '9' || ch < '0')) {
 					continue;
 				}
-
+				
 				gain_s[i] = ch;
 				i++;
 			}
-
+			
 			gain = (int)strtol(gain_s, (char **)NULL, 10);
 			if (gain < 0 || gain > 100) {
 				fprintf(stdout, "[[[ DANGER ]]] Application will not set gain that high\n");
 				continue;
 			}
-
+			
 #if 0
 			if ((gain + pa_data.aux_data.attenuation_factor) > 50) {
 				printf("[[[ WARNING ]]] This is above the recommended gain setting. Gain: %f, attenuation: %f\n",
 							 gain, pa_data.aux_data.attenuation_factor);
 			}
 #endif
-
+			
 			fprintf(stdout, "Setting gain to %d\n", gain);
 			osp_data_set_gain(osp_data, gain);
 		} else if (input == 'c') {
@@ -613,18 +598,18 @@ static int run_pa_key(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 		else if (input == 'q') {
 			break;
 		}
-
+		
 		printf("%s", OPT_STRING);
 	}
-
+	
 	printf("Key mode completed: summary:\n");
 	printf("Underruns: %d\n", pa_data.aux_data.underruns);
-
+	
 	if (close_pa() < 0) {
 		printf("Error closing down port audio stuff\n");
 		return -1;
 	}
-
+	
 	return 0;
 }
 
@@ -635,35 +620,35 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 	FILE *log_file = NULL;
 	int tcp_running = 1;
 	char message[512];
-
+	
 	unsigned int num_fails = 0;
-
+	
 	Osp_tcp osp_tcp;
 	char req;
-
+	
 	pa_user_data pa_data;
 	pa_data.user_data = osp_data;
 	pa_data.aux_data.attenuation_factor = attenuation_factor;
 	pa_data.aux_data.gain_factor = 1;
-
+	
 	osp_user_data *osp_tmp_data;
-
+	
 	osp_tmp_data = malloc(sizeof(osp_user_data));
 	memcpy(osp_tmp_data, osp_data, sizeof(osp_user_data));
 	printf("REAR MICS = %d\n", osp_tmp_data->rear_mics);
-
+	
 	// init TCP connection
 	printf("Initializing TCP connection.\n");
 	if ((osp_tcp = osp_tcp_init(UI_PORT)) == NULL) {
 		printf("There was an error initializing OSP TCP layer\n");
 		return -1;
 	}
-
+	
 	if (init_pa(&pa_data, samp_rate, frames_per_buffer) < 0) {
 		printf("Error initializing port audio stuff\n");
 		return -1;
 	}
-
+	
 	printf("Entering infinite for loop\n");
 	for (;;) {
 		fprintf(stderr, "\nWaiting for a connection from the client...\n");
@@ -673,15 +658,15 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 				num_fails++;
 				continue;
 			}
-
+			
 			fprintf(stderr, "Failed to set up TCP server 5 times, aborting\n");
 			break;
 		}
-
+		
 		printf("\nDone!!!\nClient connected\n\n");
 		pa_data.aux_data.underruns = 0;
 		tcp_running = 1;
-
+		
 		while (tcp_running == 1) {
 #if 0
 			ret = read_tcp_server_stream(ui_connfd, &req, sizeof(req));
@@ -693,7 +678,7 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 				break;
 			}
 #endif
-
+			
 			if ((req = osp_tcp_read_req(osp_tcp)) < 0) {
 				printf("\nFailed to read connection, resetting\n");
 				tcp_running = 0;
@@ -701,9 +686,9 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 			} else if (req == OSP_WRONG_VERSION) {
 				printf("\nWrong version OSP packet from client\n");
 			}
-
-//			fprintf(stderr, "Got req %d\n", req);
-
+			
+			//			fprintf(stderr, "Got req %d\n", req);
+			
 			switch (req) {
 				case OSP_REQ_UPDATE_VALUES:
 					printf("\nRequest to update OSP values\n");
@@ -721,39 +706,36 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 						printf("There was a disconnect trying to read \"values\" packet from client\n");
 						break;
 					}
-
+					
 #if 0
 					if (file_logger_log_osp_data(log_file, osp_tmp_data) < 0) {
 						fprintf(stderr, "Failed to log values to log file\n");
 					}
 #endif
-
-//					printf("Read %zd, sizeof osp_user_data %lu\n", ret, sizeof(osp_user_data));
+					
+					//					printf("Read %zd, sizeof osp_user_data %lu\n", ret, sizeof(osp_user_data));
 					printf("Got no op: %d\n", osp_tmp_data->no_op);
 					printf("AFC: %d\n", osp_tmp_data->afc);
 					printf("Rear Mics: %d\n", osp_tmp_data->rear_mics);
 					printf("Feedback: %d\n", osp_tmp_data->feedback);
-
+					
 					for (i = 0; i < NUM_BANDS; i++) {
 						osp_data->g50[i] = osp_tmp_data->g50[i];
 						osp_data->g80[i] = osp_tmp_data->g80[i];
 						printf("Gains: G50: %d, G80: %d\n", osp_data->g50[i], osp_data->g80[i]);
 					}
-
+					
 					for (i = 0; i < NUM_BANDS; i++) {
 						osp_data->knee_low[i] = osp_tmp_data->knee_low[i];
 						osp_data->knee_high[i] = osp_tmp_data->knee_high[i];
 						printf("knee low: %d, knee high: %d\n", osp_data->knee_low[i], osp_data->knee_high[i]);
 					}
-
+					
 					for (i = 0; i < NUM_BANDS; i++) {
 						osp_data->attack[i] = osp_tmp_data->attack[i];
 						osp_data->release[i] = osp_tmp_data->release[i];
 						printf("Attack: %d, Release: %d\n", osp_data->attack[i], osp_data->release[i]);
 					}
-					
-					//const char done[] = "DONE";
-					//send(osp_tcp->conn_fd, done, 5, 0);
 					
 					printf("\n");
 					break;
@@ -775,12 +757,12 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 				case OSP_REQ_USER_ID:
 					// Open log with given username
 					osp_tcp_read_user_packet(osp_tcp, message, sizeof(message));
-
+					
 					if ((log_file = file_logger_init(message)) == NULL) {
 						fprintf(stderr, "Failed to open Log File\n");
 						tcp_running = 0;
 					}
-
+					
 					printf("\nGot userID packet from host: %s\n", message);
 					break;
 				case OSP_REQ_USER_ACTION:
@@ -799,16 +781,16 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 			}
 		}
 	}
-
+	
 	// close TCP stuff
 	osp_tcp_close(osp_tcp);
-
+	
 	// Close PA stuff
 	if (close_pa() < 0) {
 		printf("Error closing down port audio stuff\n");
 		return -1;
 	}
-
+	
 	return 0;
 }
 
@@ -1029,7 +1011,7 @@ int main(int argc, char **argv)
 	float resample_32_48_taps[RESAMP_32_48_TAPS];
 	float resample_48_32_taps[RESAMP_48_32_TAPS];
 	float attenuation_factor = D_ATTENUATION_FACTOR;
-
+	
 	unsigned int sampling_frequency= SAMPLE_RATE;
 	char file_path[512];
 	pthread_t announce_thread;

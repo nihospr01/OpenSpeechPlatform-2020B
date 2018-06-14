@@ -11,7 +11,7 @@ var osp__process_8c =
     [ "osp_data_set_s2", "osp__process_8c.html#aeb2474bd6b995d8ad289bfb1ce9b91c9", null ],
     [ "osp_dump_afc_filter", "osp__process_8c.html#a37765f5c4d9ab3f3569947503b97a6c6", null ],
     [ "osp_get_num_bands", "osp__process_8c.html#afa87b8384a65fb6f6a12ac92297c9961", null ],
-    [ "osp_init", "osp__process_8c.html#a6d714155eff0850c8fd9458444365c57", null ],
+    [ "osp_init", "osp__process_8c.html#aabb5c0280f6d5cd0cce725a00533978f", null ],
     [ "osp_process_audio", "osp__process_8c.html#a6c8f16a08d0ce2a2b4989861253a51f5", null ],
     [ "osp_process_ha", "osp__process_8c.html#a5e03afe3816964e6052931a58b754d99", null ],
     [ "afc_left", "osp__process_8c.html#a1b0e0576d2848078cb3c36c87014bff5", null ],

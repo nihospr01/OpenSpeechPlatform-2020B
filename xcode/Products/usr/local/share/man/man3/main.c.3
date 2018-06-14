@@ -1,4 +1,4 @@
-.TH "osp/main.c" 3 "Wed Jun 13 2018" "Open Speech Platform" \" -*- nroff -*-
+.TH "osp/main.c" 3 "Thu Jun 14 2018" "Open Speech Platform" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -49,6 +49,8 @@ osp/main.c
 \fC#include 'constants\&.h'\fP
 .br
 \fC#include 'logger\&.h'\fP
+.br
+\fC#include 'jsmn\&.h'\fP
 .br
 
 .SS "Macros"
@@ -101,7 +103,7 @@ osp/main.c
 .RI "static int \fBfile_loopback_run\fP (const char *in_file, const char *out_file, unsigned int frames_per_buffer)"
 .br
 .ti -1c
-.RI "static int \fBrun_pa_loopback\fP (unsigned int sample_rate, unsigned int frames_per_buffer, const char *in_file, const char *out_file)"
+.RI "static int \fBrun_pa_loopback\fP (unsigned int sample_rate, unsigned int frames_per_buffer, const char *in_file, const char *out_file, \fBosp_user_data\fP *osp_data)"
 .br
 .ti -1c
 .RI "static void \fBrun_loopback_null\fP (unsigned long count, unsigned int frames_per_buffer)"
@@ -119,12 +121,18 @@ osp/main.c
 .RI "static int \fBrun_pa_tcp\fP (\fBosp_user_data\fP *osp_data, unsigned int samp_rate, unsigned int frames_per_buffer, float attenuation_factor)"
 .br
 .ti -1c
+.RI "static int \fBrun_pa_tcp_4afc\fP (\fBosp_user_data\fP *osp_data, unsigned int samp_rate, unsigned int frames_per_buffer, float attenuation_factor)"
+.br
+.ti -1c
 .RI "int \fBmain\fP (int argc, char **argv)"
 .br
 .in -1c
 .SS "Variables"
 
 .in +1c
+.ti -1c
+.RI "char \fBfilepath_4afc\fP [512]"
+.br
 .ti -1c
 .RI "static \fBResample\fP \fBresampleL\fP"
 .br
@@ -174,14 +182,18 @@ osp/main.c
 
 .SS "static int run_pa_key (\fBosp_user_data\fP * osp_data, unsigned int samp_rate, unsigned int frames_per_buffer, float attenuation_factor)\fC [static]\fP"
 
-.SS "static int run_pa_loopback (unsigned int sample_rate, unsigned int frames_per_buffer, const char * in_file, const char * out_file)\fC [static]\fP"
+.SS "static int run_pa_loopback (unsigned int sample_rate, unsigned int frames_per_buffer, const char * in_file, const char * out_file, \fBosp_user_data\fP * osp_data)\fC [static]\fP"
 
 .SS "static int run_pa_tcp (\fBosp_user_data\fP * osp_data, unsigned int samp_rate, unsigned int frames_per_buffer, float attenuation_factor)\fC [static]\fP"
+
+.SS "static int run_pa_tcp_4afc (\fBosp_user_data\fP * osp_data, unsigned int samp_rate, unsigned int frames_per_buffer, float attenuation_factor)\fC [static]\fP"
 
 .SS "static void usage (const char * s)\fC [inline]\fP, \fC [static]\fP"
 
 .SH "Variable Documentation"
 .PP 
+.SS "char filepath_4afc[512]"
+
 .SS "\fBResample\fP resampleL\fC [static]\fP"
 
 .PP

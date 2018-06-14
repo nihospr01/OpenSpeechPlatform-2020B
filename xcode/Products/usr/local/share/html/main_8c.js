@@ -18,9 +18,11 @@ var main_8c =
     [ "run_loopback", "main_8c.html#abbb0d46c0f00de5ea4ce0c647ceac666", null ],
     [ "run_loopback_null", "main_8c.html#a4db999af4611cf4620ccec2ebf6e6a0d", null ],
     [ "run_pa_key", "main_8c.html#a1eb914c7767ba47fd3463871577c3662", null ],
-    [ "run_pa_loopback", "main_8c.html#a2be8b12fd0c4b32ba4449e1f56e66807", null ],
+    [ "run_pa_loopback", "main_8c.html#ab8a38f850fea34a115fda3140af8b774", null ],
     [ "run_pa_tcp", "main_8c.html#a5c1a351ba62dfc0d60b39c5382c38636", null ],
+    [ "run_pa_tcp_4afc", "main_8c.html#a270935c92a12999bc75deb0ec045a4cd", null ],
     [ "usage", "main_8c.html#a31293479a2742f1ac5a586f181c09d3d", null ],
+    [ "filepath_4afc", "main_8c.html#acd94b84d1b851e50e9e761af568d00cd", null ],
     [ "resampleL", "main_8c.html#ab71b1ae937e7216d3836e92522723863", null ],
     [ "resampleR", "main_8c.html#a9b50a346e168b51231ee3e4d6ad9fd2d", null ]
 ];
