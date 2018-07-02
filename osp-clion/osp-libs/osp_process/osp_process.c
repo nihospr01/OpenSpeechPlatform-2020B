@@ -15,7 +15,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "constants.h"
-#include "../test.h"
 #include "logger.h"
 #include <time.h>
 
@@ -23,16 +22,16 @@
 
 #include "osp_process.h"
 #include "utilities.h"
-#include "filter.h"
+#include "filter/filter.h"
 #include "coeffs.h"
-#include "afc.h"
-#include "delay_line.h"
-#include "array_utilities.h"
+#include "afc/afc.h"
+#include "beam_forming/delay_line.h"
+#include "array_utilities/array_utilities.h"
 
-#include "peak_detect.h"
-#include "wdrc.h"
-#include "wdrc_mpo_support.h"
-#include "mpo.h"
+#include "peak_detect/peak_detect.h"
+#include "wdrc/wdrc.h"
+#include "wdrc/wdrc_mpo_support.h"
+#include "wdrc/mpo.h"
 
 #define FEEDBACK_EST_DELAY 100	///< Feedback delay in samples. For file loopback its 0. For real-time processing one needs to account for I/O delay
 //#define FEEDBACK_EST_DELAY 38 // Delay for ZoomTac box
@@ -87,44 +86,39 @@ static void osp_process_ha(osp_user_data *osp, Filter *filter, Peak_detect pd, f
 	// Doing HA processing by looping through each band
 	for (i = 0; i < NUM_BANDS; i++) {
 		// Applying Sub-Band filtering on the input signal
-        CLOCK(s);
 		filter_proc(filter[i], e_n, filtered, len);
-        CLOCK(e);
-        subband[i] = RAVG(subband[i], s, e);
 		// Applying Peak Detect on the Sub-Band filtered signal using attack and relase times specified for that Sub-Band
-        CLOCK(s);
 		peak_detect(pd, filtered, len, peak, osp->attack[i], osp->release[i], i);
 		// Converting the Peak Detector output to dB SPL values
 		peak_to_spl(peak, pdb, len);
+		
+		// speech enhancement before wdrc.
+		speech_enhancement(filtered, osp->noise_estimation_type, osp->spectral_subtraction, osp->spectral_subtraction_param, len, D_PD_SAMP_RATE, signal_speech_enhanced);
 		// MPO limiting
-
 		// #ifdef MPO  // If MPO is activated
 		if (osp->mpo_on){
-		
+			
 			wdrc_mpo_support(pdb, osp->g50[i], osp->g80[i], osp->knee_low[i], len, wdrcdb);
-            
-			mpo(filtered, pdb, wdrcdb, osp->knee_high[i], len, signal);
+			
+			mpo(signal_speech_enhanced, pdb, wdrcdb, osp->knee_high[i], len, signal);
 		}
-
+		
 		// #else /* MPO */
-			// Applying WDRC on filtered signal using the Peak Detector dB SPL values to compare with gains at 50 dB SPL and 80 dB SPL
+		// Applying WDRC on filtered signal using the Peak Detector dB SPL values to compare with gains at 50 dB SPL and 80 dB SPL
 		else {
-			wdrc(filtered, pdb, osp->g50[i], osp->g80[i], osp->knee_low[i], osp->knee_high[i], len, signal);
+			wdrc(signal_speech_enhanced, pdb, osp->g50[i], osp->g80[i], osp->knee_low[i], osp->knee_high[i], len, signal);
 		}
 		// #endif /* MPO */
 		// Accumulating the output of HA for each Sub-Band
-        CLOCK(e);
-        wdrc_avg[i] = RAVG(wdrc_avg[i], s, e);
-
-        CLOCK(s);
-		speech_enhancement(signal, osp->noise_estimation_type, osp->spectral_subtraction, osp->spectral_subtraction_param, len, D_PD_SAMP_RATE, signal_speech_enhanced);
-        CLOCK(e);
-        speech[i] = RAVG(speech[i], s, e);
-		array_add_array(s_n, signal_speech_enhanced, len);
+		
+		// For speech enhancement block after wdrc.
+		//		speech_enhancement(signal, osp->noise_estimation_type, osp->spectral_subtraction, osp->spectral_subtraction_param, len, D_PD_SAMP_RATE, signal_speech_enhanced);
+		
+		array_add_array(s_n, signal, len);
 	}
 }
 
-int osp_init(unsigned int frame_size, int sample_rate, unsigned char afc_adaptation_type)
+int osp_init(unsigned int frame_size, int sample_rate, osp_user_data *osp_data)
 {
 	int i;
 	float band_filter_coeffs[NUM_BANDS][BAND_FILT_LEN]; // Array to contain all Sub-Band filter taps
@@ -174,7 +168,7 @@ int osp_init(unsigned int frame_size, int sample_rate, unsigned char afc_adaptat
 	if ((afc_left = afc_init(afc_init_taps, ARRAY_SIZE(afc_init_taps),
 						hpf_taps, ARRAY_SIZE(hpf_taps),
 						blf_taps, ARRAY_SIZE(blf_taps),
-						frame_size, afc_adaptation_type)) == NULL) {
+						frame_size, osp_data->feedback_algorithm_type, osp_data->mu, osp_data->rho)) == NULL) {
 		fprintf(stderr, "Error initializing afc left\n");
 		return -1;
 	}
@@ -196,7 +190,7 @@ int osp_init(unsigned int frame_size, int sample_rate, unsigned char afc_adaptat
 	if ((afc_right = afc_init(afc_init_taps, ARRAY_SIZE(afc_init_taps),
 						hpf_taps, ARRAY_SIZE(hpf_taps),
 						blf_taps, ARRAY_SIZE(blf_taps),
-						frame_size, afc_adaptation_type)) == NULL) {
+						frame_size, osp_data->feedback_algorithm_type, osp_data->mu, osp_data->rho)) == NULL) {
 		fprintf(stderr, "Error initializing afc right\n");
 		return -1;
 	}
@@ -243,16 +237,10 @@ void osp_process_audio(osp_user_data *osp,
 
 	if (osp->afc) {
 		// Get the estimated feedback signal
-        CLOCK(s);
 		afc_get_y_estimated(afc_left, y_nL, len);
-        CLOCK(e);
-        afc = RAVG(afc, s, e);
 		// Subtract the estimated feedback from the input to hearing aid
 		// Ideally the subtracted signal should be equal to the input signal
-        CLOCK(s);
 		array_subtract_array(x_nL, y_nL, len);
-        CLOCK(e);
-        afc_filter = RAVG(afc_filter, s, e);
 	}
 
 	// Perform basic Hearing Aid processing (HA) on the left channel
@@ -276,10 +264,7 @@ void osp_process_audio(osp_user_data *osp,
 	// Update AFC filter taps using the current frame output and the current frame subtracted signal
 	// These updated AFC filter taps will be used to remove feedback for the next frame
 	if (osp->afc) {
-        CLOCK(s);
 		afc_update_taps(afc_left, tmp, x_nL, len);
-        CLOCK(e);
-        afc_update = RAVG(afc_update,s,e);
 	}
 
 	if (osp->feedback) {
@@ -413,6 +398,17 @@ void osp_data_init(osp_user_data *user_data)
 	user_data->no_op = 0;
 	user_data->feedback = 0;
 	user_data->rear_mics = 1;
+	
+	user_data->choose_sampling_frequency = 1;
+//	user_data->mpo_on = 1;
+	user_data->noise_estimation_type = 0;
+	user_data->spectral_subtraction = 0;
+	user_data->spectral_subtraction_param = 0;
+	
+	user_data->feedback_algorithm_type = 1;
+	user_data->mu = 0.005;
+	user_data->rho =  0.985;
+	
 }
 
 void osp_data_set_gain(osp_user_data *user_data, int gain)

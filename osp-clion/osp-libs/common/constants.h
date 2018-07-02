@@ -36,6 +36,9 @@
 #define RESAMP_48_32_TAPS	25	///< Number of taps for decimation filter in resampler.c for 48 to 32 kHz
 #define RESAMP_32_48_TAPS	25	///< Number of taps for interpolation filter in resampler.c for 32 to 48 kHz
 #define SYNTHETIC_TAP_LEN	525	///< Synthetic feedback filter tap length
+#define RESAMP_32_96_TAPS_MIC_CALIB 211 ///< Number of taps for interpolation filter in resampler.c with calibration
+#define RESAMP_96_32_TAPS_MIC_CALIB 212 ///< Number of taps for decimation filter in resampler.c with calibration
+
 
 /*** Peak detect defaults ***/
 #define D_ATTACK_TIME	5	///< Attack time in msec
@@ -72,18 +75,30 @@ typedef struct osp_user_data_t {
 	int afc;					///< AFC on/off
 	int feedback;				///< Feedback on/off
 	int rear_mics;				///< Read mics on/off
+	
+	// Amplification parameters
+	
 	int g50[NUM_BANDS];			///< The gain values at 50 dB SPL input level
 	int g80[NUM_BANDS];			///< The gain values at 80 dB SPL input level
-
 	int knee_low[NUM_BANDS];	///< Lower kneepoints for all bands
 	int knee_high[NUM_BANDS];	///< Upper kneepoints for all bands
 	int attack[NUM_BANDS];		///< Attack time for WDRC for all bands
 	int release[NUM_BANDS];		///< Release time for WDRC for all bands
 	int mpo_on;					///< toggle for MPO on/off
 	int choose_sampling_frequency;
+	
+	// Noise management parameters
+	
 	int noise_estimation_type; ///< Choose type of Noise estimation technique
 	int spectral_subtraction; ///< Spectral subtraction ON/OFF
 	float spectral_subtraction_param; ///< Spectral subtraction parameter
+	
+	// Feedback management parameters
+	
+	int feedback_algorithm_type; ///< Choose the type of feedback algorithm type.
+	float mu; ///< Step size parameter
+	float rho; ///< Forgetting factor
+	
 } osp_user_data;
 
 /**
