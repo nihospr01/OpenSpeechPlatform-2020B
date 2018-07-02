@@ -14,7 +14,7 @@
 #ifndef COEFFS_H__
 #define COEFFS_H__
 
-#include "constants.h"
+#include "common/constants.h"
 
 #if !defined(ARRAY_SIZE)
     #define ARRAY_SIZE(x) (sizeof((x)) / sizeof((x)[0]))

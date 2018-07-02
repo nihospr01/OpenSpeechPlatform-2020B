@@ -328,6 +328,8 @@ The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and
 
 #### Researcher page
 
+Note: Run OSP-Xcode with -t parameter enabled and -l parameter disabled. 
+
 1.  Local:  localhost:8000/researcherpage; Apache: IP_ADDRESS/researcherpage
 2.  Add at least 5db to each cell in the the G65 row
 3.  Press transmit and listen to the sound that plays
@@ -336,6 +338,7 @@ The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and
 
 #### 4AFC
 
+Note: Run OSP-Xcode with -l parameter enabled and -t parameter disabled. 
 
 1.  Local:  localhost:8000/4afc; Apache: IP_ADDRESS/4afc
 2.  Click on the four choices and the play symbol and make sure you are hearing the appropriate word

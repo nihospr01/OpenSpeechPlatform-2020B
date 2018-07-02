@@ -17,8 +17,8 @@
 #include <math.h>
 
 #include "afc.h"
-#include "filter.h"
-#include "array_utilities.h"
+#include "filter/filter.h"
+#include "array_utilities/array_utilities.h"
 #include "circular_buffer.h"
 
 /**
@@ -184,7 +184,7 @@ static void get_step_size_weights(float *taps, float *step_size_weights, float a
 Afc afc_init(const float *afc_filter_taps, int afc_filter_tap_len,
 				const float *prefilter_taps, int prefilter_tap_len,
 				const float *band_limited_filter_taps, int band_limited_filter_tap_len,
-				int frame_size, unsigned int adaptation_type)
+				int frame_size, unsigned int adaptation_type, float afc_mu, float afc_rho)
 {
 	struct afc_t *obj;
 
@@ -228,12 +228,15 @@ Afc afc_init(const float *afc_filter_taps, int afc_filter_tap_len,
 	obj->adaptation_type = adaptation_type;
 
 	obj->power_estimate = 0;
-	obj->mu = 0.005;
+	obj->mu = afc_mu;
 	obj->delta = 1e-15;
-	obj->rho = 0.985;
+	obj->rho = afc_rho;
 	obj->alpha = 0;
 	obj->beta = 5;
 
+	printf("\nmu initial value = %f\n",obj->mu);
+	printf("\nrho initial value = %f\n",obj->rho);
+	
 	return obj;
 
 abort7:

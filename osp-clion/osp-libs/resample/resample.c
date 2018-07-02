@@ -14,7 +14,7 @@
 #include <stdlib.h>
 
 #include "resample.h"
-#include "filter.h"
+#include "filter/filter.h"
 
 #define SIZE_32		32
 #define SIZE_48		48

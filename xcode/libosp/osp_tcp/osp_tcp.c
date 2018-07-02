@@ -120,14 +120,14 @@ int osp_tcp_read_req(Osp_tcp osp_tcp)
 	
 	// Read in the request byte
 	ret = read_tcp_server_stream(osp_tcp->conn_fd, JSON_STRING, READ_REQUEST_LEN_JSON);
-	for(i=0;i<READ_REQUEST_LEN_JSON+1;i++)
-	{
-		if(JSON_STRING[i]=='}')
-		{
-			JSON_STRING[i+1]= '\0';
-			break;
-		}
-	}
+//	for(i=0;i<READ_REQUEST_LEN_JSON+1;i++)
+//	{
+//		if(JSON_STRING[i]=='}')
+//		{
+//			JSON_STRING[i+1]= '\0';
+//			break;
+//		}
+//	}
 	JSON_STRING[READ_REQUEST_LEN_JSON] = '\0';
 	printf("\n\n%s\n\n",JSON_STRING);
 	
@@ -400,53 +400,54 @@ ssize_t osp_tcp_read_user_packet(Osp_tcp osp_tcp, char *message, unsigned int si
 	int r,i;
 	int req = 0;
 	char JSON_STRING_USER[512];
-//	ret = read_tcp_server_stream(osp_tcp->conn_fd, JSON_STRING_USER, USER_LEN_JSON);
-//	JSON_STRING_USER[USER_LEN_JSON] = '\0';
-//	printf("\n\n%s\n\n", JSON_STRING_USER);
-//	if (ret < 0) {
-//		perror("Failed to read connection\n");
-//		return -1;
-//	} else if (ret == 0){
-//		return OSP_DISCONNECT;
-//	}
-//
-//	r = jsmn_parse(&p, JSON_STRING_USER, strlen(JSON_STRING_USER), t, sizeof(t)/sizeof(t[0]));
-//	if (r < 0) {
-//		printf("Failed to parse JSON: %d\n", r);
-//		return 1;
-//	}
-////	printf("r values is %d\n", r);
-//
-//	/* Assume the top-level element is an object */
-//	if (r < 1 || t[0].type != JSMN_OBJECT) {
-//		printf("Object expected\n");
-//		return 1;
-//	}
-//
-//	/* Loop over all keys of the root object */
-//	for (i = 1; i < r; i++) {
-//		if (jsoneq(JSON_STRING_USER, &t[i], "LS") == 0) {
-//			/* We may use strndup() to fetch string value */
-//
-//			req = get_int_from_SubString(JSON_STRING_USER, t[i+1].start, t[i+1].end-t[i+1].start);
-//			printf("Length of String: %d\n",req);
-//			i++;
-//		}
-//		else {
-//			printf("Unexpected key: %.*s\n", t[i].end-t[i].start,
-//						 JSON_STRING_USER + t[i].start);
-//		}
-//
-//	}
-//
-//
-//
-//
-//
-//	if (size < ret) {
-//		fprintf(stderr, "Not enough memory allocated in message to contain xmission\n");
-//		return -1;
-//	}
+	
+	ret = read_tcp_server_stream(osp_tcp->conn_fd, JSON_STRING_USER, USER_LEN_JSON);
+	JSON_STRING_USER[USER_LEN_JSON] = '\0';
+	printf("\n\n%s\n\n", JSON_STRING_USER);
+	if (ret < 0) {
+		perror("Failed to read connection\n");
+		return -1;
+	} else if (ret == 0){
+		return OSP_DISCONNECT;
+	}
+
+	r = jsmn_parse(&p, JSON_STRING_USER, strlen(JSON_STRING_USER), t, sizeof(t)/sizeof(t[0]));
+	if (r < 0) {
+		printf("Failed to parse JSON: %d\n", r);
+		return 1;
+	}
+//	printf("r values is %d\n", r);
+
+	/* Assume the top-level element is an object */
+	if (r < 1 || t[0].type != JSMN_OBJECT) {
+		printf("Object expected\n");
+		return 1;
+	}
+
+	/* Loop over all keys of the root object */
+	for (i = 1; i < r; i++) {
+		if (jsoneq(JSON_STRING_USER, &t[i], "LS") == 0) {
+			/* We may use strndup() to fetch string value */
+
+			req = get_int_from_SubString(JSON_STRING_USER, t[i+1].start, t[i+1].end-t[i+1].start);
+			printf("Length of String: %d\n",req);
+			i++;
+		}
+		else {
+			printf("Unexpected key: %.*s\n", t[i].end-t[i].start,
+						 JSON_STRING_USER + t[i].start);
+		}
+
+	}
+
+
+
+
+
+	if (size < ret) {
+		fprintf(stderr, "Not enough memory allocated in message to contain xmission\n");
+		return -1;
+	}
 
 	ret = read_tcp_server_stream(osp_tcp->conn_fd, JSON_STRING_USER, READ_REQUEST_LEN_JSON);
 	for(i = 0; i<1024+1;i++)
@@ -508,13 +509,12 @@ ssize_t osp_4afc_read_values(Osp_tcp osp_tcp, char *file_path, unsigned int size
 	jsmntok_t t[128]; /* We expect no more than 128 tokens */
 	jsmn_init(&p);
 	int r,i,j;
-	char intermediate_str[512];
-	char JSON_STRING_UPDATE[512];
+	char JSON_STRING_UPDATE[5000];
 	// Read in the request byte
 	
-	ret = read_tcp_server_stream(osp_tcp->conn_fd, JSON_STRING_UPDATE, 1024);
+	ret = read_tcp_server_stream(osp_tcp->conn_fd, JSON_STRING_UPDATE, size);
 	
-	for(i = 0; i<1024+1;i++)
+	for(i = 0; i<size+1;i++)
 	{
 		if(JSON_STRING_UPDATE[i] == '}')
 		{
@@ -522,7 +522,7 @@ ssize_t osp_4afc_read_values(Osp_tcp osp_tcp, char *file_path, unsigned int size
 			break;
 		}
 	}
-	JSON_STRING_UPDATE[HA_STATE_JSON] = '\0';
+//	JSON_STRING_UPDATE[HA_STATE_JSON] = '\0';
 
 	printf(" \n\n%s\n\n", JSON_STRING_UPDATE);
 	

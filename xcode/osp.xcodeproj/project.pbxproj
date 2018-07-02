@@ -23,7 +23,7 @@
 		1443AB5D1F28B0530081864E /* wdrc.c in Sources */ = {isa = PBXBuildFile; fileRef = 704B300B1F0F07FC001615F8 /* wdrc.c */; };
 		1443AB5E1F28B0580081864E /* wdrc_mpo_support.c in Sources */ = {isa = PBXBuildFile; fileRef = 704B300D1F0F07FC001615F8 /* wdrc_mpo_support.c */; };
 		14702B691F28D23B00E17FFB /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14702B681F28D23B00E17FFB /* libportaudio.a */; };
-		4AF8A38820D2C036002F3499 /* jsmn.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AF8A38720D2C036002F3499 /* jsmn.c */; };
+		4AB1C31A20EAB80100890D07 /* jsmn.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AB1C31920EAB80100890D07 /* jsmn.c */; };
 		7014BC261F291D3C0011E7AB /* filterbank_coeffs1.flt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7014BC1E1F291D1B0011E7AB /* filterbank_coeffs1.flt */; };
 		7014BC271F291D3C0011E7AB /* filterbank_coeffs2.flt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7014BC1F1F291D1B0011E7AB /* filterbank_coeffs2.flt */; };
 		7014BC281F291D3C0011E7AB /* filterbank_coeffs3.flt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7014BC201F291D1B0011E7AB /* filterbank_coeffs3.flt */; };
@@ -76,12 +76,12 @@
 		4A54EDE1204087E700D70A25 /* peak_valley_detection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = peak_valley_detection.png; sourceTree = "<group>"; };
 		4A54EDE3204087E800D70A25 /* Software_assets_2018a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Software_assets_2018a.png; sourceTree = "<group>"; };
 		4A54EDE4204087E800D70A25 /* table_comp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table_comp.png; sourceTree = "<group>"; };
+		4AB1C31820EAB80000890D07 /* jsmn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jsmn.h; sourceTree = "<group>"; };
+		4AB1C31920EAB80100890D07 /* jsmn.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jsmn.c; sourceTree = "<group>"; };
 		4AF8A38220D2C028002F3499 /* resample_32_96_with_mic_calibration_right_ear.flt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = resample_32_96_with_mic_calibration_right_ear.flt; sourceTree = "<group>"; };
 		4AF8A38320D2C029002F3499 /* resample_96_32_with_mic_calibration_right_ear.flt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = resample_96_32_with_mic_calibration_right_ear.flt; sourceTree = "<group>"; };
 		4AF8A38420D2C029002F3499 /* resample_32_96_with_mic_calibration_left_ear.flt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = resample_32_96_with_mic_calibration_left_ear.flt; sourceTree = "<group>"; };
 		4AF8A38520D2C029002F3499 /* resample_96_32_with_mic_calibration_left_ear.flt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = resample_96_32_with_mic_calibration_left_ear.flt; sourceTree = "<group>"; };
-		4AF8A38620D2C036002F3499 /* jsmn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jsmn.h; sourceTree = "<group>"; };
-		4AF8A38720D2C036002F3499 /* jsmn.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jsmn.c; sourceTree = "<group>"; };
 		7014BC0E1F291D1B0011E7AB /* afc_init.flt */ = {isa = PBXFileReference; lastKnownFileType = text; path = afc_init.flt; sourceTree = "<group>"; };
 		7014BC0F1F291D1B0011E7AB /* afc_init_taps.flt */ = {isa = PBXFileReference; lastKnownFileType = text; path = afc_init_taps.flt; sourceTree = "<group>"; };
 		7014BC101F291D1B0011E7AB /* afc_init_taps_l.flt */ = {isa = PBXFileReference; lastKnownFileType = text; path = afc_init_taps_l.flt; sourceTree = "<group>"; };
@@ -183,8 +183,8 @@
 		4AF8A38920D2C03E002F3499 /* json_parser */ = {
 			isa = PBXGroup;
 			children = (
-				4AF8A38720D2C036002F3499 /* jsmn.c */,
-				4AF8A38620D2C036002F3499 /* jsmn.h */,
+				4AB1C31920EAB80100890D07 /* jsmn.c */,
+				4AB1C31820EAB80000890D07 /* jsmn.h */,
 			);
 			path = json_parser;
 			sourceTree = "<group>";
@@ -570,6 +570,7 @@
 				1443AB5E1F28B0580081864E /* wdrc_mpo_support.c in Sources */,
 				1443AB501F28AFBF0081864E /* circular_buffer.c in Sources */,
 				1443AB4F1F28AFB80081864E /* afc.c in Sources */,
+				4AB1C31A20EAB80100890D07 /* jsmn.c in Sources */,
 				1443AB5C1F28B04F0081864E /* mpo.c in Sources */,
 				1443AB591F28B0360081864E /* tcplib.c in Sources */,
 				1443AB531F28AFF80081864E /* beam_forming.c in Sources */,
@@ -582,7 +583,6 @@
 				704B2FCD1F0EFA38001615F8 /* logger.c in Sources */,
 				1443AB561F28B0230081864E /* osp_process.c in Sources */,
 				1443AB571F28B0270081864E /* utilities.c in Sources */,
-				4AF8A38820D2C036002F3499 /* jsmn.c in Sources */,
 				1443AB581F28B02F0081864E /* osp_tcp.c in Sources */,
 				704B2FCC1F0EFA31001615F8 /* port_wrapper.c in Sources */,
 				1443AB5B1F28B0450081864E /* resample.c in Sources */,

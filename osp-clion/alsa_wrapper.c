@@ -9,8 +9,8 @@
 
 
 
-char *pdevice = "hw:0,0";
-char *cdevice = "hw:0,0";
+char *pdevice = "hw:0,1";
+char *cdevice = "hw:0,2";
 snd_pcm_format_t format = SND_PCM_FORMAT_S16_LE;
 int rate = 48000;
 int channels = 2;

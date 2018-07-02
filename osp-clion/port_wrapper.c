@@ -18,7 +18,7 @@
 
 /* set 0 (lowest) latency */
 #ifdef __linux__
-	#define DESIRED_LATENCY (.1)
+	#define DESIRED_LATENCY .02
 #else
 	#define DESIRED_LATENCY (0.001)
 #endif
@@ -189,8 +189,8 @@ static int pa_main_callback(const void *inputBuffer,
 		}
 	}
 
-	ret = resample_96_32(resampleL, inL, inL32, (int)frameCount);
-	resample_96_32(resampleR, inR, inR32, (int)frameCount);
+	ret = resample_48_32(resampleL, inL, inL32, (int)frameCount);
+	resample_48_32(resampleR, inR, inR32, (int)frameCount);
 
 	if (pa_data->user_data->no_op) {
 		for (i = 0; i < ret; i++) {
@@ -210,8 +210,8 @@ static int pa_main_callback(const void *inputBuffer,
 
 	}
 
-	resample_32_96(resampleL, outL32, outL, ret);
-	resample_32_96(resampleR, outR32, outR, ret);
+	resample_32_48(resampleL, outL32, outL, ret);
+	resample_32_48(resampleR, outR32, outR, ret);
 
     return paContinue;  // aka 0
 }
@@ -258,8 +258,8 @@ static int pa_loopback_callback(const void *inputBuffer,
 	}
 
 	ret =
-	resample_96_32(resampleL, inL, inL32, (int)frameCount);
-	resample_96_32(resampleR, inR, inR32, (int)frameCount);
+	resample_48_32(resampleL, inL, inL32, (int)frameCount);
+	resample_48_32(resampleR, inR, inR32, (int)frameCount);
 
 	if (loopback_data->osp_data->no_op) {
 		for (i = 0; i < ret; i++) {
@@ -275,8 +275,8 @@ static int pa_loopback_callback(const void *inputBuffer,
 	}
 
 	// Here we're putting the processed data (downsample->osp->upsample) onto the file context structure
-	resample_32_96(resampleL, outL32, &(loopback_data->file_ctx->outL[loopback_data->file_ctx->index]), ret);
-	resample_32_96(resampleR, outR32, &(loopback_data->file_ctx->outR[loopback_data->file_ctx->index]), ret);
+	resample_32_48(resampleL, outL32, &(loopback_data->file_ctx->outL[loopback_data->file_ctx->index]), ret);
+	resample_32_48(resampleR, outR32, &(loopback_data->file_ctx->outR[loopback_data->file_ctx->index]), ret);
 
 	// Put the input file data from the file context structure onto the output buffer
 	for (i = 0; i < (int)frameCount; i++, loopback_data->file_ctx->index++) {

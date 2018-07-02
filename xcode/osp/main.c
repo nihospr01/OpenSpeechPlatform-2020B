@@ -920,7 +920,7 @@ static int run_pa_tcp_4afc(osp_user_data *osp_data, unsigned int samp_rate, unsi
 				case 8:
 					//set file path
 					
-					if ((ret = osp_4afc_read_values(osp_tcp, filepath_4afc, 1024)) < 0) {
+					if ((ret = osp_4afc_read_values(osp_tcp, filepath_4afc, 5000)) < 0) {
 						printf("Failed to read values packet from client\n");
 						tcp_running = 0;
 						break;

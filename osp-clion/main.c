@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "loopback.h"
-#include "test.h"
+#include "alsa_wrapper.h"
 #ifdef __linux__
 #include <getopt.h>
 #endif
@@ -37,6 +37,14 @@
 #endif
 #include "common/constants.h"
 #include "logger.h"
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "jsmn.h"
+
+char filepath_4afc[512];
 
 /*** Main constants ***/
 #define UI_PORT				8001
@@ -76,6 +84,13 @@ static inline void usage(const char *s)
 	printf("\t-T\tinitialize with selected AFC. 0=FXLMS and 1=PNLMS\n");
 	printf("\t-M\tEnable/Disable MPO. 0= Disable MPO and 1 = Enable MPO\n");
 	printf("\t-l\t<Loopback File>\tRun in loopback mode where <Loopback File> is input\n");
+	printf("\t-F\tChoose sampling Frequency. 0 = 48 kHz or 1 = 96 kHz\n");
+	printf("\t-N\tChoose noise estimation technique (0,1,2,3). 0- Disabled, 1- Arslan, 2- Hirsch, 3- MCRA\n");
+	printf("\t-S\tSpectral subtraction 1- on/ 0 -off\n");
+	printf("\t-s\tSpectral subtraction parameter, float value from 0 to 1\n");
+	
+	
+	
 }
 
 static void * announce_presence(void * tid)
@@ -324,37 +339,37 @@ static int file_context_write(file_loopback_context *file_ctx)
 
 
 // Called when loopback is selected with file
-static int file_loopback_run(const char *in_file, const char *out_file, unsigned int frames_per_buffer)
-{
-	unsigned long i;
-
-	file_loopback_context file_ctx;
-	osp_user_data osp_data;
-
-	osp_data_init(&osp_data);
-	osp_data.feedback = 1;
-
-	printf("Initializing file context for file_loopback\n");
-	if (file_loopback_init(&file_ctx, in_file, out_file) < 0) {
-		return -1;
-	}
-
-	// Loop through the file and do the processing
-	printf("Running through loopback processing...\n");
-	for (i = 0; i < file_ctx.length; i += frames_per_buffer) {
-		//run_loopback_32(&osp_data, file_ctx.inL + i, file_ctx.inR + i, file_ctx.outL + i, file_ctx.outR + i, frames_per_buffer);
-		run_loopback(&osp_data, file_ctx.inL + i, file_ctx.inR + i, file_ctx.outL + i, file_ctx.outR + i, frames_per_buffer);
-	}
-
-	if (file_context_write(&file_ctx) < 0) {
-		printf("Error writing file\n");
-		return -1;
-	}
-
-	file_loopback_close(&file_ctx);
-
-	return 0;
-}
+//static int file_loopback_run(const char *in_file, const char *out_file, unsigned int frames_per_buffer)
+//{
+//	unsigned long i;
+//
+//	file_loopback_context file_ctx;
+//	osp_user_data osp_data;
+//
+//	osp_data_init(&osp_data);
+//	osp_data.feedback = 1;
+//
+//	printf("Initializing file context for file_loopback\n");
+//	if (file_loopback_init(&file_ctx, in_file, out_file) < 0) {
+//		return -1;
+//	}
+//
+//	// Loop through the file and do the processing
+//	printf("Running through loopback processing...\n");
+//	for (i = 0; i < file_ctx.length; i += frames_per_buffer) {
+//		//run_loopback_32(&osp_data, file_ctx.inL + i, file_ctx.inR + i, file_ctx.outL + i, file_ctx.outR + i, frames_per_buffer);
+//		run_loopback(&osp_data, file_ctx.inL + i, file_ctx.inR + i, file_ctx.outL + i, file_ctx.outR + i, frames_per_buffer);
+//	}
+//
+//	if (file_context_write(&file_ctx) < 0) {
+//		printf("Error writing file\n");
+//		return -1;
+//	}
+//
+//	file_loopback_close(&file_ctx);
+//
+//	return 0;
+//}
 
 static int run_pa_loopback(unsigned int sample_rate, unsigned int frames_per_buffer, const char *in_file, const char *out_file)
 {
@@ -389,27 +404,26 @@ static int run_pa_loopback(unsigned int sample_rate, unsigned int frames_per_buf
 }
 
 // Called when loopback is selected without file (null test)
-static void run_loopback_null(unsigned long count, unsigned int frames_per_buffer)
-{
-	float inL[frames_per_buffer];
-	float inR[frames_per_buffer];
-	float outL[frames_per_buffer];
-	float outR[frames_per_buffer];
-
-	unsigned long i = 0;
-
-	printf("Running null loopback mode for %ld iterations\n", count);
-
-	osp_user_data osp_data;
-
-	osp_data_init(&osp_data);
-
-	while (i < count) {
-		run_loopback(&osp_data, inL, inR, outL, outR, frames_per_buffer);
-		i++;
-	}
-}
-#if ALSA_PA
+//static void run_loopback_null(unsigned long count, unsigned int frames_per_buffer)
+//{
+//	float inL[frames_per_buffer];
+//	float inR[frames_per_buffer];
+//	float outL[frames_per_buffer];
+//	float outR[frames_per_buffer];
+//
+//	unsigned long i = 0;
+//
+//	printf("Running null loopback mode for %ld iterations\n", count);
+//
+//	osp_user_data osp_data;
+//
+//	osp_data_init(&osp_data);
+//
+//	while (i < count) {
+//		run_loopback(&osp_data, inL, inR, outL, outR, frames_per_buffer);
+//		i++;
+//	}
+//}
 static int init_pa(pa_user_data *pa_data, unsigned int samp_rate, unsigned int frames_per_buffer)
 {
 	// init PA stream
@@ -426,8 +440,6 @@ static int init_pa(pa_user_data *pa_data, unsigned int samp_rate, unsigned int f
 
 	return 0;
 }
-
-#endif
 static int close_pa()
 {
 	// stop PA stream
@@ -558,7 +570,34 @@ static int run_pa_key(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 		} else if (input == '0') {
 			printf("Setting NH\n");
 			osp_data_set_nh(osp_data);
-		} else if (input == 'q') {
+		} else if( input == 'p'){
+			char ch;
+			int i = 0;
+			float param;
+			char param_s[10] = {};
+			
+			while ((ch = getchar()) != '\n') {
+				
+				if (ch != '.'){
+					if ((ch > '9' || ch < '0')) {
+						continue;
+					}
+				}
+				param_s[i] = ch;
+				i++;
+			}
+			
+			param = strtof(param_s, NULL);
+			if (param<0 || param > 1){
+				printf("The range for Spectral subtraction parameter should be with in 0 and 1\n");
+				continue;
+			}
+			osp_data->spectral_subtraction_param = param;
+			printf("Spectral subtraction parameter = %f\n", osp_data->spectral_subtraction_param);
+		}
+		
+		
+		else if (input == 'q') {
 			break;
 		}
 
@@ -613,7 +652,7 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 
 	printf("Entering infinite for loop\n");
 	for (;;) {
-		fprintf(stderr, "Waiting for a connection from the client...");
+		fprintf(stderr, "\nWaiting for a connection from the client...\n");
 		if (osp_tcp_connect(osp_tcp) < 0) {
 			printf("Error on getting server connection\n");
 			if (num_fails < 5) {
@@ -624,8 +663,8 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 			fprintf(stderr, "Failed to set up TCP server 5 times, aborting\n");
 			return 1;
 		}
-
-		printf("done. Client connected\n");
+		
+		printf("\nDone!!!\nClient connected\n\n");
 		pa_data.aux_data.underruns = 0;
 		tcp_running = 1;
 
@@ -642,18 +681,18 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 #endif
 
 			if ((req = osp_tcp_read_req(osp_tcp)) < 0) {
-				printf("Failed to read connection, resetting\n");
+				printf("\nFailed to read connection, resetting\n");
 				tcp_running = 0;
 				break;
 			} else if (req == OSP_WRONG_VERSION) {
-				printf("Wrong version OSP packet from client\n");
+				printf("\nWrong version OSP packet from client\n");
 			}
-
-			fprintf(stderr, "Got req %d\n", req);
-
+			
+			//			fprintf(stderr, "Got req %d\n", req);
+			
 			switch (req) {
 				case OSP_REQ_UPDATE_VALUES:
-					printf("Request to update OSP values\n");
+					printf("\nRequest to update OSP values\n");
 #if 0
 					ret = read_tcp_server_stream(ui_connfd, (char *)osp_tmp_data, sizeof(osp_user_data));
 #endif
@@ -700,7 +739,7 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 					printf("\n");
 					break;
 				case OSP_REQ_GET_UNDERRUNS:
-					printf("Received underrun request packet\n");
+					printf("\nReceived underrun request packet\n");
 					//fprintf(stderr, "Sending underruns %d\n", pa_data.aux_data.underruns);
 					if (osp_tcp_send_underruns(osp_tcp, pa_data.aux_data.underruns) < 0) {
 						printf("Error sending underrun packet to client\n");
@@ -708,7 +747,7 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 					}
 					break;
 				case OSP_REQ_GET_NUM_BANDS:
-					printf("Request to report number of bands\n");
+					printf("\nRequest to report number of bands\n");
 					if (osp_tcp_send_num_bands(osp_tcp, osp_get_num_bands()) < 0) {
 						printf("Failed to notify client to num of bands\n");
 						tcp_running = 0;
@@ -758,7 +797,7 @@ static int stream_alsa(osp_user_data *osp_data, unsigned int samp_rate, unsigned
 {
 	pthread_t alsa_thread;
 
-	if(pthread_create(&alsa_thread, NULL, test, NULL))
+	if(pthread_create(&alsa_thread, NULL, alsa_stream, NULL))
 	{
 		fprintf(stderr, "Error pthread_create() failed to create announcement thread\n");
 	}
@@ -1056,6 +1095,8 @@ int main(int argc, char **argv)
 	unsigned int tcp_mode;
 	unsigned int adaptation_type;
 	unsigned int ansi_test_onoff;
+    unsigned int noise_estimation_type;
+    unsigned int spectral_subtraction;
 	float resample_32_48_taps[RESAMP_32_48_TAPS];
 	float resample_48_32_taps[RESAMP_48_32_TAPS];
 	float attenuation_factor = D_ATTENUATION_FACTOR;
@@ -1072,6 +1113,55 @@ int main(int argc, char **argv)
 	tcp_mode = 0;
 	while ((c = getopt(argc, argv, "ad:M:l:p:rtT:")) != -1) {
 		switch (c) {
+			
+			case 'N':
+				if (optarg == NULL) {
+					osp_data.noise_estimation_type = 3;
+					printf("Cohen & Berdugo MCRA Noise Estimation method chosen as default\n");
+//                    sampling_frequency = SAMPLE_RATE;
+					break;
+					
+				}
+				noise_estimation_type = (unsigned char)strtol(optarg, (char **)NULL, 10);
+				osp_data.noise_estimation_type = noise_estimation_type;
+				if(noise_estimation_type == 0) {
+					printf("Noise estimation disabled\n");
+				}
+				else if (noise_estimation_type == 1){
+					printf("Arslan Noise Estimation method chosen\n");
+				}
+				else if (noise_estimation_type == 2){
+					printf("Hirsch & Ehrlicher Noise Estimation method chosen\n");
+				}
+				else if (noise_estimation_type == 3){
+					printf("Cohen & Berdugo MCRA Noise Estimation method chosen\n");
+				}
+				else{
+					osp_data.noise_estimation_type = 3;
+					printf("Invalid entry for noise estimation, Cohen & Berdugo MCRA Noise Estimation method chosen by default\n");
+				}
+				break;
+			case 'S':
+				if (optarg == NULL) {
+					osp_data.spectral_subtraction = 0;
+					printf("Spectral subtraction for speech enhancement disabled\n");
+//                    sampling_frequency = SAMPLE_RATE;
+					break;
+					
+				}
+				spectral_subtraction = (unsigned char)strtol(optarg, (char **)NULL, 10);
+				osp_data.spectral_subtraction = spectral_subtraction;
+				if(spectral_subtraction == 0) {
+					printf("Spectral subtraction for speech enhancement disabled\n");
+				}
+				else if (spectral_subtraction == 1){
+					printf("Spectral subtraction enabled\n");
+				}
+				else{
+					osp_data.spectral_subtraction = 0;
+					printf("Invalid entry for Spectral subtraction, Spectral subtraction disabled by default\n");
+				}
+				break;
 			case 'M':
 				ansi_test_onoff = (unsigned char)strtol(optarg, (char **)NULL, 10);
 				if(ansi_test_onoff == 0) {
@@ -1102,26 +1192,31 @@ int main(int argc, char **argv)
 				attenuation_factor = log2lin(attenuation_factor);
 				printf("Attenuation factor is %f\n", attenuation_factor);
 				break;
-//			case 'l':
-//				if (strcmp(optarg, "NULL") == 0 || strcmp(optarg, "null") == 0) {
-//					printf("Loopback mode specified, using no file, just empty buffers\n");
-//					run_loopback_null(10000, FRAMES_PER_BUFFER);
-//				} else {
-//					printf("Loopback mode specified, setting up file %s\n", optarg);
-//					file_loopback_run(optarg, "output_file_test", 96);
-//				}
-//				break;
-//			case 'p':
-//				if (strcmp(optarg, "NULL") == 0 || strcmp(optarg, "null") == 0) {
-//					printf("Portaudio loopback mode specified, using no file, just empty buffers\n");
-//				} else {
-//					if (run_pa_loopback(SAMPLE_RATE, FRAMES_PER_BUFFER,
-//															optarg, "output_file_pa") < 0) {
-//						printf("There was an error running the PA mode with files\n");
-//					}
-//					printf("Portaudio loopback mode specified, setting up file %s\n", optarg);
-//				}
-//				break;
+//            case 'l':
+//                if (strcmp(optarg, "NULL") == 0 || strcmp(optarg, "null") == 0) {
+//                    printf("Loopback mode specified, using no file, just empty buffers\n");
+//                    run_loopback_null(10000, FRAMES_PER_BUFFER);
+//                } else {
+//                    printf("Loopback mode specified, setting up file %s\n", optarg);
+//                    tcp_mode = 2;
+////                    strcpy (file_path, optarg);
+////                    printf("Is string copied: %s tcp: %d\n",file_path,tcp_mode);
+//                    //                    file_loopback_run(optarg, "output_file_test", 96, &osp_data);
+//                    //                    file_loopback_4afc(optarg);
+//                    
+//                }
+//                break;
+//            case 'p':
+//                if (strcmp(optarg, "NULL") == 0 || strcmp(optarg, "null") == 0) {
+//                    printf("Portaudio loopback mode specified, using no file, just empty buffers\n");
+//                } else {
+//                    if (run_pa_loopback(SAMPLE_RATE, FRAMES_PER_BUFFER,
+//                                                            optarg, "output_file_pa", &osp_data) < 0) {
+//                        printf("There was an error running the PA mode with files\n");
+//                    }
+//                    printf("Portaudio loopback mode specified, setting up file %s\n", optarg);
+//                }
+//                break;
 			case 't':
 				printf("Using TCP daemon mode\n");
 				tcp_mode = 1;
@@ -1139,9 +1234,9 @@ int main(int argc, char **argv)
 					printf("No argument for AFC adaptation type, setting to SLMS\n");
 					adaptation_type = 2;
 				}
-
-				adaptation_type = (unsigned char)strtol(optarg, (char **)NULL, 10);
-				switch (adaptation_type) {
+				
+				osp_data.feedback_algorithm_type = (unsigned char)strtol(optarg, (char **)NULL, 10);
+				switch (osp_data.feedback_algorithm_type) {
 					case 0:
 						printf("Setting adaptation type to FXLMS\n");
 						break;
@@ -1163,7 +1258,7 @@ int main(int argc, char **argv)
 	}
 
 	// Initialize osp stuff
-	if (osp_init(FRAME_SIZE, SAMPLE_RATE, adaptation_type) < 0) {
+	if (osp_init(FRAME_SIZE, SAMPLE_RATE, &osp_data) < 0) {
 		printf("Error initializing osp\n");
 		return -1;
 	}

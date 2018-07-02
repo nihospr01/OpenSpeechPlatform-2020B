@@ -37,7 +37,8 @@ typedef struct osp_tcp_t *Osp_tcp;
 #define OSP_REQ_GET_NUM_BANDS	5
 #define OSP_DISCONNECT			6
 #define OSP_REQ_LAST			7	///< This exists so we can test if an inc packet is one we recognize
-#define READ_REQUEST_LEN_JSON 36
+
+#define READ_REQUEST_LEN_JSON 32
 #define USER_LEN_JSON 8
 #define USER_JSON 10
 #define HA_STATE_JSON 257
