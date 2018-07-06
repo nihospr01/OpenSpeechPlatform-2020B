@@ -29,7 +29,7 @@ set(SOURCE_FILES main.c logger.c osp-libs/afc/afc.c osp-libs/afc/circular_buffer
         osp-libs/array_utilities/array_utilities.c osp-libs/beam_forming/beam_forming.c osp-libs/beam_forming/delay_line.c
         osp-libs/filter/filter.c osp-libs/osp_process/osp_process.c osp-libs/osp_process/utilities.c osp-libs/osp_tcp/osp_tcp.c
         osp-libs/osp_tcp/tcplib.c osp-libs/peak_detect/peak_detect.c osp-libs/resample/resample.c osp-libs/wdrc/mpo.c
-        osp-libs/wdrc/wdrc.c osp-libs/wdrc/wdrc_mpo_support.c osp-libs/speech_enhancement/speech_enhancement.c)
+        osp-libs/wdrc/wdrc.c osp-libs/wdrc/wdrc_mpo_support.c osp-libs/speech_enhancement/speech_enhancement.c osp-libs/osp_tcp/jsmn.c)
 
 
 include_directories(/usr/include osp-libs /usr/local/include osp-libs/afc osp-libs/array_utilities osp-libs/beam_forming osp-libs/common
