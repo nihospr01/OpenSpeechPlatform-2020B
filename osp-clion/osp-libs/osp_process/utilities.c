@@ -19,15 +19,6 @@ int load_filter_taps(const char *file, float *taps, int len)
 {
 	FILE *in;
 	int size;
-	
-	//const char default_filter_path_base[PATH_MAX] = "/usr/local/etc/osp";
-	
-//	const char* filter_path_base;
-//	filter_path_base = getenv("OSP_FILTER_PATH_BASE");
-//	if (filter_path_base == NULL) {
-//		filter_path_base = default_filter_path_base;
-//	}
-	
 	char filter_file[PATH_MAX] = "";
 	printf("Base:%s\n", OSP_FILTER_PATH_BASE);
 	sprintf(filter_file, "%s/%s",OSP_FILTER_PATH_BASE, file);

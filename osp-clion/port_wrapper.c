@@ -103,7 +103,7 @@ static int _internal_pa_init(PaStreamParameters *inputParameters, PaStreamParame
         printf("device %d  = %s\n", i, deviceInfo->name);
     }
 
-    inputParameters->device = Pa_GetDefaultInputDevice(); /* default input device */
+    inputParameters->device = 2; /* default input device */
     printf("Input device # %d.\n", inputParameters->device);
     printf("Input LL: %g s\n", Pa_GetDeviceInfo(inputParameters->device)->defaultLowInputLatency);
     printf("Input HL: %g s\n", Pa_GetDeviceInfo(inputParameters->device)->defaultHighInputLatency);
@@ -114,7 +114,7 @@ static int _internal_pa_init(PaStreamParameters *inputParameters, PaStreamParame
 
     inputParameters->hostApiSpecificStreamInfo = NULL;
 
-    outputParameters->device = Pa_GetDefaultOutputDevice(); /* default output device */
+    outputParameters->device = 1; /* default output device */
     printf("Output device # %d.\n", outputParameters->device);
     printf("Output LL: %g s\n", Pa_GetDeviceInfo( outputParameters->device)->defaultLowOutputLatency);
     printf("Output HL: %g s\n", Pa_GetDeviceInfo( outputParameters->device)->defaultHighOutputLatency);
