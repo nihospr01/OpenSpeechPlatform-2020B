@@ -32,7 +32,7 @@
 #define NUM_BANDS			6	///< Number of Sub-Bands
 #define BAND_FILT_LEN 		193	///< Sub-Band filter tap length
 #define RESAMP_96_32_TAPS	25	///< Number of taps for decimation filter in resampler.c
-#define RESAMP_32_96_TAPS	25	///< Number of taps for interpolation filter in resampler.c
+#define RESAMP_32_96_TAPS	24	///< Number of taps for interpolation filter in resampler.c
 #define RESAMP_48_32_TAPS	25	///< Number of taps for decimation filter in resampler.c for 48 to 32 kHz
 #define RESAMP_32_48_TAPS	25	///< Number of taps for interpolation filter in resampler.c for 32 to 48 kHz
 #define SYNTHETIC_TAP_LEN	525	///< Synthetic feedback filter tap length

@@ -1,4 +1,4 @@
-.TH "libosp/afc/afc.c" 3 "Thu Jun 14 2018" "Open Speech Platform" \" -*- nroff -*-
+.TH "libosp/afc/afc.c" 3 "Mon Oct 8 2018" "Open Speech Platform" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,6 +6,8 @@ libosp/afc/afc.c
 .SH SYNOPSIS
 .br
 .PP
+\fC#include <stdio\&.h>\fP
+.br
 \fC#include <stdlib\&.h>\fP
 .br
 \fC#include <string\&.h>\fP
@@ -50,6 +52,9 @@ libosp/afc/afc.c
 .RI "static void \fBget_step_size_weights\fP (float *taps, float *step_size_weights, float alpha, float beta, float delta, int len)"
 .br
 .RI "Update the proportionate matrix (P(n)) diagonal matrix for PNLMS adaptation\&. "
+.ti -1c
+.RI "static void \fBget_step_size_weights_slms\fP (float *taps, float *step_size_weights, float p, float c, int len)"
+.br
 .ti -1c
 .RI "\fBAfc\fP \fBafc_init\fP (const float *afc_filter_taps, int afc_filter_tap_len, const float *prefilter_taps, int prefilter_tap_len, const float *band_limited_filter_taps, int band_limited_filter_tap_len, int frame_size, unsigned int adaptation_type, float afc_mu, float afc_rho)"
 .br
@@ -240,6 +245,8 @@ Update the proportionate matrix (P(n)) diagonal matrix for PNLMS adaptation\&. G
 \fIlen\fP Length of the AFC filter 
 .RE
 .PP
+
+.SS "static void get_step_size_weights_slms (float * taps, float * step_size_weights, float p, float c, int len)\fC [static]\fP"
 
 .SS "static void update_u_prefiltered_accumulated (float * u_prefiltered_accumulated, float * new_frame, int u_prefiltered_acc_len, int new_frame_len)\fC [static]\fP"
 

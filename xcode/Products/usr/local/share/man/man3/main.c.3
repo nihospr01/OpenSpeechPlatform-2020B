@@ -1,4 +1,4 @@
-.TH "osp/main.c" 3 "Thu Jun 14 2018" "Open Speech Platform" \" -*- nroff -*-
+.TH "osp/main.c" 3 "Mon Oct 8 2018" "Open Speech Platform" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -82,7 +82,7 @@ osp/main.c
 .RI "static float \fBlog2lin\fP (float db)"
 .br
 .ti -1c
-.RI "static void \fBusage\fP (const char *s)"
+.RI "static void \fBusage\fP ()"
 .br
 .ti -1c
 .RI "static void * \fBannounce_presence\fP (void *tid)"
@@ -121,6 +121,9 @@ osp/main.c
 .RI "static int \fBrun_pa_tcp\fP (\fBosp_user_data\fP *osp_data, unsigned int samp_rate, unsigned int frames_per_buffer, float attenuation_factor)"
 .br
 .ti -1c
+.RI "static int \fBplayback_file\fP (\fBosp_user_data\fP *osp_data, unsigned int samp_rate, unsigned int frames_per_buffer, float attenuation_factor)"
+.br
+.ti -1c
 .RI "static int \fBrun_pa_tcp_4afc\fP (\fBosp_user_data\fP *osp_data, unsigned int samp_rate, unsigned int frames_per_buffer, float attenuation_factor)"
 .br
 .ti -1c
@@ -132,6 +135,9 @@ osp/main.c
 .in +1c
 .ti -1c
 .RI "char \fBfilepath_4afc\fP [512]"
+.br
+.ti -1c
+.RI "char \fBfilepath_argument\fP [512]"
 .br
 .ti -1c
 .RI "static \fBResample\fP \fBresampleL\fP"
@@ -176,6 +182,8 @@ osp/main.c
 
 .SS "int main (int argc, char ** argv)"
 
+.SS "static int playback_file (\fBosp_user_data\fP * osp_data, unsigned int samp_rate, unsigned int frames_per_buffer, float attenuation_factor)\fC [static]\fP"
+
 .SS "static void run_loopback (\fBosp_user_data\fP * osp_data, float * inL, float * inR, float * outL, float * outR, size_t len)\fC [static]\fP"
 
 .SS "static void run_loopback_null (unsigned long count, unsigned int frames_per_buffer)\fC [static]\fP"
@@ -188,11 +196,13 @@ osp/main.c
 
 .SS "static int run_pa_tcp_4afc (\fBosp_user_data\fP * osp_data, unsigned int samp_rate, unsigned int frames_per_buffer, float attenuation_factor)\fC [static]\fP"
 
-.SS "static void usage (const char * s)\fC [inline]\fP, \fC [static]\fP"
+.SS "static void usage ()\fC [inline]\fP, \fC [static]\fP"
 
 .SH "Variable Documentation"
 .PP 
 .SS "char filepath_4afc[512]"
+
+.SS "char filepath_argument[512]"
 
 .SS "\fBResample\fP resampleL\fC [static]\fP"
 

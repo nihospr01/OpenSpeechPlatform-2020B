@@ -11,5 +11,6 @@ var searchData=
   ['peak_5fdetect_5fdestroy',['peak_detect_destroy',['../peak__detect_8c.html#a0012f353d07e27778b050692205a717e',1,'peak_detect_destroy(Peak_detect pd):&#160;peak_detect.c'],['../peak__detect_8h.html#a0012f353d07e27778b050692205a717e',1,'peak_detect_destroy(Peak_detect pd):&#160;peak_detect.c']]],
   ['peak_5fdetect_5finit',['peak_detect_init',['../peak__detect_8c.html#a1bb9895ff8c4b0457213e526fd4fab74',1,'peak_detect_init(float fsamp, unsigned int num_bands):&#160;peak_detect.c'],['../peak__detect_8h.html#a1bb9895ff8c4b0457213e526fd4fab74',1,'peak_detect_init(float fsamp, unsigned int num_bands):&#160;peak_detect.c']]],
   ['peak_5fto_5fspl',['peak_to_spl',['../peak__detect_8c.html#a28a24577ab91983936daee15fd88af54',1,'peak_to_spl(float *peak, float *pdb, size_t len):&#160;peak_detect.c'],['../peak__detect_8h.html#a28a24577ab91983936daee15fd88af54',1,'peak_to_spl(float *peak, float *pdb, size_t len):&#160;peak_detect.c']]],
+  ['playback_5ffile',['playback_file',['../main_8c.html#ab474a7b7ec06d48e6d807ac2c063cc96',1,'main.c']]],
   ['print_5fheader',['print_header',['../extract__bin_8c.html#a32f135f415257f8da944690bae0b5f16',1,'extract_bin.c']]]
 ];

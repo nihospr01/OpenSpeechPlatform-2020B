@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['c',['c',['../structafc__t.html#a7f14ee40f9a80693b671c16c526cf846',1,'afc_t']]],
   ['choose_5fsampling_5ffrequency',['choose_sampling_frequency',['../structosp__user__data__t.html#a7aac3aa1476589a9014fef82cbcc4c4c',1,'osp_user_data_t']]],
   ['circular_5fbuffer',['Circular_buffer',['../circular__buffer_8h.html#aa88184dd60879f696cb2e679d0e50b45',1,'circular_buffer.h']]],
   ['circular_5fbuffer_2ec',['circular_buffer.c',['../circular__buffer_8c.html',1,'']]],

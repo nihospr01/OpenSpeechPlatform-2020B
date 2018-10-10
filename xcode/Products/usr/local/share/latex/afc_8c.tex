@@ -1,5 +1,6 @@
 \hypertarget{afc_8c}{}\section{libosp/afc/afc.c File Reference}
 \label{afc_8c}\index{libosp/afc/afc.\+c@{libosp/afc/afc.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include $<$math.\+h$>$}\newline
@@ -32,6 +33,8 @@ static void \mbox{\hyperlink{afc_8c_a93d83559cbb9c271e3a8c55a67ffbd09}{update\+\
 \begin{DoxyCompactList}\small\item\em Updating u\+\_\+prefiltered\+\_\+accumulated buffer which is circular. \end{DoxyCompactList}\item 
 static void \mbox{\hyperlink{afc_8c_a4cfbda46d723acc3423af2483fa0f05a}{get\+\_\+step\+\_\+size\+\_\+weights}} (float $\ast$taps, float $\ast$step\+\_\+size\+\_\+weights, float alpha, float beta, float delta, int len)
 \begin{DoxyCompactList}\small\item\em Update the proportionate matrix (P(n)) diagonal matrix for P\+N\+L\+MS adaptation. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{afc_8c_a9c01d475143676e96ffc4e4ff1bdcf32}{get\+\_\+step\+\_\+size\+\_\+weights\+\_\+slms}} (float $\ast$taps, float $\ast$step\+\_\+size\+\_\+weights, float p, float c, int len)
+\item 
 \mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} \mbox{\hyperlink{afc_8c_abe05d4f7f9d83b91231162a853c8bfef}{afc\+\_\+init}} (const float $\ast$afc\+\_\+filter\+\_\+taps, int afc\+\_\+filter\+\_\+tap\+\_\+len, const float $\ast$prefilter\+\_\+taps, int prefilter\+\_\+tap\+\_\+len, const float $\ast$band\+\_\+limited\+\_\+filter\+\_\+taps, int band\+\_\+limited\+\_\+filter\+\_\+tap\+\_\+len, int frame\+\_\+size, unsigned int adaptation\+\_\+type, float afc\+\_\+mu, float afc\+\_\+rho)
 \begin{DoxyCompactList}\small\item\em Function to initialize the afc data struct. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{afc_8c_ac453a669837cff671fbe64d59da8fd03}{afc\+\_\+update\+\_\+taps}} (\mbox{\hyperlink{afc_8h_a18f5ff6b916f548f1d14d1e48ec23908}{Afc}} afc, float $\ast$s, float $\ast$e, size\+\_\+t frame\+\_\+size)
@@ -237,6 +240,12 @@ Get weights for all step sizes. Step sizes are different for each filter tap
 {\em len} & Length of the A\+FC filter \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{afc_8c_a9c01d475143676e96ffc4e4ff1bdcf32}\label{afc_8c_a9c01d475143676e96ffc4e4ff1bdcf32}} 
+\index{afc.\+c@{afc.\+c}!get\+\_\+step\+\_\+size\+\_\+weights\+\_\+slms@{get\+\_\+step\+\_\+size\+\_\+weights\+\_\+slms}}
+\index{get\+\_\+step\+\_\+size\+\_\+weights\+\_\+slms@{get\+\_\+step\+\_\+size\+\_\+weights\+\_\+slms}!afc.\+c@{afc.\+c}}
+\subsubsection{\texorpdfstring{get\+\_\+step\+\_\+size\+\_\+weights\+\_\+slms()}{get\_step\_size\_weights\_slms()}}
+{\footnotesize\ttfamily static void get\+\_\+step\+\_\+size\+\_\+weights\+\_\+slms (\begin{DoxyParamCaption}\item[{float $\ast$}]{taps,  }\item[{float $\ast$}]{step\+\_\+size\+\_\+weights,  }\item[{float}]{p,  }\item[{float}]{c,  }\item[{int}]{len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
 \mbox{\Hypertarget{afc_8c_a93d83559cbb9c271e3a8c55a67ffbd09}\label{afc_8c_a93d83559cbb9c271e3a8c55a67ffbd09}} 
 \index{afc.\+c@{afc.\+c}!update\+\_\+u\+\_\+prefiltered\+\_\+accumulated@{update\+\_\+u\+\_\+prefiltered\+\_\+accumulated}}
 \index{update\+\_\+u\+\_\+prefiltered\+\_\+accumulated@{update\+\_\+u\+\_\+prefiltered\+\_\+accumulated}!afc.\+c@{afc.\+c}}

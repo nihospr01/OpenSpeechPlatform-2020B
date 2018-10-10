@@ -114,8 +114,8 @@ int osp_tcp_read_req(Osp_tcp osp_tcp)
 	
 	jsmn_init(&p);
 	int req[2];
-	int r,i,j;
-	int length_input;
+	int r,i;
+//	int length_input;
 	char JSON_STRING[512];
 	
 	// Read in the request byte
@@ -508,7 +508,7 @@ ssize_t osp_4afc_read_values(Osp_tcp osp_tcp, char *file_path, unsigned int size
 	jsmn_parser p;
 	jsmntok_t t[128]; /* We expect no more than 128 tokens */
 	jsmn_init(&p);
-	int r,i,j;
+	int r,i;
 	char JSON_STRING_UPDATE[5000];
 	// Read in the request byte
 	

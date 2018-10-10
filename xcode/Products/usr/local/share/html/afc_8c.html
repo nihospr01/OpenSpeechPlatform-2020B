@@ -92,7 +92,8 @@ $(document).ready(function(){initNavTree('afc_8c.html','');});
 <div class="title">afc.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;math.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="afc_8h_source.html">afc.h</a>&quot;</code><br />
@@ -102,8 +103,7 @@ $(document).ready(function(){initNavTree('afc_8c.html','');});
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for afc.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="afc_8c__incl.svg" width="100%" height="382"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="afc_8c__incl.svg" width="100%" height="382"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -127,6 +127,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a4cfbda46d723acc3423af2483fa0f05a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="afc_8c.html#a4cfbda46d723acc3423af2483fa0f05a">get_step_size_weights</a> (float *taps, float *step_size_weights, float alpha, float beta, float delta, int len)</td></tr>
 <tr class="memdesc:a4cfbda46d723acc3423af2483fa0f05a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the proportionate matrix (P(n)) diagonal matrix for PNLMS adaptation.  <a href="#a4cfbda46d723acc3423af2483fa0f05a">More...</a><br /></td></tr>
 <tr class="separator:a4cfbda46d723acc3423af2483fa0f05a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c01d475143676e96ffc4e4ff1bdcf32"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="afc_8c.html#a9c01d475143676e96ffc4e4ff1bdcf32">get_step_size_weights_slms</a> (float *taps, float *step_size_weights, float p, float c, int len)</td></tr>
+<tr class="separator:a9c01d475143676e96ffc4e4ff1bdcf32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe05d4f7f9d83b91231162a853c8bfef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="afc_8h.html#a18f5ff6b916f548f1d14d1e48ec23908">Afc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="afc_8c.html#abe05d4f7f9d83b91231162a853c8bfef">afc_init</a> (const float *afc_filter_taps, int afc_filter_tap_len, const float *prefilter_taps, int prefilter_tap_len, const float *band_limited_filter_taps, int band_limited_filter_tap_len, int frame_size, unsigned int adaptation_type, float afc_mu, float afc_rho)</td></tr>
 <tr class="memdesc:abe05d4f7f9d83b91231162a853c8bfef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to initialize the afc data struct.  <a href="#abe05d4f7f9d83b91231162a853c8bfef">More...</a><br /></td></tr>
 <tr class="separator:abe05d4f7f9d83b91231162a853c8bfef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -648,6 +650,60 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a9c01d475143676e96ffc4e4ff1bdcf32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c01d475143676e96ffc4e4ff1bdcf32">&#9670;&nbsp;</a></span>get_step_size_weights_slms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void get_step_size_weights_slms </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>taps</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>step_size_weights</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

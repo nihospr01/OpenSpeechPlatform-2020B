@@ -1,4 +1,4 @@
-.TH "afc_t" 3 "Thu Jun 14 2018" "Open Speech Platform" \" -*- nroff -*-
+.TH "afc_t" 3 "Mon Oct 8 2018" "Open Speech Platform" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -66,6 +66,14 @@ afc_t \- AFC data structure\&.
 .br
 .RI "Parameter for PNLMS\&. "
 .ti -1c
+.RI "float \fBp\fP"
+.br
+.RI "Parameter for SLMS\&. "
+.ti -1c
+.RI "float \fBc\fP"
+.br
+.RI "Parameter for SLMS\&. "
+.ti -1c
 .RI "float * \fBu_prefiltered_accumulated\fP"
 .br
 .RI "AFC_NUM_FRAMES frames accumulated values of pre-filtered output of u(n)\&. i\&.e\&. u_f(n) "
@@ -98,6 +106,10 @@ Band-limited filter H(z)
 
 .PP
 Parameter for PNLMS\&. 
+.SS "float afc_t::c"
+
+.PP
+Parameter for SLMS\&. 
 .SS "float afc_t::delta"
 
 .PP
@@ -110,6 +122,10 @@ Number of samples in the current frame\&.
 
 .PP
 Step size parameter\&. 
+.SS "float afc_t::p"
+
+.PP
+Parameter for SLMS\&. 
 .SS "float afc_t::power_estimate"
 
 .PP

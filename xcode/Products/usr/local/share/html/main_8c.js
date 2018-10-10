@@ -15,14 +15,16 @@ var main_8c =
     [ "init_pa", "main_8c.html#a86ff0d7ff30269dba677b358fcabc387", null ],
     [ "log2lin", "main_8c.html#ab352b1ff7a758e40b3072874726eba4c", null ],
     [ "main", "main_8c.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
+    [ "playback_file", "main_8c.html#ab474a7b7ec06d48e6d807ac2c063cc96", null ],
     [ "run_loopback", "main_8c.html#abbb0d46c0f00de5ea4ce0c647ceac666", null ],
     [ "run_loopback_null", "main_8c.html#a4db999af4611cf4620ccec2ebf6e6a0d", null ],
     [ "run_pa_key", "main_8c.html#a1eb914c7767ba47fd3463871577c3662", null ],
     [ "run_pa_loopback", "main_8c.html#ab8a38f850fea34a115fda3140af8b774", null ],
     [ "run_pa_tcp", "main_8c.html#a5c1a351ba62dfc0d60b39c5382c38636", null ],
     [ "run_pa_tcp_4afc", "main_8c.html#a270935c92a12999bc75deb0ec045a4cd", null ],
-    [ "usage", "main_8c.html#a31293479a2742f1ac5a586f181c09d3d", null ],
+    [ "usage", "main_8c.html#a64a6014565bb3e03294ec4a952d5add0", null ],
     [ "filepath_4afc", "main_8c.html#acd94b84d1b851e50e9e761af568d00cd", null ],
+    [ "filepath_argument", "main_8c.html#a7ee64d80fc55ab4debe40586456af5f6", null ],
     [ "resampleL", "main_8c.html#ab71b1ae937e7216d3836e92522723863", null ],
     [ "resampleR", "main_8c.html#a9b50a346e168b51231ee3e4d6ad9fd2d", null ]
 ];

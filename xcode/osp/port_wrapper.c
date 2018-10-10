@@ -53,42 +53,65 @@ static int _internal_pa_init(PaStreamParameters *inputParameters, PaStreamParame
 	int numDevices;
 	int i;
 	
-	float resample_32_96_with_mic_calibration_left_ear[RESAMP_32_96_TAPS_MIC_CALIB];
-	float resample_32_96_with_mic_calibration_right_ear[RESAMP_32_96_TAPS_MIC_CALIB];
-	float resample_96_32_with_mic_calibration_left_ear[RESAMP_96_32_TAPS_MIC_CALIB];
-	float resample_96_32_with_mic_calibration_right_ear[RESAMP_96_32_TAPS_MIC_CALIB];
+//	float resample_32_96_with_mic_calibration_left_ear[RESAMP_32_96_TAPS_MIC_CALIB];
+//	float resample_32_96_with_mic_calibration_right_ear[RESAMP_32_96_TAPS_MIC_CALIB];
+//	float resample_96_32_with_mic_calibration_left_ear[RESAMP_96_32_TAPS_MIC_CALIB];
+//	float resample_96_32_with_mic_calibration_right_ear[RESAMP_96_32_TAPS_MIC_CALIB];
 	
-	//
-	// Load the resampler taps
-	
-	if (load_filter_taps("resample_32_96_with_mic_calibration_left_ear.flt", resample_32_96_with_mic_calibration_left_ear, RESAMP_32_96_TAPS_MIC_CALIB) < 0) {
+	float resample_32_96_taps[RESAMP_32_96_TAPS];
+	float resample_96_32_taps[RESAMP_96_32_TAPS];
+		
+	if (load_filter_taps("resample_32_96.flt", resample_32_96_taps, RESAMP_32_96_TAPS) < 0) {
 		return -1;
 	}
 	
-	if (load_filter_taps("resample_32_96_with_mic_calibration_right_ear.flt", resample_32_96_with_mic_calibration_right_ear, RESAMP_32_96_TAPS_MIC_CALIB) < 0) {
-		return -1;
-	}
-	
-	if (load_filter_taps("resample_96_32_with_mic_calibration_left_ear.flt", resample_96_32_with_mic_calibration_left_ear, RESAMP_96_32_TAPS_MIC_CALIB) < 0) {
-		return -1;
-	}
-	
-	if (load_filter_taps("resample_96_32_with_mic_calibration_right_ear.flt", resample_96_32_with_mic_calibration_right_ear, RESAMP_96_32_TAPS_MIC_CALIB) < 0) {
+	if (load_filter_taps("resample_96_32.flt", resample_96_32_taps, RESAMP_96_32_TAPS) < 0) {
 		return -1;
 	}
 	
 	// Initialize resampler Left
-	if ((resampleL = resample_init(resample_32_96_with_mic_calibration_left_ear, ARRAY_SIZE(resample_32_96_with_mic_calibration_left_ear),
-																 resample_96_32_with_mic_calibration_left_ear, ARRAY_SIZE(resample_96_32_with_mic_calibration_left_ear))) == NULL) {
+	if ((resampleL = resample_init(resample_32_96_taps, ARRAY_SIZE(resample_32_96_taps),
+																 resample_96_32_taps, ARRAY_SIZE(resample_96_32_taps))) == NULL) {
 		return -1;
 	}
 	
 	// Initialize resampler Right
-	if ((resampleR = resample_init(resample_32_96_with_mic_calibration_right_ear, ARRAY_SIZE(resample_32_96_with_mic_calibration_right_ear),
-																 resample_96_32_with_mic_calibration_right_ear, ARRAY_SIZE(resample_96_32_with_mic_calibration_right_ear))) == NULL) {
+	if ((resampleR = resample_init(resample_32_96_taps, ARRAY_SIZE(resample_32_96_taps),
+																 resample_96_32_taps, ARRAY_SIZE(resample_96_32_taps))) == NULL) {
 		return -1;
 	}
 	
+	//
+	// Load the resampler taps
+	
+//	if (load_filter_taps("resample_32_96_with_mic_calibration_left_ear.flt", resample_32_96_with_mic_calibration_left_ear, RESAMP_32_96_TAPS_MIC_CALIB) < 0) {
+//		return -1;
+//	}
+//
+//	if (load_filter_taps("resample_32_96_with_mic_calibration_right_ear.flt", resample_32_96_with_mic_calibration_right_ear, RESAMP_32_96_TAPS_MIC_CALIB) < 0) {
+//		return -1;
+//	}
+//
+//	if (load_filter_taps("resample_96_32_with_mic_calibration_left_ear.flt", resample_96_32_with_mic_calibration_left_ear, RESAMP_96_32_TAPS_MIC_CALIB) < 0) {
+//		return -1;
+//	}
+//
+//	if (load_filter_taps("resample_96_32_with_mic_calibration_right_ear.flt", resample_96_32_with_mic_calibration_right_ear, RESAMP_96_32_TAPS_MIC_CALIB) < 0) {
+//		return -1;
+//	}
+//
+//	// Initialize resampler Left
+//	if ((resampleL = resample_init(resample_32_96_with_mic_calibration_left_ear, ARRAY_SIZE(resample_32_96_with_mic_calibration_left_ear),
+//																 resample_96_32_with_mic_calibration_left_ear, ARRAY_SIZE(resample_96_32_with_mic_calibration_left_ear))) == NULL) {
+//		return -1;
+//	}
+//
+//	// Initialize resampler Right
+//	if ((resampleR = resample_init(resample_32_96_with_mic_calibration_right_ear, ARRAY_SIZE(resample_32_96_with_mic_calibration_right_ear),
+//																 resample_96_32_with_mic_calibration_right_ear, ARRAY_SIZE(resample_96_32_with_mic_calibration_right_ear))) == NULL) {
+//		return -1;
+//	}
+//
 	
 	// Init beam forming stuff
 	if ((beam_formL = beam_form_init(0, 1, sample_rate)) == NULL) {
@@ -280,8 +303,8 @@ static int pa_loopback_callback(const void *inputBuffer,
 		return paContinue;
 	}
 
-	ret = resample_96_32(resampleL, inL, inL32, frameCount);
-	resample_96_32(resampleR, inR, inR32, frameCount);
+	ret = resample_96_32(resampleL, &(loopback_data->file_ctx->inL[loopback_data->file_ctx->index]), inL32 , frameCount);
+	resample_96_32(resampleR, &(loopback_data->file_ctx->inR[loopback_data->file_ctx->index]), inR32,  frameCount);
 
 	if (loopback_data->osp_data->no_op) {
 		for (i = 0; i < ret; i++) {
@@ -302,8 +325,8 @@ static int pa_loopback_callback(const void *inputBuffer,
 
 	// Put the input file data from the file context structure onto the output buffer
 	for (i = 0; i < (int)frameCount; i++, loopback_data->file_ctx->index++) {
-		outL[i] = loopback_data->file_ctx->inL[loopback_data->file_ctx->index];
-		outR[i] = loopback_data->file_ctx->inR[loopback_data->file_ctx->index];
+		outL[i] = loopback_data->file_ctx->outL[loopback_data->file_ctx->index];
+		outR[i] = loopback_data->file_ctx->outR[loopback_data->file_ctx->index];
 	}
 
 	// Data gets put onto the file output buffer in resampling. Need to check if we're done.

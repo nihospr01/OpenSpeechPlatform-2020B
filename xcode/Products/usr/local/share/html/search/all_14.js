@@ -7,7 +7,7 @@ var searchData=
   ['upa',['upa',['../structafc__t.html#a11328ef1f3d92c69c404c5df7761116a',1,'afc_t']]],
   ['update_5fu_5fprefiltered_5faccumulated',['update_u_prefiltered_accumulated',['../afc_8c.html#a93d83559cbb9c271e3a8c55a67ffbd09',1,'afc.c']]],
   ['upsample',['upsample',['../structresample__t.html#a7f06c113fbaa88f3f943e84358d05e45',1,'resample_t']]],
-  ['usage',['usage',['../main_8c.html#a31293479a2742f1ac5a586f181c09d3d',1,'main.c']]],
+  ['usage',['usage',['../main_8c.html#a64a6014565bb3e03294ec4a952d5add0',1,'main.c']]],
   ['user_5fdata',['user_data',['../structpa__user__data__t.html#afcb50245302828da62e070d923d145c3',1,'pa_user_data_t']]],
   ['user_5fjson',['USER_JSON',['../osp__tcp_8h.html#acbb575a53449acaade075615da61307d',1,'osp_tcp.h']]],
   ['user_5flen_5fjson',['USER_LEN_JSON',['../osp__tcp_8h.html#a094486f28d8cd6fca095dbbdaf670b7e',1,'osp_tcp.h']]],

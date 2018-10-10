@@ -11,7 +11,7 @@
  
  */
 
-
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
@@ -41,6 +41,8 @@ struct afc_t {
 	float rho;	///< Forgetting factor
 	float alpha;	///< Parameter for PNLMS
 	float beta;	///< Parameter for PNLMS
+	float p;	///< Parameter for SLMS
+	float c;	///< Parameter for SLMS
 	float *u_prefiltered_accumulated; ///< AFC_NUM_FRAMES frames accumulated values of pre-filtered output of u(n). i.e. u_f(n)
 	Circular_buffer upa;
 };
@@ -180,6 +182,18 @@ static void get_step_size_weights(float *taps, float *step_size_weights, float a
 	// array_multiply_const(step_size_weights, 1.0 / min_step_size_weights, len);
 }
 
+static void get_step_size_weights_slms(float *taps, float *step_size_weights, float p, float c, int len)
+{
+	int i;
+	float tmp = 0;
+	for(i = 0; i < len; i++) {
+		step_size_weights[i] = powf(fabsf(taps[i]) + c, 2-p);
+		// step_size_weights[i] = sqrt(fabsf(taps[i]) + c);
+	}
+	
+	tmp = 1.0 / array_mean(step_size_weights, len);
+	array_multiply_const(step_size_weights, tmp, len);
+}
 
 Afc afc_init(const float *afc_filter_taps, int afc_filter_tap_len,
 				const float *prefilter_taps, int prefilter_tap_len,
@@ -233,6 +247,8 @@ Afc afc_init(const float *afc_filter_taps, int afc_filter_tap_len,
 	obj->rho = afc_rho;
 	obj->alpha = 0;
 	obj->beta = 5;
+	obj->c = 1e-6;
+	obj->p = 1.5;
 
 	printf("\nmu initial value = %f\n",obj->mu);
 	printf("\nrho initial value = %f\n",obj->rho);
@@ -299,15 +315,20 @@ int afc_update_taps(Afc afc, float *s, float *e, size_t frame_size)
 	filter_get_taps(afc->afc_filter, afc_filter_taps);
 
 	switch(afc->adaptation_type) {
-		// FXLMS
+			// FXLMS
 		case 0:
 			break;
-		// PNLMS
+			// PNLMS
 		case 1:
-			default:
 			get_step_size_weights(afc_filter_taps, step_size_weights, afc->alpha, afc->beta, afc->delta, AFC_FILTER_TAP_LEN);
 			array_element_multiply_array(afc_filter_update, step_size_weights, ARRAY_SIZE(afc_filter_update));
+			break;
 			
+			// SLMS
+		case 2:
+		default:
+			get_step_size_weights_slms(afc_filter_taps, step_size_weights, afc->p, afc->c, AFC_FILTER_TAP_LEN);
+			array_element_multiply_array(afc_filter_update, step_size_weights, ARRAY_SIZE(afc_filter_update));
 	}
 
 	// Compute the updated afc filter taps
