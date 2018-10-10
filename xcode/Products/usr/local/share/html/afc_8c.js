@@ -10,5 +10,6 @@ var afc_8c =
     [ "compute_gradient_upa", "afc_8c.html#a1eeff5119c14cd963fa967bd209d91d5", null ],
     [ "DSPF_sp_fircirc_2", "afc_8c.html#a66ccd7a4405272de4401221d1028b7d2", null ],
     [ "get_step_size_weights", "afc_8c.html#a4cfbda46d723acc3423af2483fa0f05a", null ],
+    [ "get_step_size_weights_slms", "afc_8c.html#a9c01d475143676e96ffc4e4ff1bdcf32", null ],
     [ "update_u_prefiltered_accumulated", "afc_8c.html#a93d83559cbb9c271e3a8c55a67ffbd09", null ]
 ];

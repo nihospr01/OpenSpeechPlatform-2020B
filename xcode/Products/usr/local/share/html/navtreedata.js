@@ -50,8 +50,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "afc_8c.html",
-"libosp_2osp__process_2logger_8h_source.html",
-"structosp__tcp__t.html#a944dbf95de27ec773bf9b4e169a30661"
+"libosp_2osp__process_2logger_8h.html#aed1edcc4c4106ded407551794cd9d81d",
+"structjsmntok__t.html#a8ac3694b7335456c8e602197778883db"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

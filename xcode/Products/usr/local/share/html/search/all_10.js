@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['p',['p',['../structafc__t.html#ae93bcaea87a0f75300fc91ea8d50b2ad',1,'afc_t']]],
   ['pa_5faux_5fdata',['pa_aux_data',['../constants_8h.html#add46628e302aedde68d37aea654eda24',1,'constants.h']]],
   ['pa_5faux_5fdata_5ft',['pa_aux_data_t',['../structpa__aux__data__t.html',1,'']]],
   ['pa_5fclose',['pa_close',['../port__wrapper_8c.html#aea4b670fd6e019f53d12d48176593231',1,'pa_close():&#160;port_wrapper.c'],['../port__wrapper_8h.html#aea4b670fd6e019f53d12d48176593231',1,'pa_close():&#160;port_wrapper.c']]],
@@ -16,13 +17,14 @@ var searchData=
   ['pa_5fuser_5fdata_5ft',['pa_user_data_t',['../structpa__user__data__t.html',1,'']]],
   ['pdl',['pdL',['../osp__process_8c.html#a3c18e558d4aff166f6be1cd1fa271ff1',1,'osp_process.c']]],
   ['pdr',['pdR',['../osp__process_8c.html#aa630bd455bf668501cc2c91822cb4d2b',1,'osp_process.c']]],
-  ['peak_5fdetect',['Peak_detect',['../peak__detect_8h.html#a152d14cd03f6e1ac947c95921da5507c',1,'Peak_detect():&#160;peak_detect.h'],['../peak__detect_8c.html#a3d0ec744b3cd1bf9acd7598def47748c',1,'peak_detect(Peak_detect pd, float *input, size_t len, float *peak, float attack_time, float release_time, int band_num):&#160;peak_detect.c'],['../peak__detect_8h.html#a3d0ec744b3cd1bf9acd7598def47748c',1,'peak_detect(Peak_detect pd, float *input, size_t len, float *peak, float attack_time, float release_time, int band_num):&#160;peak_detect.c']]],
+  ['peak_5fdetect',['peak_detect',['../peak__detect_8c.html#a3d0ec744b3cd1bf9acd7598def47748c',1,'peak_detect(Peak_detect pd, float *input, size_t len, float *peak, float attack_time, float release_time, int band_num):&#160;peak_detect.c'],['../peak__detect_8h.html#a3d0ec744b3cd1bf9acd7598def47748c',1,'peak_detect(Peak_detect pd, float *input, size_t len, float *peak, float attack_time, float release_time, int band_num):&#160;peak_detect.c'],['../peak__detect_8h.html#a152d14cd03f6e1ac947c95921da5507c',1,'Peak_detect():&#160;peak_detect.h']]],
   ['peak_5fdetect_2ec',['peak_detect.c',['../peak__detect_8c.html',1,'']]],
   ['peak_5fdetect_2eh',['peak_detect.h',['../peak__detect_8h.html',1,'']]],
   ['peak_5fdetect_5fdestroy',['peak_detect_destroy',['../peak__detect_8c.html#a0012f353d07e27778b050692205a717e',1,'peak_detect_destroy(Peak_detect pd):&#160;peak_detect.c'],['../peak__detect_8h.html#a0012f353d07e27778b050692205a717e',1,'peak_detect_destroy(Peak_detect pd):&#160;peak_detect.c']]],
   ['peak_5fdetect_5finit',['peak_detect_init',['../peak__detect_8c.html#a1bb9895ff8c4b0457213e526fd4fab74',1,'peak_detect_init(float fsamp, unsigned int num_bands):&#160;peak_detect.c'],['../peak__detect_8h.html#a1bb9895ff8c4b0457213e526fd4fab74',1,'peak_detect_init(float fsamp, unsigned int num_bands):&#160;peak_detect.c']]],
   ['peak_5fdetect_5ft',['peak_detect_t',['../structpeak__detect__t.html',1,'']]],
   ['peak_5fto_5fspl',['peak_to_spl',['../peak__detect_8c.html#a28a24577ab91983936daee15fd88af54',1,'peak_to_spl(float *peak, float *pdb, size_t len):&#160;peak_detect.c'],['../peak__detect_8h.html#a28a24577ab91983936daee15fd88af54',1,'peak_to_spl(float *peak, float *pdb, size_t len):&#160;peak_detect.c']]],
+  ['playback_5ffile',['playback_file',['../main_8c.html#ab474a7b7ec06d48e6d807ac2c063cc96',1,'main.c']]],
   ['port',['port',['../structosp__tcp__t.html#a2b2fad6184d1ce632032645f85469657',1,'osp_tcp_t']]],
   ['port_5fwrapper_2ec',['port_wrapper.c',['../port__wrapper_8c.html',1,'']]],
   ['port_5fwrapper_2eh',['port_wrapper.h',['../port__wrapper_8h.html',1,'']]],

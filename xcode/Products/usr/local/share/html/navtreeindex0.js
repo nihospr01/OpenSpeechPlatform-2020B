@@ -6,7 +6,8 @@ var NAVTREEINDEX0 =
 "afc_8c.html#a3b8e35089fac94e704cd9b0a964b7202":[1,0,0,0,0,2],
 "afc_8c.html#a4cfbda46d723acc3423af2483fa0f05a":[1,0,0,0,0,9],
 "afc_8c.html#a66ccd7a4405272de4401221d1028b7d2":[1,0,0,0,0,8],
-"afc_8c.html#a93d83559cbb9c271e3a8c55a67ffbd09":[1,0,0,0,0,10],
+"afc_8c.html#a93d83559cbb9c271e3a8c55a67ffbd09":[1,0,0,0,0,11],
+"afc_8c.html#a9c01d475143676e96ffc4e4ff1bdcf32":[1,0,0,0,0,10],
 "afc_8c.html#aa954fa18c8519c3b191b6e7e0be8ff02":[1,0,0,0,0,6],
 "afc_8c.html#abe05d4f7f9d83b91231162a853c8bfef":[1,0,0,0,0,4],
 "afc_8c.html#ac453a669837cff671fbe64d59da8fd03":[1,0,0,0,0,5],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "libosp_2osp__process_2logger_8h.html#a77837c49da9b8b5b86bc5a0d11702b21":[1,0,0,5,1,6],
 "libosp_2osp__process_2logger_8h.html#aa9b914884d7e4c95be9e9cb2b99d385b":[1,0,0,5,1,5],
 "libosp_2osp__process_2logger_8h.html#aaf2698d28214fc0f1d3c13efcfe62906":[1,0,0,5,1,3],
-"libosp_2osp__process_2logger_8h.html#ab9cc7514357ca48166849172842cd1fc":[1,0,0,5,1,0],
-"libosp_2osp__process_2logger_8h.html#aed1edcc4c4106ded407551794cd9d81d":[1,0,0,5,1,4]
+"libosp_2osp__process_2logger_8h.html#ab9cc7514357ca48166849172842cd1fc":[1,0,0,5,1,0]
 };

@@ -43,6 +43,8 @@
 #include "jsmn.h"
 
 char filepath_4afc[512];
+char filepath_argument[512];
+
 
 /*** Main constants ***/
 #define UI_PORT				8001
@@ -69,18 +71,19 @@ static inline float log2lin(float db)
 	return powf(10, (db/20.0));
 }
 
-static inline void usage(const char *s)
+static inline void usage()
 {
-	printf("usage: %s [-hardt] [-l <Loopback File>]\n", s);
+
 	printf("options:\n");
 	printf("\t-h\tshow this usage\n");
 	printf("\t-a\tstart application with AFC set to OFF\n");
 	printf("\t-r\tstart application with rear mics disabled (two channel only mode)\n");
 	printf("\t-d\tset the attenuation factor (gain in dB)\n");
 	printf("\t-t\tstart application in TCP daemon mode\n");
+	printf("\t-l\tstart application in 4AFC mode\n");
 	printf("\t-T\tinitialize with selected AFC. 0=FXLMS and 1=PNLMS\n");
 	printf("\t-M\tEnable/Disable MPO. 0= Disable MPO and 1 = Enable MPO\n");
-	printf("\t-l\t<Loopback File>\tRun in loopback mode where <Loopback File> is input\n");
+	printf("\t-p\t<playback File>\tRun in loopback mode where <Loopback File> is input\n");
 	printf("\t-F\tChoose sampling Frequency. 0 = 48 kHz or 1 = 96 kHz\n");
 	printf("\t-N\tChoose noise estimation technique (0,1,2,3). 0- Disabled, 1- Arslan, 2- Hirsch, 3- MCRA\n");
 	printf("\t-S\tSpectral subtraction 1- on/ 0 -off\n");
@@ -372,7 +375,7 @@ static int file_loopback_run(const char *in_file, const char *out_file, unsigned
 
 static int run_pa_loopback(unsigned int sample_rate, unsigned int frames_per_buffer, const char *in_file, const char *out_file, osp_user_data *osp_data)
 {
-	int i;
+//	int i;
 	pa_loopback_data loopback_data;
 	file_loopback_context file_ctx;
 	loopback_data.file_ctx = &file_ctx;
@@ -794,6 +797,33 @@ static int run_pa_tcp(osp_user_data *osp_data, unsigned int samp_rate, unsigned 
 	return 0;
 }
 
+
+static int playback_file(osp_user_data *osp_data, unsigned int samp_rate, unsigned int frames_per_buffer, float attenuation_factor)
+{
+	pa_user_data pa_data;
+	pa_data.user_data = osp_data;
+	pa_data.aux_data.attenuation_factor = attenuation_factor;
+	pa_data.aux_data.gain_factor = 1;
+	
+	osp_user_data *osp_tmp_data;
+	
+	osp_tmp_data = malloc(sizeof(osp_user_data));
+	memcpy(osp_tmp_data, osp_data, sizeof(osp_user_data));
+	printf("REAR MICS = %d\n", osp_tmp_data->rear_mics);
+	
+	// init TCP connection
+	
+	pa_data.aux_data.underruns = 0;
+	
+	run_pa_loopback(SAMPLE_RATE, FRAMES_PER_BUFFER,	filepath_argument, "output_file_pa.wav", osp_data);
+	printf("Played file: %s\n",filepath_argument );
+	
+	
+	
+	return 0;
+}
+
+
 static int run_pa_tcp_4afc(osp_user_data *osp_data, unsigned int samp_rate, unsigned int frames_per_buffer, float attenuation_factor)
 {
 	ssize_t ret;
@@ -836,7 +866,7 @@ static int run_pa_tcp_4afc(osp_user_data *osp_data, unsigned int samp_rate, unsi
 				num_fails++;
 				continue;
 			}
-			
+
 			fprintf(stderr, "Failed to set up TCP server 5 times, aborting\n");
 			break;
 		}
@@ -866,8 +896,8 @@ static int run_pa_tcp_4afc(osp_user_data *osp_data, unsigned int samp_rate, unsi
 				printf("\nWrong version OSP packet from client\n");
 			}
 			
-			//			fprintf(stderr, "Got req %d\n", req);
-			
+						fprintf(stderr, "Got req %d\n", req);
+
 			switch (req) {
 				case OSP_REQ_UPDATE_VALUES:
 					printf("\nRequest to update OSP values\n");
@@ -930,7 +960,7 @@ static int run_pa_tcp_4afc(osp_user_data *osp_data, unsigned int samp_rate, unsi
 						break;
 					}
 					run_pa_loopback(SAMPLE_RATE, FRAMES_PER_BUFFER,	filepath_4afc, "output_file_pa.wav", osp_data);
-					printf("%s\n",filepath_4afc );
+					printf("The file %s has been played with the set OSP settings\n",filepath_4afc );
 					break;
 				case OSP_REQ_GET_UNDERRUNS:
 					printf("\nReceived underrun request packet\n");
@@ -992,18 +1022,19 @@ static int run_pa_tcp_4afc(osp_user_data *osp_data, unsigned int samp_rate, unsi
 int main(int argc, char **argv)
 {
 	int c;
-	int i;
-	unsigned int tcp_mode;
+//	int i;
+	unsigned int osp_start_settings;
+	unsigned int osp_mode;
 	unsigned int adaptation_type;
 	unsigned int ansi_test_onoff;
 	unsigned int noise_estimation_type;
 	unsigned int spectral_subtraction;
 	unsigned int choose_sampling_frequency;
 	
-	float resample_32_96_with_mic_calibration_left_ear[RESAMP_32_96_TAPS_MIC_CALIB];
-	float resample_32_96_with_mic_calibration_right_ear[RESAMP_32_96_TAPS_MIC_CALIB];
-	float resample_96_32_with_mic_calibration_left_ear[RESAMP_96_32_TAPS_MIC_CALIB];
-	float resample_96_32_with_mic_calibration_right_ear[RESAMP_96_32_TAPS_MIC_CALIB];
+//	float resample_32_96_with_mic_calibration_left_ear[RESAMP_32_96_TAPS_MIC_CALIB];
+//	float resample_32_96_with_mic_calibration_right_ear[RESAMP_32_96_TAPS_MIC_CALIB];
+//	float resample_96_32_with_mic_calibration_left_ear[RESAMP_96_32_TAPS_MIC_CALIB];
+//	float resample_96_32_with_mic_calibration_right_ear[RESAMP_96_32_TAPS_MIC_CALIB];
 	
 	
 	float resample_32_96_taps[RESAMP_32_96_TAPS];
@@ -1013,20 +1044,27 @@ int main(int argc, char **argv)
 	float attenuation_factor = D_ATTENUATION_FACTOR;
 	
 	unsigned int sampling_frequency= SAMPLE_RATE;
-	char file_path[512];
+//	char file_path[512];
 	pthread_t announce_thread;
 	
 	osp_user_data osp_data;
 	osp_data_init(&osp_data);
 	
-	if (argc < 2) {
-		usage(argv[0]);
-	}
+//	pa_user_data pa_data;
+
+	
+//	if (argc < 2) {
+//		usage(argv[0]);
+//	}
 	
 	adaptation_type = 2;
-	tcp_mode = 0;
-	while ((c = getopt(argc, argv, "ad:M:l:p:rtT:F:N:S:s:")) != -1) {
+	osp_mode = 0;
+	while ((c = getopt(argc, argv, "ad:M:p:lhrtT:F:N:S:s:")) != -1) {
 		switch (c) {
+			case 'h':
+				usage();
+				return 0;
+				break;
 			case 'F':
 				if (optarg == NULL) {
 					osp_data.choose_sampling_frequency = 1;
@@ -1129,33 +1167,65 @@ int main(int argc, char **argv)
 				printf("Attenuation factor is %f\n", attenuation_factor);
 				break;
 			case 'l':
-				if (strcmp(optarg, "NULL") == 0 || strcmp(optarg, "null") == 0) {
-					printf("Loopback mode specified, using no file, just empty buffers\n");
-					run_loopback_null(10000, FRAMES_PER_BUFFER);
-				} else {
-					printf("Loopback mode specified, setting up file %s\n", optarg);
-					tcp_mode = 2;
-					strcpy (file_path, optarg);
-					printf("Is string copied: %s tcp: %d\n",file_path,tcp_mode);
-					//					file_loopback_run(optarg, "output_file_test", 96, &osp_data);
-					//					file_loopback_4afc(optarg);
-					
+				printf("4AFC mode selected\n");
+				osp_mode = 2;
+				
+//				if (strcmp(optarg, "NULL") == 0 || strcmp(optarg, "null") == 0) {
+//					printf("4AFC mode selected\n");
+//					osp_mode = 2;
+//				} else {
+//
+//				}
+				break;
+			case 's':
+				if (optarg == NULL) {
+					printf("No argument for initial osp settings, setting to default osp data settings\n");
+					break;
+				}
+				else{
+				osp_start_settings = (unsigned char)strtol(optarg, (char **)NULL, 10);
+				
+				switch (osp_start_settings) {
+					case 1:
+						printf("Setting osp data settings to N2\n");
+						osp_data_set_n2(&osp_data);
+						break;
+					case 2:
+						printf("Setting osp data settings to N4\n");
+						osp_data_set_n4(&osp_data);
+						break;
+					case 3:
+						printf("Setting osp data settings to S2\n");
+						osp_data_set_s2(&osp_data);
+						break;
+					case 4:
+						printf("Setting osp data settings to NH\n");
+						osp_data_set_nh(&osp_data);
+						break;
+					case 5:
+						printf("Setting osp data settings to gain 20 on all bands\n");
+						osp_data_set_gain(&osp_data,20);
+						break;
+						
+					default:
+						printf("Setting to default osp data settings\n");
+				}
 				}
 				break;
+				
 			case 'p':
 				if (strcmp(optarg, "NULL") == 0 || strcmp(optarg, "null") == 0) {
-					printf("Portaudio loopback mode specified, using no file, just empty buffers\n");
+					printf("Playback mode specified, however no file specified\n");
 				} else {
-					if (run_pa_loopback(SAMPLE_RATE, FRAMES_PER_BUFFER,
-															optarg, "output_file_pa", &osp_data) < 0) {
-						printf("There was an error running the PA mode with files\n");
-					}
-					printf("Portaudio loopback mode specified, setting up file %s\n", optarg);
+					printf("Playback mode specified, setting up file %s\n", optarg);
+					osp_mode = 3;
+					strcpy (filepath_argument, optarg);
+					printf("osp_mode: %d\n",osp_mode);
 				}
 				break;
 			case 't':
 				printf("Using TCP daemon mode\n");
-				tcp_mode = 1;
+				osp_mode = 1;
 				break;
 			case 'r':
 				printf("Disabling Rear mics\n");
@@ -1168,9 +1238,10 @@ int main(int argc, char **argv)
 			case 'T':
 				if (optarg == NULL) {
 					printf("No argument for AFC adaptation type, setting to PNLMS\n");
-					osp_data.feedback_algorithm_type = 1;
+					osp_data.feedback_algorithm_type = 2;
+					break;
 				}
-				
+				else{
 				osp_data.feedback_algorithm_type = (unsigned char)strtol(optarg, (char **)NULL, 10);
 				switch (osp_data.feedback_algorithm_type) {
 					case 0:
@@ -1180,20 +1251,16 @@ int main(int argc, char **argv)
 						printf("Setting adaptation type to PNLMS\n");
 						break;
 					case 2:
-						printf("\n\n******************************************************************************************************************\n");
-						printf("For SLMS please refer to \"Lee, Ching-Hua, Bhaskar D. Rao, and Harinath Garudadri. Sparsity promoting LMS for adaptive feedback cancellation. In Signal Processing Conference (EUSIPCO), 2017 25th European, pp. 226-230. IEEE, 2017.\" Setting Adaptation type to PNLMS\n");
-						printf("******************************************************************************************************************\n\n\n");
+						printf("Setting adaptation type to SLMS\n");
 						break;
 					default:
-						printf("Setting adaptation type to PNLMS\n");
+						printf("Setting adaptation type to SLMS\n");
+				}
 				}
 				break;
-			case 'h':
-				usage(argv[0]);
-				return 0;
-				break;
+			
 			default:
-				usage(argv[0]);
+				usage();
 				return 0;
 		}
 	}
@@ -1206,43 +1273,68 @@ int main(int argc, char **argv)
 	
 	if (osp_data.choose_sampling_frequency)
 	{
-		if (load_filter_taps("resample_32_96_with_mic_calibration_left_ear.flt", resample_32_96_with_mic_calibration_left_ear, RESAMP_32_96_TAPS_MIC_CALIB) < 0) {
+		if (load_filter_taps("resample_32_96.flt", resample_32_96_taps, RESAMP_32_96_TAPS) < 0) {
 			return -1;
 		}
 		
-		if (load_filter_taps("resample_32_96_with_mic_calibration_right_ear.flt", resample_32_96_with_mic_calibration_right_ear, RESAMP_32_96_TAPS_MIC_CALIB) < 0) {
-			return -1;
-		}
-		
-		if (load_filter_taps("resample_96_32_with_mic_calibration_left_ear.flt", resample_96_32_with_mic_calibration_left_ear, RESAMP_96_32_TAPS_MIC_CALIB) < 0) {
-			return -1;
-		}
-		
-		if (load_filter_taps("resample_96_32_with_mic_calibration_right_ear.flt", resample_96_32_with_mic_calibration_right_ear, RESAMP_96_32_TAPS_MIC_CALIB) < 0) {
+		if (load_filter_taps("resample_96_32.flt", resample_96_32_taps, RESAMP_96_32_TAPS) < 0) {
 			return -1;
 		}
 		
 		// Initialize resampler Left
-		if ((resampleL = resample_init(resample_32_96_with_mic_calibration_left_ear, ARRAY_SIZE(resample_32_96_with_mic_calibration_left_ear),
-																	 resample_96_32_with_mic_calibration_left_ear, ARRAY_SIZE(resample_96_32_with_mic_calibration_left_ear))) == NULL) {
+		if ((resampleL = resample_init(resample_32_96_taps, ARRAY_SIZE(resample_32_96_taps),
+																	 resample_96_32_taps, ARRAY_SIZE(resample_96_32_taps))) == NULL) {
 			return -1;
 		}
 		
 		// Initialize resampler Right
-		if ((resampleR = resample_init(resample_32_96_with_mic_calibration_right_ear, ARRAY_SIZE(resample_32_96_with_mic_calibration_right_ear),
-																	 resample_96_32_with_mic_calibration_right_ear, ARRAY_SIZE(resample_96_32_with_mic_calibration_right_ear))) == NULL) {
+		if ((resampleR = resample_init(resample_32_96_taps, ARRAY_SIZE(resample_32_96_taps),
+																	 resample_96_32_taps, ARRAY_SIZE(resample_96_32_taps))) == NULL) {
 			return -1;
 		}
+		
+		
+		// if mic calibrated filters are required, uncomment these lines.
+		
+//		if (load_filter_taps("resample_32_96_with_mic_calibration_left_ear.flt", resample_32_96_with_mic_calibration_left_ear, RESAMP_32_96_TAPS_MIC_CALIB) < 0) {
+//			return -1;
+//		}
+//
+//		if (load_filter_taps("resample_32_96_with_mic_calibration_right_ear.flt", resample_32_96_with_mic_calibration_right_ear, RESAMP_32_96_TAPS_MIC_CALIB) < 0) {
+//			return -1;
+//		}
+//
+//		if (load_filter_taps("resample_96_32_with_mic_calibration_left_ear.flt", resample_96_32_with_mic_calibration_left_ear, RESAMP_96_32_TAPS_MIC_CALIB) < 0) {
+//			return -1;
+//		}
+//
+//		if (load_filter_taps("resample_96_32_with_mic_calibration_right_ear.flt", resample_96_32_with_mic_calibration_right_ear, RESAMP_96_32_TAPS_MIC_CALIB) < 0) {
+//			return -1;
+//		}
+//
+//		// Initialize resampler Left
+//		if ((resampleL = resample_init(resample_32_96_with_mic_calibration_left_ear, ARRAY_SIZE(resample_32_96_with_mic_calibration_left_ear),
+//																	 resample_96_32_with_mic_calibration_left_ear, ARRAY_SIZE(resample_96_32_with_mic_calibration_left_ear))) == NULL) {
+//			return -1;
+//		}
+//
+//		// Initialize resampler Right
+//		if ((resampleR = resample_init(resample_32_96_with_mic_calibration_right_ear, ARRAY_SIZE(resample_32_96_with_mic_calibration_right_ear),
+//																	 resample_96_32_with_mic_calibration_right_ear, ARRAY_SIZE(resample_96_32_with_mic_calibration_right_ear))) == NULL) {
+//			return -1;
+//		}
+
+
 	}
 	
 	
 	else
 	{
-		if (load_filter_taps("resample_32_96.flt", resample_32_48_taps, RESAMP_32_48_TAPS) < 0) {
+		if (load_filter_taps("resample_32_48.flt", resample_32_48_taps, RESAMP_32_48_TAPS) < 0) {
 			return -1;
 		}
 		
-		if (load_filter_taps("resample_96_32.flt", resample_48_32_taps, RESAMP_48_32_TAPS) < 0) {
+		if (load_filter_taps("resample_48_32.flt", resample_48_32_taps, RESAMP_48_32_TAPS) < 0) {
 			return -1;
 		}
 		
@@ -1266,15 +1358,21 @@ int main(int argc, char **argv)
 	
 	
 	//////////// Where the magic happens ///////////////
-	if (tcp_mode == 1) {
+	if (osp_mode == 1) {
 		
 		if (run_pa_tcp(&osp_data, SAMPLE_RATE, FRAMES_PER_BUFFER, attenuation_factor) < 0) {
 			printf("Error starting tcp version of live app.\n");
 		}
 	}
-	
-	if (tcp_mode == 2) {
+	if (osp_mode == 2) {
 		if (run_pa_tcp_4afc(&osp_data, SAMPLE_RATE, FRAMES_PER_BUFFER, attenuation_factor) < 0) {
+			printf("Error starting 4AFC version of live app.\n");
+		}
+		
+	}
+	if (osp_mode == 3) {
+		
+		if (playback_file(&osp_data, SAMPLE_RATE, FRAMES_PER_BUFFER, attenuation_factor) < 0) {
 			printf("Error starting 4AFC version of live app.\n");
 		}
 		
