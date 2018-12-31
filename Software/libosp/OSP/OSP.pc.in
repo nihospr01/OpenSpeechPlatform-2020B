@@ -1,0 +1,8 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=@CMAKE_INSTALL_PREFIX@
+includedir=@CMAKE_INSTALL_PREFIX@/include/libosp
+
+Name: libosp
+Description: The OpenSpeechPlatform library
+Version: 2.0
+Cflags: -I@CMAKE_INSTALL_PREFIX@/libosp

@@ -1,0 +1,64 @@
+//
+// Created by Dhiman Sengupta on 11/14/18.
+//
+
+#ifndef OSP_CLION_CXX_OPENSPEECHPLATFORM_HPP
+#define OSP_CLION_CXX_OPENSPEECHPLATFORM_HPP
+
+#define OSP_VERSION_MAJOR @OSP_VERSION_MAJOR@
+#define OSP_VERSION_MINOR @OSP_VERSION_MINOR@
+
+#include <iostream>
+#include <unistd.h>
+#include <string>
+#include "ews_connect.hpp"
+#include "portaudio_wrapper.h"
+#include "control_param.h"
+
+template <class P, class M, class D>
+void keyboard(P* parser, M* masterHA, controls *main_controls){
+    D user_data[NUM_CHANNEL];
+    std::string command_line_in;
+    std::getline(std::cin, command_line_in);
+    std::istringstream iss(command_line_in);
+    std::vector<std::string> command_line_array((std::istream_iterator<WordDelimitedBy<' '>>(iss)),
+                                                std::istream_iterator<WordDelimitedBy<' '>>());
+    command_line_array.insert(command_line_array.begin(), "Temp");
+    std::vector<char *> cstrings;
+    for(auto& string : command_line_array)
+        cstrings.push_back(&string.front());
+
+    masterHA->get_params(user_data);
+    parser->parse((int)cstrings.size(), cstrings.data(), user_data, main_controls);
+    masterHA->set_params(user_data);
+}
+
+template <class PARSER, class MHA, class DATA>
+int openspeechplatform(PARSER *parser, MHA *masterHA, controls *main_controls){
+
+
+    portaudio_wrapper *audio;
+    if(main_controls->input_device == -1) {
+        audio = new  portaudio_wrapper(2, 2, patestCallback<MHA>, (void *) masterHA, main_controls->samp_freq, main_controls->buf_size);
+    }
+    else{
+        audio = new  portaudio_wrapper(main_controls->input_device, 2, main_controls->output_device, 2, patestCallback<MHA>,
+                                       (void *) masterHA, main_controls->samp_freq, main_controls->buf_size);
+    }
+    audio->start_stream();
+    ews_connection<PARSER, MHA, DATA> server(parser, masterHA, 8001);
+    while(!main_controls->endloop){
+        keyboard<PARSER, MHA, DATA>(parser, masterHA, main_controls);
+    }
+    audio->stop_stream();
+    delete audio;
+    delete masterHA;
+    delete parser;
+
+
+    return 0;
+
+
+}
+
+#endif //OSP_CLION_CXX_OPENSPEECHPLATFORM_HPP

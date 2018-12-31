@@ -1,0 +1,84 @@
+div {
+  text-align: center;
+}
+
+h1 {
+  font-size: 30;
+}
+
+#matrix {
+  margin: 0 auto;
+  padding-top: 8px;
+  padding: 5px;
+}
+
+#matrix tr,
+td {
+  padding: 7px;
+}
+
+#matrix button {
+  height: 200px;
+  width: 420px;
+  font-family: georgia;
+  font-size: 50;
+  font-weight: bold;
+}
+
+#b1,
+#b3 {
+  border-width: medium;
+  border-radius: 25px;
+  border-color: #3ebdcf;
+  background-color: white;
+}
+
+#b1:click,
+#b3:click {
+  background-color: rgb(255, 153, 51);
+}
+
+#b2 {
+  border-width: medium;
+  border-color: #3ebdcf;
+  border-radius: 25px;
+  background-color: white;
+}
+
+#b2:click {
+  background-color: rgb(255, 153, 51);
+}
+
+#b4 {
+  border-width: medium;
+  border-color: #3ebdcf;
+  border-radius: 25px;
+  background-color: white;
+}
+
+#b4:click {
+  background-color: rgb(255, 153, 51);
+}
+
+#next {
+  height: 80px;
+  width: 840px;
+  background-color: rgba(62, 189, 207, 0.5);
+  text-align: center;
+  font-size: 50;
+  border-radius: 25px;
+}
+
+#next:hover {
+  background-color: rgba(62, 189, 207, 1);
+}
+
+.progress {
+  background: white;
+  border: 0px solid rgba(62, 189, 207, 1);
+  border-radius: 4px;
+  height: 20px;
+}
+.progress-bar {
+  background: rgba(62, 189, 207, 1);
+}
