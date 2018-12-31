@@ -1,0 +1,13 @@
+#lmore{
+  align-self: left;
+  width: 200;
+  height: 150;
+  border: 10;
+
+}
+#lless{
+  align-self: right;
+  width: 200;
+  height: 150;
+
+}
