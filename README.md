@@ -16,11 +16,12 @@
 ├── LICENSE
 ├── README.md
 └── Software
-    ├── EWS
-    ├── OSP
-    ├── README.md
-    ├── install
-    └──libosp
+    ├── EWS
+    ├── OSP
+    ├── README.md
+    ├── install
+    ├── libosp
+    └── submodule
 
-10 directories, 10 files
+11 directories, 10 files
 ```
