@@ -1,0 +1,3 @@
+[submodule "lib/osp"]
+	path = lib/osp
+	url = https://bitbucket.org/openspeechplatform/libosp.git
