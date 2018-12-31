@@ -1,0 +1,76 @@
+.menu {
+  color: black;
+  align-items: center;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.panel1 {
+  background-color: #fabe58;
+  height: -webkit-fill-available;
+}
+.panel2 {
+  background-color: #6bb9f0;
+  height: -webkit-fill-available;
+}
+.panel3 {
+  background-color: #f4d03f;
+  height: -webkit-fill-available;
+}
+.panel {
+  font-size: 80px;
+  text-align: center;
+  color: black;
+  height: -webkit-fill-available;
+}
+h1 {
+  font-size: 60px;
+}
+.instructions {
+  font-size: 40px;
+  border: 10px solid black;
+  background-color: white;
+  margin-top: 60px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.btn-secondary {
+  font-size: 60px;
+  text-align: center;
+  padding: 10px 10px;
+  border-radius: 20px;
+  border: 5px solid black;
+  text-decoration: none;
+  margin: 10px 0px 10px 0px;
+}
+.btn-light {
+  font-size: 60px;
+  border-radius: 50%;
+  border: 5px solid black;
+  padding: 10px 10px 10px 10px;
+  margin: 5px 0px 5px 0px;
+}
+.btn2 {
+  font-size: 40px;
+  margin-top: 70px;
+  border: 5px solid black;
+}
+
+.h10 {
+  font-size: 50px;
+  font-family: arial;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  color: black;
+}
+
+.mycontainer {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hidden {
+     display:none;
+}

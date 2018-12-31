@@ -1,0 +1,124 @@
+body {
+  padding-top: 70px;
+  background-color: #f7f7f7;
+}
+
+.anchor {
+  padding-top: 40px; /* prevents the fixed navbar from obscuring the anchors */
+  margin-top: -40px;
+  display: inline-block; /* required for webkit browsers */
+}
+
+#submit li {
+  margin-top: 10px;
+}
+
+.jumbotron {
+  position: relative;
+  background: none;
+}
+
+.jumbotron:after {
+  content: '';
+  opacity: 0.15;
+  margin-left: 0px;
+  position: absolute;
+  z-index: -1;
+}
+
+.navbar-default {
+  text-transform: uppercase;
+  font-family: 'Gill Sans', Calibri, AvenirNext, Avenir, HelveticaNeue,
+    Helvetica, Arial, Verdana, sans-serif;
+  font-size: 12pt;
+}
+
+.navbar-default .navbar-brand {
+  font-size: 20pt;
+}
+
+.navbar-brand {
+  text-transform: none;
+}
+
+.navbar-nav {
+  font-weight: 300;
+}
+
+/* Adapted from the Bootstrap docs for sidebar navigation + scrollspy */
+.sidenav .nav > li > a {
+  display: block;
+  padding: 5px 20px 5px 0px;
+}
+.sidenav .nav > li > a:hover,
+.sidenav .nav > li > a:focus {
+  text-decoration: none;
+  background-color: #e5e3e9;
+  border-right: 1px solid #990615;
+}
+.sidenav .nav > .active > a,
+.sidenav .nav > .active:hover > a,
+.sidenav .nav > .active:focus > a {
+  font-weight: bold;
+  background-color: transparent;
+  border-right: 1px solid #990615;
+}
+
+/* Nav: second level */
+.sidenav .nav .nav {
+  margin-bottom: 8px;
+}
+
+.sidenav .nav .nav > li > a {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 30px;
+  font-size: 90%;
+}
+
+.nav-list > .active > a,
+.nav-list > .active > a:hover {
+  background-color: #7d0612;
+}
+
+@media (max-width: 1000px) {
+  .sidenav.affix {
+    position: static;
+    width: auto;
+    top: 0;
+  }
+}
+
+.lab-slide {
+  margin-bottom: 2em;
+}
+
+.lab-slide h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+}
+
+.lab-slide .pre-scrollable {
+  max-height: 300px;
+}
+
+.lab-slide video {
+  border: 1px solid gray;
+  height: 200px;
+}
+
+.navbar-default .navbar-brand {
+  font-size: 15px;
+}
+
+.navbar-collapse {
+  font-size: 12px;
+}
+
+#faq .row {
+  margin-top: 10px;
+}

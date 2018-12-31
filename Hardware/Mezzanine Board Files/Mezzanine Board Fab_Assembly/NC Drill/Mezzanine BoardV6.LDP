@@ -1,0 +1,2 @@
+LayersSetName=Top_Bot_Thru_Holes|DrillFile=mezzanine boardv6-roundholes.txt|DrillLayers=gtl,g1,g2,gbl
+LayersSetName=Top_Bot_Slot_Holes|DrillFile=mezzanine boardv6-slotholes.txt|DrillLayers=gtl,g1,g2,gbl
