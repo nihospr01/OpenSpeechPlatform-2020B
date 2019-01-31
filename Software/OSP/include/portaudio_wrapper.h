@@ -6,60 +6,17 @@
 
 #define NUM_CHANNEL 2
 
-
-
 class portaudio_wrapper{
 
 public:
-    /**
-     * Constructor for when the input and output devices are manually entered
-     * @param in_device
-     * @param in_num_channel
-     * @param out_device
-     * @param out_num_channels
-     * @param callback
-     * @param userData
-     * @param sample_rate
-     * @param frames_per_buffer
-     */
     portaudio_wrapper(int in_device, int in_num_channel, int out_device, int out_num_channels,
                       PaStreamCallback callback, void *userData, int sample_rate, unsigned long frames_per_buffer);
-    /**
-     * Constructor for when the input and output devices are the default devices
-     * @param in_num_channel
-     * @param out_num_channels
-     * @param callback
-     * @param userData
-     * @param sample_rate
-     * @param frames_per_buffer
-     */
     portaudio_wrapper( int in_num_channel, int out_num_channels, PaStreamCallback callback, void *userData, int sample_rate,
                        unsigned long frames_per_buffer);
-    /**
-     * Destructor
-     */
     ~portaudio_wrapper();
-    /**
-     * Initialize the stream
-     * @param in_device
-     * @param in_num_channel
-     * @param out_device
-     * @param out_num_channels
-     * @param callback
-     * @param userData
-     * @return 0 if successful
-     */
     int init_stream(int in_device, int in_num_channel, int out_device, int out_num_channels,
                     PaStreamCallback callback, void* userData);
-    /**
-     * Start the stream
-     * @return 0 if successful
-     */
     int start_stream();
-    /**
-     * Stop the stream
-     * @return 0 if successful
-     */
     int stop_stream();
 
 private:
@@ -76,17 +33,6 @@ private:
 
 };
 
-/**
- * The sample callback for OSP and Port Audio
- * @tparam S is the class type of the RTMHA
- * @param inputBuffer
- * @param outputBuffer
- * @param framesPerBuffer
- * @param timeInfo
- * @param statusFlags
- * @param userData
- * @return
- */
 template <class S>
 static int patestCallback( const void *inputBuffer, void *outputBuffer,
                            unsigned long framesPerBuffer,

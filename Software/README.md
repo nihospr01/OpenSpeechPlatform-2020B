@@ -24,18 +24,17 @@
 │   └── webpack.mix.js
 ├── OSP
 │   ├── CMakeLists.txt
-│   ├── build
-│   ├── cmake-build-debug
 │   ├── golden
 │   ├── include
 │   └── src
 ├── README.md
 ├── install
-└── libosp
-    ├── CMakeLists.txt
-    ├── OSP
-    ├── README.md
-    ├── build
-    └── test
+├── libosp
+│   ├── CMakeLists.txt
+│   ├── OSP
+│   ├── README.md
+│   ├── build
+│   └── test
+└── submodule
 
 ```

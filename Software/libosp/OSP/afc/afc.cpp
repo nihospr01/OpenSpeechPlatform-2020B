@@ -4,7 +4,7 @@ afc::afc(float *bandlimited_filter_taps, size_t bandlimited_filter_tap_len, floa
                   size_t prefilter_tap_len, float *adaptive_filter_taps, size_t adaptive_filter_tap_len,
                   size_t max_frame_size,
                   int adaptation_type, float mu, float delta, float rho, float alpha, float beta, float p, float c,
-                  float power_estimate, size_t delay_len)
+                  float power_estimate, size_t delay_len, int afc_on_off)
         : adaptive_filter(adaptive_filter_taps, adaptive_filter_tap_len, max_frame_size,
                           adaptation_type, mu, delta, rho, alpha,
                           beta, p, c, power_estimate) {
@@ -14,6 +14,7 @@ afc::afc(float *bandlimited_filter_taps, size_t bandlimited_filter_tap_len, floa
     delay_len_ = delay_len;
     delay_buffer_ = new circular_buffer(MAX_DELAY_LEN + max_frame_size, 0.0f);
     u_ = new float[max_frame_size];
+    afc_on_off_ = afc_on_off;
 }
 
 afc::~afc() {
@@ -26,7 +27,7 @@ afc::~afc() {
 
 int
 afc::get_y_hat(float *y_hat, float *e, float *s, size_t ref_size) {
-    if (this->get_adaptation_type() == -1) {
+    if (!afc_on_off_) {
         for (size_t i = 0; i < ref_size; i++) {
             y_hat[i] = 0.0f;
         }
@@ -69,4 +70,19 @@ afc::set_delay(size_t delay_len) {
     } else {
         return -1;
     }
+}
+
+void
+afc::set_afc_on_off(int afc_on_off) {
+    afc_on_off_ = afc_on_off;
+}
+
+void
+afc::get_afc_on_off(int &afc_on_off) {
+    afc_on_off = afc_on_off_;
+}
+
+void
+afc::reset(float* default_taps, size_t len) {
+    this->set_taps(default_taps,len);
 }

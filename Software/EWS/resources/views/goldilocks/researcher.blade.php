@@ -30,14 +30,6 @@
 <body>
 
     <div class="container">
-        {{--<nav aria-label="breadcrumb">--}}
-            {{--<ol class="breadcrumb">--}}
-                {{--<li class="breadcrumb-item"><a href="{{ url('/goldilocks') }}">Goldilocks</a></li>--}}
-                {{--<li class="breadcrumb-item active" aria-current="page">Researcher Page</li>--}}
-            {{--</ol>--}}
-        {{--</nav>--}}
-
-
         <div class="row align-items-center" style="margin-bottom: 10px">
             <div class="col-3">
                 <div class="row align-items-center">
@@ -81,13 +73,13 @@
                 </div>
             </div>
             <div class="col-3">
-                <div class="row align-items-center" style="margin: 1px">
+                <div class="row palign-items-center" style="margin: 1px">
                     <button id="btnGroupDrop1" type="button" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Read
                     </button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                         @foreach($programs as $program)
-                            <a id="{{$program->id}}" name="{{$program->name}}" class="dropdown-item" href="#" onclick="changeProgram( {{$program->id}} , this.name )">{{$program->name}}</a>
+                            <a id="program_{{$program->id}}" name="{{$program->name}}" class="dropdown-item" href="#" onclick="changeProgram( {{$program->id}} , this.name )">{{$program->name}}</a>
                         @endforeach
 
                         @if(count($programs) == 0)
@@ -125,97 +117,105 @@
                     <tbody>
                         <tr>
                             <th class="text-center" style="font-size: 1.5rem; border-color: white">CR</th>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="cr_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1" onchange="changeColor(this.id)" onblur="cr(0)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="cr_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1" onchange="changeColor(this.id)" onblur="cr(1)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="cr_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1" onchange="changeColor(this.id)" onblur="cr(2)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="cr_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1" onchange="changeColor(this.id)" onblur="cr(3)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="cr_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1" onchange="changeColor(this.id)" onblur="cr(4)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="cr_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1" onchange="changeColor(this.id)" onblur="cr(5)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="cr_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1" onchange="changeColor(this.id)"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="compression_ratio" data-index="0" id="cr_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="compression_ratio" data-index="1" id="cr_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="compression_ratio" data-index="2" id="cr_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="compression_ratio" data-index="3" id="cr_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="compression_ratio" data-index="4" id="cr_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="compression_ratio" data-index="5" id="cr_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="compression_ratio" data-index="6" id="cr_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1"></td>
                         </tr>
                         <tr>
                             <th class="text-center" style="font-size: 1.5rem; border-color: white">G50</th>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g50_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g50(0)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g50_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g50(1)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g50_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g50(2)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g50_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g50(3)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g50_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g50(4)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g50_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g50(5)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g50_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g50" data-index="0" id="g50_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g50" data-index="1" id="g50_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g50" data-index="2" id="g50_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g50" data-index="3" id="g50_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g50" data-index="4" id="g50_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g50" data-index="5" id="g50_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g50" data-index="6" id="g50_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
                         </tr>
                         <tr>
                             <th class="text-center" style="font-size: 1.5rem; border-color: white">G65</th>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g65_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g65(0)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g65_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g65(1)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g65_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g65(2)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g65_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g65(3)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g65_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g65(4)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g65_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g65(5)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g65_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g65" data-index="0" id="g65_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g65" data-index="1" id="g65_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g65" data-index="2" id="g65_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g65" data-index="3" id="g65_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g65" data-index="4" id="g65_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g65" data-index="5" id="g65_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g65" data-index="6" id="g65_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
                         </tr>
                         <tr>
                             <th class="text-center" style="font-size: 1.5rem; border-color: white">G80</th>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g80_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g80(0)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g80_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g80(1)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g80_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g80(2)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g80_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g80(3)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g80_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g80(4)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g80_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="g80(5)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="g80_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g80" data-index="0" id="g80_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g80" data-index="1" id="g80_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g80" data-index="2" id="g80_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g80" data-index="3" id="g80_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g80" data-index="4" id="g80_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g80" data-index="5" id="g80_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g80" data-index="6" id="g80_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
                         </tr>
                         <tr>
                             <th class="text-center" style="font-size: 1.5rem; border-color: white">Knee</th>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="kneelow_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="45" onchange="changeColor(this.id)" onblur="kneelow(0)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="kneelow_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="45" onchange="changeColor(this.id)" onblur="kneelow(1)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="kneelow_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="45" onchange="changeColor(this.id)" onblur="kneelow(2)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="kneelow_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="45" onchange="changeColor(this.id)" onblur="kneelow(3)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="kneelow_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="45" onchange="changeColor(this.id)" onblur="kneelow(4)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="kneelow_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="45" onchange="changeColor(this.id)" onblur="kneelow(5)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="kneelow_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="45" onchange="changeColor(this.id)"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="knee_low" data-index="0" id="kneelow_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="45"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="knee_low" data-index="1" id="kneelow_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="45"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="knee_low" data-index="2" id="kneelow_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="45"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="knee_low" data-index="3" id="kneelow_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="45"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="knee_low" data-index="4" id="kneelow_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="45"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="knee_low" data-index="5" id="kneelow_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="45"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="knee_low" data-index="6" id="kneelow_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="45"></td>
 
                         </tr>
                         <tr>
                             <th class="text-center" style="font-size: 1.5rem; border-color: white">MPO</th>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="mpo_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="110" onchange="changeColor(this.id)" onblur="mpo(0)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="mpo_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="110" onchange="changeColor(this.id)" onblur="mpo(1)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="mpo_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="110" onchange="changeColor(this.id)" onblur="mpo(2)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="mpo_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="110" onchange="changeColor(this.id)" onblur="mpo(3)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="mpo_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="110" onchange="changeColor(this.id)" onblur="mpo(4)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="mpo_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="110" onchange="changeColor(this.id)" onblur="mpo(5)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="mpo_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="110" onchange="changeColor(this.id)"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="mpo_limit" data-index="0" id="mpo_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="120"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="mpo_limit" data-index="1" id="mpo_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="120"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="mpo_limit" data-index="2" id="mpo_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="120"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="mpo_limit" data-index="3" id="mpo_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="120"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="mpo_limit" data-index="4" id="mpo_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="120"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="mpo_limit" data-index="5" id="mpo_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="120"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="mpo_limit" data-index="6" id="mpo_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="120"></td>
 
                         </tr>
                         <tr>
                             <th class="text-center" style="font-size: 1.5rem; border-color: white">Attack</th>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="attack_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="5" onchange="changeColor(this.id)" onblur="attack(0)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="attack_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="5" onchange="changeColor(this.id)" onblur="attack(1)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="attack_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="5" onchange="changeColor(this.id)" onblur="attack(2)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="attack_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="5" onchange="changeColor(this.id)" onblur="attack(3)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="attack_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="5" onchange="changeColor(this.id)" onblur="attack(4)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="attack_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="5" onchange="changeColor(this.id)" onblur="attack(5)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="attack_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="5" onchange="changeColor(this.id)"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="attack" data-index="0" id="attack_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="5"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="attack" data-index="1" id="attack_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="5"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="attack" data-index="2" id="attack_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="5"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="attack" data-index="3" id="attack_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="5"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="attack" data-index="4" id="attack_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="5"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="attack" data-index="5" id="attack_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="5"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="attack" data-index="6" id="attack_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="5"></td>
 
                         </tr>
-
                         <tr>
                             <th class="text-center" style="font-size: 1.5rem; border-color: white">Release</th>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="release_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="100" onchange="changeColor(this.id)" onblur="release(0)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="release_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="100" onchange="changeColor(this.id)" onblur="release(1)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="release_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="100" onchange="changeColor(this.id)" onblur="release(2)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="release_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="100" onchange="changeColor(this.id)" onblur="release(3)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="release_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="100" onchange="changeColor(this.id)" onblur="release(4)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="release_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="100" onchange="changeColor(this.id)" onblur="release(5)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="release_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="100" onchange="changeColor(this.id)"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="release" data-index="0" id="release_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="20"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="release" data-index="1" id="release_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="20"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="release" data-index="2" id="release_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="20"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="release" data-index="3" id="release_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="20"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="release" data-index="4" id="release_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="20"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="release" data-index="5" id="release_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="20"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="release" data-index="6" id="release_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="20"></td>
                         </tr>
-
+                        <tr>
+                            <th class="text-center" style="font-size: 1.3rem; border-color: white">G50 Max</th>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g50_max" data-index="0" id="g50_max_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g50_max" data-index="1" id="g50_max_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g50_max" data-index="2" id="g50_max_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g50_max" data-index="3" id="g50_max_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g50_max" data-index="4" id="g50_max_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g50_max" data-index="5" id="g50_max_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="g50_max" data-index="6" id="g50_max_all" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                        </tr>
                         <tr>
                             <th class="text-center" style="font-size: 1.5rem; border-color: white">Targets</th>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="targets_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="targets(0)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="targets_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="targets(1)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="targets_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="targets(2)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="targets_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="targets(3)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="targets_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="targets(4)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="targets_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="targets(5)"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="targets" data-index="0" id="targets_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="targets" data-index="1" id="targets_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="targets" data-index="2" id="targets_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="targets" data-index="3" id="targets_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="targets" data-index="4" id="targets_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="targets" data-index="5" id="targets_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
                             <td>
                                 <button type="button" class="btn btn-info btn-block" onclick="calcg65()">Set</button>
                             </td>
@@ -223,12 +223,12 @@
                         </tr>
                         <tr>
                             <th class="text-center" style="font-size: 1.5rem; border-color: white">LTASS</th>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="ltass_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="ltass(0)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="ltass_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="ltass(1)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="ltass_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="ltass(2)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="ltass_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="ltass(3)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="ltass_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="ltass(4)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="ltass_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="ltass(5)"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="ltass" data-index="0" id="ltass_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="ltass" data-index="1" id="ltass_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="ltass" data-index="2" id="ltass_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="ltass" data-index="3" id="ltass_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="ltass" data-index="4" id="ltass_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="ltass" data-index="5" id="ltass_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
                             <td>
                                 <button type="button" class="btn btn-info btn-block" onclick="monitorValues()">Monitor</button>
                             </td>
@@ -236,32 +236,32 @@
                         </tr>
                         <tr>
                             <th class="text-center" style="font-size: 1.5rem; border-color: white">Thresh</th>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="hl_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="hl(0)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="hl_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="hl(1)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="hl_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="hl(2)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="hl_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="hl(3)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="hl_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="hl(4)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="hl_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="hl(5)"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="hearing_loss" data-index="0" id="hl_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="hearing_loss" data-index="1" id="hl_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="hearing_loss" data-index="2" id="hl_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="hearing_loss" data-index="3" id="hl_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="hearing_loss" data-index="4" id="hl_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="hearing_loss" data-index="5" id="hl_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
                         </tr>
 
                         <tr>
                             <th class="text-center" style="font-size: 1.5rem; border-color: white">L Mult</th>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="multiL_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="multiL(0)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="multiL_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="multiL(1)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="multiL_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="multiL(2)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="multiL_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="multiL(3)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="multiL_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="multiL(4)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="multiL_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="multiL(5)"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="multiplier_l" data-index="0" id="multiL_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="multiplier_l" data-index="1" id="multiL_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="multiplier_l" data-index="2" id="multiL_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="multiplier_l" data-index="3" id="multiL_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="multiplier_l" data-index="4" id="multiL_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="multiplier_l" data-index="5" id="multiL_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
                         </tr>
 
                         <tr>
                             <th class="text-center" style="font-size: 1.5rem; border-color: white">H Mult</th>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="multiH_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="multiH(0)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="multiH_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="multiH(1)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="multiH_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="multiH(2)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="multiH_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="multiH(3)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="multiH_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="multiH(4)"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="multiH_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0" onchange="changeColor(this.id)" onblur="multiH(5)"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="multiplier_h" data-index="0" id="multiH_0" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="multiplier_h" data-index="1" id="multiH_1" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="multiplier_h" data-index="2" id="multiH_2" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="multiplier_h" data-index="3" id="multiH_3" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="multiplier_h" data-index="4" id="multiH_4" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="multiplier_h" data-index="5" id="multiH_5" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -284,21 +284,21 @@
                     <tbody>
                     <tr>
                         <td class="text-center" style="font-size: 2.0rem; border-color: white">Step</th>
-                        <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="stepL" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1" onchange="changeColor(this.id)" onblur="stepL()"></td>
-                        <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="stepV" class="form-control form-control-sm table-field font-weight-bold" type="number" value="3" onchange="changeColor(this.id)" onblur="stepV()"></td>
-                        <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="stepH" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1" onchange="changeColor(this.id)" onblur="stepH()"></td>
+                        <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="lvh_params" id="stepL" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1" onchange="stepL()"></td>
+                        <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="lvh_params" id="stepV" class="form-control form-control-sm table-field font-weight-bold" type="number" value="3" onchange="stepV()"></td>
+                        <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="lvh_params" id="stepH" class="form-control form-control-sm table-field font-weight-bold" type="number" value="1" onchange="stepH()"></td>
                     </tr>
                     <tr>
                             <td class="text-center" style="font-size: 2.0rem; border-color: white">Min</th>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="minL" class="form-control form-control-sm table-field font-weight-bold" type="number" value="-40" onchange="changeColor(this.id)" onblur="minL()"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="minV" class="form-control form-control-sm table-field font-weight-bold" type="number" value="-40" onchange="changeColor(this.id)" onblur="minV()"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="minH" class="form-control form-control-sm table-field font-weight-bold" type="number" value="-40" onchange="changeColor(this.id)" onblur="minH()"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="lvh_params" id="minL" class="form-control form-control-sm table-field font-weight-bold" type="number" value="-40" onchange="minL()"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="lvh_params" id="minV" class="form-control form-control-sm table-field font-weight-bold" type="number" value="-40" onchange="minV()"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="lvh_params" id="minH" class="form-control form-control-sm table-field font-weight-bold" type="number" value="-40" onchange="minH()"></td>
                         </tr>
                         <tr>
                             <td class="text-center" style="font-size: 2.0rem; border-color: white">Max</th>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="maxL" class="form-control form-control-sm table-field font-weight-bold" type="number" value="40" onchange="changeColor(this.id)" onblur="maxL()"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="maxV" class="form-control form-control-sm table-field font-weight-bold" type="number" value="40" onchange="changeColor(this.id)" onblur="maxV()"></td>
-                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" id="maxH" class="form-control form-control-sm table-field font-weight-bold" type="number" value="40" onchange="changeColor(this.id)" onblur="maxH()"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="lvh_params" id="maxL" class="form-control form-control-sm table-field font-weight-bold" type="number" value="40" onchange="maxL()"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="lvh_params" id="maxV" class="form-control form-control-sm table-field font-weight-bold" type="number" value="40" onchange="maxV()"></td>
+                            <td style="border-color: white; border-width: thick"><input style="color: black; font-size: 1.2rem" name="lvh_params" id="maxH" class="form-control form-control-sm table-field font-weight-bold" type="number" value="40" onchange="maxH()"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -423,6 +423,7 @@
             'g80': [0, 0, 0, 0, 0, 0],
             'multiplier_l': [0, 0, 0, 0, 0, 0],
             'multiplier_h': [0, 0, 0, 0, 0, 0],
+            'g50_max': [0, 0, 0, 0, 0, 0],
             'knee_low': [45, 45, 45, 45, 45, 45],
             'mpo_limit': [110, 110, 110, 110, 110, 110],
             'attack': [5, 5, 5, 5, 5, 5],
@@ -446,6 +447,12 @@
         //start with G50/G80 deactivated
         deactivateG50G80();
 
+        //load in program
+        if("{{$listener->current_program_id}}" !== ""){
+            selectedProgram = Number("{{$listener->current_program_id}}");
+            changeProgram(selectedProgram, document.getElementById("program_"+selectedProgram).name);
+        }
+
         //logic to trigger Save As modal input
         $('#saveAsModal').on('shown.bs.modal', function () {
             $('#modalInput').trigger('focus')
@@ -458,7 +465,7 @@
                     console.log("Controlling via g50/g80");
                     parameters['control_via'] = 1;
                     for(i = 0; i < 6; i++){
-                        g50g80(i);
+                        controlParameters(i);
                     }
                     deactivateCRG65();
                     break;
@@ -466,7 +473,7 @@
                     console.log("Controlling via CR/g65");
                     parameters['control_via'] = 0;
                     for(i = 0; i < 6; i++){
-                        crg65(i);
+                        controlParameters(i);
                     }
                     deactivateG50G80();
                     break;
@@ -533,6 +540,74 @@
             }
         });
 
+        //input field control
+        $('input[type=number]').keyup(function(event){
+            var elem = event.target;
+            if(elem.name != "lvh_params") {
+                if (elem.dataset.index != 6) {
+                    console.log(elem.name, elem.dataset.index, Number(elem.value));
+                    parameters[elem.name][elem.dataset.index] = Number(elem.value);
+                    // elem.style.backgroundColor = "#FEEEBA";
+                    if (elem.name == "compression_ratio" || elem.name == "g50" || elem.name == "g65" || elem.name == "g80") {
+                        controlParameters(elem.dataset.index);
+                    }
+                }
+                else {
+                    //"All" input field
+                    var value = Number(elem.value);
+                    var currentElemArray = document.getElementsByName(elem.name);
+                    for (var i = 0; i < 6; i++) {
+                        currentElemArray[i].value = value;
+                        // currentElemArray[i].style.backgroundColor = "#FEEEBA";
+                        parameters[elem.name][i] = value;
+                        if (elem.name == "compression_ratio" || elem.name == "g50" || elem.name == "g65" || elem.name == "g80") {
+                            controlParameters(i);
+                        }
+                    }
+                }
+            }
+        }).click(function(){
+            $(this).select();
+        });
+
+
+        function controlParameters(id){
+            //controlling via CR/G65
+            if(parameters['control_via'] == 0){
+                var cr = parseFloat(document.getElementById("cr_" + id).value);
+                if (cr != 0) {
+                    slope = (1 - cr) / cr;
+                    var g65 = parseFloat(document.getElementById("g65_" + id).value);
+                    var g50 = g65 - (slope * 15);
+                    var g80 = g65 + (slope * 15);
+                    parameters['g50'][id] = g50;
+                    parameters['g80'][id] = g80;
+
+                    document.getElementById("g50_" + id).value = g50;
+                    // document.getElementById("g50_" + id).style.backgroundColor = "#FEEEBA";
+                    document.getElementById("g80_" + id).value = g80;
+                    // document.getElementById("g80_" + id).style.backgroundColor = "#FEEEBA";
+
+                }
+            }
+            //controlling via G50/G80
+            else if(parameters['control_via'] == 1){
+                var g50 = parseFloat(document.getElementById("g50_" + id).value);
+                var g80 = parseFloat(document.getElementById("g80_" + id).value);
+                var slope = (g80 - g50)/30;
+                var g65 = g50 + slope * 15;
+                parameters['g65'][id] = g65;
+                document.getElementById("g65_" + id).value = g65;
+                // document.getElementById("g65_" + id).style.backgroundColor = "#FEEEBA";
+
+                if(slope != -1){
+                    var cr = Math.round( (1 / (1 + slope)) * 100 ) / 100;
+                    parameters['compression_ratio'][id] = cr;
+                    document.getElementById("cr_" + id).value = cr;
+                    // document.getElementById("cr_" + id).style.backgroundColor = "#FEEEBA";
+                }
+            }
+        }
 
         /**
          * Deactivates compression ratio and G65 input fields. Used when switching to G50/G80 control
@@ -621,53 +696,53 @@
         }
 
 
-        /**
-         * Calculates and fills G50/G80 parameters and input fields based on CR/G65 input fields. Only works if app is
-         * set to be controlled via CR/G65
-         *
-         * @param id
-         */
-        function crg65(id){
-            if(this['parameters']['control_via'] == 0) {
-                var cr = parseFloat(document.getElementById("cr_" + id).value);
-                console.log(cr);
-                if (cr != 0) {
-                    slope = (1 - cr) / cr;
-                    var g65 = parseFloat(document.getElementById("g65_" + id).value);
-                    var g50 = g65 - (slope * 15);
-                    var g80 = g65 + (slope * 15);
-                    this['parameters']['g50'][id] = g50;
-                    this['parameters']['g80'][id] = g80;
-
-                    document.getElementById("g50_" + id).value = g50;
-                    document.getElementById("g80_" + id).value = g80;
-                }
-            }
-        }
-
-
-        /**
-         * Calculates and fills CR/G65 parameters and input fields based on G50/G80 input fields. Only works if app is
-         * set to be controlled via CR/G65
-         *
-         * @param id
-         */
-        function g50g80(id){
-            if(this['parameters']['control_via'] == 1) {
-                var g50 = parseFloat(document.getElementById("g50_" + id).value);
-                var g80 = parseFloat(document.getElementById("g80_" + id).value);
-                var slope = (g80 - g50)/30;
-                console.log("slope: ", slope);
-                var g65 = g50 + slope * 15;
-                this['parameters']['g65'][id] = g65;
-                if(slope != -1){
-                    var cr = Math.round( (1 / (1 + slope)) * 10 ) / 10;
-                    this['parameters']['compression_ratio'][id] = cr;
-                    document.getElementById("cr_" + id).value = cr;
-                }
-                document.getElementById("g65_" + id).value = g65;
-            }
-        }
+        // /**
+        //  * Calculates and fills G50/G80 parameters and input fields based on CR/G65 input fields. Only works if app is
+        //  * set to be controlled via CR/G65
+        //  *
+        //  * @param id
+        //  */
+        // function crg65(id){
+        //     if(this['parameters']['control_via'] == 0) {
+        //         var cr = parseFloat(document.getElementById("cr_" + id).value);
+        //         console.log(cr);
+        //         if (cr != 0) {
+        //             slope = (1 - cr) / cr;
+        //             var g65 = parseFloat(document.getElementById("g65_" + id).value);
+        //             var g50 = g65 - (slope * 15);
+        //             var g80 = g65 + (slope * 15);
+        //             this['parameters']['g50'][id] = g50;
+        //             this['parameters']['g80'][id] = g80;
+        //
+        //             document.getElementById("g50_" + id).value = g50;
+        //             document.getElementById("g80_" + id).value = g80;
+        //         }
+        //     }
+        // }
+        //
+        //
+        // /**
+        //  * Calculates and fills CR/G65 parameters and input fields based on G50/G80 input fields. Only works if app is
+        //  * set to be controlled via CR/G65
+        //  *
+        //  * @param id
+        //  */
+        // function g50g80(id){
+        //     if(this['parameters']['control_via'] == 1) {
+        //         var g50 = parseFloat(document.getElementById("g50_" + id).value);
+        //         var g80 = parseFloat(document.getElementById("g80_" + id).value);
+        //         var slope = (g80 - g50)/30;
+        //         console.log("slope: ", slope);
+        //         var g65 = g50 + slope * 15;
+        //         this['parameters']['g65'][id] = g65;
+        //         if(slope != -1){
+        //             var cr = Math.round( (1 / (1 + slope)) * 10 ) / 10;
+        //             this['parameters']['compression_ratio'][id] = cr;
+        //             document.getElementById("cr_" + id).value = cr;
+        //         }
+        //         document.getElementById("g65_" + id).value = g65;
+        //     }
+        // }
 
 
         /**
@@ -675,16 +750,16 @@
          * After calculating G65, calculates and fills G50/G80, and sets program to be controlled via
          */
         function calcg65(){
-            for(var i = 0; i < 6; i++){
-                this['parameters']['g65'][i] = this['parameters']['targets'][i] - this['parameters']['ltass'][i];
-                document.getElementById("g65_"+i).value = this['parameters']['g65'][i];
-                crg65(i);
-            }
             //if currently being controlled by g50g80, switch
             if(this['parameters']['control_via'] !== 0){
                 this['parameters']['control_via'] == 0;
                 $('#cr_g65').closest('.btn').button('toggle');
                 deactivateG50G80();
+            }
+            for(var i = 0; i < 6; i++){
+                this['parameters']['g65'][i] = this['parameters']['targets'][i] - this['parameters']['ltass'][i];
+                document.getElementById("g65_"+i).value = this['parameters']['g65'][i];
+                controlParameters(i);
             }
         }
 
@@ -719,49 +794,49 @@
 
         /** Upon updating the input field in HTML, the parameter element needs to be updated as well. **/
 
-        function targets(id){
-            this['parameters']['targets'][id] = parseFloat(document.getElementById("targets_"+id).value);
-        }
-        function ltass(id){
-            this['parameters']['ltass'][id] = parseFloat(document.getElementById("ltass_"+id).value);
-        }
-        function hl(id){
-            this['parameters']['hearing_loss'][id] = parseFloat(document.getElementById("hl_"+id).value);
-        }
-        function cr(id){
-            this['parameters']['compression_ratio'][id] = parseFloat(document.getElementById("cr_"+id).value);
-            crg65(id);
-        }
-        function g50(id){
-            this['parameters']['g50'][id] = parseFloat(document.getElementById("g50_"+id).value);
-            g50g80(id);
-        }
-        function g65(id){
-            this['parameters']['g65'][id] = parseFloat(document.getElementById("g65_"+id).value);
-            crg65(id);
-        }
-        function g80(id){
-            this['parameters']['g80'][id] = parseFloat(document.getElementById("g80_"+id).value);
-            g50g80(id);
-        }
-        function multiL(id){
-            this['parameters']['multiplier_l'][id] = parseFloat(document.getElementById("multiL_"+id).value);
-        }
-        function multiH(id){
-            this['parameters']['multiplier_h'][id] = parseFloat(document.getElementById("multiH_"+id).value);
-        }
-        function kneelow(id){
-            this['parameters']['knee_low'][id] = parseFloat(document.getElementById("kneelow_"+id).value);
-        }
-        function mpo(id){
-            this['parameters']['mpo_limit'][id] = parseFloat(document.getElementById("mpo_"+id).value);
-        }
-        function attack(id){
-            this['parameters']['attack'][id] = parseFloat(document.getElementById("attack_"+id).value);
-        }
-        function release(id){
-            this['parameters']['release'][id] = parseFloat(document.getElementById("release_"+id).value);
-        }
+        // function targets(id){
+        //     this['parameters']['targets'][id] = parseFloat(document.getElementById("targets_"+id).value);
+        // }
+        // function ltass(id){
+        //     this['parameters']['ltass'][id] = parseFloat(document.getElementById("ltass_"+id).value);
+        // }
+        // function hl(id){
+        //     this['parameters']['hearing_loss'][id] = parseFloat(document.getElementById("hl_"+id).value);
+        // }
+        // function cr(id){
+        //     this['parameters']['compression_ratio'][id] = parseFloat(document.getElementById("cr_"+id).value);
+        //     crg65(id);
+        // }
+        // function g50(id){
+        //     this['parameters']['g50'][id] = parseFloat(document.getElementById("g50_"+id).value);
+        //     g50g80(id);
+        // }
+        // function g65(id){
+        //     this['parameters']['g65'][id] = parseFloat(document.getElementById("g65_"+id).value);
+        //     crg65(id);
+        // }
+        // function g80(id){
+        //     this['parameters']['g80'][id] = parseFloat(document.getElementById("g80_"+id).value);
+        //     g50g80(id);
+        // }
+        // function multiL(id){
+        //     this['parameters']['multiplier_l'][id] = parseFloat(document.getElementById("multiL_"+id).value);
+        // }
+        // function multiH(id){
+        //     this['parameters']['multiplier_h'][id] = parseFloat(document.getElementById("multiH_"+id).value);
+        // }
+        // function kneelow(id){
+        //     this['parameters']['knee_low'][id] = parseFloat(document.getElementById("kneelow_"+id).value);
+        // }
+        // function mpo(id){
+        //     this['parameters']['mpo_limit'][id] = parseFloat(document.getElementById("mpo_"+id).value);
+        // }
+        // function attack(id){
+        //     this['parameters']['attack'][id] = parseFloat(document.getElementById("attack_"+id).value);
+        // }
+        // function release(id){
+        //     this['parameters']['release'][id] = parseFloat(document.getElementById("release_"+id).value);
+        // }
         function minL(){
             this['parameters']['l_min'] = parseFloat(document.getElementById("minL").value);
         }
@@ -842,20 +917,6 @@
 
 
         /**
-         * TODO
-         * Function will eventually change the color of the input field. Currently only replaces and empty field with a
-         * zero
-         *
-         * @param id
-         */
-        function changeColor(id){
-            if(document.getElementById(id).value == ""){
-                document.getElementById(id).value = 0;
-            }
-        }
-
-
-        /**
          * Change the values of the inner HTML elements and javascript parameters based on the program selected from
          * the dropdown menu. Also calls updateMostRecentProgram() to set this as the program the listener will
          * use when logging into the Goldilocks app.
@@ -866,7 +927,8 @@
         function changeProgram(id, progName){
             console.log('change program:', id);
             document.getElementById("btnGroupDrop1").innerHTML = progName;
-            var newProgram = this['programs'][id];
+            // var newProgram = this['programs'][id];
+            var newProgram = JSON.parse(JSON.stringify(programs[id]));
             this['parameters'] = newProgram;
             this['selectedProgram'] = id;
             console.log(this['parameters']);
@@ -932,6 +994,7 @@
                     document.getElementById("mpo_"+i).value = newProgram['mpo_limit'][i];
                     document.getElementById("attack_"+i).value = newProgram['attack'][i];
                     document.getElementById("release_"+i).value = newProgram['release'][i];
+                    document.getElementById("g50_max_"+i).value = newProgram['g50_max'][i];
                 }
                 else{
                     document.getElementById("cr_all").value = "";
@@ -942,6 +1005,7 @@
                     document.getElementById("mpo_all").value = "";
                     document.getElementById("attack_all").value = "";
                     document.getElementById("release_all").value = "";
+                    document.getElementById("g50_max_all").value = "";
                 }
             }
             document.getElementById("minL").value = newProgram['l_min'];
@@ -1012,15 +1076,20 @@
                         this['parameters']
                     ]),
                     success: function(response){
-                        console.log(response);
-                        $('#saveAsModal').modal('hide');
-                        alert("New program saved. Reloading.");
-                        location.reload();
+                        console.log(JSON.parse(response));
+                        if(JSON.parse(response)['status'] == "failure"){
+                            document.getElementById("modalInputError").innerHTML = "The name \"" + (document.getElementById("modalInput").value) + "\" is already taken.";
+                        }
+                        else {
+                            $('#saveAsModal').modal('hide');
+                            alert("New program saved. Refreshing the web page.");
+                            location.reload();
+                        }
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.log(JSON.stringify(jqXHR));
                         console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                        document.getElementById("modalInputError").innerHTML = "There was an error with your request";
+                        document.getElementById("modalInputError").innerHTML = "There was an error with your request.";
                     }
                 });
             }

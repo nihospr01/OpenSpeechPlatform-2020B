@@ -3,13 +3,6 @@
 #include "osp_param.h"
 #include "osp_process.hpp"
 
-/**
- * This is the main function to run OSP
- * @param argc Argument counter
- * @param argv Arguments
- * @return 0 if successful
- */
-
 int main(int argc, char* argv[]){
     unsigned num_cpus = std::thread::hardware_concurrency();
     std::cout << num_cpus << " threads available\n";

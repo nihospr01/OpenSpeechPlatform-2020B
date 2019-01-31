@@ -77,7 +77,7 @@ margin-bottom: 0;
 <body>
   <div class="container-fluid" style="background-color: #e8ecf1;">
     <div class="row">
-        <div  class="col-sm menu"><button type="button" class="btn btn-outline-dark btn-block">ID: {{ $listener->listener_id }}</button></div>
+        <div  class="col-sm menu"><button type="button" class="btn btn-outline-dark btn-block">{{ $listener->listener }}</button></div>
       </div>
     </div>
 
@@ -92,7 +92,7 @@ margin-bottom: 0;
     <div class= "row">
       <div class="col" >
         @foreach($programs as $program)
-          <button type="button" id="{{$program->id}}" class="btn btn-light btn-lg btn-block prgrm" onclick="changeProgram({{$program->id}})">{{$program->name}}</button>
+          <button type="button" id="program_{{$program->id}}" class="btn btn-light btn-lg btn-block prgrm" onclick="changeProgram({{$program->id}})">{{$program->name}}</button>
         @endforeach
 
         @if(count($programs) == 0)
@@ -107,7 +107,7 @@ margin-bottom: 0;
           <form method="POST" onsubmit="return validateForm()">
               {{ Form::token() }}
               <input type="hidden" id="program_id" name="program_id" value="-1">
-              {{--<button type="submit"  id="modify" class="btn btn-lg btn-info saveas" > Modify </button>--}}
+              <button type="submit"  id="modify" class="btn btn-lg btn-info saveas" > Modify </button>
           </form>
         </div>
       </div>
@@ -118,10 +118,20 @@ margin-bottom: 0;
 
         var selected;
 
+        var programs = JSON.parse("{{$parameters}}".replace(/&quot;/g,'"'));
+
+        //load in program
+        if("{{$listener->current_program_id}}" !== ""){
+            selectedProgram = Number("{{$listener->current_program_id}}");
+            $('#program_'+selectedProgram).focus();
+            changeProgram(selectedProgram);
+        }
+
         function changeProgram(id){
-            console.log(id);
+
             this['selected'] = id;
             document.getElementById("program_id").value = id;
+
             $.ajax({
                 method: 'POST',
                 headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}" },
@@ -130,7 +140,7 @@ margin-bottom: 0;
                     program_id: this['selected']
                 }),
                 success: function(response){
-                    console.log(response);
+                    console.log(response, "program changed");
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log(JSON.stringify(jqXHR));

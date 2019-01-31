@@ -35,12 +35,13 @@ public:
      * @param[in] c A parameter for adaptive filter
      * @param[in] power_estimate A parameter for adaptive filter
      * @param[in] delay_len The number of delay in samples
+     * @param[in] afc_on_off A flag to turn the AFC on (0: OFF, 1: ON)
      * @see adaptive_filter
      */
     explicit afc(float *bandlimited_filter_taps, size_t bandlimited_filter_tap_len, float *prefilter_taps,
                  size_t prefilter_tap_len, float *adaptive_filter_taps, size_t adaptive_filter_tap_len, size_t max_frame_size,
                  int adaptation_type, float mu, float delta, float rho, float alpha, float beta, float p, float c,
-                 float power_estimate, size_t delay_len);
+                 float power_estimate, size_t delay_len, int afc_on_off);
 
     /**
      * @brief AFC destructor
@@ -70,6 +71,25 @@ public:
      */
     int set_delay(size_t delay_len);
 
+    /**
+     * @brief Setting the ON/OFF for the AFC
+     * @param[in] afc_on_off A flag to turn the AFC on (False: OFF, True: ON)
+     */
+    void set_afc_on_off(int afc_on_off);
+
+    /**
+     * @brief Getting the ON/OFF for the AFC
+     * @param[in] afc_on_off A flag indicating the ON/OFF of AFC (False: OFF, True: ON)
+     */
+    void get_afc_on_off(int &afc_on_off);
+
+    /**
+     * @brief Reset the AFC filter to all zeros
+     * @param[in] default_taps The default AFC filter
+     * @param[in] len Length of the default AFC filter
+     */
+    void reset(float* default_taps, size_t len);
+
 private:
     filter* bandlimited_filter_;
     filter* prefilter_e_;
@@ -77,6 +97,7 @@ private:
     size_t delay_len_;
     circular_buffer* delay_buffer_;
     float* u_;
+    int afc_on_off_;
 };
 
 #endif //OSP_AFC_H

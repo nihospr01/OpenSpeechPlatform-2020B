@@ -1,444 +1,475 @@
+
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Dynamic Quiz Project</title>
-		<link type='text/css' rel='stylesheet' href='stylesheet.css'/>
-		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open Sans"/>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mobile.css') }}">
+    <script type="text/javascript" src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/popper.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $('.page-login').show();
+            
+            testerID= "";
+            participantID = "";
+            title = "";
+            partATitle = "";
+            var questions = [];
+            var currQuestion = 0;
+            var numQuestions = 0;
+            var singleRes = "";
+            var responses = [];
+            var multipleRes = new Set([]);
+            var isMultiple = [];
+            const titleRow = ["Questions#", "Participant's Answer"];
+            //log in handler
+            $('#login').click(function(event){
+                event.preventDefault();
+
+                //get the tester and participant ID
+                testerID = $('#testerID').val();
+                participantID = $('#participantID').val();
+
+                $('.page-login').hide();
+            
+                //load the questions from json file
+                async function load_survey(){
+                    try{
+                        const response = await fetch("ema.json");
+                       
+                        const survey = await response.json();
+                       
+                        return survey;
+                    }
+                    catch(err){
+                        alert(err.message);
+                    }
+                }
+
+                //resolve the promise from async load function
+                load_survey().then(data => {
+                    title = data["title"];
+                    partATitle = data["partA"];
+                    
+                    let tempQuestions = data["questions"];
+
+                    for(var i =0;i<tempQuestions.length;i++){
+                        if(tempQuestions[i]["question_title"]!==""){
+                            questions.push(tempQuestions[i]);
+                        }
+                    }
+
+                    console.log(questions);
+                    numQuestions = questions.length;
+                    for(var i =0;i<numQuestions;i++){
+                        isMultiple.push(questions[i]["isMultiple"]);
+                    }
+                    $("#SurveyTitle").show();
+                    $("#surveyTitle").text(title);
+                    $('#progressBar').css('width',(100/numQuestions)+'%');
+                });
+            });
+
+            $('#continue').click(function(event){
+                event.preventDefault();
+                $('#SurveyTitle').hide();
+                $("#partATitle").text(partATitle);
+                $('#PartA').show();
+                $('#nextQuestion').attr('disabled','disabled');
+            });
+
+            
+
+            $('#toQuestions').click(function(event){
+                event.preventDefault();
+                $('#PartA').hide();
+                $('#SurveyQuestioins').show();
+                setQuestions(currQuestion);
+            });
+
+            $('#nextQuestion').click(function(event){
+                event.preventDefault();
+                $('#nextQuestion').attr('disabled','disabled');
+                if(multipleRes.size === 0){
+                    responses.push(singleRes);
+                }
+                else{
+                    responses.push(multipleRes);
+                }
+                singleRes = "";
+                multipleRes = new Set([]);
+                currQuestion += 1;
+                if(currQuestion === numQuestions){
+                    $('#SurveyQuestioins').hide();
+                  
+                    $('#info').append("<p>Tester ID: "+testerID+"</p>");
+                    $('#info').append("<p>Participant ID: "+participantID+"</p>")
+                    
+                    //Fill out result form
+                    for(var i=0;i<numQuestions;i++){
+                        let res = "";
+                        if(isMultiple[i] == 1){
+                            var count = 1;
+                            responses[i].forEach(element => {
+                                let temp = "("+count+")"+element+".<br/> ";
+                                res += temp;
+                                count++;
+                            });
+                        }
+                        else{
+                            res = responses[i];
+                        }
+                       
+                        id = (i+1).toString();
+                        $("#resultTable tr:last").after(
+                            "<tr><th scope='row'>"+id+"</th><td style='text-align:left'>"+res+"</td><tr>"
+                        );
+                    }
+
+                    $("#SurveyResult").show();
+                    return;
+                }
+
+                if(currQuestion === numQuestions-1){
+                    $('#nextQuestion').text("Done");
+                }
+
+                $("#titleArea").empty();
+                $("#choiceArea").empty();
+                setQuestions(currQuestion);
+                var value = (currQuestion+1)*(100/numQuestions);
+                $('#progressBar').css('width',value+'%').attr('aria-valuenow',value);
+            });
+
+
+
+            $('#download').on("click",function(event){
+                event.preventDefault();
+                var ret = [];
+                ret.push(titleRow);
+                for(var i =0;i<numQuestions;i++){
+                    let line = [];
+                    line.push(i.toString());
+                    let ans = "";
+                    if(isMultiple[i] == 0){
+                        ans = responses[i];
+                    }
+                    else{
+                        var count = 1;
+                        responses[i].forEach(element => {
+                            let temp = "("+count+")"+element+" ";
+                            ans += temp;
+                            count++;
+                        });
+                    }
+                    line.push(ans);
+                    ret.push(line);
+                }
+     
+                let csvContent = "data:text/csv;charset=utf-8,";
+                ret.forEach(function(rowArray){
+                    let row = rowArray.join(";");
+                    csvContent += row+"\r\n";
+                });
+     
+                var encodeUri = encodeURI(csvContent);
+                window.open(encodeUri);
+
+            });
+
+
+
+            $('#prevQuestion').click(function(event){
+                event.preventDefault();
+                currQuestion -= 1;
+                singleRes = "";
+                multipleRes = new Set([]);
+                responses.pop();
+                if(currQuestion < 0){
+                    window.location.replace("/");
+                    return;
+                }
+                $("#titleArea").empty();
+                $("#choiceArea").empty();
+                setQuestions(currQuestion);
+                var value = (currQuestion+1)*(100/numQuestions);
+                $('#progressBar').css('width',value+'%').attr('aria-valuenow',value);
+            });
+
+
+            function setQuestions(questionIndex){
+                let title = questions[questionIndex]["question_title"];
+                $("<h4 style=>"+title+"</h4>").appendTo("#titleArea");
+                let choices = questions[questionIndex]["choices"];
+                var res = "";
+
+                //If the user can only select one answer
+                if(questions[questionIndex]["isMultiple"]===0){
+                    for(var i = 0;i<choices.length;i++){
+                        res += "<button class='btn btn-lg btn-outline-secondary btn-block btn-choice-single' >"+choices[i]+"</button>";
+                    }
+                    $(document).on("click", ".btn-choice-single", function(event){
+                        event.preventDefault();
+                        
+                        if(questions[questionIndex]["isMultiple"]===0){
+                            singleRes = $(this).text();
+                            $('#nextQuestion').removeAttr('disabled');
+                        }   
+                    }); 
+                }
+                //If the user can select multiple answers
+                else{
+                    for(var i = 0;i<choices.length;i++){
+                        res += "<button class='btn btn-lg btn-block btn-choice-multiple' >"+choices[i]+"</button>";
+                    }
+                    $(document).on("click", ".btn-choice-multiple", function(event){
+
+                        if($(this).hasClass("btn-secondary")){
+                            // $(this).toggleClass("btn-outline-secondary");
+                            multipleRes.delete($(this).text());
+                            $(this).toggleClass(" btn-secondary");
+                           
+                        }
+                        else{
+                            $(this).toggleClass("btn-secondary");
+                            multipleRes.add($(this).text());
+                            // $(this).removeClass("btn-secondary");
+                            
+                        } 
+                        if(multipleRes.size>0){
+                            $('#nextQuestion').removeAttr('disabled');
+                        }
+                    });
+
+                }
+
+                $(res).appendTo("#choiceArea");
+            }
+
+            $('#StartOver').on('click',function(event){
+                event.preventDefault();
+                location.reload(true);
+            });
+        });
+
+
+    </script>
+
+    <title>EMA</title>
 
     <style>
-    body {
-    font-family: Open Sans;
-}
-
-h1 {
-    text-align: center;
-}
-
-#title {
-    text-decoration: underline;
-}
-
-#quiz {
-    text-indent: 10px;
-    display:none;
-}
-
-.button {
-    border:4px solid;
-    border-radius:5px;
-    width: 40px;
-    padding-left:5px;
-    padding-right: 5px;
-    position: relative;
-    float:right;
-    background-color: #DCDCDC;
-    color: black;
-    margin: 0 2px 0 2px;
-}
-
-.button.active {
-    background-color: #F8F8FF;
-    color: #525252;
-}
-
-button {
-    position: relative;
-    float:right;
-}
-
-.button a {
-    text-decoration: none;
-    color: black;
-}
-
-#container {
-    width:50%;
-    margin:auto;
-    padding: 0 25px 40px 10px;
-    background-color: #1E90FF;
-    border:4px solid #B0E0E6;
-    border-radius:5px;
-    color: #FFFFFF;
-    font-weight: bold;
-    box-shadow: 5px 5px 5px #888;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-#prev {
-    display:none;
-}
-
-#start {
-    display:none;
-    width: 90px;
-}
-</style>
-	</head>
-
-
-	<body>
-    <script>
-    (function() {
-  var questions = [{
-    question: "What is 2*5?",
-    choices: [2, 5, 10, 15, 20],
-    correctAnswer: 2
-  }, {
-    question: "What is 3*6?",
-    choices: [3, 6, 9, 12, 18],
-    correctAnswer: 4
-  }, {
-    question: "What is 8*9?",
-    choices: [72, 99, 108, 134, 156],
-    correctAnswer: 0
-  }, {
-    question: "What is 1*7?",
-    choices: [4, 5, 6, 7, 8],
-    correctAnswer: 3
-  }, {
-    question: "What is 8*8?",
-    choices: [20, 30, 40, 50, 64],
-    correctAnswer: 4
-  }];
-
-  var questionCounter = 0; //Tracks question number
-  var selections = []; //Array containing user choices
-  var quiz = $('#quiz'); //Quiz div object
-
-  // Display initial question
-  displayNext();
-
-  // Click handler for the 'next' button
-  $('#next').on('click', function (e) {
-    e.preventDefault();
-
-    // Suspend click listener during fade animation
-    if(quiz.is(':animated')) {
-      return false;
-    }
-    choose();
-
-    // If no user selection, progress is stopped
-    if (isNaN(selections[questionCounter])) {
-      alert('Please make a selection!');
-    } else {
-      questionCounter++;
-      displayNext();
-    }
-  });
-
-  // Click handler for the 'prev' button
-  $('#prev').on('click', function (e) {
-    e.preventDefault();
-
-    if(quiz.is(':animated')) {
-      return false;
-    }
-    choose();
-    questionCounter--;
-    displayNext();
-  });
-
-  // Click handler for the 'Start Over' button
-  $('#start').on('click', function (e) {
-    e.preventDefault();
-
-    if(quiz.is(':animated')) {
-      return false;
-    }
-    questionCounter = 0;
-    selections = [];
-    displayNext();
-    $('#start').hide();
-  });
-
-  // Animates buttons on hover
-  $('.button').on('mouseenter', function () {
-    $(this).addClass('active');
-  });
-  $('.button').on('mouseleave', function () {
-    $(this).removeClass('active');
-  });
-
-  // Creates and returns the div that contains the questions and
-  // the answer selections
-  function createQuestionElement(index) {
-    var qElement = $('<div>', {
-      id: 'question'
-    });
-
-    var header = $('<h2>Question ' + (index + 1) + ':</h2>');
-    qElement.append(header);
-
-    var question = $('<p>').append(questions[index].question);
-    qElement.append(question);
-
-    var radioButtons = createRadios(index);
-    qElement.append(radioButtons);
-
-    return qElement;
-  }
-
-  // Creates a list of the answer choices as radio inputs
-  function createRadios(index) {
-    var radioList = $('<ul>');
-    var item;
-    var input = '';
-    for (var i = 0; i < questions[index].choices.length; i++) {
-      item = $('<li>');
-      input = '<input type="radio" name="answer" value=' + i + ' />';
-      input += questions[index].choices[i];
-      item.append(input);
-      radioList.append(item);
-    }
-    return radioList;
-  }
-
-  // Reads the user selection and pushes the value to an array
-  function choose() {
-    selections[questionCounter] = +$('input[name="answer"]:checked').val();
-  }
-
-  // Displays next requested element
-  function displayNext() {
-    quiz.fadeOut(function() {
-      $('#question').remove();
-
-      if(questionCounter < questions.length){
-        var nextQuestion = createQuestionElement(questionCounter);
-        quiz.append(nextQuestion).fadeIn();
-        if (!(isNaN(selections[questionCounter]))) {
-          $('input[value='+selections[questionCounter]+']').prop('checked', true);
+        .page-login{
+            /* display: none; */
         }
 
-        // Controls display of 'prev' button
-        if(questionCounter === 1){
-          $('#prev').show();
-        } else if(questionCounter === 0){
-
-          $('#prev').hide();
-          $('#next').show();
+        #SurveyTitle{
+            display: none;
         }
-      }else {
-        var scoreElem = displayScore();
-        quiz.append(scoreElem).fadeIn();
-        $('#next').hide();
-        $('#prev').hide();
-        $('#start').show();
-      }
-    });
-  }
 
-  // Computes score and returns a paragraph element to be displayed
-  function displayScore() {
-    var score = $('<p>',{id: 'question'});
+        #PartA{
+            display: none;
+        }
 
-    var numCorrect = 0;
-    for (var i = 0; i < selections.length; i++) {
-      if (selections[i] === questions[i].correctAnswer) {
-        numCorrect++;
-      }
-    }
+        #SurveyResult{
+            display: none;
+        }
 
-    score.append('You got ' + numCorrect + ' questions out of ' +
-                 questions.length + ' right!!!');
-    return score;
-  }
-})();
-</script>
+        .btn-choice-single{
+            white-space: normal;
+        }
 
-		<div id='container'>
-			<div id='title'>
-				<h1>Learning Js Properly: Project #1 - Dynamic Quiz</h1>
-			</div>
-   			<br/>
-  			<div id='quiz'></div>
-    		<div class='btn' id='next'><a href='#'>Next</a></div>
-    		<div class='btn' id='prev'><a href='#'>Prev</a></div>
-    		<div class='btn' id='start'> <a href='#'>Start Over</a></div>
-    		<!-- <button class='' id='next'>Next</a></button>
-    		<button class='' id='prev'>Prev</a></button>
-    		<button class='' id='start'> Start Over</a></button> -->
-    	</div>
+        .btn-choice-multiple{
+            white-space: normal;
+        }
+        
+        .progress{
+            margin-bottom: 20px;
+        }
+        .container-login{
+            justify-content: center;
+            text-align: center;
+            margin-top: 50px;
+        }
 
-		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
-		<script type="text/javascript" src='questions.json'></script>
-		<script type='text/javascript' src='jsquiz.js'></script>
-	</body>
+        .description{
+            margin-top:15px;
+            margin-bottom: 15px;
+        }
 
-  <script>
-  (function() {
-var questions = [{
-  question: "What is 2*5?",
-  choices: [2, 5, 10, 15, 20],
-  correctAnswer: 2
-}, {
-  question: "What is 3*6?",
-  choices: [3, 6, 9, 12, 18],
-  correctAnswer: 4
-}, {
-  question: "What is 8*9?",
-  choices: [72, 99, 108, 134, 156],
-  correctAnswer: 0
-}, {
-  question: "What is 1*7?",
-  choices: [4, 5, 6, 7, 8],
-  correctAnswer: 3
-}, {
-  question: "What is 8*8?",
-  choices: [20, 30, 40, 50, 64],
-  correctAnswer: 4
-}];
+        .container-questions{
+            justify-content: center;
+            text-align: center;
+            margin-top: 30px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .form-group{
+            max-width: 300px;
+            margin: auto;
+        }
 
-var questionCounter = 0; //Tracks question number
-var selections = []; //Array containing user choices
-var quiz = $('#quiz'); //Quiz div object
+        .form-control{
+            margin-bottom: 10px;
+        }
 
-// Display initial question
-displayNext();
+        .btn-margin{
+            margin-bottom: 10px;
+        }
 
-// Click handler for the 'next' button
-$('#next').on('click', function (e) {
-  e.preventDefault();
+        .AppTitle{
+            margin-bottom: 20px;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-  // Suspend click listener during fade animation
-  if(quiz.is(':animated')) {
-    return false;
-  }
-  choose();
+        #progressBar{
+            width: 0%;
+        }
 
-  // If no user selection, progress is stopped
-  if (isNaN(selections[questionCounter])) {
-    alert('Please make a selection!');
-  } else {
-    questionCounter++;
-    displayNext();
-  }
-});
+        #resultTable{
+            margin-top: 20px;
+        }
 
-// Click handler for the 'prev' button
-$('#prev').on('click', function (e) {
-  e.preventDefault();
+    </style>
+</head>
+<body>
 
-  if(quiz.is(':animated')) {
-    return false;
-  }
-  choose();
-  questionCounter--;
-  displayNext();
-});
+    {{-- Section for log in page --}}
+    <section class = "page-login">
+        <div class="container-login">
+            <h3 class="AppTitle">EMA Web App</h3>
+            <div class="form-group">
+            <input class="form-control" type="text" placeholder="Tester ID" id = "testerID">
+            <input class="form-control" itype="text" placeholder="Participant ID" id = "participantID">
+            </div>
+            <div style="max-width:150px; margin:auto">
+                <button type="button" class="btn btn-info btn-block" id="login">Log in</button>
+            <a href = "{{url('/')}}" class="btn btn-outline-danger btn-block">Exit</a>
+            </div>
+            
+        </div>
+    </section>
 
-// Click handler for the 'Start Over' button
-$('#start').on('click', function (e) {
-  e.preventDefault();
+    {{-- section for task description --}}
+    <section id = "SurveyTitle">
+        <div class="container-questions">    
+            <div class="AppTitle" style="text-align:left">
+                <h4 id = "surveyTitle">
+                
+                </h4>
+            </div>
+            <div style="max-width:300px;margin:auto">
+                <button class="btn btn-info btn-lg btn-block" id = "continue">
+                    Continue
+                </button>
+                <a href="{{ url('/') }}" class = "btn btn-outline-danger btn-lg btn-block" >
+                    Exit
+                </a>
+            </div>
+        </div>
+    </section>
 
-  if(quiz.is(':animated')) {
-    return false;
-  }
-  questionCounter = 0;
-  selections = [];
-  displayNext();
-  $('#start').hide();
-});
 
-// Animates buttons on hover
-$('.button').on('mouseenter', function () {
-  $(this).addClass('active');
-});
-$('.button').on('mouseleave', function () {
-  $(this).removeClass('active');
-});
+    {{-- Section for Part-A Description --}}
+    <section id = "PartA">
+            <div class="container-questions">
+                
+                <div class="AppTitle" style="text-align:left">
+                    <h4 id = "partATitle">
+                    
+                    </h4>
+                </div>
+                <div style="max-width:300px;margin:auto">
+                    <button class="btn btn-info btn-lg btn-block" id="toQuestions">
+                        Next ->
+                    </button>
+                </div>
+            </div>
+    </section>
 
-// Creates and returns the div that contains the questions and
-// the answer selections
-function createQuestionElement(index) {
-  var qElement = $('<div>', {
-    id: 'question'
-  });
+    {{-- Sections for actual survey questions --}}
+    <section id = "SurveyQuestioins" style="display:none">
 
-  var header = $('<h2>Question ' + (index + 1) + ':</h2>');
-  qElement.append(header);
+            <div class="container-questions">
+                <div class="progress">
+                    <div class="progress-bar bg-info"
+                    role="progressbar"
+                    aria-valuenow="10"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    id = "progressBar"
+                    >
+                    </div>
+                </div>
+                    <div class="AppTitle" style="text-align:left" id = "titleArea">
+    
+                    </div>
 
-  var question = $('<p>').append(questions[index].question);
-  qElement.append(question);
+                    <div style="max-width:300px;margin-left:auto;margin-right:auto;margin-bottom:30px" id="choiceArea">
+                        
+                    </div>
 
-  var radioButtons = createRadios(index);
-  qElement.append(radioButtons);
+                    <div style="max-width:300px;margin:auto;display:flex" id="controlArea">
+                        <button class="btn btn-danger btn-lg "
+                            id = "prevQuestion"
+                            style="flex-grow:1; margin-right:5px">
+                            <- Back
+                        </button>
+                        <button class="btn btn-info btn-lg " 
+                                id  = "nextQuestion"    
+                                style="flex-grow:1; margin-left:5px">
+                            Next ->
+                        </button>
+                    </div>
+            </div>
+    </section>
 
-  return qElement;
-}
+    {{-- Section for survey result --}}
+    <section id="SurveyResult">
+        <div class="container-login">
+            <h4 class="AppTitle">Survey has ended. <br> Plesase confirm your response.
+            </h5>
 
-// Creates a list of the answer choices as radio inputs
-function createRadios(index) {
-  var radioList = $('<ul>');
-  var item;
-  var input = '';
-  for (var i = 0; i < questions[index].choices.length; i++) {
-    item = $('<li>');
-    input = '<input type="radio" name="answer" value=' + i + ' />';
-    input += questions[index].choices[i];
-    item.append(input);
-    radioList.append(item);
-  }
-  return radioList;
-}
+            <div class="container" id = "info"> 
+            </div>
 
-// Reads the user selection and pushes the value to an array
-function choose() {
-  selections[questionCounter] = +$('input[name="answer"]:checked').val();
-}
+            <div class="container">
+                <table class="table" id="resultTable">
+                        <thead>
+                            <tr>
+                            <th scope="col">Question #</th>
+                            <th scope="col">Participant's Answer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                </table>
+                <div style="max-width:300px;margin:auto;">
+                        <button class="btn btn-info btn-lg btn-block" 
+                                id  = "download"    
+                        >
+                            Download Result
+                        </button>
+                        <button class="btn btn-outline-danger btn-lg btn-block"
+                                id = "StartOver"
+                        >
+                            Start Over
+                        </button>
+                </div>
+            </div>
 
-// Displays next requested element
-function displayNext() {
-  quiz.fadeOut(function() {
-    $('#question').remove();
+        </div>
 
-    if(questionCounter < questions.length){
-      var nextQuestion = createQuestionElement(questionCounter);
-      quiz.append(nextQuestion).fadeIn();
-      if (!(isNaN(selections[questionCounter]))) {
-        $('input[value='+selections[questionCounter]+']').prop('checked', true);
-      }
 
-      // Controls display of 'prev' button
-      if(questionCounter === 1){
-        $('#prev').show();
-      } else if(questionCounter === 0){
 
-        $('#prev').hide();
-        $('#next').show();
-      }
-    }else {
-      var scoreElem = displayScore();
-      quiz.append(scoreElem).fadeIn();
-      $('#next').hide();
-      $('#prev').hide();
-      $('#start').show();
-    }
-  });
-}
+    </section>
 
-// Computes score and returns a paragraph element to be displayed
-function displayScore() {
-  var score = $('<p>',{id: 'question'});
 
-  var numCorrect = 0;
-  for (var i = 0; i < selections.length; i++) {
-    if (selections[i] === questions[i].correctAnswer) {
-      numCorrect++;
-    }
-  }
-
-  score.append('You got ' + numCorrect + ' questions out of ' +
-               questions.length + ' right!!!');
-  return score;
-}
-})();
-</script>
-
+</body>
 </html>

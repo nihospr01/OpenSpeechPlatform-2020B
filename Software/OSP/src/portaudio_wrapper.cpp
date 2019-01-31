@@ -5,8 +5,6 @@
 #define PA_SAMPLE_TYPE paFloat32
 
 
-
-
 portaudio_wrapper::portaudio_wrapper(int in_device, int in_num_channel, int out_device, int out_num_channels,
                                      PaStreamCallback callback, void *userData, int sample_rate,
                                      unsigned long frames_per_buffer){

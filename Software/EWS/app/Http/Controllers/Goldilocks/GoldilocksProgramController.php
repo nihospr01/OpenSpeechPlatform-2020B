@@ -43,11 +43,16 @@ class GoldilocksProgramController extends Controller
 
         //get data from request
         $data = $request->json()->all();
+        $program_name = $data[0];
+
+        if(GoldilocksProgram::where(['listener_id' => $listener->id, 'name' => $program_name])->exists()){
+            return json_encode(['status' => 'failure']);
+        }
 
         //create new program in database
         $program = GoldilocksProgram::create([
             'listener_id' => $listener->id,
-            'name' => $data[0],
+            'name' => $program_name,
             'parameters' => json_encode($data[1])
         ]);
 

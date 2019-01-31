@@ -31,8 +31,7 @@
 #define D_G80 0
 #define D_KNEE_LOW	45	///< Lower kneepoint in dB SPL. Using the same value for all the bands
 #define D_KNEE_HIGH	120	///< Upper kneepoint in dB SPL. Using the same value for all the bands
-#define D_MPO 120
-
+#define GLOBAL_MPO 120 /// The global MPO
 
 #define D_NOISE_ESTIMATION 0
 #define D_SPECTRAL_SUB 0
@@ -40,7 +39,9 @@
 #define D_ATTENUATION -20
 
 /*** AFC defaults ***/
-#define AFC_DELAY 150 /// delay in number of samples before bandlimited filter
+#define AFC_ON_OFF 1 /// AFC ON/OFF
+#define AFC_RESET 0 /// reset the taps of AFC filter to default values
+#define AFC_DELAY 4.6875 /// delay in millisecond for 32k Hz before bandlimited filter (originally, the delay is in number of samples, 150)
 #define AFC_MU 0.005 /// step size
 #define AFC_RHO 0.985 /// forgetting factor
 #define AFC_PE 0 /// power estimate
@@ -66,11 +67,10 @@ typedef struct osp_user_data_t {
     std::vector<float> g50 = std::vector<float>(NUM_BANDS, D_G50);			///< The gain values at 50 dB SPL input level
     std::vector<float> g80 = std::vector<float>(NUM_BANDS,D_G80 );			///< The gain values at 80 dB SPL input level
     std::vector<float> knee_low = std::vector<float>(NUM_BANDS,D_KNEE_LOW );	///< Lower kneepoints for all bands
-    std::vector<float> knee_high = std::vector<float>(NUM_BANDS,D_KNEE_HIGH );	///< Upper kneepoints for all bands
+    std::vector<float> mpo_band = std::vector<float>(NUM_BANDS,D_KNEE_HIGH );	///< MPO for all bands (upper kneepoints for all bands)
     std::vector<float> attack = std::vector<float>(NUM_BANDS,D_ATTACK_TIME );		///< Attack time for WDRC for all bands
     std::vector<float> release = std::vector<float>(NUM_BANDS,D_RELEASE_TIME );		///< Release time for WDRC for all bands
-    float mpo = D_MPO;					///< MPO for Max power limit for WDRC
-
+    float global_mpo = GLOBAL_MPO; /// The global MPO
 
     // Noise management parameters
 
@@ -79,9 +79,10 @@ typedef struct osp_user_data_t {
     float spectral_subtraction = D_SPECTRAL_SUB; ///< Spectral subtraction Param
 
     // Adaptive Feedback management parameters
-
-    int afc = D_AFC; ///< AFC Type -1: return y_hat=0, 0: stop adaptation, 1: FXLMS, 2: PMLMS, 3: SLMS
-    size_t afc_delay = AFC_DELAY;
+    int afc = AFC_ON_OFF; /// AFC ON/OFF
+    int afc_reset = AFC_RESET; /// reset the taps of AFC filter to default values (not a state, afc_reset is actually a signal)
+    int afc_type = D_AFC; ///< AFC Type -1: return y_hat=0, 0: stop adaptation, 1: FXLMS, 2: IPNLMS, 3: SLMS
+    float afc_delay = AFC_DELAY;
     float afc_mu = AFC_MU; /// step size
     float afc_rho = AFC_RHO; /// forgetting factor
     float afc_power_estimate = AFC_PE; /// power estimate
@@ -102,14 +103,16 @@ typedef struct osp_user_data_t {
                  CEREAL_NVP(g50),
                  CEREAL_NVP(g80),
                  CEREAL_NVP(knee_low),
-                 CEREAL_NVP(knee_high),
+                 CEREAL_NVP(mpo_band),
                  CEREAL_NVP(attack),
                  CEREAL_NVP(release),
-                 CEREAL_NVP(mpo),
+                 CEREAL_NVP(global_mpo),
                  CEREAL_NVP(noise_estimation_type),
                  CEREAL_NVP(spectral_type),
                  CEREAL_NVP(spectral_subtraction),
                  CEREAL_NVP(afc),
+                 CEREAL_NVP(afc_reset),
+                 CEREAL_NVP(afc_type),
                  CEREAL_NVP(afc_delay),
                  CEREAL_NVP(afc_mu),
                  CEREAL_NVP(afc_rho),

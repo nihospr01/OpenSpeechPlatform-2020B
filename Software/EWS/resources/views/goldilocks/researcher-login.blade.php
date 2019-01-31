@@ -58,7 +58,11 @@
                     <a href="{{ url('/goldilocks/admin/listeners') }}" class="btn1 btn-secondary btn-block1">Click Here To Create Listener</a>
                 @endif
             </div>
+
+            <a class="btn btn-info btn-sm" style = "margin-top:20px;margin-left:20px;"
+            href="{{url('/goldilocks')}}" role="button" >Home</a>
         </div>
+
     </div>
 </body>
 
