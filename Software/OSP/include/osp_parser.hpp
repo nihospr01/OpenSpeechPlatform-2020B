@@ -28,19 +28,21 @@ public:
                 .show_positional_help();
         options
                 ->add_options("Parameters")
-                        ("channel", "0 - Both Channel; 1 - Left Channel; 2 - Right Channel ", cxxopts::value<int>()->default_value("0"))
-                        ("en_ha", "Enable hearing aid algorithm: false - Disable; true - Enable", cxxopts::value<int>()->default_value("1"))
-                        ("rear_mics", "Enable rear microphones: false - Disable; true - Enable", cxxopts::value<int>()->default_value("0"))
+                        ("channel", "Set channel: 0 - Both Channel; 1 - Left Channel; 2 - Right Channel ", cxxopts::value<int>()->default_value("0"))
+                        ("en_ha", "Enable hearing aid algorithm: 0 - Disable; 1 - Enable", cxxopts::value<int>()->default_value("1"))
+                        ("rear_mics", "Enable rear microphones: 0 - Disable; 1 - Enable", cxxopts::value<int>()->default_value("0"))
                         ("gain", "Set the gain in dB", cxxopts::value<float>()->default_value("-20"))
                         ("g50", "Set the gain values at 50 dB SPL input level", cxxopts::value<std::string>())
                         ("g80", "Set the gain values at 80 dB SPL input level", cxxopts::value<std::string>())
                         ("knee_low", "Set the lower knee points for the bands", cxxopts::value<std::string>())
-                        ("knee_high", "Set the upper knee points for the bands", cxxopts::value<std::string>())
+                        ("mpo_band", "Set the MPO (upper knee points) for the bands", cxxopts::value<std::string>())
                         ("attack", "Set the attack time for WDRC for the bands", cxxopts::value<std::string>())
                         ("release", "Set the release time for WDRC for the bands", cxxopts::value<std::string>())
-                        ("mpo", "Set the mpo limit for all the bands", cxxopts::value<float>()->default_value("100"))
-                        ("afc", "Adaptive Feedback Cancellation: -1 - Reset AFC; 0 - AFC off; 1 - FXLMS; 2 - PMLMS; 3 - SLMS", cxxopts::value<int>()->default_value("3"))
-                        ("afc_delay", "Delay to adjust for device to device variation in feedback path", cxxopts::value<size_t>()->default_value("150"))
+                        ("global_mpo", "Set the global mpo limit", cxxopts::value<float>()->default_value("120"))
+                        ("afc", "Enable Adaptive Feedback Cancellation: 0 - Disable; 1 - Enable", cxxopts::value<int>()->default_value("1"))
+                        ("afc_reset", "Reset the taps of AFC filter to default values: 0 - Nothing; 1 - Reset", cxxopts::value<int>()->default_value("0"))
+                        ("afc_type", "Adaptation type for Adaptive Feedback Cancellation: 0 - Stop adaptation; 1 - FXLMS; 2 - IPNLMS; 3 - SLMS", cxxopts::value<int>()->default_value("3"))
+                        ("afc_delay", "Delay in millisecond to adjust for device to device variation in feedback path", cxxopts::value<float>()->default_value("4.6875"))
                         ("afc_mu", "Adjust the step size for feedback management", cxxopts::value<float>()->default_value("0.005"))
                         ("afc_rho", "Adjust the forgetting factor for feedback management", cxxopts::value<float>()->default_value("0.985"))
                         ("afc_power_estimate", "Adjust the power estimate for feedback management", cxxopts::value<float>()->default_value("0.0"))
@@ -89,11 +91,23 @@ public:
                 if(channel == 0 || channel == 2)
                     right->afc = result["afc"].as<int>();
             }
+            if(result.count("afc_reset")){
+                if(channel == 0 || channel == 1)
+                    left->afc_reset = result["afc_reset"].as<int>();
+                if(channel == 0 || channel == 2)
+                    right->afc_reset = result["afc_reset"].as<int>();
+            }
+            if(result.count("afc_type")){
+                if(channel == 0 || channel == 1)
+                    left->afc_type = result["afc_type"].as<int>();
+                if(channel == 0 || channel == 2)
+                    right->afc_type = result["afc_type"].as<int>();
+            }
             if(result.count("afc_delay")){
                 if(channel == 0 || channel == 1)
-                    left->afc_delay = result["afc_delay"].as<size_t>();
+                    left->afc_delay = result["afc_delay"].as<float>();
                 if(channel == 0 || channel == 2)
-                    right->afc_delay = result["afc_delay"].as<size_t>();
+                    right->afc_delay = result["afc_delay"].as<float>();
             }
             if(result.count("afc_mu")){
                 if(channel == 0 || channel == 1)
@@ -185,22 +199,22 @@ public:
                     std::cout << "For knee_low please have " << NUM_BANDS << " bands worth of data."  << std::endl;
                 }
             }
-            if(result.count("knee_high")){
+            if(result.count("mpo_band")){
 
-                auto& knee_high = result["knee_high"].as<std::string>();
+                auto& knee_high = result["mpo_band"].as<std::string>();
                 std::istringstream iss(knee_high);
                 std::vector<std::string> knee_high_arr((std::istream_iterator<WordDelimitedBy<','>>(iss)),
                                                  std::istream_iterator<WordDelimitedBy<','>>());
                 if(knee_high_arr.size() == NUM_BANDS) {
                     for (int j = 0; j < NUM_BANDS; j++) {
                         if(channel == 0 || channel == 1)
-                            left->knee_high[j] = stof(knee_high_arr[j]);
+                            left->mpo_band[j] = stof(knee_high_arr[j]);
                         if(channel == 0 || channel == 2)
-                            right->knee_high[j] = stof(knee_high_arr[j]);
+                            right->mpo_band[j] = stof(knee_high_arr[j]);
                     }
                 }
                 else{
-                    std::cout << "For knee_high please have " << NUM_BANDS << " bands worth of data."  << std::endl;
+                    std::cout << "For mpo_band please have " << NUM_BANDS << " bands worth of data."  << std::endl;
                 }
             }
             if(result.count("attack")){
@@ -239,11 +253,11 @@ public:
                     std::cout << "For release please have " << NUM_BANDS << " bands worth of data."  << std::endl;
                 }
             }
-            if(result.count("mpo")){
+            if(result.count("global_mpo")){
                 if(channel == 0 || channel == 1)
-                    left->mpo = result["mpo"].as<float>();
+                    left->global_mpo = result["global_mpo"].as<float>();
                 if(channel == 0 || channel == 2)
-                    right->mpo = result["mpo"].as<float>();
+                    right->global_mpo = result["global_mpo"].as<float>();
             }
             if(result.count("gain")){
                 if(channel == 0 || channel == 1)
@@ -305,7 +319,7 @@ public:
                 std::cout << str << "}" << std::endl;
             }
             if (result.count("help")) {
-                std::cout << options->help({"OSP Parameters", "Control Signals"}) << std::endl;
+                std::cout << options->help({"Parameters", "Control Signals"}) << std::endl;
             }
 
             std::cout << "Done" << std::endl;

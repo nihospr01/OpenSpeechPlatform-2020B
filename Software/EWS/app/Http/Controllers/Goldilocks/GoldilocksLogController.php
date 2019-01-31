@@ -114,7 +114,27 @@ class GoldilocksLogController extends Controller
             ,   'Pragma'              => 'public'
         ];
 
-        $list = GoldilocksLog::all()->toArray();
+        //grab form database
+        $logs = GoldilocksLog::all()->toArray();
+
+        //alter data to show lvh as separate columns, and in the right order
+        $list = [];
+        foreach($logs as $item){
+            $values = json_decode($item['lvh_values']);
+
+            $temp = [
+                'id' => $item['id'],
+                'listener_id' => $item['listener_id'],
+                'action' => $item['action'],
+                'l_value' => $values->l_value,
+                'v_value' => $values->v_value,
+                'h_value' => $values->h_value,
+                'program_state' => $item['program_state'],
+                'created_at' => $item['created_at'],
+                'updated_at' => $item['updated_at']
+            ];
+            array_push($list, $temp);
+        }
 
         //only continue if there are elements in the array
         if(count($list) > 0) {

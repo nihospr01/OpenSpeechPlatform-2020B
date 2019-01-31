@@ -47,6 +47,16 @@
             </tbody>
         </table>
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-3 offset-9">
                 <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#newListenerModal">Create New</button>

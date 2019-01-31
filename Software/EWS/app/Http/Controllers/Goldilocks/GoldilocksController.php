@@ -188,17 +188,31 @@ class GoldilocksController extends Controller
      *
      * @return View
      */
-    public function selfAdjustment(){
+    public function selfAdjustment($program_id = null){
         $listener = GoldilocksListener::where('listener', session('listener'))->first();
         $parameters = null;
-        $program_id = null;
+        if($program_id){
+            $program = GoldilocksProgram::where('id', $program_id)->firstOrFail();
+            $parameters = $program->parameters;
+        }
+
 
         //get most recent program for use if it exists
-        if($listener->current_program_id != null){
+        if($program_id == null && $listener->current_program_id != null){
             $program_id = $listener->current_program_id;
             $program = GoldilocksProgram::where('id', $program_id)->first();
             $parameters = $program->parameters;
+
+            //check to see if it's listener only
+            $data = json_decode($parameters);
+            if($data->app_behavior == 1){
+                return view('goldilocks.listener', compact('listener', 'parameters', 'program_id'));
+            }
+            else{
+                return redirect('/goldilocks/listener/programs');
+            }
         }
+
 
         return view('goldilocks.listener', compact('listener', 'parameters', 'program_id'));
     }
@@ -209,9 +223,40 @@ class GoldilocksController extends Controller
      * @return View
      */
     public function programsPage(){
-        $listener = GoldilocksListener::where('listener', session('listener'))->first();
-        $programs = $listener->programs;
-        return view('goldilocks.programs', compact('listener', 'programs'));
+        $listener = GoldilocksListener::where('listener', session('listener'))->firstOrFail();
 
+        //if user is supposed to have volume only, redirect
+        if($listener->current_program_id != null){
+            $program_id = $listener->current_program_id;
+            $program = GoldilocksProgram::where('id', $program_id)->firstOrFail();
+            $parameters = $program->parameters;
+            $data = json_decode($parameters);
+            if($data->app_behavior == 1){
+                return redirect('/goldilocks/listener');
+            }
+        }
+
+
+
+        $programs = $listener->programs;
+
+        $parameters = [];
+        foreach($programs as $p){
+            $parameters[$p->id] = json_decode($p->parameters);
+        }
+
+        $parameters = json_encode($parameters);
+
+        return view('goldilocks.programs', compact('listener', 'programs', 'parameters'));
+
+    }
+
+    public function modifyProgram(Request $request){
+//        $listener = GoldilocksListener::where('listener', session('listener'))->firstOrFail();
+        $program_id = $request->input('program_id');
+//        $program = GoldilocksProgram::where('id', $program_id)->firstOrFail();
+//        $parameters = $program->parameters;
+
+        return $this->selfAdjustment($program_id);
     }
 }

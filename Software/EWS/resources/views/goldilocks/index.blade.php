@@ -9,7 +9,28 @@
     <script type="text/javascript" src="{{ asset('js/popper.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js')}}"></script>
 
-    <title>Goldilocks v1.0</title>
+    <title>Goldilocks</title>
+    <style>
+
+        #home{
+            text-align:left;
+        }
+
+        #version{
+            text-align:right;
+        }
+
+        @media (max-width:576px) {
+            #home{
+                text-align:center;
+                margin-bottom:10px;
+            }
+            #version{
+                text-align:center;
+            }
+        }
+
+    </style>
 </head>
 
 
@@ -29,6 +50,14 @@
             <a href="{{ url('/goldilocks/logs') }}" class="list-group-item list-group-item-action">Download Logs</a>
         </div>
 
+        <div class="row" style="margin-top: 15px">
+            <div class="col-sm-8" id = "home" >
+                <a class="btn btn-info btn-sm" href="{{url('/')}}" role="button" >Home</a>
+            </div>
+            <div class="col-sm-4 " id = "version">
+                <p>Version 1.0.1</p>
+            </div>
+        </div>
 
     </div>
 

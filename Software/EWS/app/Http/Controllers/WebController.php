@@ -105,4 +105,8 @@ class WebController extends Controller
     public function load4AFC(){
         return view('4afc');
     }
+
+    public function loadEMA(){
+        return view('ema');
+    }
 }

@@ -65,8 +65,20 @@ public:
                 noiseMangement[channel][band] = new noise_management(user_data[channel].noise_estimation_type, user_data[channel].spectral_type,
                                                  user_data[channel].spectral_subtraction, samp_freq);
                 peakDetect[channel][band] = new peak_detect(samp_freq, user_data[channel].attack[band], user_data[channel].release[band]);
-                wdrcs[channel][band] = new wdrc(user_data[channel].g50[band], user_data[channel].g80[band], user_data[channel].knee_low[band], user_data[channel].mpo);
+                wdrcs[channel][band] = new wdrc(user_data[channel].g50[band], user_data[channel].g80[band], user_data[channel].knee_low[band], user_data[channel].knee_high[band]);
             }
+            // average attack and release time from each band for the global MPO
+            float global_mpo_attack = 0;
+            float global_mpo_release = 0;
+            for (int band = 0; band < NUM_BANDS; band++) {
+                global_mpo_attack = global_mpo_attack + user_data[channel].attack[band];
+                global_mpo_release = global_mpo_release + user_data[channel].release[band];
+            }
+            global_mpo_attack = global_mpo_attack / NUM_BANDS;
+            global_mpo_release = global_mpo_release / NUM_BANDS;
+
+            pd_global_mpo[channel] = new peak_detect(samp_freq,global_mpo_attack,global_mpo_release);
+            global_mpo[channel] = new wdrc(1.0,1.0,0.0,user_data[channel].global_mpo);
             finish[channel] = true;
             thread_mutex[channel] = new rk_sema;
             data_protection[channel] = new std::mutex;
@@ -74,10 +86,11 @@ public:
             input[channel] = new float[max_buffer_in];
             output[channel] = new float[max_buffer_in];
             // initialize AFC
+            size_t afc_delay_in_samples = static_cast<size_t>(32.0f*user_data[channel].afc_delay);
             afcs_[channel] = new afc(bandlimited_filter,BANDLIMITED_FILTER_SIZE,prefilter,PREFILTER_SIZE,afc_init_filter,AFC_INIT_FILTER_SIZE,
-                               max_buffer_in,user_data[channel].afc,user_data[channel].afc_mu,user_data[channel].afc_delta,user_data[channel].afc_rho,
+                               max_buffer_in,user_data[channel].afc_type,user_data[channel].afc_mu,user_data[channel].afc_delta,user_data[channel].afc_rho,
                                user_data[channel].afc_alpha,user_data[channel].afc_beta,user_data[channel].afc_p,user_data[channel].afc_c,user_data[channel].afc_power_estimate,
-                               user_data[channel].afc_delay);
+                                     afc_delay_in_samples,user_data[channel].afc);
             y_hat_[channel] = new float[max_buffer_in];
             for(size_t j=0;j<max_buffer_in;j++){
                 y_hat_[channel][j] = 0;
@@ -120,6 +133,8 @@ public:
                 delete peakDetect[channel][band];
                 delete wdrcs[channel][band];
             }
+            delete pd_global_mpo[channel];
+            delete global_mpo[channel];
         }
     };
 
@@ -170,9 +185,27 @@ public:
                 peakDetect[channel][band]->set_param(user_data[channel].attack[band], user_data[channel].release[band]);
                 wdrcs[channel][band]->set_param(user_data[channel].g50[band], user_data[channel].g80[band], user_data[channel].knee_low[band], user_data[channel].knee_high[band]);
             }
+            // average attack and release time from each band for the global MPO
+            float global_mpo_attack = 0;
+            float global_mpo_release = 0;
+            for (int band = 0; band < NUM_BANDS; band++) {
+                global_mpo_attack = global_mpo_attack + user_data[channel].attack[band];
+                global_mpo_release = global_mpo_release + user_data[channel].release[band];
+            }
+            global_mpo_attack = global_mpo_attack / NUM_BANDS;
+            global_mpo_release = global_mpo_release / NUM_BANDS;
+
+            pd_global_mpo[channel]->set_param(global_mpo_attack,global_mpo_release);
+            global_mpo[channel]->set_param(1.0,1.0,0.0,user_data[channel].global_mpo);
             afcs_[channel]->set_params(user_data[channel].afc_mu,user_data[channel].afc_rho,user_data[channel].afc_delta,user_data[channel].afc_alpha,
-                                 user_data[channel].afc_beta,user_data[channel].afc_p,user_data[channel].afc_c,user_data[channel].afc);
-            afcs_[channel]->set_delay(user_data[channel].afc_delay);
+                                 user_data[channel].afc_beta,user_data[channel].afc_p,user_data[channel].afc_c,user_data[channel].afc_type);
+            size_t afc_delay_in_samples = static_cast<size_t>(32.0f*user_data[channel].afc_delay);
+            afcs_[channel]->set_delay(afc_delay_in_samples);
+            afcs_[channel]->set_afc_on_off(user_data[channel].afc);
+            if(user_data[channel].afc_reset){
+                user_data[channel].afc_reset = 0;
+                afcs_[channel]->reset(afc_init_filter,AFC_INIT_FILTER_SIZE);
+            }
         }
         param_mutex_.unlock();
     };
@@ -193,9 +226,15 @@ public:
                 peakDetect[channel][band]->get_param(user_data[channel].attack[band], user_data[channel].release[band]);
                 wdrcs[channel][band]->get_param(user_data[channel].g50[band], user_data[channel].g80[band], user_data[channel].knee_low[band], user_data[channel].knee_high[band]);
             }
+            float g50, g80, knee_low;
+            global_mpo[channel]->get_param(g50,g80,knee_low,user_data[channel].global_mpo);
             afcs_[channel]->get_params(user_data[channel].afc_mu,user_data[channel].afc_rho,user_data[channel].afc_delta,user_data[channel].afc_alpha,
-                                 user_data[channel].afc_beta,user_data[channel].afc_p,user_data[channel].afc_c,user_data[channel].afc);
-            afcs_[channel]->get_delay(user_data[channel].afc_delay);
+                                 user_data[channel].afc_beta,user_data[channel].afc_p,user_data[channel].afc_c,user_data[channel].afc_type);
+            size_t afc_delay_in_samples;
+            afcs_[channel]->get_delay(afc_delay_in_samples);
+            user_data[channel].afc_delay = afc_delay_in_samples/32.0f;
+            afcs_[channel]->get_afc_on_off(user_data[channel].afc);
+            user_data[channel].afc_reset = 0; // not a state, afc_reset is actually a signal
         }
         param_mutex_.unlock();
     };
@@ -236,8 +275,9 @@ public:
             }
             /// Gain
             array_multiply_const(s_n_data, gain[channel], out_size);
-            // TODO: Need to add global MPO
-
+            /// global MPO
+            pd_global_mpo[channel]->get_spl(s_n_data,out_size,pdb_data);
+            global_mpo[channel]->process(s_n_data,pdb_data,out_size,s_n_data);
             /// AFC begin
             // x(n) is x_n_data, s(n) is s_n_data, out_size for their size
             afcs_[channel]->get_y_hat(y_hat_[channel],e_n_data,s_n_data,out_size);
@@ -305,6 +345,8 @@ private:
     size_t max_dwn_buf;
     afc* afcs_[NUM_CHANNEL];
     float* y_hat_[NUM_CHANNEL];
+    wdrc *global_mpo[NUM_CHANNEL];
+    peak_detect *pd_global_mpo[NUM_CHANNEL];
 };
 
 #endif //OSP_CLION_CXX_OSP_PROCESS_H

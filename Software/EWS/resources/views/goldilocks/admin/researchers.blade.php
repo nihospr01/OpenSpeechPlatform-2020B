@@ -45,11 +45,26 @@
             </tbody>
         </table>
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-3 offset-9">
                 <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#newResearcherModal">Create New</button>
             </div>
         </div>
+
+        <div class="row" style="margin-top: 15px">
+            <div class="col-sm-4" style="text-align:left" >
+                <a class="btn btn-info btn-sm" href="{{url('/goldilocks')}}" role="button" >Back</a>
+            </div>
 
     </div>
 
@@ -74,10 +89,12 @@
                         <button type="submit" class="btn btn-primary">Create</button>
                     </div>
                 {{ Form::close() }}
-
             </div>
         </div>
     </div>
+
+
+
 
     <script type="text/javascript">
         $('#newResearcherModal').on('shown.bs.modal', function () {

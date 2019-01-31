@@ -29,8 +29,6 @@
         <a href="{{ url('/goldilocks/admin/logs') }}" class="list-group-item list-group-item-action">Listener Logs</a>
         <a href="{{ url('/goldilocks/admin/programs') }}" class="list-group-item list-group-item-action">Listener Programs</a>
     </div>
-
-
 </div>
 
 </body>

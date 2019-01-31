@@ -83,11 +83,17 @@
 
     <div class="container-fluid" style="margin-bottom: 2px">
         <div class="row">
-            <div  class="col-sm menu">
+            <div  class="col">
                 <button type="button" class="btn btn-outline-dark btn-block" style="background-color: white;" data-toggle="modal" data-target="#infoModal">
-                    ID: {{ $listener->listener_id  }}
+                    HA Values
                 </button>
             </div>
+            <div  class="col">
+                <button id="lvhValues" class="btn btn-outline-dark btn-block" style="background-color: white;">
+                    {{ $listener->listener }}
+                </button>
+            </div>
+
         </div>
     </div>
 
@@ -213,47 +219,49 @@
 
 
     <!--Modal for saving new program-->
-        <div class="modal fade" id="saveAsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Save New Program</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <label for="modalInput" style="padding-right: 5px">Program name </label>
-                        <input id="modalInput" name="programName" type="text" placeholder="Quiet, Noisy, etc.">
-                        <p style="color: red" id="modalInputError"></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button id="save_as_button" type="button" class="btn btn-primary">Save</button>
-                    </div>
+    <div class="modal fade" id="saveAsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Save New Program</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="modalInput" style="padding-right: 5px">Program name </label>
+                    <input id="modalInput" name="programName" type="text" placeholder="Quiet, Noisy, etc.">
+                    <p style="color: red" id="modalInputError"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="save_as_button" type="button" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!--Modal for viewing hearing aid state-->
-        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="infoModalLabel">Parameters</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p id="infoModalText">No info to show</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
+    <!--Modal for viewing hearing aid state-->
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infoModalLabel">HA Values</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="infoModalText">No info to show</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
+    </div>
+
+
 
 
     <script language="JavaScript">
@@ -269,6 +277,7 @@
             'g80': [0, 0, 0, 0, 0, 0],
             'multiplier_l': [0, 0, 0, 0, 0, 0],
             'multiplier_h': [0, 0, 0, 0, 0, 0],
+            'g50_max': [0, 0, 0, 0, 0, 0],
             'knee_low': [45, 45, 45, 45, 45, 45],
             'mpo_limit': [110, 110, 110, 110, 110, 110],
             'attack': [5, 5, 5, 5, 5, 5],
@@ -446,8 +455,11 @@
         });
 
         $('#infoModal').on('shown.bs.modal', function () {
-            console.log("Info modal opened");
             monitorValues();
+        });
+
+        $('#lvhValues').click(function(){
+            updateLVHText();
         });
 
 
@@ -555,6 +567,27 @@
             }
         }
 
+        /**
+         * Returns true if change would exceed maximum
+         */
+        function exceedsMax(l_val, v_val, h_val){
+            for(i = 0; i < 6; i++){
+                var g65 = this['starting_g65'][i] + v_val + (l_val * this['parameters']['multiplier_l'][i]) + (h_val * this['parameters']['multiplier_h'][i]);
+                var cr = this['parameters']['compression_ratio'][i];
+                if(cr != 0){
+                    var slope = (1 - cr) / cr;
+                    var g50 = g65 - (slope * 15);
+                    if(g50 > this['parameters']['g50_max'][i]){
+                        return true;
+                    }
+                }
+                else{
+                    alert("Compression ratio should not be set to zero. Please ask for assistance.");
+                    return true;
+                }
+            }
+            return false;
+        }
 
 
         /**
@@ -572,14 +605,23 @@
                 var v_val = +document.getElementById("v_value").innerHTML;
                 var h_val = +document.getElementById("h_value").innerHTML;
 
-                //update parameters
-                for(i = 0; i < 6; i++){
-                    this['parameters']['g65'][i] = this['starting_g65'][i] + v_val + (l_val * this['parameters']['multiplier_l'][i]) + (h_val * this['parameters']['multiplier_h'][i]);
-                    crg65(i);
+                //check to see if this change exceeds max g50 gain
+                if(exceedsMax(l_val, v_val, h_val)){
+                    //output max message
+                    alert("Warning: you've attempted to exceed maximum gain. No change will take place.");
+                    //change back the value
+                    document.getElementById(id).innerHTML = old_value;
                 }
-
-                //send values to hearing aid
-                transmit();
+                else {
+                    //update parameters
+                    for (i = 0; i < 6; i++) {
+                        this['parameters']['g65'][i] = this['starting_g65'][i] + v_val + (l_val * this['parameters']['multiplier_l'][i]) + (h_val * this['parameters']['multiplier_h'][i]);
+                        crg65(i);
+                    }
+                    //send values to hearing aid
+                    transmit();
+                    updateLVHText();
+                }
 
             }
             else{
@@ -610,12 +652,24 @@
 
                 //send values to hearing aid
                 transmit();
-
+                updateLVHText();
             }
             else{
                 alert("Warning: Cannot exceed minimum value for " + step_type);
             }
 
+        }
+
+        /**
+         * Update the lvhValues HTML element using the current values
+         */
+        function updateLVHText(){
+            var elem = document.getElementById("lvhValues");
+            var l_val = document.getElementById("l_value").innerHTML;
+            var v_val = document.getElementById("v_value").innerHTML;
+            var h_val = document.getElementById("h_value").innerHTML;
+
+            elem.innerHTML = l_val + ", " + v_val + ", " + h_val;
         }
 
 
@@ -692,7 +746,7 @@
                     success: function(response){
                         console.log(response);
                         alert('Program saved');
-                        location.href= '{{ url('programs') }}';
+                        location.href= '{{ url('/goldilocks/listener/programs') }}';
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.log(JSON.stringify(jqXHR));
@@ -725,9 +779,14 @@
                         this['parameters']
                     ]),
                     success: function(response){
-                        console.log(response);
-                        $('#saveAsModal').modal('hide');
-                        location.href= '{{ url('programs') }}';
+                        if(JSON.parse(response)['status'] == "failure"){
+                            document.getElementById("modalInputError").innerHTML = "The name \"" + (document.getElementById("modalInput").value) + "\" is already taken.";
+                        }
+                        else {
+                            console.log(response);
+                            $('#saveAsModal').modal('hide');
+                            location.href = '{{ url('/goldilocks/listener/programs') }}';
+                        }
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.log(JSON.stringify(jqXHR));

@@ -14,6 +14,17 @@
 Route::get('/', 'WebController@welcomePage');
 Route::get('ansi', 'WebController@ansiPage');
 
+Route::get('ab', function () {
+    return view('ab');
+});
+
+Route::get('ab', function () {
+    return view('ab');
+});
+
+Route::get('goldilocks-nav', function(){
+	return view('goldilocks-nav');
+});
 
 /** Researcher routes **/
 Route::get('researcher/amplification', 'WebController@researcherAmplificationPage');
@@ -30,12 +41,11 @@ route::get('nal-nl2', 'NALNL2\NALNL2Controller@loadPage');
 Route::post('nal-nl2', 'NALNL2\NALNL2Controller@getParameters');
 Route::post('nal-nl2update', 'NALNL2\NALNL2Controller@updateParameters');
 
+/** 4AFC web app route */
+Route::get('4afc', 'WebController@load4AFC');
 
-
-
-
-route::get('4afc', 'WebController@load4AFC');
-
+/** EMA web app route */
+Route::get('ema','WebController@loadEMA');
 
 Route::get('goldilocks-javascript', function(){
 	return view('goldilocks-javascript');
@@ -45,6 +55,10 @@ Route::get('goldilocks-javascript', function(){
 Route::get('start', function(){
 	return view('start');
 });
+
+// route::get('ema', function(){
+// 	return view('ema');
+// });
 
 
 /** Goldilocks **/
@@ -72,7 +86,7 @@ Route::middleware(['auth.goldilocks'])->group(function(){
     Route::put('/goldilocks/listener', 'Goldilocks\GoldilocksProgramController@update');
     Route::get('/goldilocks/listener/programs', 'Goldilocks\GoldilocksController@programsPage');
     Route::post('/goldilocks/listener/programs/transmit', 'Goldilocks\GoldilocksProgramController@transmit');
-    //Route::post('programs', 'GoldilocksController@modifyProgram');
+    Route::post('/goldilocks/listener/programs', 'Goldilocks\GoldilocksController@modifyProgram');
     Route::post('/goldilocks/listener/log', 'Goldilocks\GoldilocksLogController@store');
 });
 

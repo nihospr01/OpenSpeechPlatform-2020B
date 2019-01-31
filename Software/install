@@ -18,12 +18,16 @@ if [ $OS = "Darwin" ]; then
   fi
   
   echo Install pre-requisite packages
-  brew install -y portaudio poco cereal cmake pkg-config composer
+  brew install -y portaudio poco cereal cmake pkg-config composer php72
 elif [ $OS = "Linux" ]; then
   echo Install pre-requisite packages
-  sudo apt-get update && sudo apt-get install -y alsa-base libasound2-dev portaudio19-dev \
-	  libpoco-dev libcereal-dev cmake sqlite sqlite3 php php-mbstring php-xml composer \
-	  zip unzip
+  sudo apt-get update
+  for i in alsa-base alsa-utils libasound2-dev portaudio19-dev \
+          libpoco-dev libcereal-dev cmake sqlite sqlite3 php php-mbstring php-xml composer \
+          zip unzip php-sqlite3; do
+    sudo apt-get install -y $i
+  done
+
 fi
 
 echo Build and install libosp
@@ -46,16 +50,18 @@ echo Build and install EWS
 sudo mkdir -p /opt
 sudo cp -r EWS /opt
 sudo chown -R $(whoami) /opt/EWS
-sudo sh -c 'printf "#!/bin/sh\n\n/opt/EWS/artisan serve\n" > /usr/local/bin/ews'
+sudo sh -c 'printf "#!/bin/sh\n\n/opt/EWS/artisan serve --host=0.0.0.0\n" > /usr/local/bin/ews'
 sudo chmod +x /usr/local/bin/ews
 pushd /opt/EWS
 touch database/homestead.sqlite
+composer update
 composer install
 cp .env.example .env
 php artisan config:cache
 php artisan key:generate
 php artisan config:cache
 php artisan migrate
+sudo chmod -R 777 /opt/EWS
 
 echo
 echo

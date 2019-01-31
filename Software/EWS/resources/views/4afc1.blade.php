@@ -1,20 +1,3 @@
-{{-- <!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel React application</title>
-        <link href="{{mix('css/4afc/app.css')}}" rel="stylesheet" type="text/css">
-    </head>
-    <body>
-    <h2 style="text-align: center"> Laravel and React application </h2>
-        <div id="container"></div>
-        <script src="{{mix('js/4afc/app.js')}}" ></script>
-    </body>
-</html> --}}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,12 +10,12 @@
     <script type="text/javascript" src="{{ asset('js/popper.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js')}}"></script>
     <script type="text/javascript">
-
+        
         $(document).ready(function(){
-            $('.page-login').show();
-
-            var word_sets = [];
-
+            $('.page-login').show(); 
+       
+            word_sets = [];
+            
             testerID= "";
             participantID = "";
             var questionIndex = 1;
@@ -40,7 +23,7 @@
             corrects = [];
             answers = [];
             wordSelected = "";
-            const titleRow = ["Question#", "Words","Correct Answer","Participant's Answer"];
+
             //log in handler
             $('#login').click(function(event){
                 event.preventDefault();
@@ -48,39 +31,31 @@
                 //get the tester and participant ID
                 testerID = $('#testerID').val();
                 participantID = $('#participantID').val();
-
-                $('.page-login').hide();
+         
+                $('.page-login').hide(); 
                 $('.page-question').show();
-
+                
                 //load the word sets from json file
                 async function load_word_set(){
                     try{
-                        const response = await fetch("word_sets.json");
-
+                        const response = await fetch('word_sets.json');
                         const word_sets = await response.json();
-
                         return word_sets;
                     }
                     catch(err){
-                        alert(err.message);
+                        alert('fetch questions failed',err);
                     }
                 }
-
+                
                 //resolve the promise from async load function
                 load_word_set().then(data => {
-                    let tempWordSets = data;
-
-                    for(var i =0;i<tempWordSets.length;i++){
-                        if(tempWordSets[i]["words"]!==""){
-                            word_sets.push(tempWordSets[i]);
-                        }
-                    }
+                    word_sets = data;
                     numQuestions = word_sets.length;
                     //get all correct answers
                     for(var i =0;i<numQuestions;i++){
                         corrects.push(word_sets[i]["correct_answer"]);
                     }
-                    console.log(word_sets);
+                    console.log(corrects);
                     setWords(questionIndex-1);
                     $('#progressBar').css('width',(100/numQuestions)+'%');
                 });
@@ -94,32 +69,25 @@
                     $(id).text(words[i]);
                 }
             }
-
+            
             //handler when press next question button
             $('#nextQuestion').on('click',function(event){
                 event.preventDefault();
-                $('#nextQuestion').attr('disabled','disabled');
                 answers.push(wordSelected);
                 questionIndex += 1;
-                if(questionIndex>numQuestions){
+                if(questionIndex>4){
                     $('.page-question').hide();
-                    //append testerID and participant id
-                    $('#info').append("<p>Tester ID: "+testerID+"</p>");
-                    $('#info').append("<p>Participant ID: "+participantID+"</p>")
                     $('.page-result').show();
                     result = calculateResult();
                     $('#resultTitle').text("Test Result: "+result.length.toString()+"/"+numQuestions);
-
+                    
                     //add table entries
                     for(var i=0;i<numQuestions;i++){
-                       
-                        let words = word_sets[i]['words'];
-                  
-                        let wordString = "";
+                        words = word_sets[i]['words'];
+                        wordString = "";
                         for(var j=0;j<words.length;j++){
-                            wordString += words[j]+", ";
+                            wordString += words[i]+", ";
                         }
-                    
                         id = "row"+(i+1).toString();
                         $('#resultTable tr:last').after(
                             "<tr id="+id+"><th scope='row'>"+(i+1).toString()+"</th><td>"+wordString+"</td><td>"+corrects[i]+"</td><td >"+answers[i]+"</td><tr>"
@@ -136,9 +104,10 @@
                             $(id).addClass('table-danger');
                         }
                     }
+                    
                     return;
                 }
-    
+
                 setWords(questionIndex-1);
                 var value = questionIndex*(100/numQuestions);
                 $('#progressBar').css('width',value+'%').attr('aria-valuenow',value);
@@ -147,75 +116,29 @@
                 }
             });
 
-            $("#download").on("click",function(event){
-                event.preventDefault();
-                var res = [];
-                res.push(titleRow);
-
-
-                for(var i =0;i<numQuestions;i++){
-                    let line = [];
-                    let temp = "";
-                    let word = word_sets[i]['words']
-                    for(var j = 0;j<word.length;j++){
-                        temp += word[j]+" ";
-                    }
-                    line.push(i.toString());
-                    line.push(temp);
-                    line.push(corrects[i]);
-                    line.push(answers[i]);
-                    res.push(line);
-                }
-                console.log(res);
-                let csvContent = "data:text/csv;charset=utf-8,";
-                res.forEach(function(rowArray){
-                    let row = rowArray.join(",");
-                    csvContent += row+"\r\n";
-                });
-                console.log(csvContent);
-
-                var encodeUri = encodeURI(csvContent);
-                window.open(encodeUri);
-                
-            });
-
             $('#word1').on('click',function(event){
                 event.preventDefault();
                 wordSelected = $('#word1').text();
-                $('#nextQuestion').removeAttr('disabled');
             });
 
             $('#word2').on('click',function(event){
                 event.preventDefault();
                 wordSelected = $('#word2').text();
-                $('#nextQuestion').removeAttr('disabled');
             });
-
+            
             $('#word3').on('click',function(event){
                 event.preventDefault();
                 wordSelected = $('#word3').text();
-                $('#nextQuestion').removeAttr('disabled');
-            });
-
-            $('#word3').on('click',function(event){
-                event.preventDefault();
-                wordSelected = $('#word3').text();
-                $('#nextQuestion').removeAttr('disabled');
             });
 
             $('#word4').on('click',function(event){
                 event.preventDefault();
                 wordSelected = $('#word4').text();
-                $('#nextQuestion').removeAttr('disabled');
             });
 
-            $('#start-over').on('click',function(event){
-                event.preventDefault();
-                location.reload(true);
-            });
 
-            //function to calcualte the correction rate
             function calculateResult(){
+    
                 result = [];
                 for(var i=0;i<corrects.length;i++){
                     if(answers[i] === corrects[i]){
@@ -223,18 +146,14 @@
                     }
                 }
                 return result;
+
             }
-
-
-            
-            
-
-
-        });
-
-
+           
+        });    
+    
+        
     </script>
-
+    
     <title>4AFC</title>
 
     <style>
@@ -249,11 +168,8 @@
         .page-result{
             display: none;
         }
-
-        .page-question{
-            display:none;
-        }
         .container-login{
+            /* width:60%; */
             justify-content: center;
             text-align: center;
             margin-top: 50px;
@@ -263,7 +179,7 @@
             width:80%;
             margin-bottom: 15px
         }
-
+        
         .description{
             margin-top:15px;
             margin-bottom: 15px;
@@ -275,18 +191,18 @@
             margin-top: 30px;
         }
         .form-group{
-            max-width: 280px;
+            width: 30%;
             margin: auto;
         }
 
         .form-control{
             margin-bottom: 10px;
         }
-
+        
         .btn-margin{
             margin-bottom: 10px;
         }
-        #AppTitle{
+        #AppTitle{         
             margin-bottom: 10px;
         }
 
@@ -297,35 +213,30 @@
         #resultTable{
             margin-top: 20px;
         }
-
+        
     </style>
 </head>
 <body>
-
     <section class = "page-login">
         <div class="container-login">
-            <h3 class="AppTitle">4AFC Web App</h3>
+            <h3 id="AppTitle">4AFC Web App</h3>
             <div class="form-group">
             <input class="form-control" type="text" placeholder="Tester ID" id = "testerID">
             <input class="form-control" itype="text" placeholder="Participant ID" id = "participantID">
             </div>
-            <div style="max-width:150px; margin:auto">
-                <button type="button" class="btn btn-info btn-block" id="login">Log in</button>
-            <a href = "{{url('/')}}" class="btn btn-outline-danger btn-block">Exit</a>
-            </div>
-            
+            <button type="button" class="btn btn-primary" id="login">Log in</button>
         </div>
     </section>
 
     <section class="page-question">
-
+        
         <div class="container-questions">
             <h4 class="AppTitle">
                 4AFC Web App
             </h4>
             <div class="progress">
-                    <div class="progress-bar bg-info progress-bar-striped progress-bar-animated"
-                    role="progressbar"
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                    role="progressbar" 
                     aria-valuenow="10"
                     aria-valuemin="0"
                     aria-valuemax="100"
@@ -340,43 +251,43 @@
                 <div class="row">
                     <div class="col-sm">
                             <button type="button"
-                             class="btn btn-outline-info btn-lg btn-block btn-margin"
+                             class="btn btn-outline-primary btn-lg btn-block btn-margin"
                              id = "word1"
                              >
-
-                            </button>
+                             
+                            </button>           
                     </div>
                     <div class="col-sm">
                             <button type="button"
-                             class="btn btn-outline-info btn-lg btn-block btn-margin"
+                             class="btn btn-outline-primary btn-lg btn-block btn-margin"
                              id = "word2"
                              >
-
-                            </button>
+                          
+                            </button>           
                     </div>
                 </div>
                 <div class="row">
                         <div class="col-sm">
                                 <button type="button"
-                                 class="btn btn-outline-info btn-lg btn-block btn-margin"
+                                 class="btn btn-outline-primary btn-lg btn-block btn-margin"
                                  id = "word3"
                                  >
-
-                                </button>
+               
+                                </button>           
                         </div>
                         <div class="col-sm">
                                 <button type="button"
-                                 class="btn btn-outline-info btn-lg btn-block btn-margin"
+                                 class="btn btn-outline-primary btn-lg btn-block btn-margin"
                                  id = "word4"
                                  >
-                                </button>
+                    
+                                </button>           
                         </div>
                     </div>
             </div>
-            <button type="button"
+            <button type="button" 
             class="btn btn-secondary btn-lg"
             id = "nextQuestion"
-            disabled
             >
             Next</button>
         </div>
@@ -385,9 +296,7 @@
     <section class="page-result">
         <div class="container-login">
             <h5 class="AppTitle" id="resultTitle">Test Result</h5>
-            <div class="container" id = "info">
-
-            </div>
+            
             <div class="container">
                     <table class="table" id="resultTable">
                             <thead>
@@ -401,21 +310,8 @@
                             <tbody>
                             </tbody>
                     </table>
-                    <div style="max-width:300px;margin:auto;">
-                            <button class="btn btn-info btn-lg btn-block" 
-                                    id  = "start-over"    
-                            >
-                                Start Over
-                            </button>
-                            <button class="btn btn-outline-secondary btn-lg btn-block"
-                                    id = "download"
-                            >
-                                Download Result
-                            </button>
-                    </div>
-                    
             </div>
-
+   
         </div>
 
 
@@ -424,6 +320,6 @@
 
 
 
-
+    
 </body>
 </html>
