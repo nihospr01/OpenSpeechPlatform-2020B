@@ -65,7 +65,7 @@ public:
                 noiseMangement[channel][band] = new noise_management(user_data[channel].noise_estimation_type, user_data[channel].spectral_type,
                                                  user_data[channel].spectral_subtraction, samp_freq);
                 peakDetect[channel][band] = new peak_detect(samp_freq, user_data[channel].attack[band], user_data[channel].release[band]);
-                wdrcs[channel][band] = new wdrc(user_data[channel].g50[band], user_data[channel].g80[band], user_data[channel].knee_low[band], user_data[channel].knee_high[band]);
+                wdrcs[channel][band] = new wdrc(user_data[channel].g50[band], user_data[channel].g80[band], user_data[channel].knee_low[band], user_data[channel].mpo_band[band]);
             }
             // average attack and release time from each band for the global MPO
             float global_mpo_attack = 0;
@@ -183,7 +183,7 @@ public:
             for (int band = 0; band < NUM_BANDS; band++) {
                 noiseMangement[channel][band]->set_param(user_data[channel].noise_estimation_type, user_data[channel].spectral_type, user_data[channel].spectral_subtraction);
                 peakDetect[channel][band]->set_param(user_data[channel].attack[band], user_data[channel].release[band]);
-                wdrcs[channel][band]->set_param(user_data[channel].g50[band], user_data[channel].g80[band], user_data[channel].knee_low[band], user_data[channel].knee_high[band]);
+                wdrcs[channel][band]->set_param(user_data[channel].g50[band], user_data[channel].g80[band], user_data[channel].knee_low[band], user_data[channel].mpo_band[band]);
             }
             // average attack and release time from each band for the global MPO
             float global_mpo_attack = 0;
@@ -224,7 +224,7 @@ public:
             for (int band = 0; band < NUM_BANDS; band++) {
                 noiseMangement[channel][band]->get_param(user_data[channel].noise_estimation_type, user_data[channel].spectral_type, user_data[channel].spectral_subtraction);
                 peakDetect[channel][band]->get_param(user_data[channel].attack[band], user_data[channel].release[band]);
-                wdrcs[channel][band]->get_param(user_data[channel].g50[band], user_data[channel].g80[band], user_data[channel].knee_low[band], user_data[channel].knee_high[band]);
+                wdrcs[channel][band]->get_param(user_data[channel].g50[band], user_data[channel].g80[band], user_data[channel].knee_low[band], user_data[channel].mpo_band[band]);
             }
             float g50, g80, knee_low;
             global_mpo[channel]->get_param(g50,g80,knee_low,user_data[channel].global_mpo);
