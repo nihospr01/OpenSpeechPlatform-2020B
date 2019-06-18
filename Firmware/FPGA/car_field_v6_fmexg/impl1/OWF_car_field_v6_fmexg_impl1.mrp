@@ -1,0 +1,996 @@
+
+         Lattice Mapping Report File for Design Module 'tl_car_field'
+
+
+Design Information
+------------------
+
+Command line:   map -a MachXO3LF -p LCMXO3LF-6900C -t CABGA256 -s 5 -oc
+     Commercial OWF_car_field_v6_fmexg_impl1.ngd -o
+     OWF_car_field_v6_fmexg_impl1_map.ncd -pr OWF_car_field_v6_fmexg_impl1.prf
+     -mp OWF_car_field_v6_fmexg_impl1.mrp -lpf /home/hari/Documents/osp-wearable
+     -fpga/car_field_v6_fmexg/impl1/OWF_car_field_v6_fmexg_impl1_synplify.lpf
+     -lpf /home/hari/Documents/osp-wearable-fpga/car_field_v6_fmexg/OWF_car_fiel
+     d_v6_fmexg.lpf -c 0 -gui -msgset
+     /home/hari/Documents/osp-wearable-fpga/car_field_v6_fmexg/promote.xml 
+Target Vendor:  LATTICE
+Target Device:  LCMXO3LF-6900CCABGA256
+Target Performance:   5
+Mapper:  xo3c00f,  version:  Diamond (64-bit) 3.10.0.111.2
+Mapped on:  05/15/19  12:41:33
+
+Design Summary
+--------------
+
+   Number of registers:    216 out of  7485 (3%)
+      PFU registers:          208 out of  6864 (3%)
+      PIO registers:            8 out of   621 (1%)
+   Number of SLICEs:       124 out of  3432 (4%)
+      SLICEs as Logic/ROM:    124 out of  3432 (4%)
+      SLICEs as RAM:            0 out of  2574 (0%)
+      SLICEs as Carry:          8 out of  3432 (0%)
+   Number of LUT4s:        194 out of  6864 (3%)
+      Number used as logic LUTs:        178
+      Number used as distributed RAM:     0
+      Number used as ripple logic:       16
+      Number used as shift registers:     0
+   Number of PIO sites used: 43 + 4(JTAG) out of 207 (23%)
+   Number of block RAMs:  12 out of 26 (46%)
+   Number of GSRs:  1 out of 1 (100%)
+   EFB used :       No
+   JTAG used :      No
+   Readback used :  No
+   Oscillator used :  No
+   Startup used :   No
+   POR :            On
+   Bandgap :        On
+   Number of Power Controller:  0 out of 1 (0%)
+   Number of Dynamic Bank Controller (BCINRD):  0 out of 6 (0%)
+   Number of Dynamic Bank Controller (BCLVDSO):  0 out of 1 (0%)
+   Number of DCCA:  0 out of 8 (0%)
+   Number of DCMA:  0 out of 2 (0%)
+   Number of PLLs:  1 out of 2 (50%)
+   Number of DQSDLLs:  0 out of 2 (0%)
+   Number of CLKDIVC:  0 out of 4 (0%)
+   Number of ECLKSYNCA:  0 out of 4 (0%)
+   Number of ECLKBRIDGECS:  0 out of 2 (0%)
+   Notes:-
+      1. Total number of LUT4s = (Number of logic LUT4s) + 2*(Number of
+     distributed RAMs) + 2*(Number of ripple logic)
+      2. Number of logic LUT4s does not include count of distributed RAM and
+     ripple logic.
+   Number of clocks:  4
+
+                                    Page 1
+
+
+
+
+Design:  tl_car_field                                  Date:  05/15/19  12:41:33
+
+Design Summary (cont)
+---------------------
+     Net test_l1_c: 4 loads, 4 rising, 0 falling (Driver: PIO ext_clk_in )
+     Net hr_clk_0: 107 loads, 107 rising, 0 falling (Driver: e_pll_4/PLLInst_0 )
+     
+     Net spi4_clk_c: 35 loads, 15 rising, 20 falling (Driver: PIO spi4_clk )
+     Net e_fmexg_core/clkdiv12: 12 loads, 12 rising, 0 falling (Driver:
+     e_fmexg_core/clkdiv12 )
+   Number of Clock Enables:  20
+     Net buf_cnv[0]: 5 loads, 4 LSLICEs
+     Net un2_divider: 26 loads, 26 LSLICEs
+     Net G_51: 10 loads, 10 LSLICEs
+     Net r_car_core/e_car_sequencer/djb_present_RNO_0: 1 loads, 1 LSLICEs
+     Net djb_got169_0_a2_1_RNI78G52: 1 loads, 0 LSLICEs
+     Net djb_got167_0_a2_0_RNIHQFK1: 1 loads, 0 LSLICEs
+     Net r_car_core/e_i2s_dio/in_lvds_sr/buf_cnv_4[0]: 5 loads, 5 LSLICEs
+     Net buf_cnv_0[0]: 10 loads, 8 LSLICEs
+     Net r_car_core/e_i2s_dio/reg_cnv_0[0]: 8 loads, 8 LSLICEs
+     Net r_car_core/e_i2s_dio/out_lvds_sr/buf_cnv_2[0]: 4 loads, 4 LSLICEs
+     Net l_car_core/e_car_sequencer/djb_present_RNO: 1 loads, 1 LSLICEs
+     Net djb_got166_0_a2_2_RNI0H9K1_0: 1 loads, 0 LSLICEs
+     Net djb_got166_0_a2_2_RNI0H9K1: 1 loads, 0 LSLICEs
+     Net l_car_core/e_i2s_dio/in_lvds_sr/buf_cnv_3[0]: 5 loads, 5 LSLICEs
+     Net l_car_core/e_i2s_dio/cycle_begin_RNIT3T51: 9 loads, 9 LSLICEs
+     Net l_car_core/e_i2s_dio/reg_cnv[0]: 8 loads, 8 LSLICEs
+     Net l_car_core/e_i2s_dio/out_lvds_sr/buf_cnv_1[0]: 4 loads, 4 LSLICEs
+     Net spi4_cs_c: 14 loads, 13 LSLICEs
+     Net e_fmexg_core/fifo_readclk_en: 24 loads, 0 LSLICEs
+     Net e_fmexg_core/spi_byte_ctr_0_sqmuxa: 6 loads, 6 LSLICEs
+   Number of local set/reset loads for net spi4_cs_c merged into GSR:  3
+   Number of LSRs:  0
+   Number of nets driven by tri-state buffers:  0
+   Top 10 highest fanout non-clock nets:
+     Net un2_divider: 26 loads
+     Net e_fmexg_core/fifo_readclk_en: 24 loads
+     Net e_fmexg_core/un15_spi_cs: 24 loads
+     Net l_car_core.e_i2s_dio.cycle_begin: 18 loads
+     Net G_51: 16 loads
+     Net spi4_cs_c: 16 loads
+     Net e_car_clock_gen.divider[0]: 15 loads
+     Net e_car_clock_gen.divider[1]: 14 loads
+     Net mute_sync_c: 14 loads
+     Net r_car_core/e_car_sequencer/lvdscounter[0]: 13 loads
+
+
+
+
+   Number of warnings:  14
+   Number of errors:    0
+     
+
+Design Errors/Warnings
+----------------------
+
+WARNING - map: Using local reset signal 'spi4_cs_c' to infer global GSR net.
+WARNING - map: IO buffer missing for top level port spi4_mosi...logic will be
+     discarded.
+WARNING - map: The reset of EBR 'e_fmexg_core/fifo/fmexg_fifo_8k_1025_0_11'
+
+                                    Page 2
+
+
+
+
+Design:  tl_car_field                                  Date:  05/15/19  12:41:33
+
+Design Errors/Warnings (cont)
+-----------------------------
+     cannot be controlled. The local reset is not connected to any control
+     signal and set to GND. The global reset is disabled via GSR property. To
+     control the EBR reset, either connect the local reset to a control signal
+     or force the GSR property to be enabled.
+WARNING - map: The reset of EBR 'e_fmexg_core/fifo/fmexg_fifo_8k_1025_11_0'
+     cannot be controlled. The local reset is not connected to any control
+     signal and set to GND. The global reset is disabled via GSR property. To
+     control the EBR reset, either connect the local reset to a control signal
+     or force the GSR property to be enabled.
+WARNING - map: The reset of EBR 'e_fmexg_core/fifo/fmexg_fifo_8k_1025_10_1'
+     cannot be controlled. The local reset is not connected to any control
+     signal and set to GND. The global reset is disabled via GSR property. To
+     control the EBR reset, either connect the local reset to a control signal
+     or force the GSR property to be enabled.
+WARNING - map: The reset of EBR 'e_fmexg_core/fifo/fmexg_fifo_8k_1025_9_2'
+     cannot be controlled. The local reset is not connected to any control
+     signal and set to GND. The global reset is disabled via GSR property. To
+     control the EBR reset, either connect the local reset to a control signal
+     or force the GSR property to be enabled.
+WARNING - map: The reset of EBR 'e_fmexg_core/fifo/fmexg_fifo_8k_1025_8_3'
+     cannot be controlled. The local reset is not connected to any control
+     signal and set to GND. The global reset is disabled via GSR property. To
+     control the EBR reset, either connect the local reset to a control signal
+     or force the GSR property to be enabled.
+WARNING - map: The reset of EBR 'e_fmexg_core/fifo/fmexg_fifo_8k_1025_7_4'
+     cannot be controlled. The local reset is not connected to any control
+     signal and set to GND. The global reset is disabled via GSR property. To
+     control the EBR reset, either connect the local reset to a control signal
+     or force the GSR property to be enabled.
+WARNING - map: The reset of EBR 'e_fmexg_core/fifo/fmexg_fifo_8k_1025_6_5'
+     cannot be controlled. The local reset is not connected to any control
+     signal and set to GND. The global reset is disabled via GSR property. To
+     control the EBR reset, either connect the local reset to a control signal
+     or force the GSR property to be enabled.
+WARNING - map: The reset of EBR 'e_fmexg_core/fifo/fmexg_fifo_8k_1025_5_6'
+     cannot be controlled. The local reset is not connected to any control
+     signal and set to GND. The global reset is disabled via GSR property. To
+     control the EBR reset, either connect the local reset to a control signal
+     or force the GSR property to be enabled.
+WARNING - map: The reset of EBR 'e_fmexg_core/fifo/fmexg_fifo_8k_1025_4_7'
+     cannot be controlled. The local reset is not connected to any control
+     signal and set to GND. The global reset is disabled via GSR property. To
+     control the EBR reset, either connect the local reset to a control signal
+     or force the GSR property to be enabled.
+WARNING - map: The reset of EBR 'e_fmexg_core/fifo/fmexg_fifo_8k_1025_3_8'
+     cannot be controlled. The local reset is not connected to any control
+     signal and set to GND. The global reset is disabled via GSR property. To
+     control the EBR reset, either connect the local reset to a control signal
+     or force the GSR property to be enabled.
+WARNING - map: The reset of EBR 'e_fmexg_core/fifo/fmexg_fifo_8k_1025_2_9'
+     cannot be controlled. The local reset is not connected to any control
+     signal and set to GND. The global reset is disabled via GSR property. To
+     control the EBR reset, either connect the local reset to a control signal
+     or force the GSR property to be enabled.
+WARNING - map: The reset of EBR 'e_fmexg_core/fifo/fmexg_fifo_8k_1025_1_10'
+     cannot be controlled. The local reset is not connected to any control
+
+                                    Page 3
+
+
+
+
+Design:  tl_car_field                                  Date:  05/15/19  12:41:33
+
+Design Errors/Warnings (cont)
+-----------------------------
+     signal and set to GND. The global reset is disabled via GSR property. To
+     control the EBR reset, either connect the local reset to a control signal
+     or force the GSR property to be enabled.
+
+IO (PIO) Attributes
+-------------------
+
++---------------------+-----------+-----------+------------+
+| IO Name             | Direction | Levelmode | IO         |
+|                     |           |  IO_TYPE  | Register   |
++---------------------+-----------+-----------+------------+
+| l_lvds_io           | BIDIR     | BLVDS25E  | IN         |
++---------------------+-----------+-----------+------------+
+| i2s1_sck            | OUTPUT    | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| ext_clk_in          | INPUT     | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| test_m2             | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| test_m1             | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| test_l2             | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| test_l1             | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| mute_sync           | INPUT     | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| adc_interrupt       | OUTPUT    | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| adc_data[11]        | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| adc_data[10]        | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| adc_data[9]         | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| adc_data[8]         | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| adc_data[7]         | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| adc_data[6]         | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| adc_data[5]         | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| adc_data[4]         | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| adc_data[3]         | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| adc_data[2]         | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| adc_data[1]         | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| adc_data[0]         | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| adc_pdwn            | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| adc_clk             | OUTPUT    | LVCMOS33  |            |
+
+                                    Page 4
+
+
+
+
+Design:  tl_car_field                                  Date:  05/15/19  12:41:33
+
+IO (PIO) Attributes (cont)
+--------------------------
++---------------------+-----------+-----------+------------+
+| spi4_cs             | INPUT     | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| spi4_miso           | OUTPUT    | LVCMOS18  | OUT        |
++---------------------+-----------+-----------+------------+
+| spi4_clk            | INPUT     | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| spi3_cs3            | INPUT     | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| spi3_cs0            | INPUT     | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| spi3_miso           | OUTPUT    | LVCMOS18  | OUT        |
++---------------------+-----------+-----------+------------+
+| spi3_mosi           | INPUT     | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| spi3_clk            | INPUT     | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| spi1_cs2            | INPUT     | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| spi1_cs0            | INPUT     | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| spi1_miso           | OUTPUT    | LVCMOS18  | OUT        |
++---------------------+-----------+-----------+------------+
+| spi1_mosi           | INPUT     | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| spi1_clk            | INPUT     | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| i2s2_d1             | OUTPUT    | LVCMOS18  | OUT        |
++---------------------+-----------+-----------+------------+
+| i2s2_d0             | OUTPUT    | LVCMOS18  | OUT        |
++---------------------+-----------+-----------+------------+
+| i2s2_ws             | OUTPUT    | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| i2s2_sck            | OUTPUT    | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| i2s1_d0             | INPUT     | LVCMOS18  | IN         |
++---------------------+-----------+-----------+------------+
+| i2s1_ws             | OUTPUT    | LVCMOS18  |            |
++---------------------+-----------+-----------+------------+
+| r_lvds_io           | BIDIR     | BLVDS25E  | IN         |
++---------------------+-----------+-----------+------------+
+
+Removed logic
+-------------
+
+Block VCC undriven or does not drive anything - clipped.
+Block e_pll_4/VCC undriven or does not drive anything - clipped.
+Block e_fmexg_core/GND undriven or does not drive anything - clipped.
+Block e_fmexg_core/VCC undriven or does not drive anything - clipped.
+Block l_car_core/GND undriven or does not drive anything - clipped.
+Block l_car_core/VCC undriven or does not drive anything - clipped.
+Block l_car_core/e_i2s_dio/VCC undriven or does not drive anything - clipped.
+Block l_car_core/e_i2s_dio/out_lvds_sr/VCC undriven or does not drive anything -
+     clipped.
+Block l_car_core/e_i2s_dio/out_lvds_sr/GND undriven or does not drive anything -
+     clipped.
+
+                                    Page 5
+
+
+
+
+Design:  tl_car_field                                  Date:  05/15/19  12:41:33
+
+Removed logic (cont)
+--------------------
+Block l_car_core/e_i2s_dio/out_reg_1/VCC undriven or does not drive anything -
+     clipped.
+Block l_car_core/e_i2s_dio/out_reg_1/GND undriven or does not drive anything -
+     clipped.
+Block l_car_core/e_i2s_dio/out_reg_2/GND undriven or does not drive anything -
+     clipped.
+Block l_car_core/e_i2s_dio/out_reg_2/VCC undriven or does not drive anything -
+     clipped.
+Block l_car_core/e_i2s_dio/out_i2s_sr/GND undriven or does not drive anything -
+     clipped.
+Block l_car_core/e_i2s_dio/out_i2s_sr/VCC undriven or does not drive anything -
+     clipped.
+Block l_car_core/e_i2s_dio/in_i2s_sr/VCC undriven or does not drive anything -
+     clipped.
+Block l_car_core/e_i2s_dio/in_i2s_sr/GND undriven or does not drive anything -
+     clipped.
+Block l_car_core/e_i2s_dio/in_reg_1/GND undriven or does not drive anything -
+     clipped.
+Block l_car_core/e_i2s_dio/in_reg_1/VCC undriven or does not drive anything -
+     clipped.
+Block l_car_core/e_i2s_dio/in_reg_2/GND undriven or does not drive anything -
+     clipped.
+Block l_car_core/e_i2s_dio/in_reg_2/VCC undriven or does not drive anything -
+     clipped.
+Block l_car_core/e_i2s_dio/in_lvds_sr/GND undriven or does not drive anything -
+     clipped.
+Block l_car_core/e_i2s_dio/in_lvds_sr/VCC undriven or does not drive anything -
+     clipped.
+Block l_car_core/e_car_sequencer/VCC undriven or does not drive anything -
+     clipped.
+Block l_car_core/e_car_sequencer/GND undriven or does not drive anything -
+     clipped.
+Block r_car_core/GND undriven or does not drive anything - clipped.
+Block r_car_core/VCC undriven or does not drive anything - clipped.
+Block r_car_core/e_i2s_dio/GND undriven or does not drive anything - clipped.
+Block r_car_core/e_i2s_dio/VCC undriven or does not drive anything - clipped.
+Block r_car_core/e_i2s_dio/out_lvds_sr/VCC undriven or does not drive anything -
+     clipped.
+Block r_car_core/e_i2s_dio/out_lvds_sr/GND undriven or does not drive anything -
+     clipped.
+Block r_car_core/e_i2s_dio/out_reg_1/VCC undriven or does not drive anything -
+     clipped.
+Block r_car_core/e_i2s_dio/out_reg_1/GND undriven or does not drive anything -
+     clipped.
+Block r_car_core/e_i2s_dio/out_reg_2/GND undriven or does not drive anything -
+     clipped.
+Block r_car_core/e_i2s_dio/out_reg_2/VCC undriven or does not drive anything -
+     clipped.
+Block r_car_core/e_i2s_dio/out_i2s_sr/GND undriven or does not drive anything -
+     clipped.
+Block r_car_core/e_i2s_dio/out_i2s_sr/VCC undriven or does not drive anything -
+     clipped.
+Block r_car_core/e_i2s_dio/in_lvds_sr/GND undriven or does not drive anything -
+     clipped.
+Block r_car_core/e_i2s_dio/in_lvds_sr/VCC undriven or does not drive anything -
+     clipped.
+
+                                    Page 6
+
+
+
+
+Design:  tl_car_field                                  Date:  05/15/19  12:41:33
+
+Removed logic (cont)
+--------------------
+Block r_car_core/e_car_sequencer/VCC undriven or does not drive anything -
+     clipped.
+Block r_car_core/e_car_sequencer/GND undriven or does not drive anything -
+     clipped.
+Signal spi4_cs_c_i was merged into signal spi4_cs_c
+Signal e_fmexg_core.two_samples_0_.CN was merged into signal spi4_clk_c
+Signal e_pll_4/GND undriven or does not drive anything - clipped.
+Signal e_car_clock_gen/GND undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/VCC undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/GND undriven or does not drive anything - clipped.
+Signal l_car_core/e_i2s_dio/GND undriven or does not drive anything - clipped.
+Signal VCC undriven or does not drive anything - clipped.
+Signal e_pll_4/CLKINTFB undriven or does not drive anything - clipped.
+Signal e_pll_4/DPHSRC undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLACK undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLDATO0 undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLDATO1 undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLDATO2 undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLDATO3 undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLDATO4 undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLDATO5 undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLDATO6 undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLDATO7 undriven or does not drive anything - clipped.
+Signal e_pll_4/REFCLK undriven or does not drive anything - clipped.
+Signal e_pll_4/INTLOCK undriven or does not drive anything - clipped.
+Signal e_pll_4/LOCK undriven or does not drive anything - clipped.
+Signal e_pll_4/CLKOS3 undriven or does not drive anything - clipped.
+Signal e_pll_4/CLKOS2 undriven or does not drive anything - clipped.
+Signal e_pll_4/CLKOS undriven or does not drive anything - clipped.
+Signal e_car_clock_gen/lvds_ctr_s_0_S1[7] undriven or does not drive anything -
+     clipped.
+Signal e_car_clock_gen/lvds_ctr_s_0_COUT[7] undriven or does not drive anything
+     - clipped.
+Signal e_car_clock_gen/lvds_ctr_cry_0_S0[0] undriven or does not drive anything
+     - clipped.
+Signal e_car_clock_gen/N_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ff_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aff_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aef_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ef_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do17_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do16_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do15_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do14_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do13_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do12_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do11_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do10_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do9_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do8_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do7_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do6_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do5_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do4_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do3_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do2_9 undriven or does not drive anything - clipped.
+
+                                    Page 7
+
+
+
+
+Design:  tl_car_field                                  Date:  05/15/19  12:41:33
+
+Removed logic (cont)
+--------------------
+Signal e_fmexg_core/fifo/do1_9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ff_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aff_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aef_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ef_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do17_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do16_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do15_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do14_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do13_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do12_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do11_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do10_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do9_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do8_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do7_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do6_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do5_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do4_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do3_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do2_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do1_8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ff_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aff_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aef_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ef_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do17_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do16_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do15_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do14_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do13_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do12_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do11_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do10_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do9_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do8_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do7_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do6_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do5_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do4_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do3_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do2_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do1_7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ff_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aff_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aef_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ef_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do17_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do16_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do15_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do14_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do13_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do12_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do11_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do10_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do9_6 undriven or does not drive anything - clipped.
+
+                                    Page 8
+
+
+
+
+Design:  tl_car_field                                  Date:  05/15/19  12:41:33
+
+Removed logic (cont)
+--------------------
+Signal e_fmexg_core/fifo/do8_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do7_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do6_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do5_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do4_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do3_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do2_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do1_6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ff_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aff_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aef_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ef_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do17_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do16_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do15_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do14_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do13_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do12_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do11_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do10_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do9_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do8_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do7_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do6_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do5_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do4_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do3_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do2_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do1_5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ff_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aff_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aef_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ef_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do17_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do16_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do15_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do14_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do13_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do12_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do11_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do10_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do9_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do8_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do7_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do6_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do5_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do4_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do3_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do2_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do1_4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ff_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aff_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aef_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ef_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do17_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do16_3 undriven or does not drive anything - clipped.
+
+                                    Page 9
+
+
+
+
+Design:  tl_car_field                                  Date:  05/15/19  12:41:33
+
+Removed logic (cont)
+--------------------
+Signal e_fmexg_core/fifo/do15_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do14_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do13_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do12_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do11_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do10_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do9_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do8_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do7_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do6_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do5_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do4_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do3_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do2_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do1_3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ff_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aff_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aef_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ef_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do17_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do16_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do15_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do14_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do13_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do12_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do11_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do10_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do9_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do8_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do7_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do6_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do5_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do4_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do3_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do2_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do1_2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ff_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aff_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aef_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ef_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do17_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do16_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do15_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do14_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do13_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do12_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do11_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do10_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do9_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do8_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do7_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do6_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do5_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do4_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do3_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do2_1 undriven or does not drive anything - clipped.
+
+                                   Page 10
+
+
+
+
+Design:  tl_car_field                                  Date:  05/15/19  12:41:33
+
+Removed logic (cont)
+--------------------
+Signal e_fmexg_core/fifo/do1_1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ff_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aff_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aef_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ef_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do17_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do16_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do15_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do14_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do13_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do12_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do11_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do10_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do9_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do8_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do7_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do6_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do5_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do4_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do3_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do2_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do1_0 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ff undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aff undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/aef undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/ef undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do17 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do16 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do15 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do14 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do13 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do12 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do11 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do10 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do9 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do8 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do7 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do6 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do5 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do4 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do3 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do2 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do1 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/AlmostEmpty undriven or does not drive anything -
+     clipped.
+Signal e_fmexg_core/fifo/do17_10 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do16_10 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do15_10 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do14_10 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do13_10 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do12_10 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do11_10 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do10_10 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do9_10 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do8_10 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do7_10 undriven or does not drive anything - clipped.
+
+                                   Page 11
+
+
+
+
+Design:  tl_car_field                                  Date:  05/15/19  12:41:33
+
+Removed logic (cont)
+--------------------
+Signal e_fmexg_core/fifo/do6_10 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do5_10 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do4_10 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do3_10 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do2_10 undriven or does not drive anything - clipped.
+Signal e_fmexg_core/fifo/do1_10 undriven or does not drive anything - clipped.
+Signal l_car_core/e_i2s_dio/lvds_bit_ctr_cry_0_S0[0] undriven or does not drive
+     anything - clipped.
+Signal l_car_core/e_i2s_dio/N_1 undriven or does not drive anything - clipped.
+Signal l_car_core/e_i2s_dio/lvds_bit_ctr_cry_0_COUT[3] undriven or does not
+     drive anything - clipped.
+Block spi4_cs_pad_RNI9NH1 was optimized away.
+Block e_fmexg_core/two_samples_0_.CN was optimized away.
+Block e_pll_4/GND was optimized away.
+Block e_car_clock_gen/GND was optimized away.
+Block e_fmexg_core/fifo/VCC was optimized away.
+Block e_fmexg_core/fifo/GND was optimized away.
+Block l_car_core/e_i2s_dio/GND was optimized away.
+
+Memory Usage
+------------
+
+/e_fmexg_core/fifo:
+    EBRs: 12
+    RAM SLICEs: 0
+    Logic SLICEs: 0
+    PFU Registers: 0
+    -Contains EBR fmexg_fifo_8k_1025_0_11:  TYPE= FIFO8KB,  REGMODE= NOREG,
+         RESETMODE= ASYNC,  ASYNC_RESET_RELEASE= SYNC,  GSR= DISABLED
+    -Contains EBR fmexg_fifo_8k_1025_11_0:  TYPE= FIFO8KB,  REGMODE= NOREG,
+         RESETMODE= ASYNC,  ASYNC_RESET_RELEASE= SYNC,  GSR= DISABLED
+    -Contains EBR fmexg_fifo_8k_1025_10_1:  TYPE= FIFO8KB,  REGMODE= NOREG,
+         RESETMODE= ASYNC,  ASYNC_RESET_RELEASE= SYNC,  GSR= DISABLED
+    -Contains EBR fmexg_fifo_8k_1025_9_2:  TYPE= FIFO8KB,  REGMODE= NOREG,
+         RESETMODE= ASYNC,  ASYNC_RESET_RELEASE= SYNC,  GSR= DISABLED
+    -Contains EBR fmexg_fifo_8k_1025_8_3:  TYPE= FIFO8KB,  REGMODE= NOREG,
+         RESETMODE= ASYNC,  ASYNC_RESET_RELEASE= SYNC,  GSR= DISABLED
+    -Contains EBR fmexg_fifo_8k_1025_7_4:  TYPE= FIFO8KB,  REGMODE= NOREG,
+         RESETMODE= ASYNC,  ASYNC_RESET_RELEASE= SYNC,  GSR= DISABLED
+    -Contains EBR fmexg_fifo_8k_1025_6_5:  TYPE= FIFO8KB,  REGMODE= NOREG,
+         RESETMODE= ASYNC,  ASYNC_RESET_RELEASE= SYNC,  GSR= DISABLED
+    -Contains EBR fmexg_fifo_8k_1025_5_6:  TYPE= FIFO8KB,  REGMODE= NOREG,
+         RESETMODE= ASYNC,  ASYNC_RESET_RELEASE= SYNC,  GSR= DISABLED
+    -Contains EBR fmexg_fifo_8k_1025_4_7:  TYPE= FIFO8KB,  REGMODE= NOREG,
+         RESETMODE= ASYNC,  ASYNC_RESET_RELEASE= SYNC,  GSR= DISABLED
+    -Contains EBR fmexg_fifo_8k_1025_3_8:  TYPE= FIFO8KB,  REGMODE= NOREG,
+         RESETMODE= ASYNC,  ASYNC_RESET_RELEASE= SYNC,  GSR= DISABLED
+    -Contains EBR fmexg_fifo_8k_1025_2_9:  TYPE= FIFO8KB,  REGMODE= NOREG,
+         RESETMODE= ASYNC,  ASYNC_RESET_RELEASE= SYNC,  GSR= DISABLED
+    -Contains EBR fmexg_fifo_8k_1025_1_10:  TYPE= FIFO8KB,  REGMODE= NOREG,
+         RESETMODE= ASYNC,  ASYNC_RESET_RELEASE= SYNC,  GSR= DISABLED
+
+     
+
+
+
+
+                                   Page 12
+
+
+
+
+Design:  tl_car_field                                  Date:  05/15/19  12:41:33
+
+PLL/DLL Summary
+---------------
+
+PLL 1:                                     Pin/Node Value
+  PLL Instance Name:                                e_pll_4/PLLInst_0
+  PLL Type:                                         EHXPLLJ
+  Input Clock:                             PIN      test_l1_c
+  Output Clock(P):                         NODE     hr_clk_0
+  Output Clock(S):                                  NONE
+  Output Clock(S2):                                 NONE
+  Output Clock(S3):                                 NONE
+  Feedback Signal:                         NODE     hr_clk_0
+  Reset Signal:                                     NONE
+  M Divider Reset Signal:                           NONE
+  C Divider Reset Signal:                           NONE
+  D Divider Reset Signal:                           NONE
+  Standby Signal:                                   NONE
+  PLL LOCK signal:                                  NONE
+  PLL Data bus CLK Signal:                          NONE
+  PLL Data bus Strobe Signal:                       NONE
+  PLL Data bus Reset Signal:                        NONE
+  PLL Data bus Write Enable Signal:                 NONE
+  PLL Data bus Address0:                            NONE
+  PLL Data bus Address1:                            NONE
+  PLL Data bus Address2:                            NONE
+  PLL Data bus Address3:                            NONE
+  PLL Data bus Address4:                            NONE
+  PLL Data In bus Data0:                            NONE
+  PLL Data In bus Data1:                            NONE
+  PLL Data In bus Data2:                            NONE
+  PLL Data In bus Data3:                            NONE
+  PLL Data In bus Data4:                            NONE
+  PLL Data In bus Data5:                            NONE
+  PLL Data In bus Data6:                            NONE
+  PLL Data In bus Data7:                            NONE
+  PLL Data bus Acknowledge:                         NONE
+  PLL Data Out bus Data0:                           NONE
+  PLL Data Out bus Data1:                           NONE
+  PLL Data Out bus Data2:                           NONE
+  PLL Data Out bus Data3:                           NONE
+  PLL Data Out bus Data4:                           NONE
+  PLL Data Out bus Data5:                           NONE
+  PLL Data Out bus Data6:                           NONE
+  PLL Data Out bus Data7:                           NONE
+  Input Clock Frequency (MHz):                      12.2880
+  Output Clock(P) Frequency (MHz):                  49.1520
+  Output Clock(S) Frequency (MHz):                  NA
+  Output Clock(S2) Frequency (MHz):                 NA
+  Output Clock(S3) Frequency (MHz):                 NA
+  CLKOP Post Divider A Input:                       DIVA
+  CLKOS Post Divider B Input:                       DIVB
+  CLKOS2 Post Divider C Input:                      DIVC
+  CLKOS3 Post Divider D Input:                      DIVD
+  Pre Divider A Input:                              VCO_PHASE
+  Pre Divider B Input:                              VCO_PHASE
+  Pre Divider C Input:                              VCO_PHASE
+  Pre Divider D Input:                              VCO_PHASE
+  VCO Bypass A Input:                               VCO_PHASE
+
+                                   Page 13
+
+
+
+
+Design:  tl_car_field                                  Date:  05/15/19  12:41:33
+
+PLL/DLL Summary (cont)
+----------------------
+  VCO Bypass B Input:                               VCO_PHASE
+  VCO Bypass C Input:                               VCO_PHASE
+  VCO Bypass D Input:                               VCO_PHASE
+  FB_MODE:                                          CLKOP
+  CLKI Divider:                                     1
+  CLKFB Divider:                                    4
+  CLKOP Divider:                                    11
+  CLKOS Divider:                                    1
+  CLKOS2 Divider:                                   1
+  CLKOS3 Divider:                                   1
+  Fractional N Divider:                             0
+  CLKOP Desired Phase Shift(degree):                0
+  CLKOP Trim Option Rising/Falling:                 RISING
+  CLKOP Trim Option Delay:                          0
+  CLKOS Desired Phase Shift(degree):                0
+  CLKOS Trim Option Rising/Falling:                 FALLING
+  CLKOS Trim Option Delay:                          0
+  CLKOS2 Desired Phase Shift(degree):               0
+  CLKOS3 Desired Phase Shift(degree):               0
+
+ASIC Components
+---------------
+
+Instance Name: e_fmexg_core/fifo/fmexg_fifo_8k_1025_0_11
+         Type: FIFO8KB
+Instance Name: e_fmexg_core/fifo/fmexg_fifo_8k_1025_11_0
+         Type: FIFO8KB
+Instance Name: e_fmexg_core/fifo/fmexg_fifo_8k_1025_10_1
+         Type: FIFO8KB
+Instance Name: e_fmexg_core/fifo/fmexg_fifo_8k_1025_9_2
+         Type: FIFO8KB
+Instance Name: e_fmexg_core/fifo/fmexg_fifo_8k_1025_8_3
+         Type: FIFO8KB
+Instance Name: e_fmexg_core/fifo/fmexg_fifo_8k_1025_7_4
+         Type: FIFO8KB
+Instance Name: e_fmexg_core/fifo/fmexg_fifo_8k_1025_6_5
+         Type: FIFO8KB
+Instance Name: e_fmexg_core/fifo/fmexg_fifo_8k_1025_5_6
+         Type: FIFO8KB
+Instance Name: e_fmexg_core/fifo/fmexg_fifo_8k_1025_4_7
+         Type: FIFO8KB
+Instance Name: e_fmexg_core/fifo/fmexg_fifo_8k_1025_3_8
+         Type: FIFO8KB
+Instance Name: e_fmexg_core/fifo/fmexg_fifo_8k_1025_2_9
+         Type: FIFO8KB
+Instance Name: e_fmexg_core/fifo/fmexg_fifo_8k_1025_1_10
+         Type: FIFO8KB
+Instance Name: e_pll_4/PLLInst_0
+         Type: EHXPLLJ
+
+GSR Usage
+---------
+
+GSR Component:
+   The local reset signal 'spi4_cs_c' of the design has been inferred as Global
+        Set Reset (GSR). The reset signal used for GSR control is 'spi4_cs_c'.
+
+                                   Page 14
+
+
+
+
+Design:  tl_car_field                                  Date:  05/15/19  12:41:33
+
+GSR Usage (cont)
+----------------
+        
+
+     GSR Property:
+   The design components with GSR property set to ENABLED will respond to global
+        set reset while the components with GSR property set to DISABLED will
+        not.
+        
+
+     Components on inferred reset domain with GSR Property disabled
+--------------------------------------------------------------
+
+     These components have the GSR property set to DISABLED and are on the
+     inferred reset domain. The components will respond to the reset signal
+     'spi4_cs_c' via the local reset on the component and not the GSR component.
+     
+
+     Type and number of components of the type: 
+   Register = 25 
+
+     Type and instance name of component: 
+   Register : e_fmexg_core_two_samplesio[0]
+   Register : e_fmexg_core/two_samples[1]
+   Register : e_fmexg_core/two_samples[2]
+   Register : e_fmexg_core/two_samples[3]
+   Register : e_fmexg_core/two_samples[4]
+   Register : e_fmexg_core/two_samples[5]
+   Register : e_fmexg_core/two_samples[6]
+   Register : e_fmexg_core/two_samples[7]
+   Register : e_fmexg_core/two_samples[8]
+   Register : e_fmexg_core/two_samples[9]
+   Register : e_fmexg_core/two_samples[10]
+   Register : e_fmexg_core/two_samples[11]
+   Register : e_fmexg_core/two_samples[12]
+   Register : e_fmexg_core/two_samples[13]
+   Register : e_fmexg_core/two_samples[14]
+   Register : e_fmexg_core/two_samples[15]
+   Register : e_fmexg_core/two_samples[16]
+   Register : e_fmexg_core/two_samples[17]
+   Register : e_fmexg_core/two_samples[18]
+   Register : e_fmexg_core/two_samples[19]
+   Register : e_fmexg_core/two_samples[20]
+   Register : e_fmexg_core/two_samples[21]
+   Register : e_fmexg_core/two_samples[22]
+   Register : e_fmexg_core/two_samples[23]
+   Register : e_fmexg_core/fifo_readclk_en
+
+Run Time and Memory Usage
+-------------------------
+
+   Total CPU Time: 0 secs  
+   Total REAL Time: 0 secs  
+   Peak Memory Usage: 197 MB
+        
+
+
+
+
+                                   Page 15
+
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+     Copyright (c) 1995 AT&T Corp.   All rights reserved.
+     Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+     Copyright (c) 2001 Agere Systems   All rights reserved.
+     Copyright (c) 2002-2017 Lattice Semiconductor Corporation,  All rights
+     reserved.

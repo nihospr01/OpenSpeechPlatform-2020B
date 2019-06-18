@@ -1,0 +1,5 @@
+
+
+-g RamCfg:Reset
+
+-path "/home/hari/Documents/osp-wearable-fpga/djb_field"  

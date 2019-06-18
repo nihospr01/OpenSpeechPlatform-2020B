@@ -1,0 +1,29 @@
+#
+# Logical Preferences generated for Lattice by Synplify maplat, Build 1796R.
+#
+
+# Period Constraints 
+#FREQUENCY NET "e_pll_4/hr_clk_0" 1.0 MHz;
+#FREQUENCY PORT "ext_clk_in" 1.0 MHz;
+#FREQUENCY PORT "spi4_clk" 1.0 MHz;
+
+
+# Output Constraints 
+
+# Input Constraints 
+
+# Point-to-point Delay Constraints 
+
+
+
+# Block Path Constraints 
+#BLOCK PATH FROM CLKNET "spi4_clk_c" TO CLKNET "test_l1_c";
+#BLOCK PATH FROM CLKNET "spi4_clk_c" TO CLKNET "e_pll_4/hr_clk_0";
+#BLOCK PATH FROM CLKNET "test_l1_c" TO CLKNET "spi4_clk_c";
+#BLOCK PATH FROM CLKNET "test_l1_c" TO CLKNET "e_pll_4/hr_clk_0";
+#BLOCK PATH FROM CLKNET "e_pll_4/hr_clk_0" TO CLKNET "spi4_clk_c";
+#BLOCK PATH FROM CLKNET "e_pll_4/hr_clk_0" TO CLKNET "test_l1_c";
+
+BLOCK ASYNCPATHS;
+
+# End of generated Logical Preferences.

@@ -1,0 +1,402 @@
+
+         Lattice Mapping Report File for Design Module 'tl_djb_field'
+
+
+Design Information
+------------------
+
+Command line:   map -a MachXO3LF -p LCMXO3LF-1300E -t WLCSP36 -s 5 -oc
+     Commercial djb_field_impl1.ngd -o djb_field_impl1_map.ncd -pr
+     djb_field_impl1.prf -mp djb_field_impl1.mrp -lpf /home/hari/Documents/osp-w
+     earable-fpga/djb_field/impl1/djb_field_impl1_synplify.lpf -lpf
+     /home/hari/Documents/osp-wearable-fpga/djb_field/djb_field.lpf -c 0 -gui
+     -msgset /home/hari/Documents/osp-wearable-fpga/djb_field/promote.xml 
+Target Vendor:  LATTICE
+Target Device:  LCMXO3LF-1300EWLCSP36
+Target Performance:   5
+Mapper:  xo3c00f,  version:  Diamond (64-bit) 3.10.0.111.2
+Mapped on:  03/12/19  11:45:24
+
+Design Summary
+--------------
+
+   Number of registers:     97 out of  1367 (7%)
+      PFU registers:           87 out of  1280 (7%)
+      PIO registers:           10 out of    87 (11%)
+   Number of SLICEs:        53 out of   640 (8%)
+      SLICEs as Logic/ROM:     53 out of   640 (8%)
+      SLICEs as RAM:            0 out of   480 (0%)
+      SLICEs as Carry:          4 out of   640 (1%)
+   Number of LUT4s:         75 out of  1280 (6%)
+      Number used as logic LUTs:         67
+      Number used as distributed RAM:     0
+      Number used as ripple logic:        8
+      Number used as shift registers:     0
+   Number of PIO sites used: 12 + 4(JTAG) out of 29 (55%)
+   Number of block RAMs:  0 out of 7 (0%)
+   Number of GSRs:  0 out of 1 (0%)
+   EFB used :       No
+   JTAG used :      No
+   Readback used :  No
+   Oscillator used :  No
+   Startup used :   No
+   POR :            On
+   Bandgap :        On
+   Number of Power Controller:  0 out of 1 (0%)
+   Number of Dynamic Bank Controller (BCINRD):  0 out of 4 (0%)
+   Number of Dynamic Bank Controller (BCLVDSO):  0 out of 1 (0%)
+   Number of DCCA:  0 out of 8 (0%)
+   Number of DCMA:  0 out of 2 (0%)
+   Number of PLLs:  1 out of 1 (100%)
+   Number of DQSDLLs:  0 out of 2 (0%)
+   Number of CLKDIVC:  0 out of 4 (0%)
+   Number of ECLKSYNCA:  0 out of 4 (0%)
+   Number of ECLKBRIDGECS:  0 out of 2 (0%)
+   Notes:-
+      1. Total number of LUT4s = (Number of logic LUT4s) + 2*(Number of
+     distributed RAMs) + 2*(Number of ripple logic)
+      2. Number of logic LUT4s does not include count of distributed RAM and
+     ripple logic.
+   Number of clocks:  2
+     Net codec_clk_c: 1 loads, 1 rising, 0 falling (Driver: PIO ext_clk_in )
+     Net hr_clk_0: 62 loads, 62 rising, 0 falling (Driver: e_pll_4/PLLInst_0 )
+
+                                    Page 1
+
+
+
+
+Design:  tl_djb_field                                  Date:  03/12/19  11:45:24
+
+Design Summary (cont)
+---------------------
+   Number of Clock Enables:  17
+     Net lvdscounter_RNI923O3_0[1]: 1 loads, 0 LSLICEs
+     Net buf_cnv_0[0]: 5 loads, 4 LSLICEs
+     Net e_djb_core/divider[1]: 3 loads, 3 LSLICEs
+     Net e_djb_core/e_djb_sequencer/seq_idle_internal_RNIS8NP2: 3 loads, 3
+     LSLICEs
+     Net e_djb_core/divider_RNICDVJ1_0[0]: 6 loads, 6 LSLICEs
+     Net e_djb_core/e_djb_sequencer/i2s_lr_st_RNO: 1 loads, 1 LSLICEs
+     Net e_djb_core/e_djb_sequencer/seq_idle_internal_RNO: 1 loads, 1 LSLICEs
+     Net divider_RNICDVJ1_1[0]: 3 loads, 2 LSLICEs
+     Net i2s_spkr_dat7_0_a3_1_RNIRM9K2: 1 loads, 0 LSLICEs
+     Net lvdscounter_RNI923O3_1[1]: 1 loads, 0 LSLICEs
+     Net lvdscounter_RNI923O3[1]: 1 loads, 0 LSLICEs
+     Net e_djb_core/e_i2s_dio_2/in_lvds_sr/buf_cnv[0]: 5 loads, 5 LSLICEs
+     Net cycle_begin_RNIM9LT1: 10 loads, 9 LSLICEs
+     Net buf_cnv_1[0]: 5 loads, 4 LSLICEs
+     Net e_djb_core/e_i2s_dio_2/reg_cnv[0]: 8 loads, 8 LSLICEs
+     Net e_djb_core/e_i2s_dio_2/out_lvds_sr/buf_cnv_2[0]: 4 loads, 4 LSLICEs
+     Net e_djb_core/e_djb_clock_sync/N_32: 1 loads, 1 LSLICEs
+   Number of LSRs:  0
+   Number of nets driven by tri-state buffers:  0
+   Top 10 highest fanout non-clock nets:
+     Net e_djb_core/e_djb_sequencer/lvdscounter[0]: 17 loads
+     Net e_djb_core/e_djb_sequencer/lvdscounter[1]: 15 loads
+     Net e_djb_core/divider[1]: 14 loads
+     Net e_djb_core/test_seq_reset: 14 loads
+     Net e_djb_core/divider[0]: 12 loads
+     Net e_djb_core/divider_RNICDVJ1_0[0]: 11 loads
+     Net e_djb_core/e_djb_sequencer/lvdscounter[2]: 11 loads
+     Net e_djb_core/N_49: 11 loads
+     Net cycle_begin_RNIM9LT1: 10 loads
+     Net e_djb_core/e_i2s_dio_2/cycle_begin: 10 loads
+
+
+
+
+   Number of warnings:  0
+   Number of errors:    0
+     
+
+Design Errors/Warnings
+----------------------
+
+   No errors or warnings present.
+
+IO (PIO) Attributes
+-------------------
+
++---------------------+-----------+-----------+------------+
+| IO Name             | Direction | Levelmode | IO         |
+|                     |           |  IO_TYPE  | Register   |
++---------------------+-----------+-----------+------------+
+| lvds_io             | BIDIR     | BLVDS25E  | IN/OUT/TRI |
++---------------------+-----------+-----------+------------+
+| codec_clk           | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+
+                                    Page 2
+
+
+
+
+Design:  tl_djb_field                                  Date:  03/12/19  11:45:24
+
+IO (PIO) Attributes (cont)
+--------------------------
+| ext_clk_in          | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| spi_cs1             | OUTPUT    | LVCMOS33  | OUT        |
++---------------------+-----------+-----------+------------+
+| spi_cs0             | OUTPUT    | LVCMOS25  | OUT        |
++---------------------+-----------+-----------+------------+
+| spi_miso            | INPUT     | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+| spi_mosi            | OUTPUT    | LVCMOS33  | OUT        |
++---------------------+-----------+-----------+------------+
+| spi_clk             | OUTPUT    | LVCMOS25  | OUT        |
++---------------------+-----------+-----------+------------+
+| i2s_dspk            | OUTPUT    | LVCMOS33  | OUT        |
++---------------------+-----------+-----------+------------+
+| i2s_dmic            | INPUT     | LVCMOS33  | IN         |
++---------------------+-----------+-----------+------------+
+| i2s_ws              | OUTPUT    | LVCMOS33  | OUT        |
++---------------------+-----------+-----------+------------+
+| i2s_sck             | OUTPUT    | LVCMOS33  |            |
++---------------------+-----------+-----------+------------+
+
+Removed logic
+-------------
+
+Block VCC undriven or does not drive anything - clipped.
+Block GSR_INST undriven or does not drive anything - clipped.
+Block GND undriven or does not drive anything - clipped.
+Block e_pll_4/VCC undriven or does not drive anything - clipped.
+Block e_djb_core/GND undriven or does not drive anything - clipped.
+Block e_djb_core/VCC undriven or does not drive anything - clipped.
+Block e_djb_core/e_djb_clock_sync/VCC undriven or does not drive anything -
+     clipped.
+Block e_djb_core/e_djb_clock_sync/GND undriven or does not drive anything -
+     clipped.
+Block e_djb_core/e_i2s_dio_2/VCC undriven or does not drive anything - clipped.
+Block e_djb_core/e_i2s_dio_2/out_lvds_sr/VCC undriven or does not drive anything
+     - clipped.
+Block e_djb_core/e_i2s_dio_2/out_lvds_sr/GND undriven or does not drive anything
+     - clipped.
+Block e_djb_core/e_i2s_dio_2/out_reg_1/VCC undriven or does not drive anything -
+     clipped.
+Block e_djb_core/e_i2s_dio_2/out_reg_1/GND undriven or does not drive anything -
+     clipped.
+Block e_djb_core/e_i2s_dio_2/out_reg_2/GND undriven or does not drive anything -
+     clipped.
+Block e_djb_core/e_i2s_dio_2/out_reg_2/VCC undriven or does not drive anything -
+     clipped.
+Block e_djb_core/e_i2s_dio_2/out_i2s_sr/GND undriven or does not drive anything
+     - clipped.
+Block e_djb_core/e_i2s_dio_2/out_i2s_sr/VCC undriven or does not drive anything
+     - clipped.
+Block e_djb_core/e_i2s_dio_2/in_i2s_sr/VCC undriven or does not drive anything -
+     clipped.
+Block e_djb_core/e_i2s_dio_2/in_i2s_sr/GND undriven or does not drive anything -
+     clipped.
+Block e_djb_core/e_i2s_dio_2/in_reg_1/GND undriven or does not drive anything -
+
+                                    Page 3
+
+
+
+
+Design:  tl_djb_field                                  Date:  03/12/19  11:45:24
+
+Removed logic (cont)
+--------------------
+     clipped.
+Block e_djb_core/e_i2s_dio_2/in_reg_1/VCC undriven or does not drive anything -
+     clipped.
+Block e_djb_core/e_i2s_dio_2/in_reg_2/GND undriven or does not drive anything -
+     clipped.
+Block e_djb_core/e_i2s_dio_2/in_reg_2/VCC undriven or does not drive anything -
+     clipped.
+Block e_djb_core/e_i2s_dio_2/in_lvds_sr/GND undriven or does not drive anything
+     - clipped.
+Block e_djb_core/e_i2s_dio_2/in_lvds_sr/VCC undriven or does not drive anything
+     - clipped.
+Block e_djb_core/e_djb_sequencer/VCC undriven or does not drive anything -
+     clipped.
+Block e_djb_core/e_djb_sequencer/GND undriven or does not drive anything -
+     clipped.
+Signal e_pll_4/GND undriven or does not drive anything - clipped.
+Signal e_djb_core/e_i2s_dio_2/GND undriven or does not drive anything - clipped.
+     
+Signal VCC undriven or does not drive anything - clipped.
+Signal GND undriven or does not drive anything - clipped.
+Signal e_pll_4/CLKINTFB undriven or does not drive anything - clipped.
+Signal e_pll_4/DPHSRC undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLACK undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLDATO0 undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLDATO1 undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLDATO2 undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLDATO3 undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLDATO4 undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLDATO5 undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLDATO6 undriven or does not drive anything - clipped.
+Signal e_pll_4/PLLDATO7 undriven or does not drive anything - clipped.
+Signal e_pll_4/REFCLK undriven or does not drive anything - clipped.
+Signal e_pll_4/INTLOCK undriven or does not drive anything - clipped.
+Signal e_pll_4/LOCK undriven or does not drive anything - clipped.
+Signal e_pll_4/CLKOS3 undriven or does not drive anything - clipped.
+Signal e_pll_4/CLKOS2 undriven or does not drive anything - clipped.
+Signal e_pll_4/CLKOS undriven or does not drive anything - clipped.
+Signal e_djb_core/e_i2s_dio_2/lvds_bit_ctr_s_0_S1[4] undriven or does not drive
+     anything - clipped.
+Signal e_djb_core/e_i2s_dio_2/lvds_bit_ctr_s_0_COUT[4] undriven or does not
+     drive anything - clipped.
+Signal e_djb_core/e_i2s_dio_2/lvds_bit_ctr_lcry_0_S1 undriven or does not drive
+     anything - clipped.
+Signal e_djb_core/e_i2s_dio_2/lvds_bit_ctr_lcry_0_S0 undriven or does not drive
+     anything - clipped.
+Signal e_djb_core/e_i2s_dio_2/N_1 undriven or does not drive anything - clipped.
+     
+Block e_pll_4/GND was optimized away.
+Block e_djb_core/e_i2s_dio_2/GND was optimized away.
+
+Memory Usage
+------------
+
+
+     
+
+
+                                    Page 4
+
+
+
+
+Design:  tl_djb_field                                  Date:  03/12/19  11:45:24
+
+PLL/DLL Summary
+---------------
+
+PLL 1:                                     Pin/Node Value
+  PLL Instance Name:                                e_pll_4/PLLInst_0
+  PLL Type:                                         EHXPLLJ
+  Input Clock:                             PIN      codec_clk_c
+  Output Clock(P):                         NODE     hr_clk_0
+  Output Clock(S):                                  NONE
+  Output Clock(S2):                                 NONE
+  Output Clock(S3):                                 NONE
+  Feedback Signal:                         NODE     hr_clk_0
+  Reset Signal:                                     NONE
+  M Divider Reset Signal:                           NONE
+  C Divider Reset Signal:                           NONE
+  D Divider Reset Signal:                           NONE
+  Standby Signal:                                   NONE
+  PLL LOCK signal:                                  NONE
+  PLL Data bus CLK Signal:                          NONE
+  PLL Data bus Strobe Signal:                       NONE
+  PLL Data bus Reset Signal:                        NONE
+  PLL Data bus Write Enable Signal:                 NONE
+  PLL Data bus Address0:                            NONE
+  PLL Data bus Address1:                            NONE
+  PLL Data bus Address2:                            NONE
+  PLL Data bus Address3:                            NONE
+  PLL Data bus Address4:                            NONE
+  PLL Data In bus Data0:                            NONE
+  PLL Data In bus Data1:                            NONE
+  PLL Data In bus Data2:                            NONE
+  PLL Data In bus Data3:                            NONE
+  PLL Data In bus Data4:                            NONE
+  PLL Data In bus Data5:                            NONE
+  PLL Data In bus Data6:                            NONE
+  PLL Data In bus Data7:                            NONE
+  PLL Data bus Acknowledge:                         NONE
+  PLL Data Out bus Data0:                           NONE
+  PLL Data Out bus Data1:                           NONE
+  PLL Data Out bus Data2:                           NONE
+  PLL Data Out bus Data3:                           NONE
+  PLL Data Out bus Data4:                           NONE
+  PLL Data Out bus Data5:                           NONE
+  PLL Data Out bus Data6:                           NONE
+  PLL Data Out bus Data7:                           NONE
+  Input Clock Frequency (MHz):                      12.2880
+  Output Clock(P) Frequency (MHz):                  49.1520
+  Output Clock(S) Frequency (MHz):                  NA
+  Output Clock(S2) Frequency (MHz):                 NA
+  Output Clock(S3) Frequency (MHz):                 NA
+  CLKOP Post Divider A Input:                       DIVA
+  CLKOS Post Divider B Input:                       DIVB
+  CLKOS2 Post Divider C Input:                      DIVC
+  CLKOS3 Post Divider D Input:                      DIVD
+  Pre Divider A Input:                              VCO_PHASE
+  Pre Divider B Input:                              VCO_PHASE
+  Pre Divider C Input:                              VCO_PHASE
+  Pre Divider D Input:                              VCO_PHASE
+  VCO Bypass A Input:                               VCO_PHASE
+
+                                    Page 5
+
+
+
+
+Design:  tl_djb_field                                  Date:  03/12/19  11:45:24
+
+PLL/DLL Summary (cont)
+----------------------
+  VCO Bypass B Input:                               VCO_PHASE
+  VCO Bypass C Input:                               VCO_PHASE
+  VCO Bypass D Input:                               VCO_PHASE
+  FB_MODE:                                          CLKOP
+  CLKI Divider:                                     1
+  CLKFB Divider:                                    4
+  CLKOP Divider:                                    11
+  CLKOS Divider:                                    1
+  CLKOS2 Divider:                                   1
+  CLKOS3 Divider:                                   1
+  Fractional N Divider:                             0
+  CLKOP Desired Phase Shift(degree):                0
+  CLKOP Trim Option Rising/Falling:                 RISING
+  CLKOP Trim Option Delay:                          0
+  CLKOS Desired Phase Shift(degree):                0
+  CLKOS Trim Option Rising/Falling:                 FALLING
+  CLKOS Trim Option Delay:                          0
+  CLKOS2 Desired Phase Shift(degree):               0
+  CLKOS3 Desired Phase Shift(degree):               0
+
+ASIC Components
+---------------
+
+Instance Name: e_pll_4/PLLInst_0
+         Type: EHXPLLJ
+
+Run Time and Memory Usage
+-------------------------
+
+   Total CPU Time: 0 secs  
+   Total REAL Time: 0 secs  
+   Peak Memory Usage: 170 MB
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    Page 6
+
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+     Copyright (c) 1995 AT&T Corp.   All rights reserved.
+     Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+     Copyright (c) 2001 Agere Systems   All rights reserved.
+     Copyright (c) 2002-2017 Lattice Semiconductor Corporation,  All rights
+     reserved.

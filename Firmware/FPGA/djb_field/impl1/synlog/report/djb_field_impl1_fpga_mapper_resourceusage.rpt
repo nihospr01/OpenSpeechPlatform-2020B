@@ -1,0 +1,22 @@
+Resource Usage Report
+Part: lcmxo3lf_1300e-5
+
+Register bits: 97 of 10240 (1%)
+PIC Latch:       0
+I/O cells:       12
+
+Details:
+BB:             1
+CCU2D:          4
+FD1P3AX:        84
+FD1S3AX:        3
+GSR:            1
+IB:             3
+IFS1P3DX:       2
+INV:            2
+OB:             8
+OFS1P3DX:       8
+ORCALUT4:       65
+PUR:            1
+VHI:            14
+VLO:            14

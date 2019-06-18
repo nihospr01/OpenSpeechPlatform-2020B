@@ -1,0 +1,5 @@
+
+
+-g RamCfg:Reset
+
+-path "/home/hari/Documents/osp-wearable-fpga/car_field_v6_fmexg"  

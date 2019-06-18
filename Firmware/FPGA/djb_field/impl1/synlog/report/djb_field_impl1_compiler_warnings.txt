@@ -1,0 +1,2 @@
+@W: CL169 :"/home/hari/Documents/osp-wearable-fpga/src/djb_sequencer.vhd":31:2:31:3|Pruning unused register lvds_io_cl_6. Make sure that there are no unused intermediate registers.
+

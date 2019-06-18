@@ -1,0 +1,53 @@
+[Device]
+Family=machxo3lf
+PartType=LCMXO3LF-6900C
+PartName=LCMXO3LF-6900C-5BG256C
+SpeedGrade=5
+Package=CABGA256
+OperatingCondition=COM
+Status=S
+
+[IP]
+VendorName=Lattice Semiconductor Corporation
+CoreType=LPM
+CoreStatus=Demo
+CoreName=FIFO_DC
+CoreRevision=5.8
+ModuleName=fmexg_fifo_5
+SourceFormat=VHDL
+ParameterFileVersion=1.0
+Date=05/09/2019
+Time=17:13:50
+
+[Parameters]
+Verilog=0
+VHDL=1
+EDIF=1
+Destination=Synplicity
+Expression=BusA(0 to 7)
+Order=Big Endian [MSB:LSB]
+IO=0
+FIFOImp=EBR Only
+RDepth=8192
+RWidth=12
+WDepth=8192
+WWidth=12
+regout=0
+CtrlByRdEn=0
+ClockEn=0
+EmpFlg=1
+PeMode=Static - Single Threshold
+PeAssert=10
+PeDeassert=12
+FullFlg=1
+PfMode=Static - Single Threshold
+PfAssert=2049
+PfDeassert=506
+Reset=Async
+Reset1=Sync
+RDataCount=0
+WDataCount=0
+EnECC=0
+
+[Command]
+cmd_line= -w -n fmexg_fifo_5 -lang vhdl -synth synplify -bus_exp 7 -bb -arch xo3c00f -type ebfifo -depth 8192 -width 12 -rwidth 12 -no_enable -pe 10 -pf 2049

@@ -1,0 +1,1 @@
+@W: MT529 :"/home/hari/Documents/osp-wearable-fpga/src/djb_clock_sync.vhd":41:2:41:3|Found inferred clock pll_4|CLKOP_inferred_clock which controls 5 sequential elements including e_djb_core.e_djb_clock_sync.divider[1:0]. This clock has no specified timing constraint which may prevent conversion of gated or generated clocks and may adversely impact design performance. 

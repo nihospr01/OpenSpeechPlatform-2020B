@@ -1,0 +1,308 @@
+# Tue Mar 12 11:45:23 2019
+
+Synopsys Lattice Technology Mapper, Version maplat, Build 1796R, Built Aug  4 2017 09:36:35
+Copyright (C) 1994-2017 Synopsys, Inc. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
+Product Version M-2017.03L-SP1-1
+
+Mapper Startup Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 98MB peak: 99MB)
+
+@N: MF248 |Running in 64-bit mode.
+@N: MF666 |Clock conversion enabled. (Command "set_option -fix_gated_and_generated_clocks 1" in the project file.)
+
+Design Input Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 98MB peak: 100MB)
+
+
+Mapper Initialization Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 98MB peak: 100MB)
+
+
+Start loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 111MB peak: 111MB)
+
+
+Finished loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 111MB peak: 113MB)
+
+
+
+Starting Optimization and Mapping (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 138MB peak: 141MB)
+
+
+Available hyper_sources - for debug and ip models
+	None Found
+
+
+Finished RTL optimizations (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 139MB peak: 141MB)
+
+@N: MO231 :"/home/hari/Documents/osp-wearable-fpga/src/i2s_dio_2.vhd":71:2:71:3|Found counter in view:work.i2s_dio_2(a) instance lvds_bit_ctr[4:0] 
+
+Starting factoring (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 139MB peak: 141MB)
+
+
+Finished factoring (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 141MB)
+
+
+Starting gated-clock and generated-clock conversion (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 139MB peak: 141MB)
+
+
+Finished gated-clock and generated-clock conversion (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 139MB peak: 141MB)
+
+
+Finished generic timing optimizations - Pass 1 (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 141MB)
+
+
+Starting Early Timing Optimization (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 141MB)
+
+
+Finished Early Timing Optimization (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 141MB)
+
+
+Finished generic timing optimizations - Pass 2 (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 141MB)
+
+
+Finished preparing to map (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 141MB)
+
+
+Finished technology mapping (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 141MB)
+
+Pass		 CPU time		Worst Slack		Luts / Registers
+------------------------------------------------------------
+   1		0h:00m:00s		   992.40ns		  67 /        97
+
+Finished technology timing optimizations and critical path resynthesis (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 141MB)
+
+@N: FX164 |The option to pack registers in the IOB has not been specified. Please set syn_useioff attribute.  
+
+Finished restoring hierarchy (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 141MB)
+
+@N: MT611 :|Automatically generated clock djb_clock_sync|divider_derived_clock[1] is not used and is being removed
+
+
+@S |Clock Optimization Summary
+
+
+#### START OF CLOCK OPTIMIZATION REPORT #####[
+
+0 non-gated/non-generated clock tree(s) driving 0 clock pin(s) of sequential element(s)
+1 gated/generated clock tree(s) driving 97 clock pin(s) of sequential element(s)
+0 instances converted, 97 sequential instances remain driven by gated/generated clocks
+
+============================================================================================================ Gated/Generated Clocks =============================================================================================================
+Clock Tree ID     Driving Element       Drive Element Type     Fanout     Sample Instance                          Explanation                                                                                                                   
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+@K:CKID0001       e_pll_4.PLLInst_0     EHXPLLJ                97         e_djb_core.e_djb_sequencer.i2s_lr_st     Gating structure creates improper gating logic. See the Gated Clocks description in the user guide for conversion requirements
+=================================================================================================================================================================================================================================================
+
+
+##### END OF CLOCK OPTIMIZATION REPORT ######]
+
+
+Start Writing Netlists (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 106MB peak: 141MB)
+
+Writing Analyst data base /home/hari/Documents/osp-wearable-fpga/djb_field/impl1/synwork/djb_field_impl1_m.srm
+
+Finished Writing Netlist Databases (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 139MB peak: 141MB)
+
+Writing EDIF Netlist and constraint files
+@N: FX1056 |Writing EDF file: /home/hari/Documents/osp-wearable-fpga/djb_field/impl1/djb_field_impl1.edi
+M-2017.03L-SP1-1
+@N: BW106 |Synplicity Constraint File capacitance units using default value of 1pF 
+
+Finished Writing EDIF Netlist and constraint files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 143MB peak: 145MB)
+
+
+Start final timing analysis (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 144MB peak: 145MB)
+
+@W: MT246 :"/home/hari/Documents/osp-wearable-fpga/src/pll_4.vhd":105:4:105:12|Blackbox EHXPLLJ is missing a user supplied timing model. This may have a negative effect on timing analysis and optimizations (Quality of Results) 
+@W: MT420 |Found inferred clock pll_4|CLKOP_inferred_clock with period 1000.00ns. Please declare a user-defined clock on object "n:e_pll_4.CLKOP"
+
+
+##### START OF TIMING REPORT #####[
+# Timing Report written on Tue Mar 12 11:45:23 2019
+#
+
+
+Top view:               tl_djb_field
+Requested Frequency:    1.0 MHz
+Wire load mode:         top
+Paths requested:        5
+Constraint File(s):    
+@N: MT320 |This timing report is an estimate of place and route data. For final timing results, use the FPGA vendor place and route report.
+
+@N: MT322 |Clock constraints include only register-to-register paths associated with each individual clock.
+
+
+
+Performance Summary
+*******************
+
+
+Worst slack in design: 993.546
+
+                               Requested     Estimated     Requested     Estimated                 Clock        Clock              
+Starting Clock                 Frequency     Frequency     Period        Period        Slack       Type         Group              
+-----------------------------------------------------------------------------------------------------------------------------------
+pll_4|CLKOP_inferred_clock     1.0 MHz       154.9 MHz     1000.000      6.454         993.546     inferred     Inferred_clkgroup_0
+System                         1.0 MHz       NA            1000.000      NA            NA          system       system_clkgroup    
+===================================================================================================================================
+Estimated period and frequency reported as NA means no slack depends directly on the clock waveform
+
+
+
+
+
+Clock Relationships
+*******************
+
+Clocks                                                  |    rise  to  rise     |    fall  to  fall   |    rise  to  fall   |    fall  to  rise 
+------------------------------------------------------------------------------------------------------------------------------------------------
+Starting                    Ending                      |  constraint  slack    |  constraint  slack  |  constraint  slack  |  constraint  slack
+------------------------------------------------------------------------------------------------------------------------------------------------
+pll_4|CLKOP_inferred_clock  pll_4|CLKOP_inferred_clock  |  1000.000    993.546  |  No paths    -      |  No paths    -      |  No paths    -    
+================================================================================================================================================
+ Note: 'No paths' indicates there are no paths in the design for that pair of clock edges.
+       'Diff grp' indicates that paths exist but the starting clock and ending clock are in different clock groups.
+
+
+
+Interface Information 
+*********************
+
+No IO constraint found
+
+
+
+====================================
+Detailed Report for Clock: pll_4|CLKOP_inferred_clock
+====================================
+
+
+
+Starting Points with Worst Slack
+********************************
+
+                                                 Starting                                                                                           Arrival            
+Instance                                         Reference                      Type         Pin     Net                                            Time        Slack  
+                                                 Clock                                                                                                                 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+e_djb_core.e_djb_clock_sync.seq_reset_i          pll_4|CLKOP_inferred_clock     FD1P3AX      Q       test_seq_reset                                 1.256       993.546
+e_djb_core.e_djb_sequencer.seq_idle_internal     pll_4|CLKOP_inferred_clock     FD1P3AX      Q       test_seq_idle                                  1.148       993.654
+e_djb_core_e_djb_clock_sync_lvds_i_sampledio     pll_4|CLKOP_inferred_clock     IFS1P3DX     Q       e_djb_core.e_djb_clock_sync.lvds_i_sampled     1.044       993.758
+e_djb_core.e_djb_clock_sync.last_lvds_i          pll_4|CLKOP_inferred_clock     FD1S3AX      Q       last_lvds_i                                    0.972       993.830
+e_djb_core.e_djb_clock_sync.divider[0]           pll_4|CLKOP_inferred_clock     FD1S3AX      Q       divider[0]                                     1.228       994.839
+e_djb_core.e_djb_sequencer.lvdscounter[0]        pll_4|CLKOP_inferred_clock     FD1P3AX      Q       lvdscounter[0]                                 1.268       994.847
+e_djb_core.e_djb_sequencer.lvdscounter[1]        pll_4|CLKOP_inferred_clock     FD1P3AX      Q       lvdscounter[1]                                 1.260       994.855
+e_djb_core.e_i2s_dio_2.lvds_bit_ctr[1]           pll_4|CLKOP_inferred_clock     FD1P3AX      Q       i2s_sck_c                                      1.148       995.510
+e_djb_core.e_i2s_dio_2.lvds_bit_ctr[0]           pll_4|CLKOP_inferred_clock     FD1P3AX      Q       lvds_bit_ctr[0]                                1.108       995.550
+e_djb_core.e_djb_clock_sync.divider_0[1]         pll_4|CLKOP_inferred_clock     FD1S3AX      Q       divider[1]                                     1.268       995.699
+=======================================================================================================================================================================
+
+
+Ending Points with Worst Slack
+******************************
+
+                                            Starting                                                                 Required            
+Instance                                    Reference                      Type        Pin     Net                   Time         Slack  
+                                            Clock                                                                                        
+-----------------------------------------------------------------------------------------------------------------------------------------
+e_djb_core.e_i2s_dio_2.lvds_bit_ctr[4]      pll_4|CLKOP_inferred_clock     FD1P3AX     D       lvds_bit_ctr_s[4]     999.894      993.546
+e_djb_core.e_i2s_dio_2.lvds_bit_ctr[2]      pll_4|CLKOP_inferred_clock     FD1P3AX     D       lvds_bit_ctr_s[2]     999.894      993.689
+e_djb_core.e_i2s_dio_2.lvds_bit_ctr[3]      pll_4|CLKOP_inferred_clock     FD1P3AX     D       lvds_bit_ctr_s[3]     999.894      993.689
+e_djb_core.e_i2s_dio_2.lvds_bit_ctr[0]      pll_4|CLKOP_inferred_clock     FD1P3AX     D       lvds_bit_ctr_s[0]     999.894      993.832
+e_djb_core.e_i2s_dio_2.lvds_bit_ctr[1]      pll_4|CLKOP_inferred_clock     FD1P3AX     D       lvds_bit_ctr_s[1]     999.894      993.832
+e_djb_core.e_i2s_dio_2.out_reg_1.reg[0]     pll_4|CLKOP_inferred_clock     FD1P3AX     SP      reg_cnv[0]            999.528      994.446
+e_djb_core.e_i2s_dio_2.out_reg_2.reg[0]     pll_4|CLKOP_inferred_clock     FD1P3AX     SP      reg_cnv[0]            999.528      994.446
+e_djb_core.e_i2s_dio_2.out_reg_2.reg[1]     pll_4|CLKOP_inferred_clock     FD1P3AX     SP      reg_cnv[0]            999.528      994.446
+e_djb_core.e_i2s_dio_2.out_reg_1.reg[1]     pll_4|CLKOP_inferred_clock     FD1P3AX     SP      reg_cnv[0]            999.528      994.446
+e_djb_core.e_i2s_dio_2.out_reg_1.reg[2]     pll_4|CLKOP_inferred_clock     FD1P3AX     SP      reg_cnv[0]            999.528      994.446
+=========================================================================================================================================
+
+
+
+Worst Path Information
+***********************
+
+
+Path information for path number 1: 
+      Requested Period:                      1000.000
+    - Setup time:                            0.106
+    + Clock delay at ending point:           0.000 (ideal)
+    = Required time:                         999.894
+
+    - Propagation time:                      6.348
+    - Clock delay at starting point:         0.000 (ideal)
+    = Slack (critical) :                     993.546
+
+    Number of logic level(s):                6
+    Starting point:                          e_djb_core.e_djb_clock_sync.seq_reset_i / Q
+    Ending point:                            e_djb_core.e_i2s_dio_2.lvds_bit_ctr[4] / D
+    The start point is clocked by            pll_4|CLKOP_inferred_clock [rising] on pin CK
+    The end   point is clocked by            pll_4|CLKOP_inferred_clock [rising] on pin CK
+
+Instance / Net                                                    Pin      Pin               Arrival     No. of    
+Name                                                 Type         Name     Dir     Delay     Time        Fan Out(s)
+-------------------------------------------------------------------------------------------------------------------
+e_djb_core.e_djb_clock_sync.seq_reset_i              FD1P3AX      Q        Out     1.256     1.256       -         
+test_seq_reset                                       Net          -        -       -         -           14        
+e_djb_core.e_djb_clock_sync.last_lvds_i_RNIOPI31     ORCALUT4     D        In      0.000     1.256       -         
+e_djb_core.e_djb_clock_sync.last_lvds_i_RNIOPI31     ORCALUT4     Z        Out     1.265     2.521       -         
+N_49                                                 Net          -        -       -         -           8         
+e_djb_core.e_djb_clock_sync.divider_RNIQ0L51[0]      ORCALUT4     A        In      0.000     2.521       -         
+e_djb_core.e_djb_clock_sync.divider_RNIQ0L51[0]      ORCALUT4     Z        Out     0.449     2.969       -         
+divider_RNIQ0L51[0]                                  Net          -        -       -         -           1         
+e_djb_core.e_i2s_dio_2.lvds_bit_ctr_lcry_0           CCU2D        B1       In      0.000     2.969       -         
+e_djb_core.e_i2s_dio_2.lvds_bit_ctr_lcry_0           CCU2D        COUT     Out     1.544     4.514       -         
+lvds_bit_ctr                                         Net          -        -       -         -           1         
+e_djb_core.e_i2s_dio_2.lvds_bit_ctr_cry_0[0]         CCU2D        CIN      In      0.000     4.514       -         
+e_djb_core.e_i2s_dio_2.lvds_bit_ctr_cry_0[0]         CCU2D        COUT     Out     0.143     4.657       -         
+lvds_bit_ctr_cry[1]                                  Net          -        -       -         -           1         
+e_djb_core.e_i2s_dio_2.lvds_bit_ctr_cry_0[2]         CCU2D        CIN      In      0.000     4.657       -         
+e_djb_core.e_i2s_dio_2.lvds_bit_ctr_cry_0[2]         CCU2D        COUT     Out     0.143     4.800       -         
+lvds_bit_ctr_cry[3]                                  Net          -        -       -         -           1         
+e_djb_core.e_i2s_dio_2.lvds_bit_ctr_s_0[4]           CCU2D        CIN      In      0.000     4.800       -         
+e_djb_core.e_i2s_dio_2.lvds_bit_ctr_s_0[4]           CCU2D        S0       Out     1.549     6.348       -         
+lvds_bit_ctr_s[4]                                    Net          -        -       -         -           1         
+e_djb_core.e_i2s_dio_2.lvds_bit_ctr[4]               FD1P3AX      D        In      0.000     6.348       -         
+===================================================================================================================
+
+
+
+##### END OF TIMING REPORT #####]
+
+Timing exceptions that could not be applied
+None
+
+Finished final timing analysis (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 144MB peak: 145MB)
+
+
+Finished timing report (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 144MB peak: 145MB)
+
+---------------------------------------
+Resource Usage Report
+Part: lcmxo3lf_1300e-5
+
+Register bits: 97 of 10240 (1%)
+PIC Latch:       0
+I/O cells:       12
+
+
+Details:
+BB:             1
+CCU2D:          4
+FD1P3AX:        84
+FD1S3AX:        3
+GSR:            1
+IB:             3
+IFS1P3DX:       2
+INV:            2
+OB:             8
+OFS1P3DX:       8
+ORCALUT4:       65
+PUR:            1
+VHI:            14
+VLO:            14
+Mapper successful!
+
+At Mapper Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 30MB peak: 145MB)
+
+Process took 0h:00m:01s realtime, 0h:00m:01s cputime
+# Tue Mar 12 11:45:23 2019
+
+###########################################################]

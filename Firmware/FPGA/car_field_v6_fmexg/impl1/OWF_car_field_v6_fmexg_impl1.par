@@ -1,0 +1,259 @@
+PAR: Place And Route Diamond (64-bit) 3.10.0.111.2.
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2017 Lattice Semiconductor Corporation,  All rights reserved.
+Wed May 15 12:41:34 2019
+
+/usr/local/diamond/3.10_x64/ispfpga/bin/lin64/par -f
+OWF_car_field_v6_fmexg_impl1.p2t OWF_car_field_v6_fmexg_impl1_map.ncd
+OWF_car_field_v6_fmexg_impl1.dir OWF_car_field_v6_fmexg_impl1.prf -gui -msgset
+/home/hari/Documents/osp-wearable-fpga/car_field_v6_fmexg/promote.xml
+
+
+Preference file: OWF_car_field_v6_fmexg_impl1.prf.
+
+Level/       Number       Worst        Timing       Worst        Timing       Run          NCD
+Cost [ncd]   Unrouted     Slack        Score        Slack(hold)  Score(hold)  Time         Status
+----------   --------     -----        ------       -----------  -----------  ----         ------
+5_1   *      0            11.762       0            0.315        0            04           Success
+
+* : Design saved.
+
+Total (real) run time for 1-seed: 4 secs 
+
+par done!
+
+Lattice Place and Route Report for Design "OWF_car_field_v6_fmexg_impl1_map.ncd"
+Wed May 15 12:41:34 2019
+
+PAR: Place And Route Diamond (64-bit) 3.10.0.111.2.
+Command Line: par -w -l 5 -i 6 -t 1 -c 0 -e 0 -gui -msgset /home/hari/Documents/osp-wearable-fpga/car_field_v6_fmexg/promote.xml -exp parUseNBR=1:parCDP=0:parCDR=0:parPathBased=OFF OWF_car_field_v6_fmexg_impl1_map.ncd OWF_car_field_v6_fmexg_impl1.dir/5_1.ncd OWF_car_field_v6_fmexg_impl1.prf
+Preference file: OWF_car_field_v6_fmexg_impl1.prf.
+Placement level-cost: 5-1.
+Routing Iterations: 6
+
+Loading design for application par from file OWF_car_field_v6_fmexg_impl1_map.ncd.
+Design name: tl_car_field
+NCD version: 3.3
+Vendor:      LATTICE
+Device:      LCMXO3LF-6900C
+Package:     CABGA256
+Performance: 5
+Loading device for application par from file 'xo3c6900.nph' in environment: /usr/local/diamond/3.10_x64/ispfpga.
+Package Status:                     Final          Version 1.16.
+Performance Hardware Data Status:   Final          Version 37.4.
+License checked out.
+
+
+Ignore Preference Error(s):  True
+Device utilization summary:
+
+   PIO (prelim)   45+4(JTAG)/336     15% used
+                  45+4(JTAG)/207     24% bonded
+   IOLOGIC            8/336           2% used
+
+   SLICE            124/3432          3% used
+
+   GSR                1/1           100% used
+   EBR               12/26           46% used
+   PLL                1/2            50% used
+
+
+Number of Signals: 456
+Number of Connections: 1139
+
+Pin Constraint Summary:
+   43 out of 43 pins locked (100% locked).
+
+The following 3 signals are selected to use the primary clock routing resources:
+    hr_clk_0 (driver: e_pll_4/PLLInst_0, clk load #: 106)
+    spi4_clk_c (driver: spi4_clk, clk load #: 35)
+    e_fmexg_core/clkdiv12 (driver: e_fmexg_core/SLICE_10, clk load #: 12)
+
+WARNING - par: Signal "spi4_clk_c" is selected to use Primary clock resources. However, its driver comp "spi4_clk" is located at "T8", which is not a dedicated pin for connecting to Primary clock resources. General routing has to be used to route this signal, and it might suffer from excessive delay or skew.
+
+The following 5 signals are selected to use the secondary clock routing resources:
+    un2_divider (driver: SLICE_146, clk load #: 0, sr load #: 0, ce load #: 26)
+    e_fmexg_core/fifo_readclk_en (driver: e_fmexg_core/SLICE_13, clk load #: 0, sr load #: 0, ce load #: 24)
+    spi4_cs_c (driver: spi4_cs, clk load #: 0, sr load #: 0, ce load #: 14)
+    G_51 (driver: SLICE_133, clk load #: 0, sr load #: 0, ce load #: 10)
+    buf_cnv_0[0] (driver: l_car_core/e_i2s_dio/SLICE_145, clk load #: 0, sr load #: 0, ce load #: 10)
+
+WARNING - par: Signal "spi4_cs_c" is selected to use Secondary clock resources. However, its driver comp "spi4_cs" is located at "R8", which is not a dedicated pin for connecting to Secondary clock resources. General routing has to be used to route this signal, and it might suffer from excessive delay or skew.
+Signal spi4_cs_c is selected as Global Set/Reset.
+Starting Placer Phase 0.
+..............
+Finished Placer Phase 0.  REAL time: 0 secs 
+
+Starting Placer Phase 1.
+.....................
+Placer score = 92139.
+Finished Placer Phase 1.  REAL time: 2 secs 
+
+Starting Placer Phase 2.
+.
+Placer score =  91509
+Finished Placer Phase 2.  REAL time: 2 secs 
+
+
+------------------ Clock Report ------------------
+
+Global Clock Resources:
+  CLK_PIN    : 0 out of 8 (0%)
+  General PIO: 2 out of 336 (0%)
+  PLL        : 1 out of 2 (50%)
+  DCM        : 0 out of 2 (0%)
+  DCC        : 0 out of 8 (0%)
+
+Quadrants All (TL, TR, BL, BR) - Global Clocks:
+  PRIMARY "hr_clk_0" from CLKOP on comp "e_pll_4/PLLInst_0" on PLL site "LPLL", clk load = 106
+  PRIMARY "spi4_clk_c" from comp "spi4_clk" on PIO site "T8 (PB18B)", clk load = 35
+  PRIMARY "e_fmexg_core/clkdiv12" from Q0 on comp "e_fmexg_core/SLICE_10" on site "R2C19C", clk load = 12
+  SECONDARY "un2_divider" from F1 on comp "SLICE_146" on site "R14C20B", clk load = 0, ce load = 26, sr load = 0
+  SECONDARY "e_fmexg_core/fifo_readclk_en" from Q0 on comp "e_fmexg_core/SLICE_13" on site "R21C20B", clk load = 0, ce load = 24, sr load = 0
+  SECONDARY "spi4_cs_c" from comp "spi4_cs" on PIO site "R8 (PB16B)", clk load = 0, ce load = 14, sr load = 0
+  SECONDARY "G_51" from F1 on comp "SLICE_133" on site "R14C20A", clk load = 0, ce load = 10, sr load = 0
+  SECONDARY "buf_cnv_0[0]" from F0 on comp "l_car_core/e_i2s_dio/SLICE_145" on site "R14C20D", clk load = 0, ce load = 10, sr load = 0
+
+  PRIMARY  : 3 out of 8 (37%)
+  SECONDARY: 5 out of 8 (62%)
+
+Edge Clocks:
+  No edge clock selected.
+
+--------------- End of Clock Report ---------------
+
+
+I/O Usage Summary (final):
+   45 + 4(JTAG) out of 336 (14.6%) PIO sites used.
+   45 + 4(JTAG) out of 207 (23.7%) bonded PIO sites used.
+   Number of PIO comps: 43; differential: 2.
+   Number of Vref pins used: 0.
+
+I/O Bank Usage Summary:
++----------+----------------+------------+-----------+
+| I/O Bank | Usage          | Bank Vccio | Bank Vref |
++----------+----------------+------------+-----------+
+| 0        | 4 / 51 (  7%)  | 2.5V       | -         |
+| 1        | 14 / 52 ( 26%) | 3.3V       | -         |
+| 2        | 22 / 52 ( 42%) | 1.8V       | -         |
+| 3        | 4 / 16 ( 25%)  | 3.3V       | -         |
+| 4        | 0 / 16 (  0%)  | 3.3V       | -         |
+| 5        | 1 / 20 (  5%)  | 1.8V       | -         |
++----------+----------------+------------+-----------+
+
+Total placer CPU time: 2 secs 
+
+Dumping design to file OWF_car_field_v6_fmexg_impl1.dir/5_1.ncd.
+
+0 connections routed; 1139 unrouted.
+Starting router resource preassignment
+WARNING - par: The driver of primary clock net spi4_clk_c is not placed on one of the sites dedicated for primary clocks. This primary clock will be routed to an H-spine through general routing resource and might suffer from excessive delay or skew.
+
+WARNING - par: The following clock signals will be routed by using generic routing resource and may suffer from excessive delay and/or skew.
+   Signal=test_l1_c loads=5 clock_loads=4
+
+Completed router resource preassignment. Real time: 3 secs 
+
+Start NBR router at Wed May 15 12:41:37 PDT 2019
+
+*****************************************************************
+Info: NBR allows conflicts(one node used by more than one signal)
+      in the earlier iterations. In each iteration, it tries to  
+      solve the conflicts while keeping the critical connections 
+      routed as short as possible. The routing process is said to
+      be completed when no conflicts exist and all connections   
+      are routed.                                                
+Note: NBR uses a different method to calculate timing slacks. The
+      worst slack and total negative slack may not be the same as
+      that in TRCE report. You should always run TRCE to verify  
+      your design.                                               
+*****************************************************************
+
+Start NBR special constraint process at Wed May 15 12:41:37 PDT 2019
+
+Start NBR section for initial routing at Wed May 15 12:41:37 PDT 2019
+Level 4, iteration 1
+24(0.01%) conflicts; 0(0.00%) untouched conn; 0 (nbr) score; 
+Estimated worst slack/total negative slack<setup>: 11.755ns/0.000ns; real time: 4 secs 
+
+Info: Initial congestion level at 75% usage is 0
+Info: Initial congestion area  at 75% usage is 0 (0.00%)
+
+Start NBR section for normal routing at Wed May 15 12:41:38 PDT 2019
+Level 4, iteration 1
+10(0.00%) conflicts; 0(0.00%) untouched conn; 0 (nbr) score; 
+Estimated worst slack/total negative slack<setup>: 11.755ns/0.000ns; real time: 4 secs 
+Level 4, iteration 2
+10(0.00%) conflicts; 0(0.00%) untouched conn; 0 (nbr) score; 
+Estimated worst slack/total negative slack<setup>: 11.762ns/0.000ns; real time: 4 secs 
+Level 4, iteration 3
+5(0.00%) conflicts; 0(0.00%) untouched conn; 0 (nbr) score; 
+Estimated worst slack/total negative slack<setup>: 11.762ns/0.000ns; real time: 4 secs 
+Level 4, iteration 4
+1(0.00%) conflict; 0(0.00%) untouched conn; 0 (nbr) score; 
+Estimated worst slack/total negative slack<setup>: 11.762ns/0.000ns; real time: 4 secs 
+Level 4, iteration 5
+0(0.00%) conflict; 0(0.00%) untouched conn; 0 (nbr) score; 
+Estimated worst slack/total negative slack<setup>: 11.762ns/0.000ns; real time: 4 secs 
+
+Start NBR section for setup/hold timing optimization with effort level 3 at Wed May 15 12:41:38 PDT 2019
+
+Start NBR section for re-routing at Wed May 15 12:41:38 PDT 2019
+Level 4, iteration 1
+0(0.00%) conflict; 0(0.00%) untouched conn; 0 (nbr) score; 
+Estimated worst slack/total negative slack<setup>: 11.762ns/0.000ns; real time: 4 secs 
+
+Start NBR section for post-routing at Wed May 15 12:41:38 PDT 2019
+
+End NBR router with 0 unrouted connection
+
+NBR Summary
+-----------
+  Number of unrouted connections : 0 (0.00%)
+  Number of connections with timing violations : 0 (0.00%)
+  Estimated worst slack<setup> : 11.762ns
+  Timing score<setup> : 0
+-----------
+Notes: The timing info is calculated for SETUP only and all PAR_ADJs are ignored.
+
+
+
+WARNING - par: The following clock signals will be routed by using generic routing resource and may suffer from excessive delay and/or skew.
+   Signal=test_l1_c loads=5 clock_loads=4
+
+Total CPU time 4 secs 
+Total REAL time: 4 secs 
+Completely routed.
+End of route.  1139 routed (100.00%); 0 unrouted.
+
+Hold time timing score: 0, hold timing errors: 0
+
+Timing score: 0 
+
+Dumping design to file OWF_car_field_v6_fmexg_impl1.dir/5_1.ncd.
+
+
+All signals are completely routed.
+
+
+PAR_SUMMARY::Run status = Success
+PAR_SUMMARY::Number of unrouted conns = 0
+PAR_SUMMARY::Worst  slack<setup/<ns>> = 11.762
+PAR_SUMMARY::Timing score<setup/<ns>> = 0.000
+PAR_SUMMARY::Worst  slack<hold /<ns>> = 0.315
+PAR_SUMMARY::Timing score<hold /<ns>> = 0.000
+PAR_SUMMARY::Number of errors = 0
+
+Total CPU  time to completion: 4 secs 
+Total REAL time to completion: 4 secs 
+
+par done!
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2017 Lattice Semiconductor Corporation,  All rights reserved.

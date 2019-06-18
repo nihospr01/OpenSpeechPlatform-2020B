@@ -1,0 +1,74 @@
+# Wed May 15 12:40:56 2019
+
+Synopsys Lattice Technology Pre-mapping, Version maplat, Build 1796R, Built Aug  4 2017 09:36:35
+Copyright (C) 1994-2017 Synopsys, Inc. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
+Product Version M-2017.03L-SP1-1
+
+Mapper Startup Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 98MB peak: 99MB)
+
+@A: MF827 |No constraint file specified.
+@L: /home/hari/Documents/osp-wearable-fpga/car_field_v6_fmexg/impl1/OWF_car_field_v6_fmexg_impl1_scck.rpt 
+Printing clock  summary report in "/home/hari/Documents/osp-wearable-fpga/car_field_v6_fmexg/impl1/OWF_car_field_v6_fmexg_impl1_scck.rpt" file 
+@N: MF248 |Running in 64-bit mode.
+@N: MF666 |Clock conversion enabled. (Command "set_option -fix_gated_and_generated_clocks 1" in the project file.)
+
+Design Input Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 100MB peak: 102MB)
+
+
+Mapper Initialization Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 100MB peak: 102MB)
+
+
+Start loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 112MB peak: 112MB)
+
+
+Finished loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 112MB peak: 114MB)
+
+ICG Latch Removal Summary:
+Number of ICG latches removed:	0
+Number of ICG latches not removed:	0
+syn_allowed_resources : blockrams=240  set on top level netlist tl_car_field
+
+Finished netlist restructuring (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 142MB)
+
+
+
+Clock Summary
+******************
+
+          Start                                        Requested     Requested     Clock                                         Clock                   Clock
+Level     Clock                                        Frequency     Period        Type                                          Group                   Load 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+0 -       System                                       1.0 MHz       1000.000      system                                        system_clkgroup         0    
+                                                                                                                                                              
+0 -       pll_4|CLKOP_inferred_clock                   1.0 MHz       1000.000      inferred                                      Inferred_clkgroup_0     14   
+1 .         car_clock_gen|divider_derived_clock[1]     1.0 MHz       1000.000      derived (from pll_4|CLKOP_inferred_clock)     Inferred_clkgroup_0     181  
+                                                                                                                                                              
+0 -       tl_car_field|spi4_clk                        1.0 MHz       1000.000      inferred                                      Inferred_clkgroup_2     42   
+                                                                                                                                                              
+0 -       tl_car_field|ext_clk_in                      1.0 MHz       1000.000      inferred                                      Inferred_clkgroup_1     4    
+==============================================================================================================================================================
+
+@W: MT529 :"/home/hari/Documents/osp-wearable-fpga/src/car_clock_gen.vhd":19:2:19:3|Found inferred clock pll_4|CLKOP_inferred_clock which controls 14 sequential elements including e_car_clock_gen.lvds_ctr[7:0]. This clock has no specified timing constraint which may prevent conversion of gated or generated clocks and may adversely impact design performance. 
+@W: MT529 :"/home/hari/Documents/osp-wearable-fpga/src/fmexg_core.vhd":73:2:73:3|Found inferred clock tl_car_field|ext_clk_in which controls 4 sequential elements including e_fmexg_core.counter_div12[2:0]. This clock has no specified timing constraint which may prevent conversion of gated or generated clocks and may adversely impact design performance. 
+@W: MT529 :"/home/hari/Documents/osp-wearable-fpga/src/fmexg_core.vhd":167:2:167:3|Found inferred clock tl_car_field|spi4_clk which controls 42 sequential elements including e_fmexg_core.spi_byte_ctr[1:0]. This clock has no specified timing constraint which may prevent conversion of gated or generated clocks and may adversely impact design performance. 
+
+Finished Pre Mapping Phase.
+
+Starting constraint checker (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 142MB)
+
+
+Finished constraint checker preprocessing (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 142MB)
+
+None
+None
+
+Finished constraint checker (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 142MB)
+
+Pre-mapping successful!
+
+At Mapper Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 56MB peak: 142MB)
+
+Process took 0h:00m:01s realtime, 0h:00m:01s cputime
+# Wed May 15 12:40:56 2019
+
+###########################################################]

@@ -1,0 +1,51 @@
+[ START MERGED ]
+[ END MERGED ]
+[ START CLIPPED ]
+e_pll_4/GND
+e_djb_core/e_i2s_dio_2/GND
+VCC
+GND
+e_pll_4/CLKINTFB
+e_pll_4/DPHSRC
+e_pll_4/PLLACK
+e_pll_4/PLLDATO0
+e_pll_4/PLLDATO1
+e_pll_4/PLLDATO2
+e_pll_4/PLLDATO3
+e_pll_4/PLLDATO4
+e_pll_4/PLLDATO5
+e_pll_4/PLLDATO6
+e_pll_4/PLLDATO7
+e_pll_4/REFCLK
+e_pll_4/INTLOCK
+e_pll_4/LOCK
+e_pll_4/CLKOS3
+e_pll_4/CLKOS2
+e_pll_4/CLKOS
+e_djb_core/e_i2s_dio_2/lvds_bit_ctr_s_0_S1[4]
+e_djb_core/e_i2s_dio_2/lvds_bit_ctr_s_0_COUT[4]
+e_djb_core/e_i2s_dio_2/lvds_bit_ctr_lcry_0_S1
+e_djb_core/e_i2s_dio_2/lvds_bit_ctr_lcry_0_S0
+e_djb_core/e_i2s_dio_2/N_1
+[ END CLIPPED ]
+[ START DESIGN PREFS ]
+SCHEMATIC START ;
+# map:  version Diamond (64-bit) 3.10.0.111.2 -- WARNING: Map write only section -- Tue Mar 12 11:45:24 2019
+
+SYSCONFIG SDM_PORT=DISABLE SLAVE_SPI_PORT=DISABLE I2C_PORT=DISABLE MASTER_SPI_PORT=DISABLE COMPRESS_CONFIG=ON CONFIGURATION=CFG MY_ASSP=OFF ONE_TIME_PROGRAM=OFF CONFIG_SECURE=OFF MCCLK_FREQ=2.08 JTAG_PORT=ENABLE ENABLE_TRANSFR=DISABLE SHAREDEBRINIT=DISABLE MUX_CONFIGURATION_PORTS=DISABLE DUALBOOTGOLDEN=INTERNAL BACKGROUND_RECONFIG=OFF INBUF=ON ;
+LOCATE COMP "lvds_io" SITE "A6" ;
+LOCATE COMP "codec_clk" SITE "F1" ;
+LOCATE COMP "ext_clk_in" SITE "C6" ;
+LOCATE COMP "spi_cs1" SITE "E2" ;
+LOCATE COMP "spi_cs0" SITE "A1" ;
+LOCATE COMP "spi_miso" SITE "E1" ;
+LOCATE COMP "spi_mosi" SITE "E3" ;
+LOCATE COMP "spi_clk" SITE "B1" ;
+LOCATE COMP "i2s_dspk" SITE "F4" ;
+LOCATE COMP "i2s_dmic" SITE "F3" ;
+LOCATE COMP "i2s_ws" SITE "E6" ;
+LOCATE COMP "i2s_sck" SITE "F5" ;
+FREQUENCY NET "codec_clk_c" 12.288000 MHz ;
+FREQUENCY NET "hr_clk_0" 49.152000 MHz ;
+SCHEMATIC END ;
+[ END DESIGN PREFS ]
