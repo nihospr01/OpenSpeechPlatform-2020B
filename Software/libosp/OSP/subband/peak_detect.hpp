@@ -6,7 +6,9 @@
 #define OSP_PEAK_DETECT_H
 
 #include <memory>
-#include <mutex>
+#include <atomic>
+#include <OSP/ReleasePool/ReleasePool.hpp>
+
 
 #define FP_EPSILON 2.2204460492503131e-16 // Small constant to avoid taking the log of zero
 #define DEFAULT_LEVEL 100 // Default Sound pressure level (SPL) corresponding to signal RMS value of 1 (note that SPL is measured in dB)
@@ -68,15 +70,20 @@ private:
      */
     void peak_to_spl(float* peak_in, size_t in_len, float* pdb_out);
 
+    struct peak_detect_t{
+        float attack_time_;
+        float release_time_;
+        float att_;
+        float alpha_;
+        float rel_;
+        float beta_;
+    };
+
     float fsamp_;
-    float attack_time_;
-    float release_time_;
-    float att_;
-    float alpha_;
-    float rel_;
-    float beta_;
     float prev_peak;
-    std::mutex mutex_;
+
+    std::shared_ptr<peak_detect_t> currentParam;
+    ReleasePool releasePool;
 };
 
 #endif //OSP_PEAK_DETECT_H

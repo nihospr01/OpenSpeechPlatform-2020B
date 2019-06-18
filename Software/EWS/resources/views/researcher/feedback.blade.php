@@ -71,6 +71,10 @@
 
         <form>
             <div class="form-group">
+                    <label for="delay"><strong>delay (ms)</strong>
+                    <input type="number" class="form-control" id="delay" value="0">
+            </div>
+            <div class="form-group">
                 <label for="mu"><strong>mu</strong> - The step size parameter, which has to be set to a positive value. It controls the adaptation rate of the AFC filter, in the sense that a larger mu is more suitable for a highlty changin environment. Note, however, a larger mu also leads to a higher possibility of instability and more artifacts.</label>
                 <input type="number" class="form-control" id="mu" value="0">
             </div>
@@ -78,6 +82,7 @@
                 <label for="rho"><strong>rho</strong> - A forgetting factor for controlling the update of the signal power estimate. It ranges from 0-1. For speech signals, typical values of rho are around 0.9. If it is too large, the update of the power estimate would fail to catch up with speech variatios. If it is set too small, the variance of the estimate will be high, leading to more artifacts. </label>
                 <input type="number" class="form-control" id="rho" value="0">
             </div>
+    
         </form>
 
         <div>
@@ -106,13 +111,15 @@
                 'afc_type': 0,
                 'afc_reset': 0,
                 'afc_mu': 0,
-                'afc_rho': 0
+                'afc_rho': 0,
+                'afc_delay':0
             },
             'right': {
                 'afc_type': 0,
                 'afc_reset': 0,
                 'afc_mu': 0,
-                'afc_rho': 0
+                'afc_rho': 0,
+                'afc_delay':0
             }
         };
 
@@ -158,6 +165,22 @@
             parameters['right']['afc_type'] = 3;
 
         });
+
+        $("#delay")
+            .click(function(){
+                $(this).select();
+            })
+            .blur(function(){
+                if($(this).val() > 8){
+                    alert("Number should be less than 8.0");
+                    $(this).val(parameters['left']['afc_delay']);
+                }
+                else{
+                    parameters['left']['afc_delay'] = Number($(this).val());
+                    parameters['right']['afc_delay'] = Number($(this).val());
+                }
+
+            });
 
         $("#mu")
             .click(function(){
@@ -232,14 +255,16 @@
                             'afc_type': params['left']['afc_type'],
                             'afc_reset': params['left']['afc_reset'],
                             'afc_mu': params['left']['afc_mu'],
-                            'afc_rho': params['left']['afc_rho']
+                            'afc_rho': params['left']['afc_rho'],
+                            'afc_delay': params['left']['afc_delay']
                             
                         },
                         'right': {
                             'afc_type': params['right']['afc_type'],
                             'afc_reset': params['right']['afc_reset'],
                             'afc_mu': params['right']['afc_mu'],
-                            'afc_rho': params['right']['afc_rho']
+                            'afc_rho': params['right']['afc_rho'],
+                            'afc_delay':params['right']['afc_delay']    
                            
                         }
                     };
@@ -254,6 +279,9 @@
                             $("#afc_1").prop("checked", true);
                             break;
                         case 2:
+
+
+                        
                             $("#afc_2").prop("checked", true);
                             break;
                         case 3:
@@ -266,6 +294,7 @@
                     //set spectral subtraction parameters
                     document.getElementById("mu").value = parameters['left']['afc_mu'];
                     document.getElementById("rho").value = parameters['left']['afc_rho'];
+                    $("#delay").val(parameters['left']['afc_delay']);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     // console.log(JSON.stringify(jqXHR));

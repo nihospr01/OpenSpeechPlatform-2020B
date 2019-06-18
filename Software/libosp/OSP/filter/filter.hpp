@@ -6,6 +6,7 @@
 #define OSP_FILTER_H
 
 #include <cstddef>
+#include <atomic>
 #include <OSP/circular_buffer/circular_buffer.hpp>
 
 /**
@@ -67,10 +68,9 @@ public:
     void cirfir(float* data_out, size_t num_samp);
 
 private:
-    float* tap_;
+    std::atomic<float *> tap_current, tap_next;
     size_t size_;
     circular_buffer* cir_buf_;
-    std::mutex mutex_;
     bool cir_buf_created_;
 };
 

@@ -1,39 +1,10 @@
-# OSP-2018c-Release
+# What is new in Open Speech Platform 2019a? #
+* **Transducers**: The BTE-RICs have analog-to-digital (ADC) and digital-to-analog (DAC) converters in the ear level assemblies. In addition, the BTE-RICs have 6DOF Inertial Motion Units (IMU) with a 3D accelerometer and a 3D gyroscope in each ear. The ADC supports up to 4 microphones per ear, 96 kHz sampling with 24 bits/sample. Release 2019a supports 2 mics per ear at 48 kHz, 24 bits/sample. The ear level assemblies connect to a wearable pendant with a 4-wire cable, using custom LVDS signaling. This release includes all the files for constructing the electronics, plastics and cables for BTE-RICs
 
-* Release 2018c Lab System supports both OS X and Linux computers. Our portable and wearable systems use 64-bit Debian Linux to run OSP on the realtime, embedded systems. As a byproduct, the lab system can now run on Linux also. 
+* **Hardware**: In this release, we replaced the Snapdragon™ 8016 single board computer and a custom mezzanine board with Snapdragon™ 8016 system, on module (SoM), and a custom carrier board. The wearable device measures 8.4x5.6x3.8cm and weighs 120g,  roughly 70% less volume and 50% less weight compared with release 2018a. The processor has 4 CPU cores named C0 – C3. All the system background tasks and other non-realtime tasks are scheduled to run on C0.  The realtime tasks are scheduled to run on C1, C2, and C3.
 
-* Release 2018c supports distributed processing on multiple processor cores. The portable system currently uses Snapdragon™ 8016 processor. This and other emerging IoT chipsets feature multiple cores. Snapdragon™ 8016 processor has four A53 ARM cores, running at 1.2 GHz. An important requirement for OSP is that it is responsive to user input, while not missing realtime deadlines for HA processing. Release 2018c has gone through extensive code refactoring to meet this requirement. One core is dedicated to all the kernel and the user interactions. Two cores are dedicated to left HA and right HA processing, respectively.
+* **Firmware and OS**: New in release 2019a are the OS and firmware files. The OS files include root file system rootfs.img with Debian OS, development tools, ALSA utilities and WiFi module; and kernel system boot.img with drivers and ram disk.  HA processes – RT-MHA – and user interface software – EWS – are part of the root file system and configured to run upon boot. Firmware includes FPGA code to control audio hardware and multiplex/de-multiplex I2S and SPI as a single stream. The system and service manager daemon systemd is configured to run on C0 in the file /etc/systemd/system.conf.  Since the kernel is custom, it is not managed by the package manager apt; but can be installed or updated boot.img using fastboot. The remaining system components can be updated with apt, and the OSP components via git. 
 
-* Release 2018c includes a simplified  “Getting Started User Guide.” This document describes install, build and test procedures for both RT-MHA and Embedded Web Server (EWS) comprising the OSP. 
+* **Software**: During the initialization, the system launches RT-MHA on C3 for binaural processing. Then three additional threads are spawned on C2, C1 and C0. Thread one is for processing the left channel on C1; thread two is for processing the right channel on C2; and thread three is for EWS on C0. To deal with the concurrency issues that come when three parallel threads are running, we use atomics. Atomics are well suited for this application because RTMHA is a mixed critical application. Three out of the four threads are real-time, while the last thread is non-real-time. By using atomics, we can ensure that the non-real-time thread does not hinder the operation of the real-time thread because the atomic operation is lock-free and implemented at the hardware level. All other other non-realtime tasks (e.g. file I/O, etc.) are scheduled to run on C0 only. These architectural changes along with A2D and D2A in BTE-RICs have mitigated the audio artifacts observed in Release 2018c. The overall end-to-end analog latency is about 2.5 ms with the RT-MHA algorithms disabled and about 5.7 ms RT-MHA enabled, thus leaving about 4.3 ms latency budget for noise management and other features. 
 
-* Release 2018c has been tested with a commercial, off the shelf (COTS) headset such as [Andrea Communications 3D Surround Sound Recording CANS] (https://tinyurl.com/y9xnee32). They plug in to the USB port and provide microphones and receivers on each ear. These headsets are useful for engineers working on HA processing software and developing web apps. Currently, they may be of limited value for research with hearing-impaired listeners.
-
-* Release 2018c includes complete hardware release of the portable system and customs BTE-RICs. Schematics, Altium project files, CAD files for 3D printing cases, CAD files for 3D printing BTE-RIC cases, and CAD files for 3D printing strain relief for BTE-RIC cables connecting to the processor system are included. We have manufactured limited number of systems and plan to test them in the field with collaborating labs in the coming months.
-
-* Release 2018c includes three functional web apps; (i) Researcher App for controlling HA parameters for left and right processing, (ii) Goldilocks App for self fitting research designed at SDSU and (iii) Ecological Momentary Assessment app. Release 2018c also includes 4AFC and AB comparison web apps with complete GUI, but not yet connected to the RT-MHA. We included them in this release to seek early feedback on the user interface design.
-
-```bash
-├── Documentation
-│   ├── EWS_User_Guide.pdf
-│   ├── OSP_Getting_Started_Guide.pdf
-│   ├── README.md
-│   └── RTMHA_API.pdf
-├── Hardware
-│   ├── BTE-RIC\ Files
-│   ├── BoB-Break\ Out\ Board\ Files
-│   ├── Hardware\ User\ Guide\ -\ Portable\ System\ (Gdoc).docx
-│   ├── Hardware\ User\ Guide\ -\ Portable\ System.pdf
-│   ├── Mechanical\ CAD\ Files
-│   └── Mezzanine\ Board\ Files
-├── LICENSE
-├── README.md
-└── Software
-    ├── EWS
-    ├── OSP
-    ├── README.md
-    ├── install
-    ├── libosp
-    └── submodule
-
-11 directories, 10 files
-```
+* **Applications**: This release includes web apps hosted on EWS for (i) researcher control of RT-MHA, (ii) self-fitting, A/B testing (iii) outcomes measurements (A/B comparison, 4 alternative forced choice), and (iv) ecological momentary assessment – EMA. The File I/O feature enables repeatable, reproducible experiments using canned speech files and recording ambient environment during user activities such as EMA and self-adjust.

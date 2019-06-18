@@ -33,10 +33,10 @@
                     <div class="form-inline">
                         <label for="researcher" class="h7">Researcher</label>
                         <div class="col-sm-8">
-                            @if(!$researcher)
+                            @if(!$curResearcher)
                                 <input type="text" class="text_1" id="researcher" name="researcher" placeholder="Researcher">
                             @else
-                                <input type="text" class="text_1" id="researcher" name="researcher" value="{{ $researcher->researcher }}">
+                                <input type="text" class="text_1" id="researcher" name="researcher" value="{{ $curResearcher->researcher }}">
                             @endif
                          </div>
                     </div>
@@ -47,6 +47,7 @@
                         <p style="color: red">{{ $errors->first() }}</p>
                     @endif
 
+                    <p class="text-center h8">Listeners</p>
                     @foreach($listeners as $listener)
                         <br>
                         <input type="submit" class="btn1 btn-info btn-block1" name="listener" value="{{ $listener->listener }}">

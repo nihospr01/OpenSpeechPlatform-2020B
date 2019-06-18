@@ -9,22 +9,26 @@ adaptive_filter::adaptive_filter(float *adaptive_filter_taps, size_t adaptive_fi
                                           int adaptation_type, float mu, float delta, float rho, float alpha,
                                           float beta, float p, float c, float power_estimate)
         : filter(adaptive_filter_taps, adaptive_filter_tap_len, nullptr, max_frame_size) {
+    std::shared_ptr<adaptive_filter_param_t> data_current = std::make_shared<adaptive_filter_param_t> ();
     u_ref_buf_ = new circular_buffer(adaptive_filter_tap_len + max_frame_size, 0.0f);
     adaptive_filter_tap_len_ = adaptive_filter_tap_len;
     max_frame_size_ = max_frame_size;
-    adaptation_type_ = adaptation_type;
-    mu_ = mu;
-    delta_ = delta;
-    rho_ = rho;
-    alpha_ = alpha;
-    beta_ = beta;
-    p_ = p;
-    c_ = c;
-    power_estimate_ = power_estimate;
+    data_current->adaptation_type_ = adaptation_type;
+    data_current->mu_ = mu;
+    data_current->delta_ = delta;
+    data_current->rho_ = rho;
+    data_current->alpha_ = alpha;
+    data_current->beta_ = beta;
+    data_current->p_ = p;
+    data_current->c_ = c;
+    data_current->power_estimate_ = power_estimate;
 
     gradient_ = new float[adaptive_filter_tap_len_]; // a place holder for gradient vector
     filter_taps_ = new float[adaptive_filter_tap_len_];
     step_size_weights_ = new float[adaptive_filter_tap_len_]; // a place holder for S(n)
+    u_ref_frame_buf = new float[max_frame_size]; // a place holder for the frame which will be undergone dot product with e_ref
+    releasePool.add (data_current);
+    std::atomic_store (&currentParam, data_current);
 }
 
 adaptive_filter::~adaptive_filter() {
@@ -32,12 +36,15 @@ adaptive_filter::~adaptive_filter() {
     delete[] gradient_;
     delete[] filter_taps_;
     delete[] step_size_weights_;
+    delete[] u_ref_frame_buf;
+    releasePool.release();
 }
 
 int
 adaptive_filter::update_taps(float *u_ref, float *e_ref, size_t ref_size) {
     // Are you adapting the filter taps?
-    if (adaptation_type_ <= 0) {
+    std::shared_ptr<adaptive_filter_param_t> data_current = std::atomic_load(&currentParam);
+    if (data_current->adaptation_type_ <= 0) {
         return 0;
     }
     // check the size of reference signal
@@ -45,20 +52,20 @@ adaptive_filter::update_taps(float *u_ref, float *e_ref, size_t ref_size) {
         return -1;
     }
     // compute the power estimate of the input to coefficient adaptation
-    power_estimate_ = rho_ * power_estimate_ +
-                      (1 - rho_) * (array_mean_square(u_ref, ref_size) + array_mean_square(e_ref, ref_size));
+    data_current->power_estimate_ = data_current->rho_ * data_current->power_estimate_ +
+                      (1 - data_current->rho_) * (array_mean_square(u_ref, ref_size) + array_mean_square(e_ref, ref_size));
     // normalize the step size
-    float mu = mu_ / (adaptive_filter_tap_len_ * power_estimate_ + delta_);
+    float mu = data_current->mu_ / (adaptive_filter_tap_len_ * data_current->power_estimate_ + data_current->delta_);
     // compute the gradient, gradient = [u_ref(n)]*e_ref(n)
-    auto *u_ref_frame_buf = new float[ref_size]; // a place holder for the frame which will be undergone dot product with e_ref
     u_ref_buf_->set(u_ref, ref_size); // put new u_ref frame to the buffer
     size_t u_ref_buf_head_backup = u_ref_buf_->head_; // backup the original head position
+    size_t mask = u_ref_buf_->mask_;
     for (size_t i = 0; i < adaptive_filter_tap_len_; i++) {
-        u_ref_buf_->head_ = (u_ref_buf_->head_ - i) & u_ref_buf_->mask_; // shift the head position to assess next frame
+        u_ref_buf_->head_ = (u_ref_buf_head_backup - i) & mask; // shift the head position to assess next frame
         u_ref_buf_->get(u_ref_frame_buf, ref_size); // get the frame data
         gradient_[i] = array_dot_product(u_ref_frame_buf, e_ref, ref_size); // compute dot product (cross-correlation)
-        u_ref_buf_->head_ = u_ref_buf_head_backup; // restore the original head position
     }
+    u_ref_buf_->head_ = u_ref_buf_head_backup;
 
     // compute the step-size control matrix, S(n), namely step_size_weights
     int get_check = this->get_taps(filter_taps_,
@@ -66,19 +73,19 @@ adaptive_filter::update_taps(float *u_ref, float *e_ref, size_t ref_size) {
     // case 1, Modified LMS, S(n) = I (identity)
     // case 2, IPNLMS-l_0, S(n) = (1-alpha)/2+(1+alpha)|h_i(n)|/[(2/M)one_norm(h(n))]
     // case 3, SLMS, S(n) = |h_i(n)|^(2-p)/|(1/M)*sum_over_j(|h_j(n)|^(2-p))|
-    switch (adaptation_type_) {
+    switch (data_current->adaptation_type_) {
         case 1:
             // no need to compute S(n) for Modified LMS
             break;
         case 2:
             // compute S(n) for IPNLMS-l_0
-            get_step_size_weights_IPNLMS(filter_taps_, step_size_weights_, alpha_, beta_, delta_,
+            get_step_size_weights_IPNLMS(filter_taps_, step_size_weights_, data_current->alpha_, data_current->beta_, data_current->delta_,
                                          adaptive_filter_tap_len_); // get S(n)
             array_element_multiply_array(gradient_, step_size_weights_, adaptive_filter_tap_len_); // S(n)*u(n)e(n)
             break;
         case 3:
             // compute S(n) for SLMS
-            get_step_size_weights_SLMS(filter_taps_, step_size_weights_, p_, c_, adaptive_filter_tap_len_); // get S(n)
+            get_step_size_weights_SLMS(filter_taps_, step_size_weights_, data_current->p_, data_current->c_, adaptive_filter_tap_len_); // get S(n)
             array_element_multiply_array(gradient_, step_size_weights_, adaptive_filter_tap_len_); // S(n)*u(n)e(n)
             break;
         default:
@@ -87,7 +94,6 @@ adaptive_filter::update_taps(float *u_ref, float *e_ref, size_t ref_size) {
     array_multiply_const(gradient_, mu, adaptive_filter_tap_len_); // mu*S(n)u(n)e(n)
     array_add_array(filter_taps_, gradient_, adaptive_filter_tap_len_); // w(n) + mu*S(n)u(n)e(n)
     int set_check = this->set_taps(filter_taps_, adaptive_filter_tap_len_); // update the filter taps
-    delete[] u_ref_frame_buf;
     return get_check | set_check;
 }
 
@@ -100,32 +106,38 @@ adaptive_filter::get_max_frame_size() {
 void
 adaptive_filter::get_params(float &mu, float &rho, float &delta, float &alpha, float &beta, float &p, float &c,
                                  int &adaptation_type) {
-    mu = mu_;
-    rho = rho_;
-    delta = delta_;
-    alpha = alpha_;
-    beta = beta_;
-    p = p_;
-    c = c_;
-    adaptation_type = adaptation_type_;
+    std::shared_ptr<adaptive_filter_param_t> data_current = std::atomic_load(&currentParam);
+    mu = data_current->mu_;
+    rho = data_current->rho_;
+    delta = data_current->delta_;
+    alpha = data_current->alpha_;
+    beta = data_current->beta_;
+    p = data_current->p_;
+    c = data_current->c_;
+    adaptation_type = data_current->adaptation_type_;
 }
 
 void
 adaptive_filter::set_params(float mu, float rho, float delta, float alpha, float beta, float p, float c,
                                  int adaptation_type) {
-    mu_ = mu;
-    rho_ = rho;
-    delta_ = delta;
-    alpha_ = alpha;
-    beta_ = beta;
-    p_ = p;
-    c_ = c;
-    adaptation_type_ = adaptation_type;
+    std::shared_ptr<adaptive_filter_param_t> data_next = std::make_shared<adaptive_filter_param_t> ();
+    data_next->mu_ = mu;
+    data_next->rho_ = rho;
+    data_next->delta_ = delta;
+    data_next->alpha_ = alpha;
+    data_next->beta_ = beta;
+    data_next->p_ = p;
+    data_next->c_ = c;
+    data_next->adaptation_type_ = adaptation_type;
+    releasePool.add (data_next);
+    std::atomic_store (&currentParam, data_next);
+    releasePool.release();
 }
 
 int
 adaptive_filter::get_adaptation_type() {
-    return adaptation_type_;
+    std::shared_ptr<adaptive_filter_param_t> data_current = std::atomic_load(&currentParam);
+    return data_current->adaptation_type_;
 }
 
 void

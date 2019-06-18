@@ -8,6 +8,7 @@
 #include <cereal/cereal.hpp>
 #include "filter_coef.h"
 #include "memory.h"
+
 /**
  * @brief general data structure shared between client and C application
  */
@@ -51,6 +52,25 @@
 #define AFC_P 1.5 /// SLMS
 #define AFC_C 1e-6 /// SLMS
 
+/*** Beamformer defaults ***/
+#define BF_ON_OFF 0
+#define BF_TYPE 3
+#define BF_MU 0.01
+#define BF_RHO 0.985
+#define BF_DELTA 1e-6
+#define BF_C 1e-3
+#define BF_PW 0
+#define BF_P 1.3
+#define BF_ALPHA 0
+#define BF_BETA 150
+#define BF_FIR_LENGTH 319
+#define BF_DELAY_LEN 160
+#define BF_NC_ON_OFF 0
+#define BF_AMC_ON_OFF 0
+#define NC_THR 1.0
+#define AMC_THR 2.0
+#define AMC_FORGETTING_FACTOR 0.8
+
 /**
  * Please note that any variables added to this structure must have the same name in the parser.
  */
@@ -92,6 +112,36 @@ typedef struct osp_user_data_t {
     float afc_p = AFC_P; /// SLMS
     float afc_c = AFC_C; /// SLMS
 
+    // Beamformer parameters
+    int bf = BF_ON_OFF;
+    int bf_type = BF_TYPE;
+    float bf_mu = BF_MU;
+    float bf_rho = BF_RHO;
+    float bf_delta = BF_DELTA;
+    float bf_c = BF_C;
+    float bf_power_estimate = BF_PW;
+    float bf_p = BF_P;
+    float bf_alpha = BF_ALPHA;
+    float bf_beta = BF_BETA;
+    int bf_fir_length = BF_FIR_LENGTH;
+    int bf_delay_len = BF_DELAY_LEN;
+    int bf_nc_on_off = BF_NC_ON_OFF;
+    int bf_amc_on_off = BF_AMC_ON_OFF;
+    float nc_thr = NC_THR;
+    float amc_thr = AMC_THR;
+    float amc_forgetting_factor = AMC_FORGETTING_FACTOR;
+
+
+    // File I/O parameters
+    float alpha = 0.0f;
+    std::string audio_filename;
+    std::string audio_recordfile;
+    float record_length = 5;
+    int audio_reset = 0;
+    int audio_repeat = 0;
+    int audio_play = 0;
+    int record_start = 0;
+    int record_stop = 0;
 
     template<class Archive>
     void serialize(Archive & archive)
@@ -116,7 +166,36 @@ typedef struct osp_user_data_t {
                  CEREAL_NVP(afc_delay),
                  CEREAL_NVP(afc_mu),
                  CEREAL_NVP(afc_rho),
-                 CEREAL_NVP(afc_power_estimate)); // serialize things by passing them to the archive
+                 CEREAL_NVP(afc_power_estimate),
+                 CEREAL_NVP(bf),
+                 CEREAL_NVP(bf_type),
+                 CEREAL_NVP(bf_mu),
+                 CEREAL_NVP(bf_rho),
+                 CEREAL_NVP(bf_delta),
+                 CEREAL_NVP(bf_c),
+                 CEREAL_NVP(bf_power_estimate),
+                 CEREAL_NVP(bf_p),
+                 CEREAL_NVP(bf_alpha),
+                 CEREAL_NVP(bf_beta),
+                 CEREAL_NVP(bf_fir_length),
+                 CEREAL_NVP(bf_delay_len),
+                 CEREAL_NVP(bf_nc_on_off),
+                 CEREAL_NVP(bf_amc_on_off),
+                 CEREAL_NVP(nc_thr),
+                 CEREAL_NVP(amc_thr),
+                 CEREAL_NVP(amc_forgetting_factor),
+                 CEREAL_NVP(alpha),
+                 CEREAL_NVP(audio_filename),
+                 CEREAL_NVP(audio_reset),
+                 CEREAL_NVP(audio_play),
+                 CEREAL_NVP(audio_repeat),
+                 CEREAL_NVP(audio_recordfile),
+                 CEREAL_NVP(record_start),
+                 CEREAL_NVP(record_stop),
+                 CEREAL_NVP(record_length));
+
+        // serialize things by passing them to the archive
+
     }
 
 } osp_user_data;

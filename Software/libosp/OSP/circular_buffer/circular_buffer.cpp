@@ -1,5 +1,5 @@
 #include <memory>
-#include <math.h>
+#include <cmath>
 #include <shared_mutex>
 #include <OSP/circular_buffer/circular_buffer.hpp>
 
@@ -12,7 +12,7 @@ circular_buffer::circular_buffer(size_t size, float reset) {
     for (size_t i = 0; i < size_; i++) {
         buf_[i] = reset_;
     }
-    head_ = 0;
+    head_.store(0);
     mask_ = size_ - 1;
 }
 
@@ -22,33 +22,29 @@ circular_buffer::~circular_buffer() = default;
 
 void
 circular_buffer::set(const float *item, size_t buf_size) {
-    mutex_.lock();
+    size_t head = head_.load();
     for (size_t i = 0; i < buf_size; i++) {
-        buf_[head_] = item[i];
-        head_ = (head_ + 1) & mask_;
+        buf_[head] = item[i];
+        head = (head + 1) & mask_;
     }
-    mutex_.unlock();
+    head_.store(head);
 
 };
 
 void
 circular_buffer::get(float *data, size_t buf_size) {
-    mutex_.lock();
-    size_t read_head = (head_ - buf_size) & mask_;
+    size_t read_head = (head_.load() - buf_size) & mask_;
     for (size_t i = 0; i < buf_size; i++) {
         data[i] = buf_[read_head];
         read_head = (read_head + 1) & mask_;
     }
-    mutex_.unlock();
 }
 
 void
 circular_buffer::reset() {
-    mutex_.lock();
     for (size_t i = 0; i < size_; i++) {
         buf_[i] = reset_;
     }
-    mutex_.unlock();
 }
 
 size_t

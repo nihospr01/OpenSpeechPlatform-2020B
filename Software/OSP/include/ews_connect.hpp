@@ -52,6 +52,9 @@ int isalnumquote(int c){
     else if (c == '-'){
         return c;
     }
+    else if (c == '/'){
+        return c;
+    }
     return isalnum(c);
 }
 
@@ -164,7 +167,6 @@ public:
                 std::cout << e.what();
             }
         }
-
     }
 
 
@@ -174,15 +176,22 @@ public:
 
         json_string.erase(remove_if(json_string.begin(), json_string.end(),
                                     std::not1(std::ptr_fun(::isalnumquote))), json_string.end());
-        //std::cout << json_string << std::endl;
+
+        std::string audio = "wav";
+        std::size_t found = json_string.find(audio);
+        if(found != std::string::npos){
+            json_string.erase(json_string.begin()+(found+3));
+            json_string.erase(json_string.begin()+(json_string.find_first_of('/')-1));
+
+        }
+
         std::istringstream iss(json_string);
         std::vector<std::string> json_string_arr((std::istream_iterator<WordDelimitedBy<'\"'>>(iss)),
                                                  std::istream_iterator<WordDelimitedBy<'\"'>>());
 
-        //std::cout << json_string_arr.size() << std::endl;
+
         for (int i=1; i < (int)json_string_arr.size(); i++)
         {
-
             if (i%2 !=0) {
                 json_string_arr[i] = "--" + json_string_arr[i];
 
@@ -199,6 +208,7 @@ public:
 
         std::vector<char *> cstrings;
         for(auto& string : json_string_arr) {
+
             cstrings.push_back(&string.front());
         }
         mha->get_params(user_data);

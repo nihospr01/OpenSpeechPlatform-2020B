@@ -22,8 +22,8 @@
         },
 
         {
-            "question_title": "Did you make any adjustments to your hearing aids (HAs) to improve your listening experience?",
-            "choices": ["HAs volume up","HAs volumen down","Remove HAs", "Other", "No action taken"],
+            "question_title": "How old are you?",
+            "choices": ["18-24","25-35","35-45", "45-55", "55+"],
             "isMultiple":0
         },
 
@@ -106,6 +106,7 @@
             "isMultiple":0
 
         }
+
     ]
 
 }

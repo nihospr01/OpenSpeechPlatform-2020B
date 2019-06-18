@@ -10,6 +10,18 @@
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js')}}"></script>
 
     <title>Goldilocks Admin</title>
+
+    <style>
+    .breadcrumb-item{
+      font-size: 24;
+    }
+    .breadcrumb{
+      font-size: 24;
+    }
+
+    
+
+    </style>
 </head>
 
 
@@ -33,6 +45,7 @@
             <th scope="col">Parameters</th>
             <th scope="col">Created At</th>
             <th scope="col">Updated At</th>
+            <th scope="col">Delete Program</th>
         </tr>
         </thead>
         <tbody>
@@ -44,13 +57,45 @@
                 <td>{{$program->parameters}}</td>
                 <td>{{$program->created_at}}</td>
                 <td>{{$program->updated_at}}</td>
+                <td>
+                    {!! Form::button('Delete', array('class' => 'btn btn-danger btn-block', 'onClick' => 'confirmDelete(' . $program . ')')) !!}
+                </td>
             </tr>
         @endforeach
         </tbody>
     </table>
 </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="delProgramModal" tabindex="-1" role="dialog" aria-labelledby="Delete Program" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Delete Program?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                {{ Form::open(['id' => 'delProgramForm', 'route' => array('programs.destroy', $program)]) }}
+                {{ method_field('DELETE') }}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Confirm</button>
+                    </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    </div>
 
 </body>
+
+    <script>
+        function confirmDelete(data) {
+            var url = 'http://localhost:8000/goldilocks/admin/programs/' + data.id;
+            $('#delProgramForm').attr('action', url);
+            $('#delProgramModal').modal();
+        }
+    </script>
 
 </html>

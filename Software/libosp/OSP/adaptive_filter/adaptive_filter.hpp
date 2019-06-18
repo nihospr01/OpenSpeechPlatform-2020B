@@ -6,6 +6,8 @@
 #define OSP_ADAPTIVE_FILTER_H
 
 #include <OSP/filter/filter.hpp>
+#include <atomic>
+#include <OSP/ReleasePool/ReleasePool.hpp>
 
 /**
  * @brief Adaptive Filter Class
@@ -110,18 +112,27 @@ private:
     circular_buffer* u_ref_buf_;
     size_t adaptive_filter_tap_len_;
     size_t max_frame_size_;
-    int adaptation_type_;
-    float mu_; // step size
-    float rho_; // forgetting factor
-    float power_estimate_; // power estimate
-    float delta_; // IPNLMS-l_0
-    float alpha_; // IPNLMS-l_0
-    float beta_; // IPNLMS-l_0
-    float p_; // SLMS
-    float c_; // SLMS
     float* gradient_;
     float* filter_taps_;
     float* step_size_weights_;
+    float *u_ref_frame_buf;
+
+    struct adaptive_filter_param_t {
+
+        int adaptation_type_;
+        float mu_; // step size
+        float rho_; // forgetting factor
+        float power_estimate_; // power estimate
+        float delta_; // IPNLMS-l_0
+        float alpha_; // IPNLMS-l_0
+        float beta_; // IPNLMS-l_0
+        float p_; // SLMS
+        float c_; // SLMS
+
+    };
+
+    std::shared_ptr<adaptive_filter_param_t> currentParam;
+    ReleasePool releasePool;
 };
 
 #endif //OSP_ADAPTIVE_FILTER_H

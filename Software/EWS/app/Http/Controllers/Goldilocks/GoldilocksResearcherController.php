@@ -88,9 +88,11 @@ class GoldilocksResearcherController extends Controller
      * @param  \App\GoldilocksResearcher  $goldilocksResearcher
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GoldilocksResearcher $goldilocksResearcher)
+    public function destroy($goldilocksResearcher)
     {
-        //
+        GoldilocksResearcher::destroy($goldilocksResearcher);
+
+        return redirect('goldilocks/admin/researchers');
     }
 
     /**

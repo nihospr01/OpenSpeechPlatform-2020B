@@ -163,7 +163,7 @@
 
             <div class="col-6">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-md-4">
                         <div class="row align-items-center">
                             Control via:
                         </div>
@@ -177,6 +177,26 @@
                                 </label>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-8">
+                    <div class="row ">
+                            Alpha:
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-sm-1" style="font-size: 1.2rem; color:green; border-color: white">
+                                L:
+                            </div>
+                            <div class="col-sm-4" >
+                                    <input style="color: black; font-size: 1.2rem" name="Alpha_L" id="alpha_l" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0">
+                            </div>
+                            <div class="col-sm-1" style="font-size: 1.2rem; color:green; border-color: white">
+                                    R:
+                            </div>
+                            <div class="col-sm-4">
+                                    <input style="color: black; font-size: 1.2rem" name="Alpha_R" id="alpha_r" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0">
+                            </div>
+                        </div>
+                    
                     </div>
                 </div>
                 <div class="row">
@@ -195,23 +215,33 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="row align-items-center">
+                    <div class="col-md-8" >
+                        <div class="row ">
                             Global MPO:
                         </div>
-                        <div class="row align-items-center" style="width:100px">
+                        <div class="row align-items-center">
+                            <div class="col-sm-1" style="font-size: 1.2rem; color:green; border-color: white">
+                                L:
+                            </div>
+                            <div class="col-sm-4" >
+                                    <input style="color: black; font-size: 1.2rem" name="GlobalMPO_L" id="global_mpo_l" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0">
+                            </div>
+                            <div class="col-sm-1" style="font-size: 1.2rem; color:green; border-color: white">
+                                    R:
+                            </div>
+                            <div class="col-sm-4">
+                                    <input style="color: black; font-size: 1.2rem" name="GlobalMPO_R" id="global_mpo_r" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0">
+                            </div>
+                        </div>
+                    </div>
 
-                        <input style="color: black; font-size: 1.2rem" name="GlobalMPO" id="global_mpo" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                    <div class="row align-items-center">
+                    {{-- <div class="row align-items-center">
                             AFC Delay:
-                        </div>
-                        <div class="row align-items-center" style="width:100px">
-                        <input style="color: black; font-size: 1.2rem" name="AfcDelay" id="afc_delay" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0">
-                        </div>
                     </div>
+                    <div class="row align-items-center" style="width:100px">
+                        <input style="color: black; font-size: 1.2rem" name="AfcDelay" id="afc_delay" class="form-control form-control-sm table-field font-weight-bold" type="number" value="0">
+                    </div> --}}
+                    
                 </div>
             </div>
             <div class="col-6">
@@ -552,7 +582,7 @@
                 'afc': 1, //1 - on, 0 - off
                 'afc_type': 0,
                 'global_mpo': 0,
-                'afc_delay': 0,
+                'alpha':0
             },
             'right': {
                 'compression_ratio': [1, 1, 1, 1, 1, 1],
@@ -566,21 +596,41 @@
                 'afc': 1, //1 - on, 0 - off
                 'afc_type': 0,
                 'global_mpo': 0,
-                'afc_delay': 0
+                'alpha':0
     
             },
             'control_via': 1
-        }
+        };
 
 
         //pull data on loading the page
         readMHA();
 
+        $('#alpha_l').tooltip({'trigger':'focus','title': "Between 0-1"});
+        $('#alpha_r').tooltip({'trigger':'focus','title': "Between 0-1"});
+
+
+        $("#alpha_l")
+            .click(function(){
+                $(this).select();
+            })
+            .blur(function(){
+                if($(this).val() < 0 || $(this).val() > 1){
+                    alert("Number should between 0 and 1");
+
+                }
+            });
+
+
         //on changing input field, update parameters and highlight input field
         $('input[type=number]').keyup(function(event){
             var elem = event.target;
-            if(elem.name == "GlobalMPO"){
+            if(elem.name == "GlobalMPO_L"){
                 parameters['left']['global_mpo']  = Number(elem.value);
+                return;
+            }
+            
+            if(elem.name == "GlobalMPO_R"){
                 parameters['right']['global_mpo'] = Number(elem.value);
                 return;
             }
@@ -739,8 +789,7 @@
                             attack: this['parameters']['left']['attack'],
                             release: this['parameters']['left']['release'],
                             global_mpo: this['parameters']['left']['global_mpo'],
-                            afc_delay: this['parameters']['left']['afc_delay']
-
+                            alpha: this['parameters']['left']['alpha']
                         },
                         right: {
                             en_ha: 1,
@@ -753,7 +802,7 @@
                             attack: this['parameters']['right']['attack'],
                             release: this['parameters']['right']['release'],
                             global_mpo: this['parameters']['right']['global_mpo'],
-                            afc_delay: this['parameters']['right']['afc_delay']
+                            alpha: this['parameters']['right']['alpha']
                         }
                     }
                 }),
@@ -786,7 +835,7 @@
                     parameters['left']['attack'] = params['left']['attack'];
                     parameters['left']['release'] = params['left']['release'];
                     parameters['left']['global_mpo'] = params['left']['global_mpo'];
-                    parameters['left']['afc_delay'] = params['left']['afc_delay'];
+                    // parameters['left']['afc_delay'] = params['left']['afc_delay'];
 
 
                     parameters['right']['g50'] = params['right']['g50'];
@@ -797,7 +846,7 @@
                     parameters['right']['attack'] = params['right']['attack'];
                     parameters['right']['release'] = params['right']['release'];
                     parameters['right']['global_mpo'] = params['right']['global_mpo'];
-                    parameters['right']['afc_delay'] = params['left']['afc_delay'];
+                    // parameters['right']['afc_delay'] = params['left']['afc_delay'];
 
                     //update inner html to reflect RTMHA state
                     for(i = 0; i < 6; i++){
@@ -820,8 +869,9 @@
 
                     }
                     
-                    $('#afc_delay').val(parameters['left']['afc_delay']);
-                    $('#global_mpo').val(parameters['left']['global_mpo']);
+
+                    $('#global_mpo_l').val(parameters['left']['global_mpo']);
+                    $('#global_mpo_r').val(parameters['right']['global_mpo']);
 
                     if(parameters['left']['afc'] == 0 || parameters['right']['afc'] == 0){
                         $('#afc_off').closest('.btn').button('toggle');

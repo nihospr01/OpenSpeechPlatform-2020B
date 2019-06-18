@@ -11,24 +11,16 @@
 
     <title>Goldilocks</title>
     <style>
+    .breadcrumb-item{
+      font-size: 24;
+    }
+    .breadcrumb{
+      font-size: 24;
+    }
 
-        #home{
-            text-align:left;
-        }
-
-        #version{
-            text-align:right;
-        }
-
-        @media (max-width:576px) {
-            #home{
-                text-align:center;
-                margin-bottom:10px;
-            }
-            #version{
-                text-align:center;
-            }
-        }
+    .list-group{
+      font-size: 24;
+    }
 
     </style>
 </head>

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Log;
 
 /**
- * Controller for accepting REST API requests. This controller holds all 
+ * Controller for accepting REST API requests. This controller holds all
  * REST API function calls. These calls should be universal, and not tied to any
  * one app. This is the controller in in charge of communicating with the MHA.
  */
@@ -14,7 +14,7 @@ use App\Log;
 class ApiController extends Controller
 {
     /**
-     * Sends a JSON string to the MHA. String is found in the body of the 
+     * Sends a JSON string to the MHA. String is found in the body of the
      * request object
      * POST: '/api/params'
      *

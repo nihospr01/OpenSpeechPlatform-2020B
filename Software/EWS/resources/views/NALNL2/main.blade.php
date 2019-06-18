@@ -2,7 +2,7 @@
 
 <head>
 
-	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">	
+	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 	<style>
 /*		.table-field{
 			text-align: center;
@@ -17,7 +17,7 @@
 
 		th {font-size:0.5rem;} /*1rem = 16px*/
 
-		@media (min-width: 544px) {  
+		@media (min-width: 544px) {
 		  	th {font-size:1rem;} /*1rem = 16px*/
 /*
 			.table-field{
@@ -27,9 +27,9 @@
 			}*/
 
 		}
-		 
+
 		/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
-		@media (min-width: 768px) {  
+		@media (min-width: 768px) {
 		  	th {font-size:1rem;} /*1rem = 16px*/
 /*
 		  	.table-field{
@@ -39,9 +39,9 @@
 			}*/
 
 		}
-		 
+
 		/* Large devices (desktops, 992px and up) */
-		@media (min-width: 992px) { 
+		@media (min-width: 992px) {
 		  	th {font-size:1rem;} /*1rem = 16px*/
 /*
 		  	.table-field{
@@ -51,9 +51,9 @@
 			}*/
 
 		}
-		 
+
 		/* Extra large devices (large desktops, 1200px and up) */
-		@media (min-width: 1200px) {  
+		@media (min-width: 1200px) {
 		  	th {font-size:1rem;} /*1rem = 16px*/
 /*
 		  	.table-field{
@@ -149,7 +149,7 @@
 	  	</div>
 	</div>
 
-		
+
 
 	<div class="container" style="background-color: #FFFFFF">
 		<h4 class="center-text" style="padding-top: 10; padding-bottom: 10;">Audiogram</h4>
@@ -427,12 +427,12 @@
                         document.getElementById("kneelow_4").value = parameters.knee_low[4];
                         document.getElementById("kneelow_5").value = parameters.knee_low[5];
 
-                        document.getElementById("kneehigh_0").value = parameters.knee_high[0];
-                        document.getElementById("kneehigh_1").value = parameters.knee_high[1];
-                        document.getElementById("kneehigh_2").value = parameters.knee_high[2];
-                        document.getElementById("kneehigh_3").value = parameters.knee_high[3];
-                        document.getElementById("kneehigh_4").value = parameters.knee_high[4];
-                        document.getElementById("kneehigh_5").value = parameters.knee_high[5];
+                        document.getElementById("kneehigh_0").value = parameters.mpo_band[0];
+                        document.getElementById("kneehigh_1").value = parameters.mpo_band[1];
+                        document.getElementById("kneehigh_2").value = parameters.mpo_band[2];
+                        document.getElementById("kneehigh_3").value = parameters.mpo_band[3];
+                        document.getElementById("kneehigh_4").value = parameters.mpo_band[4];
+                        document.getElementById("kneehigh_5").value = parameters.mpo_band[5];
 
                         document.getElementById("attack_0").value = parameters.attack[0];
                         document.getElementById("attack_1").value = parameters.attack[1];
@@ -496,7 +496,7 @@
 			        document.getElementById("kneelow_4").value,
 			        document.getElementById("kneelow_5").value
 				],
-				'knee_high': [	
+				'mpo_band': [
 			        document.getElementById("kneehigh_0").value,
 			        document.getElementById("kneehigh_1").value,
 			        document.getElementById("kneehigh_2").value,
@@ -510,7 +510,7 @@
 			        document.getElementById("attack_2").value,
 			        document.getElementById("attack_3").value,
 			        document.getElementById("attack_4").value,
-			        document.getElementById("attack_5").value						
+			        document.getElementById("attack_5").value
 				],
 				'release': [
 			        document.getElementById("release_0").value,

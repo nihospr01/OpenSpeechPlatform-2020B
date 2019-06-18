@@ -23,13 +23,40 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/mobile.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/open-iconic-bootstrap.min.css')}}">
     <script type="text/javascript" src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/popper.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js')}}"></script>
+
     <script type="text/javascript">
 
         $(document).ready(function(){
+            
             $('.page-login').show();
+
+            $.ajax({
+                method: 'POST',
+                url: '/api/params',
+                data: JSON.stringify({
+                    user_id: -1,
+                    method: "set",
+                    request_action:1,
+                    data:{
+                        left:{
+                            alpha:1
+                        },
+                        right:{
+                            alpha:1
+                        }                
+                    }
+                }),
+                success:function(response){
+                    console.log(response);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("Parameters were not sent to the MHA. Make sure the software is running and try again.");
+                }
+            });
 
             var word_sets = [];
 
@@ -95,6 +122,48 @@
                 }
             }
 
+            //play corresponding wav file
+            $('#playSound').on('click',function(event){
+                event.preventDefault();
+                var filePath = word_sets[questionIndex-1]['audio']['Actual_answer'];
+                console.log(filePath);
+                var playMode = 1;
+                console.log("Attempting to play sound");
+                
+                // POST request to play audio
+                $.ajax({
+                    method: 'POST',
+                    url: '/api/params',
+                    data: JSON.stringify({
+                        user_id: -1,
+                        method: "set",
+                        request_action:1,
+                        data:{
+                            left:{
+                                audio_filename:filePath,
+                                audio_reset:0,
+                                audio_play:1,
+                                audio_repeat:0
+                            },
+                            right:{
+                                audio_filename:filePath,
+                                audio_reset:0,
+                                audio_play:1,
+                                audio_repeat:0
+                            }                
+                        }
+                    }),
+                    success:function(response){
+                        console.log(response);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("Parameters were not sent to the MHA. Make sure the software is running and try again.");
+                    }
+                });
+                
+
+            }) ;
+
             //handler when press next question button
             $('#nextQuestion').on('click',function(event){
                 event.preventDefault();
@@ -146,6 +215,8 @@
                     $('#nextQuestion').text("Done");
                 }
             });
+
+
 
             $("#download").on("click",function(event){
                 event.preventDefault();
@@ -224,12 +295,6 @@
                 }
                 return result;
             }
-
-
-            
-            
-
-
         });
 
 
@@ -336,6 +401,16 @@
             <h5 class="description">
                 Press play and select the word you hear
             </h5>
+
+            {{-- play button --}}
+        
+                <button type="button" id = "playSound" class="btn btn-default btn-play" 
+                    style="width: 60px;height:60px;text-align:center;font-size:40px;"
+                >
+                    <span class="oi oi-play-circle oi-play"></span>
+                </button>
+
+            {{-- choices --}}
             <div class="container questions">
                 <div class="row">
                     <div class="col-sm">

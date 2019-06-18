@@ -14,12 +14,15 @@
 #include <beamformer/beamformer.hpp>
 #include <circular_buffer/circular_buffer.hpp>
 #include <ews_connect/ews_connect.hpp>
+#include <fileio/AudioFile.h>
+#include <fileio/playfile.h>
+#include <fileio/file_record.h>
 #include <filter/filter.hpp>
 #include <resample/32_48_filter.h>
 #include <resample/48_32_filter.h>
 #include <resample/resample.hpp>
 #include <subband/noise_management.hpp>
 #include <subband/peak_detect.hpp>
-#include <subband/wdrc.hpp>)
+#include "subband/wdrc.hpp")
 
 #endif //LIBOSP_HPP

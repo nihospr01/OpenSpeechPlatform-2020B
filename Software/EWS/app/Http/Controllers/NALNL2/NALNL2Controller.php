@@ -128,12 +128,12 @@ class NALNL2Controller extends Controller
                 (int)$request->input('knee_low')[5]
             ],
             "mpoLimit" => [
-                (int)$request->input('knee_high')[0],
-                (int)$request->input('knee_high')[1],
-                (int)$request->input('knee_high')[2],
-                (int)$request->input('knee_high')[3],
-                (int)$request->input('knee_high')[4],
-                (int)$request->input('knee_high')[5]
+                (int)$request->input('mpo_band')[0],
+                (int)$request->input('mpo_band')[1],
+                (int)$request->input('mpo_band')[2],
+                (int)$request->input('mpo_band')[3],
+                (int)$request->input('mpo_band')[4],
+                (int)$request->input('mpo_band')[5]
             ],
             "attackTime" => [
                 (int)$request->input('attack')[0],

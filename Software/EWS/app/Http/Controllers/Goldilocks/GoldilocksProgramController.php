@@ -60,7 +60,7 @@ class GoldilocksProgramController extends Controller
         $listener->current_program_id = $program->id;
         $listener->save();
 
-        return json_encode(['status' => 'success']);
+        return json_encode(['status' => 'success', 'id' => $program->id]);
     }
 
     /**
@@ -114,14 +114,29 @@ class GoldilocksProgramController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storage, and redirect to admin index.
      *
      * @param  \App\GoldilocksProgram  $goldilocksProgram
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GoldilocksProgram $goldilocksProgram)
+    public function destroy($goldilocksProgram)
     {
-        //
+        GoldilocksProgram::destroy($goldilocksProgram);
+
+        return redirect('goldilocks/admin/programs');
+    }
+
+    /**
+     * Remove the specified resource from storage, and redirect to listener programs.
+     *
+     * @param  \App\GoldilocksProgram  $goldilocksProgram
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($goldilocksProgram)
+    {
+        GoldilocksProgram::destroy($goldilocksProgram);
+
+        return redirect('goldilocks/listener/programs');
     }
 
     /**

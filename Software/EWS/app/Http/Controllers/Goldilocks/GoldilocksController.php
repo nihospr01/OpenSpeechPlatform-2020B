@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\GoldilocksListener;
 use App\GoldilocksResearcher;
 use App\GoldilocksProgram;
+use App\GoldilocksGeneric;
 
 class GoldilocksController extends Controller
 {
@@ -45,12 +46,13 @@ class GoldilocksController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function researcherLogin(){
-        $researcher = NULL;
+        $curResearcher = NULL;
         if(session()->get('researcher', 'NULL') != 'NULL'){
-            $researcher = GoldilocksResearcher::where('researcher', session('researcher'))->firstOrFail();
+            $curResearcher = GoldilocksResearcher::where('researcher', session('researcher'))->firstOrFail();
         }
+        $researchers = GoldilocksResearcher::all();
         $listeners = GoldilocksListener::all();
-        return view ('goldilocks.researcher-login', compact('listeners', 'researcher'));
+        return view ('goldilocks.researcher-login', compact('listeners', 'curResearcher', 'researchers'));
     }
 
     /**
@@ -116,8 +118,10 @@ class GoldilocksController extends Controller
             //grab researcher from database
             $researcher = GoldilocksResearcher::where('researcher', session('researcher'))->firstOrFail();
 
+            $genericProgram = GoldilocksGeneric::first();
+
             //redirect to researcher page with required parameters
-            return view('goldilocks.researcher', compact('listener', 'programs', 'researcher', 'parameters'));
+            return view('goldilocks.researcher', compact('listener', 'programs', 'researcher', 'parameters', 'genericProgram'));
 
         }
         //take user to login page if they are not logged in
@@ -184,6 +188,17 @@ class GoldilocksController extends Controller
     }
 
     /**
+     * Logs out listener and flushes session.
+     *
+     * @param Request $request
+     * @return $this|View
+     */
+    public function listenerLogout(Request $request){
+        $request->session()->flush();
+        return redirect('/goldilocks/listener/login');
+    }
+
+    /**
      * Loads listener goldilocks page for self adjustment.
      *
      * @return View
@@ -228,7 +243,14 @@ class GoldilocksController extends Controller
         //if user is supposed to have volume only, redirect
         if($listener->current_program_id != null){
             $program_id = $listener->current_program_id;
-            $program = GoldilocksProgram::where('id', $program_id)->firstOrFail();
+            $program = GoldilocksProgram::where('id', $program_id)->first();
+            if ($program == null) {
+                // reassign another program that belongs to the same listener
+                $program = GoldilocksProgram::where('listener_id', $listener->id)->firstOrFail();
+                $listener->current_program_id = $program->id;
+                $listener->save();
+            }
+
             $parameters = $program->parameters;
             $data = json_decode($parameters);
             if($data->app_behavior == 1){

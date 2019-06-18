@@ -18,7 +18,7 @@ if [ $OS = "Darwin" ]; then
   fi
   
   echo Install pre-requisite packages
-  brew install -y portaudio poco cereal cmake pkg-config composer php72
+  brew install portaudio poco cereal cmake pkg-config composer php72
 elif [ $OS = "Linux" ]; then
   echo Install pre-requisite packages
   sudo apt-get update

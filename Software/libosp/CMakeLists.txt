@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.8)
 project(OpenSpeechPlatformLibraries)
 
+set(Poco_DIR "/usr/local/lib/cmake/Poco/") 
+set(Poco_INCLUDE_DIRS "/usr/include/Poco/")
+
 find_package(Poco REQUIRED Foundation Util Net)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -32,6 +35,13 @@ add_library(OSP STATIC
         OSP/beamformer/beamformer.cpp
         OSP/circular_buffer/circular_buffer.hpp
         OSP/circular_buffer/circular_buffer.cpp
+        OSP/fileio/sema.hpp
+        OSP/fileio/AudioFile.h
+        OSP/fileio/AudioFile.cpp
+        OSP/fileio/playfile.h
+        OSP/fileio/playfile.cpp
+        OSP/fileio/file_record.h
+        OSP/fileio/file_record.cpp
         OSP/filter/filter.hpp
         OSP/filter/filter.cpp
         OSP/resample/resample.hpp
@@ -41,7 +51,8 @@ add_library(OSP STATIC
         OSP/subband/peak_detect.hpp
         OSP/subband/peak_detect.cpp
         OSP/subband/wdrc.hpp
-        OSP/subband/wdrc.cpp)
+        OSP/subband/wdrc.cpp
+        OSP/ReleasePool/ReleasePool.hpp)
 
 install(TARGETS OSP EXPORT OSP-targets
         LIBRARY DESTINATION lib

@@ -10,6 +10,17 @@
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js')}}"></script>
 
     <title>Goldilocks Admin</title>
+    <style>
+    .breadcrumb-item{
+      font-size: 24;
+    }
+    .breadcrumb{
+      font-size: 24;
+    }
+
+
+
+    </style>
 </head>
 
 
@@ -32,6 +43,7 @@
                 <th scope="col">Pin</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Updated At</th>
+                <th scope="col">Delete Listener</th>
             </tr>
             </thead>
             <tbody>
@@ -42,6 +54,9 @@
                     <td>{{$listener->pin}}</td>
                     <td>{{$listener->created_at}}</td>
                     <td>{{$listener->updated_at}}</td>
+                    <td>
+                            {!! Form::button('Delete', array('class' => 'btn btn-danger btn-block', 'onClick' => 'confirmDelete(' . $listener . ')')) !!}
+                        </td>
                 </tr>
             @endforeach
             </tbody>
@@ -93,10 +108,38 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="delListenerModal" tabindex="-1" role="dialog" aria-labelledby="Delete Listener" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Delete Listener?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                {{ Form::open(['id' => 'delListenerForm']) }}
+                {{ method_field('DELETE') }}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Confirm</button>
+                    </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         $('#newListenerModal').on('shown.bs.modal', function () {
             $('#listenerIdInput').trigger('focus')
         })
+
+        function confirmDelete(data) {
+            var url = window.location.origin + '/goldilocks/admin/listeners/' + data.id;
+            $('#delListenerForm').attr('action', url);
+            $('#delListenerModal').modal();
+        }
     </script>
 
 

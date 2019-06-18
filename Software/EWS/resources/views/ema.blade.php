@@ -15,6 +15,17 @@
         $(document).ready(function(){
             $('.page-login').show();
             
+            // function makeid(length) {
+            //     var result           = '';
+            //     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            //     var charactersLength = characters.length;
+            //     for ( var i = 0; i < length; i++ ) {
+            //         result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            //     }
+            //     return result;
+            // }
+
+    
             testerID= "";
             participantID = "";
             title = "";
@@ -28,15 +39,55 @@
             var isMultiple = [];
             const titleRow = ["Questions#", "Participant's Answer"];
             //log in handler
+
+            $('#testerID').on('keyup',function(event){
+                testerID = event.target.value;
+            });
+
+            $('#participantID').on('keyup',function(event){
+                participantID = event.target.value;
+            })
+
             $('#login').click(function(event){
                 event.preventDefault();
-
+           
+                if(testerID == "" || participantID == ""){
+                    alert("Please enter your information");
+                    return;
+                }
                 //get the tester and participant ID
-                testerID = $('#testerID').val();
-                participantID = $('#participantID').val();
+                var filename = testerID+"_"+participantID;
+                console.log(filename);
+                $.ajax({
+                        method: 'POST',
+                        url: '/api/params',
+                        data: JSON.stringify({
+                            user_id: -1,
+                            method: "set",
+                            request_action:1,
+                            data:{
+                                left:{
+                                    record_start:1,
+                                    record_length:60,
+                                    audio_recordfile: filename
+                                },
+                                right:{
+                                    record_start:1,
+                                    record_length:60,
+                                    audio_recordfile: filename
+                                }                
+                            }
+                        }),
+                        success:function(response){
+                            console.log(response);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            alert("Parameters were not sent to the MHA. Make sure the software is running and try again.");
+                        }
+                });
 
                 $('.page-login').hide();
-            
+
                 //load the questions from json file
                 async function load_survey(){
                     try{
@@ -73,6 +124,7 @@
                     $("#surveyTitle").text(title);
                     $('#progressBar').css('width',(100/numQuestions)+'%');
                 });
+ 
             });
 
             $('#continue').click(function(event){
@@ -82,8 +134,6 @@
                 $('#PartA').show();
                 $('#nextQuestion').attr('disabled','disabled');
             });
-
-            
 
             $('#toQuestions').click(function(event){
                 event.preventDefault();
@@ -130,8 +180,34 @@
                             "<tr><th scope='row'>"+id+"</th><td style='text-align:left'>"+res+"</td><tr>"
                         );
                     }
-
+                
+                    $.ajax({
+                        method: 'POST',
+                        url: '/api/params',
+                        data: JSON.stringify({
+                            user_id: -1,
+                            method: "set",
+                            request_action:1,
+                            data:{
+                                left:{
+                                    record_stop:1,
+                                },
+                                right:{
+                                    record_stop:1,
+                                }                
+                            }
+                        }),
+                        success:function(response){
+                            console.log(response);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log("Parameters were not sent to the MHA. Make sure the software is running and try again.");
+                        }
+                    });
+                    
                     $("#SurveyResult").show();
+
+
                     return;
                 }
 
@@ -215,7 +291,7 @@
                     }
                     $(document).on("click", ".btn-choice-single", function(event){
                         event.preventDefault();
-                        
+
                         if(questions[questionIndex]["isMultiple"]===0){
                             singleRes = $(this).text();
                             $('#nextQuestion').removeAttr('disabled');

@@ -54,22 +54,26 @@ int portaudio_wrapper::init_stream(int in_device, int in_num_channel, int out_de
     printf( "Num channels = %d.\n", in_num_channel );
     inputParameters.channelCount = in_num_channel;
     inputParameters.sampleFormat = PA_SAMPLE_TYPE;
-    inputParameters.suggestedLatency = 0.002;// inputInfo->defaultLowInputLatency ;
+    inputParameters.suggestedLatency = .001 ;
     inputParameters.hostApiSpecificStreamInfo = NULL;
     outputParameters.channelCount = out_num_channels;
     outputParameters.sampleFormat = PA_SAMPLE_TYPE;
-    outputParameters.suggestedLatency =  0.002;//outputInfo->defaultLowOutputLatency;
+    outputParameters.suggestedLatency =  .001;
     outputParameters.hostApiSpecificStreamInfo = NULL;
     /* -- setup -- */
+
     err = Pa_OpenStream(
             &stream,
             &inputParameters,
             &outputParameters,
             samp_rate,
             frames_per_buffer,
-            paClipOff,      /* we won't output out of range samples so don't bother clipping them */
+            paClipOff|paDitherOff|paPrimeOutputBuffersUsingStreamCallback,      /* we won't output out of range samples so don't bother clipping them */
             callback, /* no callback, use blocking API */
             userData ); /* no callback, so no callback userData */
+#ifdef __linux__
+    PaAlsa_EnableRealtimeScheduling ( &stream, 1);
+#endif
     if( err != paNoError ) {
         this->delete_stream();
         return -1;
