@@ -10,6 +10,17 @@
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js')}}"></script>
 
     <title>Goldilocks Admin</title>
+    <style>
+    .breadcrumb-item{
+      font-size: 24;
+    }
+    .breadcrumb{
+      font-size: 24;
+    }
+
+
+
+    </style>
 </head>
 
 
@@ -31,6 +42,7 @@
                 <th scope="col">Researcher</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Updated At</th>
+                <th scope="col">Delete Researcher</th>
             </tr>
             </thead>
             <tbody>
@@ -40,6 +52,9 @@
                         <td>{{$researcher->researcher}}</td>
                         <td>{{$researcher->created_at}}</td>
                         <td>{{$researcher->updated_at}}</td>
+                        <td>
+                            {!! Form::button('Delete', array('class' => 'btn btn-danger btn-block', 'onClick' => 'confirmDelete(' . $researcher . ')')) !!}
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -93,13 +108,39 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="delResearcherModal" tabindex="-1" role="dialog" aria-labelledby="Delete Researcher" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Delete Researcher?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
+                {{ Form::open(['id' => 'delResearcherForm']) }}
+                {{ method_field('DELETE') }}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Confirm</button>
+                    </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    </div>
 
 
     <script type="text/javascript">
         $('#newResearcherModal').on('shown.bs.modal', function () {
             $('#researcherIdInput').trigger('focus')
         })
+
+        function confirmDelete(data) {
+            var url = window.location.origin + '/goldilocks/admin/researchers/' + data.id;
+            $('#delResearcherForm').attr('action', url);
+            $('#delResearcherModal').modal();
+        }
     </script>
 
 

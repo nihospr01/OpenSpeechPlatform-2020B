@@ -7,6 +7,7 @@
 
 #include <mutex>
 #include <cstddef>
+#include <atomic>
 
 /**
  * @brief Noise Management Class
@@ -53,9 +54,16 @@ public:
     void speech_enhancement(float* data_in, size_t in_len, float* data_out);
 
 private:
-    int ntype;
-    int stype;
-    float sparam;
+
+    struct  nm_t{
+        int ntype;
+        int stype;
+        float sparam;
+    };
+
+    std::atomic<nm_t*> global_current;
+    std::atomic<nm_t*> global_next;
+
     float fsamp;
     float att;
     float rel;
@@ -84,7 +92,6 @@ private:
     float p;
     float b;
     //
-    std::mutex mutex_;
 };
 
 #endif //OSP_NOISE_MANAGEMENT_H

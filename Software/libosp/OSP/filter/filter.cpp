@@ -3,7 +3,12 @@
 #include <OSP/filter/filter.hpp>
 
 filter::filter(float *taps, size_t tap_size, circular_buffer *cir_buf, size_t max_buf_size) {
-    tap_ = new float[tap_size];
+    auto data_current = new float[tap_size];
+    auto data_next = new float[tap_size];
+    std::atomic_exchange(&tap_current, data_current);
+    std::atomic_exchange(&tap_next, data_next);
+
+
     size_ = tap_size;
     float *taps_ptr = taps;
     if (taps == nullptr) {
@@ -29,34 +34,35 @@ filter::~filter() {
     if (cir_buf_created_) {
         delete cir_buf_;
     }
-    delete[] tap_;
+    delete tap_current;
+    delete tap_next;
 }
 
 int
 filter::set_taps(const float *taps, size_t buf_size) {
-    mutex_.lock();
+
+    auto tap_ = tap_next.load();
+
     if (buf_size != this->size_) {
-        mutex_.unlock();
         return -1;
     }
     for (size_t i = 0; i < buf_size; i++) {
-        this->tap_[i] = taps[i];
+        tap_[i] = taps[i];
     }
-    mutex_.unlock();
+
+    tap_next.exchange(tap_current.exchange(tap_next));
     return 0;
 }
 
 int
 filter::get_taps(float *taps, size_t buf_size) {
-    mutex_.lock();
+    auto tap_ = tap_current.load();
     if (buf_size != this->size_) {
-        mutex_.unlock();
         return -1;
     }
     for (size_t i = 0; i < buf_size; i++) {
-        taps[i] = this->tap_[i];
+        taps[i] = tap_[i];
     }
-    mutex_.unlock();
     return 0;
 }
 
@@ -73,8 +79,7 @@ filter::get_size() {
 
 void
 filter::cirfir(float *data_out, size_t num_samp) {
-    mutex_.lock();
-    cir_buf_->mutex_.lock();
+    auto tap_ = tap_current.load();
     float temp_data_out;
     auto mask = (int) cir_buf_->mask_;
     auto head = (int) cir_buf_->head_;
@@ -88,6 +93,4 @@ filter::cirfir(float *data_out, size_t num_samp) {
         }
         data_out[i] = temp_data_out;
     }
-    cir_buf_->mutex_.unlock();
-    mutex_.unlock();
 }

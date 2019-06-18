@@ -6,6 +6,8 @@
 #define OSP_AFC_H
 
 #include <OSP/adaptive_filter/adaptive_filter.hpp>
+#include <atomic>
+#include <OSP/ReleasePool/ReleasePool.hpp>
 
 #define MAX_DELAY_LEN 256 // The maximum delay length in AFC
 
@@ -94,10 +96,18 @@ private:
     filter* bandlimited_filter_;
     filter* prefilter_e_;
     filter* prefilter_u_;
-    size_t delay_len_;
+    float *u_ref, *e_ref;
+
     circular_buffer* delay_buffer_;
     float* u_;
-    int afc_on_off_;
+
+    struct afc_param_t {
+        int afc_on_off_;
+        size_t delay_len_;
+    };
+
+    std::shared_ptr<afc_param_t> currentParam;
+    ReleasePool releasePool;
 };
 
 #endif //OSP_AFC_H

@@ -4,6 +4,10 @@
 
 noise_management::noise_management(int ntype, int stype, float sparam, float fsamp) {
     this->fsamp = fsamp;
+    auto data_current = new nm_t;
+    auto data_next = new nm_t;
+    std::atomic_exchange(&global_current, data_current);
+    std::atomic_exchange(&global_next, data_next);
     this->set_param(ntype, stype, sparam);
     /* Attack time in msec */
     att = 3;
@@ -58,30 +62,31 @@ noise_management::noise_management(int ntype, int stype, float sparam, float fsa
     bCB = exp(-1.0f / (0.001f * tau * fsamp)); //LP filter coefficient for noise ave
 }
 
-noise_management::~noise_management() = default;
+noise_management::~noise_management(){
+    delete global_next;
+    delete global_current;
+}
 
 void
 noise_management::set_param(int ntype, int stype, float sparam) {
-    mutex_.lock();
-    this->ntype = ntype;
-    this->stype = stype;
-    this->sparam = sparam;
-    mutex_.unlock();
-
+    auto data_next = global_next.load();
+    data_next->ntype = ntype;
+    data_next->stype = stype;
+    data_next->sparam = sparam;
+    global_next.exchange(global_current.exchange(global_next));
 }
 
 void
 noise_management::get_param(int &ntype, int &stype, float &sparam) {
-    mutex_.lock();
-    ntype = this->ntype;
-    stype = this->stype;
-    sparam = this->sparam;
-    mutex_.unlock();
+    auto data_current = global_current.load();
+
+    ntype = data_current->ntype;
+    stype = data_current->stype;
+    sparam = data_current->sparam;
 }
 
 void
 noise_management::speech_enhancement(float *data_in, size_t in_len, float *data_out) {
-    mutex_.lock();
     float xpow[in_len];
     float npow[in_len];
     float vpow[in_len];
@@ -89,6 +94,10 @@ noise_management::speech_enhancement(float *data_in, size_t in_len, float *data_
     float valley[in_len];
     float gain[in_len];
 
+    auto data_current = global_current.load();
+    int ntype = data_current->ntype;
+    int stype = data_current->stype;
+    float sparam = data_current->sparam;
 
     peak[0] = array_mean(data_in, in_len);
     valley[0] = peak[0];
@@ -169,5 +178,4 @@ noise_management::speech_enhancement(float *data_in, size_t in_len, float *data_
     } else {
         printf("Wrong data_in for Spectral subtraction\n");
     }
-    mutex_.unlock();
 }

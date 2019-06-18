@@ -18,34 +18,34 @@
         .leftBtn{
 
             padding: 0rem;
-            font-size: 2.5rem;
-            line-height:1.5;
+            font-size: 2.2rem;
+            line-height:inherit;
             border-radius:.3rem;
             width: 100px;
-            height: 90px;
+            height: 75px;
             align-self: center;
         }
 
         .rightBtn{
 
             padding: 0rem;
-            font-size: 2.5rem;
-            line-height:1.5;
+            font-size: 2.2rem;
+            line-height: inherit;
             border-radius:.3rem;
             left:0;
             width:100px;
-            height: 90px;
+            height: 75px;
             align-self: center;
         }
 
         .okay{
             padding: 0rem;
-            font-size: 2rem;
-            line-height:1.5;
+            font-size: 1.4rem;
+            line-height: inherit;
             border-radius:.3rem;
             left:0;
             width:90px;
-            height: 90px;
+            height: 75px;
             align-self: center;
         }
 
@@ -98,7 +98,6 @@
     </div>
 
     <div class="container-fluid" style="background-color: #e8ecf1">
-
 
         <!--CRSIPNESS-->
         <div id="crispness_section" class="container" style="background-color: #f4d03f; padding: 1rem; visibility: hidden;">
@@ -190,15 +189,7 @@
             </div>
         </div>
 
-        <div class="container" style="margin-top: 0.5rem;">
-            <div class="row" style="margin-bottom: 0.5rem">
-                <div class="col-12 text-center" style="align-items:center">
-                    <button type="button" id="finish_button" class="okay btn-info" style="visibility: hidden">
-                        Finish
-                    </button>
-                </div>
-            </div>
-
+        <div class="container" id="end_buttons" style="display: none;">
             <div class="row" >
                 <div class="col-6 text-center" >
                     <button type="button" id="save_button" class="save btn-info">
@@ -209,6 +200,16 @@
                 <div class="col-6 text-center" style="align-items:center">
                     <button type="button" id="save_as_modal_trigger" class="saveAs btn-info" data-toggle="modal" data-target="#saveAsModal">
                         Save As
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="margin-top: 0.5rem;">
+            <div class="row" style="margin-bottom: 0.5rem">
+                <div class="col-12 text-center" style="align-items:center">
+                    <button type="button" id="finish_button" class="okay btn-info" style="visibility: hidden">
+                        Finish
                     </button>
                 </div>
             </div>
@@ -246,15 +247,13 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="infoModalLabel">HA Values</h5>
+                    <h5 class="modal-title" id="infoModalLabel">Logout Listener</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <p id="infoModalText">No info to show</p>
-                </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" style="float: left;" onclick="location='{{ url("goldilocks/listener/logout") }}'">Logout</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -279,7 +278,7 @@
             'multiplier_h': [0, 0, 0, 0, 0, 0],
             'g50_max': [0, 0, 0, 0, 0, 0],
             'knee_low': [45, 45, 45, 45, 45, 45],
-            'mpo_limit': [110, 110, 110, 110, 110, 110],
+            'mpo_band': [110, 110, 110, 110, 110, 110],
             'attack': [5, 5, 5, 5, 5, 5],
             'release': [100, 100, 100, 100, 100, 100],
             'l_min': -40,
@@ -299,8 +298,7 @@
         };
 
         var programId = -1;
-
-
+        var programIdStart = -1;
 
         /** Pull parameters if they have been passed through **/
         if("{{$parameters}}" != ""){
@@ -309,13 +307,31 @@
         }
 
         if("{{$program_id}}" != null && "{{$program_id}}" != ""){
-            this['programId'] = '{{$program_id}}';
+            this['programId'] = this['programIdStart'] = '{{$program_id}}';
             console.log("program_id passed through", this['programId']);
         }
 
-
+        /* To keep track of adjustment logs */
         //store the starting g65 so that we may use it in updating function
         var starting_g65 = this['parameters']['g65'].slice();
+
+        var l_multipliers = this['parameters']['multiplier_l'].slice();
+        var h_multipliers = this['parameters']['multiplier_h'].slice();
+        var cr = this['parameters']['compression_ratio'].slice();
+
+        var changeString = "";
+        var steps = 0;
+
+
+        // set up L and H step sizes based on dB
+        // L (fullness) - max lmult (250,500,1000)
+        var l_mul = Math.max(parameters['multiplier_l'][0],
+                             parameters['multiplier_l'][1],
+                             parameters['multiplier_l'][2]);
+        // H (crispness) - max hmult (2000,4000,8000)
+        var h_mul = Math.max(parameters['multiplier_h'][3],
+                             parameters['multiplier_h'][4],
+                             parameters['multiplier_h'][5]);
 
 
         /** Set up sequence based on parameters passed through **/
@@ -361,14 +377,17 @@
 
         //log that the app has started
         logButtonPress('started_app');
-
+        var start = new Date();
 
 
         /** Fullness button control **/
 
         $('#l_less').click(function(){
-            decrement('l_value', 'l_step', 'l_min');
-            logButtonPress('l_less');
+            var dec = decrement('l_value', 'l_step', 'l_min');
+            if (dec != -1) {
+                logButtonPress('l_less');
+                steps += 1;
+            }
         });
 
         $('#l_okay').click(function(){
@@ -377,8 +396,11 @@
         });
 
         $('#l_more').click(function(){
-            increment('l_value', 'l_step', 'l_max');
-            logButtonPress('l_more');
+            var inc = increment('l_value', 'l_step', 'l_max');
+            if (inc != -1) {
+                logButtonPress('l_more');
+                steps += 1;
+            }
         });
 
 
@@ -386,8 +408,11 @@
         /** Loudness button control **/
 
         $('#v_less').click(function(){
-            decrement('v_value', 'v_step', 'v_min');
-            logButtonPress('v_less');
+            var dec = decrement('v_value', 'v_step', 'v_min');
+            if (dec != -1) {
+                logButtonPress('v_less');
+                steps += 1;
+            }
         });
 
         $('#v_okay').click(function(){
@@ -396,8 +421,11 @@
         });
 
         $('#v_more').click(function(){
-            increment('v_value', 'v_step', 'v_max');
-            logButtonPress('v_more');
+            var inc = increment('v_value', 'v_step', 'v_max');
+            if (inc != -1) {
+                logButtonPress('v_more');
+                steps += 1;
+            }
         });
 
 
@@ -405,8 +433,25 @@
         /** Crispness button control **/
 
         $('#h_less').click(function(){
-            decrement('h_value', 'h_step', 'h_min');
-            logButtonPress('h_less');
+            var dec = decrement('h_value', 'h_step', 'h_min');
+
+            // link with fullness for 2-parameter option
+            var inc = 0;
+            if (parameters['sequence_num'] == 2 && dec != -1) {
+                inc = increment('l_value', 'l_step', 'l_max');
+                // error in increment -- rollback decrement as well
+                if (inc == -1) {
+                    increment('h_value', 'h_step', 'h_max');
+                }
+                else {
+                    logButtonPress('l_more')
+                }
+            }
+
+            if (dec != -1 && inc != -1) {
+                logButtonPress('h_less');
+                steps += 1;
+            }
         });
 
         $('#h_okay').click(function(){
@@ -415,8 +460,26 @@
         });
 
         $('#h_more').click(function(){
-            increment('h_value', 'h_step', 'h_max');
-            logButtonPress('h_more');
+            var inc = increment('h_value', 'h_step', 'h_max');
+
+            // link with fullness for 2-parameter option
+            var dec = 0;  // default value in scope
+            if (parameters['sequence_num'] == 2 && inc != -1) {
+                dec = decrement('l_value', 'l_step', 'l_min');
+                // error in decrement -- rollback increment as well
+                if (dec == -1) {
+                    decrement('h_value', 'h_step', 'h_min');
+                }
+                else {
+                    logButtonPress('l_less');
+                }
+            }
+
+            // log only if both successful
+            if (inc != -1 && dec != -1) {
+                logButtonPress('h_more');
+                steps += 1;
+            }
         });
 
 
@@ -517,6 +580,7 @@
 
             //empty sequence array implies finish button has been pressed
             else{
+                document.getElementById("end_buttons").style.display = "block";
                 document.getElementById("save_button").style.visibility = "visible";
                 document.getElementById("save_as_modal_trigger").style.visibility = "visible";
             }
@@ -596,14 +660,22 @@
          */
         function increment(id, step_type, max){
             var old_value = +document.getElementById(id).innerHTML; //plus sign is to denote as integer
-            var new_value = old_value + this['parameters'][step_type];
+            var add = this['parameters'][step_type];
+            var new_value = old_value + add;
+
+            if (id === 'l_value') {
+                add *= l_mul;
+            }
+            else if (id === 'h_value') {
+                add *= h_mul;
+            }
 
             if(new_value <= this['parameters'][max]){
-                document.getElementById(id).innerHTML = new_value;
+                document.getElementById(id).innerHTML = old_value + add;
 
-                var l_val = +document.getElementById("l_value").innerHTML;
+                var l_val = +document.getElementById("l_value").innerHTML / l_mul;
                 var v_val = +document.getElementById("v_value").innerHTML;
-                var h_val = +document.getElementById("h_value").innerHTML;
+                var h_val = +document.getElementById("h_value").innerHTML / h_mul;
 
                 //check to see if this change exceeds max g50 gain
                 if(exceedsMax(l_val, v_val, h_val)){
@@ -611,6 +683,7 @@
                     alert("Warning: you've attempted to exceed maximum gain. No change will take place.");
                     //change back the value
                     document.getElementById(id).innerHTML = old_value;
+                    return -1;
                 }
                 else {
                     //update parameters
@@ -626,6 +699,7 @@
             }
             else{
                 alert("Warning: Cannot exceed maximum value for " + step_type);
+                return -1;
             }
         }
 
@@ -635,14 +709,23 @@
          */
         function decrement(id, step_type, min){
             var old_value = +document.getElementById(id).innerHTML; //plus sign is to denote as integer
-            var new_value = old_value - this['parameters'][step_type];
+            var sub = this['parameters'][step_type];
+            var new_value = old_value - sub;
+
+            // calculate the values in decibels for display
+            if (id === 'l_value') {
+                sub *= l_mul;
+            }
+            else if (id === 'h_value') {
+                sub *= h_mul;
+            }
 
             if(new_value >= this['parameters'][min]){
-                document.getElementById(id).innerHTML = new_value;
+                document.getElementById(id).innerHTML = old_value - sub;
 
-                var l_val = +document.getElementById("l_value").innerHTML;
+                var l_val = +document.getElementById("l_value").innerHTML / l_mul;
                 var v_val = +document.getElementById("v_value").innerHTML;
-                var h_val = +document.getElementById("h_value").innerHTML;
+                var h_val = +document.getElementById("h_value").innerHTML / h_mul;
 
                 //update parameters
                 for(i = 0; i < 6; i++){
@@ -656,6 +739,7 @@
             }
             else{
                 alert("Warning: Cannot exceed minimum value for " + step_type);
+                return -1;
             }
 
         }
@@ -669,7 +753,8 @@
             var v_val = document.getElementById("v_value").innerHTML;
             var h_val = document.getElementById("h_value").innerHTML;
 
-            elem.innerHTML = l_val + ", " + v_val + ", " + h_val;
+            // 03/28/2019 -- commented out for production
+            // elem.innerHTML = l_val + ", " + v_val + ", " + h_val;
         }
 
 
@@ -694,7 +779,7 @@
                             g50: this['parameters']['g50'],
                             g80: this['parameters']['g80'],
                             knee_low: this['parameters']['knee_low'],
-                            knee_high: this['parameters']['mpo_limit'],
+                            mpo_band: this['parameters']['mpo_band'],
                             attack: this['parameters']['attack'],
                             release: this['parameters']['release']
                         },
@@ -705,7 +790,7 @@
                             g50: this['parameters']['g50'],
                             g80: this['parameters']['g80'],
                             knee_low: this['parameters']['knee_low'],
-                            knee_high: this['parameters']['mpo_limit'],
+                            mpo_band: this['parameters']['mpo_band'],
                             attack: this['parameters']['attack'],
                             release: this['parameters']['release']
                         }
@@ -745,6 +830,7 @@
                     ]),
                     success: function(response){
                         console.log(response);
+                        logAdjustmentSession();
                         alert('Program saved');
                         location.href= '{{ url('/goldilocks/listener/programs') }}';
                     },
@@ -784,6 +870,9 @@
                         }
                         else {
                             console.log(response);
+                            rjson = JSON.parse(response);
+                            programId = rjson["id"];
+                            logAdjustmentSession();
                             $('#saveAsModal').modal('hide');
                             location.href = '{{ url('/goldilocks/listener/programs') }}';
                         }
@@ -814,7 +903,7 @@
                     parameters['g50'] = params['left']['g50'];
                     parameters['g80'] = params['left']['g80'];
                     parameters['knee_low'] = params['left']['knee_low'];
-                    parameters['mpo_limit'] = params['left']['knee_high'];
+                    parameters['mpo_band'] = params['left']['mpo_band'];
                     parameters['afc'] = params['left']['afc'];
                     parameters['attack'] = params['left']['attack'];
                     parameters['release'] = params['left']['release'];
@@ -826,7 +915,7 @@
                             CR: parameters['compression_ratio'],
                             G65: parameters['g65'],
                             KL: parameters['knee_low'],
-                            MPO: parameters['mpo_limit'],
+                            MPO: parameters['mpo_band'],
                             AT: parameters['attack'],
                             RT: parameters['release']
                         }
@@ -852,6 +941,18 @@
             var v_val = +document.getElementById("v_value").innerHTML;
             var h_val = +document.getElementById("h_value").innerHTML;
 
+            // build changeString
+            if (button_id === "l_more" || button_id === "l_less") {
+                changeString += "L" + l_val + "|";
+            }
+            else if (button_id === "v_more" || button_id === "v_less") {
+                changeString += "V" + v_val + "|";
+            }
+            else if (button_id === "h_more" || button_id === "h_less") {
+                changeString += "H" + h_val + "|";
+            }
+
+            // log to db
             $.ajax({
                 method: 'POST',
                 headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}" },
@@ -863,7 +964,69 @@
                        l_value: l_val,
                        v_value: v_val,
                        h_value: h_val
-                   }
+                   },
+                }),
+                success: function(response) {
+                   console.log(response);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                   console.log(JSON.stringify(jqXHR));
+                   console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                }
+            });
+        }
+
+
+        /**
+         * Logs the adjustment session on the press of finish button to the
+         * table `listener_adjustment_logs`
+         */
+        function logAdjustmentSession(){
+            // get finish timestamp
+            var dt = new Date();
+            var tz = dt.getTimezoneOffset() / -60;
+
+            // elapsed ms since start of session until finish
+            var ms = dt - start;
+
+            // strip last '|' delimiter from changeString
+            changeString = changeString.slice(0, -1);
+
+            var l_val = +document.getElementById("l_value").innerHTML;
+            var v_val = +document.getElementById("v_value").innerHTML;
+            var h_val = +document.getElementById("h_value").innerHTML;
+
+            console.log("millisecs: " + ms);
+            console.log("g65: " + starting_g65);
+            console.log("cr: " + cr);
+            console.log("lmul: " + l_multipliers);
+            console.log("hmul: " + h_multipliers);
+            console.log("step-by-step changes: " + changeString);
+            console.log("timestamp: " + dt);
+
+            // log to db
+            $.ajax({
+                method: 'POST',
+                headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}" },
+                url: '/goldilocks/listener/adjustmentLog',
+                data: JSON.stringify({
+                   final_lvh: {
+                       l_value: l_val,
+                       v_value: v_val,
+                       h_value: h_val
+                   },
+                   starting_g65: starting_g65,
+                   ending_g65: this['parameters']['g65'].slice(),
+                   cr: cr,
+                   lmul: l_multipliers,
+                   hmul: h_multipliers,
+                   time_ms: ms,
+                   steps: steps,
+                   changes: changeString,
+                   start_program_id: programIdStart,
+                   end_program_id: programId,
+                   timestamp: dt,
+                   timezone: tz
                 }),
                 success: function(response) {
                    console.log(response);

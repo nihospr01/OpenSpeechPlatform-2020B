@@ -144,6 +144,7 @@
        Paused...
       </span>
       <span id = "statusClip">
+      123
       </span>
     </div>
     <div id="audio0">

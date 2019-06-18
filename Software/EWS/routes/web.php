@@ -14,17 +14,26 @@
 Route::get('/', 'WebController@welcomePage');
 Route::get('ansi', 'WebController@ansiPage');
 
-Route::get('ab', function () {
-    return view('ab');
+Route::get('abx', function () {
+    return view('abx');
 });
 
 Route::get('ab', function () {
     return view('ab');
 });
 
+Route::get('ab2', function(){
+    return view('ab2');
+});
 Route::get('goldilocks-nav', function(){
 	return view('goldilocks-nav');
 });
+
+Route::get('passThrough', function(){
+	return view('passThrough');
+});
+
+
 
 /** Researcher routes **/
 Route::get('researcher/amplification', 'WebController@researcherAmplificationPage');
@@ -64,10 +73,21 @@ Route::get('start', function(){
 /** Goldilocks **/
 Route::get('/goldilocks', 'Goldilocks\GoldilocksController@index');
 Route::get('/goldilocks/admin', 'Goldilocks\GoldilocksController@adminIndex');
-Route::resource('/goldilocks/admin/researchers', 'Goldilocks\GoldilocksResearcherController', ['only' => ['index', 'store']]);
-Route::resource('/goldilocks/admin/listeners', 'Goldilocks\GoldilocksListenerController', ['only' => ['index', 'store']]);
-Route::resource('/goldilocks/admin/logs', 'Goldilocks\GoldilocksLogController', ['only' => ['index']]);
-Route::resource('/goldilocks/admin/programs', 'Goldilocks\GoldilocksProgramController', ['only' => 'index']);
+Route::resource('/goldilocks/admin/researchers', 'Goldilocks\GoldilocksResearcherController',
+                ['only' => ['index', 'store', 'destroy']]);
+Route::resource('/goldilocks/admin/listeners', 'Goldilocks\GoldilocksListenerController',
+                ['only' => ['index', 'store', 'destroy']]);
+Route::resource('/goldilocks/admin/logs', 'Goldilocks\GoldilocksLogController',
+                ['only' => ['index']]);
+Route::resource('/goldilocks/admin/adjustment_logs', 'Goldilocks\ListenerAdjustmentLogController',
+                ['only' => ['index']]);
+Route::resource('/goldilocks/admin/programs', 'Goldilocks\GoldilocksProgramController',
+                ['only' => ['index', 'destroy']]);
+Route::post('/goldilocks/admin/programs/{goldilocksProgram}',
+            ['as' => 'programs.delete', 'uses' => 'Goldilocks\GoldilocksProgramController@delete']);
+Route::resource('/goldilocks/admin/generic', 'Goldilocks\GoldilocksGenericController',
+                ['only' => ['index']]);
+Route::put('/goldilocks/admin/generic', 'Goldilocks\GoldilocksGenericController@update');
 
 /** Researcher Goldilocks routes **/
 Route::get('/goldilocks/researcher/login', 'Goldilocks\GoldilocksController@researcherLogin');
@@ -79,15 +99,19 @@ Route::post('/goldilocks/listener/programs/current', 'Goldilocks\GoldilocksListe
 /** Listener Goldilocks routes **/
 Route::get('goldilocks/listener/login', 'Goldilocks\GoldilocksController@listenerLoginPage');
 Route::post('goldilocks/listener/login', 'Goldilocks\GoldilocksController@listenerLogin');
+Route::get('goldilocks/listener/logout', 'Goldilocks\GoldilocksController@listenerLogout');
 
 Route::middleware(['auth.goldilocks'])->group(function(){
     Route::get('/goldilocks/listener', 'Goldilocks\GoldilocksController@selfAdjustment');
     Route::post('/goldilocks/listener', 'Goldilocks\GoldilocksProgramController@store');
     Route::put('/goldilocks/listener', 'Goldilocks\GoldilocksProgramController@update');
-    Route::get('/goldilocks/listener/programs', 'Goldilocks\GoldilocksController@programsPage');
+    Route::middleware(['nocache'])->group(function() {
+        Route::get('/goldilocks/listener/programs', 'Goldilocks\GoldilocksController@programsPage');
+    });
     Route::post('/goldilocks/listener/programs/transmit', 'Goldilocks\GoldilocksProgramController@transmit');
     Route::post('/goldilocks/listener/programs', 'Goldilocks\GoldilocksController@modifyProgram');
     Route::post('/goldilocks/listener/log', 'Goldilocks\GoldilocksLogController@store');
+    Route::post('/goldilocks/listener/adjustmentLog', 'Goldilocks\ListenerAdjustmentLogController@store');
 });
 
 /** Goldilocks log/download routes */
@@ -96,6 +120,7 @@ Route::get('/goldilocks/logs/researchers', 'Goldilocks\GoldilocksResearcherContr
 Route::get('/goldilocks/logs/listeners', 'Goldilocks\GoldilocksListenerController@downloadListeners');
 Route::get('/goldilocks/logs/programs', 'Goldilocks\GoldilocksProgramController@downloadPrograms');
 Route::get('/goldilocks/logs/listener-logs', 'Goldilocks\GoldilocksLogController@downloadLogs');
+Route::get('/goldilocks/logs/adjustment-logs', 'Goldilocks\ListenerAdjustmentLogController@downloadLogs');
 
 
 

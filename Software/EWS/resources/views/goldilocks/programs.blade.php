@@ -77,7 +77,7 @@ margin-bottom: 0;
 <body>
   <div class="container-fluid" style="background-color: #e8ecf1;">
     <div class="row">
-        <div  class="col-sm menu"><button type="button" class="btn btn-outline-dark btn-block">{{ $listener->listener }}</button></div>
+        <div  class="col-sm menu"><button type="button" class="btn btn-outline-dark btn-block" data-toggle="modal" data-target="#infoModal">{{ $listener->listener }}</button></div>
       </div>
     </div>
 
@@ -91,10 +91,21 @@ margin-bottom: 0;
 
     <div class= "row">
       <div class="col" >
+        <table class="table">
         @foreach($programs as $program)
-          <button type="button" id="program_{{$program->id}}" class="btn btn-light btn-lg btn-block prgrm" onclick="changeProgram({{$program->id}})">{{$program->name}}</button>
+        <tr>
+          <td>
+            <button type="button" id="program_{{$program->id}}" class="btn btn-light btn-lg btn-block prgrm" onclick="changeProgram({{$program->id}})">{{$program->name}}</button>
+          </td>
+          <!--
+          Delete button for each listener's program
+          <td width="12em">
+            {!! Form::button('Delete', array('class' => 'btn btn-danger btn-lg btn-block', 'onClick' => 'confirmDelete(' . $program . ')')) !!}
+          </td>
+           -->
+        </tr>
         @endforeach
-
+        </table>
         @if(count($programs) == 0)
           <h4 style="color: blue; text-align: center; padding-top: 20px;">No programs to display</h4>
         @endif
@@ -113,6 +124,47 @@ margin-bottom: 0;
       </div>
       </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="delProgramModal" tabindex="-1" role="dialog" aria-labelledby="Delete Program" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Delete Program?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                {{ Form::open(['id' => 'delProgramForm', 'route' => array('programs.delete', $program)]) }}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Confirm</button>
+                    </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    </div>
+
+    <!--Modal for viewing hearing aid state-->
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infoModalLabel">HA Values</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="infoModalText">No info to show</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" style="float: left;" onclick="location='{{ url("goldilocks/listener/logout") }}'">Logout</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
       <script language="JavaScript">
 
@@ -158,6 +210,12 @@ margin-bottom: 0;
                 document.getElementById("none_selected").innerHTML = "";
                 return true;
             }
+        }
+
+        function confirmDelete(data) {
+            var url = 'http://localhost:8000/goldilocks/admin/programs/' + data.id;
+            $('#delProgramForm').attr('action', url);
+            $('#delProgramModal').modal();
         }
       </script>
 

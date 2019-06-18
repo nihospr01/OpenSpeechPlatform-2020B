@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 
 /**
- * Model for Listener object. Functions written here can be invoked on a 
- * listener object at any time. 
+ * Model for Listener object. Functions written here can be invoked on a
+ * listener object at any time.
  */
 class GoldilocksListener extends Model
 {

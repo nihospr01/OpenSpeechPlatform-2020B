@@ -80,7 +80,7 @@
                     <div class="card-body">
                     <h6 class="card-subtitle mb-2 text-muted"> Includes an EMA webapp, using which an end user can respond to a prompted question or set of questions. </h6>
                     </div>
-                ` `</div>
+                </div>
                           <p>
                           </p>
               </div>
@@ -97,9 +97,29 @@
                         </p>
 
                 <div class="card" style="width: 23rem; height: 10rem; padding:10px;">
-                <a href="{{ url('/ab') }}" class="btn btn-info">AB Task</a>
+                <div class="dropDown">
+                    <button class = "btn btn-info btn-block dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        AB Tasks
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="{{url('/ab')}}">AB - Two Files</a>
+                        <a class="dropdown-item" href="{{url('/ab2')}}">AB - One File </a>
+                          <a class="dropdown-item" href="#">ABX</a>
+                      </div>
+                </div>
+
+
+
+                {{-- <a href="{{ url('/ab') }}" class="btn btn-info">AB Task</a> --}}
                   <div class="card-body">
                   <h6 class="card-subtitle mb-2 text-muted">Includes an AB Task webapp, using which an end user can select a relationship between two presented stimuli, A and B, evaluated on a 7 point likert scale.  </h6>
+                  </div>
+                </div>
+
+                <div class="card" style="width: 23rem; height: 10rem; padding:10px;">
+                <a href="{{ url('/nal-nl2') }}" class="btn btn-info">NAL-NL2</a>
+                  <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">NAL-NL2 App</h6>
                   </div>
                 </div>
             </div>

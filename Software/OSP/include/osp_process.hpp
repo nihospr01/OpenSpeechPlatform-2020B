@@ -20,12 +20,16 @@
 #include <OSP/afc/bandlimited_filter.h>
 #include <OSP/afc/prefilter.h>
 #include <OSP/afc/afc_init_filter.h>
+#include <OSP/beamformer/beamformer.hpp>
 #include <OSP/resample/resample.hpp>
 #include <OSP/resample/48_32_filter.h>
 #include <OSP/resample/32_48_filter.h>
-#include "sema.hpp"
+#include <OSP/fileio/playfile.h>
+#include <OSP/fileio/file_record.h>
+//#include "sema.hpp"
 #include "osp_param.h"
 #include "filter_coef.h"
+
 
 /**
  * @brief OSP Process Class
@@ -47,21 +51,30 @@ public:
      */
     explicit osp_process(float samp_freq, size_t max_buffer_in, osp_user_data *user_data, bool multithread){
         this->multithread = multithread;
+        if (samp_freq == 48000) {
+            max_dwn_buf = max_buffer_in * 2;
+            max_dwn_buf = max_dwn_buf / 3;
+        } else {
+            std::cout << "Error setting up osp process" << std::endl;
+            return;
+        }
+        /// Beamforming
+        beamformer_ = new beamformer(user_data[0].bf_delay_len, nullptr, user_data[0].bf_fir_length, max_dwn_buf,
+                                     user_data[0].bf_type, user_data[0].bf_mu, user_data[0].bf_delta, user_data[0].bf_rho,
+                                     user_data[0].bf_alpha, user_data[0].bf_beta, user_data[0].bf_p, user_data[0].bf_c,
+                                     user_data[0].bf_power_estimate, user_data[0].bf,user_data[0].bf_nc_on_off,
+                                     user_data[0].bf_amc_on_off,user_data[0].nc_thr,user_data[0].amc_thr,user_data[0].amc_forgetting_factor);
         for(int channel = 0; channel < NUM_CHANNEL; channel++) {
+            e_n_bf_[channel] = new circular_buffer(max_dwn_buf+BAND_FILT_LEN, 0.0f);
+            alpha[channel] = user_data[channel].alpha;
             en_ha[channel] = user_data[channel].en_ha;
+            finish[channel] = true;
             gain[channel] = powf(10.0f, user_data[channel].gain / 20.0f);
-            if (samp_freq == 48000) {
-                max_dwn_buf = max_buffer_in * 2;
-                max_dwn_buf = max_dwn_buf / 3;
-                down_sample[channel] = new resample(filter_48_32, FILTER_48_32_SIZE, max_buffer_in, 2, 3);
-                up_sample[channel] = new resample(filter_32_48, FILTER_32_48_SIZE, max_dwn_buf, 3, 2);
-            } else {
-                std::cout << "Error setting up osp process" << std::endl;
-                return;
-            }
-            e_n[channel] = new circular_buffer(max_dwn_buf + BAND_FILT_LEN, 0.0f);
+            down_sample[channel] = new resample(filter_48_32, FILTER_48_32_SIZE, max_buffer_in, 2, 3);
+            up_sample[channel] = new resample(filter_32_48, FILTER_32_48_SIZE, max_dwn_buf, 3, 2);
+
             for (int band = 0; band < NUM_BANDS; band++) {
-                filters[channel][band] = new filter(subband_filter[band], BAND_FILT_LEN, e_n[channel], max_buffer_in);
+                filters[channel][band] = new filter(subband_filter[band], BAND_FILT_LEN, e_n_bf_[channel], max_dwn_buf);
                 noiseMangement[channel][band] = new noise_management(user_data[channel].noise_estimation_type, user_data[channel].spectral_type,
                                                  user_data[channel].spectral_subtraction, samp_freq);
                 peakDetect[channel][band] = new peak_detect(samp_freq, user_data[channel].attack[band], user_data[channel].release[band]);
@@ -79,12 +92,10 @@ public:
 
             pd_global_mpo[channel] = new peak_detect(samp_freq,global_mpo_attack,global_mpo_release);
             global_mpo[channel] = new wdrc(1.0,1.0,0.0,user_data[channel].global_mpo);
-            finish[channel] = true;
             thread_mutex[channel] = new rk_sema;
-            data_protection[channel] = new std::mutex;
             rk_sema_init(thread_mutex[channel], 0);
-            input[channel] = new float[max_buffer_in];
-            output[channel] = new float[max_buffer_in];
+            finish_sema[channel] = new rk_sema;
+            rk_sema_init(finish_sema[channel], 0);
             // initialize AFC
             size_t afc_delay_in_samples = static_cast<size_t>(32.0f*user_data[channel].afc_delay);
             afcs_[channel] = new afc(bandlimited_filter,BANDLIMITED_FILTER_SIZE,prefilter,PREFILTER_SIZE,afc_init_filter,AFC_INIT_FILTER_SIZE,
@@ -92,6 +103,7 @@ public:
                                user_data[channel].afc_alpha,user_data[channel].afc_beta,user_data[channel].afc_p,user_data[channel].afc_c,user_data[channel].afc_power_estimate,
                                      afc_delay_in_samples,user_data[channel].afc);
             y_hat_[channel] = new float[max_buffer_in];
+            e_n_lr_[channel] = new float[max_dwn_buf];
             for(size_t j=0;j<max_buffer_in;j++){
                 y_hat_[channel][j] = 0;
             }
@@ -107,6 +119,7 @@ public:
                     std::cerr << "Error calling pthread_setaffinity_np: " << rc << "\n";
                 }
 #endif
+                proc_chan_thread[channel]->detach();
             }
         }
     };
@@ -115,18 +128,17 @@ public:
      * @brief OSP process destructor
      */
     ~osp_process(){
+        delete beamformer_;
         for(int channel = 0; channel < NUM_CHANNEL; channel++){
             if(multithread) {
-                proc_chan_thread[channel]->detach();
                 delete proc_chan_thread[channel];
             }
             delete up_sample[channel];
             delete down_sample[channel];
-            delete e_n[channel];
+            delete[] y_hat_[channel];
+            delete[] e_n_lr_[channel];
+            delete e_n_bf_[channel];
             delete thread_mutex[channel];
-            delete data_protection[channel];
-            delete input[channel];
-            delete output[channel];
             for(int band = 0; band < NUM_BANDS; band++){
                 delete filters[channel][band];
                 delete noiseMangement[channel][band];
@@ -146,28 +158,50 @@ public:
      */
     void process(float** in, float** out, size_t buf_size){
 //        auto start = std::chrono::high_resolution_clock::now();
-        param_mutex_.lock();
         this->buf_size = buf_size;
+
+        for(int channel = 0; channel < NUM_CHANNEL; channel++) {
+            float x_n_data[max_dwn_buf];
+            float file_read[48];
+            f1.rtmha_play(buf_size,file_read,channel);
+            array_multiply_const(file_read, alpha[channel], buf_size);
+            array_multiply_const(in[channel], 1.0f - alpha[channel], buf_size);
+            array_add_array(in[channel], file_read, buf_size);
+            down_sample[channel]->resamp(in[channel], buf_size, x_n_data, &out_size_);
+            for(size_t i=0;i<out_size_;i++){
+                e_n_lr_[channel][i] = x_n_data[i] - y_hat_[channel][i]; // compute e(n)
+            }
+        }
+        float e_n_data[2][max_dwn_buf];
+        /// Beamforming start
+        beamformer_->get_e(e_n_data[0],e_n_data[1],e_n_lr_[0],e_n_lr_[1],out_size_);
+        for(int channel = 0; channel < NUM_CHANNEL; channel++) {
+            e_n_bf_[channel]->set(e_n_data[channel],out_size_);
+        }
+        /// Beamforming end
+        input = in;
+        output = out;
         for(int j = 0; j < NUM_CHANNEL; j++) {
             if(en_ha[j]) {
-                start(j, in[j]);
+                start(j);
             }
             else{
                 array_multiply_const(in[j], gain[j], buf_size);
             }
         }
+        beamformer_->update_bf_taps(out_size_);
         for(int i = 0; i < NUM_CHANNEL; i++){
             if(en_ha[i]) {
-                join(i, out[i]);
+                join(i);
             }
             else{
                 std::memcpy(out[i], in[i], sizeof(float)*buf_size);
             }
+
         }
-        param_mutex_.unlock();
 //        auto elapsed = std::chrono::high_resolution_clock::now() - start;
 //        std::cout << std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count() << std::endl;
-        
+
     };
 
     /**
@@ -176,14 +210,21 @@ public:
      * @see osp_user_data_t
      */
     void set_params(osp_user_data *user_data){
-        param_mutex_.lock();
+        beamformer_->set_params(user_data[0].bf_mu,user_data[0].bf_rho,user_data[0].bf_delta,user_data[0].bf_alpha,
+                                user_data[0].bf_beta,user_data[0].bf_p,user_data[0].bf_c,user_data[0].bf_type);
+        beamformer_->set_bf_params(user_data[0].bf,user_data[0].bf_nc_on_off,user_data[0].bf_amc_on_off,user_data[0].nc_thr,user_data[0].amc_thr,user_data[0].amc_forgetting_factor);
         for(int channel = 0; channel < NUM_CHANNEL; channel++) {
+            alpha[channel] = user_data[channel].alpha;
             gain[channel] = powf(10.0f, user_data[channel].gain / 20.0f);
             en_ha[channel] = user_data[channel].en_ha;
+
             for (int band = 0; band < NUM_BANDS; band++) {
                 noiseMangement[channel][band]->set_param(user_data[channel].noise_estimation_type, user_data[channel].spectral_type, user_data[channel].spectral_subtraction);
+
                 peakDetect[channel][band]->set_param(user_data[channel].attack[band], user_data[channel].release[band]);
+
                 wdrcs[channel][band]->set_param(user_data[channel].g50[band], user_data[channel].g80[band], user_data[channel].knee_low[band], user_data[channel].mpo_band[band]);
+
             }
             // average attack and release time from each band for the global MPO
             float global_mpo_attack = 0;
@@ -194,7 +235,6 @@ public:
             }
             global_mpo_attack = global_mpo_attack / NUM_BANDS;
             global_mpo_release = global_mpo_release / NUM_BANDS;
-
             pd_global_mpo[channel]->set_param(global_mpo_attack,global_mpo_release);
             global_mpo[channel]->set_param(1.0,1.0,0.0,user_data[channel].global_mpo);
             afcs_[channel]->set_params(user_data[channel].afc_mu,user_data[channel].afc_rho,user_data[channel].afc_delta,user_data[channel].afc_alpha,
@@ -206,8 +246,19 @@ public:
                 user_data[channel].afc_reset = 0;
                 afcs_[channel]->reset(afc_init_filter,AFC_INIT_FILTER_SIZE);
             }
+
         }
-        param_mutex_.unlock();
+
+        auto leftUserData = user_data[0];
+        recorder.set_params(leftUserData.record_start,leftUserData.record_stop,leftUserData.record_length,leftUserData.audio_recordfile.c_str());
+        if(!leftUserData.audio_filename.empty()){
+            f1.set_params(leftUserData.audio_filename.c_str(), leftUserData.audio_reset,
+                          leftUserData.audio_repeat, leftUserData.audio_play );
+        }
+        if(!leftUserData.audio_recordfile.empty()){
+
+        }
+
     };
 
     /**
@@ -216,14 +267,19 @@ public:
      * @see osp_user_data_t
      */
     void get_params(osp_user_data *user_data){
-        param_mutex_.lock();
+        beamformer_->get_params(user_data[0].bf_mu,user_data[0].bf_rho,user_data[0].bf_delta,user_data[0].bf_alpha,
+                                user_data[0].bf_beta,user_data[0].bf_p,user_data[0].bf_c,user_data[0].bf_type);
+        beamformer_->get_bf_params(user_data[0].bf,user_data[0].bf_nc_on_off,user_data[0].bf_amc_on_off,user_data[0].nc_thr,user_data[0].amc_thr,user_data[0].amc_forgetting_factor);
         for(int channel = 0; channel < NUM_CHANNEL; channel++) {
+            user_data[channel].alpha = alpha[channel];
             user_data[channel].gain = log10f(gain[channel]) * 20.0f;
             user_data[channel].en_ha = en_ha[channel];
 
             for (int band = 0; band < NUM_BANDS; band++) {
                 noiseMangement[channel][band]->get_param(user_data[channel].noise_estimation_type, user_data[channel].spectral_type, user_data[channel].spectral_subtraction);
+
                 peakDetect[channel][band]->get_param(user_data[channel].attack[band], user_data[channel].release[band]);
+
                 wdrcs[channel][band]->get_param(user_data[channel].g50[band], user_data[channel].g80[band], user_data[channel].knee_low[band], user_data[channel].mpo_band[band]);
             }
             float g50, g80, knee_low;
@@ -235,8 +291,10 @@ public:
             user_data[channel].afc_delay = afc_delay_in_samples/32.0f;
             afcs_[channel]->get_afc_on_off(user_data[channel].afc);
             user_data[channel].afc_reset = 0; // not a state, afc_reset is actually a signal
+            recorder.get_params(user_data[channel].record_length);
+
         }
-        param_mutex_.unlock();
+
     };
 
     /**
@@ -244,48 +302,41 @@ public:
      * @param[in] channel The channel number
      */
     void process_channels(int channel){
-        float x_n_data[max_dwn_buf];
         float sub_data[max_dwn_buf];
         float nm_data[max_dwn_buf];
         float pdb_data[max_dwn_buf];
         float wdrc_data[max_dwn_buf];
         float s_n_data[max_dwn_buf];
-        float e_n_data[max_dwn_buf]; // e(n)
 
-        float *in, *out;
-        size_t out_size;
+        size_t resamp_out_size;
         do{
             memset(s_n_data, 0, sizeof(s_n_data));
             rk_sema_wait(thread_mutex[channel]);
-            data_protection[channel]->lock();
 
-            in = input[channel];
-            out = output[channel];
-            down_sample[channel]->resamp(in, buf_size, x_n_data, &out_size);
-            for(size_t i=0;i<out_size;i++){
-                e_n_data[i] = x_n_data[i] - y_hat_[channel][i]; // compute e(n)
-            }
-            e_n[channel]->set(e_n_data, out_size);
             for (int j = 0; j < NUM_BANDS; j++) {
-                filters[channel][j]->cirfir(sub_data, out_size);
-                noiseMangement[channel][j]->speech_enhancement(sub_data, out_size, nm_data);
-                peakDetect[channel][j]->get_spl(nm_data, out_size, pdb_data);
-                wdrcs[channel][j]->process(nm_data, pdb_data, out_size, wdrc_data);
-                array_add_array(s_n_data, wdrc_data, out_size);
+                filters[channel][j]->cirfir(sub_data, out_size_);
+                noiseMangement[channel][j]->speech_enhancement(sub_data, out_size_, nm_data);
+                peakDetect[channel][j]->get_spl(nm_data, out_size_, pdb_data);
+                wdrcs[channel][j]->process(nm_data, pdb_data, out_size_, wdrc_data);
+                array_add_array(s_n_data, wdrc_data, out_size_);
             }
+
+	    //e_n_bf_[channel]->get(s_n_data,out_size_);
             /// Gain
-            array_multiply_const(s_n_data, gain[channel], out_size);
+            array_multiply_const(s_n_data, gain[channel], out_size_);
             /// global MPO
-            pd_global_mpo[channel]->get_spl(s_n_data,out_size,pdb_data);
-            global_mpo[channel]->process(s_n_data,pdb_data,out_size,s_n_data);
+            pd_global_mpo[channel]->get_spl(s_n_data,out_size_,pdb_data);
+            global_mpo[channel]->process(s_n_data,pdb_data,out_size_,s_n_data);
             /// AFC begin
             // x(n) is x_n_data, s(n) is s_n_data, out_size for their size
-            afcs_[channel]->get_y_hat(y_hat_[channel],e_n_data,s_n_data,out_size);
+            afcs_[channel]->get_y_hat(y_hat_[channel],e_n_lr_[channel],s_n_data,out_size_);
             /// AFC end
-            up_sample[channel]->resamp(s_n_data, out_size, out, &out_size);
-            finish[channel] = true;
+            up_sample[channel]->resamp(s_n_data, out_size_, output[channel], &resamp_out_size);
+            recorder.record_before(buf_size, input[channel], channel);
+            recorder.rtmha_record(buf_size, input[channel], channel);
+            recorder.record_after(buf_size, input[channel], channel);
+            rk_sema_post(finish_sema[channel]);
 
-            data_protection[channel]->unlock();
         }while(multithread);
 
 
@@ -296,11 +347,7 @@ public:
      * @param[in] channel The channel number
      * @param[in] in The input signal for this channel
      */
-    void start(int channel, float *in){
-        data_protection[channel]->lock();
-        finish[channel] = false;
-        std::memcpy(input[channel], in, sizeof(float)*buf_size);
-        data_protection[channel]->unlock();
+    void start(int channel){
         rk_sema_post(thread_mutex[channel]);
         if(!multithread){
             this->process_channels(channel);
@@ -312,41 +359,38 @@ public:
      * @param[in] channel The channel number
      * @param[out] out The output signal for this channel
      */
-    void join(int channel, float *out){
-        while(true) {
-            data_protection[channel]->lock();
-            if (finish[channel]) {
-                std::memcpy(out, output[channel], sizeof(float)*buf_size);
-                data_protection[channel]->unlock();
-                return;
-            }
-            data_protection[channel]->unlock();
-        }
+    void join(int channel){
+        rk_sema_wait(finish_sema[channel]);
     }
 
 private:
-    float *input[NUM_CHANNEL], *output[NUM_CHANNEL];
-    bool finish[NUM_CHANNEL];
+    float ** volatile input, ** volatile output;
+    volatile bool finish[NUM_CHANNEL];
     size_t buf_size;
-    rk_sema *thread_mutex[NUM_CHANNEL];
-    std::mutex *data_protection[NUM_CHANNEL];
+    rk_sema *thread_mutex[NUM_CHANNEL], *finish_sema[NUM_CHANNEL];
     std::thread *proc_chan_thread[NUM_CHANNEL];
     bool multithread;
-    std::mutex param_mutex_;
     float gain[NUM_CHANNEL];
     int en_ha[NUM_CHANNEL];
     resample* up_sample[NUM_CHANNEL];
     resample* down_sample[NUM_CHANNEL];
-    circular_buffer *e_n[NUM_CHANNEL];
     filter *filters[NUM_CHANNEL][NUM_BANDS];
     noise_management *noiseMangement[NUM_CHANNEL][NUM_BANDS];
     peak_detect *peakDetect[NUM_CHANNEL][NUM_BANDS];
     wdrc *wdrcs[NUM_CHANNEL][NUM_BANDS];
     size_t max_dwn_buf;
     afc* afcs_[NUM_CHANNEL];
+    beamformer* beamformer_;
+    size_t out_size_;
+    float* e_n_lr_[NUM_CHANNEL];
+    circular_buffer* e_n_bf_[NUM_CHANNEL];
     float* y_hat_[NUM_CHANNEL];
     wdrc *global_mpo[NUM_CHANNEL];
     peak_detect *pd_global_mpo[NUM_CHANNEL];
+    float alpha[NUM_CHANNEL];
+    file_play f1;
+    file_record recorder;
+
 };
 
 #endif //OSP_CLION_CXX_OSP_PROCESS_H

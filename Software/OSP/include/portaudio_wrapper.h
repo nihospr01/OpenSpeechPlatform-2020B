@@ -3,7 +3,10 @@
 
 #include <portaudio.h>
 #include <cstdlib>
+#ifdef __linux__
+#include <pa_linux_alsa.h>
 
+#endif
 #define NUM_CHANNEL 2
 
 class portaudio_wrapper{
@@ -60,8 +63,8 @@ static int patestCallback( const void *inputBuffer, void *outputBuffer,
             output[2*i + j] = out[j][i];
     }
     for(int i = 0; i < NUM_CHANNEL; i++){
-        delete in[i];
-        delete out[i];
+        delete[] in[i];
+        delete[] out[i];
     }
     delete[] in;
     delete[] out;

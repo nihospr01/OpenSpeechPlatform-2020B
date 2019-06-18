@@ -9,7 +9,19 @@
     <script type="text/javascript" src="{{ asset('js/popper.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js')}}"></script>
 
+
     <title>Goldilocks Admin</title>
+    <style>
+    .breadcrumb-item{
+      font-size: 24;
+    }
+    .breadcrumb{
+      font-size: 24;
+    }
+
+
+
+    </style>
 </head>
 
 

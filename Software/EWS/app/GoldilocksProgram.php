@@ -25,9 +25,10 @@ class GoldilocksProgram extends Model
             'g50' => $data->g50,
             'g80' => $data->g80,
             'knee_low' => $data->knee_low,
-            'knee_high' => $data->mpo_limit,
+            'mpo_band' => $data->mpo_band,
             'attack' => $data->attack,
-            'release' => $data->release
+            'release' => $data->release,
+            'gain' => $data->gain,
         ];
         return $formatted_data;
     }

@@ -6,10 +6,11 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "apigen/apigen": "dev-master",
+        "doctrine/dbal": "^2.9",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
-        "apigen/apigen": "dev-master",
         "roave/better-reflection": "dev-master"
     },
     "require-dev": {

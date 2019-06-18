@@ -2,7 +2,7 @@
 #define OSP_CIRCULAR_BUFFER_H
 
 #include <cstddef>
-#include <mutex>
+#include <atomic>
 
 /**
  *  @brief Circular Buffer Class
@@ -49,9 +49,8 @@ public:
      */
     size_t size() const;
 
-    std::mutex mutex_;
     float* buf_;
-    size_t head_;
+    std::atomic<size_t> head_;
     size_t size_;
     size_t mask_;
     float reset_;

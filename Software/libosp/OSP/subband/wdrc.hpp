@@ -7,6 +7,8 @@
 
 #include <memory>
 #include <cmath>
+#include <atomic>
+#include <OSP/ReleasePool/ReleasePool.hpp>
 
 /**
  * @brief Wide Dynamic Range Compression (WDRC) Class
@@ -62,12 +64,21 @@ public:
     void process(float* input, float* pdb, size_t in_len, float* output);
 
 private:
-    float mpo_limit_;
-    float gain50_;
-    float gain80_;
-    float slope_;
-    float glow_;
-    float knee_low_;
+
+    struct wdrc_param_t {
+
+        float mpo_limit_;
+        float gain50_;
+        float gain80_;
+        float slope_;
+        float glow_;
+        float knee_low_;
+
+    };
+
+    std::shared_ptr<wdrc_param_t> currentParam;
+    ReleasePool releasePool;
+
 };
 
 #endif //OSP_WDRC_H
