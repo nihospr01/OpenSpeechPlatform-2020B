@@ -1,0 +1,67 @@
+Synopsys HDL Compiler, version comp2017q2p1, Build 190R, built Aug  4 2017
+@N|Running in 64-bit mode
+Copyright (C) 1994-2017 Synopsys, Inc. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
+
+Synopsys VHDL Compiler, version comp2017q2p1, Build 190R, built Aug  4 2017
+@N|Running in 64-bit mode
+Copyright (C) 1994-2017 Synopsys, Inc. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
+
+Running on host :sys76-desktop
+@N: CD720 :"/usr/local/diamond/3.10_x64/synpbase/lib/vhd/std.vhd":123:18:123:21|Setting time resolution to ps
+@N:"/home/hari/Documents/osp-wearable-fpga/src/tl_djb_field.vhd":5:7:5:18|Top entity is set to tl_djb_field.
+Options changed - recompiling
+VHDL syntax check successful!
+Options changed - recompiling
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/tl_djb_field.vhd":5:7:5:18|Synthesizing work.tl_djb_field.a.
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/djb_core.vhd":5:7:5:14|Synthesizing work.djb_core.a.
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/i2s_dio_2.vhd":11:7:11:15|Synthesizing work.i2s_dio_2.a.
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/sr8_falling.vhd":12:7:12:17|Synthesizing work.sr8_falling.a.
+Post processing for work.sr8_falling.a
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/r8_rising.vhd":6:7:6:15|Synthesizing work.r8_rising.a.
+Post processing for work.r8_rising.a
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/sr8_rising.vhd":12:7:12:16|Synthesizing work.sr8_rising.a.
+Post processing for work.sr8_rising.a
+Post processing for work.i2s_dio_2.a
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/djb_sequencer.vhd":5:7:5:19|Synthesizing work.djb_sequencer.a.
+Post processing for work.djb_sequencer.a
+@W: CL169 :"/home/hari/Documents/osp-wearable-fpga/src/djb_sequencer.vhd":31:2:31:3|Pruning unused register lvds_io_cl_6. Make sure that there are no unused intermediate registers.
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/djb_clock_sync.vhd":7:7:7:20|Synthesizing work.djb_clock_sync.a.
+Post processing for work.djb_clock_sync.a
+Post processing for work.djb_core.a
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/pll_4.vhd":14:7:14:11|Synthesizing work.pll_4.structure.
+@N: CD630 :"/usr/local/diamond/3.10_x64/cae_library/synthesis/vhdl/machxo3l.vhd":2175:10:2175:16|Synthesizing work.ehxpllj.syn_black_box.
+Post processing for work.ehxpllj.syn_black_box
+@N: CD630 :"/usr/local/diamond/3.10_x64/cae_library/synthesis/vhdl/machxo3l.vhd":1490:10:1490:12|Synthesizing work.vlo.syn_black_box.
+Post processing for work.vlo.syn_black_box
+Post processing for work.pll_4.structure
+Post processing for work.tl_djb_field.a
+
+At c_vhdl Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 72MB peak: 73MB)
+
+Process took 0h:00m:01s realtime, 0h:00m:01s cputime
+
+Process completed successfully.
+# Tue Mar 12 11:45:21 2019
+
+###########################################################]
+Synopsys Netlist Linker, version comp2017q2p1, Build 190R, built Aug  4 2017
+@N|Running in 64-bit mode
+
+At syn_nfilter Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 67MB peak: 68MB)
+
+Process took 0h:00m:01s realtime, 0h:00m:01s cputime
+
+Process completed successfully.
+# Tue Mar 12 11:45:21 2019
+
+###########################################################]
+@END
+
+At c_hdl Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 3MB peak: 4MB)
+
+Process took 0h:00m:01s realtime, 0h:00m:01s cputime
+
+Process completed successfully.
+# Tue Mar 12 11:45:21 2019
+
+###########################################################]

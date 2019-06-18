@@ -1,0 +1,1 @@
+-link    -encrypt        -top tl_djb_field -osyn /home/hari/Documents/osp-wearable-fpga/djb_field/impl1/synwork/djb_field_impl1_comp.srs /home/hari/Documents/osp-wearable-fpga/djb_field/impl1/synwork/layer0.srs   

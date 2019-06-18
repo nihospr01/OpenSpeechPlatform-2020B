@@ -1,0 +1,93 @@
+#--  Synopsys, Inc.
+#--  Version M-2017.03L-SP1-1
+#--  Project file /home/hari/Documents/osp-wearable-fpga/car_field_v6_fmexg/impl1/scratchproject.prs
+
+#project files
+add_file -vhdl -lib work "/usr/local/diamond/3.10_x64/cae_library/synthesis/vhdl/machxo3l.vhd"
+add_file -vhdl -lib work "/home/hari/Documents/osp-wearable-fpga/src/r8_rising.vhd"
+add_file -vhdl -lib work "/home/hari/Documents/osp-wearable-fpga/src/r8_falling.vhd"
+add_file -vhdl -lib work "/home/hari/Documents/osp-wearable-fpga/src/sr8_falling.vhd"
+add_file -vhdl -lib work "/home/hari/Documents/osp-wearable-fpga/src/sr8_rising.vhd"
+add_file -vhdl -lib work "/home/hari/Documents/osp-wearable-fpga/src/car_clock_gen.vhd"
+add_file -vhdl -lib work "/home/hari/Documents/osp-wearable-fpga/src/car_sequencer.vhd"
+add_file -vhdl -lib work "/home/hari/Documents/osp-wearable-fpga/src/pll_4.vhd"
+add_file -vhdl -lib work "/home/hari/Documents/osp-wearable-fpga/src/pll_8.vhd"
+add_file -vhdl -lib work "/home/hari/Documents/osp-wearable-fpga/src/pll_16.vhd"
+add_file -vhdl -lib work "/home/hari/Documents/osp-wearable-fpga/src/pll_4_usb.vhd"
+add_file -vhdl -lib work "/home/hari/Documents/osp-wearable-fpga/src/i2s_dio_2.vhd"
+add_file -vhdl -lib work "/home/hari/Documents/osp-wearable-fpga/src/car_core.vhd"
+add_file -vhdl -lib work "/home/hari/Documents/osp-wearable-fpga/src/fmexg_fifo_8k_1025.vhd"
+add_file -vhdl -lib work "/home/hari/Documents/osp-wearable-fpga/src/fmexg_core.vhd"
+add_file -vhdl -lib work "/home/hari/Documents/osp-wearable-fpga/src/tl_car_field_withfmexg.vhd"
+
+
+
+#implementation: "impl1"
+impl -add /home/hari/Documents/osp-wearable-fpga/car_field_v6_fmexg/impl1 -type fpga
+
+#
+#implementation attributes
+
+set_option -vlog_std v2001
+set_option -project_relative_includes 1
+set_option -include_path {/home/hari/Documents/osp-wearable-fpga/car_field_v6_fmexg/impl1/}
+
+#device options
+set_option -technology MACHXO3LF
+set_option -part LCMXO3LF_6900C
+set_option -package BG256C
+set_option -speed_grade -5
+set_option -part_companion ""
+
+#compilation/mapping options
+set_option -top_module "tl_car_field"
+
+# hdl_compiler_options
+set_option -distributed_compile 0
+
+# mapper_without_write_options
+set_option -frequency 1
+set_option -srs_instrumentation 1
+
+# mapper_options
+set_option -write_verilog 0
+set_option -write_vhdl 0
+
+# Lattice XP
+set_option -maxfan 1000
+set_option -disable_io_insertion 0
+set_option -retiming 0
+set_option -pipe 1
+set_option -forcegsr false
+set_option -fix_gated_and_generated_clocks 1
+set_option -rw_check_on_ram 1
+set_option -update_models_cp 0
+set_option -syn_edif_array_rename 1
+set_option -Write_declared_clocks_only 1
+
+# NFilter
+set_option -no_sequential_opt 0
+
+# sequential_optimization_options
+set_option -symbolic_fsm_compiler 1
+
+# Compiler Options
+set_option -compiler_compatible 0
+set_option -resource_sharing 1
+set_option -multi_file_compilation_unit 1
+
+# Compiler Options
+set_option -auto_infer_blackbox 0
+
+# Compiler Options
+set_option -vhdl2008 1
+
+#automatic place and route (vendor) options
+set_option -write_apr_constraint 1
+
+#set result format/file last
+project -result_file "/home/hari/Documents/osp-wearable-fpga/car_field_v6_fmexg/impl1/OWF_car_field_v6_fmexg_impl1.edi"
+
+#set log file 
+set_option log_file "/home/hari/Documents/osp-wearable-fpga/car_field_v6_fmexg/impl1/OWF_car_field_v6_fmexg_impl1.srf" 
+impl -active "impl1"

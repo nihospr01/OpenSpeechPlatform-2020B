@@ -1,0 +1,2 @@
+@W: MT246 :"/home/hari/Documents/osp-wearable-fpga/src/pll_4.vhd":105:4:105:12|Blackbox EHXPLLJ is missing a user supplied timing model. This may have a negative effect on timing analysis and optimizations (Quality of Results) 
+@W: MT420 |Found inferred clock pll_4|CLKOP_inferred_clock with period 1000.00ns. Please declare a user-defined clock on object "n:e_pll_4.CLKOP"

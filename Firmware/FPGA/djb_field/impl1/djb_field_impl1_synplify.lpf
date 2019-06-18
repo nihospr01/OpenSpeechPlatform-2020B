@@ -1,0 +1,21 @@
+#
+# Logical Preferences generated for Lattice by Synplify maplat, Build 1796R.
+#
+
+# Period Constraints 
+#FREQUENCY NET "e_pll_4/hr_clk_0" 1.0 MHz;
+
+
+# Output Constraints 
+
+# Input Constraints 
+
+# Point-to-point Delay Constraints 
+
+
+
+# Block Path Constraints 
+
+BLOCK ASYNCPATHS;
+
+# End of generated Logical Preferences.

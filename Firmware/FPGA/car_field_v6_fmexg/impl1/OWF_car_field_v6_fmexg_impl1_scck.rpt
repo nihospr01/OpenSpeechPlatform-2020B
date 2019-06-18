@@ -1,0 +1,35 @@
+# Synopsys Constraint Checker(syntax only), version maplat, Build 1796R, built Aug  4 2017
+# Copyright (C) 1994-2017 Synopsys, Inc. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
+
+# Written on Wed May 15 12:40:56 2019
+
+
+##### DESIGN INFO #######################################################
+
+Top View:                "tl_car_field"
+Constraint File(s):      (none)
+
+#Run constraint checker to find more issues with constraints.
+#########################################################################
+
+
+
+No issues found in constraint syntax.
+
+
+
+Clock Summary
+*************
+
+          Start                                        Requested     Requested     Clock                                         Clock                   Clock
+Level     Clock                                        Frequency     Period        Type                                          Group                   Load 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+0 -       System                                       1.0 MHz       1000.000      system                                        system_clkgroup         0    
+                                                                                                                                                              
+0 -       pll_4|CLKOP_inferred_clock                   1.0 MHz       1000.000      inferred                                      Inferred_clkgroup_0     14   
+1 .         car_clock_gen|divider_derived_clock[1]     1.0 MHz       1000.000      derived (from pll_4|CLKOP_inferred_clock)     Inferred_clkgroup_0     181  
+                                                                                                                                                              
+0 -       tl_car_field|spi4_clk                        1.0 MHz       1000.000      inferred                                      Inferred_clkgroup_2     42   
+                                                                                                                                                              
+0 -       tl_car_field|ext_clk_in                      1.0 MHz       1000.000      inferred                                      Inferred_clkgroup_1     4    
+==============================================================================================================================================================

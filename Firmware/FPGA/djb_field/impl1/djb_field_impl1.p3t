@@ -1,0 +1,5 @@
+-rem
+-distrce
+-log "djb_field_impl1.log"
+-o "djb_field_impl1.csv"
+-pr "djb_field_impl1.prf"

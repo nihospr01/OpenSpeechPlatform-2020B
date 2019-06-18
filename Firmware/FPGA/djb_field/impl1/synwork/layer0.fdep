@@ -1,0 +1,86 @@
+#defaultlanguage:vhdl
+#OPTIONS:"|-layerid|0|-orig_srs|/home/hari/Documents/osp-wearable-fpga/djb_field/impl1/synwork/djb_field_impl1_comp.srs|-top|tl_djb_field|-prodtype|synplify_pro|-dspmac|-fixsmult|-infer_seqShift|-nram|-sdff_counter|-divnmod|-nostructver|-encrypt|-pro|-lite|-ui|-fid2|-ram|-sharing|on|-ll|2000|-autosm|-ignore_undefined_lib|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work"
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/linux_a_64/c_vhdl":1501863388
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd/location.map":1528222270
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd/std.vhd":1528222270
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd/snps_haps_pkg.vhd":1528222271
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd/std1164.vhd":1528222271
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd/numeric.vhd":1528222270
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd/umr_capim.vhd":1528222270
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd/arith.vhd":1528222270
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd/unsigned.vhd":1528222271
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd/hyperents.vhd":1528222270
+#CUR:"/usr/local/diamond/3.10_x64/cae_library/synthesis/vhdl/machxo3l.vhd":1528222265
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/r8_rising.vhd":1531420738
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/r8_falling.vhd":1531420738
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/sr8_rising.vhd":1531420738
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/sr8_falling.vhd":1531420738
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/djb_clock_sync.vhd":1535659391
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/djb_sequencer.vhd":1531420738
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/pll_4.vhd":1531420738
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/i2s_dio_2.vhd":1538263879
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/djb_core.vhd":1538265525
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/tl_djb_field.vhd":1538956410
+0 "/usr/local/diamond/3.10_x64/cae_library/synthesis/vhdl/machxo3l.vhd" vhdl
+1 "/home/hari/Documents/osp-wearable-fpga/src/r8_rising.vhd" vhdl
+2 "/home/hari/Documents/osp-wearable-fpga/src/r8_falling.vhd" vhdl
+3 "/home/hari/Documents/osp-wearable-fpga/src/sr8_rising.vhd" vhdl
+4 "/home/hari/Documents/osp-wearable-fpga/src/sr8_falling.vhd" vhdl
+5 "/home/hari/Documents/osp-wearable-fpga/src/djb_clock_sync.vhd" vhdl
+6 "/home/hari/Documents/osp-wearable-fpga/src/djb_sequencer.vhd" vhdl
+7 "/home/hari/Documents/osp-wearable-fpga/src/pll_4.vhd" vhdl
+8 "/home/hari/Documents/osp-wearable-fpga/src/i2s_dio_2.vhd" vhdl
+9 "/home/hari/Documents/osp-wearable-fpga/src/djb_core.vhd" vhdl
+10 "/home/hari/Documents/osp-wearable-fpga/src/tl_djb_field.vhd" vhdl
+
+# Dependency Lists (Uses list)
+0 -1
+1 -1
+2 -1
+3 -1
+4 -1
+5 -1
+6 -1
+7 0 
+8 3 1 4 
+9 5 6 8 
+10 7 9 
+
+# Dependency Lists (Users Of)
+0 7 
+1 8 
+2 -1
+3 8 
+4 8 
+5 9 
+6 9 
+7 10 
+8 9 
+9 10 
+10 -1
+
+# Design Unit to File Association
+arch work r8_rising a 1
+module work r8_rising 1
+arch work r8_falling a 2
+module work r8_falling 2
+arch work sr8_rising a 3
+module work sr8_rising 3
+arch work sr8_falling a 4
+module work sr8_falling 4
+arch work djb_clock_sync a 5
+module work djb_clock_sync 5
+arch work djb_sequencer a 6
+module work djb_sequencer 6
+config work structure_con 7
+arch work pll_4 structure 7
+module work pll_4 7
+arch work i2s_dio_2 a 8
+module work i2s_dio_2 8
+arch work djb_core a 9
+module work djb_core 9
+arch work tl_djb_field a 10
+module work tl_djb_field 10
+
+
+# Configuration files used

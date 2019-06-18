@@ -1,0 +1,25 @@
+PAR: Place And Route Diamond (64-bit) 3.10.0.111.2.
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2017 Lattice Semiconductor Corporation,  All rights reserved.
+Tue Mar 12 11:45:24 2019
+
+/usr/local/diamond/3.10_x64/ispfpga/bin/lin64/par -f djb_field_impl1.p2t
+djb_field_impl1_map.ncd djb_field_impl1.dir djb_field_impl1.prf -gui -msgset
+/home/hari/Documents/osp-wearable-fpga/djb_field/promote.xml
+
+
+Preference file: djb_field_impl1.prf.
+
+Level/       Number       Worst        Timing       Worst        Timing       Run          NCD
+Cost [ncd]   Unrouted     Slack        Score        Slack(hold)  Score(hold)  Time         Status
+----------   --------     -----        ------       -----------  -----------  ----         ------
+5_1   *      0            13.084       0            0.338        0            03           Success
+
+* : Design saved.
+
+Total (real) run time for 1-seed: 3 secs 
+
+par done!

@@ -1,0 +1,4 @@
+@N: MF248 |Running in 64-bit mode.
+@N: MF666 |Clock conversion enabled. (Command "set_option -fix_gated_and_generated_clocks 1" in the project file.)
+@N: BN362 :"/home/hari/Documents/osp-wearable-fpga/src/djb_clock_sync.vhd":41:2:41:3|Removing sequential instance sync_early (in view: work.djb_clock_sync(a)) of type view:PrimLib.dff(prim) because it does not drive other instances.
+@N: BN362 :"/home/hari/Documents/osp-wearable-fpga/src/djb_clock_sync.vhd":41:2:41:3|Removing sequential instance sync_late (in view: work.djb_clock_sync(a)) of type view:PrimLib.dff(prim) because it does not drive other instances.

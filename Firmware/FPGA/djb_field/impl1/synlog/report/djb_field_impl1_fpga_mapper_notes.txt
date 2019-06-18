@@ -1,0 +1,9 @@
+@N: MF248 |Running in 64-bit mode.
+@N: MF666 |Clock conversion enabled. (Command "set_option -fix_gated_and_generated_clocks 1" in the project file.)
+@N: MO231 :"/home/hari/Documents/osp-wearable-fpga/src/i2s_dio_2.vhd":71:2:71:3|Found counter in view:work.i2s_dio_2(a) instance lvds_bit_ctr[4:0] 
+@N: FX164 |The option to pack registers in the IOB has not been specified. Please set syn_useioff attribute.  
+@N: MT611 :|Automatically generated clock djb_clock_sync|divider_derived_clock[1] is not used and is being removed
+@N: FX1056 |Writing EDF file: /home/hari/Documents/osp-wearable-fpga/djb_field/impl1/djb_field_impl1.edi
+@N: BW106 |Synplicity Constraint File capacitance units using default value of 1pF 
+@N: MT320 |This timing report is an estimate of place and route data. For final timing results, use the FPGA vendor place and route report.
+@N: MT322 |Clock constraints include only register-to-register paths associated with each individual clock.

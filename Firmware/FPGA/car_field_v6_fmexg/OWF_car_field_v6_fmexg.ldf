@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BaliProject version="3.2" title="OWF_car_field_v6_fmexg" device="LCMXO3LF-6900C-5BG256C" default_implementation="impl1">
+    <Options>
+        <Option name="HDL type" value="VHDL"/>
+    </Options>
+    <Implementation title="impl1" dir="impl1" description="impl1" synthesis="synplify" default_strategy="Strategy1">
+        <Options def_top="tl_car_field" top="tl_car_field"/>
+        <Source name="../src/r8_rising.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../src/r8_falling.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../src/sr8_falling.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../src/sr8_rising.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../src/pll_4.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../src/pll_8.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../src/pll_16.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../src/pll_4_usb.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../src/i2s_dio_2.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../src/car_clock_gen.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../src/car_sequencer.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../src/car_core.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../src/fmexg_fifo_8k_1025.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../src/fmexg_fifo_8k_2049.vhd" type="VHDL" type_short="VHDL" excluded="TRUE">
+            <Options/>
+        </Source>
+        <Source name="../src/fmexg_core.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../src/tl_car_field_withfmexg.vhd" type="VHDL" type_short="VHDL">
+            <Options top_module="tl_car_field"/>
+        </Source>
+        <Source name="OWF_car_field_v6_fmexg.lpf" type="Logic Preference" type_short="LPF">
+            <Options/>
+        </Source>
+        <Source name="impl1/impl1.xcf" type="Programming Project File" type_short="Programming">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Strategy name="Strategy1" file="OWF_car_field_v6_fmexg1.sty"/>
+</BaliProject>

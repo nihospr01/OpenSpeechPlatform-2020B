@@ -1,0 +1,366 @@
+----------------------------------------------------------------------
+Report for cell tl_car_field.a
+
+Register bits: 216 of 54912 (0%)
+PIC Latch:       0
+I/O cells:       43
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                                 BB        2       100.0
+                              CCU2D        8       100.0
+                            EHXPLLJ        1       100.0
+                            FD1P3AX      191       100.0
+                            FD1S3AX       14       100.0
+                            FD1S3DX        3       100.0
+                                GSR        1       100.0
+                                 IB       25       100.0
+                           IFS1P3DX        3       100.0
+                                INV        8       100.0
+                                 OB       16       100.0
+                           OFS1P3DX        5       100.0
+                           ORCALUT4      171       100.0
+                                PUR        1       100.0
+                                VHI       24       100.0
+                                VLO       24       100.0
+                            fifo8kb       12       100.0
+SUB MODULES 
+                      car_clock_gen        1       100.0
+                         car_core_0        1       100.0
+                         car_core_1        1       100.0
+                    car_sequencer_0        1       100.0
+                    car_sequencer_1        1       100.0
+                         fmexg_core        1       100.0
+                 fmexg_fifo_8k_1025        1       100.0
+                        i2s_dio_2_0        1       100.0
+                        i2s_dio_2_1        1       100.0
+                              pll_4        1       100.0
+                          r8_rising        1       100.0
+                        r8_rising_0        1       100.0
+                        r8_rising_1        1       100.0
+                        r8_rising_2        1       100.0
+                        r8_rising_3        1       100.0
+                        r8_rising_4        1       100.0
+                        sr8_falling        1       100.0
+                      sr8_falling_0        1       100.0
+                         sr8_rising        1       100.0
+                       sr8_rising_0        1       100.0
+                     sr8_rising_0_0        1       100.0
+                     sr8_rising_0_1        1       100.0
+                       sr8_rising_1        1       100.0
+                            
+                         TOTAL           532           
+----------------------------------------------------------------------
+Report for cell car_core_0.netlist
+  Original Cell name car_core
+     Instance path:  r_car_core
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX       56        29.3
+                            FD1S3AX        1         7.1
+                           ORCALUT4       55        32.2
+                                VHI        8        33.3
+                                VLO        8        33.3
+SUB MODULES 
+                    car_sequencer_1        1       100.0
+                        i2s_dio_2_1        1       100.0
+                        r8_rising_3        1       100.0
+                        r8_rising_4        1       100.0
+                      sr8_falling_0        1       100.0
+                     sr8_rising_0_1        1       100.0
+                       sr8_rising_1        1       100.0
+                            
+                         TOTAL           135           
+----------------------------------------------------------------------
+Report for cell car_sequencer_1.netlist
+  Original Cell name car_sequencer
+     Instance path:  r_car_core.e_car_sequencer
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX       17         8.9
+                            FD1S3AX        1         7.1
+                           ORCALUT4       36        21.1
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL            56           
+----------------------------------------------------------------------
+Report for cell i2s_dio_2_1.netlist
+  Original Cell name i2s_dio_2
+     Instance path:  r_car_core.e_i2s_dio
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX       39        20.4
+                           ORCALUT4       19        11.1
+                                VHI        6        25.0
+                                VLO        6        25.0
+SUB MODULES 
+                        r8_rising_3        1       100.0
+                        r8_rising_4        1       100.0
+                      sr8_falling_0        1       100.0
+                     sr8_rising_0_1        1       100.0
+                       sr8_rising_1        1       100.0
+                            
+                         TOTAL            75           
+----------------------------------------------------------------------
+Report for cell sr8_falling_0.netlist
+  Original Cell name sr8_falling
+     Instance path:  r_car_core.e_i2s_dio.in_lvds_sr
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX        8         4.2
+                           ORCALUT4        9         5.3
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL            19           
+----------------------------------------------------------------------
+Report for cell sr8_rising_1.netlist
+  Original Cell name sr8_rising
+     Instance path:  r_car_core.e_i2s_dio.out_i2s_sr
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX        7         3.7
+                           ORCALUT4        8         4.7
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL            17           
+----------------------------------------------------------------------
+Report for cell r8_rising_4.netlist
+  Original Cell name r8_rising
+     Instance path:  r_car_core.e_i2s_dio.out_reg_2
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX        8         4.2
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL            10           
+----------------------------------------------------------------------
+Report for cell r8_rising_3.netlist
+  Original Cell name r8_rising
+     Instance path:  r_car_core.e_i2s_dio.out_reg_1
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX        8         4.2
+                           ORCALUT4        1         0.6
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL            11           
+----------------------------------------------------------------------
+Report for cell sr8_rising_0_1.netlist
+  Original Cell name sr8_rising_0
+     Instance path:  r_car_core.e_i2s_dio.out_lvds_sr
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX        8         4.2
+                           ORCALUT4        1         0.6
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL            11           
+----------------------------------------------------------------------
+Report for cell car_core_1.netlist
+  Original Cell name car_core
+     Instance path:  l_car_core
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                              CCU2D        3        37.5
+                            FD1P3AX       90        47.1
+                            FD1S3AX        1         7.1
+                           ORCALUT4       62        36.3
+                                VHI       11        45.8
+                                VLO       11        45.8
+SUB MODULES 
+                    car_sequencer_0        1       100.0
+                        i2s_dio_2_0        1       100.0
+                          r8_rising        1       100.0
+                        r8_rising_0        1       100.0
+                        r8_rising_1        1       100.0
+                        r8_rising_2        1       100.0
+                        sr8_falling        1       100.0
+                         sr8_rising        1       100.0
+                       sr8_rising_0        1       100.0
+                     sr8_rising_0_0        1       100.0
+                            
+                         TOTAL           188           
+----------------------------------------------------------------------
+Report for cell car_sequencer_0.netlist
+  Original Cell name car_sequencer
+     Instance path:  l_car_core.e_car_sequencer
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX       17         8.9
+                            FD1S3AX        1         7.1
+                           ORCALUT4       37        21.6
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL            57           
+----------------------------------------------------------------------
+Report for cell i2s_dio_2_0.netlist
+  Original Cell name i2s_dio_2
+     Instance path:  l_car_core.e_i2s_dio
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                              CCU2D        3        37.5
+                            FD1P3AX       72        37.7
+                           ORCALUT4       25        14.6
+                                VHI        9        37.5
+                                VLO        9        37.5
+SUB MODULES 
+                          r8_rising        1       100.0
+                        r8_rising_0        1       100.0
+                        r8_rising_1        1       100.0
+                        r8_rising_2        1       100.0
+                        sr8_falling        1       100.0
+                         sr8_rising        1       100.0
+                       sr8_rising_0        1       100.0
+                     sr8_rising_0_0        1       100.0
+                            
+                         TOTAL           126           
+----------------------------------------------------------------------
+Report for cell sr8_falling.netlist
+  Original Cell name sr8_falling
+     Instance path:  l_car_core.e_i2s_dio.in_lvds_sr
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX        8         4.2
+                           ORCALUT4        9         5.3
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL            19           
+----------------------------------------------------------------------
+Report for cell r8_rising_2.netlist
+  Original Cell name r8_rising
+     Instance path:  l_car_core.e_i2s_dio.in_reg_2
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX        8         4.2
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL            10           
+----------------------------------------------------------------------
+Report for cell r8_rising_1.netlist
+  Original Cell name r8_rising
+     Instance path:  l_car_core.e_i2s_dio.in_reg_1
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX        8         4.2
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL            10           
+----------------------------------------------------------------------
+Report for cell sr8_rising_0_0.netlist
+  Original Cell name sr8_rising_0
+     Instance path:  l_car_core.e_i2s_dio.in_i2s_sr
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX        7         3.7
+                           ORCALUT4        1         0.6
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL            10           
+----------------------------------------------------------------------
+Report for cell sr8_rising.netlist
+  Original Cell name sr8_rising
+     Instance path:  l_car_core.e_i2s_dio.out_i2s_sr
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX        7         3.7
+                           ORCALUT4        9         5.3
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL            18           
+----------------------------------------------------------------------
+Report for cell r8_rising_0.netlist
+  Original Cell name r8_rising
+     Instance path:  l_car_core.e_i2s_dio.out_reg_2
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX        8         4.2
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL            10           
+----------------------------------------------------------------------
+Report for cell r8_rising.netlist
+  Original Cell name r8_rising
+     Instance path:  l_car_core.e_i2s_dio.out_reg_1
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX        8         4.2
+                           ORCALUT4        1         0.6
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL            11           
+----------------------------------------------------------------------
+Report for cell sr8_rising_0.netlist
+  Original Cell name sr8_rising
+     Instance path:  l_car_core.e_i2s_dio.out_lvds_sr
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX        8         4.2
+                           ORCALUT4        1         0.6
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL            11           
+----------------------------------------------------------------------
+Report for cell fmexg_core.netlist
+     Instance path:  e_fmexg_core
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            FD1P3AX       36        18.8
+                            FD1S3AX        6        42.9
+                            FD1S3DX        3       100.0
+                                INV        4        50.0
+                           ORCALUT4       48        28.1
+                                VHI        2         8.3
+                                VLO        2         8.3
+                            fifo8kb       12       100.0
+SUB MODULES 
+                 fmexg_fifo_8k_1025        1       100.0
+                            
+                         TOTAL           114           
+----------------------------------------------------------------------
+Report for cell fmexg_fifo_8k_1025.netlist
+     Instance path:  e_fmexg_core.fifo
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            fifo8kb       12       100.0
+                            
+                         TOTAL            14           
+----------------------------------------------------------------------
+Report for cell car_clock_gen.netlist
+     Instance path:  e_car_clock_gen
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                              CCU2D        5        62.5
+                            FD1P3AX        9         4.7
+                            FD1S3AX        2        14.3
+                                INV        2        25.0
+                           ORCALUT4        3         1.8
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL            23           
+----------------------------------------------------------------------
+Report for cell pll_4.netlist
+     Instance path:  e_pll_4
+                                          Cell usage:
+                               cell       count    Res Usage(%)
+                            EHXPLLJ        1       100.0
+                                VHI        1         4.2
+                                VLO        1         4.2
+                            
+                         TOTAL             3           

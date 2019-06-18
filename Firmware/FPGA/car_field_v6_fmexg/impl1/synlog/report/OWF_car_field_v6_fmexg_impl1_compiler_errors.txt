@@ -1,0 +1,10 @@
+@E: CL219 :"/home/hari/Documents/osp-wearable-fpga/src/fmexg_core.vhd":23:8:23:18|Multiple non-tristate drivers for net spi_bit_ctr(2) in fmexg_core
+@E: CL219 :"/home/hari/Documents/osp-wearable-fpga/src/fmexg_core.vhd":23:8:23:18|Multiple non-tristate drivers for net spi_bit_ctr(1) in fmexg_core
+@E: CL219 :"/home/hari/Documents/osp-wearable-fpga/src/fmexg_core.vhd":23:8:23:18|Multiple non-tristate drivers for net spi_bit_ctr(0) in fmexg_core
+@E: CL229 :"/home/hari/Documents/osp-wearable-fpga/src/fmexg_core.vhd":23:8:23:18|Unresolved tristate drivers for net spi_bit_ctr(0) in fmexg_core
+@E: CL229 :"/home/hari/Documents/osp-wearable-fpga/src/fmexg_core.vhd":23:8:23:18|Unresolved tristate drivers for net spi_bit_ctr(1) in fmexg_core
+@E: CL229 :"/home/hari/Documents/osp-wearable-fpga/src/fmexg_core.vhd":23:8:23:18|Unresolved tristate drivers for net spi_bit_ctr(2) in fmexg_core
+@E: MF420 |Netlist read from file /home/hari/Documents/osp-wearable-fpga/car_field_v6_fmexg/impl1/synwork/layer0.srs failed
+@E: Could not find specified top level tl_car_field (library: work, cell: tl_car_field)Process took 0h:00m:01s realtime, 0h:00m:01s cputime
+@E::Error while linking, aborting.
+

@@ -1,0 +1,26 @@
+@P:  Worst Slack : 993.546
+@P:  pll_4|CLKOP_inferred_clock - Estimated Frequency : 154.9 MHz
+@P:  pll_4|CLKOP_inferred_clock - Requested Frequency : 1.0 MHz
+@P:  pll_4|CLKOP_inferred_clock - Estimated Period : 6.454
+@P:  pll_4|CLKOP_inferred_clock - Requested Period : 1000.000
+@P:  pll_4|CLKOP_inferred_clock - Slack : 993.546
+@P:  System - Estimated Frequency : NA
+@P:  System - Requested Frequency : 1.0 MHz
+@P:  System - Estimated Period : NA
+@P:  System - Requested Period : 1000.000
+@P:  System - Slack : NA
+@P:  Total Area : 67.0
+@P:  Total Area : 0.0
+@P:  Total Area : 0.0
+@P:  Total Area : 0.0
+@P:  Total Area : 0.0
+@P:  Total Area : 0.0
+@P:  Total Area : 0.0
+@P:  Total Area : 0.0
+@P:  Total Area : 0.0
+@P:  Total Area : 0.0
+@P:  Total Area : 0.0
+@P:  Total Area : 0.0
+@P:  Total Area : 0.0
+@P:  Total Area : 0.0
+@P:  CPU Time : 0h:00m:00s

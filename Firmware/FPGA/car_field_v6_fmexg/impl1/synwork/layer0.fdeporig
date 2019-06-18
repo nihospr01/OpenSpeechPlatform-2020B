@@ -1,0 +1,118 @@
+#defaultlanguage:vhdl
+#OPTIONS:"|-layerid|0|-orig_srs|/home/hari/Documents/osp-wearable-fpga/car_field_v6_fmexg/impl1/synwork/OWF_car_field_v6_fmexg_impl1_comp.srs|-top|tl_car_field|-prodtype|synplify_pro|-dspmac|-fixsmult|-infer_seqShift|-nram|-sdff_counter|-divnmod|-nostructver|-encrypt|-pro|-lite|-ui|-fid2|-ram|-sharing|on|-ll|2000|-autosm|-vhdl2008|-ignore_undefined_lib|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work|-lib|work"
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/linux_a_64/c_vhdl":1501863388
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd2008/location.map":1528222271
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd2008/std.vhd":1528222271
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd/snps_haps_pkg.vhd":1528222271
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd2008/std1164.vhd":1528222271
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd2008/std_textio.vhd":1528222271
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd2008/numeric.vhd":1528222271
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd/umr_capim.vhd":1528222270
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd2008/arith.vhd":1528222271
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd2008/unsigned.vhd":1528222271
+#CUR:"/usr/local/diamond/3.10_x64/synpbase/lib/vhd/hyperents.vhd":1528222270
+#CUR:"/usr/local/diamond/3.10_x64/cae_library/synthesis/vhdl/machxo3l.vhd":1528222265
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/r8_rising.vhd":1531420738
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/r8_falling.vhd":1531420738
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/sr8_falling.vhd":1531420738
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/sr8_rising.vhd":1531420738
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/car_clock_gen.vhd":1531420738
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/car_sequencer.vhd":1557949058
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/pll_4.vhd":1531420738
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/pll_8.vhd":1531420738
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/pll_16.vhd":1531420738
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/pll_4_usb.vhd":1531871997
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/i2s_dio_2.vhd":1538263879
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/car_core.vhd":1557949095
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/fmexg_fifo_8k_1025.vhd":1557699813
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/fmexg_core.vhd":1557949224
+#CUR:"/home/hari/Documents/osp-wearable-fpga/src/tl_car_field_withfmexg.vhd":1557948140
+0 "/usr/local/diamond/3.10_x64/cae_library/synthesis/vhdl/machxo3l.vhd" vhdl
+1 "/home/hari/Documents/osp-wearable-fpga/src/r8_rising.vhd" vhdl
+2 "/home/hari/Documents/osp-wearable-fpga/src/r8_falling.vhd" vhdl
+3 "/home/hari/Documents/osp-wearable-fpga/src/sr8_falling.vhd" vhdl
+4 "/home/hari/Documents/osp-wearable-fpga/src/sr8_rising.vhd" vhdl
+5 "/home/hari/Documents/osp-wearable-fpga/src/car_clock_gen.vhd" vhdl
+6 "/home/hari/Documents/osp-wearable-fpga/src/car_sequencer.vhd" vhdl
+7 "/home/hari/Documents/osp-wearable-fpga/src/pll_4.vhd" vhdl
+8 "/home/hari/Documents/osp-wearable-fpga/src/pll_8.vhd" vhdl
+9 "/home/hari/Documents/osp-wearable-fpga/src/pll_16.vhd" vhdl
+10 "/home/hari/Documents/osp-wearable-fpga/src/pll_4_usb.vhd" vhdl
+11 "/home/hari/Documents/osp-wearable-fpga/src/i2s_dio_2.vhd" vhdl
+12 "/home/hari/Documents/osp-wearable-fpga/src/car_core.vhd" vhdl
+13 "/home/hari/Documents/osp-wearable-fpga/src/fmexg_fifo_8k_1025.vhd" vhdl
+14 "/home/hari/Documents/osp-wearable-fpga/src/fmexg_core.vhd" vhdl
+15 "/home/hari/Documents/osp-wearable-fpga/src/tl_car_field_withfmexg.vhd" vhdl
+
+# Dependency Lists (Uses list)
+0 -1
+1 -1
+2 -1
+3 -1
+4 -1
+5 -1
+6 -1
+7 0 
+8 0 
+9 0 
+10 0 
+11 4 1 3 
+12 6 11 
+13 0 
+14 13 
+15 7 5 12 14 
+
+# Dependency Lists (Users Of)
+0 13 10 9 8 7 
+1 11 
+2 -1
+3 11 
+4 11 
+5 15 
+6 12 
+7 15 
+8 -1
+9 -1
+10 -1
+11 12 
+12 15 
+13 14 
+14 15 
+15 -1
+
+# Design Unit to File Association
+arch work r8_rising a 1
+module work r8_rising 1
+arch work r8_falling a 2
+module work r8_falling 2
+arch work sr8_falling a 3
+module work sr8_falling 3
+arch work sr8_rising a 4
+module work sr8_rising 4
+arch work car_clock_gen a 5
+module work car_clock_gen 5
+arch work car_sequencer a 6
+module work car_sequencer 6
+config work structure_con 7
+arch work pll_4 structure 7
+module work pll_4 7
+config work structure_con 8
+arch work pll_8 structure 8
+module work pll_8 8
+config work structure_con 9
+arch work pll_16 structure 9
+module work pll_16 9
+config work structure_con 10
+arch work pll_4_usb structure 10
+module work pll_4_usb 10
+arch work i2s_dio_2 a 11
+module work i2s_dio_2 11
+arch work car_core a 12
+module work car_core 12
+config work structure_con 13
+arch work fmexg_fifo_8k_1025 structure 13
+module work fmexg_fifo_8k_1025 13
+arch work fmexg_core a 14
+module work fmexg_core 14
+arch work tl_car_field a 15
+module work tl_car_field 15

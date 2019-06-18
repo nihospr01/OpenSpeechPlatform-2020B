@@ -1,0 +1,131 @@
+---------------------------------------------------
+Report for cell tl_djb_field
+   Instance path: tl_djb_field
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      53.00        100.0
+                                 IOLGC	       8.00        100.0
+                                  LUT4	      67.00        100.0
+                                 IOREG	         10        100.0
+                                 IOBUF	         12        100.0
+                                PFUREG	         87        100.0
+                                RIPPLE	          4        100.0
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+                                 pll_4	          1         0.0
+                              djb_core	          1        99.1
+---------------------------------------------------
+Report for cell djb_core
+   Instance path: tl_djb_field/e_djb_core
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      52.50        99.1
+                                  LUT4	      66.00        98.5
+                                PFUREG	         87        100.0
+                                RIPPLE	          4        100.0
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+                             i2s_dio_2	          1        66.1
+                         djb_sequencer	          1        23.9
+                        djb_clock_sync	          1         9.0
+---------------------------------------------------
+Report for cell djb_sequencer
+   Instance path: tl_djb_field/e_djb_core/e_djb_sequencer
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      12.67        23.9
+                                  LUT4	      31.00        46.3
+                                PFUREG	         12        13.8
+---------------------------------------------------
+Report for cell i2s_dio_2
+   Instance path: tl_djb_field/e_djb_core/e_i2s_dio_2
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	      35.05        66.1
+                                  LUT4	      23.50        35.1
+                                PFUREG	         71        81.6
+                                RIPPLE	          4        100.0
+SUB MODULES
+                                  cell	      count    SLC Usage(%)
+                          sr8_rising_0	          1         3.8
+                          sr8_rising_1	          1         8.0
+                           sr8_falling	          1         9.4
+                            sr8_rising	          1         7.9
+                           r8_rising_1	          1         3.8
+                           r8_rising_2	          1         3.6
+                             r8_rising	          1         7.9
+                           r8_rising_0	          1         7.5
+---------------------------------------------------
+Report for cell sr8_falling
+   Instance path: tl_djb_field/e_djb_core/e_i2s_dio_2/in_lvds_sr
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       5.00         9.4
+                                  LUT4	       9.00        13.4
+                                PFUREG	          8         9.2
+---------------------------------------------------
+Report for cell r8_rising_2
+   Instance path: tl_djb_field/e_djb_core/e_i2s_dio_2/in_reg_2
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       1.90         3.6
+                                PFUREG	          8         9.2
+---------------------------------------------------
+Report for cell r8_rising_1
+   Instance path: tl_djb_field/e_djb_core/e_i2s_dio_2/in_reg_1
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       2.00         3.8
+                                PFUREG	          8         9.2
+---------------------------------------------------
+Report for cell sr8_rising_0
+   Instance path: tl_djb_field/e_djb_core/e_i2s_dio_2/in_i2s_sr
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       2.03         3.8
+                                  LUT4	       0.50         0.7
+                                PFUREG	          7         8.0
+---------------------------------------------------
+Report for cell sr8_rising_1
+   Instance path: tl_djb_field/e_djb_core/e_i2s_dio_2/out_i2s_sr
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       4.25         8.0
+                                  LUT4	       9.00        13.4
+                                PFUREG	          7         8.0
+---------------------------------------------------
+Report for cell r8_rising_0
+   Instance path: tl_djb_field/e_djb_core/e_i2s_dio_2/out_reg_2
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       4.00         7.5
+                                PFUREG	          8         9.2
+---------------------------------------------------
+Report for cell r8_rising
+   Instance path: tl_djb_field/e_djb_core/e_i2s_dio_2/out_reg_1
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       4.17         7.9
+                                  LUT4	       0.50         0.7
+                                PFUREG	          8         9.2
+---------------------------------------------------
+Report for cell sr8_rising
+   Instance path: tl_djb_field/e_djb_core/e_i2s_dio_2/out_lvds_sr
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       4.17         7.9
+                                  LUT4	       0.50         0.7
+                                PFUREG	          8         9.2
+---------------------------------------------------
+Report for cell djb_clock_sync
+   Instance path: tl_djb_field/e_djb_core/e_djb_clock_sync
+                     Cell usage:
+                                  cell	      count    Res Usage(%)
+                                  SLIC	       4.78         9.0
+                                  LUT4	      11.50        17.2
+                                PFUREG	          4         4.6
+---------------------------------------------------
+Report for cell pll_4
+   Instance path: tl_djb_field/e_pll_4
+                     Cell usage:
+                                  cell	      count    Res Usage(%)

@@ -1,0 +1,20 @@
+NOTE Copyright (C), 1992-2010, Lattice Semiconductor Corporation *
+NOTE All Rights Reserved *
+NOTE DATE CREATED: Tue Mar 12 11:45:28 2019 *
+NOTE DESIGN NAME: tl_djb_field *
+NOTE DEVICE NAME: LCMXO3LF-1300E-5WLCSP36 *
+NOTE PIN ASSIGNMENTS *
+NOTE PINS lvds_io : A6 : inout *
+NOTE PINS codec_clk : F1 : out *
+NOTE PINS ext_clk_in : C6 : in *
+NOTE PINS spi_cs1 : E2 : out *
+NOTE PINS spi_cs0 : A1 : out *
+NOTE PINS spi_miso : E1 : in *
+NOTE PINS spi_mosi : E3 : out *
+NOTE PINS spi_clk : B1 : out *
+NOTE PINS i2s_dspk : F4 : out *
+NOTE PINS i2s_dmic : F3 : in *
+NOTE PINS i2s_ws : E6 : out *
+NOTE PINS i2s_sck : F5 : out *
+NOTE CONFIGURATION MODE: NONE *
+NOTE COMPRESSION: on *
