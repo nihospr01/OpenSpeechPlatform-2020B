@@ -1,0 +1,53 @@
+NOTE Copyright (C), 1992-2010, Lattice Semiconductor Corporation *
+NOTE All Rights Reserved *
+NOTE DATE CREATED: Wed Sep 18 18:43:28 2019 *
+NOTE DESIGN NAME: tl_car_field *
+NOTE DEVICE NAME: LCMXO3LF-6900C-5CABGA256 *
+NOTE PIN ASSIGNMENTS *
+NOTE PINS l_lvds_io : A5 : inout *
+NOTE PINS spi1_miso : R4 : out *
+NOTE PINS i2s1_sck : R8 : out *
+NOTE PINS ext_clk_in : E2 : in *
+NOTE PINS test_m2 : M2 : out *
+NOTE PINS test_m1 : M1 : out *
+NOTE PINS test_l2 : L2 : out *
+NOTE PINS test_l1 : L1 : out *
+NOTE PINS led4_muteout : F1 : out *
+NOTE PINS volplus_mute : P13 : in *
+NOTE PINS fmexg_mic_sync : T15 : in *
+NOTE PINS adc_interrupt : T6 : out *
+NOTE PINS adc_data[11] : K15 : in *
+NOTE PINS adc_data[10] : J16 : in *
+NOTE PINS adc_data[9] : J15 : in *
+NOTE PINS adc_data[8] : H16 : in *
+NOTE PINS adc_data[7] : H15 : in *
+NOTE PINS adc_data[6] : G16 : in *
+NOTE PINS adc_data[5] : G15 : in *
+NOTE PINS adc_data[4] : F16 : in *
+NOTE PINS adc_data[3] : F15 : in *
+NOTE PINS adc_data[2] : E16 : in *
+NOTE PINS adc_data[1] : E15 : in *
+NOTE PINS adc_data[0] : D16 : in *
+NOTE PINS adc_pdwn : D15 : out *
+NOTE PINS adc_clk : C16 : out *
+NOTE PINS spi4_cs : T13 : in *
+NOTE PINS spi4_miso : T14 : out *
+NOTE PINS spi4_clk : R12 : in *
+NOTE PINS spi3_cs3 : R6 : in *
+NOTE PINS spi3_cs0 : R9 : in *
+NOTE PINS spi3_miso : T9 : out *
+NOTE PINS spi3_mosi : T10 : in *
+NOTE PINS spi3_clk : R10 : in *
+NOTE PINS spi1_cs2 : T5 : in *
+NOTE PINS spi1_cs0 : T4 : in *
+NOTE PINS spi1_mosi : R3 : in *
+NOTE PINS spi1_clk : T3 : in *
+NOTE PINS i2s2_d1 : T2 : out *
+NOTE PINS i2s2_d0 : T11 : out *
+NOTE PINS i2s2_ws : R11 : out *
+NOTE PINS i2s2_sck : T12 : out *
+NOTE PINS i2s1_d0 : T7 : in *
+NOTE PINS i2s1_ws : T8 : out *
+NOTE PINS r_lvds_io : A13 : inout *
+NOTE CONFIGURATION MODE: NONE *
+NOTE COMPRESSION: on *

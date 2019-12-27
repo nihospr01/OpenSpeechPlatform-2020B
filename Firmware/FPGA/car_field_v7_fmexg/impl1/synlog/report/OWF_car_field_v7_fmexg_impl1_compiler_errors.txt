@@ -1,0 +1,5 @@
+@E: CD385 :"/home/hari/Documents/osp-wearable-fpga/src/tl_car_field_withfmexg.vhd":124:46:124:49|aggregate with others must be in a constrained context
+@E: CD734 :"/home/hari/Documents/osp-wearable-fpga/src/tl_car_field_withfmexg.vhd":124:46:124:49|Can't convert expression to type specified - poorly formed operand of type conversion
+@E: CD716 :"/home/hari/Documents/osp-wearable-fpga/src/tl_car_field_withfmexg.vhd":124:46:124:49|Expression has ambiguous type
+@E: CD308 :"/home/hari/Documents/osp-wearable-fpga/src/tl_car_field_withfmexg.vhd":124:46:124:49|Unable to evaluate expression type
+

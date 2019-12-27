@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [Free Documents]
+   Generated File[djb_v2_jig_b.TXT]
+   Generated File[djb_v2_jig_b.LDP]
+   Generated File[djb_v2_jig_b.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 5:13:08 PM On 8/16/2019

@@ -1,0 +1,3 @@
+CKID0001:@|S:e_pll_4.PLLInst_0@|E:test_counter[0]@|F:@syn_sample_clock_path==CKID0001@|M:ClockId0001 
+CKID0002:@|S:spi4_clk@|E:e_fmexg_core.spi_byte_ctr[1]@|F:@syn_sample_clock_path==CKID0002@|M:ClockId0002 
+CKID0003:@|S:ext_clk_in@|E:mute_debounce_counter[0]@|F:@syn_sample_clock_path==CKID0003@|M:ClockId0003 

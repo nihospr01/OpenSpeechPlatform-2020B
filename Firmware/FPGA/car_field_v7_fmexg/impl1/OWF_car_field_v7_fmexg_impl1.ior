@@ -1,0 +1,79 @@
+Loading design for application iotiming from file OWF_car_field_v7_fmexg_impl1.ncd.
+Design name: tl_car_field
+NCD version: 3.3
+Vendor:      LATTICE
+Device:      LCMXO3LF-6900C
+Package:     CABGA256
+Performance: 6
+Package Status:                     Final          Version 1.16.
+Performance Hardware Data Status:   Final          Version 37.4.
+Loading design for application iotiming from file OWF_car_field_v7_fmexg_impl1.ncd.
+Design name: tl_car_field
+NCD version: 3.3
+Vendor:      LATTICE
+Device:      LCMXO3LF-6900C
+Package:     CABGA256
+Performance: M
+Package Status:                     Final          Version 1.16.
+Performance Hardware Data Status:   Final          Version 37.4.
+// Design: tl_car_field
+// Package: CABGA256
+// ncd File: OWF_car_field_v7_fmexg_impl1.ncd
+// Version: Diamond (64-bit) 3.10.0.111.2
+// Written on Fri Nov 15 13:10:37 2019
+// M: Minimum Performance Grade
+// iotiming OWF_car_field_v7_fmexg_impl1.ncd OWF_car_field_v7_fmexg_impl1.prf -gui -msgset /home/hari/Documents/osp-wearable-fpga/car_field_v7_fmexg/promote.xml
+
+I/O Timing Report (All units are in ns)
+
+Worst Case Results across Performance Grades (M, 6, 5):
+
+// Input Setup and Hold Times
+
+Port           Clock      Edge  Setup Performance_Grade  Hold Performance_Grade
+----------------------------------------------------------------------
+fmexg_mic_sync ext_clk_in R     5.320      5      -1.042     M
+i2s1_d0        ext_clk_in R     0.689      5       0.440     M
+l_lvds_io      ext_clk_in R     5.506      5       0.549     M
+r_lvds_io      ext_clk_in R     5.643      5       0.549     M
+spi1_clk       ext_clk_in R     7.158      5      -1.715     M
+spi1_cs0       ext_clk_in R     6.329      5      -1.610     M
+spi1_cs2       ext_clk_in R     3.843      5      -0.925     M
+spi1_mosi      ext_clk_in R     5.669      5      -1.413     M
+spi3_clk       ext_clk_in R     6.249      5      -1.399     M
+spi3_cs0       ext_clk_in R     6.057      5      -1.504     M
+spi3_cs3       ext_clk_in R     5.307      5      -1.381     M
+spi3_mosi      ext_clk_in R     5.896      5      -1.488     M
+spi4_cs        spi4_clk   F     4.120      5       0.813     5
+volplus_mute   ext_clk_in R     0.332      6       3.267     5
+
+
+// Clock to Output Delay
+
+Port         Clock      Edge  Max_Delay Performance_Grade  Min_Delay Performance_Grade
+------------------------------------------------------------------------
+adc_clk      ext_clk_in R    12.289         5        4.182          M
+i2s1_sck     ext_clk_in R     7.686         5        2.587          M
+i2s1_ws      ext_clk_in R     8.103         5        2.730          M
+i2s2_d0      ext_clk_in R     6.092         5        2.176          M
+i2s2_d1      ext_clk_in R     6.092         5        2.176          M
+i2s2_sck     ext_clk_in R     8.561         5        2.876          M
+i2s2_ws      ext_clk_in R     7.392         5        2.498          M
+l_lvds_io    ext_clk_in R    10.383         5        2.771          M
+led4_muteout ext_clk_in R    13.065         5        4.509          M
+r_lvds_io    ext_clk_in R    10.508         5        2.868          M
+spi1_miso    ext_clk_in R     6.092         5        2.176          M
+spi3_miso    ext_clk_in R     6.092         5        2.176          M
+spi4_miso    spi4_clk   F    10.631         5        3.605          M
+test_l2      ext_clk_in R     8.417         5        3.084          M
+test_m1      ext_clk_in R     7.760         5        2.856          M
+test_m2      ext_clk_in R     8.161         5        2.915          M
+
+
+// Internal_Clock to Output
+
+Port          Internal_Clock       
+--------------------------------------------------------
+adc_interrupt e_fmexg_core/clkdiv12
+WARNING: you must also run trce with hold speed: 5
+WARNING: you must also run trce with setup speed: 6
