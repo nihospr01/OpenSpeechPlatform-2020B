@@ -33,12 +33,12 @@
 }
 .footer {
     position: fixed;
-    left: 0;
-    bottom: 10%;
+    right: 8%;
+    bottom: 0;
     width: 100%;
     background-color: white;
     color: white;
-    text-align: center;
+    text-align: right;
 }
 .save{
   padding: .5rem;
@@ -51,17 +51,17 @@
   margin-left: 10%;
   margin-bottom: 0;
 }
-.saveAs{
+.saveas{
   padding: .5rem;
   font-size:1.4rem;
   line-height:1.2;
-  border-radius:.2rem;
+  border-radius:1.2rem;
   right:0;
   width:110px;
   height: 70px;
-align-items: center;
-align-self: center;
-margin-bottom: 0;
+  align-items: center;
+  align-self: center;
+  margin-bottom: 0;
 }
 
 .btn-light{
@@ -112,7 +112,8 @@ margin-bottom: 0;
         <p id="none_selected" style="color: red; padding-top: 15px"></p>
       </div>
 
-      <div class="footer" style="background-color: #e8ecf1;">
+      <!-- <div class="footer" style="background-color: #e8ecf1;"> -->
+      <div class="footer" style="background-color: transparent;">
         <div class= "row">
         <div class="col">
           <form method="POST" onsubmit="return validateForm()">
@@ -180,7 +181,7 @@ margin-bottom: 0;
         }
 
         function changeProgram(id){
-
+            var old_id = this['selected'];
             this['selected'] = id;
             document.getElementById("program_id").value = id;
 
@@ -193,6 +194,7 @@ margin-bottom: 0;
                 }),
                 success: function(response){
                     console.log(response, "program changed");
+                    logProgramChange(old_id, id);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log(JSON.stringify(jqXHR));
@@ -213,9 +215,47 @@ margin-bottom: 0;
         }
 
         function confirmDelete(data) {
-            var url = 'http://localhost:8000/goldilocks/admin/programs/' + data.id;
+            var url = window.location.origin + '/goldilocks/admin/programs/' + data.id;
             $('#delProgramForm').attr('action', url);
             $('#delProgramModal').modal();
+        }
+
+        /**
+         * Logs the program change.
+         */
+        function logProgramChange(old_id, new_id){
+          var dt = new Date();
+          var tz = dt.getTimezoneOffset() / -60;
+
+            // log to db
+            $.ajax({
+                method: 'POST',
+                headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}" },
+                url: '/goldilocks/listener/adjustmentLog',
+                data: JSON.stringify({
+                   final_lvh: undefined,
+                   starting_g65: undefined,
+                   ending_g65: undefined,
+                   cr: undefined,
+                   lmul: undefined,
+                   hmul: undefined,
+                   // log time and steps as 0 since they are irrelevant for program change
+                   time_ms: 0,
+                   steps: 0,
+                   changes: undefined,
+                   start_program_id: old_id,
+                   end_program_id: new_id,
+                   timestamp: dt,
+                   timezone: tz
+                }),
+                success: function(response) {
+                   console.log(response);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                   console.log(JSON.stringify(jqXHR));
+                   console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                }
+            });
         }
       </script>
 

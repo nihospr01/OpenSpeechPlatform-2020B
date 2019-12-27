@@ -1,13 +1,11 @@
 cmake_minimum_required(VERSION 3.8)
 project(OpenSpeechPlatform)
 
-set(OSP_VERSION 2.0)
+set(OSP_VERSION 2.1)
 set(OSP_VERSION_MAJOR 2)
-set(OSP_VERSION_MINOR 0)
+set(OSP_VERSION_MINOR 1)
 
-set(CMAKE_CXX_STANDARD 14)
-
-set(CMAKE_CXX_FLAGS "-O3 -Wall -Wextra")
+set(CMAKE_CXX_STANDARD 17)
 
 configure_file("include/openspeechplatform.hpp.in" "include/openspeechplatform.hpp")
 
@@ -16,6 +14,7 @@ IF(UNIX AND NOT APPLE)
 ENDIF()
 
 find_library(portaudio_LIBRARIES portaudio)
+find_package(Threads REQUIRED)
 find_package(Poco REQUIRED Foundation Util Net)
 find_package(OSP REQUIRED)
 include_directories(include ${CMAKE_CURRENT_BINARY_DIR}/include)
@@ -32,7 +31,7 @@ add_executable(osp
         include/ews_connect.hpp
         include/sema.hpp
         include/openspeechplatform.hpp.in)
-target_link_libraries(osp OSP ${portaudio_LIBRARIES})
+target_link_libraries(osp OSP ${portaudio_LIBRARIES} Threads::Threads Poco::Foundation Poco::Util Poco::Net)
 
 install(TARGETS osp
         RUNTIME DESTINATION bin)

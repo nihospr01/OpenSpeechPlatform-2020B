@@ -9,133 +9,135 @@
 #include "filter_coef.h"
 #include "memory.h"
 
-/**
- * @brief general data structure shared between client and C application
- */
 
-#define NUM_CHANNEL 2
+struct DEFAULTS {
 
-// Default osp user data values
+    // Default osp user data values
+    static const int NUM_CHANNEL = 2;
+    static const int EN_HA = 1;
+    static const int AFC = 3;
+    static const int REAR_MIC = 0;
+    static const int SAMP_FREQ = 48000;
 
-#define D_EN_HA 1
-#define D_AFC 3
-#define D_REAR_MIC 0
-#define D_SAMP_FREQ 48000
+    /*** Peak detect defaults ***/
+    static const int ATTACK_TIME = 5;    ///< Attack time in msec
+    static const int RELEASE_TIME = 20;    ///< Release time in msec
 
+    /*** WDRC defaults ***/
+    static const int G50 = 0;
+    static const int G80 = 0;
+    static const int KNEE_LOW = 45;    ///< Lower kneepoint in dB SPL. Using the same value for all the bands
+    static const int KNEE_HIGH = 120;    ///< Upper kneepoint in dB SPL. Using the same value for all the bands
+    static const int GLOBAL_MPO = 120; /// The global MPO
 
-/*** Peak detect defaults ***/
-#define D_ATTACK_TIME	5	///< Attack time in msec
-#define D_RELEASE_TIME	20	///< Release time in msec
+    static const int NOISE_ESTIMATION = 0;
+    static const int SPECTRAL_SUB = 0;
+    static const int SPECTRAL_TYPE = 0;
+    static const int ATTENUATION = -20;
 
-/*** WDRC defaults ***/
-#define D_G50 0
-#define D_G80 0
-#define D_KNEE_LOW	45	///< Lower kneepoint in dB SPL. Using the same value for all the bands
-#define D_KNEE_HIGH	120	///< Upper kneepoint in dB SPL. Using the same value for all the bands
-#define GLOBAL_MPO 120 /// The global MPO
+    /*** AFC defaults ***/
+    struct AFC {
+        static const int ON_OFF = 1; /// AFC ON/OFF
+        static const int RESET = 0; /// reset the taps of AFC filter to default values
+        static constexpr float DELAY = 4.6875; /// delay in millisecond for 32k Hz before bandlimited filter (originally, the delay is in number of samples, 150)
+        static constexpr float MU = 0.005; /// step size
+        static constexpr float RHO = 0.985; /// forgetting factor
+        static const int PE = 0; /// power estimate
+        static constexpr float DELTA = 1e-6; /// IPNLMS
+        static const int ALPHA = 0; /// IPNLMS
+        static const int BETA = 5; /// IPNLMS
+        static constexpr float P = 1.5; /// SLMS
+        static constexpr float C = 1e-6; /// SLMS
+    };
 
-#define D_NOISE_ESTIMATION 0
-#define D_SPECTRAL_SUB 0
-#define D_SPECTRAL_TYPE 0
-#define D_ATTENUATION -20
+    /*** Beamformer defaults ***/
+    struct BF {
+        static const int ON_OFF = 0;
+        static const int TYPE = 3;
+        static constexpr float MU = 0.01;
+        static constexpr float RHO = 0.985;
+        static constexpr float DELTA = 1e-6;
+        static constexpr float C = 1e-3;
+        static const int PW = 0;
+        static constexpr float P = 1.3;
+        static const int ALPHA = 0;
+        static const int BETA = 150;
+        static const int FIR_LENGTH = 319;
+        static const int DELAY_LEN = 160;
+        static const int NC_ON_OFF = 0;
+        static const int AMC_ON_OFF = 0;
+        static constexpr float NC_THR = 1.0;
+        static constexpr float AMC_THR = 2.0;
+        static constexpr float AMC_FORGETTING_FACTOR = 0.8;
+    };
+};
 
-/*** AFC defaults ***/
-#define AFC_ON_OFF 1 /// AFC ON/OFF
-#define AFC_RESET 0 /// reset the taps of AFC filter to default values
-#define AFC_DELAY 4.6875 /// delay in millisecond for 32k Hz before bandlimited filter (originally, the delay is in number of samples, 150)
-#define AFC_MU 0.005 /// step size
-#define AFC_RHO 0.985 /// forgetting factor
-#define AFC_PE 0 /// power estimate
-#define AFC_DELTA 1e-6 /// IPNLMS
-#define AFC_ALPHA 0 /// IPNLMS
-#define AFC_BETA 5 /// IPNLMS
-#define AFC_P 1.5 /// SLMS
-#define AFC_C 1e-6 /// SLMS
-
-/*** Beamformer defaults ***/
-#define BF_ON_OFF 0
-#define BF_TYPE 3
-#define BF_MU 0.01
-#define BF_RHO 0.985
-#define BF_DELTA 1e-6
-#define BF_C 1e-3
-#define BF_PW 0
-#define BF_P 1.3
-#define BF_ALPHA 0
-#define BF_BETA 150
-#define BF_FIR_LENGTH 319
-#define BF_DELAY_LEN 160
-#define BF_NC_ON_OFF 0
-#define BF_AMC_ON_OFF 0
-#define NC_THR 1.0
-#define AMC_THR 2.0
-#define AMC_FORGETTING_FACTOR 0.8
 
 /**
  * Please note that any variables added to this structure must have the same name in the parser.
  */
 
+/**
+ * @brief general data structure shared between client and C application
+ */
 typedef struct osp_user_data_t {
-    int en_ha = D_EN_HA;					///< No operation.  The audio is passed from input to output in the audio callback
-
-    int rear_mics = D_REAR_MIC;				///< Read mics on/off
-
-    float gain = D_ATTENUATION;
+    int en_ha = DEFAULTS::EN_HA;					///< No operation.  The audio is passed from input to output in the audio callback
+    int rear_mics = DEFAULTS::REAR_MIC;				///< Read mics on/off
+    float gain = DEFAULTS::ATTENUATION;
 
     // Amplification parameters
-
-    std::vector<float> g50 = std::vector<float>(NUM_BANDS, D_G50);			///< The gain values at 50 dB SPL input level
-    std::vector<float> g80 = std::vector<float>(NUM_BANDS,D_G80 );			///< The gain values at 80 dB SPL input level
-    std::vector<float> knee_low = std::vector<float>(NUM_BANDS,D_KNEE_LOW );	///< Lower kneepoints for all bands
-    std::vector<float> mpo_band = std::vector<float>(NUM_BANDS,D_KNEE_HIGH );	///< MPO for all bands (upper kneepoints for all bands)
-    std::vector<float> attack = std::vector<float>(NUM_BANDS,D_ATTACK_TIME );		///< Attack time for WDRC for all bands
-    std::vector<float> release = std::vector<float>(NUM_BANDS,D_RELEASE_TIME );		///< Release time for WDRC for all bands
-    float global_mpo = GLOBAL_MPO; /// The global MPO
+    std::vector<float> g50 = std::vector<float>(NUM_BANDS, DEFAULTS::G50);			///< The gain values at 50 dB SPL input level
+    std::vector<float> g80 = std::vector<float>(NUM_BANDS,DEFAULTS::G80 );			///< The gain values at 80 dB SPL input level
+    std::vector<float> knee_low = std::vector<float>(NUM_BANDS,DEFAULTS::KNEE_LOW );	///< Lower kneepoints for all bands
+    std::vector<float> mpo_band = std::vector<float>(NUM_BANDS,DEFAULTS::KNEE_HIGH );	///< MPO for all bands (upper kneepoints for all bands)
+    std::vector<float> attack = std::vector<float>(NUM_BANDS,DEFAULTS::ATTACK_TIME );		///< Attack time for WDRC for all bands
+    std::vector<float> release = std::vector<float>(NUM_BANDS,DEFAULTS::RELEASE_TIME );		///< Release time for WDRC for all bands
+    float global_mpo = DEFAULTS::GLOBAL_MPO; /// The global MPO
 
     // Noise management parameters
 
-    int noise_estimation_type = D_NOISE_ESTIMATION; ///< Choose type of Noise estimation technique
-    int spectral_type = D_SPECTRAL_TYPE;
-    float spectral_subtraction = D_SPECTRAL_SUB; ///< Spectral subtraction Param
+    int noise_estimation_type = DEFAULTS::NOISE_ESTIMATION; ///< Choose type of Noise estimation technique
+    int spectral_type = DEFAULTS::SPECTRAL_TYPE;
+    float spectral_subtraction = DEFAULTS::SPECTRAL_SUB; ///< Spectral subtraction Param
 
     // Adaptive Feedback management parameters
-    int afc = AFC_ON_OFF; /// AFC ON/OFF
-    int afc_reset = AFC_RESET; /// reset the taps of AFC filter to default values (not a state, afc_reset is actually a signal)
-    int afc_type = D_AFC; ///< AFC Type -1: return y_hat=0, 0: stop adaptation, 1: FXLMS, 2: IPNLMS, 3: SLMS
-    float afc_delay = AFC_DELAY;
-    float afc_mu = AFC_MU; /// step size
-    float afc_rho = AFC_RHO; /// forgetting factor
-    float afc_power_estimate = AFC_PE; /// power estimate
-    float afc_delta = AFC_DELTA; /// IPNLMS
-    float afc_alpha = AFC_ALPHA; /// IPNLMS
-    float afc_beta = AFC_BETA; /// IPNLMS
-    float afc_p = AFC_P; /// SLMS
-    float afc_c = AFC_C; /// SLMS
+    int afc = DEFAULTS::AFC::ON_OFF; /// AFC ON/OFF
+    int afc_reset = DEFAULTS::AFC::RESET; /// reset the taps of AFC filter to default values (not a state, afc_reset is actually a signal)
+    int afc_type = DEFAULTS::AFC; ///< AFC Type -1: return y_hat=0, 0: stop adaptation, 1: FXLMS, 2: IPNLMS, 3: SLMS
+    float afc_delay = DEFAULTS::AFC::DELAY;
+    float afc_mu = DEFAULTS::AFC::MU; /// step size
+    float afc_rho = DEFAULTS::AFC::RHO; /// forgetting factor
+    float afc_power_estimate = DEFAULTS::AFC::PE; /// power estimate
+    float afc_delta = DEFAULTS::AFC::DELTA; /// IPNLMS
+    float afc_alpha = DEFAULTS::AFC::ALPHA; /// IPNLMS
+    float afc_beta = DEFAULTS::AFC::BETA; /// IPNLMS
+    float afc_p = DEFAULTS::AFC::P; /// SLMS
+    float afc_c = DEFAULTS::AFC::C; /// SLMS
 
     // Beamformer parameters
-    int bf = BF_ON_OFF;
-    int bf_type = BF_TYPE;
-    float bf_mu = BF_MU;
-    float bf_rho = BF_RHO;
-    float bf_delta = BF_DELTA;
-    float bf_c = BF_C;
-    float bf_power_estimate = BF_PW;
-    float bf_p = BF_P;
-    float bf_alpha = BF_ALPHA;
-    float bf_beta = BF_BETA;
-    int bf_fir_length = BF_FIR_LENGTH;
-    int bf_delay_len = BF_DELAY_LEN;
-    int bf_nc_on_off = BF_NC_ON_OFF;
-    int bf_amc_on_off = BF_AMC_ON_OFF;
-    float nc_thr = NC_THR;
-    float amc_thr = AMC_THR;
-    float amc_forgetting_factor = AMC_FORGETTING_FACTOR;
+    int bf = DEFAULTS::BF::ON_OFF;
+    int bf_type = DEFAULTS::BF::TYPE;
+    float bf_mu = DEFAULTS::BF::MU;
+    float bf_rho = DEFAULTS::BF::RHO;
+    float bf_delta = DEFAULTS::BF::DELTA;
+    float bf_c = DEFAULTS::BF::C;
+    float bf_power_estimate = DEFAULTS::BF::PW;
+    float bf_p = DEFAULTS::BF::P;
+    float bf_alpha = DEFAULTS::BF::ALPHA;
+    float bf_beta = DEFAULTS::BF::BETA;
+    int bf_fir_length = DEFAULTS::BF::FIR_LENGTH;
+    int bf_delay_len = DEFAULTS::BF::DELAY_LEN;
+    int bf_nc_on_off = DEFAULTS::BF::NC_ON_OFF;
+    int bf_amc_on_off = DEFAULTS::BF::AMC_ON_OFF;
+    float nc_thr = DEFAULTS::BF::NC_THR;
+    float amc_thr = DEFAULTS::BF::AMC_THR;
+    float amc_forgetting_factor = DEFAULTS::BF::AMC_FORGETTING_FACTOR;
 
 
     // File I/O parameters
     float alpha = 0.0f;
     std::string audio_filename;
-    std::string audio_recordfile;
+    std::string audio_recordfile = "sample.wav";
     float record_length = 5;
     int audio_reset = 0;
     int audio_repeat = 0;
@@ -199,9 +201,5 @@ typedef struct osp_user_data_t {
     }
 
 } osp_user_data;
-
-
-
-
 
 #endif //OSP_CLION_C_OSP_STRUCTURE_H

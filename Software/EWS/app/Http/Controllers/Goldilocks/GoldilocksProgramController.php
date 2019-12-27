@@ -43,9 +43,19 @@ class GoldilocksProgramController extends Controller
 
         //get data from request
         $data = $request->json()->all();
-        $program_name = $data[0];
 
-        if(GoldilocksProgram::where(['listener_id' => $listener->id, 'name' => $program_name])->exists()){
+        // split name and rank
+        $program_name = $data[0];
+        $rank = 1;
+        $program_array = explode("-", $program_name);
+
+        if (count($program_array) > 1) {
+            $rank = (int)$program_array[count($program_array) - 1];
+            $program_name = implode("-",  array_slice($program_array, 0, -1));
+        }
+
+
+        if(GoldilocksProgram::where(['listener_id' => $listener->id, 'name' => $program_name, 'name_rank' => $rank])->exists()){
             return json_encode(['status' => 'failure']);
         }
 
@@ -53,6 +63,7 @@ class GoldilocksProgramController extends Controller
         $program = GoldilocksProgram::create([
             'listener_id' => $listener->id,
             'name' => $program_name,
+            'name_rank' => $rank,
             'parameters' => json_encode($data[1])
         ]);
 
@@ -176,6 +187,10 @@ class GoldilocksProgramController extends Controller
         $response = stream_get_contents($client, -1, -1);
         //close connection
         fclose($client);
+
+        // set this program as the current program for the listener after transmit
+        $listener->current_program_id = $program->id;
+        $listener->save();
 
         //send back response from MHA
         return $response;

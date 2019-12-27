@@ -22,6 +22,7 @@ public:
     AudioFile<float>::AudioBuffer buffer_before;
     AudioFile<float>::AudioBuffer buffer_after;
     std::string rootPath;
+    std::string file;
     std::atomic<bool> write;
     AudioFile<float>::AudioBuffer *p_buffer=0;
     AudioFile<float>::AudioBuffer *t_buffer=0;
@@ -50,13 +51,14 @@ public:
     int mono;
     int t;
     rk_sema *write_in_process;
-    file_record();
+    file_record(std::string file_ = "sample.wav", float seconds = 5);
     std::thread *record_thread;
     void rtmha_record(int num_sample, float * in,int channel);
     void record_before(int num_sample, float *in, int channel);
     void record_after(int num_sample, float *in, int channel);
     void set_params( int start_,int stop_,float seconds,const char* file_);
     void get_params(float& seconds);
+    void get_params(float& seconds, std::string& file_);
     void write_to_file();
     ~file_record();
 };

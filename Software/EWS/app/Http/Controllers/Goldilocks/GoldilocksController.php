@@ -144,7 +144,12 @@ class GoldilocksController extends Controller
         $parameters = $request->input('data');
         $listener = GoldilocksListener::where('listener', session('listener'))->firstOrFail();
         $program_id = $listener->current_program_id;
-        return view('goldilocks.listener', compact('listener','parameters', 'program_id'));
+
+        // get next program name
+        $program = GoldilocksProgram::where('id', $program_id)->firstOrFail();
+        $next_name = $program->getOriginal('name') . " " . ($program->name_rank + 1);
+
+        return view('goldilocks.listener', compact('listener','parameters', 'program_id', 'next_name'));
 
     }
 
@@ -198,6 +203,16 @@ class GoldilocksController extends Controller
         return redirect('/goldilocks/listener/login');
     }
 
+    // get next rank until it doesn't exist
+    private function getNextRankName($name, $rank, $listener_id) {
+        while (GoldilocksProgram::where(['listener_id' => $listener_id, 'name' => $name, 'name_rank' => $rank])->exists()) {
+            $rank = $rank + 1;
+        }
+
+        return $name . "-" . $rank;
+
+    }
+
     /**
      * Loads listener goldilocks page for self adjustment.
      *
@@ -206,30 +221,35 @@ class GoldilocksController extends Controller
     public function selfAdjustment($program_id = null){
         $listener = GoldilocksListener::where('listener', session('listener'))->first();
         $parameters = null;
+        $next_name = "";
         if($program_id){
             $program = GoldilocksProgram::where('id', $program_id)->firstOrFail();
             $parameters = $program->parameters;
+            $next_name = self::getNextRankName($program->getOriginal('name'), $program->name_rank + 1, $program->listener_id);
         }
 
 
         //get most recent program for use if it exists
-        if($program_id == null && $listener->current_program_id != null){
+        if($program_id == null && $listener->current_program_id != null) {
             $program_id = $listener->current_program_id;
             $program = GoldilocksProgram::where('id', $program_id)->first();
             $parameters = $program->parameters;
 
+            $next_rank = $program->name_rank + 1;
+
+            $next_name = self::getNextRankName($program->getOriginal('name'), $program->name_rank + 1, $program->listener_id);
+
             //check to see if it's listener only
             $data = json_decode($parameters);
             if($data->app_behavior == 1){
-                return view('goldilocks.listener', compact('listener', 'parameters', 'program_id'));
+                return view('goldilocks.listener', compact('listener', 'parameters', 'program_id', 'next_name'));
             }
             else{
                 return redirect('/goldilocks/listener/programs');
             }
         }
 
-
-        return view('goldilocks.listener', compact('listener', 'parameters', 'program_id'));
+        return view('goldilocks.listener', compact('listener', 'parameters', 'program_id', 'next_name'));
     }
 
     /**

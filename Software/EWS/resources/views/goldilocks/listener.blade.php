@@ -15,6 +15,15 @@
     <title>Self Adjustment</title>
 
     <style>
+        .footer {
+            position: fixed;
+            right: 0.3%;
+            bottom: 0%;
+            /*width: 100%;*/
+            background-color: transparent;
+            color: white;
+        }
+
         .leftBtn{
 
             padding: 0rem;
@@ -47,6 +56,7 @@
             width:90px;
             height: 75px;
             align-self: center;
+            vertical-align: top;
         }
 
 
@@ -72,6 +82,19 @@
             height: 70px;
             margin-right: 10%;
             margin-bottom: 0;
+            margin-left: 8%;
+        }
+
+        .dontSave{
+            padding: .5rem;
+            font-size:1.4rem;
+            line-height:1.2;
+            border-radius:.2rem;
+            width:110px;
+            height: 70px;
+            margin-right: 10%;
+            margin-bottom: 0;
+            margin-right: 10%;
         }
 
 
@@ -189,26 +212,32 @@
             </div>
         </div>
 
-        <div class="container" id="end_buttons" style="display: none;">
+        <div class="container footer" id="end_buttons" style="display: none;">
             <div class="row" >
-                <div class="col-6 text-center" >
+                <div class="col-4 text-center" >
                     <button type="button" id="save_button" class="save btn-info">
                         Save
                     </button>
                 </div>
 
-                <div class="col-6 text-center" style="align-items:center">
+                <div class="col-4 text-center" style="align-items:center">
                     <button type="button" id="save_as_modal_trigger" class="saveAs btn-info" data-toggle="modal" data-target="#saveAsModal">
                         Save As
+                    </button>
+                </div>
+
+                <div class="col-4 text-center" style="align-items:center">
+                    <button type="button" id="dont_save_button" class="save btn-info" style="display: inline-block;">
+                        Don't Save
                     </button>
                 </div>
             </div>
         </div>
 
-        <div class="container" style="margin-top: 0.5rem;">
+        <div class="container-fluid footer" id="finish_footer" style="margin-top: 0.5rem;">
             <div class="row" style="margin-bottom: 0.5rem">
-                <div class="col-12 text-center" style="align-items:center">
-                    <button type="button" id="finish_button" class="okay btn-info" style="visibility: hidden">
+                <div class="col-12 text-center">
+                    <button type="button" id="finish_button" class="okay btn-info" style="visibility: hidden; display: inline-block;">
                         Finish
                     </button>
                 </div>
@@ -231,7 +260,7 @@
                 </div>
                 <div class="modal-body">
                     <label for="modalInput" style="padding-right: 5px">Program name </label>
-                    <input id="modalInput" name="programName" type="text" placeholder="Quiet, Noisy, etc.">
+                    <input id="modalInput" name="programName" type="text" placeholder="Quiet, Noisy, etc." value="{{ $next_name }}">
                     <p style="color: red" id="modalInputError"></p>
                 </div>
                 <div class="modal-footer">
@@ -485,34 +514,29 @@
 
 
         /** Finish button control **/
-
         $('#finish_button').click(function(){
             nextPanel();
             logButtonPress('finish_button');
         });
 
-
+        /** Don't save button control **/
+        $('#dont_save_button').click(function(){
+            backToProgramsPage();
+        });
 
         /** Save button control **/
-
         $('#save_button').click(function(){
             updateProgram();
             logButtonPress('save_button');
         });
 
-
-
         /** Save as button control (in modal) **/
-
         $('#save_as_button').click(function(){
             saveProgram();
             logButtonPress('save_as_button');
         })
 
-
-
         /** Pop up box control **/
-
         $('#saveAsModal').on('shown.bs.modal', function () {
             $('#modalInput').trigger('focus')
         });
@@ -525,7 +549,12 @@
             updateLVHText();
         });
 
-
+        /**
+         * Redirects to programs page
+         */
+        function backToProgramsPage() {
+            window.location.replace("http://localhost:8000/goldilocks/listener/programs");
+        }
 
         /**
          * Logic to handle panel changes. Uses variable 'sequence' array to see what goes next.
@@ -533,6 +562,32 @@
         function nextPanel(){
 
             hideAllPanels();
+
+            l_more = document.getElementById("l_more");
+            v_more = document.getElementById("v_more");
+            h_more = document.getElementById("h_more");
+
+            l_less = document.getElementById("l_less");
+            v_less = document.getElementById("v_less");
+            h_less = document.getElementById("h_less");
+
+            // activate less buttons
+            if (l_less.disabled) {
+                l_less.disabled = false;
+            } else if (v_less.disabled) {
+                v_less.disabled = false;
+            } else if (h_less.disabled) {
+                h_less.disabled = false;
+            }
+
+            // activate more buttons
+            if (l_more.disabled) {
+                l_more.disabled = false;
+            } else if (v_more.disabled) {
+                v_more.disabled = false;
+            } else if (h_more.disabled) {
+                h_more.disabled = false;
+            }
 
             if(this['sequence'].length > 1){
                 var elem = this['sequence'].shift();
@@ -582,6 +637,7 @@
             else{
                 document.getElementById("end_buttons").style.display = "block";
                 document.getElementById("save_button").style.visibility = "visible";
+                document.getElementById("dont_save_button").style.visibility = "visible";
                 document.getElementById("save_as_modal_trigger").style.visibility = "visible";
             }
         }
@@ -595,6 +651,9 @@
             document.getElementById("fullness_section").style.visibility = "hidden";
             document.getElementById("finish_button").style.visibility = "hidden";
             document.getElementById("save_button").style.visibility = "hidden";
+            document.getElementById("dont_save_button").style.visibility = "hidden";
+            document.getElementById("finish_footer").style.visibility = "hidden";
+            document.getElementById("end_buttons").style.visibility = "hidden";
             document.getElementById("save_as_modal_trigger").style.visibility = "hidden";
         }
 
@@ -673,6 +732,15 @@
             if(new_value <= this['parameters'][max]){
                 document.getElementById(id).innerHTML = old_value + add;
 
+                // initialize buttons
+                l_more = document.getElementById("l_more");
+                v_more = document.getElementById("v_more");
+                h_more = document.getElementById("h_more");
+
+                l_less = document.getElementById("l_less");
+                v_less = document.getElementById("v_less");
+                h_less = document.getElementById("h_less");
+
                 var l_val = +document.getElementById("l_value").innerHTML / l_mul;
                 var v_val = +document.getElementById("v_value").innerHTML;
                 var h_val = +document.getElementById("h_value").innerHTML / h_mul;
@@ -681,6 +749,16 @@
                 if(exceedsMax(l_val, v_val, h_val)){
                     //output max message
                     alert("Warning: you've attempted to exceed maximum gain. No change will take place.");
+
+                    // disable more buttons
+                    if (id == 'l_value') {
+                        l_more.disabled = true;
+                    } else if (id == 'v_value') {
+                        v_more.disabled = true;
+                    } else if (id == 'h_value') {
+                        h_more.disabled = true;
+                    }
+
                     //change back the value
                     document.getElementById(id).innerHTML = old_value;
                     return -1;
@@ -691,6 +769,21 @@
                         this['parameters']['g65'][i] = this['starting_g65'][i] + v_val + (l_val * this['parameters']['multiplier_l'][i]) + (h_val * this['parameters']['multiplier_h'][i]);
                         crg65(i);
                     }
+
+
+                    // activate less buttons
+                    if (l_less.disabled || v_less.disabled || h_less.disabled) {
+                        if (l_less.disabled) {
+                            l_less.disabled = false;
+                        }
+                        if (v_less.disabled) {
+                            v_less.disabled = false;
+                        }
+                        if (h_less.disabled) {
+                            h_less.disabled = false;
+                        }
+                    }
+
                     //send values to hearing aid
                     transmit();
                     updateLVHText();
@@ -699,6 +792,16 @@
             }
             else{
                 alert("Warning: Cannot exceed maximum value for " + step_type);
+
+                // disable more buttons
+                if (id == 'l_value') {
+                    l_more.disabled = true;
+                } else if (id == 'v_value') {
+                    v_more.disabled = true;
+                } else if (id == 'h_value') {
+                    h_more.disabled = true;
+                }
+                
                 return -1;
             }
         }
@@ -720,6 +823,15 @@
                 sub *= h_mul;
             }
 
+            // initialize buttons
+            l_more = document.getElementById("l_more");
+            v_more = document.getElementById("v_more");
+            h_more = document.getElementById("h_more");
+
+            l_less = document.getElementById("l_less");
+            v_less = document.getElementById("v_less");
+            h_less = document.getElementById("h_less");
+
             if(new_value >= this['parameters'][min]){
                 document.getElementById(id).innerHTML = old_value - sub;
 
@@ -733,12 +845,35 @@
                     crg65(i);
                 }
 
+                // activate more buttons
+                if (l_more.disabled || v_more.disabled || h_more.disabled) {
+                    if (l_more.disabled) {
+                        l_more.disabled = false;
+                    }
+                    if (v_more.disabled) {
+                        v_more.disabled = false;
+                    }
+                    if (h_more.disabled) {
+                        h_more.disabled = false;
+                    }
+                }
+
                 //send values to hearing aid
                 transmit();
                 updateLVHText();
             }
             else{
                 alert("Warning: Cannot exceed minimum value for " + step_type);
+
+                // disable less buttons
+                if (id == 'l_value') {
+                    l_less.disabled = true;
+                } else if (id == 'v_value') {
+                    v_less.disabled = true;
+                } else if (id == 'h_value') {
+                    h_less.disabled = true;
+                }
+
                 return -1;
             }
 
@@ -767,6 +902,8 @@
             $.ajax({
                 method: 'POST',
                 url: '/api/params',
+                dataType: 'text json',
+                contentType: 'application/json',
                 data: JSON.stringify({
                     user_id: this['listener_id'],
                     method: "set",
@@ -824,6 +961,8 @@
                     method: 'PUT',
                     headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}" },
                     url: '/goldilocks/listener',
+                    dataType: 'text json',
+                    contentType: 'application/json',
                     data: JSON.stringify([
                         this['programId'],
                         this['parameters']
@@ -860,18 +999,19 @@
                     method: 'POST',
                     headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}" },
                     url: '/goldilocks/listener',
+                    dataType: 'text json',
+                    contentType: 'application/json',
                     data: JSON.stringify([
                         document.getElementById("modalInput").value,
                         this['parameters']
                     ]),
                     success: function(response){
-                        if(JSON.parse(response)['status'] == "failure"){
+                        if(response['status'] == "failure"){
                             document.getElementById("modalInputError").innerHTML = "The name \"" + (document.getElementById("modalInput").value) + "\" is already taken.";
                         }
                         else {
                             console.log(response);
-                            rjson = JSON.parse(response);
-                            programId = rjson["id"];
+                            programId = response["id"];
                             logAdjustmentSession();
                             $('#saveAsModal').modal('hide');
                             location.href = '{{ url('/goldilocks/listener/programs') }}';
@@ -957,6 +1097,8 @@
                 method: 'POST',
                 headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}" },
                 url: '/goldilocks/listener/log',
+                dataType: 'text json',
+                contentType: 'application/json',
                 data: JSON.stringify({
                    action: button_id,
                    program_state: parameters,
@@ -1004,12 +1146,7 @@
             console.log("step-by-step changes: " + changeString);
             console.log("timestamp: " + dt);
 
-            // log to db
-            $.ajax({
-                method: 'POST',
-                headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}" },
-                url: '/goldilocks/listener/adjustmentLog',
-                data: JSON.stringify({
+            var jsonData = JSON.stringify({
                    final_lvh: {
                        l_value: l_val,
                        v_value: v_val,
@@ -1027,13 +1164,24 @@
                    end_program_id: programId,
                    timestamp: dt,
                    timezone: tz
-                }),
+                });
+            console.log(jsonData);
+
+            // log to db
+            $.ajax({
+                async: false,
+                method: 'POST',
+                headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}" },
+                url: '/goldilocks/listener/adjustmentLog',
+                dataType: 'text json',
+                contentType: 'application/json',
+                data: jsonData,
                 success: function(response) {
-                   console.log(response);
+                    console.log(response);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                   console.log(JSON.stringify(jqXHR));
-                   console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                    console.log(JSON.stringify(jqXHR));
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
                 }
             });
         }

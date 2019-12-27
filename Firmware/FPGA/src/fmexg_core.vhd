@@ -11,7 +11,7 @@ entity fmexg_core is
 		adc_clk, adc_pdwn: out std_logic;
 		adc_data: in std_logic_vector(11 downto 0);
 		interrupt: out std_logic;
-		mute_sync: in std_logic
+		fmexg_mic_sync: in std_logic
 	);
 end entity;
 
@@ -106,7 +106,7 @@ begin
 	);
 	fifo_Q_u <= unsigned(fifo_Q);
 	
-	fifo_Data <= "100000000000" when mute_sync = '1' else adc_data; --std_logic_vector(rampcounter); 
+	fifo_Data <= "100000000000" when fmexg_mic_sync = '1' else adc_data; --std_logic_vector(rampcounter); 
 	fifo_WrClock <= clkdiv12;
 	fifo_RdClock <= spi_clk;
 	fifo_WrEn <= '1';
@@ -166,18 +166,17 @@ begin
 	process(spi_clk, spi_cs) is begin
 		if spi_cs = '1' then
 			spi_bit_ctr <= "000";
+			spi_byte_ctr <= "00";
 		elsif rising_edge(spi_clk) then
-			if spi_cs = '0' then
-				--Increment bit (8) and byte (3) counters
-				if spi_bit_ctr = "111" then
-					if spi_byte_ctr = "10" then
-						spi_byte_ctr <= "00";
-					else
-						spi_byte_ctr <= spi_byte_ctr + 1;
-					end if;
-				end if;
-				spi_bit_ctr <= spi_bit_ctr + 1;
-			end if;
+            --Increment bit (8) and byte (3) counters
+            if spi_bit_ctr = "111" then
+                if spi_byte_ctr = "10" then
+                    spi_byte_ctr <= "00";
+                else
+                    spi_byte_ctr <= spi_byte_ctr + 1;
+                end if;
+            end if;
+            spi_bit_ctr <= spi_bit_ctr + 1;
 		end if;
 	end process;
 	

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class GoldilocksProgram extends Model
 {
-    protected $fillable = ['listener_id', 'name', 'parameters'];
+    protected $fillable = ['listener_id', 'name', 'parameters', 'name_rank'];
 
     public function listener(){
         return $this->belongsTo('App\GoldilocksListener', 'listener_id');
@@ -14,6 +14,16 @@ class GoldilocksProgram extends Model
 
     public function getString(){
         return $this->parameters;
+    }
+
+    public function getNameAttribute($value) {
+        $rank = $this->name_rank;
+
+        if ($rank != 1) {
+            $value = $value . "-" . $rank;
+        }
+
+        return $value;
     }
 
     public function getAPIString(){

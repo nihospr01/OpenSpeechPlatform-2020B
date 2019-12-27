@@ -33,6 +33,9 @@ Route::get('passThrough', function(){
 	return view('passThrough');
 });
 
+Route::get('searchex', function() {
+    return view('SearchEx');
+});
 
 
 /** Researcher routes **/
@@ -121,10 +124,6 @@ Route::get('/goldilocks/logs/listeners', 'Goldilocks\GoldilocksListenerControlle
 Route::get('/goldilocks/logs/programs', 'Goldilocks\GoldilocksProgramController@downloadPrograms');
 Route::get('/goldilocks/logs/listener-logs', 'Goldilocks\GoldilocksLogController@downloadLogs');
 Route::get('/goldilocks/logs/adjustment-logs', 'Goldilocks\ListenerAdjustmentLogController@downloadLogs');
-
-
-
-
 
 
 /** Documentation route **/

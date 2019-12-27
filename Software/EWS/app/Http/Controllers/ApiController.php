@@ -54,7 +54,6 @@ class ApiController extends Controller
      * @return string
      */
     public function getParameters(){
-
         $addr = gethostbyname("127.0.0.1");
 
         $client = stream_socket_client("tcp://$addr:8001", $errno, $errorMessage);

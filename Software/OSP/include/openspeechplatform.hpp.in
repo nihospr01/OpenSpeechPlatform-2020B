@@ -17,13 +17,11 @@
 #include "control_param.h"
 #ifdef __linux__
 #include <sched.h>
-
-
 #endif
 
 template <class P, class M, class D>
 void keyboard(P* parser, M* masterHA, controls *main_controls){
-    D user_data[NUM_CHANNEL];
+    D user_data[DEFAULTS::NUM_CHANNEL];
     std::string command_line_in;
     std::getline(std::cin, command_line_in);
     std::istringstream iss(command_line_in);
@@ -41,7 +39,11 @@ void keyboard(P* parser, M* masterHA, controls *main_controls){
 
 template <class PARSER, class MHA, class DATA>
 void monitor(PARSER *parser, MHA* masterHA, controls *main_controls){
-    ews_connection<PARSER, MHA, DATA> server(parser, masterHA, 8001);
+#ifdef __linux__
+    int rc = pthread_setname_np(pthread_self(), "OSP: Console");
+    if (rc != 0)
+        std::cerr << "pthread_setname_np failed" << std::endl;
+#endif
     while(!main_controls->endloop){
         keyboard<PARSER, MHA, DATA>(parser, masterHA, main_controls);
     }
@@ -51,41 +53,83 @@ template <class PARSER, class MHA, class DATA>
 int openspeechplatform(PARSER *parser, MHA *masterHA, controls *main_controls){
 
 
+    auto cb = [](const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer,
+            const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void *userData) -> int {
+
+        (void) timeInfo;
+        (void) &statusFlags;
+        auto masterHA = (MHA *) userData;
+        auto in  = (float **) inputBuffer;
+        auto out = (float **) outputBuffer;
+        masterHA->process(in, out, framesPerBuffer);
+
+        return paContinue;
+    };
+
+#ifdef __linux__
+    cpu_set_t cpuset;
+    CPU_ZERO(&cpuset);
+    CPU_SET(0, &cpuset);
+    int rc = pthread_setaffinity_np(pthread_self(), sizeof(cpu_set_t), &cpuset);
+    if (rc != 0) {
+        std::cerr << "Error calling pthread_setaffinity_np: " << rc << std::endl;
+    }
+#endif
+
+    std::thread *monitoring = new std::thread(&monitor<PARSER, MHA, DATA>, parser, masterHA, main_controls); 
+
+#ifdef __linux__
+    rc = pthread_setname_np(pthread_self(), "OSP: EWS");
+    if (rc != 0)
+        std::cerr << "pthread_setname_np failed" << std::endl;
+#endif
+    ews_connection<PARSER, MHA, DATA> server(parser, masterHA, 8001);
+    
+    struct sched_param param; int pol;
+    int s = pthread_getschedparam(pthread_self(), &pol, &param);
+    if (s != 0)
+	    std::cerr << __func__ << "pthread_getschedparam failed" << std::endl;
+    param.sched_priority = 1;
+    s = pthread_setschedparam(pthread_self(), SCHED_FIFO, &param);
+    if (s != 0)
+	    std::cerr << __func__ << "pthread_setschedparam failed" << std::endl;
+
+#ifdef __linux__
+    CPU_ZERO(&cpuset);
+    CPU_SET(3, &cpuset);
+    rc = pthread_setaffinity_np(pthread_self(), sizeof(cpu_set_t), &cpuset);
+    if (rc != 0) {
+        std::cerr << "Error calling pthread_setaffinity_np: " << rc << std::endl;
+    }
+    rc = pthread_setname_np(pthread_self(), "OSP: Callbk");
+    if (rc != 0)
+        std::cerr << "pthread_setname_np failed" << std::endl;
+#endif
+
     portaudio_wrapper *audio;
     if(main_controls->input_device == -1) {
-        audio = new  portaudio_wrapper(2, 2, patestCallback<MHA>, (void *) masterHA, main_controls->samp_freq, main_controls->buf_size);
+        audio = new  portaudio_wrapper(2, 2, cb, (void *) masterHA, main_controls->samp_freq, main_controls->buf_size);
     }
     else{
-        audio = new  portaudio_wrapper(main_controls->input_device, 2, main_controls->output_device, 2, patestCallback<MHA>,
+        audio = new  portaudio_wrapper(main_controls->input_device, 2, main_controls->output_device, 2, cb,
                                        (void *) masterHA, main_controls->samp_freq, main_controls->buf_size);
     }
     audio->start_stream();
+    std::cout << "Input latency: " << audio->input_latency() << std::endl;
+    std::cout << "Output latency: " << audio->output_latency() << std::endl;
 
-    std::thread *monitoring = new std::thread(&monitor<PARSER, MHA, DATA>, parser, masterHA, main_controls);
 #ifdef __linux__
-        cpu_set_t cpuset;
-        CPU_ZERO(&cpuset);
-        CPU_SET(0, &cpuset);
-        int rc = pthread_setaffinity_np(monitoring->native_handle(),
-                                        sizeof(cpu_set_t), &cpuset);
-        if (rc != 0) {
-            std::cerr << "Error calling pthread_setaffinity_np: " << rc << "\n";
-        }
+    rc = pthread_setname_np(pthread_self(), "OSP: Main");
+    if (rc != 0)
+        std::cerr << "pthread_setname_np failed" << std::endl;
 #endif
 
     monitoring->join();
 
     audio->stop_stream();
     delete audio;
-    delete masterHA;
-    delete parser;
-
 
     return 0;
-
-
 }
-
-
 
 #endif //OSP_CLION_CXX_OPENSPEECHPLATFORM_HPP

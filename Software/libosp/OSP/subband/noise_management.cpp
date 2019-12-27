@@ -60,6 +60,12 @@ noise_management::noise_management(int ntype, int stype, float sparam, float fsa
 
     tau = 200; //floatime constant in msec
     bCB = exp(-1.0f / (0.001f * tau * fsamp)); //LP filter coefficient for noise ave
+
+    // Parameters for initialization
+    prob = 0.5;
+    peak_init = 0;
+    npow_init = 0;
+    valley_init = 0;
 }
 
 noise_management::~noise_management(){
@@ -94,13 +100,20 @@ noise_management::speech_enhancement(float *data_in, size_t in_len, float *data_
     float valley[in_len];
     float gain[in_len];
 
+    float n1;
+    float p;
+    float b;
+
     auto data_current = global_current.load();
     int ntype = data_current->ntype;
     int stype = data_current->stype;
     float sparam = data_current->sparam;
 
-    peak[0] = array_mean(data_in, in_len);
-    valley[0] = peak[0];
+    // peak[0] = array_mean(data_in, in_len);
+    // valley[0] = peak[0];
+
+    peak[0] = (peak_init == 0) ? array_mean(data_in, in_len) : peak_init;
+    valley[0] = (valley_init == 0) ? peak[0] : valley_init;
 
     for (size_t n = 1; n < in_len; n++) {
         xabs = fabsf(data_in[n]);
@@ -122,7 +135,7 @@ noise_management::speech_enhancement(float *data_in, size_t in_len, float *data_
 
     /* Noise power estimation */
 
-    npow[0] = xpow[0];
+    npow[0] = (npow_init == 0) ? xpow[0] : npow_init;
     array_square(valley, vpow, in_len);
 
     if (ntype == 1) {
@@ -145,7 +158,7 @@ noise_management::speech_enhancement(float *data_in, size_t in_len, float *data_
         }
     } else if (ntype == 3) {
         /* Noise power estimation using MCRA of Cohen and Berdugo */
-        prob = 0.5; // Prob of first sample being speech
+        // prob = 0.5; // Prob of first sample being speech
         for (size_t n = 1; n < in_len; n++) {
             // P[speech] for this sample
             if (xpow[n] > delta * vpow[n])
@@ -178,4 +191,8 @@ noise_management::speech_enhancement(float *data_in, size_t in_len, float *data_
     } else {
         printf("Wrong data_in for Spectral subtraction\n");
     }
+
+    peak_init = peak[in_len - 1];
+    npow_init = npow[in_len - 1];
+    valley_init = valley[in_len - 1];
 }

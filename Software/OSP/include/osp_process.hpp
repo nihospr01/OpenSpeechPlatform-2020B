@@ -64,7 +64,7 @@ public:
                                      user_data[0].bf_alpha, user_data[0].bf_beta, user_data[0].bf_p, user_data[0].bf_c,
                                      user_data[0].bf_power_estimate, user_data[0].bf,user_data[0].bf_nc_on_off,
                                      user_data[0].bf_amc_on_off,user_data[0].nc_thr,user_data[0].amc_thr,user_data[0].amc_forgetting_factor);
-        for(int channel = 0; channel < NUM_CHANNEL; channel++) {
+        for(int channel = 0; channel < DEFAULTS::NUM_CHANNEL; channel++) {
             e_n_bf_[channel] = new circular_buffer(max_dwn_buf+BAND_FILT_LEN, 0.0f);
             alpha[channel] = user_data[channel].alpha;
             en_ha[channel] = user_data[channel].en_ha;
@@ -108,19 +108,39 @@ public:
                 y_hat_[channel][j] = 0;
             }
             if(multithread) {
-                proc_chan_thread[channel] = new std::thread(&osp_process::process_channels, this, channel);
+		proc_chan_thread[channel] = new std::thread(&osp_process::process_channels, this, channel);
+		struct sched_param param; int pol;
+		int s = pthread_getschedparam(proc_chan_thread[channel]->native_handle(), &pol, &param);
+		if (s != 0)
+		    std::cerr << __func__ << "pthread_getschedparam failed" << std::endl;
+		param.sched_priority = 2;
+		s = pthread_setschedparam(proc_chan_thread[channel]->native_handle(), SCHED_FIFO, &param);
+		if (s != 0)
+		    std::cerr << __func__ << "pthread_setschedparam failed" << std::endl;
 #ifdef __linux__
                 cpu_set_t cpuset;
                 CPU_ZERO(&cpuset);
                 CPU_SET(channel+1, &cpuset);
-                int rc = pthread_setaffinity_np(proc_chan_thread[channel]->native_handle(),
-                                                sizeof(cpu_set_t), &cpuset);
+                int rc = pthread_setaffinity_np(proc_chan_thread[channel]->native_handle(), sizeof(cpu_set_t), &cpuset);
                 if (rc != 0) {
                     std::cerr << "Error calling pthread_setaffinity_np: " << rc << "\n";
                 }
+                std::stringstream name;
+                name << "OSP: Chan " << channel;
+                rc = pthread_setname_np(proc_chan_thread[channel]->native_handle(), name.str().c_str());
+                if (rc != 0)
+                    std::cerr << "pthread_setname_np failed" << std::endl;
 #endif
-                proc_chan_thread[channel]->detach();
-            }
+            } else {
+		struct sched_param param; int pol;
+		int s = pthread_getschedparam(pthread_self(), &pol, &param);
+		if (s != 0)
+		    std::cerr << __func__ << "pthread_getschedparam failed" << std::endl;
+		param.sched_priority = 2;
+		s = pthread_setschedparam(pthread_self(), SCHED_FIFO, &param);
+		if (s != 0)
+		    std::cerr << __func__ << "pthread_setschedparam failed" << std::endl;
+	    }
         }
     };
 
@@ -129,8 +149,9 @@ public:
      */
     ~osp_process(){
         delete beamformer_;
-        for(int channel = 0; channel < NUM_CHANNEL; channel++){
+        for(int channel = 0; channel < DEFAULTS::NUM_CHANNEL; channel++){
             if(multithread) {
+		proc_chan_thread[channel]->join();
                 delete proc_chan_thread[channel];
             }
             delete up_sample[channel];
@@ -160,7 +181,7 @@ public:
 //        auto start = std::chrono::high_resolution_clock::now();
         this->buf_size = buf_size;
 
-        for(int channel = 0; channel < NUM_CHANNEL; channel++) {
+        for(int channel = 0; channel < DEFAULTS::NUM_CHANNEL; channel++) {
             float x_n_data[max_dwn_buf];
             float file_read[48];
             f1.rtmha_play(buf_size,file_read,channel);
@@ -175,13 +196,13 @@ public:
         float e_n_data[2][max_dwn_buf];
         /// Beamforming start
         beamformer_->get_e(e_n_data[0],e_n_data[1],e_n_lr_[0],e_n_lr_[1],out_size_);
-        for(int channel = 0; channel < NUM_CHANNEL; channel++) {
+        for(int channel = 0; channel < DEFAULTS::NUM_CHANNEL; channel++) {
             e_n_bf_[channel]->set(e_n_data[channel],out_size_);
         }
         /// Beamforming end
         input = in;
         output = out;
-        for(int j = 0; j < NUM_CHANNEL; j++) {
+        for(int j = 0; j < DEFAULTS::NUM_CHANNEL; j++) {
             if(en_ha[j]) {
                 start(j);
             }
@@ -190,7 +211,7 @@ public:
             }
         }
         beamformer_->update_bf_taps(out_size_);
-        for(int i = 0; i < NUM_CHANNEL; i++){
+        for(int i = 0; i < DEFAULTS::NUM_CHANNEL; i++){
             if(en_ha[i]) {
                 join(i);
             }
@@ -213,7 +234,7 @@ public:
         beamformer_->set_params(user_data[0].bf_mu,user_data[0].bf_rho,user_data[0].bf_delta,user_data[0].bf_alpha,
                                 user_data[0].bf_beta,user_data[0].bf_p,user_data[0].bf_c,user_data[0].bf_type);
         beamformer_->set_bf_params(user_data[0].bf,user_data[0].bf_nc_on_off,user_data[0].bf_amc_on_off,user_data[0].nc_thr,user_data[0].amc_thr,user_data[0].amc_forgetting_factor);
-        for(int channel = 0; channel < NUM_CHANNEL; channel++) {
+        for(int channel = 0; channel < DEFAULTS::NUM_CHANNEL; channel++) {
             alpha[channel] = user_data[channel].alpha;
             gain[channel] = powf(10.0f, user_data[channel].gain / 20.0f);
             en_ha[channel] = user_data[channel].en_ha;
@@ -250,7 +271,7 @@ public:
         }
 
         auto leftUserData = user_data[0];
-        recorder.set_params(leftUserData.record_start,leftUserData.record_stop,leftUserData.record_length,leftUserData.audio_recordfile.c_str());
+        recorder->set_params(leftUserData.record_start,leftUserData.record_stop,leftUserData.record_length,leftUserData.audio_recordfile.c_str());
         if(!leftUserData.audio_filename.empty()){
             f1.set_params(leftUserData.audio_filename.c_str(), leftUserData.audio_reset,
                           leftUserData.audio_repeat, leftUserData.audio_play );
@@ -270,7 +291,7 @@ public:
         beamformer_->get_params(user_data[0].bf_mu,user_data[0].bf_rho,user_data[0].bf_delta,user_data[0].bf_alpha,
                                 user_data[0].bf_beta,user_data[0].bf_p,user_data[0].bf_c,user_data[0].bf_type);
         beamformer_->get_bf_params(user_data[0].bf,user_data[0].bf_nc_on_off,user_data[0].bf_amc_on_off,user_data[0].nc_thr,user_data[0].amc_thr,user_data[0].amc_forgetting_factor);
-        for(int channel = 0; channel < NUM_CHANNEL; channel++) {
+        for(int channel = 0; channel < DEFAULTS::NUM_CHANNEL; channel++) {
             user_data[channel].alpha = alpha[channel];
             user_data[channel].gain = log10f(gain[channel]) * 20.0f;
             user_data[channel].en_ha = en_ha[channel];
@@ -291,7 +312,7 @@ public:
             user_data[channel].afc_delay = afc_delay_in_samples/32.0f;
             afcs_[channel]->get_afc_on_off(user_data[channel].afc);
             user_data[channel].afc_reset = 0; // not a state, afc_reset is actually a signal
-            recorder.get_params(user_data[channel].record_length);
+            recorder->get_params(user_data[channel].record_length);
 
         }
 
@@ -332,9 +353,9 @@ public:
             afcs_[channel]->get_y_hat(y_hat_[channel],e_n_lr_[channel],s_n_data,out_size_);
             /// AFC end
             up_sample[channel]->resamp(s_n_data, out_size_, output[channel], &resamp_out_size);
-            recorder.record_before(buf_size, input[channel], channel);
-            recorder.rtmha_record(buf_size, input[channel], channel);
-            recorder.record_after(buf_size, input[channel], channel);
+            recorder->record_before(buf_size, input[channel], channel);
+            recorder->rtmha_record(buf_size, input[channel], channel);
+            recorder->record_after(buf_size, input[channel], channel);
             rk_sema_post(finish_sema[channel]);
 
         }while(multithread);
@@ -365,31 +386,31 @@ public:
 
 private:
     float ** volatile input, ** volatile output;
-    volatile bool finish[NUM_CHANNEL];
+    volatile bool finish[DEFAULTS::NUM_CHANNEL];
     size_t buf_size;
-    rk_sema *thread_mutex[NUM_CHANNEL], *finish_sema[NUM_CHANNEL];
-    std::thread *proc_chan_thread[NUM_CHANNEL];
+    rk_sema *thread_mutex[DEFAULTS::NUM_CHANNEL], *finish_sema[DEFAULTS::NUM_CHANNEL];
+    std::thread *proc_chan_thread[DEFAULTS::NUM_CHANNEL];
     bool multithread;
-    float gain[NUM_CHANNEL];
-    int en_ha[NUM_CHANNEL];
-    resample* up_sample[NUM_CHANNEL];
-    resample* down_sample[NUM_CHANNEL];
-    filter *filters[NUM_CHANNEL][NUM_BANDS];
-    noise_management *noiseMangement[NUM_CHANNEL][NUM_BANDS];
-    peak_detect *peakDetect[NUM_CHANNEL][NUM_BANDS];
-    wdrc *wdrcs[NUM_CHANNEL][NUM_BANDS];
+    float gain[DEFAULTS::NUM_CHANNEL];
+    int en_ha[DEFAULTS::NUM_CHANNEL];
+    resample* up_sample[DEFAULTS::NUM_CHANNEL];
+    resample* down_sample[DEFAULTS::NUM_CHANNEL];
+    filter *filters[DEFAULTS::NUM_CHANNEL][NUM_BANDS];
+    noise_management *noiseMangement[DEFAULTS::NUM_CHANNEL][NUM_BANDS];
+    peak_detect *peakDetect[DEFAULTS::NUM_CHANNEL][NUM_BANDS];
+    wdrc *wdrcs[DEFAULTS::NUM_CHANNEL][NUM_BANDS];
     size_t max_dwn_buf;
-    afc* afcs_[NUM_CHANNEL];
+    afc* afcs_[DEFAULTS::NUM_CHANNEL];
     beamformer* beamformer_;
     size_t out_size_;
-    float* e_n_lr_[NUM_CHANNEL];
-    circular_buffer* e_n_bf_[NUM_CHANNEL];
-    float* y_hat_[NUM_CHANNEL];
-    wdrc *global_mpo[NUM_CHANNEL];
-    peak_detect *pd_global_mpo[NUM_CHANNEL];
-    float alpha[NUM_CHANNEL];
+    float* e_n_lr_[DEFAULTS::NUM_CHANNEL];
+    circular_buffer* e_n_bf_[DEFAULTS::NUM_CHANNEL];
+    float* y_hat_[DEFAULTS::NUM_CHANNEL];
+    wdrc *global_mpo[DEFAULTS::NUM_CHANNEL];
+    peak_detect *pd_global_mpo[DEFAULTS::NUM_CHANNEL];
+    float alpha[DEFAULTS::NUM_CHANNEL];
     file_play f1;
-    file_record recorder;
+    file_record* recorder = new file_record;
 
 };
 

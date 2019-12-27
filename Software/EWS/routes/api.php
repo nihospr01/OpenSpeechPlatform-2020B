@@ -27,10 +27,3 @@ Route::post('params', 'ApiController@updateParameters');
 
 Route::get('getParams', 'ApiController@getParameters');
 
-// Route::post('noise', 'ApiController@updateNoise');
-
-// Route::post('feedback', 'ApiController@updateFeedback');
-
-// Route::post('4afc', 'ApiController@playSound');
-
-

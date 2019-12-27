@@ -19,7 +19,7 @@
       font-size: 24;
     }
 
-    
+
 
     </style>
 </head>
@@ -92,7 +92,7 @@
 
     <script>
         function confirmDelete(data) {
-            var url = 'http://localhost:8000/goldilocks/admin/programs/' + data.id;
+            var url = window.location.origin + '/goldilocks/admin/programs/' + data.id;
             $('#delProgramForm').attr('action', url);
             $('#delProgramModal').modal();
         }

@@ -46,7 +46,7 @@ public:
                         ("afc_mu", "Adjust the step size for feedback management", cxxopts::value<float>()->default_value("0.005"))
                         ("afc_rho", "Adjust the forgetting factor for feedback management", cxxopts::value<float>()->default_value("0.985"))
                         ("afc_power_estimate", "Adjust the power estimate for feedback management", cxxopts::value<float>()->default_value("0.0"))
-                        ("bf", "Enable beamformer: 0 - Disable; 1 - Enable", cxxopts::value<int>()->default_value("1"))
+                        ("bf", "Enable beamformer: 0 - Disable; 1 - Enable", cxxopts::value<int>()->default_value("0"))
                         ("bf_type", "Adaptation type for GSC beamforming: 0 - Stop adaptation; 1 - Modified LMS; 2 - IPNLMS; 3 - SLMS", cxxopts::value<int>()->default_value("3"))
                         ("bf_mu", "Adjust the step size for GSC beamforming", cxxopts::value<float>()->default_value("0.05"))
                         ("bf_rho", "Adjust the forgetting factor for beamforming", cxxopts::value<float>()->default_value("0.985"))
