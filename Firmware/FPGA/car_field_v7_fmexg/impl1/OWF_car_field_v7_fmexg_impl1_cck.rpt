@@ -1,0 +1,117 @@
+# Synopsys Constraint Checker, version maplat, Build 1796R, built Aug  4 2017
+# Copyright (C) 1994-2017 Synopsys, Inc. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
+
+# Written on Wed Sep 18 18:43:14 2019
+
+
+##### DESIGN INFO #######################################################
+
+Top View:                "tl_car_field"
+Constraint File(s):      (none)
+
+
+
+
+##### SUMMARY ############################################################
+
+Found 0 issues in 0 out of 0 constraints
+
+
+##### DETAILS ############################################################
+
+
+
+Clock Relationships
+*******************
+
+Starting                                         Ending                                           |     rise to rise     |     fall to fall     |     rise to fall     |     fall to rise                     
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+System                                           System                                           |     1000.000         |     No paths         |     No paths         |     No paths                         
+System                                           tl_car_field|spi4_clk                            |     No paths         |     No paths         |     1000.000         |     No paths                         
+tl_car_field|ext_clk_in                          System                                           |     1000.000         |     No paths         |     No paths         |     No paths                         
+tl_car_field|ext_clk_in                          tl_car_field|ext_clk_in                          |     1000.000         |     No paths         |     No paths         |     No paths                         
+pll_4|CLKOP_inferred_clock                       pll_4|CLKOP_inferred_clock                       |     1000.000         |     No paths         |     No paths         |     No paths                         
+pll_4|CLKOP_inferred_clock                       car_clock_gen|divider_derived_clock[1]           |     1000.000         |     No paths         |     No paths         |     No paths                         
+tl_car_field|spi4_clk                            System                                           |     No paths         |     No paths         |     No paths         |     1000.000                         
+tl_car_field|spi4_clk                            tl_car_field|spi4_clk                            |     1000.000         |     1000.000         |     500.000          |     No paths                         
+tl_car_field|mute_btn_internal_derived_clock     tl_car_field|mute_btn_internal_derived_clock     |     No paths         |     1000.000         |     No paths         |     No paths                         
+tl_car_field|mute_btn_internal_derived_clock     car_clock_gen|divider_derived_clock[1]           |     No paths         |     Diff grp         |     No paths         |     No paths                         
+car_clock_gen|divider_derived_clock[1]           car_clock_gen|divider_derived_clock[1]           |     1000.000         |     1000.000         |     500.000          |     500.000                          
+=============================================================================================================================================================================================================
+ Note: 'No paths' indicates there are no paths in the design for that pair of clock edges.
+       'Diff grp' indicates that paths exist but the starting clock and ending clock are in different clock groups.
+
+
+Unconstrained Start/End Points
+******************************
+
+p:adc_clk
+p:adc_data[0]
+p:adc_data[1]
+p:adc_data[2]
+p:adc_data[3]
+p:adc_data[4]
+p:adc_data[5]
+p:adc_data[6]
+p:adc_data[7]
+p:adc_data[8]
+p:adc_data[9]
+p:adc_data[10]
+p:adc_data[11]
+p:adc_interrupt
+p:adc_pdwn
+p:fmexg_mic_sync
+p:i2s1_d0
+p:i2s1_sck
+p:i2s1_ws
+p:i2s2_d0
+p:i2s2_d1
+p:i2s2_sck
+p:i2s2_ws
+p:l_lvds_io (bidir end point)
+p:l_lvds_io (bidir start point)
+p:led4_muteout
+p:r_lvds_io (bidir end point)
+p:r_lvds_io (bidir start point)
+p:spi1_clk
+p:spi1_cs0
+p:spi1_cs2
+p:spi1_miso
+p:spi1_mosi
+p:spi3_clk
+p:spi3_cs0
+p:spi3_cs3
+p:spi3_miso
+p:spi3_mosi
+p:spi4_cs
+p:spi4_miso
+p:spi4_mosi
+p:test_l2
+p:test_m1
+p:test_m2
+p:volplus_mute
+
+
+Inapplicable constraints
+************************
+
+(none)
+
+
+Applicable constraints with issues
+**********************************
+
+(none)
+
+
+Constraints with matching wildcard expressions
+**********************************************
+
+(none)
+
+
+Library Report
+**************
+
+
+# End of Constraint Checker Report

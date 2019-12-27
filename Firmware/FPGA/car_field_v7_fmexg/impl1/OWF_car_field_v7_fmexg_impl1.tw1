@@ -1,0 +1,349 @@
+
+Loading design for application trce from file OWF_car_field_v7_fmexg_impl1_map.ncd.
+Design name: tl_car_field
+NCD version: 3.3
+Vendor:      LATTICE
+Device:      LCMXO3LF-6900C
+Package:     CABGA256
+Performance: 5
+Loading device for application trce from file 'xo3c6900.nph' in environment: /usr/local/diamond/3.10_x64/ispfpga.
+Package Status:                     Final          Version 1.16.
+Performance Hardware Data Status:   Final          Version 37.4.
+Setup and Hold Report
+
+--------------------------------------------------------------------------------
+Lattice TRACE Report - Setup, Version Diamond (64-bit) 3.10.0.111.2
+Fri Nov 15 13:10:28 2019
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2017 Lattice Semiconductor Corporation,  All rights reserved.
+
+Report Information
+------------------
+Command line:    trce -v 1 -gt -mapchkpnt 0 -sethld -o OWF_car_field_v7_fmexg_impl1.tw1 -gui -msgset /home/hari/Documents/osp-wearable-fpga/car_field_v7_fmexg/promote.xml OWF_car_field_v7_fmexg_impl1_map.ncd OWF_car_field_v7_fmexg_impl1.prf 
+Design file:     OWF_car_field_v7_fmexg_impl1_map.ncd
+Preference file: OWF_car_field_v7_fmexg_impl1.prf
+Device,speed:    LCMXO3LF-6900C,5
+Report level:    verbose report, limited to 1 item per preference
+--------------------------------------------------------------------------------
+
+BLOCK ASYNCPATHS
+BLOCK RESETPATHS
+--------------------------------------------------------------------------------
+
+
+Derating parameters
+-------------------
+Temperature:   60 C
+Voltage:    3.300 V
+
+VCCIO Voltage:
+                   2.500 V (Bank 0, defined by PAR)
+                   3.300 V (Bank 1, defined by PAR)
+                   1.800 V (Bank 2, defined by PAR)
+                   3.300 V (Bank 3, defined by PAR)
+                   3.300 V (Bank 4)
+                   3.300 V (Bank 5, defined by PAR)
+
+
+
+================================================================================
+Preference: FREQUENCY NET "test_l1_c" 12.288000 MHz ;
+            306 items scored, 0 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Passed: The following path meets requirements by 76.094ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              mute_debounce_counter[1]  (from test_l1_c +)
+   Destination:    FF         Data in        mute_btn_internal_0io  (to test_l1_c +)
+
+   Delay:               5.237ns  (33.3% logic, 66.7% route), 4 logic levels.
+
+ Constraint Details:
+
+      5.237ns physical path delay SLICE_23 to volplus_mute_MGIOL meets
+     81.380ns delay constraint less
+      0.049ns CE_SET requirement (totaling 81.331ns) by 76.094ns
+
+ Physical Path Details:
+
+      Data path SLICE_23 to volplus_mute_MGIOL:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.405   SLICE_23.CLK to    SLICE_23.Q0 SLICE_23 (from test_l1_c)
+ROUTE         2   e 1.030    SLICE_23.Q0 to   SLICE_149.A0 mute_debounce_counter[1]
+CTOF_DEL    ---     0.447   SLICE_149.A0 to   SLICE_149.F0 SLICE_149
+ROUTE         1   e 0.401   SLICE_149.F0 to   SLICE_149.D1 op_and.op_and.result_7
+CTOF_DEL    ---     0.447   SLICE_149.D1 to   SLICE_149.F1 SLICE_149
+ROUTE         1   e 1.030   SLICE_149.F1 to   SLICE_103.D1 op_and.op_and.result_12
+CTOF_DEL    ---     0.447   SLICE_103.D1 to   SLICE_103.F1 SLICE_103
+ROUTE         2   e 1.030   SLICE_103.F1 to *mute_MGIOL.CE op_and.op_and.result (to test_l1_c)
+                  --------
+                    5.237   (33.3% logic, 66.7% route), 4 logic levels.
+
+Report:  189.179MHz is the maximum frequency for this preference.
+
+
+================================================================================
+Preference: FREQUENCY NET "hr_clk_0" 49.152000 MHz ;
+            746 items scored, 0 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Passed: The following path meets requirements by 12.187ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              l_car_core/e_car_sequencer/lvdscounter_pipe_4  (from hr_clk_0 +)
+   Destination:    FF         Data in        l_car_core/e_car_sequencer/lvds_io_1  (to hr_clk_0 +)
+
+   Delay:               8.010ns  (38.5% logic, 61.5% route), 7 logic levels.
+
+ Constraint Details:
+
+      8.010ns physical path delay l_car_core/e_car_sequencer/SLICE_63 to l_car_core/e_car_sequencer/SLICE_104 meets
+     20.345ns delay constraint less
+      0.148ns DIN_SET requirement (totaling 20.197ns) by 12.187ns
+
+ Physical Path Details:
+
+      Data path l_car_core/e_car_sequencer/SLICE_63 to l_car_core/e_car_sequencer/SLICE_104:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.405 */SLICE_63.CLK to *r/SLICE_63.Q0 l_car_core/e_car_sequencer/SLICE_63 (from hr_clk_0)
+ROUTE         7   e 1.030 *r/SLICE_63.Q0 to   SLICE_159.A1 l_car_core/e_car_sequencer/lvdscounter_pipe_4_Q
+CTOF_DEL    ---     0.447   SLICE_159.A1 to   SLICE_159.F1 SLICE_159
+ROUTE         4   e 1.030   SLICE_159.F1 to */SLICE_158.A1 l_car_core/e_car_sequencer/N_19
+CTOF_DEL    ---     0.447 */SLICE_158.A1 to */SLICE_158.F1 l_car_core/SLICE_158
+ROUTE         1   e 0.401 */SLICE_158.F1 to */SLICE_158.A0 l_car_core/e_car_sequencer/un1_i2s_spkr_dat_iv_0_a3_0_2
+CTOF_DEL    ---     0.447 */SLICE_158.A0 to */SLICE_158.F0 l_car_core/SLICE_158
+ROUTE         1   e 1.030 */SLICE_158.F0 to   SLICE_157.A0 l_car_core/e_car_sequencer/N_61
+CTOF_DEL    ---     0.447   SLICE_157.A0 to   SLICE_157.F0 SLICE_157
+ROUTE         1   e 1.030   SLICE_157.F0 to */SLICE_104.B1 l_car_core/e_car_sequencer/un1_i2s_spkr_dat_iv_0_0
+CTOF_DEL    ---     0.447 */SLICE_104.B1 to */SLICE_104.F1 l_car_core/e_car_sequencer/SLICE_104
+ROUTE         1   e 0.401 */SLICE_104.F1 to */SLICE_104.D0 l_car_core/e_car_sequencer/un1_i2s_spkr_dat_iv_0_2
+CTOF_DEL    ---     0.447 */SLICE_104.D0 to */SLICE_104.F0 l_car_core/e_car_sequencer/SLICE_104
+ROUTE         1   e 0.001 */SLICE_104.F0 to *SLICE_104.DI0 l_car_core/e_car_sequencer/un1_i2s_spkr_dat_iv_0 (to hr_clk_0)
+                  --------
+                    8.010   (38.5% logic, 61.5% route), 7 logic levels.
+
+Report:  122.579MHz is the maximum frequency for this preference.
+
+Report Summary
+--------------
+----------------------------------------------------------------------------
+Preference                              |   Constraint|       Actual|Levels
+----------------------------------------------------------------------------
+                                        |             |             |
+FREQUENCY NET "test_l1_c" 12.288000 MHz |             |             |
+;                                       |   12.288 MHz|  189.179 MHz|   4  
+                                        |             |             |
+FREQUENCY NET "hr_clk_0" 49.152000 MHz  |             |             |
+;                                       |   49.152 MHz|  122.579 MHz|   7  
+                                        |             |             |
+----------------------------------------------------------------------------
+
+
+All preferences were met.
+
+
+Clock Domains Analysis
+------------------------
+
+Found 4 clocks:
+
+Clock Domain: e_fmexg_core/clkdiv12   Source: e_fmexg_core/SLICE_26.Q0   Loads: 15
+   No transfer within this clock domain is found
+
+Clock Domain: spi4_clk_c   Source: spi4_clk.PAD   Loads: 35
+   No transfer within this clock domain is found
+
+Clock Domain: hr_clk_0   Source: e_pll_4/PLLInst_0.CLKOP   Loads: 107
+   Covered under: FREQUENCY NET "hr_clk_0" 49.152000 MHz ;
+
+   Data transfers from:
+   Clock Domain: test_l1_c   Source: ext_clk_in.PAD
+      Covered under: FREQUENCY NET "hr_clk_0" 49.152000 MHz ;   Transfers: 1
+
+Clock Domain: test_l1_c   Source: ext_clk_in.PAD   Loads: 23
+   Covered under: FREQUENCY NET "test_l1_c" 12.288000 MHz ;
+
+
+Timing summary (Setup):
+---------------
+
+Timing errors: 0  Score: 0
+Cumulative negative slack: 0
+
+Constraints cover 1052 paths, 2 nets, and 910 connections (73.39% coverage)
+
+--------------------------------------------------------------------------------
+Lattice TRACE Report - Hold, Version Diamond (64-bit) 3.10.0.111.2
+Fri Nov 15 13:10:28 2019
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2017 Lattice Semiconductor Corporation,  All rights reserved.
+
+Report Information
+------------------
+Command line:    trce -v 1 -gt -mapchkpnt 0 -sethld -o OWF_car_field_v7_fmexg_impl1.tw1 -gui -msgset /home/hari/Documents/osp-wearable-fpga/car_field_v7_fmexg/promote.xml OWF_car_field_v7_fmexg_impl1_map.ncd OWF_car_field_v7_fmexg_impl1.prf 
+Design file:     OWF_car_field_v7_fmexg_impl1_map.ncd
+Preference file: OWF_car_field_v7_fmexg_impl1.prf
+Device,speed:    LCMXO3LF-6900C,M
+Report level:    verbose report, limited to 1 item per preference
+--------------------------------------------------------------------------------
+
+BLOCK ASYNCPATHS
+BLOCK RESETPATHS
+--------------------------------------------------------------------------------
+
+
+Derating parameters
+-------------------
+Temperature:   60 C
+Voltage:    3.300 V
+
+VCCIO Voltage:
+                   2.500 V (Bank 0, defined by PAR)
+                   3.300 V (Bank 1, defined by PAR)
+                   1.800 V (Bank 2, defined by PAR)
+                   3.300 V (Bank 3, defined by PAR)
+                   3.300 V (Bank 4)
+                   3.300 V (Bank 5, defined by PAR)
+
+
+
+================================================================================
+Preference: FREQUENCY NET "test_l1_c" 12.288000 MHz ;
+            306 items scored, 0 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Passed: The following path meets requirements by 0.455ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              mute_debounce_counter[0]  (from test_l1_c +)
+   Destination:    FF         Data in        mute_debounce_counter[0]  (to test_l1_c +)
+
+   Delay:               0.442ns  (54.8% logic, 45.2% route), 2 logic levels.
+
+ Constraint Details:
+
+      0.442ns physical path delay SLICE_0 to SLICE_0 meets
+     -0.013ns DIN_HLD and
+      0.000ns delay constraint requirement (totaling -0.013ns) by 0.455ns
+
+ Physical Path Details:
+
+      Data path SLICE_0 to SLICE_0:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.138    SLICE_0.CLK to     SLICE_0.Q1 SLICE_0 (from test_l1_c)
+ROUTE         2   e 0.199     SLICE_0.Q1 to     SLICE_0.A1 mute_debounce_counter[0]
+CTOF_DEL    ---     0.104     SLICE_0.A1 to     SLICE_0.F1 SLICE_0
+ROUTE         1   e 0.001     SLICE_0.F1 to    SLICE_0.DI1 mute_debounce_counter_s[0] (to test_l1_c)
+                  --------
+                    0.442   (54.8% logic, 45.2% route), 2 logic levels.
+
+
+================================================================================
+Preference: FREQUENCY NET "hr_clk_0" 49.152000 MHz ;
+            746 items scored, 0 timing errors detected.
+--------------------------------------------------------------------------------
+
+
+Passed: The following path meets requirements by 0.357ns
+
+ Logical Details:  Cell type  Pin type       Cell/ASIC name  (clock net +/-)
+
+   Source:         FF         Q              l_car_core/e_i2s_dio/lrst_1  (from hr_clk_0 +)
+   Destination:    FF         Data in        l_car_core/e_i2s_dio/i2s_ws  (to hr_clk_0 +)
+
+   Delay:               0.337ns  (40.9% logic, 59.1% route), 1 logic levels.
+
+ Constraint Details:
+
+      0.337ns physical path delay SLICE_145 to SLICE_145 meets
+     -0.020ns M_HLD and
+      0.000ns delay constraint requirement (totaling -0.020ns) by 0.357ns
+
+ Physical Path Details:
+
+      Data path SLICE_145 to SLICE_145:
+
+   Name    Fanout   Delay (ns)          Site               Resource
+REG_DEL     ---     0.138  SLICE_145.CLK to   SLICE_145.Q1 SLICE_145 (from hr_clk_0)
+ROUTE         1   e 0.199   SLICE_145.Q1 to   SLICE_145.M0 l_car_core/e_i2s_dio/lrst_1 (to hr_clk_0)
+                  --------
+                    0.337   (40.9% logic, 59.1% route), 1 logic levels.
+
+Report Summary
+--------------
+----------------------------------------------------------------------------
+Preference(MIN Delays)                  |   Constraint|       Actual|Levels
+----------------------------------------------------------------------------
+                                        |             |             |
+FREQUENCY NET "test_l1_c" 12.288000 MHz |             |             |
+;                                       |     0.000 ns|     0.455 ns|   2  
+                                        |             |             |
+FREQUENCY NET "hr_clk_0" 49.152000 MHz  |             |             |
+;                                       |     0.000 ns|     0.357 ns|   1  
+                                        |             |             |
+----------------------------------------------------------------------------
+
+
+All preferences were met.
+
+
+Clock Domains Analysis
+------------------------
+
+Found 4 clocks:
+
+Clock Domain: e_fmexg_core/clkdiv12   Source: e_fmexg_core/SLICE_26.Q0   Loads: 15
+   No transfer within this clock domain is found
+
+Clock Domain: spi4_clk_c   Source: spi4_clk.PAD   Loads: 35
+   No transfer within this clock domain is found
+
+Clock Domain: hr_clk_0   Source: e_pll_4/PLLInst_0.CLKOP   Loads: 107
+   Covered under: FREQUENCY NET "hr_clk_0" 49.152000 MHz ;
+
+   Data transfers from:
+   Clock Domain: test_l1_c   Source: ext_clk_in.PAD
+      Covered under: FREQUENCY NET "hr_clk_0" 49.152000 MHz ;   Transfers: 1
+
+Clock Domain: test_l1_c   Source: ext_clk_in.PAD   Loads: 23
+   Covered under: FREQUENCY NET "test_l1_c" 12.288000 MHz ;
+
+
+Timing summary (Hold):
+---------------
+
+Timing errors: 0  Score: 0
+Cumulative negative slack: 0
+
+Constraints cover 1052 paths, 2 nets, and 910 connections (73.39% coverage)
+
+
+
+Timing summary (Setup and Hold):
+---------------
+
+Timing errors: 0 (setup), 0 (hold)
+Score: 0 (setup), 0 (hold)
+Cumulative negative slack: 0 (0+0)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+

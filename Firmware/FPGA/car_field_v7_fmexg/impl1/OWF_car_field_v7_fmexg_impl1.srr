@@ -1,0 +1,800 @@
+#Build: Synplify Pro (R) M-2017.03L-SP1-1, Build 086R, Aug  4 2017
+#install: /usr/local/diamond/3.10_x64/synpbase
+#OS: Linux 
+#Hostname: sys76-desktop
+
+# Wed Sep 18 18:43:12 2019
+
+#Implementation: impl1
+
+Synopsys HDL Compiler, version comp2017q2p1, Build 190R, built Aug  4 2017
+@N|Running in 64-bit mode
+Copyright (C) 1994-2017 Synopsys, Inc. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
+
+Synopsys VHDL Compiler, version comp2017q2p1, Build 190R, built Aug  4 2017
+@N|Running in 64-bit mode
+Copyright (C) 1994-2017 Synopsys, Inc. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
+
+Running on host :sys76-desktop
+@N: CD720 :"/usr/local/diamond/3.10_x64/synpbase/lib/vhd2008/std.vhd":146:18:146:21|Setting time resolution to ps
+@N:"/home/hari/Documents/osp-wearable-fpga/src/tl_car_field_withfmexg.vhd":5:7:5:18|Top entity is set to tl_car_field.
+
+File Dependency file is up to date.  It will not be rewritten.
+
+VHDL syntax check successful!
+
+Compiler output is up to date.  No re-compile necessary
+
+@N: CD231 :"/usr/local/diamond/3.10_x64/synpbase/lib/vhd2008/std1164.vhd":890:16:890:17|Using onehot encoding for type mvl9plus. For example, enumeration 'U' is mapped to "1000000000".
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/tl_car_field_withfmexg.vhd":5:7:5:18|Synthesizing work.tl_car_field.a.
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/fmexg_core.vhd":5:7:5:16|Synthesizing work.fmexg_core.a.
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/fmexg_fifo_8k_1025.vhd":14:7:14:24|Synthesizing work.fmexg_fifo_8k_1025.structure.
+@N: CD630 :"/usr/local/diamond/3.10_x64/cae_library/synthesis/vhdl/machxo3l.vhd":1874:10:1874:16|Synthesizing work.fifo8kb.syn_black_box.
+Post processing for work.fifo8kb.syn_black_box
+@N: CD630 :"/usr/local/diamond/3.10_x64/cae_library/synthesis/vhdl/machxo3l.vhd":1490:10:1490:12|Synthesizing work.vlo.syn_black_box.
+Post processing for work.vlo.syn_black_box
+@N: CD630 :"/usr/local/diamond/3.10_x64/cae_library/synthesis/vhdl/machxo3l.vhd":1483:10:1483:12|Synthesizing work.vhi.syn_black_box.
+Post processing for work.vhi.syn_black_box
+Post processing for work.fmexg_fifo_8k_1025.structure
+Post processing for work.fmexg_core.a
+@W: CL169 :"/home/hari/Documents/osp-wearable-fpga/src/fmexg_core.vhd":85:2:85:3|Pruning unused register rampcounter_2(11 downto 0). Make sure that there are no unused intermediate registers.
+@A: CL282 :"/home/hari/Documents/osp-wearable-fpga/src/fmexg_core.vhd":167:2:167:3|Feedback mux created for signal spi_byte_ctr[1:0]. It is possible a set/reset assignment for this is signal missing. To improve timing and area, specify a set/reset value.
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/car_core.vhd":5:7:5:14|Synthesizing work.car_core.a.
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/i2s_dio_2.vhd":11:7:11:15|Synthesizing work.i2s_dio_2.a.
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/sr8_falling.vhd":12:7:12:17|Synthesizing work.sr8_falling.a.
+Post processing for work.sr8_falling.a
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/r8_rising.vhd":6:7:6:15|Synthesizing work.r8_rising.a.
+Post processing for work.r8_rising.a
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/sr8_rising.vhd":12:7:12:16|Synthesizing work.sr8_rising.a.
+Post processing for work.sr8_rising.a
+Post processing for work.i2s_dio_2.a
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/car_sequencer.vhd":5:7:5:19|Synthesizing work.car_sequencer.a.
+Post processing for work.car_sequencer.a
+@W: CL169 :"/home/hari/Documents/osp-wearable-fpga/src/car_sequencer.vhd":34:2:34:3|Pruning unused register lvds_io_cl_11. Make sure that there are no unused intermediate registers.
+Post processing for work.car_core.a
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/car_clock_gen.vhd":7:7:7:19|Synthesizing work.car_clock_gen.a.
+Post processing for work.car_clock_gen.a
+@N: CD630 :"/home/hari/Documents/osp-wearable-fpga/src/pll_4.vhd":14:7:14:11|Synthesizing work.pll_4.structure.
+@N: CD630 :"/usr/local/diamond/3.10_x64/cae_library/synthesis/vhdl/machxo3l.vhd":2175:10:2175:16|Synthesizing work.ehxpllj.syn_black_box.
+Post processing for work.ehxpllj.syn_black_box
+Post processing for work.pll_4.structure
+Post processing for work.tl_car_field.a
+@N: CL159 :"/home/hari/Documents/osp-wearable-fpga/src/tl_car_field_withfmexg.vhd":32:2:32:10|Input spi4_mosi is unused.
+
+At c_vhdl Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 73MB peak: 74MB)
+
+Process took 0h:00m:01s realtime, 0h:00m:01s cputime
+
+Process completed successfully.
+# Wed Sep 18 18:43:12 2019
+
+###########################################################]
+Synopsys Netlist Linker, version comp2017q2p1, Build 190R, built Aug  4 2017
+@N|Running in 64-bit mode
+
+At syn_nfilter Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 68MB peak: 68MB)
+
+Process took 0h:00m:01s realtime, 0h:00m:01s cputime
+
+Process completed successfully.
+# Wed Sep 18 18:43:12 2019
+
+###########################################################]
+@END
+
+At c_hdl Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 3MB peak: 4MB)
+
+Process took 0h:00m:01s realtime, 0h:00m:01s cputime
+
+Process completed successfully.
+# Wed Sep 18 18:43:12 2019
+
+###########################################################]
+Synopsys Netlist Linker, version comp2017q2p1, Build 190R, built Aug  4 2017
+@N|Running in 64-bit mode
+File /home/hari/Documents/osp-wearable-fpga/car_field_v7_fmexg/impl1/synwork/OWF_car_field_v7_fmexg_impl1_comp.srs changed - recompiling
+
+At syn_nfilter Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 68MB peak: 69MB)
+
+Process took 0h:00m:01s realtime, 0h:00m:01s cputime
+
+Process completed successfully.
+# Wed Sep 18 18:43:14 2019
+
+###########################################################]
+Pre-mapping Report
+
+# Wed Sep 18 18:43:14 2019
+
+Synopsys Lattice Technology Pre-mapping, Version maplat, Build 1796R, Built Aug  4 2017 09:36:35
+Copyright (C) 1994-2017 Synopsys, Inc. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
+Product Version M-2017.03L-SP1-1
+
+Mapper Startup Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 98MB peak: 99MB)
+
+@A: MF827 |No constraint file specified.
+@L: /home/hari/Documents/osp-wearable-fpga/car_field_v7_fmexg/impl1/OWF_car_field_v7_fmexg_impl1_scck.rpt 
+Printing clock  summary report in "/home/hari/Documents/osp-wearable-fpga/car_field_v7_fmexg/impl1/OWF_car_field_v7_fmexg_impl1_scck.rpt" file 
+@N: MF248 |Running in 64-bit mode.
+@N: MF666 |Clock conversion enabled. (Command "set_option -fix_gated_and_generated_clocks 1" in the project file.)
+
+Design Input Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 100MB peak: 102MB)
+
+
+Mapper Initialization Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 100MB peak: 102MB)
+
+
+Start loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 112MB peak: 112MB)
+
+
+Finished loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 112MB peak: 114MB)
+
+ICG Latch Removal Summary:
+Number of ICG latches removed:	0
+Number of ICG latches not removed:	0
+syn_allowed_resources : blockrams=240  set on top level netlist tl_car_field
+
+Finished netlist restructuring (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 142MB)
+
+
+
+Clock Summary
+******************
+
+          Start                                              Requested     Requested     Clock                                         Clock                   Clock
+Level     Clock                                              Frequency     Period        Type                                          Group                   Load 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+0 -       System                                             1.0 MHz       1000.000      system                                        system_clkgroup         0    
+                                                                                                                                                                    
+0 -       pll_4|CLKOP_inferred_clock                         1.0 MHz       1000.000      inferred                                      Inferred_clkgroup_1     14   
+1 .         car_clock_gen|divider_derived_clock[1]           1.0 MHz       1000.000      derived (from pll_4|CLKOP_inferred_clock)     Inferred_clkgroup_1     181  
+                                                                                                                                                                    
+0 -       tl_car_field|spi4_clk                              1.0 MHz       1000.000      inferred                                      Inferred_clkgroup_2     42   
+                                                                                                                                                                    
+0 -       tl_car_field|ext_clk_in                            1.0 MHz       1000.000      inferred                                      Inferred_clkgroup_0     22   
+1 .         tl_car_field|mute_btn_internal_derived_clock     1.0 MHz       1000.000      derived (from tl_car_field|ext_clk_in)        Inferred_clkgroup_0     1    
+====================================================================================================================================================================
+
+@W: MT529 :"/home/hari/Documents/osp-wearable-fpga/src/fmexg_core.vhd":73:2:73:3|Found inferred clock tl_car_field|ext_clk_in which controls 22 sequential elements including e_fmexg_core.counter_div12[2:0]. This clock has no specified timing constraint which may prevent conversion of gated or generated clocks and may adversely impact design performance. 
+@W: MT529 :"/home/hari/Documents/osp-wearable-fpga/src/car_clock_gen.vhd":19:2:19:3|Found inferred clock pll_4|CLKOP_inferred_clock which controls 14 sequential elements including e_car_clock_gen.lvds_ctr[7:0]. This clock has no specified timing constraint which may prevent conversion of gated or generated clocks and may adversely impact design performance. 
+@W: MT529 :"/home/hari/Documents/osp-wearable-fpga/src/fmexg_core.vhd":167:2:167:3|Found inferred clock tl_car_field|spi4_clk which controls 42 sequential elements including e_fmexg_core.spi_byte_ctr[1:0]. This clock has no specified timing constraint which may prevent conversion of gated or generated clocks and may adversely impact design performance. 
+
+Finished Pre Mapping Phase.
+
+Starting constraint checker (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 142MB)
+
+
+Finished constraint checker preprocessing (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 142MB)
+
+None
+None
+
+Finished constraint checker (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 142MB)
+
+Pre-mapping successful!
+
+At Mapper Exit (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 56MB peak: 142MB)
+
+Process took 0h:00m:01s realtime, 0h:00m:01s cputime
+# Wed Sep 18 18:43:14 2019
+
+###########################################################]
+Map & Optimize Report
+
+# Wed Sep 18 18:43:14 2019
+
+Synopsys Lattice Technology Mapper, Version maplat, Build 1796R, Built Aug  4 2017 09:36:35
+Copyright (C) 1994-2017 Synopsys, Inc. This Synopsys software and all associated documentation are proprietary to Synopsys, Inc. and may only be used pursuant to the terms and conditions of a written license agreement with Synopsys, Inc. All other use, reproduction, modification, or distribution of the Synopsys software or the associated documentation is strictly prohibited.
+Product Version M-2017.03L-SP1-1
+
+Mapper Startup Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 98MB peak: 99MB)
+
+@N: MF248 |Running in 64-bit mode.
+@N: MF666 |Clock conversion enabled. (Command "set_option -fix_gated_and_generated_clocks 1" in the project file.)
+
+Design Input Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 98MB peak: 100MB)
+
+
+Mapper Initialization Complete (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 98MB peak: 100MB)
+
+
+Start loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 111MB peak: 112MB)
+
+
+Finished loading timing files (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 111MB peak: 114MB)
+
+
+
+Starting Optimization and Mapping (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 142MB)
+
+
+Available hyper_sources - for debug and ip models
+	None Found
+
+
+Finished RTL optimizations (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 140MB peak: 142MB)
+
+@N: MO231 :"/home/hari/Documents/osp-wearable-fpga/src/tl_car_field_withfmexg.vhd":120:2:120:3|Found counter in view:work.tl_car_field(a) instance mute_debounce_counter[16:0] 
+@N: MO231 :"/home/hari/Documents/osp-wearable-fpga/src/car_clock_gen.vhd":19:2:19:3|Found counter in view:work.tl_car_field(a) instance e_car_clock_gen.lvds_ctr[7:0] 
+@N: MO231 :"/home/hari/Documents/osp-wearable-fpga/src/i2s_dio_2.vhd":71:2:71:3|Found counter in view:work.i2s_dio_2_0(a) instance lvds_bit_ctr[4:0] 
+@N: MO231 :"/home/hari/Documents/osp-wearable-fpga/src/i2s_dio_2.vhd":71:2:71:3|Found counter in view:work.i2s_dio_2_1(a) instance lvds_bit_ctr[4:0] 
+
+Starting factoring (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 141MB peak: 142MB)
+
+@W: BN132 :"/home/hari/Documents/osp-wearable-fpga/src/i2s_dio_2.vhd":71:2:71:3|Removing sequential instance r_car_core.e_i2s_dio.lvds_bit_ctr[4:0] because it is equivalent to instance l_car_core.e_i2s_dio.lvds_bit_ctr[4:0]. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :"/home/hari/Documents/osp-wearable-fpga/src/i2s_dio_2.vhd":71:2:71:3|Removing instance r_car_core.e_i2s_dio.i2s_out_shiften because it is equivalent to instance l_car_core.e_i2s_dio.i2s_out_shiften. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :"/home/hari/Documents/osp-wearable-fpga/src/car_core.vhd":82:2:82:3|Removing instance r_car_core.i2s_lr_st_pre because it is equivalent to instance l_car_core.i2s_lr_st_pre. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :"/home/hari/Documents/osp-wearable-fpga/src/i2s_dio_2.vhd":71:2:71:3|Removing instance r_car_core.e_i2s_dio.i2s_in_shiften because it is equivalent to instance l_car_core.e_i2s_dio.i2s_in_shiften. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :"/home/hari/Documents/osp-wearable-fpga/src/sr8_rising.vhd":29:2:29:3|Removing instance r_car_core.e_i2s_dio.in_i2s_sr.buf[0] because it is equivalent to instance l_car_core.e_i2s_dio.in_i2s_sr.buf[0]. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :"/home/hari/Documents/osp-wearable-fpga/src/i2s_dio_2.vhd":71:2:71:3|Removing instance r_car_core.e_i2s_dio.cycle_begin because it is equivalent to instance l_car_core.e_i2s_dio.cycle_begin. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :"/home/hari/Documents/osp-wearable-fpga/src/r8_rising.vhd":19:2:19:3|Removing instance r_car_core.e_i2s_dio.in_reg_1.reg[0] because it is equivalent to instance l_car_core.e_i2s_dio.in_reg_1.reg[0]. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :"/home/hari/Documents/osp-wearable-fpga/src/i2s_dio_2.vhd":133:2:133:3|Removing instance r_car_core.e_i2s_dio.lrst_1 because it is equivalent to instance l_car_core.e_i2s_dio.lrst_1. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :"/home/hari/Documents/osp-wearable-fpga/src/sr8_rising.vhd":29:2:29:3|Removing instance r_car_core.e_i2s_dio.in_i2s_sr.buf[1] because it is equivalent to instance l_car_core.e_i2s_dio.in_i2s_sr.buf[1]. To keep the instance, apply constraint syn_preserve=1 on the instance.
+@W: BN132 :"/home/hari/Documents/osp-wearable-fpga/src/r8_rising.vhd":19:2:19:3|Removing instance r_car_core.e_i2s_dio.in_reg_1.reg[1] because it is equivalent to instance l_car_core.e_i2s_dio.in_reg_1.reg[1]. To keep the instance, apply constraint syn_preserve=1 on the instance.
+
+Finished factoring (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 142MB peak: 143MB)
+
+
+Starting gated-clock and generated-clock conversion (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 142MB peak: 143MB)
+
+
+Finished gated-clock and generated-clock conversion (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 142MB peak: 143MB)
+
+
+Finished generic timing optimizations - Pass 1 (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 143MB peak: 143MB)
+
+@N: FA113 :"/home/hari/Documents/osp-wearable-fpga/src/car_sequencer.vhd":89:9:89:35|Pipelining module un12_djb_present[27:32]. For more information, search for "pipelining" in Online Help.
+@N: MF169 :"/home/hari/Documents/osp-wearable-fpga/src/car_sequencer.vhd":34:2:34:3|Pushed in register lvdscounter[4:0].
+@N: FA113 :"/home/hari/Documents/osp-wearable-fpga/src/car_sequencer.vhd":89:9:89:35|Pipelining module un12_djb_present[27:32]. For more information, search for "pipelining" in Online Help.
+@N: MF169 :"/home/hari/Documents/osp-wearable-fpga/src/car_sequencer.vhd":34:2:34:3|Pushed in register lvdscounter[4:0].
+
+Starting Early Timing Optimization (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 143MB peak: 144MB)
+
+
+Finished Early Timing Optimization (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 143MB peak: 144MB)
+
+
+Finished generic timing optimizations - Pass 2 (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 143MB peak: 144MB)
+
+
+Finished preparing to map (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 143MB peak: 144MB)
+
+
+Finished technology mapping (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 143MB peak: 144MB)
+
+Pass		 CPU time		Worst Slack		Luts / Registers
+------------------------------------------------------------
+   1		0h:00m:00s		   495.91ns		 188 /       235
+
+Finished technology timing optimizations and critical path resynthesis (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 143MB peak: 144MB)
+
+@N: FX164 |The option to pack registers in the IOB has not been specified. Please set syn_useioff attribute.  
+
+Finished restoring hierarchy (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 143MB peak: 144MB)
+
+@N: MT611 :|Automatically generated clock tl_car_field|mute_btn_internal_derived_clock is not used and is being removed
+@N: MT611 :|Automatically generated clock car_clock_gen|divider_derived_clock[1] is not used and is being removed
+
+
+@S |Clock Optimization Summary
+
+
+#### START OF CLOCK OPTIMIZATION REPORT #####[
+
+2 non-gated/non-generated clock tree(s) driving 65 clock pin(s) of sequential element(s)
+1 gated/generated clock tree(s) driving 170 clock pin(s) of sequential element(s)
+1 instances converted, 170 sequential instances remain driven by gated/generated clocks
+
+================================== Non-Gated/Non-Generated Clocks ==================================
+Clock Tree ID     Driving Element     Drive Element Type     Fanout     Sample Instance             
+----------------------------------------------------------------------------------------------------
+@K:CKID0002       spi4_clk            port                   42         e_fmexg_core.spi_byte_ctr[1]
+@K:CKID0003       ext_clk_in          port                   23         mute_debounce_counter[0]    
+====================================================================================================
+================================================================================================== Gated/Generated Clocks ==================================================================================================
+Clock Tree ID     Driving Element       Drive Element Type     Fanout     Sample Instance     Explanation                                                                                                                   
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+@K:CKID0001       e_pll_4.PLLInst_0     EHXPLLJ                170        test_counter[0]     Gating structure creates improper gating logic. See the Gated Clocks description in the user guide for conversion requirements
+============================================================================================================================================================================================================================
+
+
+##### END OF CLOCK OPTIMIZATION REPORT ######]
+
+
+Start Writing Netlists (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 109MB peak: 144MB)
+
+Writing Analyst data base /home/hari/Documents/osp-wearable-fpga/car_field_v7_fmexg/impl1/synwork/OWF_car_field_v7_fmexg_impl1_m.srm
+
+Finished Writing Netlist Databases (Real Time elapsed 0h:00m:00s; CPU Time elapsed 0h:00m:00s; Memory used current: 142MB peak: 144MB)
+
+Writing EDIF Netlist and constraint files
+@N: FX1056 |Writing EDF file: /home/hari/Documents/osp-wearable-fpga/car_field_v7_fmexg/impl1/OWF_car_field_v7_fmexg_impl1.edi
+M-2017.03L-SP1-1
+@N: BW106 |Synplicity Constraint File capacitance units using default value of 1pF 
+
+Finished Writing EDIF Netlist and constraint files (Real Time elapsed 0h:00m:01s; CPU Time elapsed 0h:00m:01s; Memory used current: 146MB peak: 148MB)
+
+
+Start final timing analysis (Real Time elapsed 0h:00m:01s; CPU Time elapsed 0h:00m:01s; Memory used current: 147MB peak: 148MB)
+
+@W: MT246 :"/home/hari/Documents/osp-wearable-fpga/src/fmexg_fifo_8k_1025.vhd":332:4:332:26|Blackbox fifo8kb is missing a user supplied timing model. This may have a negative effect on timing analysis and optimizations (Quality of Results) 
+@W: MT246 :"/home/hari/Documents/osp-wearable-fpga/src/pll_4.vhd":105:4:105:12|Blackbox EHXPLLJ is missing a user supplied timing model. This may have a negative effect on timing analysis and optimizations (Quality of Results) 
+@W: MT420 |Found inferred clock tl_car_field|ext_clk_in with period 1000.00ns. Please declare a user-defined clock on object "p:ext_clk_in"
+@W: MT420 |Found inferred clock tl_car_field|spi4_clk with period 1000.00ns. Please declare a user-defined clock on object "p:spi4_clk"
+@W: MT420 |Found inferred clock pll_4|CLKOP_inferred_clock with period 1000.00ns. Please declare a user-defined clock on object "n:e_pll_4.CLKOP"
+
+
+##### START OF TIMING REPORT #####[
+# Timing Report written on Wed Sep 18 18:43:15 2019
+#
+
+
+Top view:               tl_car_field
+Requested Frequency:    1.0 MHz
+Wire load mode:         top
+Paths requested:        5
+Constraint File(s):    
+@N: MT320 |This timing report is an estimate of place and route data. For final timing results, use the FPGA vendor place and route report.
+
+@N: MT322 |Clock constraints include only register-to-register paths associated with each individual clock.
+
+
+
+Performance Summary
+*******************
+
+
+Worst slack in design: 495.907
+
+@N: MT286 |System clock period 0.000 stretches to negative invalid value -- ignoring stretching.
+                               Requested     Estimated      Requested     Estimated                 Clock        Clock              
+Starting Clock                 Frequency     Frequency      Period        Period        Slack       Type         Group              
+------------------------------------------------------------------------------------------------------------------------------------
+pll_4|CLKOP_inferred_clock     1.0 MHz       143.0 MHz      1000.000      6.992         993.008     inferred     Inferred_clkgroup_1
+tl_car_field|ext_clk_in        1.0 MHz       190.7 MHz      1000.000      5.242         994.758     inferred     Inferred_clkgroup_0
+tl_car_field|spi4_clk          1.0 MHz       122.2 MHz      1000.000      8.186         495.907     inferred     Inferred_clkgroup_2
+System                         1.0 MHz       1893.9 MHz     1000.000      0.528         999.472     system       system_clkgroup    
+====================================================================================================================================
+
+
+
+
+
+Clock Relationships
+*******************
+
+Clocks                                                  |    rise  to  rise      |    fall  to  fall     |    rise  to  fall     |    fall  to  rise   
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+Starting                    Ending                      |  constraint  slack     |  constraint  slack    |  constraint  slack    |  constraint  slack  
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+System                      System                      |  1000.000    1000.000  |  No paths    -        |  No paths    -        |  No paths    -      
+System                      tl_car_field|spi4_clk       |  No paths    -         |  No paths    -        |  1000.000    999.472  |  No paths    -      
+tl_car_field|ext_clk_in     System                      |  1000.000    998.744   |  No paths    -        |  No paths    -        |  No paths    -      
+tl_car_field|ext_clk_in     tl_car_field|ext_clk_in     |  1000.000    994.758   |  No paths    -        |  No paths    -        |  No paths    -      
+tl_car_field|ext_clk_in     pll_4|CLKOP_inferred_clock  |  Diff grp    -         |  No paths    -        |  No paths    -        |  No paths    -      
+pll_4|CLKOP_inferred_clock  pll_4|CLKOP_inferred_clock  |  1000.000    993.008   |  No paths    -        |  No paths    -        |  No paths    -      
+tl_car_field|spi4_clk       System                      |  No paths    -         |  No paths    -        |  No paths    -        |  1000.000    998.704
+tl_car_field|spi4_clk       tl_car_field|spi4_clk       |  1000.000    997.139   |  1000.000    998.474  |  500.000     495.907  |  No paths    -      
+=======================================================================================================================================================
+ Note: 'No paths' indicates there are no paths in the design for that pair of clock edges.
+       'Diff grp' indicates that paths exist but the starting clock and ending clock are in different clock groups.
+
+
+
+Interface Information 
+*********************
+
+No IO constraint found
+
+
+
+====================================
+Detailed Report for Clock: pll_4|CLKOP_inferred_clock
+====================================
+
+
+
+Starting Points with Worst Slack
+********************************
+
+                                                  Starting                                                                      Arrival            
+Instance                                          Reference                      Type        Pin     Net                        Time        Slack  
+                                                  Clock                                                                                            
+---------------------------------------------------------------------------------------------------------------------------------------------------
+l_car_core.e_car_sequencer.djb_present            pll_4|CLKOP_inferred_clock     FD1P3AX     Q       test_m2_c                  1.204       993.008
+l_car_core.e_car_sequencer.lvdscounter_pipe_4     pll_4|CLKOP_inferred_clock     FD1P3AX     Q       lvdscounter_pipe_4_Q       1.204       993.008
+r_car_core.e_car_sequencer.lvdscounter_pipe_4     pll_4|CLKOP_inferred_clock     FD1P3AX     Q       lvdscounter_pipe_4_Q_0     1.204       993.008
+r_car_core.e_car_sequencer.djb_present            pll_4|CLKOP_inferred_clock     FD1P3AX     Q       djb_present                1.188       993.024
+l_car_core.e_car_sequencer.lvdscounter[0]         pll_4|CLKOP_inferred_clock     FD1S3AX     Q       lvdscounter[0]             1.236       994.169
+r_car_core.e_car_sequencer.lvdscounter[0]         pll_4|CLKOP_inferred_clock     FD1S3AX     Q       lvdscounter[0]             1.236       994.169
+l_car_core.e_i2s_dio.i2s_ws                       pll_4|CLKOP_inferred_clock     FD1P3AX     Q       test_m1_c                  1.108       994.297
+e_car_clock_gen.seq_reset                         pll_4|CLKOP_inferred_clock     FD1P3AX     Q       seq_reset                  0.972       994.902
+r_car_core.e_car_sequencer.lvdscounter_pipe_1     pll_4|CLKOP_inferred_clock     FD1P3AX     Q       lvdscounter_pipe_1_Q_0     1.244       995.106
+l_car_core.e_car_sequencer.lvdscounter_pipe_1     pll_4|CLKOP_inferred_clock     FD1P3AX     Q       lvdscounter_pipe_1_Q       1.244       995.106
+===================================================================================================================================================
+
+
+Ending Points with Worst Slack
+******************************
+
+                                         Starting                                                                       Required            
+Instance                                 Reference                      Type        Pin     Net                         Time         Slack  
+                                         Clock                                                                                              
+--------------------------------------------------------------------------------------------------------------------------------------------
+l_car_core.e_car_sequencer.lvds_io_1     pll_4|CLKOP_inferred_clock     FD1P3AX     D       un1_i2s_spkr_dat_iv_0       1000.089     993.008
+r_car_core.e_car_sequencer.lvds_io_1     pll_4|CLKOP_inferred_clock     FD1P3AX     D       un1_i2s_spkr_dat_iv_0_0     1000.089     993.008
+l_car_core.e_i2s_dio.lvds_bit_ctr[3]     pll_4|CLKOP_inferred_clock     FD1P3AX     D       lvds_bit_ctr_s[3]           999.894      994.902
+l_car_core.e_i2s_dio.lvds_bit_ctr[4]     pll_4|CLKOP_inferred_clock     FD1P3AX     D       lvds_bit_ctr_s[4]           999.894      994.902
+l_car_core.e_i2s_dio.lvds_bit_ctr[1]     pll_4|CLKOP_inferred_clock     FD1P3AX     D       lvds_bit_ctr_s[1]           999.894      995.045
+l_car_core.e_i2s_dio.lvds_bit_ctr[2]     pll_4|CLKOP_inferred_clock     FD1P3AX     D       lvds_bit_ctr_s[2]           999.894      995.045
+e_car_clock_gen.lvds_ctr[7]              pll_4|CLKOP_inferred_clock     FD1P3AX     D       lvds_ctr_s[7]               999.894      995.329
+e_car_clock_gen.lvds_ctr[5]              pll_4|CLKOP_inferred_clock     FD1P3AX     D       lvds_ctr_s[5]               999.894      995.471
+e_car_clock_gen.lvds_ctr[6]              pll_4|CLKOP_inferred_clock     FD1P3AX     D       lvds_ctr_s[6]               999.894      995.471
+e_car_clock_gen.lvds_ctr[3]              pll_4|CLKOP_inferred_clock     FD1P3AX     D       lvds_ctr_s[3]               999.894      995.614
+============================================================================================================================================
+
+
+
+Worst Path Information
+***********************
+
+
+Path information for path number 1: 
+      Requested Period:                      1000.000
+    - Setup time:                            -0.089
+    + Clock delay at ending point:           0.000 (ideal)
+    = Required time:                         1000.089
+
+    - Propagation time:                      7.081
+    - Clock delay at starting point:         0.000 (ideal)
+    = Slack (non-critical) :                 993.008
+
+    Number of logic level(s):                6
+    Starting point:                          l_car_core.e_car_sequencer.djb_present / Q
+    Ending point:                            l_car_core.e_car_sequencer.lvds_io_1 / D
+    The start point is clocked by            pll_4|CLKOP_inferred_clock [rising] on pin CK
+    The end   point is clocked by            pll_4|CLKOP_inferred_clock [rising] on pin CK
+
+Instance / Net                                                           Pin      Pin               Arrival     No. of    
+Name                                                        Type         Name     Dir     Delay     Time        Fan Out(s)
+--------------------------------------------------------------------------------------------------------------------------
+l_car_core.e_car_sequencer.djb_present                      FD1P3AX      Q        Out     1.204     1.204       -         
+test_m2_c                                                   Net          -        -       -         -           7         
+l_car_core.e_car_sequencer.i2s_spkr_sh_2_i_o3               ORCALUT4     B        In      0.000     1.204       -         
+l_car_core.e_car_sequencer.i2s_spkr_sh_2_i_o3               ORCALUT4     Z        Out     1.193     2.397       -         
+N_61                                                        Net          -        -       -         -           4         
+l_car_core.e_car_sequencer.un1_i2s_spkr_dat_iv_0_a3_0_2     ORCALUT4     A        In      0.000     2.397       -         
+l_car_core.e_car_sequencer.un1_i2s_spkr_dat_iv_0_a3_0_2     ORCALUT4     Z        Out     1.017     3.413       -         
+un1_i2s_spkr_dat_iv_0_a3_0_2                                Net          -        -       -         -           1         
+l_car_core.e_car_sequencer.un1_i2s_spkr_dat_iv_0_a3_0       ORCALUT4     A        In      0.000     3.413       -         
+l_car_core.e_car_sequencer.un1_i2s_spkr_dat_iv_0_a3_0       ORCALUT4     Z        Out     1.017     4.430       -         
+N_71                                                        Net          -        -       -         -           1         
+l_car_core.e_car_sequencer.un1_i2s_spkr_dat_iv_0_0          ORCALUT4     A        In      0.000     4.430       -         
+l_car_core.e_car_sequencer.un1_i2s_spkr_dat_iv_0_0          ORCALUT4     Z        Out     1.017     5.447       -         
+un1_i2s_spkr_dat_iv_0_0                                     Net          -        -       -         -           1         
+l_car_core.e_car_sequencer.un1_i2s_spkr_dat_iv_0_2          ORCALUT4     B        In      0.000     5.447       -         
+l_car_core.e_car_sequencer.un1_i2s_spkr_dat_iv_0_2          ORCALUT4     Z        Out     1.017     6.464       -         
+un1_i2s_spkr_dat_iv_0_2                                     Net          -        -       -         -           1         
+l_car_core.e_car_sequencer.un1_i2s_spkr_dat_iv_0            ORCALUT4     D        In      0.000     6.464       -         
+l_car_core.e_car_sequencer.un1_i2s_spkr_dat_iv_0            ORCALUT4     Z        Out     0.617     7.081       -         
+un1_i2s_spkr_dat_iv_0                                       Net          -        -       -         -           1         
+l_car_core.e_car_sequencer.lvds_io_1                        FD1P3AX      D        In      0.000     7.081       -         
+==========================================================================================================================
+
+
+
+
+====================================
+Detailed Report for Clock: tl_car_field|ext_clk_in
+====================================
+
+
+
+Starting Points with Worst Slack
+********************************
+
+                             Starting                                                                     Arrival            
+Instance                     Reference                   Type        Pin     Net                          Time        Slack  
+                             Clock                                                                                           
+-----------------------------------------------------------------------------------------------------------------------------
+mute_debounce_counter[0]     tl_car_field|ext_clk_in     FD1S3AX     Q       mute_debounce_counter[0]     1.044       994.758
+mute_debounce_counter[1]     tl_car_field|ext_clk_in     FD1S3AX     Q       mute_debounce_counter[1]     1.044       994.900
+mute_debounce_counter[2]     tl_car_field|ext_clk_in     FD1S3AX     Q       mute_debounce_counter[2]     1.044       994.900
+mute_debounce_counter[3]     tl_car_field|ext_clk_in     FD1S3AX     Q       mute_debounce_counter[3]     1.044       995.043
+mute_debounce_counter[4]     tl_car_field|ext_clk_in     FD1S3AX     Q       mute_debounce_counter[4]     1.044       995.043
+mute_debounce_counter[5]     tl_car_field|ext_clk_in     FD1S3AX     Q       mute_debounce_counter[5]     1.044       995.186
+mute_debounce_counter[6]     tl_car_field|ext_clk_in     FD1S3AX     Q       mute_debounce_counter[6]     1.044       995.186
+mute_debounce_counter[7]     tl_car_field|ext_clk_in     FD1S3AX     Q       mute_debounce_counter[7]     1.044       995.329
+mute_debounce_counter[8]     tl_car_field|ext_clk_in     FD1S3AX     Q       mute_debounce_counter[8]     1.044       995.329
+mute_debounce_counter[9]     tl_car_field|ext_clk_in     FD1S3AX     Q       mute_debounce_counter[9]     1.044       995.471
+=============================================================================================================================
+
+
+Ending Points with Worst Slack
+******************************
+
+                              Starting                                                                        Required            
+Instance                      Reference                   Type        Pin     Net                             Time         Slack  
+                              Clock                                                                                               
+----------------------------------------------------------------------------------------------------------------------------------
+mute_debounce_counter[15]     tl_car_field|ext_clk_in     FD1S3AX     D       mute_debounce_counter_s[15]     999.894      994.758
+mute_debounce_counter[16]     tl_car_field|ext_clk_in     FD1S3AX     D       mute_debounce_counter_s[16]     999.894      994.758
+mute_debounce_counter[13]     tl_car_field|ext_clk_in     FD1S3AX     D       mute_debounce_counter_s[13]     999.894      994.900
+mute_debounce_counter[14]     tl_car_field|ext_clk_in     FD1S3AX     D       mute_debounce_counter_s[14]     999.894      994.900
+mute_debounce_counter[11]     tl_car_field|ext_clk_in     FD1S3AX     D       mute_debounce_counter_s[11]     999.894      995.043
+mute_debounce_counter[12]     tl_car_field|ext_clk_in     FD1S3AX     D       mute_debounce_counter_s[12]     999.894      995.043
+mute_debounce_counter[9]      tl_car_field|ext_clk_in     FD1S3AX     D       mute_debounce_counter_s[9]      999.894      995.186
+mute_debounce_counter[10]     tl_car_field|ext_clk_in     FD1S3AX     D       mute_debounce_counter_s[10]     999.894      995.186
+muted                         tl_car_field|ext_clk_in     FD1S3AX     D       muted_RNO                       1000.089     995.306
+mute_debounce_counter[7]      tl_car_field|ext_clk_in     FD1S3AX     D       mute_debounce_counter_s[7]      999.894      995.329
+==================================================================================================================================
+
+
+
+Worst Path Information
+***********************
+
+
+Path information for path number 1: 
+      Requested Period:                      1000.000
+    - Setup time:                            0.106
+    + Clock delay at ending point:           0.000 (ideal)
+    = Required time:                         999.894
+
+    - Propagation time:                      5.137
+    - Clock delay at starting point:         0.000 (ideal)
+    = Slack (non-critical) :                 994.758
+
+    Number of logic level(s):                9
+    Starting point:                          mute_debounce_counter[0] / Q
+    Ending point:                            mute_debounce_counter[16] / D
+    The start point is clocked by            tl_car_field|ext_clk_in [rising] on pin CK
+    The end   point is clocked by            tl_car_field|ext_clk_in [rising] on pin CK
+
+Instance / Net                                  Pin      Pin               Arrival     No. of    
+Name                                Type        Name     Dir     Delay     Time        Fan Out(s)
+-------------------------------------------------------------------------------------------------
+mute_debounce_counter[0]            FD1S3AX     Q        Out     1.044     1.044       -         
+mute_debounce_counter[0]            Net         -        -       -         -           2         
+mute_debounce_counter_cry_0[0]      CCU2D       A1       In      0.000     1.044       -         
+mute_debounce_counter_cry_0[0]      CCU2D       COUT     Out     1.544     2.588       -         
+mute_debounce_counter_cry[0]        Net         -        -       -         -           1         
+mute_debounce_counter_cry_0[1]      CCU2D       CIN      In      0.000     2.588       -         
+mute_debounce_counter_cry_0[1]      CCU2D       COUT     Out     0.143     2.731       -         
+mute_debounce_counter_cry[2]        Net         -        -       -         -           1         
+mute_debounce_counter_cry_0[3]      CCU2D       CIN      In      0.000     2.731       -         
+mute_debounce_counter_cry_0[3]      CCU2D       COUT     Out     0.143     2.874       -         
+mute_debounce_counter_cry[4]        Net         -        -       -         -           1         
+mute_debounce_counter_cry_0[5]      CCU2D       CIN      In      0.000     2.874       -         
+mute_debounce_counter_cry_0[5]      CCU2D       COUT     Out     0.143     3.017       -         
+mute_debounce_counter_cry[6]        Net         -        -       -         -           1         
+mute_debounce_counter_cry_0[7]      CCU2D       CIN      In      0.000     3.017       -         
+mute_debounce_counter_cry_0[7]      CCU2D       COUT     Out     0.143     3.159       -         
+mute_debounce_counter_cry[8]        Net         -        -       -         -           1         
+mute_debounce_counter_cry_0[9]      CCU2D       CIN      In      0.000     3.159       -         
+mute_debounce_counter_cry_0[9]      CCU2D       COUT     Out     0.143     3.302       -         
+mute_debounce_counter_cry[10]       Net         -        -       -         -           1         
+mute_debounce_counter_cry_0[11]     CCU2D       CIN      In      0.000     3.302       -         
+mute_debounce_counter_cry_0[11]     CCU2D       COUT     Out     0.143     3.445       -         
+mute_debounce_counter_cry[12]       Net         -        -       -         -           1         
+mute_debounce_counter_cry_0[13]     CCU2D       CIN      In      0.000     3.445       -         
+mute_debounce_counter_cry_0[13]     CCU2D       COUT     Out     0.143     3.588       -         
+mute_debounce_counter_cry[14]       Net         -        -       -         -           1         
+mute_debounce_counter_cry_0[15]     CCU2D       CIN      In      0.000     3.588       -         
+mute_debounce_counter_cry_0[15]     CCU2D       S1       Out     1.549     5.137       -         
+mute_debounce_counter_s[16]         Net         -        -       -         -           1         
+mute_debounce_counter[16]           FD1S3AX     D        In      0.000     5.137       -         
+=================================================================================================
+
+
+
+
+====================================
+Detailed Report for Clock: tl_car_field|spi4_clk
+====================================
+
+
+
+Starting Points with Worst Slack
+********************************
+
+                                 Starting                                                          Arrival            
+Instance                         Reference                 Type        Pin     Net                 Time        Slack  
+                                 Clock                                                                                
+----------------------------------------------------------------------------------------------------------------------
+e_fmexg_core.spi_bit_ctr[0]      tl_car_field|spi4_clk     FD1S3DX     Q       spi_bit_ctr[0]      1.180       495.907
+e_fmexg_core.spi_bit_ctr[1]      tl_car_field|spi4_clk     FD1S3DX     Q       spi_bit_ctr[1]      1.180       495.907
+e_fmexg_core.spi_bit_ctr[2]      tl_car_field|spi4_clk     FD1S3DX     Q       spi_bit_ctr[2]      1.148       495.939
+e_fmexg_core.spi_byte_ctr[0]     tl_car_field|spi4_clk     FD1S3AX     Q       spi_byte_ctr[0]     1.180       496.925
+e_fmexg_core.spi_byte_ctr[1]     tl_car_field|spi4_clk     FD1S3AX     Q       spi_byte_ctr[1]     1.180       496.925
+e_fmexg_core.first_sample[7]     tl_car_field|spi4_clk     FD1P3AX     Q       first_sample[7]     0.972       998.474
+e_fmexg_core.two_samples[1]      tl_car_field|spi4_clk     FD1P3AX     Q       two_samples[1]      0.972       998.474
+e_fmexg_core.first_sample[0]     tl_car_field|spi4_clk     FD1P3AX     Q       first_sample[0]     0.972       998.500
+e_fmexg_core.first_sample[1]     tl_car_field|spi4_clk     FD1P3AX     Q       first_sample[1]     0.972       998.500
+e_fmexg_core.first_sample[2]     tl_car_field|spi4_clk     FD1P3AX     Q       first_sample[2]     0.972       998.500
+======================================================================================================================
+
+
+Ending Points with Worst Slack
+******************************
+
+                                 Starting                                                                Required            
+Instance                         Reference                 Type        Pin     Net                       Time         Slack  
+                                 Clock                                                                                       
+-----------------------------------------------------------------------------------------------------------------------------
+e_fmexg_core.first_sample[0]     tl_car_field|spi4_clk     FD1P3AX     SP      spi_byte_ctr_0_sqmuxa     499.528      495.907
+e_fmexg_core.first_sample[1]     tl_car_field|spi4_clk     FD1P3AX     SP      spi_byte_ctr_0_sqmuxa     499.528      495.907
+e_fmexg_core.first_sample[2]     tl_car_field|spi4_clk     FD1P3AX     SP      spi_byte_ctr_0_sqmuxa     499.528      495.907
+e_fmexg_core.first_sample[3]     tl_car_field|spi4_clk     FD1P3AX     SP      spi_byte_ctr_0_sqmuxa     499.528      495.907
+e_fmexg_core.first_sample[4]     tl_car_field|spi4_clk     FD1P3AX     SP      spi_byte_ctr_0_sqmuxa     499.528      495.907
+e_fmexg_core.first_sample[5]     tl_car_field|spi4_clk     FD1P3AX     SP      spi_byte_ctr_0_sqmuxa     499.528      495.907
+e_fmexg_core.first_sample[6]     tl_car_field|spi4_clk     FD1P3AX     SP      spi_byte_ctr_0_sqmuxa     499.528      495.907
+e_fmexg_core.first_sample[7]     tl_car_field|spi4_clk     FD1P3AX     SP      spi_byte_ctr_0_sqmuxa     499.528      495.907
+e_fmexg_core.first_sample[8]     tl_car_field|spi4_clk     FD1P3AX     SP      spi_byte_ctr_0_sqmuxa     499.528      495.907
+e_fmexg_core.first_sample[9]     tl_car_field|spi4_clk     FD1P3AX     SP      spi_byte_ctr_0_sqmuxa     499.528      495.907
+=============================================================================================================================
+
+
+
+Worst Path Information
+***********************
+
+
+Path information for path number 1: 
+      Requested Period:                      500.000
+    - Setup time:                            0.472
+    + Clock delay at ending point:           0.000 (ideal)
+    = Required time:                         499.528
+
+    - Propagation time:                      3.621
+    - Clock delay at starting point:         0.000 (ideal)
+    = Slack (critical) :                     495.907
+
+    Number of logic level(s):                2
+    Starting point:                          e_fmexg_core.spi_bit_ctr[0] / Q
+    Ending point:                            e_fmexg_core.first_sample[0] / SP
+    The start point is clocked by            tl_car_field|spi4_clk [rising] on pin CK
+    The end   point is clocked by            tl_car_field|spi4_clk [falling] on pin CK
+
+Instance / Net                                        Pin      Pin               Arrival     No. of    
+Name                                     Type         Name     Dir     Delay     Time        Fan Out(s)
+-------------------------------------------------------------------------------------------------------
+e_fmexg_core.spi_bit_ctr[0]              FD1S3DX      Q        Out     1.180     1.180       -         
+spi_bit_ctr[0]                           Net          -        -       -         -           5         
+e_fmexg_core.spi_byte_ctr_0_sqmuxa_1     ORCALUT4     A        In      0.000     1.180       -         
+e_fmexg_core.spi_byte_ctr_0_sqmuxa_1     ORCALUT4     Z        Out     1.153     2.333       -         
+spi_byte_ctr_0_sqmuxa_1                  Net          -        -       -         -           3         
+e_fmexg_core.spi_byte_ctr_0_sqmuxa       ORCALUT4     C        In      0.000     2.333       -         
+e_fmexg_core.spi_byte_ctr_0_sqmuxa       ORCALUT4     Z        Out     1.289     3.621       -         
+spi_byte_ctr_0_sqmuxa                    Net          -        -       -         -           12        
+e_fmexg_core.first_sample[0]             FD1P3AX      SP       In      0.000     3.621       -         
+=======================================================================================================
+
+
+
+
+====================================
+Detailed Report for Clock: System
+====================================
+
+
+
+Starting Points with Worst Slack
+********************************
+
+                                              Starting                                        Arrival            
+Instance                                      Reference     Type        Pin     Net           Time        Slack  
+                                              Clock                                                              
+-----------------------------------------------------------------------------------------------------------------
+e_fmexg_core.fifo.fmexg_fifo_8k_1025_0_11     System        fifo8kb     do0     fifo_Q[0]     0.000       999.472
+e_fmexg_core.fifo.fmexg_fifo_8k_1025_1_10     System        fifo8kb     do0     fifo_Q[1]     0.000       999.472
+e_fmexg_core.fifo.fmexg_fifo_8k_1025_2_9      System        fifo8kb     do0     fifo_Q[2]     0.000       999.472
+e_fmexg_core.fifo.fmexg_fifo_8k_1025_3_8      System        fifo8kb     do0     fifo_Q[3]     0.000       999.472
+e_fmexg_core.fifo.fmexg_fifo_8k_1025_4_7      System        fifo8kb     do0     fifo_Q[4]     0.000       999.472
+e_fmexg_core.fifo.fmexg_fifo_8k_1025_5_6      System        fifo8kb     do0     fifo_Q[5]     0.000       999.472
+e_fmexg_core.fifo.fmexg_fifo_8k_1025_6_5      System        fifo8kb     do0     fifo_Q[6]     0.000       999.472
+e_fmexg_core.fifo.fmexg_fifo_8k_1025_7_4      System        fifo8kb     do0     fifo_Q[7]     0.000       999.472
+e_fmexg_core.fifo.fmexg_fifo_8k_1025_8_3      System        fifo8kb     do0     fifo_Q[8]     0.000       999.472
+e_fmexg_core.fifo.fmexg_fifo_8k_1025_9_2      System        fifo8kb     do0     fifo_Q[9]     0.000       999.472
+=================================================================================================================
+
+
+Ending Points with Worst Slack
+******************************
+
+                                 Starting                                                Required            
+Instance                         Reference     Type        Pin     Net                   Time         Slack  
+                                 Clock                                                                       
+-------------------------------------------------------------------------------------------------------------
+e_fmexg_core.two_samples[8]      System        FD1P3AX     D       two_samples_3[8]      1000.089     999.472
+e_fmexg_core.two_samples[9]      System        FD1P3AX     D       two_samples_3[9]      1000.089     999.472
+e_fmexg_core.two_samples[10]     System        FD1P3AX     D       two_samples_3[10]     1000.089     999.472
+e_fmexg_core.two_samples[11]     System        FD1P3AX     D       two_samples_3[11]     1000.089     999.472
+e_fmexg_core.two_samples[16]     System        FD1P3AX     D       two_samples_3[16]     1000.089     999.472
+e_fmexg_core.two_samples[17]     System        FD1P3AX     D       two_samples_3[17]     1000.089     999.472
+e_fmexg_core.two_samples[18]     System        FD1P3AX     D       two_samples_3[18]     1000.089     999.472
+e_fmexg_core.two_samples[19]     System        FD1P3AX     D       two_samples_3[19]     1000.089     999.472
+e_fmexg_core.two_samples[20]     System        FD1P3AX     D       two_samples_3[20]     1000.089     999.472
+e_fmexg_core.two_samples[21]     System        FD1P3AX     D       two_samples_3[21]     1000.089     999.472
+=============================================================================================================
+
+
+
+Worst Path Information
+***********************
+
+
+Path information for path number 1: 
+      Requested Period:                      1000.000
+    - Setup time:                            -0.089
+    + Clock delay at ending point:           0.000 (ideal)
+    = Required time:                         1000.089
+
+    - Propagation time:                      0.617
+    - Clock delay at starting point:         0.000 (ideal)
+    - Estimated clock delay at start point:  -0.000
+    = Slack (non-critical) :                 999.472
+
+    Number of logic level(s):                1
+    Starting point:                          e_fmexg_core.fifo.fmexg_fifo_8k_1025_0_11 / do0
+    Ending point:                            e_fmexg_core.two_samples[11] / D
+    The start point is clocked by            System [rising]
+    The end   point is clocked by            tl_car_field|spi4_clk [falling] on pin CK
+
+Instance / Net                                             Pin      Pin               Arrival     No. of    
+Name                                          Type         Name     Dir     Delay     Time        Fan Out(s)
+------------------------------------------------------------------------------------------------------------
+e_fmexg_core.fifo.fmexg_fifo_8k_1025_0_11     fifo8kb      do0      Out     0.000     0.000       -         
+fifo_Q[0]                                     Net          -        -       -         -           2         
+e_fmexg_core.two_samples_3[11]                ORCALUT4     A        In      0.000     0.000       -         
+e_fmexg_core.two_samples_3[11]                ORCALUT4     Z        Out     0.617     0.617       -         
+two_samples_3[11]                             Net          -        -       -         -           1         
+e_fmexg_core.two_samples[11]                  FD1P3AX      D        In      0.000     0.617       -         
+============================================================================================================
+
+
+
+##### END OF TIMING REPORT #####]
+
+Timing exceptions that could not be applied
+None
+
+Finished final timing analysis (Real Time elapsed 0h:00m:01s; CPU Time elapsed 0h:00m:01s; Memory used current: 147MB peak: 148MB)
+
+
+Finished timing report (Real Time elapsed 0h:00m:01s; CPU Time elapsed 0h:00m:01s; Memory used current: 147MB peak: 148MB)
+
+---------------------------------------
+Resource Usage Report
+Part: lcmxo3lf_6900c-5
+
+Register bits: 235 of 54912 (0%)
+PIC Latch:       0
+I/O cells:       45
+
+
+Details:
+BB:             2
+CCU2D:          17
+FD1P3AX:        191
+FD1S3AX:        32
+FD1S3DX:        3
+GSR:            1
+IB:             26
+IFS1P3DX:       4
+INV:            8
+OB:             15
+OBZ:            2
+OFS1P3DX:       5
+ORCALUT4:       177
+PUR:            1
+VHI:            24
+VLO:            24
+Mapper successful!
+
+At Mapper Exit (Real Time elapsed 0h:00m:01s; CPU Time elapsed 0h:00m:01s; Memory used current: 33MB peak: 148MB)
+
+Process took 0h:00m:01s realtime, 0h:00m:01s cputime
+# Wed Sep 18 18:43:15 2019
+
+###########################################################]

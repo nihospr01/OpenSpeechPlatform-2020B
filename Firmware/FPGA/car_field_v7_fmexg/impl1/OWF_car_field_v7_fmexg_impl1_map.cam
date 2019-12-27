@@ -1,0 +1,341 @@
+[ START MERGED ]
+spi4_cs_c_i spi4_cs_c
+e_fmexg_core.two_samples_0_.CN spi4_clk_c
+[ END MERGED ]
+[ START CLIPPED ]
+e_pll_4/GND
+e_car_clock_gen/GND
+e_fmexg_core/fifo/VCC
+e_fmexg_core/fifo/GND
+l_car_core/e_i2s_dio/GND
+mute_debounce_counter_cry_0_COUT[15]
+e_pll_4/CLKINTFB
+e_pll_4/DPHSRC
+e_pll_4/PLLACK
+e_pll_4/PLLDATO0
+e_pll_4/PLLDATO1
+e_pll_4/PLLDATO2
+e_pll_4/PLLDATO3
+e_pll_4/PLLDATO4
+e_pll_4/PLLDATO5
+e_pll_4/PLLDATO6
+e_pll_4/PLLDATO7
+e_pll_4/REFCLK
+e_pll_4/INTLOCK
+e_pll_4/LOCK
+e_pll_4/CLKOS3
+e_pll_4/CLKOS2
+e_pll_4/CLKOS
+e_car_clock_gen/lvds_ctr_cry_0_S0[0]
+e_car_clock_gen/N_1
+e_car_clock_gen/lvds_ctr_s_0_S1[7]
+e_car_clock_gen/lvds_ctr_s_0_COUT[7]
+e_fmexg_core/fifo/ff_9
+e_fmexg_core/fifo/aff_9
+e_fmexg_core/fifo/aef_9
+e_fmexg_core/fifo/ef_9
+e_fmexg_core/fifo/do17_9
+e_fmexg_core/fifo/do16_9
+e_fmexg_core/fifo/do15_9
+e_fmexg_core/fifo/do14_9
+e_fmexg_core/fifo/do13_9
+e_fmexg_core/fifo/do12_9
+e_fmexg_core/fifo/do11_9
+e_fmexg_core/fifo/do10_9
+e_fmexg_core/fifo/do9_9
+e_fmexg_core/fifo/do8_9
+e_fmexg_core/fifo/do7_9
+e_fmexg_core/fifo/do6_9
+e_fmexg_core/fifo/do5_9
+e_fmexg_core/fifo/do4_9
+e_fmexg_core/fifo/do3_9
+e_fmexg_core/fifo/do2_9
+e_fmexg_core/fifo/do1_9
+e_fmexg_core/fifo/ff_8
+e_fmexg_core/fifo/aff_8
+e_fmexg_core/fifo/aef_8
+e_fmexg_core/fifo/ef_8
+e_fmexg_core/fifo/do17_8
+e_fmexg_core/fifo/do16_8
+e_fmexg_core/fifo/do15_8
+e_fmexg_core/fifo/do14_8
+e_fmexg_core/fifo/do13_8
+e_fmexg_core/fifo/do12_8
+e_fmexg_core/fifo/do11_8
+e_fmexg_core/fifo/do10_8
+e_fmexg_core/fifo/do9_8
+e_fmexg_core/fifo/do8_8
+e_fmexg_core/fifo/do7_8
+e_fmexg_core/fifo/do6_8
+e_fmexg_core/fifo/do5_8
+e_fmexg_core/fifo/do4_8
+e_fmexg_core/fifo/do3_8
+e_fmexg_core/fifo/do2_8
+e_fmexg_core/fifo/do1_8
+e_fmexg_core/fifo/ff_7
+e_fmexg_core/fifo/aff_7
+e_fmexg_core/fifo/aef_7
+e_fmexg_core/fifo/ef_7
+e_fmexg_core/fifo/do17_7
+e_fmexg_core/fifo/do16_7
+e_fmexg_core/fifo/do15_7
+e_fmexg_core/fifo/do14_7
+e_fmexg_core/fifo/do13_7
+e_fmexg_core/fifo/do12_7
+e_fmexg_core/fifo/do11_7
+e_fmexg_core/fifo/do10_7
+e_fmexg_core/fifo/do9_7
+e_fmexg_core/fifo/do8_7
+e_fmexg_core/fifo/do7_7
+e_fmexg_core/fifo/do6_7
+e_fmexg_core/fifo/do5_7
+e_fmexg_core/fifo/do4_7
+e_fmexg_core/fifo/do3_7
+e_fmexg_core/fifo/do2_7
+e_fmexg_core/fifo/do1_7
+e_fmexg_core/fifo/ff_6
+e_fmexg_core/fifo/aff_6
+e_fmexg_core/fifo/aef_6
+e_fmexg_core/fifo/ef_6
+e_fmexg_core/fifo/do17_6
+e_fmexg_core/fifo/do16_6
+e_fmexg_core/fifo/do15_6
+e_fmexg_core/fifo/do14_6
+e_fmexg_core/fifo/do13_6
+e_fmexg_core/fifo/do12_6
+e_fmexg_core/fifo/do11_6
+e_fmexg_core/fifo/do10_6
+e_fmexg_core/fifo/do9_6
+e_fmexg_core/fifo/do8_6
+e_fmexg_core/fifo/do7_6
+e_fmexg_core/fifo/do6_6
+e_fmexg_core/fifo/do5_6
+e_fmexg_core/fifo/do4_6
+e_fmexg_core/fifo/do3_6
+e_fmexg_core/fifo/do2_6
+e_fmexg_core/fifo/do1_6
+e_fmexg_core/fifo/ff_5
+e_fmexg_core/fifo/aff_5
+e_fmexg_core/fifo/aef_5
+e_fmexg_core/fifo/ef_5
+e_fmexg_core/fifo/do17_5
+e_fmexg_core/fifo/do16_5
+e_fmexg_core/fifo/do15_5
+e_fmexg_core/fifo/do14_5
+e_fmexg_core/fifo/do13_5
+e_fmexg_core/fifo/do12_5
+e_fmexg_core/fifo/do11_5
+e_fmexg_core/fifo/do10_5
+e_fmexg_core/fifo/do9_5
+e_fmexg_core/fifo/do8_5
+e_fmexg_core/fifo/do7_5
+e_fmexg_core/fifo/do6_5
+e_fmexg_core/fifo/do5_5
+e_fmexg_core/fifo/do4_5
+e_fmexg_core/fifo/do3_5
+e_fmexg_core/fifo/do2_5
+e_fmexg_core/fifo/do1_5
+e_fmexg_core/fifo/ff_4
+e_fmexg_core/fifo/aff_4
+e_fmexg_core/fifo/aef_4
+e_fmexg_core/fifo/ef_4
+e_fmexg_core/fifo/do17_4
+e_fmexg_core/fifo/do16_4
+e_fmexg_core/fifo/do15_4
+e_fmexg_core/fifo/do14_4
+e_fmexg_core/fifo/do13_4
+e_fmexg_core/fifo/do12_4
+e_fmexg_core/fifo/do11_4
+e_fmexg_core/fifo/do10_4
+e_fmexg_core/fifo/do9_4
+e_fmexg_core/fifo/do8_4
+e_fmexg_core/fifo/do7_4
+e_fmexg_core/fifo/do6_4
+e_fmexg_core/fifo/do5_4
+e_fmexg_core/fifo/do4_4
+e_fmexg_core/fifo/do3_4
+e_fmexg_core/fifo/do2_4
+e_fmexg_core/fifo/do1_4
+e_fmexg_core/fifo/ff_3
+e_fmexg_core/fifo/aff_3
+e_fmexg_core/fifo/aef_3
+e_fmexg_core/fifo/ef_3
+e_fmexg_core/fifo/do17_3
+e_fmexg_core/fifo/do16_3
+e_fmexg_core/fifo/do15_3
+e_fmexg_core/fifo/do14_3
+e_fmexg_core/fifo/do13_3
+e_fmexg_core/fifo/do12_3
+e_fmexg_core/fifo/do11_3
+e_fmexg_core/fifo/do10_3
+e_fmexg_core/fifo/do9_3
+e_fmexg_core/fifo/do8_3
+e_fmexg_core/fifo/do7_3
+e_fmexg_core/fifo/do6_3
+e_fmexg_core/fifo/do5_3
+e_fmexg_core/fifo/do4_3
+e_fmexg_core/fifo/do3_3
+e_fmexg_core/fifo/do2_3
+e_fmexg_core/fifo/do1_3
+e_fmexg_core/fifo/ff_2
+e_fmexg_core/fifo/aff_2
+e_fmexg_core/fifo/aef_2
+e_fmexg_core/fifo/ef_2
+e_fmexg_core/fifo/do17_2
+e_fmexg_core/fifo/do16_2
+e_fmexg_core/fifo/do15_2
+e_fmexg_core/fifo/do14_2
+e_fmexg_core/fifo/do13_2
+e_fmexg_core/fifo/do12_2
+e_fmexg_core/fifo/do11_2
+e_fmexg_core/fifo/do10_2
+e_fmexg_core/fifo/do9_2
+e_fmexg_core/fifo/do8_2
+e_fmexg_core/fifo/do7_2
+e_fmexg_core/fifo/do6_2
+e_fmexg_core/fifo/do5_2
+e_fmexg_core/fifo/do4_2
+e_fmexg_core/fifo/do3_2
+e_fmexg_core/fifo/do2_2
+e_fmexg_core/fifo/do1_2
+e_fmexg_core/fifo/ff_1
+e_fmexg_core/fifo/aff_1
+e_fmexg_core/fifo/aef_1
+e_fmexg_core/fifo/ef_1
+e_fmexg_core/fifo/do17_1
+e_fmexg_core/fifo/do16_1
+e_fmexg_core/fifo/do15_1
+e_fmexg_core/fifo/do14_1
+e_fmexg_core/fifo/do13_1
+e_fmexg_core/fifo/do12_1
+e_fmexg_core/fifo/do11_1
+e_fmexg_core/fifo/do10_1
+e_fmexg_core/fifo/do9_1
+e_fmexg_core/fifo/do8_1
+e_fmexg_core/fifo/do7_1
+e_fmexg_core/fifo/do6_1
+e_fmexg_core/fifo/do5_1
+e_fmexg_core/fifo/do4_1
+e_fmexg_core/fifo/do3_1
+e_fmexg_core/fifo/do2_1
+e_fmexg_core/fifo/do1_1
+e_fmexg_core/fifo/ff_0
+e_fmexg_core/fifo/aff_0
+e_fmexg_core/fifo/aef_0
+e_fmexg_core/fifo/ef_0
+e_fmexg_core/fifo/do17_0
+e_fmexg_core/fifo/do16_0
+e_fmexg_core/fifo/do15_0
+e_fmexg_core/fifo/do14_0
+e_fmexg_core/fifo/do13_0
+e_fmexg_core/fifo/do12_0
+e_fmexg_core/fifo/do11_0
+e_fmexg_core/fifo/do10_0
+e_fmexg_core/fifo/do9_0
+e_fmexg_core/fifo/do8_0
+e_fmexg_core/fifo/do7_0
+e_fmexg_core/fifo/do6_0
+e_fmexg_core/fifo/do5_0
+e_fmexg_core/fifo/do4_0
+e_fmexg_core/fifo/do3_0
+e_fmexg_core/fifo/do2_0
+e_fmexg_core/fifo/do1_0
+e_fmexg_core/fifo/ff
+e_fmexg_core/fifo/aff
+e_fmexg_core/fifo/aef
+e_fmexg_core/fifo/ef
+e_fmexg_core/fifo/do17
+e_fmexg_core/fifo/do16
+e_fmexg_core/fifo/do15
+e_fmexg_core/fifo/do14
+e_fmexg_core/fifo/do13
+e_fmexg_core/fifo/do12
+e_fmexg_core/fifo/do11
+e_fmexg_core/fifo/do10
+e_fmexg_core/fifo/do9
+e_fmexg_core/fifo/do8
+e_fmexg_core/fifo/do7
+e_fmexg_core/fifo/do6
+e_fmexg_core/fifo/do5
+e_fmexg_core/fifo/do4
+e_fmexg_core/fifo/do3
+e_fmexg_core/fifo/do2
+e_fmexg_core/fifo/do1
+e_fmexg_core/fifo/AlmostEmpty
+e_fmexg_core/fifo/do17_10
+e_fmexg_core/fifo/do16_10
+e_fmexg_core/fifo/do15_10
+e_fmexg_core/fifo/do14_10
+e_fmexg_core/fifo/do13_10
+e_fmexg_core/fifo/do12_10
+e_fmexg_core/fifo/do11_10
+e_fmexg_core/fifo/do10_10
+e_fmexg_core/fifo/do9_10
+e_fmexg_core/fifo/do8_10
+e_fmexg_core/fifo/do7_10
+e_fmexg_core/fifo/do6_10
+e_fmexg_core/fifo/do5_10
+e_fmexg_core/fifo/do4_10
+e_fmexg_core/fifo/do3_10
+e_fmexg_core/fifo/do2_10
+e_fmexg_core/fifo/do1_10
+l_car_core/e_i2s_dio/lvds_bit_ctr_cry_0_S0[0]
+l_car_core/e_i2s_dio/N_1
+l_car_core/e_i2s_dio/lvds_bit_ctr_cry_0_COUT[3]
+mute_debounce_counter_cry_0_S0[0]
+N_1
+[ END CLIPPED ]
+[ START DESIGN PREFS ]
+SCHEMATIC START ;
+# map:  version Diamond (64-bit) 3.10.0.111.2 -- WARNING: Map write only section -- Wed Sep 18 18:43:16 2019
+
+SYSCONFIG SDM_PORT=DISABLE SLAVE_SPI_PORT=DISABLE I2C_PORT=DISABLE MASTER_SPI_PORT=DISABLE COMPRESS_CONFIG=ON CONFIGURATION=CFG MY_ASSP=OFF ONE_TIME_PROGRAM=OFF CONFIG_SECURE=OFF MCCLK_FREQ=2.08 JTAG_PORT=ENABLE ENABLE_TRANSFR=DISABLE SHAREDEBRINIT=DISABLE MUX_CONFIGURATION_PORTS=DISABLE DUALBOOTGOLDEN=INTERNAL BACKGROUND_RECONFIG=OFF INBUF=ON ;
+LOCATE COMP "l_lvds_io" SITE "A5" ;
+LOCATE COMP "spi1_miso" SITE "R4" ;
+LOCATE COMP "i2s1_sck" SITE "R8" ;
+LOCATE COMP "ext_clk_in" SITE "E2" ;
+LOCATE COMP "test_m2" SITE "M2" ;
+LOCATE COMP "test_m1" SITE "M1" ;
+LOCATE COMP "test_l2" SITE "L2" ;
+LOCATE COMP "test_l1" SITE "L1" ;
+LOCATE COMP "led4_muteout" SITE "F1" ;
+LOCATE COMP "volplus_mute" SITE "P13" ;
+LOCATE COMP "fmexg_mic_sync" SITE "T15" ;
+LOCATE COMP "adc_interrupt" SITE "T6" ;
+LOCATE COMP "adc_data[11]" SITE "K15" ;
+LOCATE COMP "adc_data[10]" SITE "J16" ;
+LOCATE COMP "adc_data[9]" SITE "J15" ;
+LOCATE COMP "adc_data[8]" SITE "H16" ;
+LOCATE COMP "adc_data[7]" SITE "H15" ;
+LOCATE COMP "adc_data[6]" SITE "G16" ;
+LOCATE COMP "adc_data[5]" SITE "G15" ;
+LOCATE COMP "adc_data[4]" SITE "F16" ;
+LOCATE COMP "adc_data[3]" SITE "F15" ;
+LOCATE COMP "adc_data[2]" SITE "E16" ;
+LOCATE COMP "adc_data[1]" SITE "E15" ;
+LOCATE COMP "adc_data[0]" SITE "D16" ;
+LOCATE COMP "adc_pdwn" SITE "D15" ;
+LOCATE COMP "adc_clk" SITE "C16" ;
+LOCATE COMP "spi4_cs" SITE "T13" ;
+LOCATE COMP "spi4_miso" SITE "T14" ;
+LOCATE COMP "spi4_clk" SITE "R12" ;
+LOCATE COMP "spi3_cs3" SITE "R6" ;
+LOCATE COMP "spi3_cs0" SITE "R9" ;
+LOCATE COMP "spi3_miso" SITE "T9" ;
+LOCATE COMP "spi3_mosi" SITE "T10" ;
+LOCATE COMP "spi3_clk" SITE "R10" ;
+LOCATE COMP "spi1_cs2" SITE "T5" ;
+LOCATE COMP "spi1_cs0" SITE "T4" ;
+LOCATE COMP "spi1_mosi" SITE "R3" ;
+LOCATE COMP "spi1_clk" SITE "T3" ;
+LOCATE COMP "i2s2_d1" SITE "T2" ;
+LOCATE COMP "i2s2_d0" SITE "T11" ;
+LOCATE COMP "i2s2_ws" SITE "R11" ;
+LOCATE COMP "i2s2_sck" SITE "T12" ;
+LOCATE COMP "i2s1_d0" SITE "T7" ;
+LOCATE COMP "i2s1_ws" SITE "T8" ;
+LOCATE COMP "r_lvds_io" SITE "A13" ;
+FREQUENCY NET "test_l1_c" 12.288000 MHz ;
+FREQUENCY NET "hr_clk_0" 49.152000 MHz ;
+SCHEMATIC END ;
+[ END DESIGN PREFS ]
