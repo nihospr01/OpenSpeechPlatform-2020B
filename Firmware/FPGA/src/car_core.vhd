@@ -18,7 +18,8 @@ entity car_core is
 		spi_cs0: in std_logic;
 		spi_cs1: in std_logic;
 		--
-		mute_sync: in std_logic;
+		fmexg_mic_sync: in std_logic;
+		muted: in std_logic;
 		--
 		test_lrst_pre, test_djb_present: out std_logic
 	);
@@ -39,7 +40,8 @@ architecture a of car_core is
 			spi_sck, spi_mosi, spi_cs0_n, spi_cs1_n: in std_logic;
 			spi_miso: out std_logic;
 			--
-			mute_sync: in std_logic;
+			fmexg_mic_sync: in std_logic;
+			muted: in std_logic;
 			--
 			test_djb_present: out std_logic
 		);
@@ -66,9 +68,11 @@ architecture a of car_core is
 	signal i2s_mic_ld, i2s_mic_sh, i2s_mic_dat: std_logic;
 	signal i2s_lr_st_pre, i2s_lr_st: std_logic;
 	signal spi_cs0_n, spi_cs1_n: std_logic;
+	signal spi_miso_internal: std_logic;
 begin
 	spi_cs0_n <= not spi_cs0;
 	spi_cs1_n <= not spi_cs1;
+	spi_miso <= spi_miso_internal when (spi_cs0 and spi_cs1) = '0' else 'Z';
 	
 	test_lrst_pre <= i2s_lr_st;
 	
@@ -100,9 +104,10 @@ begin
 		spi_mosi => spi_mosi, 
 		spi_cs0_n => spi_cs0_n, 
 		spi_cs1_n => spi_cs1_n,
-		spi_miso => spi_miso,
+		spi_miso => spi_miso_internal,
 		--
-		mute_sync => mute_sync,
+		fmexg_mic_sync => fmexg_mic_sync,
+		muted => muted,
 		--
 		test_djb_present => test_djb_present
 	);

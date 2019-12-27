@@ -14,7 +14,6 @@
   <script type='text/javascript'>
 
    $(document).ready(function(){
-    
     $('.section-choices').hide();
     $('.section-controls').hide();
     $('.section-results').hide();
@@ -23,8 +22,9 @@
     var numIteration = 1;
     var a = 0;
     var b = 0;
-    var low = 0;
-    var high = 10;
+    var low = -20;
+    var high = 0;
+
     function calculateA(lo, hi){
       var diff = (hi-lo)/4;
       a = lo + diff;
@@ -56,46 +56,9 @@
     }
     
     var A = calculateA(low,high);
-    var B = calculateB(low,high);
-
-    // var N2 = {
-    //   'left':{
-    //     'g50': [2, 6, 17, 21, 20, 20],
-    //     'g80': [1, 1, 4, 8, 14, 14]
-    //   },
-    //   'right':{
-    //     'g50': [2, 6, 17, 21, 20, 20],
-    //     'g80': [1, 1, 4, 8, 14, 14]
-    //   }
-    // }
-
-    // var N4 = {
-    //   'left':{
-    //     'g50': [17, 24, 34, 36, 33, 33],
-    //     'g80': [8, 12, 19, 25, 24, 24]
-    //   },
-    //   'right':{
-    //     'g50': [17, 24, 34, 36, 33, 33],
-    //     'g80': [8, 12, 19, 25, 24, 24]
-    //   }
-    // }
-
-    // var S2 = {
-    //   'left':{
-    //     'g50': [2, 7, 19, 28, 33, 33],
-    //     'g80': [1, 1, 4, 18, 19, 19]
-    //   },
-    //   'right':{
-    //     'g50': [2, 7, 19, 28, 33, 33],
-    //     'g80': [1, 1, 4, 18, 19, 19]
-    //   }
-    // }
-    
-    // var A = NH;
-    // var B = S2;    
+    var B = calculateB(low,high); 
 
     function transmitParams(direction){
-      console.log("attempting to transmit");
       $.ajax({
         method: 'POST',
         url: '/api/params',
@@ -120,7 +83,7 @@
 
 
     function onStartPlaying(){
-      console.log("attempting to transmit");
+      // console.log("attempting to transmit");
       $.ajax({
         method: 'POST',
         url: '/api/params',
@@ -156,7 +119,7 @@
     }
 
     function onExit(){
-      console.log("attempting to transmit");
+      // console.log("attempting to transmit");
       $.ajax({
         method: 'POST',
         url: '/api/params',
@@ -172,34 +135,6 @@
             right:{
               audio_filename:'/audio/AB/MPEG_es01_s.wav',
               audio_play:0
-            }
-          }
-        }),
-        success: function(response){
-          console.log(response);
-        },
-        error: function(jqXHR, textStatus,errorThrown){
-          console.log("Parameters were not sent to the MHA.")
-        }
-      });
-    }
-
-   
-    function transmitFilePath(){
-      console.log("attempting to transmit");
-      $.ajax({
-        method: 'POST',
-        url: '/api/params',
-        data: JSON.stringify({
-          user_id: -1,
-          method: 'set',
-          request_action: 1,
-          data:{
-            left:{
-              audio_filename:'/audio/AB/MPEG_es01_s.wav'
-            },
-            right:{
-              audio_filename:'/audio/AB/MPEG_es01_s.wav'
             }
           }
         }),
@@ -215,38 +150,22 @@
     function showControls(callback){
       $('.section-controls').addClass("animated fadeInUp");
       function handleAnimationEnd(){
-        // console.log("what");
         $('.section-controls').removeClass("animted fadeInUp");
         if(typeof callback == 'function') callback();
       }
       $('.section-controls').on("animationend",handleAnimationEnd)
     }
 
-
     $('#A').click(function(){
       $('#A').addClass('bg-info');
       $('#B').removeClass('bg-info');
       transmitParams(A);
-      A_listened = 1;
-      if(A_listened === 1 && B_listened === 1 ){
-        $('.section-choices').show();
-        $('.section-choices').addClass("animated fadeInUp");
-        A_listened = 0;
-        B_listened = 0;
-      }
     });
     
     $('#B').click(function(){
       $('#B').addClass('bg-info');
       $('#A').removeClass('bg-info');
       transmitParams(B);
-      B_listened = 1;
-      if(A_listened === 1 && B_listened === 1 ){
-        $('.section-choices').show();
-        $('.section-choices').addClass("animated fadeInUp");
-        A_listened = 0;
-        B_listened = 0;
-      }
     });
 
     $('#startPlaying').click(function(){
@@ -255,28 +174,28 @@
       showControls(function(){
         onStartPlaying();
       })
+      $('.section-choices').show()
+      $('.section-choices').addClass("animated fadeInUp");
     });
 
     $('#A_better').click(function(){
-      A = calculateA(low,b);
-      B = calculateB(low,b);
+      high = b;
+      A = calculateA(low,high);
+      B = calculateB(low,high);
       console.log(A)
-      $('.section-choices').hide();
       transmitParams(A);
       A_listened = 0;
       numIteration++;
-      // listenAgain();
     });
 
     $('#B_better').click(function(){
-      A = calculateA(a,high);
-      B = calculateB(a,high);
+      low = a;
+      A = calculateA(low,high);
+      B = calculateB(low,high);
       console.log(B);
-      $('.section-choices').hide();
       transmitParams(B);
       B_listened = 0;
       numIteration++;
-      // listenAgain();
     });
 
     $('#AB_equal').click(function(){
@@ -293,7 +212,6 @@
     $('#exit').click(function(){
       onExit();
     });
-
    });
   </script>
  
@@ -424,7 +342,6 @@
 
 <!-- Section for 3-scale likert Control -->
 <section class="section-choices">
-
   <div class="container-choices">
   <h3 class="text-secondary">Select which one is better</h3>
     <div class="grid-choices">
@@ -491,51 +408,3 @@
   </div>
 
 </section>
-
-  <!-- <div class="container" style="max-width:150px; margin-top:40px;   justify-content: center;
-    text-align: center;">
-    <a  href = "{{url('/')}}" class="btn btn-outline-danger btn-block" id="exit">
-            Exit
-    </a>
-  </div> -->
-
-
-
-<!-- <div class="container" style="background-color: white;">
-
-  <div class="container-fluid"
-       id = "title" >
-    <span class = "animated fadeInUp" id = "titleText"><h4>AB Test</h4></span>
-    <button type="button" class="btn btn-outline-info btn-lg btn-block" id= "startPlaying">play</button>
-  </div>
-
-
-
-  
-
-
-    <div class="container-choices">
-        <div class="grid-choices">
-            <div class="row">
-                <div class="col-sm">
-                    <button type="button" class="btn btn-outline-info btn-lg btn-block">A is better than  B</button>
-                </div>
-                <div class="col-sm">
-                    <button type="button" class="btn btn-outline-info btn-lg btn-block">A and B are equal</button>
-                </div>
-                <div class="col-sm">
-                    <button type="button" class="btn btn-outline-info btn-lg btn-block">B is better than A</button>
-                </div>
-                </div>
-        </div>
- 
-    </div>
-    <div class="container" style="max-width:150px; margin-top:40px;   justify-content: center;
-    text-align: center;">
-        <a  href = "{{url('/')}}" class="btn btn-outline-danger btn-block" id="exit">
-            Exit
-        </a>
-    </div>
-
-
-</div>

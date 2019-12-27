@@ -16,7 +16,8 @@ entity car_sequencer is
 		spi_sck, spi_mosi, spi_cs0_n, spi_cs1_n: in std_logic;
 		spi_miso: out std_logic;
 		--
-		mute_sync: in std_logic;
+		fmexg_mic_sync: in std_logic;
+		muted: in std_logic;
 		--
 		test_djb_present: out std_logic
 	);
@@ -65,7 +66,7 @@ begin
 					end if;
 				when 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 =>
 					if djb_present = '1' then
-						i2s_mic_dat <= '0' when mute_sync = '1' else lvds_io;
+						i2s_mic_dat <= '0' when fmexg_mic_sync = '1' else lvds_io;
 						i2s_mic_sh <= '1';
 					end if;
 				when 26 =>
@@ -92,7 +93,7 @@ begin
 						lvds_io <= '1';
 						i2s_spkr_ld <= '1';
 					when 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 =>
-						lvds_io <= i2s_spkr_dat;
+						lvds_io <= '0' when muted = '1' else i2s_spkr_dat;
 						i2s_spkr_sh <= '1'; --Should actually be '0' for 9, but doesn't matter if we shift an extra 0 around
 					when 10 =>
 						lvds_io <= i2s_lr_st;

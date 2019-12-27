@@ -1,8 +1,17 @@
 #include "portaudio_wrapper.h"
 
 #include <iostream>
+#include <sstream>
 
-#define PA_SAMPLE_TYPE paFloat32
+#ifdef __linux__
+#include <pa_linux_alsa.h>
+#endif
+
+#ifdef __APPLE__
+#include <pa_mac_core.h>
+#endif
+
+static const PaSampleFormat SAMPLE_TYPE = paFloat32 | paNonInterleaved;
 
 
 portaudio_wrapper::portaudio_wrapper(int in_device, int in_num_channel, int out_device, int out_num_channels,
@@ -36,32 +45,32 @@ portaudio_wrapper::portaudio_wrapper(int in_num_channel, int out_num_channels, P
 portaudio_wrapper::~portaudio_wrapper() {
     this->delete_stream();
 }
-int portaudio_wrapper::init_stream(int in_device, int in_num_channel, int out_device, int out_num_channels,
+int portaudio_wrapper::init_stream(int in_device, int in_num_channels, int out_device, int out_num_channels,
                                     PaStreamCallback callback, void* userData) {
 
+    /* -- setup -- */
+    inputInfo = Pa_GetDeviceInfo( in_device );
     inputParameters.device = in_device; /* default input device */
-    printf( "Input device # %d.\n", inputParameters.device );
-    inputInfo = Pa_GetDeviceInfo( inputParameters.device );
-    printf( "    Name: %s\n", inputInfo->name );
-    printf( "      LL: %g s\n", inputInfo->defaultLowInputLatency );
-    printf( "      HL: %g s\n", inputInfo->defaultHighInputLatency );
-    outputParameters.device = out_device; /* default output device */
-    printf( "Output device # %d.\n", outputParameters.device );
-    outputInfo = Pa_GetDeviceInfo( outputParameters.device );
-    printf( "   Name: %s\n", outputInfo->name );
-    printf( "     LL: %g s\n", outputInfo->defaultLowOutputLatency );
-    printf( "     HL: %g s\n", outputInfo->defaultHighOutputLatency );
-    printf( "Num channels = %d.\n", in_num_channel );
-    inputParameters.channelCount = in_num_channel;
-    inputParameters.sampleFormat = PA_SAMPLE_TYPE;
+    inputParameters.channelCount = in_num_channels;
+    inputParameters.sampleFormat = SAMPLE_TYPE;
     inputParameters.suggestedLatency = .001 ;
     inputParameters.hostApiSpecificStreamInfo = NULL;
+
+    outputInfo = Pa_GetDeviceInfo( out_device );
+    outputParameters.device = out_device; /* default output device */
     outputParameters.channelCount = out_num_channels;
-    outputParameters.sampleFormat = PA_SAMPLE_TYPE;
+    outputParameters.sampleFormat = SAMPLE_TYPE;
     outputParameters.suggestedLatency =  .001;
     outputParameters.hostApiSpecificStreamInfo = NULL;
-    /* -- setup -- */
 
+#ifdef __APPLE__
+    PaMacCoreStreamInfo mac;
+    PaMacCore_SetupStreamInfo(&mac, paMacCorePro);
+    inputParameters.hostApiSpecificStreamInfo = (void*) &mac;
+    outputParameters.hostApiSpecificStreamInfo = (void*) &mac;
+#endif
+
+    // Open stream
     err = Pa_OpenStream(
             &stream,
             &inputParameters,
@@ -71,13 +80,31 @@ int portaudio_wrapper::init_stream(int in_device, int in_num_channel, int out_de
             paClipOff|paDitherOff|paPrimeOutputBuffersUsingStreamCallback,      /* we won't output out of range samples so don't bother clipping them */
             callback, /* no callback, use blocking API */
             userData ); /* no callback, so no callback userData */
-#ifdef __linux__
-    PaAlsa_EnableRealtimeScheduling ( &stream, 1);
-#endif
+
     if( err != paNoError ) {
+        std::cerr << "Failed to create PortAudio stream" << std::endl;
         this->delete_stream();
         return -1;
     }
+
+#ifdef __linux__
+    PaAlsa_EnableRealtimeScheduling ( &stream, 1);
+#endif
+
+    // Print stats
+    std::stringstream ss;
+    ss << "Input device # " << inputParameters.device << std::endl;
+    ss << "  Name: " << inputInfo->name << std::endl;
+    ss << "  Channels = " << out_num_channels << std::endl;
+    ss << "  LL: " << inputInfo->defaultLowInputLatency << " seconds"  << std::endl;
+    ss << "  HL: " << inputInfo->defaultHighInputLatency << " seconds" << std::endl;
+    ss << "Output device # " << outputParameters.device << std::endl;
+    ss << "  Name: " << outputInfo->name << std::endl;
+    ss << "  Channels = " << in_num_channels << std::endl;
+    ss << "  LL: " << outputInfo->defaultLowOutputLatency << " seconds" << std::endl;
+    ss << "  HL: " << outputInfo->defaultHighOutputLatency << " seconds" << std::endl;
+    std::cout << ss.str() << std::endl;
+
     return 0;
 }
 
@@ -101,6 +128,7 @@ int portaudio_wrapper::start_stream() {
         delete_stream();
         return -1;
     }
+
     return 0;
 
 }
@@ -115,3 +143,12 @@ int portaudio_wrapper::stop_stream() {
 
 }
 
+double portaudio_wrapper::input_latency() {
+    auto si = Pa_GetStreamInfo(stream);
+    return si->inputLatency;
+}
+
+double portaudio_wrapper::output_latency() {
+    auto si = Pa_GetStreamInfo(stream);
+    return si->outputLatency;
+}

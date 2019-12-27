@@ -102,9 +102,8 @@
                         AB Tasks
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="{{url('/ab')}}">AB - Two Files</a>
-                        <a class="dropdown-item" href="{{url('/ab2')}}">AB - One File </a>
-                          <a class="dropdown-item" href="#">ABX</a>
+                          <a class="dropdown-item" href="{{url('/ab2')}}">AB</a>
+                          <a class="dropdown-item" href="{{url('/searchex')}}">SearchEx</a>
                       </div>
                 </div>
 
@@ -116,12 +115,12 @@
                   </div>
                 </div>
 
-                <div class="card" style="width: 23rem; height: 10rem; padding:10px;">
+                {{-- <div class="card" style="width: 23rem; height: 10rem; padding:10px;">
                 <a href="{{ url('/nal-nl2') }}" class="btn btn-info">NAL-NL2</a>
                   <div class="card-body">
                     <h6 class="card-subtitle mb-2 text-muted">NAL-NL2 App</h6>
                   </div>
-                </div>
+                </div> --}}
             </div>
 
                       <p>

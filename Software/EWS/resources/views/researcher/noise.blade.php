@@ -45,6 +45,9 @@
         </nav>
 
 
+        <div>
+          <h4> Noise Estimation Options </h4>
+        </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="noise_estimation_type" id="type_1" value="1">
             <label class="form-check-label" for="type_1">
@@ -72,27 +75,82 @@
 
         <form>
             <div class="form-group">
-                <label for="spectral_subtraction">Spectral Subtraction Parameter (0 to 1) </label>
+                <label for="spectral_subtraction">Noise Subtraction Parameter 0 (none) to 1(aggressive) </label>
                 <input type="number" class="form-control" id="spectral_subtraction_input" value="0">
             </div>
 
         </form>
 
-
-        <div class="row align-items-center" style="margin: 1px">
-            <div class="col-6">
-                <button id="resetButton" class="btn btn-info btn-block">Undo</button>
-            </div>
-            <div class="col-6">
-                <button id="transmitButton" class="btn btn-info btn-block">Transmit</button>
-            </div>
+        <div>
+          <div  class="btn-group btn-block" onclick="myFunctionSE()" data-toggle="buttons">
+            <label class="btn btn-info">
+              <div id="mySEDIV">Enable Speech Enhancement</div>
+            </label>
+          </div>
         </div>
 
+        <script>
+        function myFunctionSE() {
+          var x = document.getElementById("mySEDIV");
+          if (x.innerHTML === "Enable Speech Enhancement") {
+            x.innerHTML = "Disable Speech Enhancement";
+          } else {
+            x.innerHTML = "Enable Speech Enhancement";
+            }
+          }
+
+        </script>
+
+<p>
+</p>
+
+        <div>
+          <h4> Beamforming </h4>
+        </div>
+
+        <div>
+          <form>
+            <div class="form-group">
+              <label for="normConstraint">Norm Constraint: </label>
+              <input type="normConstraint" class="form-control" id="normConstraint" aria-describedby="normConstraint" placeholder="Please enter a value 0-10">
+            </div>
+            <div class="form-group">
+              <label for="adaptationModeControl">Adaptation mode control: </label>
+              <input type="adaptationModeControl" class="form-control" id="adaptationModeControl" placeholder="Please enter a value 0-10">
+            </div>
+          </form>
+        </div>
+
+
+        <div>
+            <button type="button" id="bf_toggle" class="btn btn-info btn-block" data-toggle="button" aria-pressed="false" autocomplete="off">
+                Enable Beamforming
+            </button>
+          {{-- <div  class="btn-group btn-block" data-toggle="buttons">
+            <label class="btn btn-info">
+              <div id="bf_toggle">Enable Beamforming</div>
+            </label>
+          </div> --}}
+        </div>
+
+        {{-- <script>
+        function myFunctionBF() {
+          var x = document.getElementById("myBFDIV");
+          if (x.innerHTML === "Enable Beamforming") {
+            x.innerHTML = "Disable Beamforming";
+          } else {
+            x.innerHTML = "Enable Beamforming";
+            }
+          }
+
+        </script> --}}
         <p id="text"></p>
 
     </div>
 
     <script type="text/javascript">
+        var bf_enabled = false
+
         var parameters = {
             'left': {
                 'noise_estimation_type': 0,
@@ -106,10 +164,38 @@
             }
         };
 
+        var bf_parameters = {
+            'left': {
+                'bf': 0,
+                'nc_thr': 0,
+                'amc_thr': 0
+            },
+            'right': {
+                'bf': 0,
+                'nc_thr': 0,
+                'amc_thr': 0
+            }
+        }
+
+        $("#bf_toggle").on("click", () => {
+            if (this.bf_enabled) {
+                $("#bf_toggle").text("Enable Beamforming")
+                this.bf_enabled = false
+                this.bf_parameters['left']['bf'] = 0
+                this.bf_parameters['right']['bf'] = 0
+                transmit(this.bf_parameters)
+            }
+            else {
+                $("#bf_toggle").text("Disable Beamforming")
+                this.bf_enabled = true
+                this.bf_parameters['left']['bf'] = 1
+                this.bf_parameters['right']['bf'] = 1
+                transmit(this.bf_parameters)
+            }
+        })
 
         //pull data on loading the page
         readMHA();
-
 
         //on clicking reset button, read from MHA
         $("#resetButton").click(function(){
@@ -118,7 +204,7 @@
 
         //on clicking transmit button, send data to MHA
         $("#transmitButton").click(function(){
-            transmit();
+            transmit(this['parameters']);
         });
 
         $("#type_0").click(function (){
@@ -162,13 +248,11 @@
                 }
             });
 
-
-
         /**
          * Transmit the current program state by making a POST request on api/params
          *
          */
-        function transmit(){
+         function transmit(parametersValue) {
             console.log("Attempting to transmit");
             $.ajax({
                 method: 'POST',
@@ -177,14 +261,12 @@
                     user_id: -1,
                     method: "set",
                     request_action: 1,
-                    data: this['parameters']
+                    data: parametersValue
                 }),
                 success: function(response){
                     console.log(response);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    // console.log(JSON.stringify(jqXHR));
-                    // console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
                     console.log("Parameters were not sent to the MHA. Make sure the software is running and try again.");
                 }
             });
@@ -197,7 +279,6 @@
                 success: function(response){
                     console.log("Parameters successfully pulled from MHA");
                     var params = JSON.parse(response);
-
                     var data = {
                         'left': {
                             'noise_estimation_type': params['left']['noise_estimation_type'],
@@ -239,6 +320,8 @@
             });
         }
     </script>
+
+
 
 </body>
 </html>

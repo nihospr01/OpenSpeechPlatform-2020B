@@ -87,11 +87,14 @@ private:
     //
     float delta;
     //
-    float n1;
+    // float n1;
     float prob;
-    float p;
-    float b;
-    //
+    // float p;
+    // float b;
+
+    float peak_init;
+    float npow_init;
+    float valley_init;
 };
 
 #endif //OSP_NOISE_MANAGEMENT_H

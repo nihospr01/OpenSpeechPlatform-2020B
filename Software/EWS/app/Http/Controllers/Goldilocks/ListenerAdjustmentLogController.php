@@ -45,21 +45,30 @@ class ListenerAdjustmentLogController extends Controller
         //get listener currently logged in
         $listener = GoldilocksListener::where('listener', session('listener'))->firstOrFail();
 
+        // check nullable optional keys first
+        $final_lvh = isset($data['final_lvh'])? json_encode($data['final_lvh']) : null;
+        $change_string = isset($data['changes'])? $data['changes'] : null;
+        $starting_g65 = isset($data['starting_g65'])? json_encode($data['starting_g65']) : null;
+        $ending_g65 = isset($data['ending_g65'])? json_encode($data['ending_g65']) : null;
+        $compression_ratio = isset($data['cr'])? json_encode($data['cr']) : null;
+        $l_multipliers = isset($data['lmul'])? json_encode($data['lmul']) : null;
+        $h_multipliers = isset($data['hmul'])? json_encode($data['hmul']) : null;
+
         //create new log in database
         $log = ListenerAdjustmentLog::create([
             'listener_id' => $listener->id,
             'researcher_id' => $listener->researcher_id,
             'start_program_id' => $data['start_program_id'],
             'end_program_id' => $data['end_program_id'],
-            'final_lvh' => json_encode($data['final_lvh']),
+            'final_lvh' => $final_lvh,
             'steps' => $data['steps'],
             'seconds_elapsed' => round($data['time_ms'] / 1000.0),
-            'change_string' => $data['changes'],
-            'starting_g65' => json_encode($data['starting_g65']),
-            'ending_g65' => json_encode($data['ending_g65']),
-            'compression_ratio' => json_encode($data['cr']),
-            'l_multipliers' => json_encode($data['lmul']),
-            'h_multipliers' => json_encode($data['hmul']),
+            'change_string' => $change_string,
+            'starting_g65' => $starting_g65,
+            'ending_g65' => $ending_g65,
+            'compression_ratio' => $compression_ratio,
+            'l_multipliers' => $l_multipliers,
+            'h_multipliers' => $h_multipliers,
             'client_finish' => Carbon::parse($data['timestamp']),
             'client_timezone' => $data['timezone']
         ]);
@@ -163,9 +172,9 @@ class ListenerAdjustmentLogController extends Controller
                 'researcher' => $researcher_name,
                 'starting_program' => $start_program_name,
                 'ending_program' => $end_program_name,
-                'final_l' => $values->l_value,
-                'final_v' => $values->v_value,
-                'final_h' => $values->h_value,
+                'final_l' => (isset($values))? $values->l_value : null,
+                'final_v' => (isset($values))? $values->v_value : null,
+                'final_h' => (isset($values))? $values->h_value : null,
                 'steps' => $item['steps'],
                 'seconds_elapsed' => $item['seconds_elapsed'],
                 'changes' => $item['change_string'],

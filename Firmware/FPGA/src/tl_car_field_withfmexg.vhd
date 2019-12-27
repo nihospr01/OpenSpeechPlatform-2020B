@@ -36,7 +36,9 @@ entity tl_car_field is
 		adc_clk, adc_pdwn: out std_logic;
 		adc_data: in std_logic_vector(11 downto 0);
 		adc_interrupt: out std_logic;
-		mute_sync: in std_logic;
+		fmexg_mic_sync: in std_logic;
+		volplus_mute: in std_logic;
+		led4_muteout: out std_logic;
 		--
 		test_l1, test_l2, test_m1, test_m2: out std_logic
 	);
@@ -71,7 +73,8 @@ architecture a of tl_car_field is
 			spi_cs0: in std_logic;
 			spi_cs1: in std_logic;
 			--
-			mute_sync: in std_logic;
+			fmexg_mic_sync: in std_logic;
+			muted: in std_logic;
 			--
 			test_lrst_pre, test_djb_present: out std_logic
 		);
@@ -85,13 +88,15 @@ architecture a of tl_car_field is
 			adc_clk, adc_pdwn: out std_logic;
 			adc_data: in std_logic_vector(11 downto 0);
 			interrupt: out std_logic;
-			mute_sync: in std_logic
+			fmexg_mic_sync: in std_logic
 		);
 	end component;
 
 	signal hr_clk, main_clk, int_reset, seq_reset: std_logic;
 	signal i2s_sck, i2s_ws: std_logic;
 	signal test_counter: unsigned(3 downto 0);
+	signal mute_debounce_counter: unsigned(16 downto 0);
+	signal mute_btn_internal, muted: std_logic;
 begin
 	int_reset <= '0';
 
@@ -109,6 +114,27 @@ begin
 		end if;
 	end process;
 	test_l2 <= test_counter(3);
+	
+	-- Mute
+	process(ext_clk_in, int_reset) is begin
+		if int_reset = '1' then
+			mute_debounce_counter <= (others => '0');
+			mute_btn_internal <= '1';
+		elsif rising_edge(ext_clk_in) then
+			if (and mute_debounce_counter) then
+				mute_btn_internal <= volplus_mute;
+			end if;
+			mute_debounce_counter <= mute_debounce_counter + 1;
+		end if;
+	end process;
+	process(mute_btn_internal, int_reset) is begin
+		if int_reset = '1' then
+			muted <= '0';
+		elsif falling_edge(mute_btn_internal) then
+			muted <= not muted;
+		end if;
+	end process;
+	led4_muteout <= muted;
 
 	-- For 48 kHz sampling:
 	-- 48 kHz sampling * 2 channels * 32 bits = 3.072 MHz I2S bit clock
@@ -138,7 +164,7 @@ begin
 		spi_miso => spi1_miso,
 		spi_cs0 => spi1_cs0,
 		spi_cs1 => spi1_cs2,
-		mute_sync => mute_sync,
+		fmexg_mic_sync => fmexg_mic_sync, muted => muted,
 		test_lrst_pre => test_m1, test_djb_present => test_m2
 	);
 	
@@ -151,7 +177,7 @@ begin
 		spi_miso => spi3_miso,
 		spi_cs0 => spi3_cs0,
 		spi_cs1 => spi3_cs3,
-		mute_sync => mute_sync,
+		fmexg_mic_sync => fmexg_mic_sync, muted => muted,
 		test_lrst_pre => open, test_djb_present => open
 	);
 	
@@ -162,7 +188,7 @@ begin
 		adc_clk => adc_clk, adc_pdwn => adc_pdwn,
 		adc_data => adc_data,
 		interrupt => adc_interrupt,
-		mute_sync => mute_sync
+		fmexg_mic_sync => fmexg_mic_sync
 	);
 	
 end architecture;

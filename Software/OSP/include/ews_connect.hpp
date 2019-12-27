@@ -108,7 +108,7 @@ public:
                         //std::cout << "get" << std::endl;
                         std::stringstream os;
                         cereal::JSONOutputArchive archive(os);
-                        assert(NUM_CHANNEL == 2);
+                        assert(DEFAULTS::NUM_CHANNEL == 2);
                         T data[2];
                         mha->get_params(data);
                         T left = data[0];
@@ -175,7 +175,7 @@ public:
         T user_data[2];
 
         json_string.erase(remove_if(json_string.begin(), json_string.end(),
-                                    std::not1(std::ptr_fun(::isalnumquote))), json_string.end());
+                                    std::not_fn(::isalnumquote)), json_string.end());
 
         std::string audio = "wav";
         std::size_t found = json_string.find(audio);

@@ -11,10 +11,10 @@
 
 using namespace std;
 
-file_record::file_record()
+file_record::file_record(std::string file_, float seconds)
 {
-
-    rootPath = "/opt/EWS/public/record";
+    rootPath = "/opt/EWS/public/record/";
+    file = file_;
     numSamples_before=2880000;
     numSamples_after=2880000;
     buffer.resize(2);
@@ -25,7 +25,7 @@ file_record::file_record()
     buffer_before[1].resize(numSamples_before);
     buffer_after[0].resize(numSamples_after);
     buffer_after[1].resize(numSamples_after);
-    numSamples = 0;
+    numSamples = (int)(48000.0f*seconds);
     current_position_l=0;
     current_position_r=0;
     current_before_l=0;
@@ -143,7 +143,7 @@ void file_record::record_after(int num_sample, float *in, int channel)
 
 }
 
-void file_record::set_params( int start_, int stop_, float seconds,const char* file_)
+void file_record::set_params( int start_, int stop_, float seconds, const char* file_)
 {
     if (start_) {
         numSamples = (int)(48000.0f*seconds);
@@ -172,8 +172,15 @@ void file_record::set_params( int start_, int stop_, float seconds,const char* f
 
 
 void file_record::get_params( float& seconds){
-    seconds = ((float)numSamples)/48000.0f;
-    printf("%d %f", numSamples, seconds);
+    seconds = ((float)numSamples) / 48000.0f;
+    printf("%d %f\n", numSamples, seconds);
+}
+
+
+void file_record::get_params( float& seconds, std::string& file_){
+    seconds = ((float)numSamples) / 48000.0f;
+    file_ = this->file;
+    printf("%d %f\n", numSamples, seconds);
 }
 
 void file_record:: write_to_file()
@@ -192,7 +199,6 @@ void file_record:: write_to_file()
         t=t+1;
         audioFile.save (file_path + std::string("-") +to_string(t) + std::string(".wav"), AudioFileFormat::Wave);
         printf("Recorded\n");
-
     }
 
 }
