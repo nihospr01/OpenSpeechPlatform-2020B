@@ -1,0 +1,11 @@
+{
+    "left": [
+        "CantinaBand3.wav",
+        "CantinaBand60.wav"
+    ],
+    "right": [
+        "StarWars3.wav",
+        "StarWars60.wav",
+        "taunt.wav"
+    ]
+}

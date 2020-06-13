@@ -1,0 +1,29 @@
+#!/bin/bash
+
+echo
+echo
+echo "This script will use 'sudo' throughout at various times, invoke this"
+echo "as a user with sudo priveleges and enter your user password when prompted"
+echo
+echo
+
+OS=$(uname)
+
+echo Build and install EWS-PHP
+cd -
+sudo mkdir -p /opt
+sudo rsync -avr --exclude='vendor' --exclude='database/homestead.sqlite' EWS/ /opt/EWS
+sudo chown -R $(whoami) /opt/EWS
+sudo sh -c 'printf "#!/bin/sh\n\n/opt/EWS/artisan serve --host=0.0.0.0 --port=8080\n" > /usr/local/bin/ews'
+sudo chmod +x /usr/local/bin/ews
+pushd /opt/EWS
+touch database/homestead.sqlite
+composer update
+composer install
+php artisan config:cache
+php artisan key:generate
+php artisan config:cache
+php artisan migrate
+sudo chmod -R 777 /opt/EWS
+popd
+

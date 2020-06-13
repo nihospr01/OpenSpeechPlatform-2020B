@@ -1,0 +1,274 @@
+\hypertarget{classAudioFile}{}\section{Audio\+File$<$ T $>$ Class Template Reference}
+\label{classAudioFile}\index{Audio\+File$<$ T $>$@{Audio\+File$<$ T $>$}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAudioFile_ad1260a47791dc30cbabfe3ff2ea099b1}\label{classAudioFile_ad1260a47791dc30cbabfe3ff2ea099b1}} 
+typedef std\+::vector$<$ std\+::vector$<$ T $>$ $>$ {\bfseries Audio\+Buffer}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classAudioFile_ae74399e93d3f4623c7421ee10cfc0e15}{Audio\+File} ()
+\item 
+bool \hyperlink{classAudioFile_a0ff16123b519a4665e9f3e7d341f0a26}{load} (std\+::string file\+Path)
+\item 
+bool \hyperlink{classAudioFile_a415239cad5b54b4fef4a210ab79911e3}{save} (std\+::string file\+Path, \hyperlink{AudioFile_8h_ad18559d169602e85d0ad68da6ef8593f}{Audio\+File\+Format} format=Audio\+File\+Format\+::\+Wave)
+\item 
+uint32\+\_\+t \hyperlink{classAudioFile_a8cd1b082af9db6bd180e4a63edcdefc9}{get\+Sample\+Rate} () const
+\item 
+int \hyperlink{classAudioFile_a514f860a956b4494ee8d8c806391d6b3}{get\+Num\+Channels} () const
+\item 
+bool \hyperlink{classAudioFile_a1057326fd2c2eca7cc7937f811868cf1}{is\+Mono} () const
+\item 
+bool \hyperlink{classAudioFile_a380a188d95f8f23b7622dfe222a7e8f6}{is\+Stereo} () const
+\item 
+int \hyperlink{classAudioFile_a5495d5cb55911de54f0714e219130b48}{get\+Bit\+Depth} () const
+\item 
+int \hyperlink{classAudioFile_ae1b5b4b7351a79dbf810bb34ede496b9}{get\+Num\+Samples\+Per\+Channel} () const
+\item 
+double \hyperlink{classAudioFile_a5a6b01404675361b1c21c9c5fb5753d4}{get\+Length\+In\+Seconds} () const
+\item 
+void \hyperlink{classAudioFile_a7b88c68133a9ac92149c58499e026360}{print\+Summary} () const
+\item 
+bool \hyperlink{classAudioFile_afa0a0f7d576b0597c938c5a89746636e}{set\+Audio\+Buffer} (Audio\+Buffer \&new\+Buffer)
+\item 
+void \hyperlink{classAudioFile_ac155ed12db0f3b02011a7d75b525e71a}{set\+Audio\+Buffer\+Size} (int num\+Channels, int num\+Samples)
+\item 
+void \hyperlink{classAudioFile_a4cff9513d49e21d25de13513564784b7}{set\+Num\+Samples\+Per\+Channel} (int num\+Samples)
+\item 
+void \hyperlink{classAudioFile_a354018a94ae15907d7308782f2adadbb}{set\+Num\+Channels} (int num\+Channels)
+\item 
+void \hyperlink{classAudioFile_a2adf2ea23e7daeb8401e717c1b3d874b}{set\+Bit\+Depth} (int num\+Bits\+Per\+Sample)
+\item 
+void \hyperlink{classAudioFile_a2d8fa306e40535113c3eba111e16483b}{set\+Sample\+Rate} (uint32\+\_\+t new\+Sample\+Rate)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Audio\+Buffer \hyperlink{classAudioFile_af937119db095c5af870851050dcbeabb}{samples}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class Audio\+File$<$ T $>$}
+
+
+
+Definition at line 47 of file Audio\+File.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classAudioFile_ae74399e93d3f4623c7421ee10cfc0e15}\label{classAudioFile_ae74399e93d3f4623c7421ee10cfc0e15}} 
+\index{Audio\+File@{Audio\+File}!Audio\+File@{Audio\+File}}
+\index{Audio\+File@{Audio\+File}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{Audio\+File()}{AudioFile()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::\hyperlink{classAudioFile}{Audio\+File} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructor 
+
+Definition at line 54 of file Audio\+File.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classAudioFile_a5495d5cb55911de54f0714e219130b48}\label{classAudioFile_a5495d5cb55911de54f0714e219130b48}} 
+\index{Audio\+File@{Audio\+File}!get\+Bit\+Depth@{get\+Bit\+Depth}}
+\index{get\+Bit\+Depth@{get\+Bit\+Depth}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{get\+Bit\+Depth()}{getBitDepth()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+int \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::get\+Bit\+Depth (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+the bit depth of each sample 
+
+Definition at line 93 of file Audio\+File.\+cpp.
+
+\mbox{\Hypertarget{classAudioFile_a5a6b01404675361b1c21c9c5fb5753d4}\label{classAudioFile_a5a6b01404675361b1c21c9c5fb5753d4}} 
+\index{Audio\+File@{Audio\+File}!get\+Length\+In\+Seconds@{get\+Length\+In\+Seconds}}
+\index{get\+Length\+In\+Seconds@{get\+Length\+In\+Seconds}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{get\+Length\+In\+Seconds()}{getLengthInSeconds()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+double \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::get\+Length\+In\+Seconds (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+the length in seconds of the audio file based on the number of samples and sample rate 
+
+Definition at line 110 of file Audio\+File.\+cpp.
+
+\mbox{\Hypertarget{classAudioFile_a514f860a956b4494ee8d8c806391d6b3}\label{classAudioFile_a514f860a956b4494ee8d8c806391d6b3}} 
+\index{Audio\+File@{Audio\+File}!get\+Num\+Channels@{get\+Num\+Channels}}
+\index{get\+Num\+Channels@{get\+Num\+Channels}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{get\+Num\+Channels()}{getNumChannels()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+int \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::get\+Num\+Channels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+the number of audio channels in the buffer 
+
+Definition at line 72 of file Audio\+File.\+cpp.
+
+\mbox{\Hypertarget{classAudioFile_ae1b5b4b7351a79dbf810bb34ede496b9}\label{classAudioFile_ae1b5b4b7351a79dbf810bb34ede496b9}} 
+\index{Audio\+File@{Audio\+File}!get\+Num\+Samples\+Per\+Channel@{get\+Num\+Samples\+Per\+Channel}}
+\index{get\+Num\+Samples\+Per\+Channel@{get\+Num\+Samples\+Per\+Channel}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{get\+Num\+Samples\+Per\+Channel()}{getNumSamplesPerChannel()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+int \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::get\+Num\+Samples\+Per\+Channel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+the number of samples per channel 
+
+Definition at line 100 of file Audio\+File.\+cpp.
+
+\mbox{\Hypertarget{classAudioFile_a8cd1b082af9db6bd180e4a63edcdefc9}\label{classAudioFile_a8cd1b082af9db6bd180e4a63edcdefc9}} 
+\index{Audio\+File@{Audio\+File}!get\+Sample\+Rate@{get\+Sample\+Rate}}
+\index{get\+Sample\+Rate@{get\+Sample\+Rate}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{get\+Sample\+Rate()}{getSampleRate()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+uint32\+\_\+t \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::get\+Sample\+Rate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+the sample rate 
+
+Definition at line 65 of file Audio\+File.\+cpp.
+
+\mbox{\Hypertarget{classAudioFile_a1057326fd2c2eca7cc7937f811868cf1}\label{classAudioFile_a1057326fd2c2eca7cc7937f811868cf1}} 
+\index{Audio\+File@{Audio\+File}!is\+Mono@{is\+Mono}}
+\index{is\+Mono@{is\+Mono}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{is\+Mono()}{isMono()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::is\+Mono (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+true if the audio file is mono 
+
+Definition at line 79 of file Audio\+File.\+cpp.
+
+\mbox{\Hypertarget{classAudioFile_a380a188d95f8f23b7622dfe222a7e8f6}\label{classAudioFile_a380a188d95f8f23b7622dfe222a7e8f6}} 
+\index{Audio\+File@{Audio\+File}!is\+Stereo@{is\+Stereo}}
+\index{is\+Stereo@{is\+Stereo}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{is\+Stereo()}{isStereo()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::is\+Stereo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+true if the audio file is stereo 
+
+Definition at line 86 of file Audio\+File.\+cpp.
+
+\mbox{\Hypertarget{classAudioFile_a0ff16123b519a4665e9f3e7d341f0a26}\label{classAudioFile_a0ff16123b519a4665e9f3e7d341f0a26}} 
+\index{Audio\+File@{Audio\+File}!load@{load}}
+\index{load@{load}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::load (\begin{DoxyParamCaption}\item[{std\+::string}]{file\+Path }\end{DoxyParamCaption})}
+
+Loads an audio file from a given file path.  true if the file was successfully loaded 
+
+Definition at line 221 of file Audio\+File.\+cpp.
+
+\mbox{\Hypertarget{classAudioFile_a7b88c68133a9ac92149c58499e026360}\label{classAudioFile_a7b88c68133a9ac92149c58499e026360}} 
+\index{Audio\+File@{Audio\+File}!print\+Summary@{print\+Summary}}
+\index{print\+Summary@{print\+Summary}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{print\+Summary()}{printSummary()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::print\+Summary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Prints a summary of the audio file to the console 
+
+Definition at line 117 of file Audio\+File.\+cpp.
+
+\mbox{\Hypertarget{classAudioFile_a415239cad5b54b4fef4a210ab79911e3}\label{classAudioFile_a415239cad5b54b4fef4a210ab79911e3}} 
+\index{Audio\+File@{Audio\+File}!save@{save}}
+\index{save@{save}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::save (\begin{DoxyParamCaption}\item[{std\+::string}]{file\+Path,  }\item[{\hyperlink{AudioFile_8h_ad18559d169602e85d0ad68da6ef8593f}{Audio\+File\+Format}}]{format = {\ttfamily AudioFileFormat\+:\+:Wave} }\end{DoxyParamCaption})}
+
+Saves an audio file to a given file path.  true if the file was successfully saved 
+
+Definition at line 525 of file Audio\+File.\+cpp.
+
+\mbox{\Hypertarget{classAudioFile_afa0a0f7d576b0597c938c5a89746636e}\label{classAudioFile_afa0a0f7d576b0597c938c5a89746636e}} 
+\index{Audio\+File@{Audio\+File}!set\+Audio\+Buffer@{set\+Audio\+Buffer}}
+\index{set\+Audio\+Buffer@{set\+Audio\+Buffer}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{set\+Audio\+Buffer()}{setAudioBuffer()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::set\+Audio\+Buffer (\begin{DoxyParamCaption}\item[{Audio\+Buffer \&}]{new\+Buffer }\end{DoxyParamCaption})}
+
+Set the audio buffer for this \hyperlink{classAudioFile}{Audio\+File} by copying samples from another buffer.  true if the buffer was copied successfully. 
+
+Definition at line 130 of file Audio\+File.\+cpp.
+
+\mbox{\Hypertarget{classAudioFile_ac155ed12db0f3b02011a7d75b525e71a}\label{classAudioFile_ac155ed12db0f3b02011a7d75b525e71a}} 
+\index{Audio\+File@{Audio\+File}!set\+Audio\+Buffer\+Size@{set\+Audio\+Buffer\+Size}}
+\index{set\+Audio\+Buffer\+Size@{set\+Audio\+Buffer\+Size}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{set\+Audio\+Buffer\+Size()}{setAudioBufferSize()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::set\+Audio\+Buffer\+Size (\begin{DoxyParamCaption}\item[{int}]{num\+Channels,  }\item[{int}]{num\+Samples }\end{DoxyParamCaption})}
+
+Sets the audio buffer to a given number of channels and number of samples per channel. This will try to preserve the existing audio, adding zeros to any new channels or new samples in a given channel. 
+
+Definition at line 162 of file Audio\+File.\+cpp.
+
+\mbox{\Hypertarget{classAudioFile_a2adf2ea23e7daeb8401e717c1b3d874b}\label{classAudioFile_a2adf2ea23e7daeb8401e717c1b3d874b}} 
+\index{Audio\+File@{Audio\+File}!set\+Bit\+Depth@{set\+Bit\+Depth}}
+\index{set\+Bit\+Depth@{set\+Bit\+Depth}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{set\+Bit\+Depth()}{setBitDepth()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::set\+Bit\+Depth (\begin{DoxyParamCaption}\item[{int}]{num\+Bits\+Per\+Sample }\end{DoxyParamCaption})}
+
+Sets the bit depth for the audio file. If you use the \hyperlink{classAudioFile_a415239cad5b54b4fef4a210ab79911e3}{save()} function, this bit depth rate will be used 
+
+Definition at line 207 of file Audio\+File.\+cpp.
+
+\mbox{\Hypertarget{classAudioFile_a354018a94ae15907d7308782f2adadbb}\label{classAudioFile_a354018a94ae15907d7308782f2adadbb}} 
+\index{Audio\+File@{Audio\+File}!set\+Num\+Channels@{set\+Num\+Channels}}
+\index{set\+Num\+Channels@{set\+Num\+Channels}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{set\+Num\+Channels()}{setNumChannels()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::set\+Num\+Channels (\begin{DoxyParamCaption}\item[{int}]{num\+Channels }\end{DoxyParamCaption})}
+
+Sets the number of channels. New channels will have the correct number of samples and be initialised to zero 
+
+Definition at line 186 of file Audio\+File.\+cpp.
+
+\mbox{\Hypertarget{classAudioFile_a4cff9513d49e21d25de13513564784b7}\label{classAudioFile_a4cff9513d49e21d25de13513564784b7}} 
+\index{Audio\+File@{Audio\+File}!set\+Num\+Samples\+Per\+Channel@{set\+Num\+Samples\+Per\+Channel}}
+\index{set\+Num\+Samples\+Per\+Channel@{set\+Num\+Samples\+Per\+Channel}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{set\+Num\+Samples\+Per\+Channel()}{setNumSamplesPerChannel()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::set\+Num\+Samples\+Per\+Channel (\begin{DoxyParamCaption}\item[{int}]{num\+Samples }\end{DoxyParamCaption})}
+
+Sets the number of samples per channel in the audio buffer. This will try to preserve the existing audio, adding zeros to new samples in a given channel if the number of samples is increased. 
+
+Definition at line 170 of file Audio\+File.\+cpp.
+
+\mbox{\Hypertarget{classAudioFile_a2d8fa306e40535113c3eba111e16483b}\label{classAudioFile_a2d8fa306e40535113c3eba111e16483b}} 
+\index{Audio\+File@{Audio\+File}!set\+Sample\+Rate@{set\+Sample\+Rate}}
+\index{set\+Sample\+Rate@{set\+Sample\+Rate}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{set\+Sample\+Rate()}{setSampleRate()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::set\+Sample\+Rate (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{new\+Sample\+Rate }\end{DoxyParamCaption})}
+
+Sets the sample rate for the audio file. If you use the \hyperlink{classAudioFile_a415239cad5b54b4fef4a210ab79911e3}{save()} function, this sample rate will be used 
+
+Definition at line 214 of file Audio\+File.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classAudioFile_af937119db095c5af870851050dcbeabb}\label{classAudioFile_af937119db095c5af870851050dcbeabb}} 
+\index{Audio\+File@{Audio\+File}!samples@{samples}}
+\index{samples@{samples}!Audio\+File@{Audio\+File}}
+\subsubsection{\texorpdfstring{samples}{samples}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+Audio\+Buffer \hyperlink{classAudioFile}{Audio\+File}$<$ T $>$\+::samples}
+
+A vector of vectors holding the audio samples for the \hyperlink{classAudioFile}{Audio\+File}. You can access the samples by channel and then by sample index, i.\+e\+: \begin{DoxyVerb} samples[channel][sampleIndex]\end{DoxyVerb}
+ 
+
+Definition at line 126 of file Audio\+File.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{AudioFile_8h}{Audio\+File.\+h}\item 
+\hyperlink{AudioFile_8cpp}{Audio\+File.\+cpp}\end{DoxyCompactItemize}

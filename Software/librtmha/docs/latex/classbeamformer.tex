@@ -1,0 +1,230 @@
+\hypertarget{classbeamformer}{}\section{beamformer Class Reference}
+\label{classbeamformer}\index{beamformer@{beamformer}}
+
+
+Beamformer Class.  
+
+
+
+
+{\ttfamily \#include $<$beamformer.\+hpp$>$}
+
+
+
+Inheritance diagram for beamformer\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{classbeamformer__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for beamformer\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{classbeamformer__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbeamformer_a30c14263a887cada41e51dffd39991c8}{beamformer} (size\+\_\+t delay\+\_\+len, float $\ast$adaptive\+\_\+filter\+\_\+taps, size\+\_\+t adaptive\+\_\+filter\+\_\+tap\+\_\+len, size\+\_\+t max\+\_\+frame\+\_\+size, int adaptation\+\_\+type, float mu, float delta, float rho, float alpha, float beta, float p, float c, float power\+\_\+estimate, int bf\+\_\+on\+\_\+off, int bf\+\_\+nc\+\_\+on\+\_\+off, int bf\+\_\+amc\+\_\+on\+\_\+off, float nc\+\_\+thr, float amc\+\_\+thr, float amc\+\_\+forgetting\+\_\+factor)
+\begin{DoxyCompactList}\small\item\em Beamformer constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classbeamformer_abedc8820adb8711f5fe9f9786bdcbcbf}\label{classbeamformer_abedc8820adb8711f5fe9f9786bdcbcbf}} 
+\hyperlink{classbeamformer_abedc8820adb8711f5fe9f9786bdcbcbf}{$\sim$beamformer} ()
+\begin{DoxyCompactList}\small\item\em Beamformer destructor. \end{DoxyCompactList}\item 
+void \hyperlink{classbeamformer_a557285c2c9ba3cc59cb73db8e5e823ed}{get\+\_\+e} (float $\ast$e\+\_\+l, float $\ast$e\+\_\+r, const float $\ast$x\+\_\+l, const float $\ast$x\+\_\+r, size\+\_\+t ref\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Getting e signal (the output signal of this beamformer) \end{DoxyCompactList}\item 
+int \hyperlink{classbeamformer_a5c98a192f70faf7dc3f354f677bec4ee}{update\+\_\+bf\+\_\+taps} (size\+\_\+t ref\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Update the taps of the beamformer. \end{DoxyCompactList}\item 
+void \hyperlink{classbeamformer_af3f89821c2cd4e52a9ed634d0d73aa3a}{get\+\_\+bf\+\_\+params} (int \&bf\+\_\+on\+\_\+off, int \&bf\+\_\+nc\+\_\+on\+\_\+off, int \&bf\+\_\+amc\+\_\+on\+\_\+off, float \&nc\+\_\+thr, float \&amc\+\_\+thr, float \&amc\+\_\+forgetting\+\_\+factor)
+\begin{DoxyCompactList}\small\item\em Getting all parameters from this beamformer. \end{DoxyCompactList}\item 
+void \hyperlink{classbeamformer_ac608a617588757dba3ac80c88a3d3c70}{set\+\_\+bf\+\_\+params} (int bf\+\_\+on\+\_\+off, int bf\+\_\+nc\+\_\+on\+\_\+off, int bf\+\_\+amc\+\_\+on\+\_\+off, float nc\+\_\+thr, float amc\+\_\+thr, float amc\+\_\+forgetting\+\_\+factor)
+\begin{DoxyCompactList}\small\item\em Setting all parameters from this beamformer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Beamformer Class. 
+
+This beamformer class implements the generalized sidelobe canceller (G\+SC) using S\+L\+MS \mbox{[}Lee et al., I\+H\+C\+ON 2018\mbox{]}. 
+
+Definition at line 39 of file beamformer.\+hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classbeamformer_a30c14263a887cada41e51dffd39991c8}\label{classbeamformer_a30c14263a887cada41e51dffd39991c8}} 
+\index{beamformer@{beamformer}!beamformer@{beamformer}}
+\index{beamformer@{beamformer}!beamformer@{beamformer}}
+\subsubsection{\texorpdfstring{beamformer()}{beamformer()}}
+{\footnotesize\ttfamily beamformer\+::beamformer (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{delay\+\_\+len,  }\item[{float $\ast$}]{adaptive\+\_\+filter\+\_\+taps,  }\item[{size\+\_\+t}]{adaptive\+\_\+filter\+\_\+tap\+\_\+len,  }\item[{size\+\_\+t}]{max\+\_\+frame\+\_\+size,  }\item[{int}]{adaptation\+\_\+type,  }\item[{float}]{mu,  }\item[{float}]{delta,  }\item[{float}]{rho,  }\item[{float}]{alpha,  }\item[{float}]{beta,  }\item[{float}]{p,  }\item[{float}]{c,  }\item[{float}]{power\+\_\+estimate,  }\item[{int}]{bf\+\_\+on\+\_\+off,  }\item[{int}]{bf\+\_\+nc\+\_\+on\+\_\+off,  }\item[{int}]{bf\+\_\+amc\+\_\+on\+\_\+off,  }\item[{float}]{nc\+\_\+thr,  }\item[{float}]{amc\+\_\+thr,  }\item[{float}]{amc\+\_\+forgetting\+\_\+factor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Beamformer constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em delay\+\_\+len} & The length of delay line in samples for beamformer \\
+\hline
+\mbox{\tt in}  & {\em adaptive\+\_\+filter\+\_\+taps} & The initial filter taps for adaptive filter in beamformer \\
+\hline
+\mbox{\tt in}  & {\em adaptive\+\_\+filter\+\_\+tap\+\_\+len} & The number of filter taps of adaptive filter in beamformer \\
+\hline
+\mbox{\tt in}  & {\em max\+\_\+frame\+\_\+size} & The maximum processing frame size in adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em adaptation\+\_\+type} & The adaptation type for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em mu} & A parameter for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em delta} & A parameter for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em rho} & A parameter for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em alpha} & A parameter for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em beta} & A parameter for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em p} & A parameter for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em c} & A parameter for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em power\+\_\+estimate} & A parameter for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em bf\+\_\+on\+\_\+off} & A flag for enabling beamformer \\
+\hline
+\mbox{\tt in}  & {\em bf\+\_\+nc\+\_\+on\+\_\+off} & A flag for enabling norm-\/constrained adaptation \\
+\hline
+\mbox{\tt in}  & {\em bf\+\_\+amc\+\_\+on\+\_\+off} & A flag for enabling adaptation mode controller \\
+\hline
+\mbox{\tt in}  & {\em nc\+\_\+thr} & A threshold for the norm-\/constrained adaptation \\
+\hline
+\mbox{\tt in}  & {\em amc\+\_\+thr} & A threshold for the adaptation mode controller \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classadaptive__filter}{adaptive\+\_\+filter} 
+\end{DoxySeeAlso}
+
+
+Definition at line 32 of file beamformer.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classbeamformer_af3f89821c2cd4e52a9ed634d0d73aa3a}\label{classbeamformer_af3f89821c2cd4e52a9ed634d0d73aa3a}} 
+\index{beamformer@{beamformer}!get\+\_\+bf\+\_\+params@{get\+\_\+bf\+\_\+params}}
+\index{get\+\_\+bf\+\_\+params@{get\+\_\+bf\+\_\+params}!beamformer@{beamformer}}
+\subsubsection{\texorpdfstring{get\+\_\+bf\+\_\+params()}{get\_bf\_params()}}
+{\footnotesize\ttfamily void beamformer\+::get\+\_\+bf\+\_\+params (\begin{DoxyParamCaption}\item[{int \&}]{bf\+\_\+on\+\_\+off,  }\item[{int \&}]{bf\+\_\+nc\+\_\+on\+\_\+off,  }\item[{int \&}]{bf\+\_\+amc\+\_\+on\+\_\+off,  }\item[{float \&}]{nc\+\_\+thr,  }\item[{float \&}]{amc\+\_\+thr,  }\item[{float \&}]{amc\+\_\+forgetting\+\_\+factor }\end{DoxyParamCaption})}
+
+
+
+Getting all parameters from this beamformer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em bf\+\_\+on\+\_\+off} & A flag to turn the beamformer on (0\+: O\+FF, 1\+: ON) \\
+\hline
+\mbox{\tt out}  & {\em bf\+\_\+nc\+\_\+on\+\_\+off} & A flag to turn the norm-\/constrained adaptation on (0\+: O\+FF, 1\+: ON) \\
+\hline
+\mbox{\tt out}  & {\em bf\+\_\+amc\+\_\+on\+\_\+off} & A flag to turn the adaptation mode controller on (0\+: O\+FF, 1\+: ON) \\
+\hline
+\mbox{\tt out}  & {\em nc\+\_\+thr} & A threshold for the norm-\/constrained adaptation \\
+\hline
+\mbox{\tt out}  & {\em amc\+\_\+thr} & A threshold for the adaptation mode controller \\
+\hline
+\mbox{\tt out}  & {\em amc\+\_\+forgetting\+\_\+factor} & A forgetting factor to compute the signal power \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 142 of file beamformer.\+cpp.
+
+\mbox{\Hypertarget{classbeamformer_a557285c2c9ba3cc59cb73db8e5e823ed}\label{classbeamformer_a557285c2c9ba3cc59cb73db8e5e823ed}} 
+\index{beamformer@{beamformer}!get\+\_\+e@{get\+\_\+e}}
+\index{get\+\_\+e@{get\+\_\+e}!beamformer@{beamformer}}
+\subsubsection{\texorpdfstring{get\+\_\+e()}{get\_e()}}
+{\footnotesize\ttfamily void beamformer\+::get\+\_\+e (\begin{DoxyParamCaption}\item[{float $\ast$}]{e\+\_\+l,  }\item[{float $\ast$}]{e\+\_\+r,  }\item[{const float $\ast$}]{x\+\_\+l,  }\item[{const float $\ast$}]{x\+\_\+r,  }\item[{size\+\_\+t}]{ref\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Getting e signal (the output signal of this beamformer) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em e\+\_\+l} & The output signal of this beamformer on the left \\
+\hline
+\mbox{\tt out}  & {\em e\+\_\+r} & The output signal of this beamformer on the right \\
+\hline
+\mbox{\tt in}  & {\em x\+\_\+l} & The input signal from the left channel \\
+\hline
+\mbox{\tt in}  & {\em x\+\_\+r} & the input signal from the right channel \\
+\hline
+\mbox{\tt in}  & {\em ref\+\_\+size} & The size of each input signal (x\+\_\+l and x\+\_\+r have the same size) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 70 of file beamformer.\+cpp.
+
+\mbox{\Hypertarget{classbeamformer_ac608a617588757dba3ac80c88a3d3c70}\label{classbeamformer_ac608a617588757dba3ac80c88a3d3c70}} 
+\index{beamformer@{beamformer}!set\+\_\+bf\+\_\+params@{set\+\_\+bf\+\_\+params}}
+\index{set\+\_\+bf\+\_\+params@{set\+\_\+bf\+\_\+params}!beamformer@{beamformer}}
+\subsubsection{\texorpdfstring{set\+\_\+bf\+\_\+params()}{set\_bf\_params()}}
+{\footnotesize\ttfamily void beamformer\+::set\+\_\+bf\+\_\+params (\begin{DoxyParamCaption}\item[{int}]{bf\+\_\+on\+\_\+off,  }\item[{int}]{bf\+\_\+nc\+\_\+on\+\_\+off,  }\item[{int}]{bf\+\_\+amc\+\_\+on\+\_\+off,  }\item[{float}]{nc\+\_\+thr,  }\item[{float}]{amc\+\_\+thr,  }\item[{float}]{amc\+\_\+forgetting\+\_\+factor }\end{DoxyParamCaption})}
+
+
+
+Setting all parameters from this beamformer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em bf\+\_\+on\+\_\+off} & A flag to turn the beamformer on (0\+: O\+FF, 1\+: ON) \\
+\hline
+\mbox{\tt in}  & {\em bf\+\_\+nc\+\_\+on\+\_\+off} & A flag to turn the norm-\/constrained adaptation on (0\+: O\+FF, 1\+: ON) \\
+\hline
+\mbox{\tt in}  & {\em bf\+\_\+amc\+\_\+on\+\_\+off} & A flag to turn the adaptation mode controller on (0\+: O\+FF, 1\+: ON) \\
+\hline
+\mbox{\tt in}  & {\em nc\+\_\+thr} & A threshold for the norm-\/constrained adaptation \\
+\hline
+\mbox{\tt in}  & {\em amc\+\_\+thr} & A threshold for the adaptation mode controller \\
+\hline
+\mbox{\tt in}  & {\em amc\+\_\+forgetting\+\_\+factor} & A forgetting factor to compute the signal power \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 153 of file beamformer.\+cpp.
+
+\mbox{\Hypertarget{classbeamformer_a5c98a192f70faf7dc3f354f677bec4ee}\label{classbeamformer_a5c98a192f70faf7dc3f354f677bec4ee}} 
+\index{beamformer@{beamformer}!update\+\_\+bf\+\_\+taps@{update\+\_\+bf\+\_\+taps}}
+\index{update\+\_\+bf\+\_\+taps@{update\+\_\+bf\+\_\+taps}!beamformer@{beamformer}}
+\subsubsection{\texorpdfstring{update\+\_\+bf\+\_\+taps()}{update\_bf\_taps()}}
+{\footnotesize\ttfamily int beamformer\+::update\+\_\+bf\+\_\+taps (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{ref\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Update the taps of the beamformer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ref\+\_\+size} & The size of each input signal (x\+\_\+l and x\+\_\+r have the same size) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A flag indicating the success of adaptation in adaptive filter 
+\end{DoxyReturn}
+
+
+Definition at line 102 of file beamformer.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{beamformer_8hpp}{beamformer.\+hpp}\item 
+\hyperlink{beamformer_8cpp}{beamformer.\+cpp}\end{DoxyCompactItemize}

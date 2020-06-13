@@ -1,0 +1,94 @@
+\hypertarget{classresample}{}\section{resample Class Reference}
+\label{classresample}\index{resample@{resample}}
+
+
+Resample Class.  
+
+
+
+
+{\ttfamily \#include $<$resample.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classresample_af9ae60e50b2be5ee96f8f2bddf942b90}{resample} (float $\ast$taps, size\+\_\+t tap\+\_\+size, size\+\_\+t max\+\_\+in\+\_\+buf\+\_\+size, int interp\+\_\+factor, int deci\+\_\+factor)
+\begin{DoxyCompactList}\small\item\em Resample constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classresample_a98884fd6264cbd4c7254e7c3767b5a85}\label{classresample_a98884fd6264cbd4c7254e7c3767b5a85}} 
+\hyperlink{classresample_a98884fd6264cbd4c7254e7c3767b5a85}{$\sim$resample} ()
+\begin{DoxyCompactList}\small\item\em Resample destructor. \end{DoxyCompactList}\item 
+void \hyperlink{classresample_a121c622a3ed64b69b09025a008f84dc3}{resamp} (float $\ast$data\+\_\+in, size\+\_\+t in\+\_\+size, float $\ast$data\+\_\+out, size\+\_\+t $\ast$out\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Getting the resampled signal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Resample Class. 
+
+Resampling class implements L/\+M-\/fold resampling 
+
+Definition at line 15 of file resample.\+hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classresample_af9ae60e50b2be5ee96f8f2bddf942b90}\label{classresample_af9ae60e50b2be5ee96f8f2bddf942b90}} 
+\index{resample@{resample}!resample@{resample}}
+\index{resample@{resample}!resample@{resample}}
+\subsubsection{\texorpdfstring{resample()}{resample()}}
+{\footnotesize\ttfamily resample\+::resample (\begin{DoxyParamCaption}\item[{float $\ast$}]{taps,  }\item[{size\+\_\+t}]{tap\+\_\+size,  }\item[{size\+\_\+t}]{max\+\_\+in\+\_\+buf\+\_\+size,  }\item[{int}]{interp\+\_\+factor,  }\item[{int}]{deci\+\_\+factor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Resample constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em taps} & The filter taps of the lowpass filter (to reject images and prevent aliasing) \\
+\hline
+\mbox{\tt in}  & {\em tap\+\_\+size} & The number of taps of the lowpass filter \\
+\hline
+\mbox{\tt in}  & {\em max\+\_\+in\+\_\+buf\+\_\+size} & The maximum input buffer size \\
+\hline
+\mbox{\tt in}  & {\em interp\+\_\+factor} & The interpolation factor L (to implement L-\/fold expander) \\
+\hline
+\mbox{\tt in}  & {\em deci\+\_\+factor} & The decimation factor M (to implement M-\/fold decimator) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 7 of file resample.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classresample_a121c622a3ed64b69b09025a008f84dc3}\label{classresample_a121c622a3ed64b69b09025a008f84dc3}} 
+\index{resample@{resample}!resamp@{resamp}}
+\index{resamp@{resamp}!resample@{resample}}
+\subsubsection{\texorpdfstring{resamp()}{resamp()}}
+{\footnotesize\ttfamily void resample\+::resamp (\begin{DoxyParamCaption}\item[{float $\ast$}]{data\+\_\+in,  }\item[{size\+\_\+t}]{in\+\_\+size,  }\item[{float $\ast$}]{data\+\_\+out,  }\item[{size\+\_\+t $\ast$}]{out\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Getting the resampled signal. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em data\+\_\+in} & The signal in original sampling rate \\
+\hline
+\mbox{\tt in}  & {\em in\+\_\+size} & The size of the original signal \\
+\hline
+\mbox{\tt out}  & {\em data\+\_\+out} & The resampled signal \\
+\hline
+\mbox{\tt out}  & {\em out\+\_\+size} & The size of the resampled signal \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 23 of file resample.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+resample.\+hpp\item 
+resample.\+cpp\end{DoxyCompactItemize}

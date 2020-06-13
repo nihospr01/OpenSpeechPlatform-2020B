@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\StartSocket::class,
+        Commands\HeartbeatTimestamp::class
     ];
 
     /**
@@ -24,8 +25,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // TODO: add to crontab
+        $schedule->command('heartbeat:write')
+                 ->everyFiveMinutes();
     }
 
     /**

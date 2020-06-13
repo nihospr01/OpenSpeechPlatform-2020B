@@ -1,0 +1,224 @@
+//
+// Created by Dhiman Sengupta on 11/14/18.
+//
+
+#ifndef OSP_CLION_CXX_OPENSPEECHPLATFORM_HPP
+#define OSP_CLION_CXX_OPENSPEECHPLATFORM_HPP
+
+#define OSP_VERSION_MAJOR @OSP_VERSION_MAJOR@
+#define OSP_VERSION_MINOR @OSP_VERSION_MINOR@
+
+#include <iostream>
+#include <unistd.h>
+#include <thread>
+#include <string>
+#include <vector>
+#include <ctime>
+#include <random>
+#include "ews_connect.hpp"
+#include "portaudio_wrapper.h"
+#include "control_param.h"
+#include "stopwatch.h"
+#ifdef __linux__
+#include <sched.h>
+#endif
+
+
+
+template<class P, class M, class D>
+void keyboard(P *parser, M *masterHA, controls *main_controls) {
+    D user_data[2];
+    std::string command_line_in;
+    std::getline(std::cin, command_line_in);
+    std::istringstream iss(command_line_in);
+    std::vector<std::string> command_line_array((std::istream_iterator<WordDelimitedBy<' '>>(iss)),
+                                                std::istream_iterator<WordDelimitedBy<' '>>());
+    command_line_array.insert(command_line_array.begin(), "Temp");
+    std::vector<char *> cstrings;
+    for(auto& string : command_line_array)
+        cstrings.push_back(&string.front());
+
+    masterHA->get_params(user_data);
+    parser->parse((int)cstrings.size(), cstrings.data(), user_data, main_controls);
+    masterHA->set_params(user_data);
+}
+
+template <class PARSER, class MHA, class DATA>
+void monitor(PARSER *parser, MHA* masterHA, controls *main_controls){
+#ifdef __linux__
+    int rc = pthread_setname_np(pthread_self(), "OSP: Console");
+    if (rc != 0)
+        std::cerr << "pthread_setname_np failed" << std::endl;
+#endif
+    while(!main_controls->endloop){
+        keyboard<PARSER, MHA, DATA>(parser, masterHA, main_controls);
+    }
+};
+
+template <class MHA>
+struct callback_data{
+    float **in;
+    float **out;
+    controls *main_controls;
+    MHA *masterHA;
+
+};
+
+template <class PARSER, class MHA, class DATA>
+int openspeechplatform(PARSER *parser, MHA *masterHA, controls *main_controls){
+
+#ifdef STOPWATCH1
+    filename =
+            "/root/data/overall" + std::to_string(main_controls->bench_type) + "_" + std::to_string(main_controls->k_size) +
+            "_" + std::to_string(main_controls->k_iter) + GetCurrentTimeForFileName() + ".csv";
+#endif
+
+    callback_data<MHA> *cb_data = new callback_data<MHA>();
+
+
+    cb_data->in = new float*[2];
+    cb_data->out = new float*[2];
+    for(int i = 0; i < 2; i++){
+        cb_data->in[i] = new float[main_controls->buf_size];
+        std::memset(cb_data->in[i], 0, sizeof(float)*main_controls->buf_size);
+        cb_data->out[i] = new float[main_controls->buf_size];
+        std::memset(cb_data->out[i], 0, sizeof(float)*main_controls->buf_size);
+    }
+    cb_data->main_controls = main_controls;
+    cb_data->masterHA = masterHA;
+
+    auto cb = [](const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer,
+                 const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void *userData) -> int {
+
+    #ifdef OVERALL
+            start_time = std::chrono::steady_clock::now();
+    #endif
+            (void) timeInfo;
+            (void) &statusFlags;
+            auto cb_data = (callback_data<MHA> *) userData;
+            float ** in = cb_data->in;
+            float ** out = cb_data->out;
+            auto masterHA = cb_data->masterHA;
+            auto main_controls = cb_data->main_controls;
+            int in_chan = main_controls->input_channels;
+            int out_chan = main_controls->output_channels;
+
+            if(in_chan == 0){
+                masterHA->process(in, out, framesPerBuffer);
+            }
+            else if(in_chan == 1){
+                std::memcpy(in[0], inputBuffer, framesPerBuffer* sizeof(float));
+                std::memcpy(in[1], inputBuffer, framesPerBuffer* sizeof(float));
+                masterHA->process(in, out, framesPerBuffer);
+            }
+            else if(in_chan == 2 && out_chan == 2){
+                masterHA->process((float **) inputBuffer, (float **) outputBuffer, framesPerBuffer);
+            }
+            else{
+                masterHA->process((float **) inputBuffer, out, framesPerBuffer);
+            }
+
+            if(out_chan == 1) {
+                std::memcpy(outputBuffer, out[0], framesPerBuffer * sizeof(float));
+            }
+            else{
+                float ** temp = (float **) outputBuffer;
+                std::memcpy(temp[0], out[0], framesPerBuffer * sizeof(float));
+                std::memcpy(temp[1], out[1], framesPerBuffer * sizeof(float));
+            }
+
+
+    #ifdef OVERALL
+            if (counter < RECORD_TIME) {
+                end_time = std::chrono::steady_clock::now();
+                dur[counter] =
+                        std::chrono::duration_cast<std::chrono::duration<double>>(end_time - start_time).count() * 1000000;
+                counter++;
+            } else {
+                std::ofstream outfile;
+                outfile.open(filename);
+                for (int i = 0; i < RECORD_TIME; i++) {
+                    outfile << dur[i] << std::endl;
+
+                }
+                outfile.close();
+    #ifdef STATS
+                printStats();
+    #endif
+                exit(0);
+            }
+    #endif
+            return paContinue;
+        };
+
+#ifdef __linux__
+    cpu_set_t cpuset;
+    CPU_ZERO(&cpuset);
+    CPU_SET(0, &cpuset);
+    int rc = pthread_setaffinity_np(pthread_self(), sizeof(cpu_set_t), &cpuset);
+    if (rc != 0) {
+        std::cerr << "Error calling pthread_setaffinity_np: " << rc << std::endl;
+    }
+#endif
+
+    std::thread *monitoring = new std::thread(&monitor<PARSER, MHA, DATA>, parser, masterHA, main_controls); 
+
+#ifdef __linux__
+    rc = pthread_setname_np(pthread_self(), "OSP: EWS");
+    if (rc != 0)
+        std::cerr << "pthread_setname_np failed" << std::endl;
+#endif
+    ews_connection<PARSER, MHA, DATA> server(parser, masterHA, 8001);
+    
+    struct sched_param param; int pol;
+    int s = pthread_getschedparam(pthread_self(), &pol, &param);
+    if (s != 0)
+	    std::cerr << __func__ << "pthread_getschedparam failed" << std::endl;
+    param.sched_priority = 1;
+    s = pthread_setschedparam(pthread_self(), SCHED_FIFO, &param);
+    if (s != 0)
+	    std::cerr << __func__ << "pthread_setschedparam failed" << std::endl;
+
+#ifdef __linux__
+    CPU_ZERO(&cpuset);
+    CPU_SET(3, &cpuset);
+    rc = pthread_setaffinity_np(pthread_self(), sizeof(cpu_set_t), &cpuset);
+    if (rc != 0) {
+        std::cerr << "Error calling pthread_setaffinity_np: " << rc << std::endl;
+    }
+    rc = pthread_setname_np(pthread_self(), "OSP: Callbk");
+    if (rc != 0)
+        std::cerr << "pthread_setname_np failed" << std::endl;
+#endif
+
+    portaudio_wrapper *audio;
+    if(main_controls->file_test)
+        main_controls->input_channels = 0;
+    if(main_controls->input_device == -1) {
+        audio = new  portaudio_wrapper(main_controls->input_channels, main_controls->output_channels,
+                                       cb, (void *) cb_data, main_controls->samp_freq, main_controls->buf_size);
+    }
+    else{
+        audio = new  portaudio_wrapper(main_controls->input_device, main_controls->input_channels,
+                                       main_controls->output_device, main_controls->output_channels, cb,
+                                       (void *) cb_data, main_controls->samp_freq, main_controls->buf_size);
+    }
+    audio->start_stream();
+    std::cout << "Input latency: " << audio->input_latency() << std::endl;
+    std::cout << "Output latency: " << audio->output_latency() << std::endl;
+
+#ifdef __linux__
+    rc = pthread_setname_np(pthread_self(), "OSP: Main");
+    if (rc != 0)
+        std::cerr << "pthread_setname_np failed" << std::endl;
+#endif
+
+    monitoring->join();
+
+    audio->stop_stream();
+    delete audio;
+
+    return 0;
+}
+
+#endif //OSP_CLION_CXX_OPENSPEECHPLATFORM_HPP

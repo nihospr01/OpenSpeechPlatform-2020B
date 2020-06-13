@@ -1,0 +1,255 @@
+\hypertarget{classafc}{}\section{afc Class Reference}
+\label{classafc}\index{afc@{afc}}
+
+
+Adaptive Feedback Cancellation (A\+FC) Class.  
+
+
+
+
+{\ttfamily \#include $<$afc.\+hpp$>$}
+
+
+
+Inheritance diagram for afc\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{classafc__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for afc\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{classafc__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classafc_a2f6b513c6bbc373ee59b1dddcb71f6a4}{afc} (float $\ast$bandlimited\+\_\+filter\+\_\+taps, size\+\_\+t bandlimited\+\_\+filter\+\_\+tap\+\_\+len, float $\ast$prefilter\+\_\+taps, size\+\_\+t prefilter\+\_\+tap\+\_\+len, float $\ast$adaptive\+\_\+filter\+\_\+taps, size\+\_\+t adaptive\+\_\+filter\+\_\+tap\+\_\+len, size\+\_\+t max\+\_\+frame\+\_\+size, int adaptation\+\_\+type, float mu, float delta, float rho, float alpha, float beta, float p, float c, float power\+\_\+estimate, size\+\_\+t delay\+\_\+len, int afc\+\_\+on\+\_\+off)
+\begin{DoxyCompactList}\small\item\em A\+FC constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classafc_a9143ec3fdf33d512a307c98e977f5e5a}\label{classafc_a9143ec3fdf33d512a307c98e977f5e5a}} 
+\hyperlink{classafc_a9143ec3fdf33d512a307c98e977f5e5a}{$\sim$afc} ()
+\begin{DoxyCompactList}\small\item\em A\+FC destructor. \end{DoxyCompactList}\item 
+int \hyperlink{classafc_ad4678623a91bce48b23dd2bdfd403682}{get\+\_\+y\+\_\+hat} (float $\ast$y\+\_\+hat, float $\ast$e, float $\ast$s, size\+\_\+t ref\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Getting y\+\_\+hat signal (an estimated feedback signal) \end{DoxyCompactList}\item 
+void \hyperlink{classafc_abe939a99bca35b708ffd66bef80abeb4}{get\+\_\+delay} (size\+\_\+t \&delay\+\_\+len)
+\begin{DoxyCompactList}\small\item\em Getting the length of delay line in samples. \end{DoxyCompactList}\item 
+int \hyperlink{classafc_adf8c29b6bfc26a0d91eccdff26c76887}{set\+\_\+delay} (size\+\_\+t delay\+\_\+len)
+\begin{DoxyCompactList}\small\item\em Setting the length of delay line in samples. \end{DoxyCompactList}\item 
+void \hyperlink{classafc_a5e905d06e41380c61aec6221dbf203fb}{set\+\_\+afc\+\_\+on\+\_\+off} (int afc\+\_\+on\+\_\+off)
+\begin{DoxyCompactList}\small\item\em Setting the O\+N/\+O\+FF for the A\+FC. \end{DoxyCompactList}\item 
+void \hyperlink{classafc_a2119124c7589cb15a7b55568d5301073}{get\+\_\+afc\+\_\+on\+\_\+off} (int \&afc\+\_\+on\+\_\+off)
+\begin{DoxyCompactList}\small\item\em Getting the O\+N/\+O\+FF for the A\+FC. \end{DoxyCompactList}\item 
+void \hyperlink{classafc_a6f82d1ff5013e2311f099c3d4a911a75}{reset} (float $\ast$default\+\_\+taps, size\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em Reset the A\+FC filter to all zeros. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Adaptive Feedback Cancellation (A\+FC) Class. 
+
+Under the F\+X\+L\+MS framework, this A\+FC class utilizes an adaptive filter to estimate the feedback signal, namely, y\+\_\+hat. 
+
+Definition at line 40 of file afc.\+hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classafc_a2f6b513c6bbc373ee59b1dddcb71f6a4}\label{classafc_a2f6b513c6bbc373ee59b1dddcb71f6a4}} 
+\index{afc@{afc}!afc@{afc}}
+\index{afc@{afc}!afc@{afc}}
+\subsubsection{\texorpdfstring{afc()}{afc()}}
+{\footnotesize\ttfamily afc\+::afc (\begin{DoxyParamCaption}\item[{float $\ast$}]{bandlimited\+\_\+filter\+\_\+taps,  }\item[{size\+\_\+t}]{bandlimited\+\_\+filter\+\_\+tap\+\_\+len,  }\item[{float $\ast$}]{prefilter\+\_\+taps,  }\item[{size\+\_\+t}]{prefilter\+\_\+tap\+\_\+len,  }\item[{float $\ast$}]{adaptive\+\_\+filter\+\_\+taps,  }\item[{size\+\_\+t}]{adaptive\+\_\+filter\+\_\+tap\+\_\+len,  }\item[{size\+\_\+t}]{max\+\_\+frame\+\_\+size,  }\item[{int}]{adaptation\+\_\+type,  }\item[{float}]{mu,  }\item[{float}]{delta,  }\item[{float}]{rho,  }\item[{float}]{alpha,  }\item[{float}]{beta,  }\item[{float}]{p,  }\item[{float}]{c,  }\item[{float}]{power\+\_\+estimate,  }\item[{size\+\_\+t}]{delay\+\_\+len,  }\item[{int}]{afc\+\_\+on\+\_\+off }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+A\+FC constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em bandlimited\+\_\+filter\+\_\+taps} & The filter taps for bandlimited filter in A\+FC \\
+\hline
+\mbox{\tt in}  & {\em bandlimited\+\_\+filter\+\_\+tap\+\_\+len} & The number of taps of bandlimited filter in A\+FC \\
+\hline
+\mbox{\tt in}  & {\em prefilter\+\_\+taps} & The filter taps for whitening filter in A\+FC \\
+\hline
+\mbox{\tt in}  & {\em prefilter\+\_\+tap\+\_\+len} & The number of taps of prefilter in A\+FC \\
+\hline
+\mbox{\tt in}  & {\em adaptive\+\_\+filter\+\_\+taps} & The initial filter taps for adaptive filter in A\+FC \\
+\hline
+\mbox{\tt in}  & {\em adaptive\+\_\+filter\+\_\+tap\+\_\+len} & The number of filter taps of adaptive filter in A\+FC \\
+\hline
+\mbox{\tt in}  & {\em max\+\_\+frame\+\_\+size} & The maximum processing frame size in adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em adaptation\+\_\+type} & The adaptation type for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em mu} & A parameter for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em delta} & A parameter for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em rho} & A parameter for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em alpha} & A parameter for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em beta} & A parameter for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em p} & A parameter for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em c} & A parameter for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em power\+\_\+estimate} & A parameter for adaptive filter \\
+\hline
+\mbox{\tt in}  & {\em delay\+\_\+len} & The number of delay in samples \\
+\hline
+\mbox{\tt in}  & {\em afc\+\_\+on\+\_\+off} & A flag to turn the A\+FC on (0\+: O\+FF, 1\+: ON) \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classadaptive__filter}{adaptive\+\_\+filter} 
+\end{DoxySeeAlso}
+
+
+Definition at line 29 of file afc.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classafc_a2119124c7589cb15a7b55568d5301073}\label{classafc_a2119124c7589cb15a7b55568d5301073}} 
+\index{afc@{afc}!get\+\_\+afc\+\_\+on\+\_\+off@{get\+\_\+afc\+\_\+on\+\_\+off}}
+\index{get\+\_\+afc\+\_\+on\+\_\+off@{get\+\_\+afc\+\_\+on\+\_\+off}!afc@{afc}}
+\subsubsection{\texorpdfstring{get\+\_\+afc\+\_\+on\+\_\+off()}{get\_afc\_on\_off()}}
+{\footnotesize\ttfamily void afc\+::get\+\_\+afc\+\_\+on\+\_\+off (\begin{DoxyParamCaption}\item[{int \&}]{afc\+\_\+on\+\_\+off }\end{DoxyParamCaption})}
+
+
+
+Getting the O\+N/\+O\+FF for the A\+FC. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em afc\+\_\+on\+\_\+off} & A flag indicating the O\+N/\+O\+FF of A\+FC (False\+: O\+FF, True\+: ON) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 120 of file afc.\+cpp.
+
+\mbox{\Hypertarget{classafc_abe939a99bca35b708ffd66bef80abeb4}\label{classafc_abe939a99bca35b708ffd66bef80abeb4}} 
+\index{afc@{afc}!get\+\_\+delay@{get\+\_\+delay}}
+\index{get\+\_\+delay@{get\+\_\+delay}!afc@{afc}}
+\subsubsection{\texorpdfstring{get\+\_\+delay()}{get\_delay()}}
+{\footnotesize\ttfamily void afc\+::get\+\_\+delay (\begin{DoxyParamCaption}\item[{size\+\_\+t \&}]{delay\+\_\+len }\end{DoxyParamCaption})}
+
+
+
+Getting the length of delay line in samples. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em delay\+\_\+len} & The number of delay in samples \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 91 of file afc.\+cpp.
+
+\mbox{\Hypertarget{classafc_ad4678623a91bce48b23dd2bdfd403682}\label{classafc_ad4678623a91bce48b23dd2bdfd403682}} 
+\index{afc@{afc}!get\+\_\+y\+\_\+hat@{get\+\_\+y\+\_\+hat}}
+\index{get\+\_\+y\+\_\+hat@{get\+\_\+y\+\_\+hat}!afc@{afc}}
+\subsubsection{\texorpdfstring{get\+\_\+y\+\_\+hat()}{get\_y\_hat()}}
+{\footnotesize\ttfamily int afc\+::get\+\_\+y\+\_\+hat (\begin{DoxyParamCaption}\item[{float $\ast$}]{y\+\_\+hat,  }\item[{float $\ast$}]{e,  }\item[{float $\ast$}]{s,  }\item[{size\+\_\+t}]{ref\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Getting y\+\_\+hat signal (an estimated feedback signal) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em y\+\_\+hat} & An estimated feedback signal \\
+\hline
+\mbox{\tt in}  & {\em e} & An error signal for A\+FC (the output of hearing aid processing) \\
+\hline
+\mbox{\tt in}  & {\em s} & An input signal for A\+FC (the input of hearing aid processing) \\
+\hline
+\mbox{\tt in}  & {\em ref\+\_\+size} & The size of each signal (e and s have the same size) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A flag indicating the success of getting correct y\+\_\+hat according to the adaptation type 
+\end{DoxyReturn}
+
+
+Definition at line 63 of file afc.\+cpp.
+
+\mbox{\Hypertarget{classafc_a6f82d1ff5013e2311f099c3d4a911a75}\label{classafc_a6f82d1ff5013e2311f099c3d4a911a75}} 
+\index{afc@{afc}!reset@{reset}}
+\index{reset@{reset}!afc@{afc}}
+\subsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void afc\+::reset (\begin{DoxyParamCaption}\item[{float $\ast$}]{default\+\_\+taps,  }\item[{size\+\_\+t}]{len }\end{DoxyParamCaption})}
+
+
+
+Reset the A\+FC filter to all zeros. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em default\+\_\+taps} & The default A\+FC filter \\
+\hline
+\mbox{\tt in}  & {\em len} & Length of the default A\+FC filter \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 126 of file afc.\+cpp.
+
+\mbox{\Hypertarget{classafc_a5e905d06e41380c61aec6221dbf203fb}\label{classafc_a5e905d06e41380c61aec6221dbf203fb}} 
+\index{afc@{afc}!set\+\_\+afc\+\_\+on\+\_\+off@{set\+\_\+afc\+\_\+on\+\_\+off}}
+\index{set\+\_\+afc\+\_\+on\+\_\+off@{set\+\_\+afc\+\_\+on\+\_\+off}!afc@{afc}}
+\subsubsection{\texorpdfstring{set\+\_\+afc\+\_\+on\+\_\+off()}{set\_afc\_on\_off()}}
+{\footnotesize\ttfamily void afc\+::set\+\_\+afc\+\_\+on\+\_\+off (\begin{DoxyParamCaption}\item[{int}]{afc\+\_\+on\+\_\+off }\end{DoxyParamCaption})}
+
+
+
+Setting the O\+N/\+O\+FF for the A\+FC. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em afc\+\_\+on\+\_\+off} & A flag to turn the A\+FC on (False\+: O\+FF, True\+: ON) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 111 of file afc.\+cpp.
+
+\mbox{\Hypertarget{classafc_adf8c29b6bfc26a0d91eccdff26c76887}\label{classafc_adf8c29b6bfc26a0d91eccdff26c76887}} 
+\index{afc@{afc}!set\+\_\+delay@{set\+\_\+delay}}
+\index{set\+\_\+delay@{set\+\_\+delay}!afc@{afc}}
+\subsubsection{\texorpdfstring{set\+\_\+delay()}{set\_delay()}}
+{\footnotesize\ttfamily int afc\+::set\+\_\+delay (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{delay\+\_\+len }\end{DoxyParamCaption})}
+
+
+
+Setting the length of delay line in samples. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em delay\+\_\+len} & The number of delay in samples \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A flag indicating the success of setting delay\+\_\+len 
+\end{DoxyReturn}
+
+
+Definition at line 97 of file afc.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{afc_8hpp}{afc.\+hpp}\item 
+\hyperlink{afc_8cpp}{afc.\+cpp}\end{DoxyCompactItemize}

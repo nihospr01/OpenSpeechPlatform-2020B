@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo
+echo
+echo "This script will use 'sudo' throughout at various times, invoke this"
+echo "as a user with sudo priveleges and enter your user password when prompted"
+echo
+echo
+
+OS=$(uname)
+
+echo Execute NodeJS Frontend
+cd -
+pushd $PWD/ews-frontend
+sudo npm install
+sudo npm update
+sudo npm audit fix
+sudo npm run start
+popd

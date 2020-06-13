@@ -44,6 +44,7 @@
             <a href="{{ url('/goldilocks/logs/programs') }}" class="list-group-item list-group-item-action">Programs CSV</a>
             <a href="{{ url('/goldilocks/logs/listener-logs') }}" class="list-group-item list-group-item-action">Listener Click Logs CSV (Old)</a>
             <a href="{{ url('/goldilocks/logs/adjustment-logs') }}" class="list-group-item list-group-item-action">Listener Adjustment Logs CSV (New)</a>
+            <a href="{{ url('/goldilocks/logs/on-off-logs') }}" class="list-group-item list-group-item-action">Device On-Off Logs CSV</a>
         </div>
 
     </div>

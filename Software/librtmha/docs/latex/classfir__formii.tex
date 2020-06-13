@@ -1,0 +1,161 @@
+\hypertarget{classfir__formii}{}\section{fir\+\_\+formii Class Reference}
+\label{classfir__formii}\index{fir\+\_\+formii@{fir\+\_\+formii}}
+
+
+Filter Class.  
+
+
+
+
+{\ttfamily \#include $<$fir\+\_\+formii.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classfir__formii_a1b2824e6a0f6f9065e86d43676432b37}{fir\+\_\+formii} (float $\ast$taps, size\+\_\+t tap\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Filter constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfir__formii_ac9b5d5e8b0a2b2cad69a6b7935e87f19}\label{classfir__formii_ac9b5d5e8b0a2b2cad69a6b7935e87f19}} 
+\hyperlink{classfir__formii_ac9b5d5e8b0a2b2cad69a6b7935e87f19}{$\sim$fir\+\_\+formii} ()
+\begin{DoxyCompactList}\small\item\em Filter destructor. \end{DoxyCompactList}\item 
+void \hyperlink{classfir__formii_a35f410bda8c31d821ec438707b0bca10}{set\+\_\+taps} (const float $\ast$taps, size\+\_\+t tap\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Setting the filter taps. \end{DoxyCompactList}\item 
+void \hyperlink{classfir__formii_a11e18bf6b5c6ffcb8979bb0ecf7436e1}{get\+\_\+taps} (float $\ast$taps, size\+\_\+t \&tap\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Getting the filter taps. \end{DoxyCompactList}\item 
+void \hyperlink{classfir__formii_ac9b081bf01b911fbbbd354e0c3b61e94}{process} (const float $\ast$data\+\_\+in, float $\ast$data\+\_\+out, size\+\_\+t num\+\_\+samp)
+\begin{DoxyCompactList}\small\item\em Getting the output of this F\+IR filter by performing frame-\/based convolution. \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{classfir__formii_af2225fdc109c072f68840975b6e269fd}{get\+\_\+size} ()
+\begin{DoxyCompactList}\small\item\em Getting the number of taps of this F\+IR filter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Filter Class. 
+
+This filter class implements the F\+IR filter 
+
+Definition at line 41 of file fir\+\_\+formii.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfir__formii_a1b2824e6a0f6f9065e86d43676432b37}\label{classfir__formii_a1b2824e6a0f6f9065e86d43676432b37}} 
+\index{fir\+\_\+formii@{fir\+\_\+formii}!fir\+\_\+formii@{fir\+\_\+formii}}
+\index{fir\+\_\+formii@{fir\+\_\+formii}!fir\+\_\+formii@{fir\+\_\+formii}}
+\subsubsection{\texorpdfstring{fir\+\_\+formii()}{fir\_formii()}}
+{\footnotesize\ttfamily fir\+\_\+formii\+::fir\+\_\+formii (\begin{DoxyParamCaption}\item[{float $\ast$}]{taps,  }\item[{size\+\_\+t}]{tap\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Filter constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em taps} & The filter taps for this F\+IR filter \\
+\hline
+\mbox{\tt in}  & {\em tap\+\_\+size} & The number of taps of this F\+IR filter \\
+\hline
+\mbox{\tt in}  & {\em cir\+\_\+buf} & The circular buffer for this F\+IR filter to perform frame-\/based convolution \\
+\hline
+\mbox{\tt in}  & {\em max\+\_\+buf\+\_\+size} & The maximum size of circular buffer you need to specify if there is no circular buffer given in cir\+\_\+buf \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 29 of file fir\+\_\+formii.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfir__formii_af2225fdc109c072f68840975b6e269fd}\label{classfir__formii_af2225fdc109c072f68840975b6e269fd}} 
+\index{fir\+\_\+formii@{fir\+\_\+formii}!get\+\_\+size@{get\+\_\+size}}
+\index{get\+\_\+size@{get\+\_\+size}!fir\+\_\+formii@{fir\+\_\+formii}}
+\subsubsection{\texorpdfstring{get\+\_\+size()}{get\_size()}}
+{\footnotesize\ttfamily size\+\_\+t fir\+\_\+formii\+::get\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getting the number of taps of this F\+IR filter. 
+
+\begin{DoxyReturn}{Returns}
+The number of taps of this F\+IR filter 
+\end{DoxyReturn}
+
+
+Definition at line 97 of file fir\+\_\+formii.\+cpp.
+
+\mbox{\Hypertarget{classfir__formii_a11e18bf6b5c6ffcb8979bb0ecf7436e1}\label{classfir__formii_a11e18bf6b5c6ffcb8979bb0ecf7436e1}} 
+\index{fir\+\_\+formii@{fir\+\_\+formii}!get\+\_\+taps@{get\+\_\+taps}}
+\index{get\+\_\+taps@{get\+\_\+taps}!fir\+\_\+formii@{fir\+\_\+formii}}
+\subsubsection{\texorpdfstring{get\+\_\+taps()}{get\_taps()}}
+{\footnotesize\ttfamily void fir\+\_\+formii\+::get\+\_\+taps (\begin{DoxyParamCaption}\item[{float $\ast$}]{taps,  }\item[{size\+\_\+t \&}]{tap\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Getting the filter taps. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em taps} & The filter taps (1-\/D array) \\
+\hline
+\mbox{\tt in}  & {\em buf\+\_\+size} & The size of the filter taps (this should be the same as tap\+\_\+size passed in constructor) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A flag indicating the success of getting the filter taps 
+\end{DoxyReturn}
+
+
+Definition at line 65 of file fir\+\_\+formii.\+cpp.
+
+\mbox{\Hypertarget{classfir__formii_ac9b081bf01b911fbbbd354e0c3b61e94}\label{classfir__formii_ac9b081bf01b911fbbbd354e0c3b61e94}} 
+\index{fir\+\_\+formii@{fir\+\_\+formii}!process@{process}}
+\index{process@{process}!fir\+\_\+formii@{fir\+\_\+formii}}
+\subsubsection{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily void fir\+\_\+formii\+::process (\begin{DoxyParamCaption}\item[{const float $\ast$}]{data\+\_\+in,  }\item[{float $\ast$}]{data\+\_\+out,  }\item[{size\+\_\+t}]{num\+\_\+samp }\end{DoxyParamCaption})}
+
+
+
+Getting the output of this F\+IR filter by performing frame-\/based convolution. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em data\+\_\+in} & The input signal \\
+\hline
+\mbox{\tt out}  & {\em data\+\_\+out} & The output signal \\
+\hline
+ & {\em num\+\_\+samp} & The size of input and output signal (data\+\_\+in and data\+\_\+out should have the same size) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 73 of file fir\+\_\+formii.\+cpp.
+
+\mbox{\Hypertarget{classfir__formii_a35f410bda8c31d821ec438707b0bca10}\label{classfir__formii_a35f410bda8c31d821ec438707b0bca10}} 
+\index{fir\+\_\+formii@{fir\+\_\+formii}!set\+\_\+taps@{set\+\_\+taps}}
+\index{set\+\_\+taps@{set\+\_\+taps}!fir\+\_\+formii@{fir\+\_\+formii}}
+\subsubsection{\texorpdfstring{set\+\_\+taps()}{set\_taps()}}
+{\footnotesize\ttfamily void fir\+\_\+formii\+::set\+\_\+taps (\begin{DoxyParamCaption}\item[{const float $\ast$}]{taps,  }\item[{size\+\_\+t}]{tap\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Setting the filter taps. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em taps} & The filter taps (an 1-\/D array) \\
+\hline
+\mbox{\tt in}  & {\em buf\+\_\+size} & The size of the filter taps (this should be the same as tap\+\_\+size passed in constructor) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A flag indicating the success of setting the filter taps 
+\end{DoxyReturn}
+
+
+Definition at line 49 of file fir\+\_\+formii.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{fir__formii_8h}{fir\+\_\+formii.\+h}\item 
+\hyperlink{fir__formii_8cpp}{fir\+\_\+formii.\+cpp}\end{DoxyCompactItemize}

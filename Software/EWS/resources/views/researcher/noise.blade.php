@@ -43,7 +43,9 @@
             <a class="nav-item nav-link text-white bg-info" href="#">Noise Management</a>
             <a class="nav-item nav-link text-info bg-white" href="{{ url('/researcher/feedback') }}">Feedback Management</a>
         </nav>
-
+        <a href="{{url('/')}}" id="exit" class="btn btn-outline-success" style="margin-bottom: 10px">
+            Home
+        </a>
 
         <div>
           <h4> Noise Estimation Options </h4>
