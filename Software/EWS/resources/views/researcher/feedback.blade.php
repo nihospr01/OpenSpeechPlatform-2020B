@@ -42,7 +42,9 @@
             <a class="nav-item nav-link text-info bg-white" href="{{ url('/researcher/noise') }}">Noise Management</a>
             <a class="nav-item nav-link text-white bg-info" href="#">Feedback Management</a>
         </nav>
-
+        <a href="{{url('/')}}" id="exit" class="btn btn-outline-success" style="margin-bottom: 10px">
+            Home
+        </a>
 
         <div class="form-check">
             <input class="form-check-input" type="radio" name="afc_type" id="afc_0" value="0">

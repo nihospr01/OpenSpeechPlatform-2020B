@@ -1,0 +1,63 @@
+{
+    "punct": "Please listen to this message and adjust the volume",
+    "length": 3.00, 
+    "length_comment": "the length of the audio file in second",
+    "index": 8,
+    "index_comment": "number of words in punct - 1",
+    "words":[
+      {
+        "start": 0.00,
+        "end": 0.69,
+        "content": "Please",
+        "index": 0
+      },
+      {
+        "start": 0.69,
+        "end": 1.14,
+        "content": "listen",
+        "index": 1
+      },
+      {
+        "start": 1.14,
+        "end": 1.39,
+        "content": "to",
+        "index": 2
+      },
+      {
+        "start": 1.39,
+        "end": 1.48,
+        "content": "this",
+        "index": 3
+      },
+      {
+        "start": 1.48,
+        "end": 1.68,
+        "content": "message",
+        "index": 4
+      },
+      {
+        "start": 1.68,
+        "end": 1.99,
+        "content": "and",
+        "index": 5
+      },
+      {
+        "start": 1.99,
+        "end": 2.48,
+        "content": "adjust",
+        "index": 6
+      },
+      {
+        "start": 2.48,
+        "end": 2.78,
+        "content": "the",
+        "index": 7
+      },
+      {
+        "start": 2.78,
+        "end": 3.00,
+        "content": "volume",
+        "index": 8
+      }
+    ]
+  }

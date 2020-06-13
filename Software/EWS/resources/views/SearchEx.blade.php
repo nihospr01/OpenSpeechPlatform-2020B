@@ -25,9 +25,14 @@
             var alpha = 0;
             var New = 0;
             var Now = 0;
+            var switchingTime = 3;
+            var currPlaying = 0;
+            var switchingParamIntervalId = null;
+            var controlMode = 0;
 
             $("#input_min").val(low);
             $("#input_max").val(high);
+            $('#switching_time').val(switchingTime);
 
             reset = () => {
                 $.ajax({
@@ -124,20 +129,45 @@
                 })
             }    
 
-            $("input[type=radio]").on("click", () => {
-                alpha = $("input:radio:checked").val();
+            function switchParam() {
+                if (currPlaying === 1) {
+                    $('#current').addClass('btn-info');
+                    $('#new').removeClass('btn-info');
+                    var param = getParam(Now);
+                    transmitParams(param);
+                    currPlaying = 0;
+                }
+                else {
+                    $('#new').addClass('btn-info');
+                    $('#current').removeClass('btn-info');
+                    var param = getParam(New);
+                    transmitParams(param);
+                    currPlaying = 1;
+                }
+            }
+
+            
+            $("input[type=radio]", "#audioMode").on("click", () => {
+                alpha = $("input:radio:checked", "#audioMode").val();
+                console.log(alpha);
             });
 
+            $("input[type=radio]", "#controlMode").on("click", ()=> {
+                controlMode = $("input:radio:checked", "#controlMode").val();
+                console.log(controlMode);
+            })
+        
+
             $('#new').on("click", () => {
-                    $('#new').addClass('bg-info');
-                    $('#current').removeClass('bg-info');
+                    $('#new').addClass('btn-info');
+                    $('#current').removeClass('btn-info');
                     var param = getParam(New);
                     transmitParams(param);
             });
                 
             $('#current').on("click", () => {
-                    $('#current').addClass('bg-info');
-                    $('#new').removeClass('bg-info');
+                    $('#current').addClass('btn-info');
+                    $('#new').removeClass('btn-info');
                     var param = getParam(Now)
                     transmitParams(param);
             });
@@ -146,6 +176,13 @@
                 $(".section-intro").hide();
                 $(".section-controls").show();
                 onStartPlaying();
+                if (controlMode === 0) {
+                    $('#current').addClass('btn-info');
+                    $('#new').removeClass('btn-info');
+                    var param = getParam(Now)
+                    transmitParams(param);
+                    switchingParamIntervalId = setInterval(switchParam, switchingTime*1000);
+                }
             });
 
             $("exit").on("click", () => {
@@ -159,6 +196,8 @@
             $("#input_max").on("input", () => {
                 high = $("#input_max").val();
             })
+
+            
 
             calculateNew = (choice) => {
                 if (Math.abs(choice - high) < Math.abs(choice - low)) {
@@ -181,6 +220,7 @@
                 numIteration++;
                 console.log("Current: " + Now)
                 console.log("New: "+ New);
+
             });
 
             $("#new_worse").on("click", () => {
@@ -193,6 +233,9 @@
             })
 
             $("#equal").on("click", () => {
+                if (switchingParamIntervalId != null) {
+                    clearInterval(switchingParamIntervalId);
+                }
                 $(".section-controls").hide();
                 $("#curr_value").text("The overall gain is: " + Now);
                 $("#value_diff").text("The difference between two stimulus: " + Math.abs(New - Now));
@@ -262,11 +305,30 @@
         }
 
         .btn-play {
-            width: 60px;
-            height: 60px;
-            text-align: center;
-            font-size: 40px;
+            font-size: 60px;
+            padding: 15px;
         }
+        
+        .btn-play-wrapper {
+            border-style: solid;
+            border-width: 1px;
+            width:180px; 
+            height: 130px;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            align-items: center;
+        }
+
+        .btn-choice-wrapper {
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            width: 90%;
+            max-width: 350px;
+        }
+
 
     </style>
 
@@ -287,22 +349,24 @@
 
             <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">Input Controls</h5>
-                            <div class="form-check" >
-                                    <input class="form-check-input" type="radio" name="modeSelection" id="useBackground" value="0" checked>
-                                <label class="form-check-label" for="modeSelection">
-                                    Use Live Audio
-                                </label>
+                        <h5 class="card-title text-secondary" >Input Controls</h5>
+                            <div id="audioMode">
+                                <div class="form-check" >
+                                        <input class="form-check-input" type="radio" name="modeSelection" id="useBackground" value="0" checked>
+                                    <label class="form-check-label" for="modeSelection">
+                                        Use Live Audio
+                                    </label>
+                                </div>
+                                <div class="form-check" style="margin-bottom:10px">
+                                    <input class="form-check-input" type="radio" name="modeSelection" id="useAudiofile" value="1">
+                                    <label class="form-check-label" for="modeSelection">
+                                        Use File Stimulus
+                                    </label>
+                                </div>
                             </div>
-                            <div class="form-check" style="margin-bottom:10px">
-                                <input class="form-check-input" type="radio" name="modeSelection" id="useAudiofile" value="1">
-                                <label class="form-check-label" for="modeSelection">
-                                    Use File Stimulus
-                                </label>
-                            </div>
-                            <h6 class="text-secondary">
+                            <h5 class="text-secondary">
                                 Enter your search range:
-                            </h6>
+                            </h5>
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" >Min</span>
@@ -314,6 +378,24 @@
                                     <span class="input-group-text" >Max</span>
                                 </div>
                                 <input type="number" id="input_max" class="form-control">
+                            </div>
+                          
+                            <h5 class="text-secondary">
+                                    Control Mode:
+                            </h5>
+                            <div id="controlMode">
+                                <div class="form-check" >
+                                    <input class="form-check-input" type="radio" name="controlType" id="audoPlay" value="0" checked>
+                                    <label class="form-check-label" for="controlType">
+                                        Auto
+                                    </label>
+                                </div>
+                                <div class="form-check" style="margin-bottom:10px">
+                                    <input class="form-check-input" type="radio" name="controlType" id="manualPlay" value="1">
+                                    <label class="form-check-label" for="controlType">
+                                        Manual
+                                    </label>
+                                </div>
                             </div>
                     </div>
             </div>
@@ -330,83 +412,58 @@
     </section>
 
     <section class="section-controls">
-        <div class="container"  style="text-align:center">
-            <h3 class="text-secondary">
-                Compare New and Current Setting and Choose Which One is Better
+        <div class="container"  style="text-align:center; margin-bottom: 20px">
+            <h3 class="text-secondary" style="margin-bottom: 30px">
+                Do you like New?
             </h3>
-            <div class="row justify-content-around">
-                <div class="col" >
-                    <button type="button" id = "new" class="btn btn-default btn-play">
-                        <span class="oi oi-play-circle oi-play"></span>
-                    </button>
-                    <h3>New</h3>
+            <div class="row" style="margin-bottom: 50px; text-align:center;">
+                <div type="button" id="new" class="col btn-play-wrapper" >
+                    <span class="oi oi-media-play btn-play"></span>
+                    <h3 >New</h3>
                 </div>
-                <div class="col">
-                    <button type="button" id = "current" class="btn btn-default btn-play">
-                        <span class="oi oi-play-circle oi-play"></span>
-                    </button>
-                    <h3>Current</h3>
+                <div type="button" id="current" class="col btn-play-wrapper">
+                    <span class="oi oi-media-play btn-play"></span>
+                    <h3 >Current</h3>
                 </div>
             </div>
-            
-            <div class="row">
-                <div class="col-2">
-                    <span style="font-size: 36px">
-                        <i class="far fa-smile"></i>
-                    </span>
-                </div>
-                <div class="col-10" style="justify-content: center;">
-                    <span style="width: 80%">
-                        <button 
-                            type="button"
-                            class="btn btn-outline-info btn-lg btn-block"
-                            id = "new_better"
-                        >
-                            New is better than Current
-                        </button>
-                    </span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-2">
-                    <span style="font-size: 36px">
-                        <i class="far fa-meh"></i>
-                    </span>
-                </div>
-                <div class="col-10">
-                    <button 
-                        type="button" 
-                        class="btn btn-outline-info btn-lg btn-block"
-                        id = "equal"
-                        >
-                        New is the same as Current
-                    </button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-2">
-                    <span style="font-size: 36px">
-                        <i class="far fa-frown"></i>
-                    </span>
-                </div>
-                <div class="col-10">
-                    <button 
-                        type="button" 
-                        class="btn btn-outline-info btn-lg btn-block"
-                        id = "new_worse"
-                    >
-                    New is worse than Current
-                    </button>
-                </div>
-            </div>
+
+                <button
+                    class="btn btn-outline-info btn-lg btn-choice-wrapper"
+                    style="margin-left: 10px"
+                    id="new_better"
+                >
+                    <span style='font-size:60px;'>&#128515;</span>
+                    <span style="margin-left: 30px; font-size: 30px">New is Better</span>
+                </button>
+                <button
+                    class="btn btn-outline-info btn-lg btn-choice-wrapper"
+                    style="margin-left: 10px"
+                    id = "new_worse"
+                >
+                    <span style='font-size:60px;'>&#128542;</span>
+                    <span style="margin-left: 30px; font-size: 30px">New is Worse</span>
+                </button>
+                <button
+                    class="btn btn-outline-info btn-lg btn-choice-wrapper"
+                    style="margin-left: 10px"
+                    id = "equal"
+                >
+                    <span style='font-size:60px;'>&#9989;</span>
+                    <span style="margin-left: 30px; font-size: 30px">Both are Same</span>
+                </button>
         </div>
     </section>
 
     <section class="section-results">
         <div class="container"
              id = "status" >
-          <h1  id = "result">Here is your result</h2>  
-          <div class="container" style="margin-top:20px">
+          <h2  id = "result">Here is your result</h2>  
+          <div style=" 
+          margin-top:10px;           
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;">
             <h4 class = "text-secondary" id="curr_value">
            
             </h4>
@@ -427,6 +484,6 @@
            </a>
           </div>
         </div>
-
+    </section>
 </body>
 </html>

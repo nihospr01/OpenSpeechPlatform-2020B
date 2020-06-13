@@ -556,38 +556,15 @@
             window.location.replace("http://localhost:8000/goldilocks/listener/programs");
         }
 
+        disableButtonOnMaxOvershoot();
+        disableButtonOnMinOvershoot();
+
         /**
          * Logic to handle panel changes. Uses variable 'sequence' array to see what goes next.
          */
         function nextPanel(){
 
             hideAllPanels();
-
-            l_more = document.getElementById("l_more");
-            v_more = document.getElementById("v_more");
-            h_more = document.getElementById("h_more");
-
-            l_less = document.getElementById("l_less");
-            v_less = document.getElementById("v_less");
-            h_less = document.getElementById("h_less");
-
-            // activate less buttons
-            if (l_less.disabled) {
-                l_less.disabled = false;
-            } else if (v_less.disabled) {
-                v_less.disabled = false;
-            } else if (h_less.disabled) {
-                h_less.disabled = false;
-            }
-
-            // activate more buttons
-            if (l_more.disabled) {
-                l_more.disabled = false;
-            } else if (v_more.disabled) {
-                v_more.disabled = false;
-            } else if (h_more.disabled) {
-                h_more.disabled = false;
-            }
 
             if(this['sequence'].length > 1){
                 var elem = this['sequence'].shift();
@@ -732,15 +709,6 @@
             if(new_value <= this['parameters'][max]){
                 document.getElementById(id).innerHTML = old_value + add;
 
-                // initialize buttons
-                l_more = document.getElementById("l_more");
-                v_more = document.getElementById("v_more");
-                h_more = document.getElementById("h_more");
-
-                l_less = document.getElementById("l_less");
-                v_less = document.getElementById("v_less");
-                h_less = document.getElementById("h_less");
-
                 var l_val = +document.getElementById("l_value").innerHTML / l_mul;
                 var v_val = +document.getElementById("v_value").innerHTML;
                 var h_val = +document.getElementById("h_value").innerHTML / h_mul;
@@ -748,20 +716,11 @@
                 //check to see if this change exceeds max g50 gain
                 if(exceedsMax(l_val, v_val, h_val)){
                     //output max message
-                    alert("Warning: you've attempted to exceed maximum gain. No change will take place.");
-
-                    // disable more buttons
-                    if (id == 'l_value') {
-                        l_more.disabled = true;
-                    } else if (id == 'v_value') {
-                        v_more.disabled = true;
-                    } else if (id == 'h_value') {
-                        h_more.disabled = true;
-                    }
+                    // alert("Warning: you've attempted to exceed maximum gain. No change will take place.");
 
                     //change back the value
-                    document.getElementById(id).innerHTML = old_value;
-                    return -1;
+                    // document.getElementById(id).innerHTML = old_value;
+                    // return -1;
                 }
                 else {
                     //update parameters
@@ -770,39 +729,129 @@
                         crg65(i);
                     }
 
-
-                    // activate less buttons
-                    if (l_less.disabled || v_less.disabled || h_less.disabled) {
-                        if (l_less.disabled) {
-                            l_less.disabled = false;
-                        }
-                        if (v_less.disabled) {
-                            v_less.disabled = false;
-                        }
-                        if (h_less.disabled) {
-                            h_less.disabled = false;
-                        }
-                    }
-
                     //send values to hearing aid
                     transmit();
                     updateLVHText();
                 }
 
-            }
-            else{
-                alert("Warning: Cannot exceed maximum value for " + step_type);
+            } else{
+                // alert("Warning: Cannot exceed maximum value for " + step_type);
 
-                // disable more buttons
-                if (id == 'l_value') {
+                // document.getElementById(id).innerHTML = old_value;
+                // return -1;
+            }
+
+            this.disableButtonOnMaxOvershoot();
+            this.enableButtonOnBypassMinOvershoot();
+        }
+
+        function enableButtonOnBypassMinOvershoot() {
+            // preemptive calculaions to determine button enables
+            var l_less = document.getElementById("l_less");
+            var v_less = document.getElementById("v_less");
+            var h_less = document.getElementById("h_less");
+
+            var sub_l = this['parameters']['l_step'];
+            var sub_h = this['parameters']['h_step'];
+            var sub_v = this['parameters']['v_step'];
+
+            var old_value_l = +document.getElementById("l_value").innerHTML;
+            var old_value_h = +document.getElementById("h_value").innerHTML;
+            var old_value_v = +document.getElementById("v_value").innerHTML;
+
+            var new_value_l = old_value_l - sub_l;
+            var new_value_h = old_value_h - sub_h;
+            var new_value_v = old_value_v - sub_v;
+
+            // enable l button if doesn't overshoot min anymore
+            if(new_value_l > this['parameters']['l_min']){
+                l_less.disabled = false;
+                l_less.innerHTML = "Less";
+            }
+
+            if(new_value_h > this['parameters']['h_min']){
+                h_less.disabled = false;
+                h_less.innerHTML = "Less";
+            }
+
+            if(new_value_v > this['parameters']['v_min']){
+                v_less.disabled = false;
+                v_less.innerHTML = "Less";
+            }
+        }
+
+        function disableButtonOnMaxOvershoot() {
+            // preemptive calculaions to determine button disables
+            var l_more = document.getElementById("l_more");
+            var v_more = document.getElementById("v_more");
+            var h_more = document.getElementById("h_more");
+
+            var add_l = this['parameters']['l_step'];
+            var add_h = this['parameters']['h_step'];
+            var add_v = this['parameters']['v_step'];
+
+            var old_value_l = +document.getElementById("l_value").innerHTML;
+            var old_value_h = +document.getElementById("h_value").innerHTML;
+            var old_value_v = +document.getElementById("v_value").innerHTML;
+
+            var new_value_l = old_value_l + add_l;
+            var new_value_h = old_value_h + add_h;
+            var new_value_v = old_value_v + add_v;
+
+            add_l *= l_mul;
+            add_h *= h_mul;
+
+            // disable l button on overshoot
+            if(new_value_l <= this['parameters']['l_max']){
+                var new_value_l_2 = old_value_l + add_l;
+
+                var l_val = new_value_l_2 / l_mul;
+                var v_val = old_value_v;
+                var h_val = old_value_h / h_mul;
+
+                if(exceedsMax(l_val, v_val, h_val)){
                     l_more.disabled = true;
-                } else if (id == 'v_value') {
-                    v_more.disabled = true;
-                } else if (id == 'h_value') {
-                    h_more.disabled = true;
+                    l_more.innerHTML = "MAX";
+                    l_more.style.color = "red";
                 }
-                
-                return -1;
+            } else {
+                l_more.disabled = true;
+                l_more.innerHTML = "MAX";
+                l_more.style.color = "red";
+            }
+
+            // disable h button on overshoot
+            if(new_value_h <= this['parameters']['h_max']){
+                var new_value_h_2 = old_value_h + add_h;
+
+                var l_val = old_value_l / l_mul;
+                var v_val = old_value_v;
+                var h_val = new_value_h_2 / h_mul;
+
+                if(exceedsMax(l_val, v_val, h_val)){
+                    h_more.disabled = true;
+                    h_more.innerHTML = "MAX";
+                }
+            } else {
+                h_more.disabled = true;
+                h_more.innerHTML = "MAX";
+            }
+
+            // disable v button on overshoot
+            if(new_value_v <= this['parameters']['v_max']){
+                var new_value_v_2 = old_value_v + add_v;
+
+                var l_val = old_value_l / l_mul;
+                var v_val = new_value_v_2;
+                var h_val = old_value_h / h_mul;
+
+                if(exceedsMax(l_val, v_val, h_val)){
+                    v_more.disabled = true;
+                    v_more.innerHTML = "MAX";
+                }
+            } else {
+                v_more.disabled = true;
+                v_more.innerHTML = "MAX";
             }
         }
 
@@ -823,15 +872,6 @@
                 sub *= h_mul;
             }
 
-            // initialize buttons
-            l_more = document.getElementById("l_more");
-            v_more = document.getElementById("v_more");
-            h_more = document.getElementById("h_more");
-
-            l_less = document.getElementById("l_less");
-            v_less = document.getElementById("v_less");
-            h_less = document.getElementById("h_less");
-
             if(new_value >= this['parameters'][min]){
                 document.getElementById(id).innerHTML = old_value - sub;
 
@@ -845,38 +885,111 @@
                     crg65(i);
                 }
 
-                // activate more buttons
-                if (l_more.disabled || v_more.disabled || h_more.disabled) {
-                    if (l_more.disabled) {
-                        l_more.disabled = false;
-                    }
-                    if (v_more.disabled) {
-                        v_more.disabled = false;
-                    }
-                    if (h_more.disabled) {
-                        h_more.disabled = false;
-                    }
-                }
-
                 //send values to hearing aid
                 transmit();
                 updateLVHText();
             }
-            else{
-                alert("Warning: Cannot exceed minimum value for " + step_type);
 
-                // disable less buttons
-                if (id == 'l_value') {
-                    l_less.disabled = true;
-                } else if (id == 'v_value') {
-                    v_less.disabled = true;
-                } else if (id == 'h_value') {
-                    h_less.disabled = true;
+            this.disableButtonOnMinOvershoot();
+            this.enableButtonOnBypassMaxOvershoot();
+        }
+
+        function enableButtonOnBypassMaxOvershoot() {
+            // preemptive calculaions to determine button enables
+            var l_more = document.getElementById("l_more");
+            var v_more = document.getElementById("v_more");
+            var h_more = document.getElementById("h_more");
+
+            var add_l = this['parameters']['l_step'];
+            var add_h = this['parameters']['h_step'];
+            var add_v = this['parameters']['v_step'];
+
+            var old_value_l = +document.getElementById("l_value").innerHTML;
+            var old_value_h = +document.getElementById("h_value").innerHTML;
+            var old_value_v = +document.getElementById("v_value").innerHTML;
+
+            var new_value_l = old_value_l + add_l;
+            var new_value_h = old_value_h + add_h;
+            var new_value_v = old_value_v + add_v;
+
+            add_l *= l_mul;
+            add_h *= h_mul;
+
+            // enable l button if doesn't bypass max threshold anymore
+            if(new_value_l <= this['parameters']['l_max']){
+                var new_value_l_2 = old_value_l + add_l;
+
+                var l_val = new_value_l_2 / l_mul;
+                var v_val = old_value_v;
+                var h_val = old_value_h / h_mul;
+
+                if(!exceedsMax(l_val, v_val, h_val)){
+                    l_more.disabled = false;
+                    l_more.innerHTML = "More";
                 }
+            }
+            
+            // enable v button if doesn't bypass max threshold anymore
+            if(new_value_v <= this['parameters']['v_max']){
+                var new_value_v_2 = old_value_v + add_v;
 
-                return -1;
+                var l_val = old_value_l / l_mul;
+                var v_val = new_value_v_2;
+                var h_val = old_value_h / h_mul;
+
+                if(!exceedsMax(l_val, v_val, h_val)){
+                    v_more.disabled = false;
+                    v_more.innerHTML = "More";
+                }
             }
 
+            // enable h button if doesn't bypass max threshold anymore
+            if(new_value_h <= this['parameters']['h_max']){
+                var new_value_h_2 = old_value_h + add_h;
+
+                var l_val = old_value_l / l_mul;
+                var v_val = old_value_v;
+                var h_val = new_value_h_2 / h_mul;
+
+                if(!exceedsMax(l_val, v_val, h_val)){
+                    h_more.disabled = false;
+                    h_more.innerHTML = "More";
+                }
+            }
+        }
+
+        function disableButtonOnMinOvershoot() {
+            // preemptive calculaions to determine button disables
+            var l_less = document.getElementById("l_less");
+            var v_less = document.getElementById("v_less");
+            var h_less = document.getElementById("h_less");
+
+            var sub_l = this['parameters']['l_step'];
+            var sub_h = this['parameters']['h_step'];
+            var sub_v = this['parameters']['v_step'];
+
+            var old_value_l = +document.getElementById("l_value").innerHTML;
+            var old_value_h = +document.getElementById("h_value").innerHTML;
+            var old_value_v = +document.getElementById("v_value").innerHTML;
+
+            var new_value_l = old_value_l - sub_l;
+            var new_value_h = old_value_h - sub_h;
+            var new_value_v = old_value_v - sub_v;
+
+            if(new_value_l < this['parameters']['l_min']){
+                l_less.disabled = true;
+                l_less.innerHTML = "MIN";
+            }
+
+            if(new_value_h < this['parameters']['h_min']){
+                h_less.disabled = true;
+                h_less.innerHTML = "MIN";
+            }
+
+            if(new_value_v < this['parameters']['v_min']){
+                v_less.disabled = true;
+                v_less.innerHTML = "MIN";
+            }
         }
 
         /**

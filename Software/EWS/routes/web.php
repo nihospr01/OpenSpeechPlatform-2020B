@@ -37,6 +37,9 @@ Route::get('searchex', function() {
     return view('SearchEx');
 });
 
+Route::get('jnd', function() {
+    return view('jnd');
+});
 
 /** Researcher routes **/
 Route::get('researcher/amplification', 'WebController@researcherAmplificationPage');
@@ -84,6 +87,8 @@ Route::resource('/goldilocks/admin/logs', 'Goldilocks\GoldilocksLogController',
                 ['only' => ['index']]);
 Route::resource('/goldilocks/admin/adjustment_logs', 'Goldilocks\ListenerAdjustmentLogController',
                 ['only' => ['index']]);
+Route::resource('/goldilocks/admin/on_off_logs', 'Goldilocks\DeviceOnOffLogController',
+                ['only' => ['index']]);
 Route::resource('/goldilocks/admin/programs', 'Goldilocks\GoldilocksProgramController',
                 ['only' => ['index', 'destroy']]);
 Route::post('/goldilocks/admin/programs/{goldilocksProgram}',
@@ -125,6 +130,8 @@ Route::get('/goldilocks/logs/programs', 'Goldilocks\GoldilocksProgramController@
 Route::get('/goldilocks/logs/listener-logs', 'Goldilocks\GoldilocksLogController@downloadLogs');
 Route::get('/goldilocks/logs/adjustment-logs', 'Goldilocks\ListenerAdjustmentLogController@downloadLogs');
 
+Route::get('/goldilocks/logs/on-off-logs', 'Goldilocks\DeviceOnOffLogController@downloadLogs');
+Route::post('/goldilocks/listener/on-off-logs', 'Goldilocks\DeviceOnOffLogController@store');
 
 /** Documentation route **/
 Route::get('/docs', function(){

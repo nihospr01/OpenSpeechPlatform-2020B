@@ -43,6 +43,7 @@
         <a href="{{ url('/goldilocks/admin/listeners') }}" class="list-group-item list-group-item-action">Listeners</a>
         <a href="{{ url('/goldilocks/admin/logs') }}" class="list-group-item list-group-item-action">Listener Click Logs (Old)</a>
         <a href="{{ url('/goldilocks/admin/adjustment_logs') }}" class="list-group-item list-group-item-action">Listener Adjustment Logs (New)</a>
+        <a href="{{ url('/goldilocks/admin/on_off_logs') }}" class="list-group-item list-group-item-action">Device On-Off Logs</a>
         <a href="{{ url('/goldilocks/admin/programs') }}" class="list-group-item list-group-item-action">Listener Programs</a>
         <a href="{{ url('/goldilocks/admin/generic') }}" class="list-group-item list-group-item-action">Modify Global Generic Program</a>
     </div>

@@ -1,0 +1,140 @@
+\hypertarget{classnoise__management}{}\section{noise\+\_\+management Class Reference}
+\label{classnoise__management}\index{noise\+\_\+management@{noise\+\_\+management}}
+
+
+Noise Management Class.  
+
+
+
+
+{\ttfamily \#include $<$noise\+\_\+management.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classnoise__management_a2285f3bb163f38f773cf5d6ccbd6022e}{noise\+\_\+management} (int ntype, int stype, float sparam, float fsamp)
+\begin{DoxyCompactList}\small\item\em Noise management constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classnoise__management_a9a0a09f3048e97a98d3278e233096530}\label{classnoise__management_a9a0a09f3048e97a98d3278e233096530}} 
+\hyperlink{classnoise__management_a9a0a09f3048e97a98d3278e233096530}{$\sim$noise\+\_\+management} ()
+\begin{DoxyCompactList}\small\item\em Noise management destructor. \end{DoxyCompactList}\item 
+void \hyperlink{classnoise__management_a50d6db52a6a83aef67e42c4a9f879cc5}{set\+\_\+param} (int ntype, int stype, float sparam)
+\begin{DoxyCompactList}\small\item\em Setting all parameters in noise management. \end{DoxyCompactList}\item 
+void \hyperlink{classnoise__management_af5fe32222b7fe86d4ec3222e2f60ede7}{get\+\_\+param} (int \&ntype, int \&stype, float \&sparam)
+\begin{DoxyCompactList}\small\item\em Getting all parameters in noise management. \end{DoxyCompactList}\item 
+void \hyperlink{classnoise__management_aa73425faa4f2434bf26a27c7068bbd1a}{speech\+\_\+enhancement} (float $\ast$data\+\_\+in, size\+\_\+t in\+\_\+len, float $\ast$data\+\_\+out)
+\begin{DoxyCompactList}\small\item\em A function to perform speech enhancement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Noise Management Class. 
+
+Speech enhancement using peak and valley detection, noise estimation and spectral subtraction 
+
+Definition at line 16 of file noise\+\_\+management.\+hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classnoise__management_a2285f3bb163f38f773cf5d6ccbd6022e}\label{classnoise__management_a2285f3bb163f38f773cf5d6ccbd6022e}} 
+\index{noise\+\_\+management@{noise\+\_\+management}!noise\+\_\+management@{noise\+\_\+management}}
+\index{noise\+\_\+management@{noise\+\_\+management}!noise\+\_\+management@{noise\+\_\+management}}
+\subsubsection{\texorpdfstring{noise\+\_\+management()}{noise\_management()}}
+{\footnotesize\ttfamily noise\+\_\+management\+::noise\+\_\+management (\begin{DoxyParamCaption}\item[{int}]{ntype,  }\item[{int}]{stype,  }\item[{float}]{sparam,  }\item[{float}]{fsamp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Noise management constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ntype} & The type of noise estimation, 1\+: using limits on change (ref\+: Arslan et al.), 2\+: using the weighted averaging of Hirsch and Ehrlicher, 3\+: using M\+C\+RA of Cohen and Berdugo \\
+\hline
+\mbox{\tt in}  & {\em stype} & The type of spectral subtraction, 0\+: normal, 1\+: oversubtraction \\
+\hline
+\mbox{\tt in}  & {\em sparam} & A parameter for spectral subtraction \\
+\hline
+\mbox{\tt in}  & {\em fsamp} & The sampling rate \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 5 of file noise\+\_\+management.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classnoise__management_af5fe32222b7fe86d4ec3222e2f60ede7}\label{classnoise__management_af5fe32222b7fe86d4ec3222e2f60ede7}} 
+\index{noise\+\_\+management@{noise\+\_\+management}!get\+\_\+param@{get\+\_\+param}}
+\index{get\+\_\+param@{get\+\_\+param}!noise\+\_\+management@{noise\+\_\+management}}
+\subsubsection{\texorpdfstring{get\+\_\+param()}{get\_param()}}
+{\footnotesize\ttfamily void noise\+\_\+management\+::get\+\_\+param (\begin{DoxyParamCaption}\item[{int \&}]{ntype,  }\item[{int \&}]{stype,  }\item[{float \&}]{sparam }\end{DoxyParamCaption})}
+
+
+
+Getting all parameters in noise management. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ntype} & See constructor \\
+\hline
+\mbox{\tt in}  & {\em stype} & See constructor \\
+\hline
+\mbox{\tt in}  & {\em sparam} & See constructor \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 86 of file noise\+\_\+management.\+cpp.
+
+\mbox{\Hypertarget{classnoise__management_a50d6db52a6a83aef67e42c4a9f879cc5}\label{classnoise__management_a50d6db52a6a83aef67e42c4a9f879cc5}} 
+\index{noise\+\_\+management@{noise\+\_\+management}!set\+\_\+param@{set\+\_\+param}}
+\index{set\+\_\+param@{set\+\_\+param}!noise\+\_\+management@{noise\+\_\+management}}
+\subsubsection{\texorpdfstring{set\+\_\+param()}{set\_param()}}
+{\footnotesize\ttfamily void noise\+\_\+management\+::set\+\_\+param (\begin{DoxyParamCaption}\item[{int}]{ntype,  }\item[{int}]{stype,  }\item[{float}]{sparam }\end{DoxyParamCaption})}
+
+
+
+Setting all parameters in noise management. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ntype} & See constructor \\
+\hline
+\mbox{\tt in}  & {\em stype} & See constructor \\
+\hline
+\mbox{\tt in}  & {\em sparam} & See constructor \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 77 of file noise\+\_\+management.\+cpp.
+
+\mbox{\Hypertarget{classnoise__management_aa73425faa4f2434bf26a27c7068bbd1a}\label{classnoise__management_aa73425faa4f2434bf26a27c7068bbd1a}} 
+\index{noise\+\_\+management@{noise\+\_\+management}!speech\+\_\+enhancement@{speech\+\_\+enhancement}}
+\index{speech\+\_\+enhancement@{speech\+\_\+enhancement}!noise\+\_\+management@{noise\+\_\+management}}
+\subsubsection{\texorpdfstring{speech\+\_\+enhancement()}{speech\_enhancement()}}
+{\footnotesize\ttfamily void noise\+\_\+management\+::speech\+\_\+enhancement (\begin{DoxyParamCaption}\item[{float $\ast$}]{data\+\_\+in,  }\item[{size\+\_\+t}]{in\+\_\+len,  }\item[{float $\ast$}]{data\+\_\+out }\end{DoxyParamCaption})}
+
+
+
+A function to perform speech enhancement. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em data\+\_\+in} & The input signal \\
+\hline
+\mbox{\tt in}  & {\em in\+\_\+len} & Length of the input signal \\
+\hline
+\mbox{\tt out}  & {\em data\+\_\+out} & The output signal, i.\+e., the enhanced speech signal \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 95 of file noise\+\_\+management.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+noise\+\_\+management.\+hpp\item 
+noise\+\_\+management.\+cpp\end{DoxyCompactItemize}

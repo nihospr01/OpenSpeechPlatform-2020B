@@ -1,0 +1,38 @@
+#!/bin/bash
+
+echo
+echo
+echo "This script will use 'sudo' throughout at various times, invoke this"
+echo "as a user with sudo priveleges and enter your user password when prompted"
+echo
+echo
+
+OS=$(uname)
+if [ $OS = "Darwin" ]; then
+  which -s brew
+  if [[ $? != 0 ]]; then
+    echo Install brew
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  else
+    brew update
+  fi
+  
+  echo Install pre-requisite packages
+  brew install portaudio poco cereal cmake pkg-config composer php72 node
+elif [ $OS = "Linux" ]; then
+  echo Install pre-requisite packages
+  sudo apt-get update
+  for i in alsa-base alsa-utils libasound2-dev portaudio19-dev \
+          libpoco-dev libcereal-dev cmake sqlite sqlite3 php php-mbstring php-xml composer \
+          zip unzip php-sqlite3 nodejs yarn; do
+    sudo apt-get install -y $i
+  done
+  sudo apt-get install -y libnode-dev node-gyp libssl-dev
+  sudo apt-get install -y npm
+
+elif VERB="$( which yum )" 2> /dev/null; then
+ echo Install pre-requisite packages
+ yum update
+ yum -y install alsa-base alsa-utils libasound2-dev portaudio19-dev libpoco-dev libcereal-dev\ 	  cmake sqlite sqlite3 php php-mbstring php-xml composer zip unzip php-sqlite3 \
+ 	libnode-dev node-gyp libssl-dev npm git
+fi

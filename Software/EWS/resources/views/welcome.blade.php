@@ -8,15 +8,44 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
         <!--Lines 11-14 are accessing bootstrap, jquery, and other javascript elements from the asset folder for use in this interface.-->
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         <script type="text/javascript" src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/popper.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('js/bootstrap.min.js')}}"></script>
+        <script type="text/javascript">
+          $(document).ready(function() {
+              $.ajax({
+                  method: 'POST',
+                  url: '/api/params',
+                  data: JSON.stringify({
+                      user_id: -1,
+                      method: "set",
+                      request_action:1,
+                      data:{
+                          left:{
+                              alpha:0
+                          },
+                          right:{
+                              alpha:0
+                          }                
+                      }
+                  }),
+                  success:function(response){
+                      console.log(response);
+                  },
+                  error: function(jqXHR, textStatus, errorThrown) {
+                      console.log("Parameters were not sent to the MHA. Make sure the software is running and try again.");
+                  }
+              });
+          })
+        </script>
 <!--The title element is what will display in the heading of your browser bar next to the page icon.-->
         <title>OSP</title>
-
-
     </head>
 
 <!-- The body tag, below, is the start of the body section of the page, and includes the main skeleton of the user interface -->

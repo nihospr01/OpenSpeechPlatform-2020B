@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo
+echo
+echo "This script will use 'sudo' throughout at various times, invoke this"
+echo "as a user with sudo priveleges and enter your user password when prompted"
+echo
+echo
+
+./pre_req_all
+./libosp
+./ews_njs_noexec
+
+echo
+echo
+echo "To run open two terminal windows, then in first one run 'osp' and in the"
+echo "second one type 'cd /opt/ews-backend'. Then type 'npm run dev'" 
+echo "Now open a browser window and goto the local address mentioned in ews"
+echo 
+echo
+echo
