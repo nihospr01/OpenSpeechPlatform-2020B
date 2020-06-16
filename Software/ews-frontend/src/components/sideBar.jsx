@@ -142,7 +142,7 @@ class Sidebar extends Component{
                             </ListItem>   
                         </List>
                     </Collapse>
-                    <ListItem button key = "BST Apps" onClick = {this.handleFittingApps}>
+                    {/* <ListItem button key = "BST Apps" onClick = {this.handleFittingApps}>
                         <ListItemText primary = "BST Apps"/>
                         {this.state.fittingAppsOpen? <ExpandLess/> : <ExpandMore/>}
                     </ListItem>
@@ -160,21 +160,8 @@ class Sidebar extends Component{
                                         <ListItemText primary="4AFC"/>
                                     </ListItem>
                             }
-                            {/* <ListItem className = {classes.nested} button key = "AB Tasks" onClick = {this.handleABOpen}>
-                                <ListItemText primary = "AB Tasks"/>
-                                {this.state.ABOpen? <ExpandLess /> : <ExpandMore />}
-                            </ListItem>
-                            <Collapse in={this.state.ABOpen} timeout="auto" unmountOnExit>
-                                <List component="div" disablePadding>
-                                    {['AB','SearchEx'].map((text,index)=>(
-                                    <ListItem className = {classes.doublyNested} button key = {text}>
-                                        <ListItemText primary = {text}/>
-                                    </ListItem>
-                                ))}
-                                </List>
-                            </Collapse>       */}
                         </List>
-                    </Collapse>
+                    </Collapse> */}
                 </List>
             </div>      
         );

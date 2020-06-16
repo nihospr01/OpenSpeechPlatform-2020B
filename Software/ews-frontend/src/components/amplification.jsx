@@ -41,7 +41,7 @@ const styles = (theme) => ({
         width: "90%",
         paddingLeft: theme.spacing(2),
         [theme.breakpoints.down("md")]: {
-            // maxWidth: 450,
+            maxWidth: 450,
         },
         [theme.breakpoints.up("md")]: {
             alignItems: "center",
@@ -78,11 +78,10 @@ const disabled_row = [
     ["g50", "g80"],
 ];
 
-const table_background = {
-    'Left':"#b0dfe5",
-    'Right':"#ffa6a6",
-    'Both':"#91f2ad"
 
+const channel_suffix = {
+    Left: '_L',
+    Right:'_R'
 }
 
 class Amplification extends Component {
@@ -93,7 +92,8 @@ class Amplification extends Component {
         // alpha: 1,
         freping: 0,
         global_mpo: 120,
-        channel: "Left",
+        // in single channel, the channel should be at channels[0]
+        channels: ["Left"],
         aligned: 1,
         cr_L: [1, 1, 1, 1, 1, 1],
         cr_R: [1, 1, 1, 1, 1, 1],
@@ -147,7 +147,7 @@ class Amplification extends Component {
         var g65_Right = param_right["g50"];
 
         const bandNumber = g50_Left.length;
-        console.log(data);
+
         for (var i = 0; i < bandNumber; i++) {
             var slope_L = (g80_Left[i] - g50_Left[i]) / 30;
             var slope_R = (g80_Right[i] - g80_Right[i]) / 30;
@@ -213,6 +213,8 @@ class Amplification extends Component {
 
     };
 
+    // Note: DB profile data does not contain bandNumber
+    // bandNumber is decided by OSP, not need to reset bandNumber when loading from DB
     updateParamTableFromDB = (data) => {
         console.log("update from DB")
         let param_left = data["left"];
@@ -237,9 +239,19 @@ class Amplification extends Component {
             release_R: param_right["release"],
             frepingAlpha_L: param_left["freping_alpha"],
             frepingAlpha_R: param_right["freping_alpha"],
-            bandNumber: data["bandNumber"],
         }
+
         let stateBeforeTransmit =  JSON.parse(JSON.stringify(stateData));
+        // add control signals from current state 
+        //TODO
+        stateBeforeTransmit = {
+            ...stateBeforeTransmit,
+            afc: this.state.afc,
+            freping: this.state.freping,
+            global_mpo: this.state.global_mpo,
+            aligned: this.state.aligned,
+        }
+        console.log(stateBeforeTransmit);
         this.setState({
             stateBeforeTransmit,
             ...stateData
@@ -278,9 +290,19 @@ class Amplification extends Component {
     };
 
     handleChannelChange = (event) => {
+        let data = []
+        if(event.target.value === 'Both'){
+            data = ['Left', 'Right'];
+        }else{
+            data = [event.target.value];
+        }
+        console.log(data)
         this.setState({
-            channel: event.target.value,
-        });
+            channels: data
+        })
+        // this.setState({
+        //     channel: event.target.value,
+        // });
     };
 
     handleAlignChange = (event) => {
@@ -302,37 +324,23 @@ class Amplification extends Component {
         });
     };
 
+    // Called when the input field is changed in param table row
     handleSubBandInputChange = (event) => {
-        const { channel } = this.state;
+        const { channels } = this.state;
         let inputId = event.target.id.split("_");
         let index = inputId[1];
         let type = inputId[0];
-        let type_L = type + "_L";
-        let type_R = type + "_R";
 
-        if (channel === "Right") {
-            let values_R = this.state[type_R];
-            values_R[index] = Number(event.target.value);
-            this.setState({
-                [type_R]: values_R,
-            });
-        } else if (channel === "Left") {
-            let values_L = this.state[type_L];
-            values_L[index] = Number(event.target.value);
-            this.setState({
-                [type_L]: values_L,
-            });
-        } else {
-            let values_L = this.state[type_L];
-            let values_R = this.state[type_R];
-            values_L[index] = Number(event.target.value);
-            values_R[index] = Number(event.target.value);
-            this.setState({
-                [type_L]: values_L,
-                [type_R]: values_R,
-            });
+        let data = {};
+        for(const channel of channels){
+            // add name suffix based on the channel
+            let type_channel = type + channel_suffix[channel];
+            let values = this.state[type_channel];
+            values[index] = Number(event.target.value);
+            data[type_channel] = values;
         }
 
+        this.setState(data);
         if (
             type === "cr" ||
             type === "g50" ||
@@ -343,43 +351,23 @@ class Amplification extends Component {
         }
     };
 
+    // Called when ALL field is changed in parameter table row 
     handleAllInputChange = (event) => {
-
-        const { channel, bandNumber } = this.state;
+        const { channels, bandNumber } = this.state;
         let inputId = event.target.id.split("_");
         let type = inputId[0];
-        let type_L = type + "_L";
-        let type_R = type + "_R";
 
-        if (channel === "Right") {
-            let values_R = this.state[type_R];
-            for (let i = 0; i < bandNumber; i++) {
-                values_R[i] = Number(event.target.value);
-            }
-            this.setState({
-                [type_R]: values_R,
-            });
-        } else if (channel === "Left") {
-            let values_L = this.state[type_L];
-            for (let i = 0; i < bandNumber; i++) {
-                values_L[i] = Number(event.target.value);
-            }
-            this.setState({
-                [type_L]: values_L,
-            });
-        } else {
-            let values_L = this.state[type_L];
-            let values_R = this.state[type_R];
-            for (let i = 0; i < bandNumber; i++) {
-                values_L[i] = Number(event.target.value);
-                values_R[i] = Number(event.target.value);
-            }
 
-            this.setState({
-                [type_L]: values_L,
-                [type_R]: values_R,
-            });
+        let data = {}
+        for( const channel of channels) {
+            let type_channel = type + channel_suffix[channel];
+            let values = this.state[type_channel];
+            for (let i = 0; i < bandNumber; i++) {
+                values[i] = Number(event.target.value);
+            }
+            data[type_channel] = values;
         }
+        this.setState(data);
 
         if (
             type === "cr" ||
@@ -391,156 +379,89 @@ class Amplification extends Component {
         }
     };
 
+    // Update g50 and g80
     updateParameter = (index) => {
         const {
             control_via,
-            channel,
-            cr_L,
-            cr_R,
-            g65_L,
-            g65_R,
-            g50_L,
-            g50_R,
-            g80_L,
-            g80_R,
+            channels,
         } = this.state;
-        let g50_Left = g50_L.slice();
-        let g50_Right = g50_R.slice();
-        let g80_Left = g80_L.slice();
-        let g80_Right = g80_R.slice();
-        let g65_Left = g65_L.slice();
-        let g65_Right = g65_R.slice();
-        let cr_Left = cr_L.slice();
-        let cr_Right = cr_R.slice();
 
-        if (control_via === 1) {
-            if (channel === "Both") {
-                let cr = cr_Left[index];
-                if (cr !== 0) {
-                    let slope = (1 - cr) / cr;
-                    let g65 = g65_Left[index];
+        //update the g50/g80 when control via cr/g65
+        if(control_via === 1){
+            let data = {};
+            for(const channel of channels){
+                let cr_channel  = 'cr' + channel_suffix[channel];
+                let cr_values = this.state[cr_channel].slice();
+                let cr = cr_values[index];
+                if(cr !== 0){
+                    let slope = (1-cr) /cr;
+
+                    let g65_channel  = 'g65' + channel_suffix[channel];
+                    let g65_values = this.state[g65_channel].slice();
+                    let g65 = g65_values[index];
+                    
                     let g80 = Number(g65) + Number(slope * 15);
                     let g50 = Number(g65) - Number(slope * 15);
-                    g50_Left[index] = g50;
-                    g50_Right[index] = g50;
-                    g80_Left[index] = g80;
-                    g80_Right[index] = g80;
-                    this.setState({
-                        g50_L: g50_Left,
-                        g80_L: g80_Left,
-                        g50_R: g50_Right,
-                        g80_R: g80_Right,
-                    });
-                }
-            } else if (channel === "Left") {
-                let cr = cr_Left[index];
-                if (cr !== 0) {
-                    let slope = (1 - cr) / cr;
-                    let g65 = g65_Left[index];
-                    let g80 = Number(g65) + Number(slope * 15);
-                    let g50 = Number(g65) - Number(slope * 15);
-                    g50_Left[index] = g50;
-                    g80_Left[index] = g80;
-                    this.setState({
-                        g50_L: g50_Left,
-                        g80_L: g80_Left,
-                    });
-                }
-            } else {
-                let cr = cr_Right[index];
-                if (cr !== 0) {
-                    let slope = (1 - cr) / cr;
-                    let g65 = g65_Right[index];
-                    let g80 = Number(g65) + Number(slope * 15);
-                    let g50 = Number(g65) - Number(slope * 15);
-                    g50_Right[index] = g50;
-                    g80_Right[index] = g80;
-                    this.setState({
-                        g50_R: g50_Right,
-                        g80_R: g80_Right,
-                    });
-                }
+
+                    // update g80 and g50 values
+                    let g50_channel  = 'g50' + channel_suffix[channel];
+                    let g50_values = this.state[g50_channel].slice();
+                    g50_values[index] = g50;
+                    data[g50_channel] = g50_values;
+
+                    let g80_channel  = 'g80' + channel_suffix[channel];
+                    let g80_values = this.state[g80_channel].slice();
+                    g80_values[index] = g80;
+                    data[g80_channel] = g80_values;
+                }    
             }
+            this.setState(data);
         }
     };
 
     updateAllParameters = () => {
         const {
             control_via,
-            channel,
-            cr_L,
-            cr_R,
-            g65_L,
-            g65_R,
-            g50_L,
-            g50_R,
-            g80_L,
-            g80_R,
+            channels,
             bandNumber,
         } = this.state;
-        let g50_Left = g50_L.slice();
-        let g50_Right = g50_R.slice();
-        let g80_Left = g80_L.slice();
-        let g80_Right = g80_R.slice();
-        let g65_Left = g65_L.slice();
-        let g65_Right = g65_R.slice();
-        let cr_Left = cr_L.slice();
-        let cr_Right = cr_R.slice();
 
-        if (control_via === 1) {
-            if (channel === "Both") {
-                for (let i = 0; i < bandNumber; i++) {
-                    let cr = cr_Left[i];
-                    if (cr !== 0) {
-                        let slope = (1 - cr) / cr;
-                        let g65 = g65_Left[i];
+        if(control_via === 1){
+            let data = {};
+            for(const channel of channels){
+                // construct the param name based on channels and get values
+                let cr_channel  = 'cr' + channel_suffix[channel];
+                let cr_values = this.state[cr_channel].slice();
+
+                let g65_channel  = 'g65' + channel_suffix[channel];
+                let g65_values = this.state[g65_channel].slice();
+
+                let g50_channel  = 'g50' + channel_suffix[channel];
+                let g50_values = this.state[g50_channel].slice();
+
+                let g80_channel  = 'g80' + channel_suffix[channel];
+                let g80_values = this.state[g80_channel].slice();
+
+                for (let index = 0; index < bandNumber; index++) {
+                    let cr = cr_values[index];
+                    if(cr !== 0){
+                        let slope = (1-cr) /cr;
+                        let g65 = g65_values[index];
+                        
                         let g80 = Number(g65) + Number(slope * 15);
                         let g50 = Number(g65) - Number(slope * 15);
-                        g50_Left[i] = g50;
-                        g50_Right[i] = g50;
-                        g80_Left[i] = g80;
-                        g80_Right[i] = g80;
+
+                        // update g80 and g50 values
+                        g50_values[index] = g50;
+                        data[g50_channel] = g50_values;
+
+                        g80_values[index] = g80;
+                        data[g80_channel] = g80_values;
                     }
                 }
-                this.setState({
-                    g50_L: g50_Left,
-                    g80_L: g80_Left,
-                    g50_R: g50_Right,
-                    g80_R: g80_Right,
-                });
-            } else if (channel === "Left") {
-                for (let i = 0; i < bandNumber; i++) {
-                    let cr = cr_Left[i];
-                    if (cr !== 0) {
-                        let slope = (1 - cr) / cr;
-                        let g65 = g65_Left[i];
-                        let g80 = Number(g65) + Number(slope * 15);
-                        let g50 = Number(g65) - Number(slope * 15);
-                        g50_Left[i] = g50;
-                        g80_Left[i] = g80;
-                    }
-                }
-                this.setState({
-                    g50_L: g50_Left,
-                    g80_L: g80_Left,
-                });
-            } else {
-                for (var i = 0; i < bandNumber; i++) {
-                    let cr = cr_Right[i];
-                    if (cr !== 0) {
-                        let slope = (1 - cr) / cr;
-                        let g65 = g65_Right[i];
-                        let g80 = Number(g65) + Number(slope * 15);
-                        let g50 = Number(g65) - Number(slope * 15);
-                        g50_Right[i] = g50;
-                        g80_Right[i] = g80;
-                    }
-                }
-                this.setState({
-                    g50_R: g50_Right,
-                    g80_R: g80_Right,
-                });
+                    
             }
+            this.setState(data);
         }
     };
 
@@ -672,27 +593,11 @@ class Amplification extends Component {
         return params;
     };
 
-    generateAlignControl = (bandNumber) => {
-        if (bandNumber === 10) {
-            return (
-                <ListItem>
-                    <ListItemText primary="Aligned" />
-                    <ListItemSecondaryAction>
-                        <Radio.Group
-                            value={this.state.aligned}
-                            buttonStyle="solid"
-                            onChange={this.handleAlignChange}
-                        >
-                            <Radio.Button value={1}>On</Radio.Button>
-                            <Radio.Button value={0}>Off</Radio.Button>
-                        </Radio.Group>
-                    </ListItemSecondaryAction>
-                </ListItem>
-            );
-        }
-    };
+    // Called when 'save profile' is clicked
+    // Save current values of parameters into DB
     handleSaveParamsToDB = async (profileName) => {
         var params = JSON.stringify(this.generateParamsProfile());
+
         try {
             const response = await axios.post("/api/param/amplification", {
                 profileName: profileName,
@@ -705,6 +610,8 @@ class Amplification extends Component {
         }
     };
 
+    // Called when 'load profile' is clicked
+    // Load param values from DB
     handleLoadParamsFromDB = async (profile) => {
         try {
             const params = await JSON.parse(profile);
@@ -724,7 +631,7 @@ class Amplification extends Component {
             const data = response.data;
             // Update the current transmitted state
             this.setState(prevState => {
-                //omit old stateBeforeTransmit
+                // Omit old stateBeforeTransmit
                 let { stateBeforeTransmit, ...stateData} = prevState;
                 let newStateBeforeTransmit =  JSON.parse(JSON.stringify(stateData));;
                 return {stateBeforeTransmit: newStateBeforeTransmit}
@@ -735,9 +642,10 @@ class Amplification extends Component {
         }
     };
 
+    // Table for mobile view
     paramTableRowMobile = (subBand, index) => {
         const { classes } = this.props;
-        const { channel, type, bandNumber } = this.state;
+        const { channels, type, bandNumber } = this.state;
 
         if (index !== bandNumber) {
             return (
@@ -746,11 +654,8 @@ class Amplification extends Component {
                     <ListItemSecondaryAction>
                         {type.value.map((data_id) => {
                             var curr_data_id = data_id;
-                            if (channel === "Right") {
-                                curr_data_id += "_R";
-                            } else {
-                                curr_data_id += "_L";
-                            }
+                            curr_data_id += channel_suffix[channels[0]];
+
                             return (
                                 <TextField
                                     className={
@@ -803,13 +708,8 @@ class Amplification extends Component {
     // Disable cr and g65 row when control via = g50/g80
     // Disable g58 and g80 row when control via = cr/g65
     paramTableRow = (type) => {
-        const { channel, control_via } = this.state;
-        var data_id = type;
-        if (channel === "Right") {
-            data_id += "_R";
-        } else {
-            data_id += "_L";
-        }
+        const { channels, control_via } = this.state;
+        var data_id = type + channel_suffix[channels[0]];
 
         var disabled_style = disabled_row[control_via].includes(type)
             ? { backgroundColor: "#bdbdbd", testColor: "gray" }
@@ -861,6 +761,7 @@ class Amplification extends Component {
     };
 
     renderControlSignals = () => {
+        const { channels } = this.state;
         return (
             <List
                 subheader={
@@ -884,7 +785,7 @@ class Amplification extends Component {
                     <ListItemText primary="Channel" />
                     <ListItemSecondaryAction>
                         <Radio.Group
-                            value={this.state.channel}
+                            value={channels.length === 2 ? 'Both' : channels[0]}
                             buttonStyle="solid"
                             onChange={this.handleChannelChange}
                         >
@@ -907,10 +808,9 @@ class Amplification extends Component {
     // Get the parameter label color by comparing current value and previously transmitted value
     // If value is changed, highlight label colors
     getParamLabelColor = (label) => {
-        console.log(label, this.state[label])
-        console.log(label, this.state.stateBeforeTransmit[label])
         return _.isEqual(this.state[label],this.state.stateBeforeTransmit[label]) ?{color:'black'}:{ color: "#F50057" };
     }
+
     renderParamControls = () => {
         const { bandNumber } = this.state;
         return (
@@ -965,7 +865,9 @@ class Amplification extends Component {
                     // Render Aligned control based on the bandNUmber
                     bandNumber === 10 && (
                         <ListItem>
-                            <ListItemText primary="Aligned" />
+                            <ListItemText primary="Aligned" 
+                             style={this.getControlLabelColor('aligned')}
+                            />
                             <ListItemSecondaryAction>
                                 <Radio.Group
                                     value={this.state.aligned}
@@ -982,9 +884,25 @@ class Amplification extends Component {
             </List>
         );
     };
+
+    getTableColor = () => { 
+        const { channels } = this.state;
+        // Both channels
+        if(channels.length === 2){
+            return "#91f2ad"; 
+        }else if(channels[0] === 'Right'){
+            //Right
+            return "#ffa6a6";
+        }else {
+            //Left
+            return "#b0dfe5";
+        }
+    }
+
     render() {
         const { classes } = this.props;
-        const { type, bandNumber, channel} = this.state;
+        const { type, bandNumber } = this.state;
+
         return (
             <div className={classes.content}>
                 <Grid container spacing={3}>
@@ -1005,7 +923,7 @@ class Amplification extends Component {
                     </Grid>
                 </Grid>
 
-                <Paper className={classes.paramSection} style={{backgroundColor:table_background[channel]}}>
+                <Paper className={classes.paramSection} style={{backgroundColor:this.getTableColor()}}>
                     <Toolbar>
                         <Typography color="textSecondary" gutterBottom>
                             Parameter Settings

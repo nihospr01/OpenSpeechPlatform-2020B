@@ -198,17 +198,17 @@ class AssessmentPage extends Component {
         //     New: newNew,
         //     Now: newNow,
         // })
-        try {
-            const response = await axios.post("/api/param/setparam", {
-                method: 'set',
-                data: dataInput,
-            });
-            const data = response.data;
-            console.log(data);
-        }
-        catch(error) {
-            alert(error.response.data);
-        }
+        // try {
+        //     const response = await axios.post("/api/param/setparam", {
+        //         method: 'set',
+        //         data: dataInput,
+        //     });
+        //     const data = response.data;
+        //     console.log(data);
+        // }
+        // catch(error) {
+        //     alert(error.response.data);
+        // }
 
         if (controlMode == 0){
             let param = this.getParam(newNow);
@@ -497,7 +497,7 @@ class AssessmentPage extends Component {
                         </p>
                     </div>
 
-                    <div style={{
+                    {/* <div style={{
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -509,9 +509,9 @@ class AssessmentPage extends Component {
                             onChange={this.handleChangeInputMode.bind(this)}
                         />
                             Use Live Audio
-                    </div>
+                    </div> */}
 
-                    <div style={{
+                    {/* <div style={{
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -523,7 +523,7 @@ class AssessmentPage extends Component {
                             onChange={this.handleChangeInputMode.bind(this)}
                         />
                             Use File Stimulus
-                    </div>                    
+                    </div>                     */}
                     <div style={{
                         display: "flex",
                         justifyContent: "center",
