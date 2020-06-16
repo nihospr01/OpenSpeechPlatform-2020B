@@ -12,6 +12,7 @@ export default class ResearcherService {
         }
         catch (err) {
             console.log("Error writing to db");
+            console.log(err);
             throw err;
         }
     }

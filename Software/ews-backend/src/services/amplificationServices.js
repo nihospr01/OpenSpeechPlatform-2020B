@@ -9,7 +9,7 @@ export default class AmplificationServices {
                 parameters,
                 bandNumber
             });
-            
+            console.log(savedParameters);
             return savedParameters;
         }
         catch (err) {

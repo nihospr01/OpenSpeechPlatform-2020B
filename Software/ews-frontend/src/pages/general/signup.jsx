@@ -67,7 +67,6 @@ const formStyles = {
 class ResearcherSignup extends Component {
     state = {
         researcherID: "",
-        institution: "",
         password: "",
         isLoading: false,
     };
@@ -75,12 +74,6 @@ class ResearcherSignup extends Component {
     handleInputChange = (event) => {
         this.setState({
             [event.target.id]: event.target.value,
-        });
-    }
-
-    handleSelectChange = (event) => {
-        this.setState({
-            institution: event.target.value,
         });
     }
 
@@ -113,8 +106,8 @@ class ResearcherSignup extends Component {
 
     render() {
         const { classes } = this.props;
-        const { researcherID, institution, password, isLoading } = this.state;
-        const submitDisabled = researcherID === "" || institution === "" || password === "" || isLoading;
+        const { researcherID, password, isLoading } = this.state;
+        const submitDisabled = researcherID === ""  || password === "" || isLoading;
         return (
             <form autoComplete="off" noValidate className={classes.formContent} >
                 <TextField
@@ -125,16 +118,6 @@ class ResearcherSignup extends Component {
                     onChange={this.handleInputChange}
                     className={classes.textField}
                 />
-                <FormControl variant="outlined" required className={classes.textField}>
-                    <InputLabel>Insititution</InputLabel>
-                    <Select
-                        id="institution"
-                        onChange={this.handleSelectChange}
-                    >
-                        <MenuItem value="UCSD">University of California, San Diego</MenuItem>
-                        <MenuItem value="SDSU">San Diego State University</MenuItem>
-                    </Select>
-                </FormControl>
                 <TextField
                     variant="outlined"
                     required

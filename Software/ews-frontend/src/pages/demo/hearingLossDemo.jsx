@@ -102,8 +102,8 @@ class HearingLossDemo extends Component {
         }
     }
 
-    handleApply = async () => {
-        const { currentNode, nodes } = this.state;
+    handleApply = async (currentNode) => {
+        const { nodes } = this.state;
         try {
             const response = await axios.post("/api/param/setparam", {
                 method: 'set',
@@ -117,9 +117,11 @@ class HearingLossDemo extends Component {
         }
     }
 
-    handleSliderChange = (event, value) => {
-        this.setState({ currentNode: value / 25 + 1 });
-        sessionStorage.setItem('rootNode', parseInt(value / 25 + 1));
+    handleSliderChange = async (event, value) => {
+        let currentNode = value / 25 + 1;
+        this.setState({ currentNode });
+        sessionStorage.setItem('rootNode', parseInt(currentNode));
+        await this.handleApply(currentNode);
     }
 
     render() {
@@ -167,31 +169,7 @@ class HearingLossDemo extends Component {
                             className={classes.img}
                         />
                     </Grid>
-                    <Grid 
-                        container
-                        direction="row"
-                        justify="flex-end"
-                        alignItems="center"
-                    >
-                        <Button
-                            className={classes.button}
-                            variant="outlined" 
-                            color="primary"
-                            onClick={this.handleApply}
-                        >
-                            Transmit
-                        </Button>
-                        <Button
-                            className={classes.button}
-                            variant="outlined" 
-                            color="primary"
-                            onClick={null}
-                            component={Link}
-                            to={'/researcherpage'}
-                        >
-                            Continue
-                        </Button>
-                    </Grid>
+
                 </Grid>
             </Paper>
         );
