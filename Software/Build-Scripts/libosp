@@ -10,7 +10,7 @@ echo
 OS=$(uname)
 
 echo Build and install librtmha
-cd -
+cd ..
 pushd librtmha
 mkdir -p build
 cd build
