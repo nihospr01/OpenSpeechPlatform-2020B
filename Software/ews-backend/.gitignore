@@ -30,3 +30,5 @@ node_modules
 # Database
 *.sqlite
 database
+
+!./build
