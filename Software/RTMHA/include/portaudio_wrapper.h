@@ -13,7 +13,7 @@ public:
     portaudio_wrapper( int in_num_channel, int out_num_channels, PaStreamCallback callback, void *userData, int sample_rate,
                        unsigned long frames_per_buffer);
     ~portaudio_wrapper();
-    int init_stream(int in_device, int in_num_channel, int out_device, int out_num_channels,
+    int init_stream(int in_device, int in_num_channels, int out_device, int out_num_channels,
                     PaStreamCallback callback, void* userData);
     int start_stream();
     int stop_stream();

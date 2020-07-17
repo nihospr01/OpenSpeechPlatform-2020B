@@ -11,7 +11,7 @@ OS=$(uname)
 
 echo Build, install and execute Nodejs-based EWS backend
 sudo mkdir -p /opt
-sudo cp -r ews-backend /opt
+sudo cp -r ../ews-backend /opt
 sudo chown -R $(whoami) /opt/ews-backend
 sudo sh -c 'printf "#!/bin/sh\n\ncd /opt/ews-backend && npm run dev\n" > /usr/local/bin/ews-backend'
 sudo chmod a+x /usr/local/bin/ews-backend
@@ -25,6 +25,3 @@ sudo mkdir -p database
 sudo sequelize db:migrate
 popd
 #popd
-
-
-

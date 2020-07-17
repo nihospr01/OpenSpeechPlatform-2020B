@@ -53,14 +53,14 @@ int portaudio_wrapper::init_stream(int in_device, int in_num_channels, int out_d
     inputParameters.device = in_device; /* default input device */
     inputParameters.channelCount = in_num_channels;
     inputParameters.sampleFormat = SAMPLE_TYPE;
-    inputParameters.suggestedLatency = inputInfo->defaultHighInputLatency ;
+    inputParameters.suggestedLatency = .001;
     inputParameters.hostApiSpecificStreamInfo = NULL;
 
     outputInfo = Pa_GetDeviceInfo( out_device );
     outputParameters.device = out_device; /* default output device */
     outputParameters.channelCount = out_num_channels;
     outputParameters.sampleFormat = SAMPLE_TYPE;
-    outputParameters.suggestedLatency =  outputInfo->defaultHighOutputLatency;
+    outputParameters.suggestedLatency =  .001;
     outputParameters.hostApiSpecificStreamInfo = NULL;
 
 #ifdef __APPLE__

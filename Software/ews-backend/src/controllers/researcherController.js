@@ -18,9 +18,9 @@ router.get("/", async(req, res, next) => {
 })
 
 router.post("/signup", async (req, res, next) => {
-    const { researcherID, institution, password } = req.body;
+    const { researcherID, password } = req.body;
     try {
-        const savedResearcher = await researcherServices.signUp(researcherID, institution, password);
+        const savedResearcher = await researcherServices.signUp(researcherID, password);
         res.status(200).send(savedResearcher);
     }
     catch (err) {
