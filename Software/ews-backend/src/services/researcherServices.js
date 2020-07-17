@@ -4,9 +4,9 @@ const db = require('../../models/index');
 const Researcher = db.researcher;
 
 export default class ResearcherService {
-    async signUp (researcherID, institution, password) {
+    async signUp (researcherID, password) {
         try {
-            const savedResearcher = await Researcher.create({researcherID, institution, password});
+            const savedResearcher = await Researcher.create({researcherID, password});
             console.log(savedResearcher);
             return savedResearcher;
         }

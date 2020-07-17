@@ -12,13 +12,13 @@ int main(int argc, char* argv[]){
 
 
     osp_user_data user_data[DEFAULTS::NUM_CHANNEL];
-    controls main_controls;
+    controls main_controls, temp;
     auto parser = new osp_parser();
     parser->parse(argc, argv, user_data, &main_controls, 1);
 
     osp_user_data_multirate user_data_multirate[DEFAULTS_MULTIRATE::NUM_CHANNEL];
     auto parser_multirate = new osp_parser_multirate();
-    parser_multirate->parse(argc, argv, user_data_multirate);
+    parser_multirate->parse(argc, argv, user_data_multirate, &temp, 1);
 
     if(main_controls.ref_design == 0){
         auto masterHA = new osp_process(main_controls.samp_freq, main_controls.buf_size, user_data,

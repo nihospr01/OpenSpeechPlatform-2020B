@@ -87,9 +87,8 @@ int openspeechplatform(PARSER *parser, MHA *masterHA, controls *main_controls){
     cb_data->main_controls = main_controls;
     cb_data->masterHA = masterHA;
 
-    auto cb = [](const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer,
+        auto cb = [](const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer,
                  const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void *userData) -> int {
-
     #ifdef OVERALL
             start_time = std::chrono::steady_clock::now();
     #endif
@@ -102,22 +101,23 @@ int openspeechplatform(PARSER *parser, MHA *masterHA, controls *main_controls){
             auto main_controls = cb_data->main_controls;
             int in_chan = main_controls->input_channels;
             int out_chan = main_controls->output_channels;
-
+            
             if(in_chan == 0){
                 masterHA->process(in, out, framesPerBuffer);
             }
             else if(in_chan == 1){
-                std::memcpy(in[0], inputBuffer, framesPerBuffer* sizeof(float));
-                std::memcpy(in[1], inputBuffer, framesPerBuffer* sizeof(float));
+                auto temp = (float**)inputBuffer;
+                std::memcpy(in[0], temp[0], framesPerBuffer* sizeof(float));
+                std::memcpy(in[1], temp[0], framesPerBuffer* sizeof(float));
                 masterHA->process(in, out, framesPerBuffer);
             }
             else if(in_chan == 2 && out_chan == 2){
-                masterHA->process((float **) inputBuffer, (float **) outputBuffer, framesPerBuffer);
+                masterHA->process((float **) inputBuffer, out, framesPerBuffer);
             }
             else{
                 masterHA->process((float **) inputBuffer, out, framesPerBuffer);
             }
-
+            
             if(out_chan == 1) {
                 std::memcpy(outputBuffer, out[0], framesPerBuffer * sizeof(float));
             }
@@ -126,8 +126,6 @@ int openspeechplatform(PARSER *parser, MHA *masterHA, controls *main_controls){
                 std::memcpy(temp[0], out[0], framesPerBuffer * sizeof(float));
                 std::memcpy(temp[1], out[1], framesPerBuffer * sizeof(float));
             }
-
-
     #ifdef OVERALL
             if (counter < RECORD_TIME) {
                 end_time = std::chrono::steady_clock::now();
@@ -199,6 +197,7 @@ int openspeechplatform(PARSER *parser, MHA *masterHA, controls *main_controls){
                                        cb, (void *) cb_data, main_controls->samp_freq, main_controls->buf_size);
     }
     else{
+        printf("Here\n");
         audio = new  portaudio_wrapper(main_controls->input_device, main_controls->input_channels,
                                        main_controls->output_device, main_controls->output_channels, cb,
                                        (void *) cb_data, main_controls->samp_freq, main_controls->buf_size);
