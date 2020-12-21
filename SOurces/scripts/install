@@ -1,0 +1,106 @@
+#!/bin/bash
+
+dbdir=`dirname "$0"`/../release/database
+
+help=0
+readonly=0
+while getopts "d:rh" opt
+do
+    case "${opt}" in
+        d) dbdir=${OPTARG};;
+        r) readonly=1;;
+        h) help=1;;
+    esac
+done
+shift $((OPTIND-1))
+
+
+if [ $help -gt 0 ]
+then
+    printf "Builds and Installs OSP.\n"
+    printf "Usage: install [-d dbdir] [-r]\n"
+    printf "-d database_dir\tParent directory for the databases\n"
+    printf "Default is release/database\n"
+    printf "-r\t readonly.  Puts storage and cache in dbdir so release dir can be mounted readonly\n"
+    exit
+fi
+
+mkdir -p $dbdir
+dbdir=`realpath ${dbdir}`
+printf "dbdir=$dbdir\n"
+
+cd `dirname "$0"`/..
+rm -rf release
+
+echo Building and Installing libosp
+pushd libosp
+make clean
+make
+popd
+
+echo Building and Installing NodeJS Server
+pushd ewsnodejs-server
+
+npm install
+npm audit fix
+# if ! command -v sequelize &> /dev/null
+# then
+#     sudo npm install -g sequelize-cli
+# fi
+#sequelize db:migrate
+popd
+rsync -qav --exclude='.git*' --exclude='test' --exclude='docs' ewsnodejs-server release
+
+mkdir -p $dbdir
+ln -s $dbdir release/ewsnodejs-server/database
+
+if [ $readonly -gt 0 ]
+then
+    mv release/ewsnodejs-server/node_modules $dbdir
+    ln -s $dbdir/node_modules release/ewsnodejs-server/node_modules
+fi
+
+
+echo Building and Installing NodeJS Client
+pushd ewsnodejs-client
+npm install
+npm audit fix
+npm run build
+popd
+rm -rf release/ewsnodejs-server/build
+rsync -qav ewsnodejs-client/build release/ewsnodejs-server
+
+echo Build and Install PHP Server
+rsync -qav --exclude='vendor' --exclude='database/homestead.sqlite' \
+    --exclude='.git*' --exclude='.vscode' --exclude='tests' embeddedwebserver release
+pushd release/embeddedwebserver
+
+if [ $readonly -gt 0 ]
+then
+    mv storage $dbdir
+    ln -s $dbdir/storage storage
+    mkdir -p $dbdir/bootstrap/cache
+    rm -rf bootstrap/cache
+    ln -s $dbdir/bootstrap/cache bootstrap/cache
+fi
+
+touch $dbdir/homestead.sqlite
+cat << EOF >> .env
+DB_DATABASE=$dbdir/homestead.sqlite
+EOF
+
+composer update --with-all-dependencies
+composer install
+php artisan config:cache
+php artisan key:generate
+php artisan config:cache
+php artisan migrate --force
+popd
+
+# set up OSP_MEDIA
+mkdir -p release/media
+mv release/embeddedwebserver/public/audio/* release/media
+mv release/ewsnodejs-server/src/utils/audio/* release/media
+
+# Copy scripts to bin directory
+cp -pr scripts/start-ews* scripts/run* release/bin

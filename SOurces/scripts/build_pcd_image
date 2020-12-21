@@ -1,0 +1,11 @@
+#!/bin/bash
+cd `dirname "$0"`
+
+printf "Checking out or updating sources\n"
+scripts/checkout
+
+pushd ospboard
+
+git clone --recurse-submodules git@bitbucket.org:openspeechplatform/ospboard.git
+
+

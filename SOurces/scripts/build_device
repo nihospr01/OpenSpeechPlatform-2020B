@@ -1,0 +1,35 @@
+#!/bin/bash
+cd `dirname "$0"`
+chown -R osp.osp /opt /usr/local
+su osp << EOSU
+export LC_ALL=C
+npm config set jobs 8
+./install
+
+rm /usr/local/bin/* 
+cd /usr/local/bin
+ln -s /opt/release/bin/osp osp
+ln -s /opt/release/bin/osp_cli osp_cli
+ln -s /opt/release/bin/pa_devs pa_devs
+ln -s /opt/release/bin/run_osp run_osp
+ln -s /opt/release/bin/start-ews start-ews
+ln -s /opt/release/bin/start-ews-php start-ews-php
+
+cd /opt/liblsl
+mkdir -p build
+cd build
+cmake -DLSL_UNIXFOLDERS=1 -DCMAKE_INSTALL_PREFIX=/usr/local -DLSL_BUILD_EXAMPLES=0 ..
+make
+make install
+
+cd /opt/libimu
+mkdir -p build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
+make
+cp refimu /usr/local/bin
+cp ../init_trigger.sh /usr/local/bin
+EOSU
+chown -R root.root /usr/local
+
+

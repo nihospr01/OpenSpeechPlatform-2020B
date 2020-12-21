@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Export to excel test</title>
+        <script src="dist/excellentexport.js"></script>
+        <style>
+            table, tr, td {
+                border: 1px black solid;
+            }
+        </style>
+        <script>
+            function newApi(format) {
+                return ExcellentExport.convert({
+                    anchor: 'anchorNewApi-' + format,
+                    filename: 'data_123.' + format,
+                    format: format
+                }, [{
+                    name: 'Sheet Name Here 1',
+                    from: {
+                        table: 'datatable'
+                    }
+                }]);
+            }
+
+            function newApiArray(format) {
+                return ExcellentExport.convert({
+                    anchor: 'anchorNewApi-' + format + '-array',
+                    filename: 'data_123.array',
+                    format: format
+                }, [{
+                    name: 'Sheet Name Here 1',
+                    from: {
+                        array: [['line 1', 1234 , 'CN 你好'],
+                                ['line 2', 1234.56 , 'JP こんにちは']
+                        ]
+                    }
+                }]);
+            }
+
+            function exportSome() {
+                return ExcellentExport.convert({
+                    anchor: "anchorNewApi-xlsx-some",
+                    filename: "somedata",
+                    format: "xlsx"
+                }, [{
+                    name: 'Sheet number 1',
+                    from: {
+                        table: 'datatable'
+                    },
+                    filterRowFn: function(row) {
+                        if (row[1] == 200) {
+                            return false;
+                        }
+                        return true;
+                    },
+                    removeColumns: [1],
+
+                }])
+            }
+        </script>
+    </head>
+    <body>
+        <h1>ExcellentExport.js</h1>
+
+        Check on <a href="http://jordiburgos.com">jordiburgos.com</a> and  <a href="https://github.com/jmaister/excellentexport">GitHub</a>.
+
+        <h3>Test page</h3>
+
+        Test table:
+        <table id="datatable">
+            <tr>
+                <th>Column 1</th>
+                <th>Column "cool" 2</th>
+                <th>Column 3</th>
+                <th>Column 4</th>
+            </tr>
+            <tr>
+                <td>100,111</td>
+                <td>200</td>
+                <td>030</td>
+                <td>áéíóú</td>
+            </tr>
+            <tr>
+                <td>400</td>
+                <td>500</td>
+                <td>Chinese chars: 解决导出csv中文乱码问题</td>
+                <td>àèìòù</td>
+            </tr>
+            <tr>
+                <td>Text</td>
+                <td>More text</td>
+                <td>Text with
+                new line</td>
+                <td>ç ñ ÄËÏÖÜ äëïöü</td>
+            </tr>
+        </table>
+
+        <br/>
+
+        <a download="somedata.xls" href="#" onclick="return ExcellentExport.excel(this, 'datatable', 'Sheet Name Here');">Export to Excel</a>
+        <br/>
+
+        <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable');">Export to CSV - UTF8</a>
+        <br/>
+        <a download="somedata.csv" href="#" onclick="return ExcellentExport.csv(this, 'datatable', ';');">Export to CSV - Using semicolon ";" separator - UTF8</a>
+        <br/>
+        <h1>NEW API!</h1>
+        <a download="data_123.xls" href="#" id="anchorNewApi-xls" onclick="return newApi('xls');">Export to Excel: XLS format</a>
+        <br/>
+        <a download="data_123.xlsx" href="#" id="anchorNewApi-xlsx" onclick="return newApi('xlsx');">Export to Excel: XLSX format</a>
+        <br/>
+        <a download="data_123.csv" href="#" id="anchorNewApi-csv" onclick="return newApi('csv');">Export to CSV</a>
+        <br>
+        <a href="#" id="anchorNewApi-xlsx-some" onclick="return exportSome();">Export to Excel: XLSX filtering columns and rows</a>
+        <br/>
+        <br/>
+
+        <h1>NEW API from Arrays!</h1>
+
+        <a href="#" id="anchorNewApi-xlsx-array" onclick="return newApiArray('xlsx');">Export to XLSX from array</a>
+        <br>
+        <a href="#" id="anchorNewApi-xls-array" onclick="return newApiArray('xls');">Export to XLS from array</a>
+        <br>
+        <a href="#" id="anchorNewApi-csv-array" onclick="return newApiArray('csv');">Export to CSV from array</a>
+
+    </body>
+</html>

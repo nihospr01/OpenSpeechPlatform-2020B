@@ -1,0 +1,115 @@
+#!/bin/bash
+
+all=0
+help=0
+while getopts ah flag
+do
+    case "${flag}" in
+        a) all=1;;
+        h) help=1;;
+    esac
+done
+
+if [ $help -gt 0 ]
+then
+    printf "Checks out sources from git and switches to the develop branch.\n"
+    printf "If sources are already checked out, it will go a git pull.\n\n"
+    printf "Usage: checkout [-a]\n-a\tAll. (includes ospboard)\n\n"
+    exit
+fi
+
+if [ ! -d "libosp" ]
+then
+    git clone git@bitbucket.org:openspeechplatform/libosp.git
+    pushd libosp
+    git checkout develop
+    popd
+else
+    pushd libosp
+    git pull
+    printf "\n"
+    git status
+    printf "\n"
+    popd
+fi
+
+if [ ! -d "ewsnodejs-server" ]
+then
+    git clone git@bitbucket.org:openspeechplatform/ewsnodejs-server
+    pushd ewsnodejs-server
+    git checkout develop
+    popd
+else
+    pushd ewsnodejs-server
+    git pull
+    printf "\n"
+    git status
+    printf "\n"
+    popd
+fi
+
+if [ ! -d "ewsnodejs-client" ]
+then
+    git clone git@bitbucket.org:openspeechplatform/ewsnodejs-client.git
+    pushd ewsnodejs-client
+    git checkout develop
+    popd
+else
+    pushd ewsnodejs-client
+    git pull
+    printf "\n"
+    git status
+    printf "\n"
+    popd
+fi
+
+if [ ! -d "embeddedwebserver" ]
+then
+    git clone git@bitbucket.org:openspeechplatform/embeddedwebserver.git
+    pushd embeddedwebserver
+    git checkout develop
+    popd
+else
+    pushd embeddedwebserver
+    git pull
+    printf "\n"
+    git status
+    printf "\n"
+    popd
+fi
+
+if [ $all -gt 0 ]
+then
+    if [ ! -d "ospboard" ]
+    then
+        git clone --recurse-submodules git@bitbucket.org:openspeechplatform/ospboard.git
+        pushd ospboard
+        git checkout develop
+        popd
+    else
+        pushd ospboard
+        git pull
+        printf "\n"
+        git status
+        printf "\n"
+        popd
+    fi
+
+    if [ ! -d "libimu" ]
+    then
+        git clone git@bitbucket.org:openspeechplatform/libimu.git
+    else
+        pushd libimu
+        git pull
+        printf "\n"
+        git status
+        printf "\n"
+        popd
+    fi
+
+    if [ ! -d "liblsl" ]
+    then
+        git clone https://github.com/sccn/liblsl.git
+    fi
+
+fi

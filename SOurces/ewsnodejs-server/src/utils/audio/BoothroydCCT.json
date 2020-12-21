@@ -1,0 +1,261 @@
+{
+    "words": [
+        {
+            "filename": "sate.wav",
+            "option_A": "states",
+            "option_B": "sates",
+            "option_C": "state",
+            "option_D": "sate",
+            "answer": "sate"
+        },
+        {
+            "filename": "teak.wav",
+            "option_A": "peak",
+            "option_B": "teak",
+            "option_C": "peat",
+            "option_D": "teat",
+            "answer": "teak"
+        },
+        {
+            "filename": "bait.wav",
+            "option_A": "base",
+            "option_B": "pace",
+            "option_C": "bait",
+            "option_D": "pate",
+            "answer": "bait"
+        },
+        {
+            "filename": "bad.wav",
+            "option_A": "mat",
+            "option_B": "bat",
+            "option_C": "mad",
+            "option_D": "bad",
+            "answer": "bad"
+        },
+        {
+            "filename": "last.wav",
+            "option_A": "clast",
+            "option_B": "last",
+            "option_C": "class",
+            "option_D": "lass",
+            "answer": "last"
+        },
+        {
+            "filename": "cat.wav",
+            "option_A": "pat",
+            "option_B": "cat",
+            "option_C": "pad",
+            "option_D": "cad",
+            "answer": "cat"
+        },
+        {
+            "filename": "mess.wav",
+            "option_A": "mess",
+            "option_B": "bess",
+            "option_C": "met",
+            "option_D": "bet",
+            "answer": "mess"
+        },
+        {
+          "filename": "sip.wav",
+          "option_A": "zip",
+          "option_B": "sip",
+          "option_C": "zit",
+          "option_D": "sit",
+          "answer": "sip"
+      },
+      {
+          "filename": "sack.wav",
+          "option_A": "stacks",
+          "option_B": "sacks",
+          "option_C": "stack",
+          "option_D": "sack",
+          "answer": "sack"
+      },
+      {
+          "filename": "bit.wav",
+          "option_A": "dick",
+          "option_B": "bick",
+          "option_C": "dit",
+          "option_D": "bit",
+          "answer": "bit"
+      },
+      {
+        "filename": "pass.wav",
+        "option_A": "bass",
+        "option_B": "pass",
+        "option_C": "bat",
+        "option_D": "pat",
+        "answer": "pass"
+    },
+    {
+        "filename": "mitt.wav",
+        "option_A": "mitt",
+        "option_B": "bit",
+        "option_C": "mid",
+        "option_D": "bid",
+        "answer": "mitt"
+    },
+    {
+        "filename": "slip.wav",
+        "option_A": "slips",
+        "option_B": "lips",
+        "option_C": "slip",
+        "option_D": "lip",
+        "answer": "slip"
+    },
+    {
+        "filename": "kin.wav",
+        "option_A": "tim",
+        "option_B": "kim",
+        "option_C": "tin",
+        "option_D": "kin",
+        "answer": "kin"
+    },
+    {
+        "filename": "pays.wav",
+        "option_A": "bays",
+        "option_B": "pays",
+        "option_C": "bade",
+        "option_D": "paid",
+        "answer": "pays"
+    },
+    {
+        "filename": "bed.wav",
+        "option_A": "met",
+        "option_B": "bet",
+        "option_C": "med",
+        "option_D": "bed",
+        "answer": "bed"
+    },
+    {
+        "filename": "sales.wav",
+        "option_A": "stales",
+        "option_B": "sales",
+        "option_C": "stale",
+        "option_D": "sale",
+        "answer": "sales"
+    },
+    {
+        "filename": "sock.wav",
+        "option_A": "sock",
+        "option_B": "shock",
+        "option_C": "sop",
+        "option_D": "shop",
+        "answer": "sock"
+    },
+    {
+        "filename": "bus.wav",
+        "option_A": "bus",
+        "option_B": "pus",
+        "option_C": "but",
+        "option_D": "putt",
+        "answer": "bus"
+    },
+    {
+        "filename": "dead.wav",
+        "option_A": "net",
+        "option_B": "debt",
+        "option_C": "ned",
+        "option_D": "dead",
+        "answer": "dead"
+    },
+    {
+        "filename": "creep.wav",
+        "option_A": "creeps",
+        "option_B": "reaps",
+        "option_C": "creep",
+        "option_D": "reap",
+        "answer": "creep"
+    },
+    {
+        "filename": "pop.wav",
+        "option_A": "pop",
+        "option_B": "top",
+        "option_C": "pot",
+        "option_D": "tot",
+        "answer": "pop"
+    },
+    {
+        "filename": "cut.wav",
+        "option_A": "gus",
+        "option_B": "cuss",
+        "option_C": "gut",
+        "option_D": "cut",
+        "answer": "cut"
+    },
+    {
+        "filename": "reef.wav",
+        "option_A": "reef",
+        "option_B": "leaf",
+        "option_C": "reeve",
+        "option_D": "leave",
+        "answer": "reef"
+    },
+    {
+        "filename": "saves.wav",
+        "option_A": "staves",
+        "option_B": "saves",
+        "option_C": "stave",
+        "option_D": "save",
+        "answer": "saves"
+    },
+    {
+        "filename": "type.wav",
+        "option_A": "tyke",
+        "option_B": "pike",
+        "option_C": "type",
+        "option_D": "pipe",
+        "answer": "type"
+    },
+    {
+        "filename": "buys.wav",
+        "option_A": "buys",
+        "option_B": "pies",
+        "option_C": "bide",
+        "option_D": "pie",
+        "answer": "buys"
+    },
+    {
+        "filename": "tack.wav",
+        "option_A": "sag",
+        "option_B": "tag",
+        "option_C": "sack",
+        "option_D": "tack",
+        "answer": "tack"
+    },
+    {
+        "filename": "clap.wav",
+        "option_A": "claps",
+        "option_B": "laps",
+        "option_C": "clap",
+        "option_D": "lap",
+        "answer": "clap"
+    },
+    {
+        "filename": "tape.wav",
+        "option_A": "cape",
+        "option_B": "tape",
+        "option_C": "cake",
+        "option_D": "take",
+        "answer": "tape"
+    },
+    {
+        "filename": "greet.wav",
+        "option_A": "grease",
+        "option_B": "crease",
+        "option_C": "greet",
+        "option_D": "creet",
+        "answer": "greet"
+    },
+    {
+        "filename": "sad.wav",
+        "option_A": "sad",
+        "option_B": "tad",
+        "option_C": "sat",
+        "option_D": "tat",
+        "answer": "sad"
+    }
+    ]
+  }
+  

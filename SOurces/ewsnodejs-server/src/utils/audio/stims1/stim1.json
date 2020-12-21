@@ -1,0 +1,259 @@
+{
+    "punct": "She had your dark suit in greasy wash water all year. Don't ask me to carry an oily rag like that. She had your dark suit in greasy wash water all year. Don't ask me to carry an oily rag like that",
+    "length": "12592.312500",
+    "index": "62",
+    "words": [
+        {
+            "start": "141.250000",
+            "end": "320.187500",
+            "content": "she",
+            "index": "0"
+        },
+        {
+            "start": "320.187500",
+            "end": "538.125000",
+            "content": "had",
+            "index": "1"
+        },
+        {
+            "start": "538.125000",
+            "end": "655.000000",
+            "content": "your",
+            "index": "2"
+        },
+        {
+            "start": "655.000000",
+            "end": "968.625000",
+            "content": "dark",
+            "index": "3"
+        },
+        {
+            "start": "968.625000",
+            "end": "1294.375000",
+            "content": "suit",
+            "index": "4"
+        },
+        {
+            "start": "1294.375000",
+            "end": "1438.625000",
+            "content": "in",
+            "index": "5"
+        },
+        {
+            "start": "1438.625000",
+            "end": "1828.875000",
+            "content": "greasy",
+            "index": "6"
+        },
+        {
+            "start": "1828.875000",
+            "end": "2188.000000",
+            "content": "wash",
+            "index": "7"
+        },
+        {
+            "start": "2188.000000",
+            "end": "2537.812500",
+            "content": "water",
+            "index": "8"
+        },
+        {
+            "start": "2537.812500",
+            "end": "2738.812500",
+            "content": "all",
+            "index": "9"
+        },
+        {
+            "start": "2738.812500",
+            "end": "3017.250000",
+            "content": "year",
+            "index": "10"
+        },
+        {
+            "start": "3328.250000",
+            "end": "3499.375000",
+            "content": "don't",
+            "index": "11"
+        },
+        {
+            "start": "3499.375000",
+            "end": "3827.500000",
+            "content": "ask",
+            "index": "12"
+        },
+        {
+            "start": "3827.500000",
+            "end": "3927.500000",
+            "content": "me",
+            "index": "13"
+        },
+        {
+            "start": "3927.500000",
+            "end": "4022.500000",
+            "content": "to",
+            "index": "14"
+        },
+        {
+            "start": "4022.500000",
+            "end": "4401.437500",
+            "content": "carry",
+            "index": "15"
+        },
+        {
+            "start": "4401.437500",
+            "end": "4474.562500",
+            "content": "an",
+            "index": "16"
+        },
+        {
+            "start": "4474.562500",
+            "end": "4832.500000",
+            "content": "oily",
+            "index": "17"
+        },
+        {
+            "start": "4832.500000",
+            "end": "5187.500000",
+            "content": "rag",
+            "index": "18"
+        },
+        {
+            "start": "5187.500000",
+            "end": "5391.062500",
+            "content": "like",
+            "index": "19"
+        },
+        {
+            "start": "5391.062500",
+            "end": "5712.500000",
+            "content": "that",
+            "index": "20"
+        },
+        {
+            "start": "7019.375000",
+            "end": "7242.500000",
+            "content": "she",
+            "index": "21"
+        },
+        {
+            "start": "7242.500000",
+            "end": "7452.500000",
+            "content": "had",
+            "index": "22"
+        },
+        {
+            "start": "7413.125000",
+            "end": "7537.500000",
+            "content": "your",
+            "index": "23"
+        },
+        {
+            "start": "7537.500000",
+            "end": "7845.000000",
+            "content": "dark",
+            "index": "24"
+        },
+        {
+            "start": "7845.000000",
+            "end": "8191.875000",
+            "content": "suit",
+            "index": "25"
+        },
+        {
+            "start": "8191.875000",
+            "end": "8323.312500",
+            "content": "in",
+            "index": "26"
+        },
+        {
+            "start": "8323.312500",
+            "end": "8684.562500",
+            "content": "greasy",
+            "index": "27"
+        },
+        {
+            "start": "8684.562500",
+            "end": "9084.062500",
+            "content": "wash",
+            "index": "28"
+        },
+        {
+            "start": "9130.000000",
+            "end": "9380.312500",
+            "content": "water",
+            "index": "29"
+        },
+        {
+            "start": "9478.125000",
+            "end": "9676.562500",
+            "content": "all",
+            "index": "30"
+        },
+        {
+            "start": "9676.562500",
+            "end": "10021.250000",
+            "content": "year",
+            "index": "31"
+        },
+        {
+            "start": "10310.000000",
+            "end": "10487.500000",
+            "content": "don't",
+            "index": "32"
+        },
+        {
+            "start": "10487.500000",
+            "end": "10752.500000",
+            "content": "ask",
+            "index": "33"
+        },
+        {
+            "start": "10752.500000",
+            "end": "10917.500000",
+            "content": "me",
+            "index": "34"
+        },
+        {
+            "start": "10917.500000",
+            "end": "10997.500000",
+            "content": "to",
+            "index": "35"
+        },
+        {
+            "start": "10997.500000",
+            "end": "11337.312500",
+            "content": "carry",
+            "index": "36"
+        },
+        {
+            "start": "11337.312500",
+            "end": "11422.500000",
+            "content": "an",
+            "index": "37"
+        },
+        {
+            "start": "11422.500000",
+            "end": "11697.625000",
+            "content": "oily",
+            "index": "38"
+        },
+        {
+            "start": "11697.625000",
+            "end": "12016.562500",
+            "content": "rag",
+            "index": "39"
+        },
+        {
+            "start": "12016.562500",
+            "end": "12220.000000",
+            "content": "like",
+            "index": "40"
+        },
+        {
+            "start": "12220.000000",
+            "end": "12592.312500",
+            "content": "that",
+            "index": "41"
+        }
+    ]
+}

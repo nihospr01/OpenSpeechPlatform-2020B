@@ -1,0 +1,88 @@
+#!/bin/bash
+
+# Runs NodeJS and PHP EWS and OSP and OSP_CLI in
+# tabs in a gnome-terminal
+
+media=`dirname "$0"`/../media
+export OSP_MEDIA=`realpath $media`
+printf "Setting OSP_MEDIA to $OSP_MEDIA\n\n"
+
+function launchBrowser() {
+    if ! command -v nc &> /dev/null
+    then
+        echo "Failed to launch brwoser."
+        echo "netcat (nc) could not be found. Please install it."
+        return
+    fi
+	TRIES=1
+	NC=`command -v nc`
+	while ! "$NC" -z localhost 5000
+	do
+		if [ $TRIES -gt 60 ]
+		then
+			exit 1
+		fi
+		TRIES=$(($TRIES + 1))
+		sleep 1
+	done
+	xdg-open "http://localhost:5000"
+}
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]
+then
+    if which gnome-terminal
+    then
+
+        gnome-terminal --tab -t OSP --wait -- `dirname "$0"`/osp &
+        gnome-terminal --tab -t OSP_CLI --wait -- `dirname "$0"`/osp_cli &
+        gnome-terminal --tab -t EWS-PHP --wait -- `dirname "$0"`/start-ews-php &
+        gnome-terminal --tab -t EWS-NODEJS --wait -- `dirname "$0"`/start-ews &
+        launchBrowser
+	    wait
+    else
+        if which konsole
+        then
+            konsole --new-tab -e "`dirname "$0"`/osp" &
+            konsole --new-tab -e "`dirname "$0"`/osp_cli" &
+            konsole --new-tab -e "`dirname "$0"`/start-ews-php" &
+            konsole --new-tab -e "`dirname "$0"`/start-ews" &
+            launchBrowser
+            wait
+        else
+            printf "Can not find terminal program\n"
+            printf "Please install gnome-terminal or konsole\n"
+        fi
+    fi
+elif [[ "$OSTYPE" == "darwin"* ]]
+then
+    printf "Running all processes in Terminal tabs.\n\n"
+    printf "If you get 'execution error: Not authorized to send Apple events..\n"
+    printf "Then you must goto\n"
+    printf "Sytem Preferences -> Security & Privacy -> Privacy -> Automation\n"
+    printf "and check the Terminal/System Events checkbox.\n"
+    printf "You might also need to go to\n"
+    printf "Sytem Preferences -> Security & Privacy -> Privacy -> Accessibility\n"
+    printf "and check the Terminal box\n\n"
+    printf "Warning: closing tabs may not stop the running process.\n\n"
+
+    function tab() {
+    osascript <<EOF
+        tell application "System Events"
+        tell process "Terminal" to keystroke "t" using command down
+        end
+        tell application "Terminal"
+        activate
+        do script with command "export OSP_MEDIA=\"$OSP_MEDIA\"; cd \"$PWD\"; $*" in window 1
+        end tell
+EOF
+    }
+
+    tab `dirname "$0"`/osp_cli
+    tab `dirname "$0"`/osp
+    tab `dirname "$0"`/start-ews-php
+    tab `dirname "$0"`/start-ews
+
+else
+    printf "Unknown OS: $OSTYPE"
+fi
+

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cd `dirname "$0"`/../ewsnodejs-server && npm run dev

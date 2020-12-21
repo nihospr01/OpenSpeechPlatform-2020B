@@ -1,0 +1,60 @@
+{
+    "words": [
+        {
+            "filename": "bells.wav",
+            "option_A": "tells",
+            "option_B": "bells",
+            "option_C": "bills",
+            "option_D": "feels",
+            "answer": "bells"
+        },
+        {
+            "filename": "cat.wav",
+            "option_A": "cat",
+            "option_B": "bat",
+            "option_C": "that",
+            "option_D": "chat",
+            "answer": "cat"
+        },
+        {
+            "filename": "duty.wav",
+            "option_A": "beauty",
+            "option_B": "dirty",
+            "option_C": "guilty",
+            "option_D": "duty",
+            "answer": "duty"
+        },
+        {
+            "filename": "fast.wav",
+            "option_A": "trust",
+            "option_B": "cast",
+            "option_C": "dust",
+            "option_D": "fast",
+            "answer": "fast"
+        },
+        {
+            "filename": "forward.wav",
+            "option_A": "forward",
+            "option_B": "ford",
+            "option_C": "howard",
+            "option_D": "flower",
+            "answer": "forward"
+        },
+        {
+            "filename": "interesting.wav",
+            "option_A": "interested",
+            "option_B": "interest",
+            "option_C": "interesting",
+            "option_D": "interacting",
+            "answer": "interesting"
+        },
+        {
+            "filename": "word_test.wav",
+            "option_A": "tax",
+            "option_B": "text",
+            "option_C": "test",
+            "option_D": "best",
+            "answer": "test"
+        }
+    ]
+}
