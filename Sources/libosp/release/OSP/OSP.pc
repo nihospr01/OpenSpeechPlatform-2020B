@@ -1,8 +1,0 @@
-prefix=/opt/OpenSpeechPlatform-UCSD/Software/release
-exec_prefix=/opt/OpenSpeechPlatform-UCSD/Software/release
-includedir=/opt/OpenSpeechPlatform-UCSD/Software/release/include/libosp
-
-Name: libosp
-Description: The OpenSpeechPlatform library
-Version: 2.0
-Cflags: -I/opt/OpenSpeechPlatform-UCSD/Software/release/libosp
