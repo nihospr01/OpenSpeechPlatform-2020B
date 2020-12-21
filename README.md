@@ -1,11 +1,58 @@
-# What is new in Open Speech Platform 2020a? #
-* **Transducers**: This release includes professionally designed housings for BTE-RICS, comparable to some commercial hearing aids. This new improved design has 2-piece chassis, 2-piece outer shell, revised strain relief at BTE-RIC, and revised strain relief at the USB connector. These changes along with rigid and flex PCBs from Release 2019b have substantially improved the yield and reliability of BTE-RICs. We have been able to manufacture 12, and 24 BTE-RICs in two batches, respectively.  
+#  OSP Release Notes - 2020B
 
-* **Hardware**: Release 2020a includes new CAD designs that improved overall fit, ruggedness, a cutout to visualize LEDs, ergonomic placement of buttons, and recessed MUTE button to prevent accidental muting. The hardware (electronics) from Release 2019b is feature complete and has been stable in multi-site testing.  
+## Firmware and OS
 
-* **Firmware and OS**: 2020a includes baseline version of libIMU that provides access to raw data from the three IMUs (3-D Accl and 3D-gyro data from left  ear, right ear, and processing unit – a total of 18 dimensional vector at 100 Hz sampling) corresponding to physical activity and head motion.  
+2020a includes baseline version of libIMU that provides access to raw data from the three IMUs (3-D Accl and 3D-gyro data from left ear, right ear, and processing unit – a total of 18 dimensional vector at 100 Hz sampling) corresponding to physical activity and head motion.
 
-* **Software**: Release 2020a adds two new modules to the signal processing library libOSP. The first is a multi-rate, subband decomposition module comprising 10 bands at audiometric frequencies.  This module is plug-in compatible with the 6-band filter bank from previous releases. The second is a frequency warping module (called freping) that expands or compresses content in each band of the filter bank based on the value of freping_alpha (0 is pass through, positive and negative values expand and compress the content, respectively). 
 
-* **Applications**: In 2020a, we introduce Node.js and React for extending EWS features. Both are based on JavaScript and expected to improve rapid prototyping capabilities of OSP for audiology research. This release includes (i) researcher app with 10-band and 6-band capability, (ii) researcher control of freping frequency lowering studies, (iii) a new landing page, (iv) demo apps, (v) a way of uploading any custom stimuli to be played through RTMHA, (vi) allowing the use of any app on NodeJS with either Live or Pre Recorded Stimuli.  
+## Software
+
+
+Libosp now has the ability to switch between 6 and 10 bands.  There is a new command-line interface to directly control it.
+
+
+A binary software installer is available for the Mac, and soon for Linux.  
+
+
+
+## Applications
+
+
+In 2020a, we introduced Node.js and React for extending EWS features. Both are based on JavaScript and expected to improve rapid prototyping capabilities of OSP for audiology research.   For 2020b we have reimplemented most of the old PHP/Laravel apps in Node/React.
+
+---
+
+We also now have…
+
+
+
+## Guides and Documentation
+
+
+### MacOS
+
+
+[Quick Start](OSP%20Software%20Documentation/OSP%20Software%20Quick%20Start%20Guide%20(macOS%20Installer)%20-%20Release%202020B.pdf) - Essential requirements and steps for installing and getting OSP software running.
+
+[Getting Started](OSP%20Software%20Documentation/OSP%20Software%20Getting%20Started%20Guide%20-%20Release%202020B.md) - Comprehensive guide to installing and testing OSP software. This guide covers the following, which are also available as separate guides.
+
+* Installation Requirements and Steps (included in the Quick Start Guide)
+
+* [Sanity Check - Audio Input and Output Sources](OSP%20Software%20Documentation/OSP%20Software%20Sanity%20Check%20-%20Audio%20Input_Output%20Sources%20(Release%202020B).pdf) - Guide to checking that your audio input and output sources are connected for OSP software usage.
+
+* [Sanity Check - Node.js Version of EWS](OSP%20Software%20Documentation/OSP%20Software%20Sanity%20Check%20-%20Nodejs%20Version%20of%20EWS%20(Release%202020B).pdf) - Guide to testing that the Node.js version of the embedded web server (EWS) works as intended.
+
+* [Sanity Check - PHP/Laravel Version of EWS](OSP%20Software%20Documentation/OSP%20Software%20Sanity%20Check%20-%20PHP:Laravel%20Version%20of%20EWS%20(Release%202020B).pdf) - Guide to testing that the PHP/Laravel version of the embedded web server (EWS) works as intended.
+
+[Troubleshooting Guide](OSP%20Software%20Documentation/OSP%20Software%20Troubleshooting%20Quick%20Start%20Guide%20(macOS%20Installer)%20-%20Release%202020B.pdf) - Covers steps for possible issues during OSP software installation.
+
+
+---
+
+## OSP Forum
+
+In the OSP website, this is where audiologists, hearing aid researchers, and others can connect with one another to provide feedback on issues and suggest improvements to OSP software and hardware.
+
+
+Anyone can search and read OSP documentation, announcements, and other upcoming posts within the forum. For those who [register an account](http://openspeechplatform.ucsd.edu/register/), they can participate in the forum by creating new posts or responding to existing posts.
 
