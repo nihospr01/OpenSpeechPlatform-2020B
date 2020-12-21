@@ -1,7 +1,0 @@
-var data = {
-	"body": "<path d=\"M4 21h16V8H4m10 7v3h-4v-3H7l5-5l5 5M3 3h18v4H3\" fill=\"currentColor\"/>",
-	"width": 24,
-	"height": 24
-};
-exports.__esModule = true;
-exports.default = data;
