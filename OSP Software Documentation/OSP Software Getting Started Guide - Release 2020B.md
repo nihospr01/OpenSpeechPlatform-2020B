@@ -87,7 +87,7 @@ computer to continue the installation.
 11. In the terminal, enter the command “`run_osp`”. You should see five terminal tabs automatically opened, running processes, and generating messages.
 
     If you don’t see these tabs and/or get an error message ““execution error”: Not authorized to send Apple events...”, see “**[8 Troubleshooting \- Terminal Tabs Won’t Open](#8-troubleshooting---terminal-tabs-wont-open)**".  
-<img src="pictures_from_guides/installationSteps/terminal-run_osp.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/installationSteps/terminal-run_osp.png" width="300px" height="100%"/>
 
     You would be automatically redirected to your browser, where you'll see the landing page for Node.js version of EWS (URL should be “**localhost:5000/login**”). It is highly recommended to use this version, as future updates and features to EWS will only be supported within Node.js.  
 
