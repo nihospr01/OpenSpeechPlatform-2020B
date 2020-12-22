@@ -124,22 +124,22 @@ For PHP/Laravel version of EWS, see “**[5 Sanity Check - PHP/Laravel version o
 
 &nbsp;  
 
-1. Choose any one of the three options in the CoarseFit Demo, scroll down. Notice the changes in the images and text. Then, click the “Next” button.  
+2. Choose any one of the three options in the CoarseFit Demo, scroll down. Notice the changes in the images and text. Then, click the “Next” button.  
 <img src="pictures_from_guides/nodejs_coarseFitDemo/nodesjs_selectOption.png" width="300px" height="100%"/>
 
 &nbsp;  
 
-4. Choose one of the five hearing loss levels, which help change the volume heard. Then, click on the horizontal bar and select an audio file.  
+3. Choose one of the five hearing loss levels, which help change the volume heard. Then, click on the horizontal bar and select an audio file.  
 <img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_lossLevelsFileSelection.png" width="500px" height="100%"/>
 
 &nbsp;  
 
-5. Below the audio file section and buttons, you should see changes to the graph based on the hearing loss levels chosen.  
+4. Below the audio file section and buttons, you should see changes to the graph based on the hearing loss levels chosen.  
 <img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_changeToGraph.png" width="500px" height="100%"/>
 
 &nbsp;  
 
-6. Get one of the BTE-RICs and hold it close to its intended ear. **DO NOT put it too close or inside your ear yet.**
+5. Get one of the BTE-RICs and hold it close to its intended ear. **DO NOT put it too close or inside your ear yet.**
 
     **Disclaimer: For people in general, BTE-RICs can become quite loud. You can risk damaging your ears. You must test the BTE-RICs to determine how loud they are before inserting them close or inside into your ears.**
 
@@ -147,13 +147,13 @@ For PHP/Laravel version of EWS, see “**[5 Sanity Check - PHP/Laravel version o
 
     &nbsp;  
 
-7. Press the “Play/Pause” button. To adjust how loud the audio file is, select different hearing loss levels until you can comfortably listen to the audio file.
+6. Press the “Play/Pause” button. To adjust how loud the audio file is, select different hearing loss levels until you can comfortably listen to the audio file.
   
     <img src="pictures_from_guides/sanityChecks/sanityCheck_nodejs_playAdjustVolumeBTERICs.png" width="500px" height="100%"/>
 
     &nbsp;  
 
-8. You may insert both BTE-RICs close or into your ears. Play the audio file again and test the various buttons.
+7. You may insert both BTE-RICs close or into your ears. Play the audio file again and test the various buttons.
 
     **Note**: only the “stim#/stim#.wav” files have transcripts available. To view the transcript, click on the “Show Transcript” toggle.
 
@@ -162,7 +162,7 @@ For PHP/Laravel version of EWS, see “**[5 Sanity Check - PHP/Laravel version o
 
 &nbsp;  
 
-9. You should be finished with testing the demo. Clicking the “Submit” button takes you back to the landing page.  
+8. You should be finished with testing the demo. Clicking the “Submit” button takes you back to the landing page.  
 <img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_finishedDemo.png" width="500px" height="100%"/>
 
 &nbsp;  

@@ -57,29 +57,32 @@ _Note that audio input (mic) and output (volume) should not muted._
 1. Go to this link to the OSP GitHub Repository: [https://github.com/nihospr01/OpenSpeechPlatform-UCSD](https://github.com/nihospr01/OpenSpeechPlatform-UCSD)
 
 2. Then, go to the folder labeled "Binaries". You'll find a .pkg file in the “Binaries” folder called “OSP-macos-installer-x64-1.3.0.pkg” with “1.3.0” being the version number. Click on that file.  
-<img src="pictures_from_guides/installationSteps/binariesFolder.png" height="300px">
+<img src="pictures_from_guides/installationSteps/binariesFolder.png" width="500px" height="auto">
+<br>
+<br>
+<img src="pictures_from_guides/installationSteps/getInstaller.png" width="500px" height="auto">
 
-3. Click on the "Download" button to download the installer file on your computer.  
-<img src="pictures_from_guides/installationSteps/downloadButton.png" height="100%">
+1. Click on the "Download" button to download the installer file on your computer.  
+<img src="pictures_from_guides/installationSteps/downloadButton.png" width="300px" height="auto">
 
 4. You should see this installer window opened. Follow the instructions shown.  
-<img src="pictures_from_guides/installationSteps/ospInstaller_Welcome.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/installationSteps/ospInstaller_Welcome.png" width="500px" height="auto"/>
 
 5. Read the Software License Agreement and agree to the terms.  
-<img src="pictures_from_guides/installationSteps/ospInstaller_LicenseAgreement.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/installationSteps/ospInstaller_LicenseAgreement.png" width="500px" height="auto"/>
 
 6. Enter your password used to sign in to your 
 computer to continue the installation.  
-<img src="pictures_from_guides/installationSteps/ospInstaller_enterPassword.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/installationSteps/ospInstaller_enterPassword.png" width="500px" height="auto"/>
 
 7. Wait for the installation to complete. Time will vary.  
-<img src="pictures_from_guides/installationSteps/ospInstaller_waitCompletion.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/installationSteps/ospInstaller_waitCompletion.png" width="500px" height="auto"/>
 
 8. You should see this window to confirm that OSP installation completed successfully.  
-<img src="pictures_from_guides/installationSteps/ospInstaller_installationCompleted.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/installationSteps/ospInstaller_installationCompleted.png" width="500px" height="auto"/>
 
 9. Follow the installer window instructions by opening a new terminal. To do so, you can simultaneously press the command and spacebar keys on your keyboard to open Spotlight Search, which looks like a long horizontal area in your screen with a Search icon.  
-<img src="pictures_from_guides/installationSteps/runningOSP_spotlightSearch.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/installationSteps/runningOSP_spotlightSearch.png" width="500px" height="auto"/>
 
 10. Type in “terminal”, and the application should show up automatically.  
 <img src="pictures_from_guides/installationSteps/runningOSP_searchTerminal.png" width="250px" height="100%"/>
@@ -87,16 +90,16 @@ computer to continue the installation.
 11. In the terminal, enter the command “`run_osp`”. You should see five terminal tabs automatically opened, running processes, and generating messages.
 
     If you don’t see these tabs and/or get an error message ““execution error”: Not authorized to send Apple events...”, see “**[8 Troubleshooting \- Terminal Tabs Won’t Open](#8-troubleshooting---terminal-tabs-wont-open)**".  
-    <img src="pictures_from_guides/installationSteps/terminal-run_osp.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/installationSteps/terminal-run_osp.png" width="500px" height="auto"/>
 
     You would be automatically redirected to your browser, where you'll see the landing page for Node.js version of EWS (URL should be “**localhost:5000/login**”). It is highly recommended to use this version, as future updates and features to EWS will only be supported within Node.js.  
 
-    <img src="pictures_from_guides/ews_nodejs_landingPage.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/ews_nodejs_landingPage.png" width="500px" height="auto"/>
 
     &nbsp;
 
 12. (optional) To access the PHP/Laravel version of EWS, enter “**localhost:8080**” in your browser search bar. The landing page should look like the following.  
-    <img src="pictures_from_guides/ews_php_landingPage.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/ews_php_landingPage.png" width="500px" height="auto"/>
 
 &nbsp;
 
@@ -114,37 +117,37 @@ This section of the guide describes where to locate audio input and output sour
 
     * Press the command and spacebar keys on your keyboard to open Spotlight Search and start typing “system preferences”. The app name will be highlighted. Press enter.
 
-        <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_searchSystemPreferences.png" width="300px" height="100%"/>
+        <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_searchSystemPreferences.png" width="500px" height="auto"/>
 
     * You should see this interface of the System Preferences. Then, click on “Sound”.
 
-        <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_systemPreferencesSound.png" width="300px" height="100%"/>
+        <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_systemPreferencesSound.png" width="500px" height="auto"/>
 
     * There are tabs labeled “Output” and “Input”, where you can connect available audio microphone input and volume output sources. **Ensure that both audio input and output are not set to mute.**
 
-        <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_sound.png" width="300px" height="100%"/>
+        <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_sound.png" width="500px" height="auto"/>
     &nbsp;
 
     **For Audio MIDI Setup**
 
     * Press the command and spacebar keys on your keyboard to open Spotlight Search and start typing “audio midi setup”. The app name will be highlighted. Press enter.
 
-        <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_searchAudioMIDI.png" width="300px" height="100%"/>
+        <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_searchAudioMIDI.png" width="500px" height="auto"/>
 
     * The image below is the Audio MIDI Setup interface, where you can connect your audio sources for microphone input and volume output and make other changes to sound settings. **Ensure that both audio input and output are not muted.**
 
-        <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_audioMIDISetup.png" width="300px" height="100%"/>
+        <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_audioMIDISetup.png" width="500px" height="auto"/>
 
     &nbsp;
 
 2. After you connected your desired audio sources, press the command and spacebar keys on your keyboard to open Spotlight Search.  
-<img src="pictures_from_guides/installationSteps/runningOSP_spotlightSearch.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/installationSteps/runningOSP_spotlightSearch.png" width="500px" height="auto"/>
 
 3. Type in “terminal”, and the application should show up automatically.  
 <img src="pictures_from_guides/installationSteps/runningOSP_searchTerminal.png" width="250px" height="100%"/>
 
 4. In the terminal, enter the command “`run_osp`”. You should see 5 terminal tabs automatically opened,  running processes, and generating messages.  
-<img src="pictures_from_guides/installationSteps/terminal-run_osp.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/installationSteps/terminal-run_osp.png" width="500px" height="auto"/>
 
 5. Click on the tab named “osp_cli”, enter the command “`play`”, and press return/enter.  
 
@@ -152,11 +155,11 @@ This section of the guide describes where to locate audio input and output sour
 
     You should see parameters shown and the word “success” being shown.
 
-    <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_terminalPlayCommand.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_terminalPlayCommand.png" width="500px" height="auto"/>
 
 
 6. To immediately stop the audio file playing, type in the command “`stop`” and press return/enter.  
-    <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_terminalStopCommand.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_terminalStopCommand.png" width="500px" height="auto"/>
 
 &nbsp;  
 
@@ -168,13 +171,13 @@ This section describes steps that verify RT-MHA, Node.js version of EWS, and aud
 For PHP/Laravel version of EWS, see “**[6 Sanity Check - PHP/Laravel version of EWS](#6-sanity-check---phplaravel-version-of-ews)**”.
 
 1. Check your browser that you’re in the right landing page. If not, type in “localhost:5000” in the browser search bar.  
-<img src="pictures_from_guides/ews_nodejs_landingPage.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/ews_nodejs_landingPage.png" width="500px" height="auto"/>
 
-1. In the center below “Freping”, click on the button labeled “CoarseFit Task”.
-<img src="pictures_from_guides/nodejs_selectCoarseFit.png" width="300px" height="100%"/>
+2. In the center below “Freping”, click on the button labeled “CoarseFit Task”.
+<img src="pictures_from_guides/nodejs_selectCoarseFit.png" width="500px" height="auto"/>
 
 3. Choose any one of the three options in the CoarseFit Demo, scroll down. Notice the changes in the images and text. Then, click the “Next” button.  
-<img src="pictures_from_guides/nodejs_coarseFitDemo/nodesjs_selectOption.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/nodejs_coarseFitDemo/nodesjs_selectOption.png" width="500px" height="auto"/>
 
 4. Choose one of the five hearing loss levels, which help change the volume heard. Then, click on the horizontal bar and select an audio file.  
 <img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_lossLevelsFileSelection.png" width="500px" height="100%"/>
@@ -182,12 +185,14 @@ For PHP/Laravel version of EWS, see “**[6 Sanity Check - PHP/Laravel version o
 5. Below the audio file section and buttons, you should see changes to the graph based on the hearing loss levels chosen.  
 <img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_changeToGraph.png" width="500px" height="100%"/>
 
-1. At this point, you should have an audio input and output source connected to your computer and ready for listening. If not, go back to "[**4 Sanity Check - Making Sure Audio Input and Output Works**](#4-sanity-check---making-sure-audio-input-and-output-works)" to connect your audio sources. If you have an external headset, please connect it via Bluetooth or through your computer’s audio jack.  
+6. At this point, you should have an audio input and output source connected to your computer and ready for listening. If not, go back to "[**4 Sanity Check - Making Sure Audio Input and Output Works**](#4-sanity-check---making-sure-audio-input-and-output-works)" to connect your audio sources. If you have an external headset, please connect it via Bluetooth or through your computer’s audio jack.  
 
     <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_sound.png" width="500px" height="100%"/>
+    <br>
+    <br>
     <img src="pictures_from_guides/adjustVolume.png" width="200px" height="100%"/>
 
-2. Press the “Play/Pause” button and listen for audio feedback. Adjust the volume on your computer accordingly until you can comfortably listen to the audio file.  
+7. Press the “Play/Pause” button and listen for audio feedback. Adjust the volume on your computer accordingly until you can comfortably listen to the audio file.  
 <img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_playListenAudio.png" width="500px" height="100%"/>
 
 8. Play the audio file again, listen, and test the various buttons.
@@ -210,29 +215,31 @@ This section describes steps that verify RT-MHA, PHP/Laravel version of EWS, and
 For Node.js version of EWS, see “**[5 Sanity Check - Node.js version of EWS](#5-sanity-check---nodejs-version-of-ews)**”.
 
 1. Check your browser that you’re in the right landing page. If not, type in “localhost:8080” in the browser search bar.  
-<img src="pictures_from_guides/ews_php_landingPage.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/ews_php_landingPage.png" width="500px" height="auto"/>
 
 2. In the upper-right hand corner, click on the button labeled “Researcher Page”.  
-<img src="pictures_from_guides/php_ResearcherPage/researcherPage_selectDemo.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/php_ResearcherPage/researcherPage_selectDemo.png" width="500px" height="auto"/>
 
 3. You should see this screen for the Researcher Page in the “Amplification” section.  
-<img src="pictures_from_guides/php_ResearcherPage/researcherPage_amplification.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/php_ResearcherPage/researcherPage_amplification.png" width="500px" height="auto"/>
 
-1. At this point, you should have an audio input and output source connected to your computer and ready for listening. If not, go back to [**4 Sanity Check - Making Sure Audio Input and Output Works**](#4-sanity-check---making-sure-audio-input-and-output-works) to connect your audio sources. If you have an external headset, please connect it via Bluetooth or through your computer’s audio jack.
+4. At this point, you should have an audio input and output source connected to your computer and ready for listening. If not, go back to [**4 Sanity Check - Making Sure Audio Input and Output Works**](#4-sanity-check---making-sure-audio-input-and-output-works) to connect your audio sources. If you have an external headset, please connect it via Bluetooth or through your computer’s audio jack.
 
-    <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_sound.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_sound.png" width="500px" height="auto"/>
+    <br>
+    <br>
     <img src="pictures_from_guides/adjustVolume.png" width="200px" height="100%"/>
 
-2. Scroll to the bottom of the page and click on the “Transmit” button. Then, speak into your computer or headset’s microphone and listen for immediate audio feedback.  
-<img src="pictures_from_guides/php_ResearcherPage/researcherPage_transmitSpeakFeedback.png" width="300px" height="100%"/>
+5. Scroll to the bottom of the page and click on the “Transmit” button. Then, speak into your computer or headset’s microphone and listen for immediate audio feedback.  
+<img src="pictures_from_guides/php_ResearcherPage/researcherPage_transmitSpeakFeedback.png" width="500px" height="auto"/>
 
 6. Scroll back up and view the “Controls” settings. Next to “Control Via:”, click on CR/G65. Then, in the boxed cell within the “All” column and “G65” row, type in “5”. Notice the change in values.
 
     Changing the value in the boxed cell to “5” should change the gain for “g65” to be 5 decibels (dB SPL) across all frequency bands (250 to 8000 Hertz).  
-    <img src="pictures_from_guides/php_ResearcherPage/researcherPage_controls.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/php_ResearcherPage/researcherPage_controls.png" width="500px" height="auto"/>
 
 7. Scroll to the bottom of the page and click on the “Transmit” button again. Speak into your computer or headset’s microphone and listen for immediate audio feedback. Notice the differences in volume.  
-<img src="pictures_from_guides/php_ResearcherPage/researcherPage_transmitSpeakFeedback.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/php_ResearcherPage/researcherPage_transmitSpeakFeedback.png" width="500px" height="auto"/>
 
 &nbsp;  
 
@@ -245,15 +252,15 @@ Refer to this section if you don’t see the OSP installer window open, and inst
 
 1. Press the command and spacebar keys on your keyboard to open Spotlight Search and start typing “system preferences”. The app name will be highlighted. Press enter.
 
-    <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_searchSystemPreferences.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_searchSystemPreferences.png" width="500px" height="auto"/>
 
 2. Go to "Security and Privacy".
 
-    <img src="pictures_from_guides/troubleshooting/troubleshooting_installerWindow_securityAndPrivacy.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/troubleshooting/troubleshooting_installerWindow_securityAndPrivacy.png" width="500px" height="auto"/>
 
 3. In the “General” tab, you should see the “unidentified developer” message here as well. Click the “Open Anyway” button.
 
-    <img src="pictures_from_guides/troubleshooting/troubleshooting_installerWindow_openAnyway.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/troubleshooting/troubleshooting_installerWindow_openAnyway.png" width="500px" height="auto"/>
 
 4. If you receive this popup, confirm by pressing the “Open” button.  
 
@@ -261,7 +268,7 @@ Refer to this section if you don’t see the OSP installer window open, and inst
 
 5. You should see this installer window opened. Proceed to Step 3 within [**3 Installation Steps**](#3-installation-steps).
 
-    <img src="pictures_from_guides/installationSteps/ospInstaller_Welcome.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/installationSteps/ospInstaller_Welcome.png" width="500px" height="auto"/>
 
 &nbsp;  
 
@@ -273,35 +280,36 @@ Refer to this section if the five terminal tabs don’t open when you enter the 
 during step 10 of "**[3 Installation Steps](#3-installation-steps)**".
 
 1. Follow the installer window instructions by opening a new terminal. To do so, you can simultaneously press the command and spacebar keys on your keyboard to open Spotlight Search, which looks like a long horizontal area in your screen with a Search icon. Type in "system preferences”, and the application should show up automatically.  
-    <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_searchSystemPreferences.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_searchSystemPreferences.png" width="500px" height="auto"/>
 
 2. Go to "Security and Privacy".
 
-    <img src="pictures_from_guides/troubleshooting/troubleshooting_installerWindow_securityAndPrivacy.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/troubleshooting/troubleshooting_installerWindow_securityAndPrivacy.png" width="500px" height="auto"/>
 
 3. Go to the “Privacy” Tab. On the left sidebar, scroll down to “Accessibility”, then click on the lock icon at the bottom.  
-    <img src="pictures_from_guides/troubleshooting/troubleshooting_terminalTabs_accessibility.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/troubleshooting/troubleshooting_terminalTabs_accessibility.png" width="500px" height="auto"/>
 
 4. Use Touch ID or enter your password to unlock these settings.
 
-    <img src="pictures_from_guides/troubleshooting/troubleshooting_terminalTabs_password.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/troubleshooting/troubleshooting_terminalTabs_password.png" width="500px" height="auto"/>
 
 5. Click on the checkbox next to Terminal to enable Terminal access. You should see a checkmark.  
-    <img src="pictures_from_guides/troubleshooting/troubleshooting_terminalTabs_accessibilityGranted.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/troubleshooting/troubleshooting_terminalTabs_accessibilityGranted.png" width="500px" height="auto"/>
 
 6. Go to the left sidebar again and scroll down to “Automation”. Click on the checkbox next to “System Events.app”.
 
-    <img src="pictures_from_guides/troubleshooting/troubleshooting_terminalTabs_systemEvents.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/troubleshooting/troubleshooting_terminalTabs_systemEvents.png" width="500px" height="auto"/>
 
 7. Go to the left sidebar again and scroll to “Microphone”. Check and/or click the checkbox next to “Terminal” to enable the Terminal access to the Microphone.
 
-    <img src="pictures_from_guides/troubleshooting/troubleshooting_terminalTabs_microphone.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/troubleshooting/troubleshooting_terminalTabs_microphone.png" width="500px" height="auto"/>
 
 8. Then, click on the lock icon to save these changes. Return to step 10 of [**3 Installation Steps**](#3-installation-steps) to try entering “`run_osp`” again.
 
-    <img src="pictures_from_guides/troubleshooting/troubleshooting_terminalTabs_lockIcon.png" width="300px" height="100%"/>
-
-    <img src="pictures_from_guides/installationSteps/terminal-run_osp.png" width="300px" height="100%"/>
+    <img src="pictures_from_guides/troubleshooting/troubleshooting_terminalTabs_lockIcon.png" width="500px" height="auto"/>
+    <br>
+    <br>
+    <img src="pictures_from_guides/installationSteps/terminal-run_osp.png" width="500px" height="auto"/>
 
 &nbsp;  
 
@@ -310,17 +318,17 @@ during step 10 of "**[3 Installation Steps](#3-installation-steps)**".
 &nbsp;  
 
 1. First, find the version number. Have a terminal running and enter "`run_osp`" to launch OSP. Go to the “-bash” terminal tab, and find the “Setting OSP_MEDIA to /Library” message.  
-<img src="pictures_from_guides/uninstallation/uninstallOSP_versionNumber.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/uninstallation/uninstallOSP_versionNumber.png" width="500px" height="auto"/>
 
-1. Enter the command “`sudo bash /Library/OSP/1.3.0/uninstall.sh`”. Simply replace “`1.3.0`” with the version number you found. When prompted, enter your computer sign-in password.  
-<img src="pictures_from_guides/uninstallation/uninstallOSP_commandAndPassword.png" width="300px" height="100%"/>
+2. Enter the command “`sudo bash /Library/OSP/1.3.0/uninstall.sh`”. Simply replace “`1.3.0`” with the version number you found. When prompted, enter your computer sign-in password.  
+<img src="pictures_from_guides/uninstallation/uninstallOSP_commandAndPassword.png" width="500px" height="auto"/>
 
 3. You will be asked if you want to proceed
 uninstallation. To do so, type “y”.  
-<img src="pictures_from_guides/uninstallation/uninstallOSP_yToContinue.png" width="400px" height="100%"/>  
+<img src="pictures_from_guides/uninstallation/uninstallOSP_yToContinue.png" width="500px" height="auto"/>  
 
 4. You should see the following message that the uninstall process has been finished.  
-<img src="pictures_from_guides/uninstallation/uninstallOSP_uninstallationComplete.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/uninstallation/uninstallOSP_uninstallationComplete.png" width="500px" height="auto"/>
 
 &nbsp;  
 
