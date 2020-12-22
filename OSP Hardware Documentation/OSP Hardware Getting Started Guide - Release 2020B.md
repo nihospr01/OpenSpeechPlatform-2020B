@@ -87,13 +87,13 @@ Ideally, you would have a computer that has a working browser, reliable wifi con
 
     "**192.168.8.1:5000**" - This runs the Node.js version of EWS. It is highly recommended to use this version, as future updates and features to EWS will only be supported within Node.js.  
 
-    <img src="pictures_from_guides/ews_nodejs_landingPage.png" width="500px" height="100%"/>
+    <img src="pictures_from_guides/ews_nodejs_landingPage.png" width="500px" height="auto"/>
 
     &nbsp;  
 
     "**192.168.8.1**" - Optionally, you can access the PHP/Laravel version of EWS, but this is the legacy version of EWS which will eventually be replaced with the Node.js version.
 
-    <img src="pictures_from_guides/ews_php_landingPage.png" width="500px" height="100%"/>
+    <img src="pictures_from_guides/ews_php_landingPage.png" width="500px" height="auto"/>
 
 &nbsp;  
 
@@ -115,27 +115,27 @@ This section describes steps that verify RT-MHA, Node.js version of EWS, and aud
 For PHP/Laravel version of EWS, see “**[5 Sanity Check - PHP/Laravel version of EWS](#5-sanity-check---phplaravel-version-of-ews)**”.
 
 1. Check your browser that you’re in the right landing page. If not, type in “**192.168.8.1:5000**” in the browser search bar.  
-<img src="pictures_from_guides/ews_nodejs_landingPage.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/ews_nodejs_landingPage.png" width="500px" height="auto"/>
 
 &nbsp;
 
 1. In the center below “Freping”, click on the button labeled “CoarseFit Task”.
-<img src="pictures_from_guides/nodejs_selectCoarseFit.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/nodejs_selectCoarseFit.png" width="500px" height="auto"/>
 
 &nbsp;  
 
 2. Choose any one of the three options in the CoarseFit Demo, scroll down. Notice the changes in the images and text. Then, click the “Next” button.  
-<img src="pictures_from_guides/nodejs_coarseFitDemo/nodesjs_selectOption.png" width="300px" height="100%"/>
+<img src="pictures_from_guides/nodejs_coarseFitDemo/nodesjs_selectOption.png" width="500px" height="auto"/>
 
 &nbsp;  
 
 3. Choose one of the five hearing loss levels, which help change the volume heard. Then, click on the horizontal bar and select an audio file.  
-<img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_lossLevelsFileSelection.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_lossLevelsFileSelection.png" width="500px" height="auto"/>
 
 &nbsp;  
 
 4. Below the audio file section and buttons, you should see changes to the graph based on the hearing loss levels chosen.  
-<img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_changeToGraph.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_changeToGraph.png" width="500px" height="auto"/>
 
 &nbsp;  
 
@@ -149,7 +149,7 @@ For PHP/Laravel version of EWS, see “**[5 Sanity Check - PHP/Laravel version o
 
 6. Press the “Play/Pause” button. To adjust how loud the audio file is, select different hearing loss levels until you can comfortably listen to the audio file.
   
-    <img src="pictures_from_guides/sanityChecks/sanityCheck_nodejs_playAdjustVolumeBTERICs.png" width="500px" height="100%"/>
+    <img src="pictures_from_guides/sanityChecks/sanityCheck_nodejs_playAdjustVolumeBTERICs.png" width="500px" height="auto"/>
 
     &nbsp;  
 
@@ -158,12 +158,12 @@ For PHP/Laravel version of EWS, see “**[5 Sanity Check - PHP/Laravel version o
     **Note**: only the “stim#/stim#.wav” files have transcripts available. To view the transcript, click on the “Show Transcript” toggle.
 
     Click on the “Reset” button and play the audio file again. You should also be able to notice that the selected word heard and shown has a different shade of color (usually shown in red) during audio playback.  
-<img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_testButtons.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_testButtons.png" width="500px" height="auto"/>
 
 &nbsp;  
 
 8. You should be finished with testing the demo. Clicking the “Submit” button takes you back to the landing page.  
-<img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_finishedDemo.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_finishedDemo.png" width="500px" height="auto"/>
 
 &nbsp;  
 
@@ -175,17 +175,17 @@ This section describes steps that verify RT-MHA, PHP/Laravel version of EWS, and
 For Node.js version of EWS, see “**[4 Sanity Check - Node.js version of EWS](#4-sanity-check---nodejs-version-of-ews)**”.
 
 1. Check your browser that you’re in the right landing page. If not, type in “**192.168.8.1**” in the browser search bar.  
-<img src="pictures_from_guides/ews_php_landingPage.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/ews_php_landingPage.png" width="500px" height="auto"/>
 
 &nbsp;  
 
 2. In the upper-right hand corner, click on the button labeled “Researcher Page”.  
-<img src="pictures_from_guides/php_ResearcherPage/researcherPage_selectDemo.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/php_ResearcherPage/researcherPage_selectDemo.png" width="500px" height="auto"/>
 
 &nbsp;  
 
 3. You should see this screen for the Researcher Page in the “Amplification” section.  
-<img src="pictures_from_guides/php_ResearcherPage/researcherPage_amplification.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/php_ResearcherPage/researcherPage_amplification.png" width="500px" height="auto"/>
 
 &nbsp;  
 
@@ -198,19 +198,19 @@ For Node.js version of EWS, see “**[4 Sanity Check - Node.js version of EWS](#
     &nbsp;  
 
 5. Scroll to the bottom of the page and click on the “Transmit” button. Then, scratch the BTE-RICs on the circled areas and listen for immediate audio feedback.  
-<img src="pictures_from_guides/sanityChecks/sanityCheck_php_transmitScratchListen.png" width="350px" height="100%"/>
+<img src="pictures_from_guides/sanityChecks/sanityCheck_php_transmitScratchListen.png" width="500px" height="auto"/>
 
 &nbsp;  
 
 6. Scroll back up and view the “Controls” settings. Next to “Control Via:”, click on CR/G65. Then, in the boxed cell within the “All” column and “G65” row, type in “5”. Notice the change in values.
 
     Changing the value in the boxed cell to “5” should change the gain for “g65” to be 5 decibels (dB SPL) across all frequency bands (250 to 8000 Hertz).  
-    <img src="pictures_from_guides/php_ResearcherPage/researcherPage_controls.png" width="500px" height="100%"/>
+    <img src="pictures_from_guides/php_ResearcherPage/researcherPage_controls.png" width="500px" height="auto"/>
 
     &nbsp;  
 
 7. Scroll to the bottom of the page and click on the “Transmit” button again. Scratch the BTE-RICs on the circled areas again and listen for immediate audio feedback. Notice the differences in volume. 
-<img src="pictures_from_guides/sanityChecks/sanityCheck_php_transmitScratchListen.png" width="350px" height="100%"/>
+<img src="pictures_from_guides/sanityChecks/sanityCheck_php_transmitScratchListen.png" width="500px" height="auto"/>
 
 &nbsp;  
 
