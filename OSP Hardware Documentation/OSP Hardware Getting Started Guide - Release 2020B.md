@@ -6,8 +6,8 @@ This document is a more detailed version of the Quick Start Guide that covers th
 
 &nbsp;
 
-## Table of Contents
-- [Table of Contents](#table-of-contents)
+## **Table of Contents**
+- [**Table of Contents**](#table-of-contents)
 - [**1 Installation Requirements**](#1-installation-requirements)
 - [**2 Installation Steps**](#2-installation-steps)
 - [**3 Quick Introduction to OSP Software**](#3-quick-introduction-to-osp-software)
@@ -218,8 +218,24 @@ For Node.js version of EWS, see “**[4 Sanity Check - Node.js version of EWS](#
 ([back to table of contents](#table-of-contents)) <!-- omit in toc --> 
 
 Below are hyperlinks to OSP-related resources:
-1. [OSP Website](http://openspeechplatform.ucsd.edu/) - General information of OSP.
-2. [OSP Forum](http://openspeechplatform.ucsd.edu/forum/) - Community discussion of issues and suggestions for improving OSP.
+1. [**OSP Website**](http://openspeechplatform.ucsd.edu/) - General information of OSP.
+2. [**OSP Forum**](http://openspeechplatform.ucsd.edu/forum/) - Community discussion of issues and suggestions for improving OSP.
+
+**For setting up OSP software**, there are separate guides that cover the installation steps and sanity checks. Below are more hyperlinks:
+
+1. [Software Quick Start Guide](OSP%20Software%20Documentation/OSP%20Software%20Quick%20Start%20Guide%20(macOS%20Installer)%20-%20Release%202020B.pdf) - Essential requirements and steps for installing and getting OSP software running.
+
+2. [Software Getting Started Guide](OSP%20Software%20Documentation/OSP%20Software%20Getting%20Started%20Guide%20-%20Release%202020B.md) - Comprehensive guide to installing and testing OSP software. This guide covers the following, which are also available as separate guides.
+
+   * Installation Requirements and Steps (included in the [Software Quick Start Guide](OSP%20Software%20Documentation/OSP%20Software%20Quick%20Start%20Guide%20(macOS%20Installer)%20-%20Release%202020B.pdf))
+
+   * [Software Sanity Check - Audio Input and Output Sources](OSP%20Software%20Documentation/OSP%20Software%20Sanity%20Check%20-%20Audio%20Input_Output%20Sources%20(Release%202020B).pdf) - Guide to checking that your audio input and output sources are connected for OSP software usage.
+
+   * [Software Sanity Check - Node.js Version of EWS](OSP%20Software%20Documentation/OSP%20Software%20Sanity%20Check%20-%20Nodejs%20Version%20of%20EWS%20(Release%202020B).pdf) - Guide to testing that the Node.js version of the embedded web server (EWS) works as intended.
+
+   * [Software Sanity Check - PHP/Laravel Version of EWS](OSP%20Software%20Documentation/OSP%20Software%20Sanity%20Check%20-%20PHP:Laravel%20Version%20of%20EWS%20(Release%202020B).pdf) - Guide to testing that the PHP/Laravel version of the embedded web server (EWS) works as intended.
+
+   * [Software Troubleshooting Guide](OSP%20Software%20Documentation/OSP%20Software%20Troubleshooting%20Quick%20Start%20Guide%20(macOS%20Installer)%20-%20Release%202020B.pdf) - Covers steps for possible issues during OSP software installation.
 
 This work is supported by:
 * NIH  R33-DC015046:  Self-fitting  of  Amplification:  Methodology  andCandidacy

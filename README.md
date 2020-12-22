@@ -50,11 +50,11 @@ We also now have…
 
 ### *OSP Hardware*
 
-[Hardware Quick Start Guide](OSP%20Hardware%20Documentation/OSP%20Hardware%20Getting%20Started%20Guide%20-%20Release%202020B.pdf) - Essential requirements and steps for installing and getting OSP hardware running.
+[Hardware Quick Start Guide](OSP%20Hardware%20Documentation/OSP%20Hardware%20Quick%20Start%20Guide%20-%20Release%202020B.pdf) - Essential requirements and steps for installing and getting OSP hardware running.
 
 [Hardware Getting Started Guide](OSP%20Hardware%20Documentation/OSP%20Hardware%20Getting%20Started%20Guide%20-%20Release%202020B.md) - Comprehensive guide to installing and testing OSP hardware. This guide covers the following, which are also available as separate guides.
 
-* Installation Requirements and Steps (included in the [Hardware Quick Start Guide](OSP%20Hardware%20Documentation/OSP%20Hardware%20Getting%20Started%20Guide%20-%20Release%202020B.pdf))
+* Installation Requirements and Steps (included in the [Hardware Quick Start Guide](OSP%20Hardware%20Documentation/OSP%20Hardware%20Quick%20Start%20Guide%20-%20Release%202020B.pdf))
 
 * [Hardware Sanity Check - Node.js Version of EWS](OSP%20Hardware%20Documentation/OSP%20Hardware%20Sanity%20Check%20-%20Nodejs%20Version%20of%20EWS%20(Release%202020B).pdf) - Guide to testing that the Node.js version of the embedded web server (EWS) works as intended.
 

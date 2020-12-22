@@ -4,6 +4,8 @@ For the *Quick Start Guide*, go to this [link to the PDF](https://drive.google.c
 
 This document is a more detailed version of the Quick Start Guide that covers the installation steps and sanity checks in greater detail, troubleshooting sections for resolving installation issues, and sanity checks for verifying functionality of OSP software.
 
+&nbsp;  
+
 ## **Table of Contents**
 - [**Table of Contents**](#table-of-contents)
 - [**1 Quick Introduction to OSP Software**](#1-quick-introduction-to-osp-software)
@@ -17,6 +19,8 @@ This document is a more detailed version of the Quick Start Guide that covers th
 - [**9 Uninstalling OSP**](#9-uninstalling-osp)
 - [**10 Resources and Acknowledgements**](#10-resources-and-acknowledgements)
 - [**11 Bibliography**](#11-bibliography)
+
+&nbsp;  
 
 ## **1 Quick Introduction to OSP Software**
 ([back to table of contents](#table-of-contents)) <!-- omit in toc -->
@@ -44,38 +48,43 @@ The following is essential for installing OSP.
 
 _Note that audio input (mic) and output (volume) should not muted._
 
+&nbsp;  
+
 ## **3 Installation Steps**
 ([back to table of contents](#table-of-contents)) <!-- omit in toc -->
 &nbsp;  
 
-1. Go to this link to the ["Release" folder in Google Drive](https://drive.google.com/drive/folders/1NjtwBNzf2SkYOxKLAYshZf0nhyLz3Y0z?usp=sharing) to find and download an installer file of the latest version number (end of the file name should have ".pkg").
-2. Right on the file and select "Download" from the context menu.  
-    <img src="pictures_from_guides/installationSteps/downloadContextMenu.png" height="400px"/>
+1. Go to this link to the OSP GitHub Repository: [https://github.com/nihospr01/OpenSpeechPlatform-UCSD](https://github.com/nihospr01/OpenSpeechPlatform-UCSD)
 
-    Once you open the file, If you receive a message “(file name).pkg cannot be opened because it is from an unidentified developer”, see “**[7 Troubleshooting \- Can’t Open Installer Window](#7-troubleshooting---cant-open-installer-window)**”  section in the Getting Started Guide.
-3. You should see this installer window opened. Follow the instructions shown.  
+2. Then, go to the folder labeled "Binaries". You'll find a .pkg file in the “Binaries” folder called “OSP-macos-installer-x64-1.3.0.pkg” with “1.3.0” being the version number. Click on that file.  
+<img src="pictures_from_guides/installationSteps/binariesFolder.png" height="300px">
+
+3. Click on the "Download" button to download the installer file on your computer.  
+<img src="pictures_from_guides/installationSteps/downloadButton.png" height="100%">
+
+4. You should see this installer window opened. Follow the instructions shown.  
 <img src="pictures_from_guides/installationSteps/ospInstaller_Welcome.png" width="300px" height="100%"/>
 
-4. Read the Software License Agreement and agree to the terms.  
+5. Read the Software License Agreement and agree to the terms.  
 <img src="pictures_from_guides/installationSteps/ospInstaller_LicenseAgreement.png" width="300px" height="100%"/>
 
-5. Enter your password used to sign in to your 
-computer to continue the installation.
+6. Enter your password used to sign in to your 
+computer to continue the installation.  
 <img src="pictures_from_guides/installationSteps/ospInstaller_enterPassword.png" width="300px" height="100%"/>
 
-6. Wait for the installation to complete. Time will vary.  
+7. Wait for the installation to complete. Time will vary.  
 <img src="pictures_from_guides/installationSteps/ospInstaller_waitCompletion.png" width="300px" height="100%"/>
 
-7. You should see this window to confirm that OSP installation completed successfully.  
+8. You should see this window to confirm that OSP installation completed successfully.  
 <img src="pictures_from_guides/installationSteps/ospInstaller_installationCompleted.png" width="300px" height="100%"/>
 
-8. Follow the installer window instructions by opening a new terminal. To do so, you can simultaneously press the command and spacebar keys on your keyboard to open Spotlight Search, which looks like a long horizontal area in your screen with a Search icon.
+9. Follow the installer window instructions by opening a new terminal. To do so, you can simultaneously press the command and spacebar keys on your keyboard to open Spotlight Search, which looks like a long horizontal area in your screen with a Search icon.  
 <img src="pictures_from_guides/installationSteps/runningOSP_spotlightSearch.png" width="300px" height="100%"/>
 
-9. Type in “terminal”, and the application should show up automatically.  
+10. Type in “terminal”, and the application should show up automatically.  
 <img src="pictures_from_guides/installationSteps/runningOSP_searchTerminal.png" width="250px" height="100%"/>
 
-10. In the terminal, enter the command “`run_osp`”. You should see five terminal tabs automatically opened, running processes, and generating messages.
+11. In the terminal, enter the command “`run_osp`”. You should see five terminal tabs automatically opened, running processes, and generating messages.
 
     If you don’t see these tabs and/or get an error message ““execution error”: Not authorized to send Apple events...”, see “**[8 Troubleshooting \- Terminal Tabs Won’t Open](#8-troubleshooting---terminal-tabs-wont-open)**".  
 <img src="pictures_from_guides/installationSteps/terminal-run_osp.png" width="300px" height="100%"/>
@@ -85,8 +94,8 @@ computer to continue the installation.
     <img src="pictures_from_guides/ews_nodejs_landingPage.png" width="300px" height="100%"/>
 
     &nbsp;
-1.  (optional) To access the PHP/Laravel version of EWS, enter “**localhost:8080**” in your browser search bar. The landing page should look like the following.  
 
+12. (optional) To access the PHP/Laravel version of EWS, enter “**localhost:8080**” in your browser search bar. The landing page should look like the following.  
     <img src="pictures_from_guides/ews_php_landingPage.png" width="300px" height="100%"/>
 
 &nbsp;
@@ -95,9 +104,7 @@ computer to continue the installation.
 ([back to table of contents](#table-of-contents)) <!-- omit in toc -->
 &nbsp;  
 
-This guide describes where to locate audio input and output sources in your macOS computer as well as using the "osp - cli" tab in the terminal to hear audio output. Describing the different settings for each of them is beyond the scope of this guide.
-
-
+This section of the guide describes where to locate audio input and output sources in your macOS computer as well as using the "osp - cli" tab in the terminal to hear audio output. Describing the different settings for each of them is beyond the scope of this guide.
 
 1. Check, and connect, to desired audio input (mic) and output (volume).
 
@@ -175,12 +182,12 @@ For PHP/Laravel version of EWS, see “**[6 Sanity Check - PHP/Laravel version o
 5. Below the audio file section and buttons, you should see changes to the graph based on the hearing loss levels chosen.  
 <img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_changeToGraph.png" width="500px" height="100%"/>
 
-6. At this point, you should have an audio input and output source connected to your computer and ready for listening. If not, go back to "[1\-3 Sanity Check - Making Sure Audio Input and Output Works](#1-3-sanity-check---making-sure-audio-input-and-output-works)" to connect your audio sources. If you have an external headset, please connect it via Bluetooth or through your computer’s audio jack.  
+1. At this point, you should have an audio input and output source connected to your computer and ready for listening. If not, go back to "[**4 Sanity Check - Making Sure Audio Input and Output Works**](#4-sanity-check---making-sure-audio-input-and-output-works)" to connect your audio sources. If you have an external headset, please connect it via Bluetooth or through your computer’s audio jack.  
 
     <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_sound.png" width="500px" height="100%"/>
     <img src="pictures_from_guides/adjustVolume.png" width="200px" height="100%"/>
 
-7. Press the “Play/Pause” button and listen for audio feedback. Adjust the volume on your computer accordingly until you can comfortably listen to the audio file.  
+2. Press the “Play/Pause” button and listen for audio feedback. Adjust the volume on your computer accordingly until you can comfortably listen to the audio file.  
 <img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_playListenAudio.png" width="500px" height="100%"/>
 
 8. Play the audio file again, listen, and test the various buttons.
@@ -211,12 +218,12 @@ For Node.js version of EWS, see “**[5 Sanity Check - Node.js version of EWS](#
 3. You should see this screen for the Researcher Page in the “Amplification” section.  
 <img src="pictures_from_guides/php_ResearcherPage/researcherPage_amplification.png" width="300px" height="100%"/>
 
-4. At this point, you should have an audio input and output source connected to your computer and ready for listening. If not, go back to [1\-3 Sanity Check - Making Sure Audio Input and Output Works](#1-3-sanity-check---making-sure-audio-input-and-output-works) to connect your audio sources. If you have an external headset, please connect it via Bluetooth or through your computer’s audio jack.
+1. At this point, you should have an audio input and output source connected to your computer and ready for listening. If not, go back to [**4 Sanity Check - Making Sure Audio Input and Output Works**](#4-sanity-check---making-sure-audio-input-and-output-works) to connect your audio sources. If you have an external headset, please connect it via Bluetooth or through your computer’s audio jack.
 
     <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_sound.png" width="300px" height="100%"/>
     <img src="pictures_from_guides/adjustVolume.png" width="200px" height="100%"/>
 
-5. Scroll to the bottom of the page and click on the “Transmit” button. Then, speak into your computer or headset’s microphone and listen for immediate audio feedback.  
+2. Scroll to the bottom of the page and click on the “Transmit” button. Then, speak into your computer or headset’s microphone and listen for immediate audio feedback.  
 <img src="pictures_from_guides/php_ResearcherPage/researcherPage_transmitSpeakFeedback.png" width="300px" height="100%"/>
 
 6. Scroll back up and view the “Controls” settings. Next to “Control Via:”, click on CR/G65. Then, in the boxed cell within the “All” column and “G65” row, type in “5”. Notice the change in values.
@@ -252,7 +259,7 @@ Refer to this section if you don’t see the OSP installer window open, and inst
 
     <img src="pictures_from_guides/troubleshooting/troubleshooting_installerWindow_cannotVerify.png" width="200px" height="100%"/>
 
-5. You should see this installer window opened. Proceed to Step 3 within [1\-2 Installation Steps](#1-2-installation-steps).
+5. You should see this installer window opened. Proceed to Step 3 within [**3 Installation Steps**](#3-installation-steps).
 
     <img src="pictures_from_guides/installationSteps/ospInstaller_Welcome.png" width="300px" height="100%"/>
 
@@ -290,7 +297,7 @@ during step 10 of "**[3 Installation Steps](#3-installation-steps)**".
 
     <img src="pictures_from_guides/troubleshooting/troubleshooting_terminalTabs_microphone.png" width="300px" height="100%"/>
 
-8. Then, click on the lock icon to save these changes. Return to step 10 of [1\-2 Installation Steps](#1-2-installation-steps) to try entering “run_osp” again.
+8. Then, click on the lock icon to save these changes. Return to step 10 of [**3 Installation Steps**](#3-installation-steps) to try entering “`run_osp`” again.
 
     <img src="pictures_from_guides/troubleshooting/troubleshooting_terminalTabs_lockIcon.png" width="300px" height="100%"/>
 
@@ -305,7 +312,7 @@ during step 10 of "**[3 Installation Steps](#3-installation-steps)**".
 1. First, find the version number. Have a terminal running and enter "`run_osp`" to launch OSP. Go to the “-bash” terminal tab, and find the “Setting OSP_MEDIA to /Library” message.  
 <img src="pictures_from_guides/uninstallation/uninstallOSP_versionNumber.png" width="300px" height="100%"/>
 
-1. Enter the command “`sudo bash /Library/OSP/1.2.3/uninstall.sh`”. Simply replace “`1.2.3`” with the version number you found. When prompted, enter your computer sign-in password.  
+1. Enter the command “`sudo bash /Library/OSP/1.3.0/uninstall.sh`”. Simply replace “`1.3.0`” with the version number you found. When prompted, enter your computer sign-in password.  
 <img src="pictures_from_guides/uninstallation/uninstallOSP_commandAndPassword.png" width="300px" height="100%"/>
 
 3. You will be asked if you want to proceed
@@ -315,12 +322,28 @@ uninstallation. To do so, type “y”.
 4. You should see the following message that the uninstall process has been finished.  
 <img src="pictures_from_guides/uninstallation/uninstallOSP_uninstallationComplete.png" width="300px" height="100%"/>
 
+&nbsp;  
+
 ## **10 Resources and Acknowledgements**
 ([back to table of contents](#table-of-contents)) <!-- omit in toc -->  
 
 Below are hyperlinks to OSP-related resources:
-1. [OSP Website](http://openspeechplatform.ucsd.edu/) - General information of OSP.
-2. [OSP Forum](http://openspeechplatform.ucsd.edu/forum/) - Community discussion of issues and suggestions for improving OSP.
+1. [**OSP Website**](http://openspeechplatform.ucsd.edu/) - General information of OSP.
+2. [**OSP Forum**](http://openspeechplatform.ucsd.edu/forum/) - Community discussion of issues and suggestions for improving OSP.
+
+**For setting up OSP hardware**, there are separate guides that cover the installation steps and sanity checks. Below are more hyperlinks:
+
+1. [Software Quick Start Guide](OSP%20Software%20Documentation/OSP%20Software%20Quick%20Start%20Guide%20(macOS%20Installer)%20-%20Release%202020B.pdf) - Essential requirements and steps for installing and getting OSP software running.
+
+2. [Software Getting Started Guide](OSP%20Software%20Documentation/OSP%20Software%20Getting%20Started%20Guide%20-%20Release%202020B.md) - Comprehensive guide to installing and testing OSP software. This guide covers the following, which are also available as separate guides.
+
+   * Installation Requirements and Steps (included in the [Software Quick Start Guide](OSP%20Software%20Documentation/OSP%20Software%20Quick%20Start%20Guide%20(macOS%20Installer)%20-%20Release%202020B.pdf))
+
+   * [Software Sanity Check - Audio Input and Output Sources](OSP%20Software%20Documentation/OSP%20Software%20Sanity%20Check%20-%20Audio%20Input_Output%20Sources%20(Release%202020B).pdf) - Guide to checking that your audio input and output sources are connected for OSP software usage.
+
+   * [Software Sanity Check - Node.js Version of EWS](OSP%20Software%20Documentation/OSP%20Software%20Sanity%20Check%20-%20Nodejs%20Version%20of%20EWS%20(Release%202020B).pdf) - Guide to testing that the Node.js version of the embedded web server (EWS) works as intended.
+
+   * [Software Sanity Check - PHP/Laravel Version of EWS](OSP%20Software%20Documentation/OSP%20Software%20Sanity%20Check%20-%20PHP:Laravel%20Version%20of%20EWS%20(Release%202020B).pdf) - Guide to testing that the PHP/Laravel version of the embedded web server (EWS) works as intended.
 
 This work is supported by:
 
@@ -330,7 +353,6 @@ This work is supported by:
 * The Qualcomm Institute 
 
 &nbsp;   
-
 
 ## **11 Bibliography**
 ([back to table of contents](#table-of-contents)) <!-- omit in toc --> 
