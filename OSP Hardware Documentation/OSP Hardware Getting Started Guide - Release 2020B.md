@@ -31,21 +31,21 @@ It's a small wearable box that contains:
 
     The installation steps in this guide will refer to the PCD as "the device".  
 
-    <img src="pictures/ospDevicePics/requirements/requirement_PCD.png" height="400px"/>
+    <img src="pictures_from_guides/requirements/requirement_PCD.png" height="400px"/>
 
 &nbsp;  
 
 2. **BTE-RICs (Behind-the-Ear, Receivers-in-Canal)**  
 These are "hearing aid"-style audio transducer devices that connect to the PCD via a 4-wire cable.  
 
-    <img src="pictures/ospDevicePics/requirements/pcdWithEarAssemblies.png" height="400px"/>
+    <img src="pictures_from_guides/requirements/pcdWithEarAssemblies.png" height="400px"/>
 
 &nbsp;  
 
 3. **1 micro-USB Cable**  
 This may have a power adapter attached that is connected to an outlet, but it is sufficient by itself long as it can be connected to a reliable source of power.
 
-    <img src="pictures/ospDevicePics/requirements/microUSB_cable.png" height="100px"/>
+    <img src="pictures_from_guides/requirements/microUSB_cable.png" height="100px"/>
 
 &nbsp;  
 
@@ -60,25 +60,25 @@ Ideally, you would have a computer that has a working browser, reliable wifi con
 
 1. The device should have some source of power to operate. While the device is off, plug in the micro-USB cable into the ADB port (Android Debug Port) of the device to charge it.
 
-    <img src="pictures/ospDevicePics/installationSteps/installationStep_cableADBport.png" height="350px"/>
+    <img src="pictures_from_guides/installationSteps/installationStep_cableADBport.png" height="350px"/>
 
 &nbsp;  
 
 2. Plug in the BTE-RICs into the left and right ports on the side of the device, as shown below.
 
-    <img src="pictures/ospDevicePics/installationSteps/installationStep_plugBTE-RICs.png" height="350px"/>
+    <img src="pictures_from_guides/installationSteps/installationStep_plugBTE-RICs.png" height="350px"/>
 
 &nbsp;  
 
 3. Now turn on the device by flicking the on/off switch on the device.
 
-    <img src="pictures/ospDevicePics/installationSteps/installationStep_turnOnDevice.png" height="175px"/>
+    <img src="pictures_from_guides/installationSteps/installationStep_turnOnDevice.png" height="175px"/>
 
 &nbsp;  
 
 4. Once powered on, the device has a wifi hotspot called "ospboard" to connect to. Power on your browser-enabled device or computer and navigate to available wifi networks (on macOS, it should have the wifi icon in the upper-right hand side of your screen). Connect to the wifi network that says "ospboard" and, when prompted, enter "password" as the password.
 
-    <img src="pictures/ospDevicePics/installationSteps/installationStep_ospboardHotspot.png" height="300px"/>
+    <img src="pictures_from_guides/installationSteps/installationStep_ospboardHotspot.png" height="300px"/>
 
 &nbsp;  
 
@@ -87,13 +87,13 @@ Ideally, you would have a computer that has a working browser, reliable wifi con
 
     "**192.168.8.1:5000**" - This runs the Node.js version of EWS. It is highly recommended to use this version, as future updates and features to EWS will only be supported within Node.js.  
 
-    <img src="pictures/ews_nodejs_landingPage.png" width="500px" height="100%"/>
+    <img src="pictures_from_guides/ews_nodejs_landingPage.png" width="500px" height="100%"/>
 
     &nbsp;  
 
     "**192.168.8.1**" - Optionally, you can access the PHP/Laravel version of EWS, but this is the legacy version of EWS which will eventually be replaced with the Node.js version.
 
-    <img src="pictures/ews_php_landingPage.png" width="500px" height="100%"/>
+    <img src="pictures_from_guides/ews_php_landingPage.png" width="500px" height="100%"/>
 
 &nbsp;  
 
@@ -115,27 +115,27 @@ This section describes steps that verify RT-MHA, Node.js version of EWS, and aud
 For PHP/Laravel version of EWS, see “**[5 Sanity Check - PHP/Laravel version of EWS](#5-sanity-check---phplaravel-version-of-ews)**”.
 
 1. Check your browser that you’re in the right landing page. If not, type in “**192.168.8.1:5000**” in the browser search bar.  
-<img src="pictures/ews_nodejs_landingPage.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/ews_nodejs_landingPage.png" width="500px" height="100%"/>
 
 &nbsp;
 
-2. In the center below “Freping”, click on the button labeled “CoarseFit Task”.
-<img src="pictures/softwarePics/nodesjs_selectCoarseFit.png" width="500px" height="100%"/>
+1. In the center below “Freping”, click on the button labeled “CoarseFit Task”.
+<img src="pictures_from_guides/nodejs_selectCoarseFit.png" width="500px" height="100%"/>
 
 &nbsp;  
 
-3. Choose any one of the three options in the CoarseFit Demo, scroll down. Notice the changes in the images and text. Then, click the “Next” button.  
-<img src="pictures/softwarePics/nodejs_coarseFitDemo/nodesjs_selectOption.png" width="300px" height="100%"/>
+1. Choose any one of the three options in the CoarseFit Demo, scroll down. Notice the changes in the images and text. Then, click the “Next” button.  
+<img src="pictures_from_guides/nodejs_coarseFitDemo/nodesjs_selectOption.png" width="300px" height="100%"/>
 
 &nbsp;  
 
 4. Choose one of the five hearing loss levels, which help change the volume heard. Then, click on the horizontal bar and select an audio file.  
-<img src="pictures/softwarePics/nodejs_coarseFitDemo/coarseFitDemo_lossLevelsFileSelection.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_lossLevelsFileSelection.png" width="500px" height="100%"/>
 
 &nbsp;  
 
 5. Below the audio file section and buttons, you should see changes to the graph based on the hearing loss levels chosen.  
-<img src="pictures/softwarePics/nodejs_coarseFitDemo/coarseFitDemo_changeToGraph.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_changeToGraph.png" width="500px" height="100%"/>
 
 &nbsp;  
 
@@ -143,13 +143,13 @@ For PHP/Laravel version of EWS, see “**[5 Sanity Check - PHP/Laravel version o
 
     **Disclaimer: For people in general, BTE-RICs can become quite loud. You can risk damaging your ears. You must test the BTE-RICs to determine how loud they are before inserting them close or inside into your ears.**
 
-    <img src="pictures/ospDevicePics/requirements/pcdWithEarAssemblies.png" height="400px"/>
+    <img src="pictures_from_guides/requirements/pcdWithEarAssemblies.png" height="400px"/>
 
     &nbsp;  
 
 7. Press the “Play/Pause” button. To adjust how loud the audio file is, select different hearing loss levels until you can comfortably listen to the audio file.
   
-    <img src="pictures/ospDevicePics/sanityChecks/sanityCheck_nodejs_playAdjustVolumeBTERICs.png" width="500px" height="100%"/>
+    <img src="pictures_from_guides/sanityChecks/sanityCheck_nodejs_playAdjustVolumeBTERICs.png" width="500px" height="100%"/>
 
     &nbsp;  
 
@@ -158,12 +158,12 @@ For PHP/Laravel version of EWS, see “**[5 Sanity Check - PHP/Laravel version o
     **Note**: only the “stim#/stim#.wav” files have transcripts available. To view the transcript, click on the “Show Transcript” toggle.
 
     Click on the “Reset” button and play the audio file again. You should also be able to notice that the selected word heard and shown has a different shade of color (usually shown in red) during audio playback.  
-<img src="pictures/softwarePics/nodejs_coarseFitDemo/coarseFitDemo_testButtons.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_testButtons.png" width="500px" height="100%"/>
 
 &nbsp;  
 
 9. You should be finished with testing the demo. Clicking the “Submit” button takes you back to the landing page.  
-<img src="pictures/softwarePics/nodejs_coarseFitDemo/coarseFitDemo_finishedDemo.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_finishedDemo.png" width="500px" height="100%"/>
 
 &nbsp;  
 
@@ -175,17 +175,17 @@ This section describes steps that verify RT-MHA, PHP/Laravel version of EWS, and
 For Node.js version of EWS, see “**[4 Sanity Check - Node.js version of EWS](#4-sanity-check---nodejs-version-of-ews)**”.
 
 1. Check your browser that you’re in the right landing page. If not, type in “**192.168.8.1**” in the browser search bar.  
-<img src="pictures/ews_php_landingPage.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/ews_php_landingPage.png" width="500px" height="100%"/>
 
 &nbsp;  
 
 2. In the upper-right hand corner, click on the button labeled “Researcher Page”.  
-<img src="pictures/softwarePics/php_ResearcherPage/researcherPage_selectDemo.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/php_ResearcherPage/researcherPage_selectDemo.png" width="500px" height="100%"/>
 
 &nbsp;  
 
 3. You should see this screen for the Researcher Page in the “Amplification” section.  
-<img src="pictures/softwarePics/php_ResearcherPage/researcherPage_amplification.png" width="500px" height="100%"/>
+<img src="pictures_from_guides/php_ResearcherPage/researcherPage_amplification.png" width="500px" height="100%"/>
 
 &nbsp;  
 
@@ -193,24 +193,24 @@ For Node.js version of EWS, see “**[4 Sanity Check - Node.js version of EWS](#
 
     **Disclaimer: For people in general, BTE-RICs can become quite loud. You can risk damaging your ears. You must test the BTE-RICs to determine how loud they are before inserting them close or inside into your ears.**
 
-    <img src="pictures/ospDevicePics/requirements/pcdWithEarAssemblies.png" height="400px"/>
+    <img src="pictures_from_guides/requirements/pcdWithEarAssemblies.png" height="400px"/>
 
     &nbsp;  
 
 5. Scroll to the bottom of the page and click on the “Transmit” button. Then, scratch the BTE-RICs on the circled areas and listen for immediate audio feedback.  
-<img src="pictures/ospDevicePics/sanityChecks/sanityCheck_php_transmitScratchListen.png" width="350px" height="100%"/>
+<img src="pictures_from_guides/sanityChecks/sanityCheck_php_transmitScratchListen.png" width="350px" height="100%"/>
 
 &nbsp;  
 
 6. Scroll back up and view the “Controls” settings. Next to “Control Via:”, click on CR/G65. Then, in the boxed cell within the “All” column and “G65” row, type in “5”. Notice the change in values.
 
     Changing the value in the boxed cell to “5” should change the gain for “g65” to be 5 decibels (dB SPL) across all frequency bands (250 to 8000 Hertz).  
-    <img src="pictures/softwarePics/php_ResearcherPage/researcherPage_controls.png" width="500px" height="100%"/>
+    <img src="pictures_from_guides/php_ResearcherPage/researcherPage_controls.png" width="500px" height="100%"/>
 
     &nbsp;  
 
 7. Scroll to the bottom of the page and click on the “Transmit” button again. Scratch the BTE-RICs on the circled areas again and listen for immediate audio feedback. Notice the differences in volume. 
-<img src="pictures/ospDevicePics/sanityChecks/sanityCheck_php_transmitScratchListen.png" width="350px" height="100%"/>
+<img src="pictures_from_guides/sanityChecks/sanityCheck_php_transmitScratchListen.png" width="350px" height="100%"/>
 
 &nbsp;  
 
@@ -219,11 +219,7 @@ For Node.js version of EWS, see “**[4 Sanity Check - Node.js version of EWS](#
 
 Below are hyperlinks to OSP-related resources:
 1. [OSP Website](http://openspeechplatform.ucsd.edu/) - General information of OSP.
-
-Want to leave feedback on OSP and these guides? Refer to these links:
-1. [OSP Forum](http://openspeechplatform.ucsd.edu/forum/) - Community discussion of issues and suggestions for improving OSP.
-2. [Feedback Form for OSP](**link to be added**) - 1-2 minutes of your time to inform what aspects of OSP need to be improved.
-&nbsp;  
+2. [OSP Forum](http://openspeechplatform.ucsd.edu/forum/) - Community discussion of issues and suggestions for improving OSP.
 
 This work is supported by:
 * NIH  R33-DC015046:  Self-fitting  of  Amplification:  Methodology  andCandidacy
