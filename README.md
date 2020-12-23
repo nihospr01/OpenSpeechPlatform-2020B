@@ -10,8 +10,7 @@ Stable and no issues reported since 2020a. https://github.com/nihospr01/OpenSpee
 
 ## Firmware and OS
 
-2020a includes baseline version of libIMU that provides access to raw data from the three IMUs (3-D Accl and 3D-gyro data from left ear, right ear, and processing unit – a total of 18 dimensional vector at 100 Hz sampling) corresponding to physical activity and head motion.
-
+**IMU support:** baseline version of libIMU that provides access to raw data from the three IMUs (3-D Accl and 3D-gyro data from left ear, right ear, and processing unit – a total of 18 dimensional vector at 100 Hz sampling). The three IMUs (two on each BTE-RIC) and the PCD can be used for physical activity, balance, and he’d orientation research. 
 
 ## Software
 
