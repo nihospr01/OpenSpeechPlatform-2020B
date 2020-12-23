@@ -202,7 +202,7 @@ For PHP/Laravel version of EWS, see “**[6 Sanity Check - PHP/Laravel version o
 
     **Note**: only the “stim#/stim#.wav” files have transcripts available. To view the transcript, click on the “Show Transcript” toggle.
 
-    Click on the “Reset” button and play the audio file again. You should also be able to notice that the selected word heard and shown has a different shade of color (usually shown in red) during audio playback.  
+    After playing a “stim#/stim#.wav” audio file, you should also be able to notice that the selected word heard and shown has a different shade of color (usually shown in red) during audio playback.  
 <img src="pictures_from_guides/nodejs_coarseFitDemo/coarseFitDemo_testButtons.png" width="500px" height="100%"/>
 
 9. You should be finished with testing the demo. Clicking the “Submit” button takes you back to the landing page.  
