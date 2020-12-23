@@ -65,11 +65,11 @@ _Note that audio input (mic) and output (volume) should not muted._
 1. Click on the "Download" button to download the installer file on your computer.  
 <img src="pictures_from_guides/installationSteps/downloadButton.png" width="300px" height="auto">
 
-4. You should see this installer window opened. Follow the instructions shown.  
+2. Open the file, and you should see this installer window opened. If you don't see this installer window open, and instead see a pop-up message “OSP-macos-installer-x64-(version number).pkg cannot be opened because it is from an unidentified developer”, see the section "[**7 Troubleshooting \- Can’t Open Installer Window**](#7-troubleshooting---cant-open-installer-window)"  
 <img src="pictures_from_guides/installationSteps/ospInstaller_Welcome.png" width="500px" height="auto"/>
 
-5. Read the Software License Agreement and agree to the terms.  
-<img src="pictures_from_guides/installationSteps/ospInstaller_LicenseAgreement.png" width="500px" height="auto"/>
+3. Follow the instructions shown in the installer window. First, read the Software License Agreement and agree to the terms.  
+<img src="pictures_from_guides/installationSteps/ospInstaller_LicenseAgreement.png" width="500px" height="auto"/> 
 
 6. Enter your password used to sign in to your 
 computer to continue the installation.  
