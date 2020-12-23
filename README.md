@@ -15,10 +15,13 @@ Stable and no issues reported since 2020a. https://github.com/nihospr01/OpenSpee
 ## Software
 
 
-Libosp now has the ability to switch between 6 and 10 bands.  There is a new command-line interface to directly control it.
+- Libosp now has the ability to switch between 6 and 10 bands.  
+- There is a new command-line interface to directly control it.
+  - Written in python for easy extensibility.
+  - Allows easier troubleshooting of web apps communicating with RT-MHA.
+  - Provides expanded help with RT-MHA commands.
 
-
-A binary software installer is available for the Mac, and soon for Linux.  
+- A binary software installer is available for the Mac, and soon for Linux.  This provides for simple installation of the complete OSP package without the complexity of building from sources. It further provides sanity checks for corect operation of the peripherals, the algorithms, and the apps.
 
 
 
