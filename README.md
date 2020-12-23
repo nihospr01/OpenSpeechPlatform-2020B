@@ -21,7 +21,9 @@ Stable and no issues reported since 2020a. https://github.com/nihospr01/OpenSpee
   - Allows easier troubleshooting of web apps communicating with RT-MHA.
   - Provides expanded help with RT-MHA commands.
 
-- A binary software installer is available for the Mac, and soon for Linux.  This provides for simple installation of the complete OSP package without the complexity of building from sources. It further provides sanity checks for corect operation of the peripherals, the algorithms, and the apps.
+- A binary software installer is available for the Mac, and soon for Linux.  
+  - This provides for simple installation of the complete OSP package without the complexity of building from sources. 
+  - It further provides sanity checks for corect operation of the peripherals, the algorithms, and the apps.
 
 
 
@@ -29,6 +31,14 @@ Stable and no issues reported since 2020a. https://github.com/nihospr01/OpenSpee
 
 
 In 2020a, we introduced Node.js and React for extending EWS features. Both are based on JavaScript and expected to improve rapid prototyping capabilities of OSP for audiology research.   For 2020b we have reimplemented most of the old PHP/Laravel apps in Node/React.
+
+New Apps in 2020b:
+
+- Researcher Page. Has ability to switch between 6 and 10 band RT-MHA.
+- Freping Demo app allows for expanding or compressing content in up to three spectral bands. This enables research on frequency domain manipulations along with WDRC to compensate for hearing loss.
+- Goldilocks app available as a PHP/Laravel app.
+- CoarseFit Demo app allows users to select stimulus (with and without closed captioning display) and select pre-configured NAL-NL2 preseciptions for normal, mild, moderate, severe, and profound.
+- 4AFC Demo app provides a template for word recognition accuracy using minimal contrast word sets written in Javascript and React.
 
 &nbsp;
 
