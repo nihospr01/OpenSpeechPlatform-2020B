@@ -149,16 +149,19 @@ This section of the guide describes where to locate audio input and output sour
 4. In the terminal, enter the command “`run_osp`”. You should see 5 terminal tabs automatically opened,  running processes, and generating messages.  
 <img src="pictures_from_guides/installationSteps/terminal-run_osp.png" width="500px" height="auto"/>
 
-5. Click on the tab named “osp_cli”, enter the command “`play`”, and press return/enter.  
+5. You may hear an increase in background noise. Try speaking to your microphone/audio input source and you should be able to hear yourself speaking.
+<img src="pictures_from_guides/sanityChecks/sanityCheck_audio_testMicAudioInput.png" width="500px" height="auto"/>
 
-    You should hear an audio file played. The file is named “tomsdiner.wav”.
+6. Click on the tab named “osp_cli”, enter the command “`play`”, and press return/enter.  
 
-    You should see parameters shown and the word “success” being shown.
+    You should hear an audio file played. You should also see parameters and the word “success” in the terminal.
 
     <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_terminalPlayCommand.png" width="500px" height="auto"/>
 
 
-6. To immediately stop the audio file playing, type in the command “`stop`” and press return/enter.  
+7. To immediately stop the audio file playing, type in the command “`stop`” and press return/enter.
+
+    You should hear the audio file stop. You should also see parameters and the word “success” in the terminal.
     <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_terminalStopCommand.png" width="500px" height="auto"/>
 
 &nbsp;  
