@@ -2,11 +2,11 @@
 
 ## Transducers
 
-Stable and no issues reported. https://github.com/nihospr01/OpenSpeechPlatform-UCSD/tree/2020a
+Stable and no issues reported since 2020a. https://github.com/nihospr01/OpenSpeechPlatform-UCSD/tree/2020a
 
 ## Hardware
 
-No changes from 2020a. https://github.com/nihospr01/OpenSpeechPlatform-UCSD/tree/2020a 
+Stable and no issues reported since 2020a. https://github.com/nihospr01/OpenSpeechPlatform-UCSD/tree/2020a 
 
 ## Firmware and OS
 
