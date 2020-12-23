@@ -2,7 +2,7 @@
 
 ## Mac OS
 
-`OSP-macos-installer-x64-1.3.0.pkg` is the 2020b release.
+`OSP-macos-installer-x64-1.3.1.pkg` is the 2020b release.
 See [Quick Start Guide](https://github.com/nihospr01/OpenSpeechPlatform-UCSD/blob/master/OSP%20Software%20Documentation/OSP%20Software%20Quick%20Start%20Guide%20(macOS%20Installer)%20-%20Release%202020B.pdf)
 
 ## PCD Device
