@@ -54,43 +54,41 @@ _Note that audio input (mic) and output (volume) should not muted._
 ([back to table of contents](#table-of-contents)) <!-- omit in toc -->
 &nbsp;  
 
-1. Go to this link to the OSP GitHub Repository: [https://github.com/nihospr01/OpenSpeechPlatform-UCSD](https://github.com/nihospr01/OpenSpeechPlatform-UCSD)
+1. Go to this [link to the "Release" folder in Google Drive](https://drive.google.com/drive/folders/1NjtwBNzf2SkYOxKLAYshZf0nhyLz3Y0z?usp=sharing) to find and download an installer file of the latest version number (end of the file name should have ".pkg").
 
-2. Then, go to the folder labeled "Binaries". You'll find a .pkg file in the “Binaries” folder called “OSP-macos-installer-x64-1.3.0.pkg” with “1.3.0” being the version number. Click on that file.  
-<img src="pictures_from_guides/installationSteps/binariesFolder.png" width="500px" height="auto">
-<br>
-<br>
-<img src="pictures_from_guides/installationSteps/getInstaller.png" width="500px" height="auto">
+    You may also try copying and pasting this URL to go to the folder: [https://drive.google.com/drive/folders/1NjtwBNzf2SkYOxKLAYshZf0nhyLz3Y0z?usp=sharing](https://drive.google.com/drive/folders/1NjtwBNzf2SkYOxKLAYshZf0nhyLz3Y0z?usp=sharing)
 
-1. Click on the "Download" button to download the installer file on your computer.  
-<img src="pictures_from_guides/installationSteps/downloadButton.png" width="300px" height="auto">
+    The end of the file name should have ".pkg" as the file type and the version number would appear with three numbers ("1.3.1" for example).
 
-2. Open the file, and you should see this installer window opened. If you don't see this installer window open, and instead see a pop-up message “OSP-macos-installer-x64-(version number).pkg cannot be opened because it is from an unidentified developer”, see the section "[**7 Troubleshooting \- Can’t Open Installer Window**](#7-troubleshooting---cant-open-installer-window)"  
+2. Right on the file and select "Download" from the context menu. Save the installer file to an accessible place in your computer, and wait for the download process to complete.  
+    <img src="pictures_from_guides/installationSteps/downloadContextMenu.png" height="500px"/>
+
+3. Once the download finishes, open the file, and you should see this installer window opened. However, if you instead see this pop-up message “OSP-macos-installer-x64-(version number).pkg cannot be opened because it is from an unidentified developer”, see the section "[**7 Troubleshooting \- Can’t Open Installer Window**](#7-troubleshooting---cant-open-installer-window)". Otherwise, proceed to the next step.  
 <img src="pictures_from_guides/installationSteps/ospInstaller_Welcome.png" width="500px" height="auto"/>
 
-3. Follow the instructions shown in the installer window. First, read the Software License Agreement and agree to the terms.  
+4. Follow the instructions shown in the installer window. First, read the Software License Agreement and agree to the terms.  
 <img src="pictures_from_guides/installationSteps/ospInstaller_LicenseAgreement.png" width="500px" height="auto"/> 
 
-6. Enter your password used to sign in to your 
+5. Enter your password used to sign in to your 
 computer to continue the installation.  
 <img src="pictures_from_guides/installationSteps/ospInstaller_enterPassword.png" width="500px" height="auto"/>
 
-7. Wait for the installation to complete. Time will vary.  
+6. Wait for the installation to complete. Time will vary.  
 <img src="pictures_from_guides/installationSteps/ospInstaller_waitCompletion.png" width="500px" height="auto"/>
 
-8. You should see this window to confirm that OSP installation completed successfully.  
+7. You should see this window to confirm that OSP installation completed successfully.  
 <img src="pictures_from_guides/installationSteps/ospInstaller_installationCompleted.png" width="500px" height="auto"/>
 
-9. Follow the installer window instructions by opening a new terminal. To do so, you can simultaneously press the command and spacebar keys on your keyboard to open Spotlight Search, which looks like a long horizontal area in your screen with a Search icon.  
+8. Follow the installer window instructions by opening a new terminal. To do so, you can simultaneously press the command and spacebar keys on your keyboard to open Spotlight Search, which looks like a long horizontal area in your screen with a Search icon.  
 <img src="pictures_from_guides/installationSteps/runningOSP_spotlightSearch.png" width="500px" height="auto"/>
 
-10. Type in “terminal”, and the application should show up automatically.  
+9. Type in “terminal”, and the application should show up automatically.  
 <img src="pictures_from_guides/installationSteps/runningOSP_searchTerminal.png" width="250px" height="100%"/>
 
-11. In the terminal, enter the command “`run_osp`”. You should see five terminal tabs automatically opened, running processes, and generating messages.
+10. In the terminal, enter the command “`run_osp`”. You should see five terminal tabs automatically opened, running processes, and generating messages.
 
     If you don’t see these tabs and/or get an error message ““execution error”: Not authorized to send Apple events...”, see “**[8 Troubleshooting \- Terminal Tabs Won’t Open](#8-troubleshooting---terminal-tabs-wont-open)**".  
-    <img src="pictures_from_guides/installationSteps/terminal-run_osp.png" width="500px" height="auto"/>
+    <img src="pictures_from_guides/installationSteps/terminal-run_osp.png" width="750px" height="auto"/>
 
     You would be automatically redirected to your browser, where you'll see the landing page for Node.js version of EWS (URL should be “**localhost:5000/login**”). It is highly recommended to use this version, as future updates and features to EWS will only be supported within Node.js.  
 
@@ -98,7 +96,7 @@ computer to continue the installation.
 
     &nbsp;
 
-12. (optional) To access the PHP/Laravel version of EWS, enter “**localhost:8080**” in your browser search bar. The landing page should look like the following.  
+11. (optional) To access the PHP/Laravel version of EWS, enter “**localhost:8080**” in your browser search bar. The landing page should look like the following.  
     <img src="pictures_from_guides/ews_php_landingPage.png" width="500px" height="auto"/>
 
 &nbsp;
@@ -147,7 +145,7 @@ This section of the guide describes where to locate audio input and output sour
 <img src="pictures_from_guides/installationSteps/runningOSP_searchTerminal.png" width="250px" height="100%"/>
 
 4. In the terminal, enter the command “`run_osp`”. You should see 5 terminal tabs automatically opened,  running processes, and generating messages.  
-<img src="pictures_from_guides/installationSteps/terminal-run_osp.png" width="500px" height="auto"/>
+<img src="pictures_from_guides/installationSteps/terminal-run_osp.png" width="750px" height="auto"/>
 
 5. You may hear an increase in background noise. Try speaking to your microphone/audio input source and you should be able to hear yourself speaking.
 <img src="pictures_from_guides/sanityChecks/sanityCheck_audio_testMicAudioInput.png" width="500px" height="auto"/>
@@ -267,7 +265,7 @@ Refer to this section if you don’t see the OSP installer window open, and inst
 
 4. If you receive this popup, confirm by pressing the “Open” button.  
 
-    <img src="pictures_from_guides/troubleshooting/troubleshooting_installerWindow_cannotVerify.png" width="200px" height="100%"/>
+    <img src="pictures_from_guides/troubleshooting/troubleshooting_installerWindow_cannotVerify.png" width="300px" height="100%"/>
 
 5. You should see this installer window opened. Proceed to Step 3 within [**3 Installation Steps**](#3-installation-steps).
 
