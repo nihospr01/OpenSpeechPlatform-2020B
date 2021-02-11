@@ -1,4 +1,4 @@
-# OSP Hardware Getting Started Guide (macOS installer) \- Release 2020b <!-- omit in toc -->
+# OSP Hardware Getting Started Guide \- Release 2020b <!-- omit in toc -->
 
 For the *Quick Start Guide*, go to this [link to the PDF](https://drive.google.com/file/d/1Q6VIWwYGnjLXZDoGF__KdsRDg5Nd6haC/view?usp=sharing).
 
